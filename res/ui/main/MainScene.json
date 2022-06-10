@@ -1,0 +1,332 @@
+{
+  "ID": "f7b91ded-035d-41d0-adc0-f5845e8fc9d6",
+  "Version": "2.3.4",
+  "Name": "MainScene",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 18,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/lobby_background.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 281,
+            "Scale9OriginY": 435,
+            "Scale9Width": 290,
+            "Scale9Height": 451,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 320.0,
+              "Y": 568.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PositionPercentXEnabled": true,
+            "PositionPercentYEnabled": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.5
+            },
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "Tag": 19,
+            "ActionTag": 13797230,
+            "Size": {
+              "X": 640.0,
+              "Y": 1136.0
+            },
+            "Name": "background",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/main/bottom/BottomNav.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 320.0001,
+              "Y": 55.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PositionPercentXEnabled": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.0484
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 320.0001,
+            "RightMargin": 319.9999,
+            "TopMargin": 1081.0,
+            "BottomMargin": 55.0,
+            "Tag": 57,
+            "ActionTag": 2128432903,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "bottomNav",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/lobby/treasureHolders/treasureHolders.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 320.0,
+              "Y": 218.7245
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.1925
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 320.0,
+            "RightMargin": 320.0,
+            "TopMargin": 917.2755,
+            "BottomMargin": 218.7245,
+            "Tag": 94,
+            "ActionTag": -824568226,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "treasureHolder",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/lobby/battleBtn.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 321.9286,
+              "Y": 401.9315
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.503,
+              "Y": 0.3538
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 321.9286,
+            "RightMargin": 318.0714,
+            "TopMargin": 734.0685,
+            "BottomMargin": 401.9315,
+            "Tag": 104,
+            "ActionTag": -1895683840,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "battleBtn",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/common/common_arena_forest.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 319.9999,
+              "Y": 657.7752
+            },
+            "Scale": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.579
+            },
+            "PreSize": {
+              "X": 0.9453,
+              "Y": 0.5563
+            },
+            "LeftMargin": 17.4999,
+            "RightMargin": 17.5001,
+            "TopMargin": 162.2248,
+            "BottomMargin": 341.7752,
+            "Tag": 108,
+            "ActionTag": 798333993,
+            "Size": {
+              "X": 605.0,
+              "Y": 632.0
+            },
+            "Name": "arenaImg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/main/header/header.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 321.0,
+              "Y": 1092.8942
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.5016,
+              "Y": 0.9621
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 321.0,
+            "RightMargin": 319.0,
+            "TopMargin": 43.1058,
+            "BottomMargin": 1092.8942,
+            "Tag": 113,
+            "ActionTag": -306060697,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "concurencyHolder",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/lobby/playerInfoHolder.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 320.6915,
+              "Y": 996.576
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.5011,
+              "Y": 0.8773
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 320.6915,
+            "RightMargin": 319.3085,
+            "TopMargin": 139.424,
+            "BottomMargin": 996.576,
+            "Tag": 146,
+            "ActionTag": -1060530172,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "playerInfoHolder",
+            "ctype": "ProjectNodeObjectData"
+          }
+        ],
+        "Size": {
+          "X": 640.0,
+          "Y": 1136.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../image/common/common_arena_forest.png",
+        "../../image/mainScene/lobby_background.png",
+        "../lobby/battleBtn.json",
+        "../lobby/playerInfoHolder.json",
+        "../lobby/treasureHolders/treasureHolders.json",
+        "bottom/BottomNav.json",
+        "header/header.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}

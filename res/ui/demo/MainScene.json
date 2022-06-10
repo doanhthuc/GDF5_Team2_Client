@@ -1,0 +1,122 @@
+{
+  "ID": "a2ee0952-26b5-49ae-8bf9-4f1d6279b798",
+  "Version": "2.3.4",
+  "Name": "MainScene",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/demo/HelloWorld.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 561.4733,
+              "Y": 970.466
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5199,
+              "Y": 0.5055
+            },
+            "PreSize": {
+              "X": 0.8889,
+              "Y": 0.3333
+            },
+            "LeftMargin": 81.4733,
+            "RightMargin": 38.5266,
+            "TopMargin": 629.5339,
+            "BottomMargin": 650.466,
+            "Tag": 5,
+            "ActionTag": 953446860,
+            "Size": {
+              "X": 960.0,
+              "Y": 640.0
+            },
+            "Name": "Default",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Default",
+              "Path": "Default/Sprite.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 805.7667,
+              "Y": 1015.0748
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.7461,
+              "Y": 0.5287
+            },
+            "PreSize": {
+              "X": 0.1204,
+              "Y": 0.063
+            },
+            "LeftMargin": 740.7667,
+            "RightMargin": 209.2333,
+            "TopMargin": 844.4252,
+            "BottomMargin": 954.5748,
+            "Tag": 8,
+            "ActionTag": -487644380,
+            "Size": {
+              "X": 130.0,
+              "Y": 121.0
+            },
+            "Name": "imgBagGold",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 640.0,
+          "Y": 1136.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../Default/Sprite.png",
+        "../../texture/demo/HelloWorld.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}

@@ -1,0 +1,155 @@
+{
+  "ID": "8d18f902-1f44-45a0-8f41-22ae44406fca",
+  "Version": "2.3.4",
+  "Name": "battleBtn",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 100,
+        "Children": [
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "image/lobby/lobby_home_btn_battle_pressing.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "image/lobby/lobby_home_btn_battle.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 387,
+            "Scale9Height": 159,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -208.5,
+            "RightMargin": -208.5,
+            "TopMargin": -90.5,
+            "BottomMargin": -90.5,
+            "Tag": 102,
+            "ActionTag": 2093590062,
+            "Size": {
+              "X": 417.0,
+              "Y": 181.0
+            },
+            "Name": "Button_1",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/lobby/lobby_home_btn_battle_txt.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 76,
+            "Scale9OriginY": 17,
+            "Scale9Width": 80,
+            "Scale9Height": 20,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0001,
+              "Y": 30.0
+            },
+            "Scale": {
+              "ScaleX": 1.1817,
+              "ScaleY": 1.2927
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -115.9999,
+            "RightMargin": -116.0001,
+            "TopMargin": -57.0,
+            "BottomMargin": 3.0,
+            "Tag": 103,
+            "ActionTag": 1746845039,
+            "Size": {
+              "X": 232.0,
+              "Y": 54.0
+            },
+            "Name": "Image_1",
+            "ctype": "ImageViewObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../Default/Button_Disable.png",
+        "../../image/lobby/lobby_home_btn_battle.png",
+        "../../image/lobby/lobby_home_btn_battle_pressing.png",
+        "../../image/lobby/lobby_home_btn_battle_txt.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}
