@@ -1,0 +1,444 @@
+{
+  "ID": "155c4046-1c0c-49dc-92a3-03bd1dd4e317",
+  "Version": "2.3.4",
+  "Name": "BattleMapLayer",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 14,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/battle/battle_map_layer/map_background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {},
+            "Position": {
+              "X": -2.3712,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0323,
+              "ScaleY": 1.0758
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": -0.0037,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.9688,
+              "Y": 0.9296
+            },
+            "LeftMargin": -2.3712,
+            "RightMargin": 22.3712,
+            "TopMargin": 80.0,
+            "BottomMargin": 0.0,
+            "Tag": 48,
+            "ActionTag": 1473843458,
+            "Size": {
+              "X": 620.0,
+              "Y": 1056.0
+            },
+            "Name": "map_background_9",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/battle/battle_map_layer/map_river_0000.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 322.1331,
+              "Y": 635.5609
+            },
+            "Scale": {
+              "ScaleX": 0.7264,
+              "ScaleY": 0.7264
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5033,
+              "Y": 0.5595
+            },
+            "PreSize": {
+              "X": 1.5906,
+              "Y": 0.1822
+            },
+            "LeftMargin": -186.8669,
+            "RightMargin": -191.1331,
+            "TopMargin": 396.9391,
+            "BottomMargin": 532.0609,
+            "Tag": 83,
+            "ActionTag": 1770523212,
+            "Size": {
+              "X": 1018.0,
+              "Y": 207.0
+            },
+            "Name": "map_river_0000_40",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/battle/battle_map_layer/map_river_0001.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 322.1331,
+              "Y": 635.5609
+            },
+            "Scale": {
+              "ScaleX": 0.7264,
+              "ScaleY": 0.7264
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5033,
+              "Y": 0.5595
+            },
+            "PreSize": {
+              "X": 1.5906,
+              "Y": 0.1822
+            },
+            "LeftMargin": -186.8669,
+            "RightMargin": -191.1331,
+            "TopMargin": 396.9391,
+            "BottomMargin": 532.0609,
+            "Tag": 84,
+            "ActionTag": 1757564912,
+            "Size": {
+              "X": 1018.0,
+              "Y": 207.0
+            },
+            "Name": "map_river_0001_41",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/battle/battle_map_layer/map_background_0003.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 320.0,
+              "Y": 365.6392
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.3219
+            },
+            "PreSize": {
+              "X": 0.9891,
+              "Y": 0.3812
+            },
+            "LeftMargin": 3.5,
+            "RightMargin": 3.5,
+            "TopMargin": 553.8608,
+            "BottomMargin": 149.1392,
+            "Tag": 85,
+            "ActionTag": 1498831508,
+            "Size": {
+              "X": 633.0,
+              "Y": 433.0
+            },
+            "Name": "player_map_boundary",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/battle/battle_map_layer/map_background_0002.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 320.0,
+              "Y": 883.3008
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.7776
+            },
+            "PreSize": {
+              "X": 0.9937,
+              "Y": 0.3847
+            },
+            "LeftMargin": 2.0,
+            "RightMargin": 2.0,
+            "TopMargin": 34.1992,
+            "BottomMargin": 664.8008,
+            "Tag": 86,
+            "ActionTag": -374576857,
+            "Size": {
+              "X": 636.0,
+              "Y": 437.0
+            },
+            "Name": "opponent_map_boundary",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/battle/battle_map_layer/map_background_0001.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 320.0,
+              "Y": 392.5
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.3455
+            },
+            "PreSize": {
+              "X": 0.8422,
+              "Y": 0.3389
+            },
+            "LeftMargin": 50.5,
+            "RightMargin": 50.5,
+            "TopMargin": 551.0,
+            "BottomMargin": 200.0,
+            "Tag": 87,
+            "ActionTag": -27801078,
+            "Size": {
+              "X": 539.0,
+              "Y": 385.0
+            },
+            "Name": "player_map_background",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/battle/battle_map_layer/map_background_0000.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 320.0,
+              "Y": 854.5
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "RotationSkewX": 180.0,
+            "RotationSkewY": 180.0,
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.7522
+            },
+            "PreSize": {
+              "X": 0.8422,
+              "Y": 0.3389
+            },
+            "LeftMargin": 50.5,
+            "RightMargin": 50.5,
+            "TopMargin": 89.0,
+            "BottomMargin": 662.0,
+            "Tag": 89,
+            "ActionTag": 2013091159,
+            "Size": {
+              "X": 539.0,
+              "Y": 385.0
+            },
+            "Name": "opponent_map_background",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/battle/battle_map_layer/map_decoration_0002.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 700.6674,
+              "Y": 619.9827
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 1.0948,
+              "Y": 0.5458
+            },
+            "PreSize": {
+              "X": 0.4359,
+              "Y": 0.1998
+            },
+            "LeftMargin": 561.1674,
+            "RightMargin": -200.1674,
+            "TopMargin": 402.5173,
+            "BottomMargin": 506.4827,
+            "Tag": 91,
+            "ActionTag": 104629459,
+            "Size": {
+              "X": 279.0,
+              "Y": 227.0
+            },
+            "Name": "map_decoration_0002_48",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "texture/battle/battle_map_layer/map_decoration_0001.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -68.7413,
+              "Y": 637.3278
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": -0.1074,
+              "Y": 0.561
+            },
+            "PreSize": {
+              "X": 0.3844,
+              "Y": 0.2474
+            },
+            "LeftMargin": -191.7413,
+            "RightMargin": 585.7413,
+            "TopMargin": 358.1722,
+            "BottomMargin": 496.8278,
+            "Tag": 92,
+            "ActionTag": 284156563,
+            "Size": {
+              "X": 246.0,
+              "Y": 281.0
+            },
+            "Name": "map_decoration_0001_49",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 640.0,
+          "Y": 1136.0
+        },
+        "Name": "Layer",
+        "ctype": "LayerObjectData"
+      },
+      "UsedResources": [
+        "../../texture/battle/battle_map_layer/map_background.png",
+        "../../texture/battle/battle_map_layer/map_background_0000.png",
+        "../../texture/battle/battle_map_layer/map_background_0001.png",
+        "../../texture/battle/battle_map_layer/map_background_0002.png",
+        "../../texture/battle/battle_map_layer/map_background_0003.png",
+        "../../texture/battle/battle_map_layer/map_decoration_0001.png",
+        "../../texture/battle/battle_map_layer/map_decoration_0002.png",
+        "../../texture/battle/battle_map_layer/map_river_0000.png",
+        "../../texture/battle/battle_map_layer/map_river_0001.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Layer"
+}
