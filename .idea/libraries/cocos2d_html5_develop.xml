@@ -2,11 +2,11 @@
   <library name="cocos2d-html5-develop" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/../common/cocos2d-html5-develop" />
+        <item url="file://$PROJECT_DIR$/../../common/cocos2d-html5-develop" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../common/cocos2d-html5-develop" />
+      <root url="file://$PROJECT_DIR$/../../common/cocos2d-html5-develop" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

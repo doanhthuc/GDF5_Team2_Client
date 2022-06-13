@@ -1,8 +1,11 @@
-let Entity = cc.Class({
-    properties: {
-        id: 0,
-        name: "entity",
-        component: {}
+let EntityECS = cc.Class.extend({
+    id: 0,
+    name: "EntityECS",
+
+    ctor: function (id) {
+        this.id = id;
+        this.component = {};
+        cc.log("new " + this.name);
     },
 
     addComponent: function (component) {
@@ -14,10 +17,34 @@ let Entity = cc.Class({
             throw new Error("Component with id = " + component.id + " exist");
         }
 
-        this.component[component.id] = component
+        this.component[component.id] = component;
+        return this;
     },
 
     removeComponent: function (componentId) {
-        delete this.component[componentId]
-    }
+        delete this.component[componentId];
+    },
+
+    getComponent: function (componentId) {
+        return this.component[componentId];
+    },
+
+    hasAllComponent: function (...componentIds) {
+        let c = 0;
+        for (let i = 0; i < componentIds.length; i++) {
+            if (this.getComponent(componentIds[i])) {
+                c++;
+            }
+        }
+        return c === componentIds.length;
+    },
+
+    hasAnyComponent: function (...componentIds) {
+        for (let i = 0; i < componentIds.length; i++) {
+            if (this.getComponent(componentIds[i])) {
+                return true;
+            }
+        }
+        return false;
+    },
 });
