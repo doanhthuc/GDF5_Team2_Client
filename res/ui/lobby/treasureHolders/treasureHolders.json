@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json",
+              "Path": "ui/lobby/treasureHolders/treasureSlot/finishedSlot.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -44,19 +44,19 @@
             },
             "LeftMargin": -244.5,
             "RightMargin": 244.5,
-            "Tag": 194,
-            "ActionTag": -1950179946,
+            "Tag": 161,
+            "ActionTag": 880218339,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_1",
+            "Name": "FileNode_5",
             "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json",
+              "Path": "ui/lobby/treasureHolders/treasureSlot/openningSlot/openingSlot.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -83,19 +83,19 @@
             },
             "LeftMargin": -81.5,
             "RightMargin": 81.5,
-            "Tag": 199,
-            "ActionTag": -1335674484,
+            "Tag": 175,
+            "ActionTag": -169206743,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_2",
+            "Name": "FileNode_7",
             "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json",
+              "Path": "ui/lobby/treasureHolders/treasureSlot/occupiedSlot.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -103,7 +103,7 @@
             "InnerActionSpeed": 1.0,
             "AnchorPoint": {},
             "Position": {
-              "X": 81.5,
+              "X": 81.6,
               "Y": 0.0
             },
             "Scale": {
@@ -120,21 +120,21 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 81.5,
-            "RightMargin": -81.5,
-            "Tag": 202,
-            "ActionTag": -870908960,
+            "LeftMargin": 81.6,
+            "RightMargin": -81.6,
+            "Tag": 166,
+            "ActionTag": 692979117,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_3",
+            "Name": "FileNode_6",
             "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json",
+              "Path": "ui/lobby/treasureHolders/treasureSlot/emptySlot.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -179,7 +179,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "treasureSlot/treasureSlotEmpty.json"
+        "treasureSlot/emptySlot.json",
+        "treasureSlot/finishedSlot.json",
+        "treasureSlot/occupiedSlot.json",
+        "treasureSlot/openningSlot/openingSlot.json"
       ],
       "ctype": "GameFileData"
     }

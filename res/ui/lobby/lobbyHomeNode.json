@@ -1,7 +1,7 @@
 {
-  "ID": "b358006e-1f20-421c-a770-35ffeefd68bd",
+  "ID": "e745b553-e68a-44e7-946e-154d1a65249f",
   "Version": "2.3.4",
-  "Name": "bottomNav",
+  "Name": "lobbyHomeNode",
   "Content": {
     "Content": {
       "Animation": {
@@ -12,12 +12,12 @@
       },
       "AnimationList": [],
       "ObjectData": {
-        "Tag": 28,
+        "Tag": 488,
         "Children": [
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
+              "Path": "ui/lobby/playerInfoHolder.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -25,8 +25,8 @@
             "InnerActionSpeed": 1.0,
             "AnchorPoint": {},
             "Position": {
-              "X": -261.9163,
-              "Y": 55.0
+              "X": 0.0034,
+              "Y": 431.7858
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -42,23 +42,68 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -261.9163,
-            "RightMargin": 261.9163,
-            "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 438,
-            "ActionTag": -1493826437,
+            "LeftMargin": 0.0034,
+            "RightMargin": -0.0034,
+            "TopMargin": -431.7858,
+            "BottomMargin": 431.7858,
+            "Tag": 539,
+            "ActionTag": -1608104551,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "inventoryTab",
+            "Name": "playerInfoHolder",
             "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
+              "Path": "assets/common/common_arena_forest.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0056,
+              "Y": 92.9849
+            },
+            "Scale": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -302.4944,
+            "RightMargin": -302.5056,
+            "TopMargin": -408.9849,
+            "BottomMargin": -223.0151,
+            "Tag": 547,
+            "ActionTag": 36349544,
+            "Size": {
+              "X": 605.0,
+              "Y": 632.0
+            },
+            "Name": "arenaImg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/lobby/battleBtn.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -66,8 +111,8 @@
             "InnerActionSpeed": 1.0,
             "AnchorPoint": {},
             "Position": {
-              "X": -142.3063,
-              "Y": 55.0
+              "X": 0.0034,
+              "Y": -162.8559
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -83,23 +128,23 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -142.3063,
-            "RightMargin": 142.3063,
-            "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 443,
-            "ActionTag": 1948612340,
+            "LeftMargin": 0.0034,
+            "RightMargin": -0.0034,
+            "TopMargin": 162.8559,
+            "BottomMargin": -162.8559,
+            "Tag": 548,
+            "ActionTag": -732692632,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "shopTab",
+            "Name": "battleBtn",
             "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
+              "Path": "ui/lobby/treasureHolders/treasureHolders.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -107,8 +152,8 @@
             "InnerActionSpeed": 1.0,
             "AnchorPoint": {},
             "Position": {
-              "X": 0.0,
-              "Y": 55.0
+              "X": 0.0034,
+              "Y": -346.0609
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -124,30 +169,33 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 458,
-            "ActionTag": 1544646611,
+            "LeftMargin": 0.0034,
+            "RightMargin": -0.0034,
+            "TopMargin": 346.0609,
+            "BottomMargin": -346.0609,
+            "Tag": 552,
+            "ActionTag": 667195930,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "homeTab",
+            "Name": "treasureHolder",
             "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
+              "Path": "assets/common/fx/arena_particle.plist",
               "Plist": ""
             },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 1
+            },
             "AnchorPoint": {},
             "Position": {
-              "X": 140.6844,
-              "Y": 55.0
+              "X": 0.0,
+              "Y": 72.9995
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -163,59 +211,16 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 140.6844,
-            "RightMargin": -140.6844,
-            "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 448,
-            "ActionTag": -322565567,
+            "TopMargin": -72.9995,
+            "BottomMargin": 72.9995,
+            "Tag": 1666,
+            "ActionTag": -1248637283,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "emptyTab1",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 259.7954,
-              "Y": 55.0
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 259.7954,
-            "RightMargin": -259.7954,
-            "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 453,
-            "ActionTag": -1027649220,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "emptyTab2",
-            "ctype": "ProjectNodeObjectData"
+            "Name": "Particle_1",
+            "ctype": "ParticleObjectData"
           }
         ],
         "Size": {
@@ -226,7 +231,12 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "navTab.json"
+        "../../assets/common/common_arena_forest.png",
+        "../../assets/common/fx/arena_particle.plist",
+        "../../assets/common/fx/arena_particle.png",
+        "battleBtn.json",
+        "playerInfoHolder.json",
+        "treasureHolders/treasureHolders.json"
       ],
       "ctype": "GameFileData"
     }

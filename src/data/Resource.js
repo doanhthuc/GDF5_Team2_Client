@@ -15,12 +15,15 @@ var res = {
     ZCSD_SCREEN_DECRYPTION: 'zcsd/screen_decryption.json',
     ZCSD_SCREEN_ZALO: 'zcsd/screen_zalo.json',
     MAIN_SCREEN: 'ui/main/MainScene.json',
+    BOTTOM_NAV: 'ui/main/bottom/bottomNav.json',
+
+
     //popup
     ZCSD_POPUP_MINI_GAME: 'zcsd/game/mini_game/PopupMiniGame.json',
 
     //images
     Slot1_png: 'zcsd/slot1.png',
-
+    ACTIVE_TAB_BG: '/assets/lobby/lobby_page_btn_selecting.png'
 
 };
 

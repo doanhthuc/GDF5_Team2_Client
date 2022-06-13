@@ -1,0 +1,269 @@
+{
+  "ID": "2540a049-5c61-4bcf-a6b3-553a18d659af",
+  "Version": "2.3.4",
+  "Name": "occupiedSlot",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 382,
+        "Children": [
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_home_treasure_empty.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_home_treasure_empty.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 113,
+            "Scale9Height": 162,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -71.5,
+            "RightMargin": -71.5,
+            "TopMargin": -92.0,
+            "BottomMargin": -92.0,
+            "Tag": 669,
+            "ActionTag": 103753755,
+            "Size": {
+              "X": 143.0,
+              "Y": 184.0
+            },
+            "Name": "backgroundBtn",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FontSize": 18,
+            "LabelText": "3H",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 69.6191
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -17.0,
+            "RightMargin": -17.0,
+            "TopMargin": -83.1191,
+            "BottomMargin": 56.1191,
+            "Tag": 1671,
+            "ActionTag": -764797802,
+            "Size": {
+              "X": 34.0,
+              "Y": 27.0
+            },
+            "Alpha": 76,
+            "Name": "countdownTxt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/common/common_treasure.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 72,
+            "Scale9OriginY": 66,
+            "Scale9Width": 76,
+            "Scale9Height": 69,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.0001,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 0.35,
+              "ScaleY": 0.35
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -110.0001,
+            "RightMargin": -109.9999,
+            "TopMargin": -100.5,
+            "BottomMargin": -100.5,
+            "Tag": 1672,
+            "ActionTag": -973128561,
+            "Size": {
+              "X": 220.0,
+              "Y": 201.0
+            },
+            "Name": "treasureImg",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 12,
+            "LabelText": "Rừng thiêng",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -67.9635
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -54.0,
+            "RightMargin": -54.0,
+            "TopMargin": 58.9635,
+            "BottomMargin": -76.9635,
+            "Tag": 1673,
+            "ActionTag": -612516419,
+            "Size": {
+              "X": 108.0,
+              "Y": 18.0
+            },
+            "Alpha": 76,
+            "Name": "mapNameTxt",
+            "ctype": "TextObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../../assets/common/common_treasure.png",
+        "../../../../assets/font/SVN-Supercell Magic.ttf",
+        "../../../../assets/lobby/lobby_home_treasure_empty.png",
+        "../../../../Default/Button_Disable.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

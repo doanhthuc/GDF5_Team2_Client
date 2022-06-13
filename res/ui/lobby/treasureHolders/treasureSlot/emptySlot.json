@@ -1,7 +1,7 @@
 {
-  "ID": "8d18f902-1f44-45a0-8f41-22ae44406fca",
+  "ID": "050788bc-aafd-4ad4-84f9-02434c33890a",
   "Version": "2.3.4",
-  "Name": "battleBtn",
+  "Name": "emptySlot",
   "Content": {
     "Content": {
       "Animation": {
@@ -12,7 +12,7 @@
       },
       "AnimationList": [],
       "ObjectData": {
-        "Tag": 100,
+        "Tag": 192,
         "Children": [
           {
             "FontSize": 14,
@@ -29,19 +29,19 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_btn_battle_pressing.png",
+              "Path": "assets/lobby/lobby_home_treasure_empty.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_btn_battle.png",
+              "Path": "assets/lobby/lobby_home_treasure_empty.png",
               "Plist": ""
             },
             "Scale9Enable": true,
             "Scale9OriginX": 15,
             "Scale9OriginY": 11,
-            "Scale9Width": 387,
-            "Scale9Height": 159,
+            "Scale9Width": 113,
+            "Scale9Height": 162,
             "OutlineColor": {
               "G": 0,
               "B": 0
@@ -76,40 +76,51 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -208.5,
-            "RightMargin": -208.5,
-            "TopMargin": -90.5,
-            "BottomMargin": -90.5,
-            "Tag": 102,
-            "ActionTag": 2093590062,
+            "LeftMargin": -71.5,
+            "RightMargin": -71.5,
+            "TopMargin": -92.0,
+            "BottomMargin": -92.0,
+            "Tag": 743,
+            "ActionTag": -1782879792,
             "Size": {
-              "X": 417.0,
-              "Y": 181.0
+              "X": 143.0,
+              "Y": 184.0
             },
-            "Name": "Button_1",
+            "Name": "backgroundBtn",
             "ctype": "ButtonObjectData"
           },
           {
-            "FileData": {
+            "FontSize": 18,
+            "LabelText": "Ô Trống",
+            "FontResource": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_btn_battle_txt.png",
+              "Path": "assets/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
-            "Scale9OriginX": 76,
-            "Scale9OriginY": 17,
-            "Scale9Width": 80,
-            "Scale9Height": 20,
+            "OutlineColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 0.0001,
-              "Y": 30.0
+              "X": -0.005,
+              "Y": -0.0011
             },
             "Scale": {
-              "ScaleX": 1.1817,
-              "ScaleY": 1.2927
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "CColor": {},
             "IconVisible": false,
@@ -121,18 +132,19 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -115.9999,
-            "RightMargin": -116.0001,
-            "TopMargin": -57.0,
-            "BottomMargin": 3.0,
-            "Tag": 103,
-            "ActionTag": 1746845039,
+            "LeftMargin": -55.005,
+            "RightMargin": -54.995,
+            "TopMargin": -13.4989,
+            "BottomMargin": -13.5011,
+            "Tag": 336,
+            "ActionTag": -648237683,
             "Size": {
-              "X": 232.0,
-              "Y": 54.0
+              "X": 110.0,
+              "Y": 27.0
             },
-            "Name": "Image_1",
-            "ctype": "ImageViewObjectData"
+            "Alpha": 76,
+            "Name": "emptySlotTxt",
+            "ctype": "TextObjectData"
           }
         ],
         "Size": {
@@ -143,10 +155,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/lobby/lobby_home_btn_battle.png",
-        "../../assets/lobby/lobby_home_btn_battle_pressing.png",
-        "../../assets/lobby/lobby_home_btn_battle_txt.png",
-        "../../Default/Button_Disable.png"
+        "../../../../assets/font/SVN-Supercell Magic.ttf",
+        "../../../../assets/lobby/lobby_home_treasure_empty.png",
+        "../../../../Default/Button_Disable.png"
       ],
       "ctype": "GameFileData"
     }

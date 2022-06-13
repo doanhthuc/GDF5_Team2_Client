@@ -5,48 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/res/Default/Sprite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/font/SVN-Supercell Magic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/common/common_arena_forest.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/common/common_avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/common/common_icon_g_small.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/common/common_icon_gold_small.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/common/common_icon_trophy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/lobby/lobby_home_btn_battle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/lobby/lobby_home_btn_battle_pressing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/lobby/lobby_home_btn_battle_txt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/lobby/lobby_home_treasure_empty.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_btn_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_btn_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_btn_selecting.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_icon_cards.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_icon_home.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_icon_shop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/header/lobby_box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/header/lobby_currency_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/header/lobby_currency_btn_top_up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/lobby_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/image/mainScene/lobby_home_player.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/demo/MainScene.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/lobby/battleBtn.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/lobby/playerInfoHolder.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotFinished.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotOccupied.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotOpening.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/main/MainScene.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/main/bottom/BottomNav.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/main/header/header.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/mainGUI/Main.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ui/mainGUI/layers/lobby.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/font/SVN-Supercell Magic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/common/common_arena_forest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/common/common_avatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/common/common_icon_g_small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/common/common_icon_gold_small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/common/common_icon_trophy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/lobby/lobby_home_btn_battle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/lobby/lobby_home_btn_battle_pressing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/lobby/lobby_home_btn_battle_txt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/lobby/lobby_home_treasure_empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_btn_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_btn_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_btn_selecting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_icon_cards.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_icon_home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_icon_shop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/header/lobby_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/header/lobby_currency_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/header/lobby_currency_btn_top_up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/lobby_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/image/mainScene/lobby_home_player.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/battleBtn.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/battleBtn.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/playerInfoHolder.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/playerInfoHolder.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/MainScene.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/MainScene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/bottom/BottomNav.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/bottom/BottomNav.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/header/header.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/header/header.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/ResourceAnimation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ResourceAnimation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -363,7 +356,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="ReaderModeSettings">
     <option name="showLigatures" value="true" />
@@ -746,6 +739,8 @@
       <workItem from="1654756280641" duration="6310000" />
       <workItem from="1654766224133" duration="369000" />
       <workItem from="1654853238110" duration="3696000" />
+      <workItem from="1655085459835" duration="4378000" />
+      <workItem from="1655103950924" duration="12042000" />
     </task>
     <servers />
   </component>

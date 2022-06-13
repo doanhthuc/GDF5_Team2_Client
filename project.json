@@ -19,6 +19,7 @@
         "src/**/*.js"
     ],
     "jsList": [
+        "src/data/bottom-nav-resources/NavResources.js",
         "src/data/Resource.js",
         "src/data/ResourceAnimation.js",
         "src/framework/AnimationMgr.js",
@@ -41,10 +42,11 @@
         "src/base/UIFactory.js",
         "src/modules/animation/ScreenDragonbones.js",
         "src/modules/localization/ScreenLocalization.js",
+        "src/modules/mainGUI/bottomNav.js",
+        "src/modules/mainGUI/mainScreen.js",
         "src/modules/mainmenu/ScreenMenu.js",
         "src/modules/testnetwork/network/Network.js",
         "src/modules/testnetwork/network/Packet.js",
-        "src/modules/testnetwork/ScreenNetwork.js",
-        "src/modules/mainGUI/mainScreen.js"
+        "src/modules/testnetwork/ScreenNetwork.js"
     ]
 }

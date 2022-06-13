@@ -1,0 +1,184 @@
+{
+  "ID": "03434d12-0112-4455-a2e8-0348c2309835",
+  "Version": "2.3.4",
+  "Name": "countdownHolder",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 194,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_home_treasure_opening_time.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 46,
+            "Scale9OriginY": 10,
+            "Scale9Width": 50,
+            "Scale9Height": 12,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -71.0,
+            "RightMargin": -71.0,
+            "TopMargin": -16.0,
+            "BottomMargin": -16.0,
+            "Tag": 195,
+            "ActionTag": -1197720752,
+            "Size": {
+              "X": 142.0,
+              "Y": 32.0
+            },
+            "Name": "slotTimeHolder",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 14,
+            "LabelText": "15h 32m",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 143,
+              "G": 151,
+              "B": 163
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 1.6289
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 61,
+              "G": 61,
+              "B": 61
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -39.0,
+            "RightMargin": -39.0,
+            "TopMargin": -12.1289,
+            "BottomMargin": -8.8711,
+            "Tag": 196,
+            "ActionTag": -228975168,
+            "Size": {
+              "X": 78.0,
+              "Y": 21.0
+            },
+            "Name": "countdownTxt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_stat_icon_time.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 18,
+            "Scale9Width": 17,
+            "Scale9Height": 19,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -63.6624,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 0.7,
+              "ScaleY": 0.7
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -87.1624,
+            "RightMargin": 40.1624,
+            "TopMargin": -27.5,
+            "BottomMargin": -27.5,
+            "Tag": 197,
+            "ActionTag": -1300573477,
+            "Size": {
+              "X": 47.0,
+              "Y": 55.0
+            },
+            "Name": "countdownIcon",
+            "ctype": "ImageViewObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../../../assets/font/SVN-Supercell Magic.ttf",
+        "../../../../../assets/lobby/lobby_home_treasure_opening_time.png",
+        "../../../../../assets/lobby/lobby_stat_icon_time.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}
