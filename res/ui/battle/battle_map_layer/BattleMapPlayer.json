@@ -1,0 +1,169 @@
+{
+  "ID": "0f4fe6ca-4f32-440f-b15c-c784010cae1d",
+  "Version": "2.3.4",
+  "Name": "BattleMapPlayer",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 463,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/map/map_background_0003.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 208,
+            "Scale9OriginY": 142,
+            "Scale9Width": 217,
+            "Scale9Height": 149,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 7.9991,
+              "Y": -34.9999
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0554
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -308.5009,
+            "RightMargin": -324.4991,
+            "TopMargin": -181.5001,
+            "BottomMargin": -251.4999,
+            "Tag": 575,
+            "ActionTag": -1462415986,
+            "Size": {
+              "X": 633.0,
+              "Y": 433.0
+            },
+            "Name": "border",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/map/map_background_0001.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -269.5,
+            "RightMargin": -269.5,
+            "TopMargin": -192.5,
+            "BottomMargin": -192.5,
+            "Tag": 464,
+            "ActionTag": -850968760,
+            "Size": {
+              "X": 539.0,
+              "Y": 385.0
+            },
+            "Name": "map",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/battle/UI/ui_grid.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -270.5,
+            "RightMargin": -270.5,
+            "TopMargin": -193.5,
+            "BottomMargin": -193.5,
+            "Tag": 466,
+            "ActionTag": -907766610,
+            "Size": {
+              "X": 541.0,
+              "Y": 387.0
+            },
+            "Name": "grid",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../assets/battle/UI/ui_grid.png",
+        "../../../assets/map/map_background_0001.png",
+        "../../../assets/map/map_background_0003.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

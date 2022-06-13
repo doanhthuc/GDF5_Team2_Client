@@ -1,0 +1,460 @@
+{
+  "ID": "410ad0c7-bf7f-4460-b68f-8bc35141f077",
+  "Version": "2.3.4",
+  "Name": "header",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 82,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/header/lobby_currency_background.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 281,
+            "Scale9OriginY": 28,
+            "Scale9Width": 292,
+            "Scale9Height": 29,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -320.0,
+            "RightMargin": -320.0,
+            "TopMargin": -42.5,
+            "BottomMargin": -42.5,
+            "Tag": 84,
+            "ActionTag": 336011806,
+            "Size": {
+              "X": 640.0,
+              "Y": 85.0
+            },
+            "Name": "lobbyCurrencyBackground",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/header/lobby_box.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -90.0,
+              "Y": 10.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -160.0,
+            "RightMargin": 20.0,
+            "TopMargin": -30.0,
+            "BottomMargin": -10.0,
+            "Tag": 85,
+            "ActionTag": 1953640469,
+            "Size": {
+              "X": 140.0,
+              "Y": 40.0
+            },
+            "Name": "goldBox",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/header/lobby_box.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 90.0,
+              "Y": 10.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 20.0,
+            "RightMargin": -160.0,
+            "TopMargin": -30.0,
+            "BottomMargin": -10.0,
+            "Tag": 88,
+            "ActionTag": 1891324832,
+            "Size": {
+              "X": 140.0,
+              "Y": 40.0
+            },
+            "Name": "gemBox",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/common/common_icon_g_small.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 25.0,
+              "Y": 10.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -2.5,
+            "RightMargin": -52.5,
+            "TopMargin": -41.5,
+            "BottomMargin": -21.5,
+            "Tag": 109,
+            "ActionTag": 2019171990,
+            "Size": {
+              "X": 55.0,
+              "Y": 63.0
+            },
+            "Name": "gemIcon",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/common/common_icon_gold_small.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -169.7827,
+              "Y": 9.4409
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -199.7827,
+            "RightMargin": 139.7827,
+            "TopMargin": -41.4409,
+            "BottomMargin": -22.5591,
+            "Tag": 110,
+            "ActionTag": -1793433082,
+            "Size": {
+              "X": 60.0,
+              "Y": 64.0
+            },
+            "Name": "goldIcon",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/header/lobby_currency_btn_top_up.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -24.8177,
+              "Y": 10.3829
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -43.8177,
+            "RightMargin": 5.8177,
+            "TopMargin": -30.3829,
+            "BottomMargin": -9.6171,
+            "Tag": 111,
+            "ActionTag": -960341146,
+            "Size": {
+              "X": 38.0,
+              "Y": 40.0
+            },
+            "Name": "goldTopUpBtn",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/header/lobby_currency_btn_top_up.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 154.6263,
+              "Y": 10.4587
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 135.6263,
+            "RightMargin": -173.6263,
+            "TopMargin": -30.4587,
+            "BottomMargin": -9.5413,
+            "Tag": 112,
+            "ActionTag": -1403151985,
+            "Size": {
+              "X": 38.0,
+              "Y": 40.0
+            },
+            "Name": "gemTopUpBtn",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "923.000",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -91.167,
+              "Y": 10.4541
+            },
+            "Scale": {
+              "ScaleX": 0.6584,
+              "ScaleY": 0.871
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -150.667,
+            "RightMargin": 31.667,
+            "TopMargin": -23.9541,
+            "BottomMargin": -3.0459,
+            "Tag": 240,
+            "ActionTag": -1666873092,
+            "Size": {
+              "X": 119.0,
+              "Y": 27.0
+            },
+            "Name": "goldTxt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "25.337",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 93.0394,
+              "Y": 10.3308
+            },
+            "Scale": {
+              "ScaleX": 0.7617,
+              "ScaleY": 0.871
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 48.0394,
+            "RightMargin": -138.0394,
+            "TopMargin": -23.8308,
+            "BottomMargin": -3.1692,
+            "Tag": 242,
+            "ActionTag": 303207535,
+            "Size": {
+              "X": 90.0,
+              "Y": 27.0
+            },
+            "Name": "gemTxt",
+            "ctype": "TextObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../font/SVN-Supercell Magic.ttf",
+        "../../../image/common/common_icon_g_small.png",
+        "../../../image/common/common_icon_gold_small.png",
+        "../../../image/mainScene/header/lobby_box.png",
+        "../../../image/mainScene/header/lobby_currency_background.png",
+        "../../../image/mainScene/header/lobby_currency_btn_top_up.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

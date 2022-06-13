@@ -1,0 +1,280 @@
+{
+  "ID": "6983592f-eaf3-4ec9-aa80-d92d35608e3f",
+  "Version": "2.3.4",
+  "Name": "AvatarNode",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 446,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/battle/battle_info_box.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 29,
+            "Scale9OriginY": 29,
+            "Scale9Width": 30,
+            "Scale9Height": 30,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.866,
+              "Y": 0.0075
+            },
+            "Scale": {
+              "ScaleX": 1.3799,
+              "ScaleY": 0.6862
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -100.866,
+            "RightMargin": -99.134,
+            "TopMargin": -44.0075,
+            "BottomMargin": -43.9925,
+            "Tag": 513,
+            "ActionTag": 886504479,
+            "Size": {
+              "X": 200.0,
+              "Y": 88.0
+            },
+            "Name": "background",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/common/common_avatar.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 12,
+            "Scale9OriginY": 12,
+            "Scale9Width": 13,
+            "Scale9Height": 13,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -124.5182,
+              "Y": 0.0075
+            },
+            "Scale": {
+              "ScaleX": 1.2934,
+              "ScaleY": 1.2934
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -143.0182,
+            "RightMargin": 106.0182,
+            "TopMargin": -18.5075,
+            "BottomMargin": -18.4925,
+            "Tag": 515,
+            "ActionTag": 1550609512,
+            "Size": {
+              "X": 37.0,
+              "Y": 37.0
+            },
+            "Name": "avatar",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/common/common_avatar_border.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 44,
+            "Scale9OriginY": 48,
+            "Scale9Width": 47,
+            "Scale9Height": 50,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -124.5182,
+              "Y": 0.0075
+            },
+            "Scale": {
+              "ScaleX": 0.4065,
+              "ScaleY": 0.4065
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -192.0182,
+            "RightMargin": 57.0182,
+            "TopMargin": -73.0075,
+            "BottomMargin": -72.9925,
+            "Tag": 514,
+            "ActionTag": 1851559303,
+            "Size": {
+              "X": 135.0,
+              "Y": 146.0
+            },
+            "Name": "avatar_border",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "UNSTOPABLE_13",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 17.1959,
+              "Y": 18.394
+            },
+            "Scale": {
+              "ScaleX": 0.8832,
+              "ScaleY": 0.8832
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -98.3041,
+            "RightMargin": -132.6959,
+            "TopMargin": -31.894,
+            "BottomMargin": 4.894,
+            "Tag": 571,
+            "ActionTag": 1738329336,
+            "Size": {
+              "X": 231.0,
+              "Y": 27.0
+            },
+            "Name": "username",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FontSize": 16,
+            "LabelText": "GDF_5_team_2",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 20.9545,
+              "Y": -15.2317
+            },
+            "Scale": {
+              "ScaleX": 0.8832,
+              "ScaleY": 0.8832
+            },
+            "CColor": {
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -59.5455,
+            "RightMargin": -101.4545,
+            "TopMargin": 4.2317,
+            "BottomMargin": -26.2317,
+            "Tag": 642,
+            "ActionTag": 150169027,
+            "Size": {
+              "X": 161.0,
+              "Y": 22.0
+            },
+            "Name": "clan_name",
+            "ctype": "TextObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../../assets/battle/battle_info_box.png",
+        "../../../../assets/common/common_avatar.png",
+        "../../../../assets/common/common_avatar_border.png",
+        "../../../../assets/font/SVN-Supercell Magic.ttf"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

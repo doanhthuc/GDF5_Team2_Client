@@ -1,0 +1,209 @@
+{
+  "ID": "acc04562-1974-44d4-a858-d388a3a84a13",
+  "Version": "2.3.4",
+  "Name": "BattleCardNode",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 241,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/battle/battle_card_box.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 35,
+            "Scale9OriginY": 47,
+            "Scale9Width": 38,
+            "Scale9Height": 49,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -54.0,
+            "RightMargin": -54.0,
+            "TopMargin": -71.5,
+            "BottomMargin": -71.5,
+            "Tag": 1724,
+            "ActionTag": -2021611772,
+            "Size": {
+              "X": 108.0,
+              "Y": 143.0
+            },
+            "Name": "card_slot_background",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/card/card_background_4.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 38,
+            "Scale9OriginY": 54,
+            "Scale9Width": 42,
+            "Scale9Height": 56,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 0.8743,
+              "ScaleY": 0.8743
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -54.0,
+            "RightMargin": -54.0,
+            "TopMargin": -71.5,
+            "BottomMargin": -71.5,
+            "Tag": 1731,
+            "ActionTag": 228484791,
+            "Size": {
+              "X": 108.0,
+              "Y": 143.0
+            },
+            "Name": "card_background",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/card/card_border_1.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 45,
+            "Scale9OriginY": 61,
+            "Scale9Width": 48,
+            "Scale9Height": 64,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 0.96,
+              "ScaleY": 0.96
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -54.0,
+            "RightMargin": -54.0,
+            "TopMargin": -71.5,
+            "BottomMargin": -71.5,
+            "Tag": 1723,
+            "ActionTag": -1290571381,
+            "Size": {
+              "X": 108.0,
+              "Y": 143.0
+            },
+            "Name": "card_border",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/battle_ui_layer/card/CardEnergyNode.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": -56.09
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": 56.09,
+            "BottomMargin": -56.09,
+            "Tag": 1830,
+            "ActionTag": -1880251703,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "FileNode_1",
+            "ctype": "ProjectNodeObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../../assets/battle/battle_card_box.png",
+        "../../../../assets/card/card_background_4.png",
+        "../../../../assets/card/card_border_1.png",
+        "CardEnergyNode.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}
