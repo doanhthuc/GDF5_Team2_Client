@@ -1,6 +1,6 @@
 const treasureSlot = cc.Node.extend({
     id: null,
-    DEFAULT_STATE: 'EMPTY',
+    DEFAULT_STATE: TreasureSlotResources.STATE.EMPTY,
     state: this.DEFAULT_STATE,
     timeRemaining: 0,
     countdownTxt: 0,
@@ -8,6 +8,9 @@ const treasureSlot = cc.Node.extend({
 
 
     ctor: function () {
+        // this.node = node;
+        // this.parentLayer = parentLayer;
+        // cc.log(JSON.stringify(this.node))
         this._super();
         this.init();
         this.setNodeByState(this.state);
@@ -26,7 +29,7 @@ const treasureSlot = cc.Node.extend({
 
     setNodeByState: function (state) {
         this.state = state;
-        this.node.removeFromParent(false);
+        if (this.node !== null) this.node.removeFromParent(false);
         switch (state) {
             case TreasureSlotResources.STATE.EMPTY:
                 this.node = this.emptySlotNode;
@@ -41,7 +44,8 @@ const treasureSlot = cc.Node.extend({
                 this.node = this.finishedSlotNode;
                 break;
         }
-        this.addChild(this.node);
+        // this.addChild(this.node)
+        // this.parentLayer.addChild(this.node);
     },
 
 
