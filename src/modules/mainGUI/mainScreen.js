@@ -14,19 +14,17 @@ const MainScreen = cc.Layer.extend({
 
         this.scene = rootNode.node;
         this.tabList = this.scene.getChildByName('bottomNav');
-        cc.log(JSON.stringify(this.tabList.getChildren()[0].getChildByName('nameTxt')));
-        this.tabMap = new Map(
-            this.scene.getChildByName('bottomNav').getChildren().map(function (tab) {
-                cc.log(tab);
+        // cc.log(JSON.stringify(this.tabList.getChildren()[0].getChildByName('nameTxt')));
+        this.tabMap = new Map(this.scene.getChildByName('bottomNav').getChildren().map(function (tab) {
                 return [tab.getName(), tab];
             })
         );
-        cc.log(this.tabMap);
-        cc.log(JSON.stringify(this.tabMap.get('homeTab')));
+        // cc.log(this.tabMap);
+        // cc.log(JSON.stringify(this.tabMap.get('homeTab')));
         this.homeTab = this.tabMap.get('homeTab');
         this.homeTab.getChildByName('backgroundBtn').loadTextures(res.ACTIVE_TAB_BG, res.ACTIVE_TAB_BG);
-        cc.log(this.homeTab.parent.getName());
-        cc.log(res.BOTTOM_NAV)
+        // cc.log(this.homeTab.parent.getName());
+        // cc.log(res.BOTTOM_NAV)
         let nav = new bottomNav();
         this.addChild(nav);
         // nav.setPosition(this.scene.width / 2, 55);

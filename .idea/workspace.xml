@@ -5,40 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/font/SVN-Supercell Magic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/common/common_arena_forest.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/common/common_avatar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/common/common_icon_g_small.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/common/common_icon_gold_small.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/common/common_icon_trophy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/lobby/lobby_home_btn_battle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/lobby/lobby_home_btn_battle_pressing.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/lobby/lobby_home_btn_battle_txt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/lobby/lobby_home_treasure_empty.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_btn_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_btn_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_btn_selecting.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_icon_cards.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_icon_home.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/bottom/lobby_page_icon_shop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/header/lobby_box.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/header/lobby_currency_background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/header/lobby_currency_btn_top_up.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/lobby_background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/image/mainScene/lobby_home_player.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/battleBtn.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/battleBtn.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/playerInfoHolder.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/playerInfoHolder.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/main/MainScene.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/MainScene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/main/bottom/BottomNav.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/bottom/BottomNav.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/main/header/header.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/header/header.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/ResourceAnimation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ResourceAnimation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,6 +116,10 @@
         <option value="$PROJECT_DIR$/src/framework/UserData.js" />
       </list>
     </option>
+  </component>
+  <component name="JsBowerSettings">
+    <bower-package value="" />
+    <bower.json value="" />
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsGulpfileManager">
@@ -338,9 +312,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="FullScreen" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Project/lgrc_project/client/HelloJavascript/src/framework/Framework.js" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="format.on.save" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -354,8 +332,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="false" />
+    <property name="rearrange.code.on.save" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="ReaderModeSettings">
@@ -376,6 +353,17 @@
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -573,17 +561,6 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -741,6 +718,9 @@
       <workItem from="1654853238110" duration="3696000" />
       <workItem from="1655085459835" duration="4378000" />
       <workItem from="1655103950924" duration="12042000" />
+      <workItem from="1655128103614" duration="7773000" />
+      <workItem from="1655137474022" duration="183000" />
+      <workItem from="1655137724044" duration="294000" />
     </task>
     <servers />
   </component>
@@ -844,6 +824,10 @@
         <breakpoint enabled="true" log-message="true" type="javascript-exception" />
       </default-breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
