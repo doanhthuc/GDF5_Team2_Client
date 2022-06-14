@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data/tresure-resources/treasureSlotResources.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/lobby/lobbyLayer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/lobby/playerInfoHolder.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/lobby/treasure.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/lobby/treasureSlot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/openningSlot/countdownHolder.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/openningSlot/openingSlot.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/MainScene.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/MainScene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/bottom/navTab.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/bottom/navTab.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/header/header.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/header/header.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" afterDir="false" />
@@ -321,8 +334,10 @@
     <property name="format.on.save" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="options.lastSelected" value="web-ide.project.structure" />
@@ -333,7 +348,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="rearrange.code.on.save" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
   </component>
   <component name="ReaderModeSettings">
     <option name="showLigatures" value="true" />
@@ -353,17 +368,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -561,6 +565,17 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -721,6 +736,7 @@
       <workItem from="1655128103614" duration="7773000" />
       <workItem from="1655137474022" duration="183000" />
       <workItem from="1655137724044" duration="294000" />
+      <workItem from="1655178100072" duration="22447000" />
     </task>
     <servers />
   </component>

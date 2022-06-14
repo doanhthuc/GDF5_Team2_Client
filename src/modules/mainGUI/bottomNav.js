@@ -1,62 +1,118 @@
 const bottomNav = cc.Node.extend({
-    ctor: function () {
+    ctor: function (handleScrollPageCallback) {
         this._super();
+        this.handleScrollPageCallback = handleScrollPageCallback;
         this.init();
     },
-    DEFAULT_TAB: 'HOME_TAB',
 
     init: function () {
+        this.DEFAULT_TAB = 'HOME_TAB';
         this.activeTab = this.DEFAULT_TAB;
+        this.tabMap = new Map();
         this.loadTabList();
+        this.setPositionForTab();
     },
 
-    loadTabList: function () {
-        this.tabMap = new Map();
+
+    /*loadTabList: function () {
         let currentWidth = 0;
         for (let tab in NavResources.TAB_LIST) {
             let node = ccs.load(NavResources.NAV_TAB, '').node;
             this.addChild(node);
-            node.getChildByName('iconImg').loadTexture(NavResources.TAB_LIST[tab].icon);
-            node.getChildByName('nameTxt').setString(NavResources.TAB_LIST[tab].text);
+            this.tabMap.set(tab, node);
+            node.name = NavResources.TAB_LIST[tab].name;
+            node.iconImg = node.getChildByName('iconImg');
+            node.backgroundBtn = node.getChildByName('backgroundBtn');
+            node.nameTxt = node.getChildByName('nameTxt');
+            cc.log(node.backgroundBtn);
+            node.backgroundBtn.addTouchEventListener(this.onTabClick.bind(this), this);
+            if (NavResources.TAB_LIST[tab].icon !== undefined) {
+                node.iconImg.loadTexture(NavResources.TAB_LIST[tab].icon);
+                node.getChildByName('nameTxt').setString(NavResources.TAB_LIST[tab].text);
+                node.getChildByName('nameTxt').setVisible(false);
+            }
             let backgroundBtn = node.getChildByName('backgroundBtn')
             if (tab !== this.activeTab) {
-                backgroundBtn.loadTextureNormal(
+                node.backgroundBtn.loadTextureNormal(
                     NavResources.TAB_LIST[tab].backgroundImg
                 );
                 node.setPosition(
-                    NavResources.NORMAL_BUTTON_HEIGHT * 0.5 + currentWidth,
+                    NavResources.NORMAL_BUTTON_WIDTH * 0.5 + currentWidth,
                     NavResources.NORMAL_BUTTON_HEIGHT / 2
                 );
-                currentWidth += backgroundBtn.getSize().width;
+                currentWidth += backgroundBtn.getSize().width - 4;
             } else {
-                backgroundBtn.loadTextureNormal(
+                node.backgroundBtn.loadTextureNormal(
                     NavResources.ACTIVE_TAB_BG
                 )
                 node.setPosition(
                     NavResources.ACTIVE_BUTTON_WIDTH * 0.5 + currentWidth,
                     NavResources.NORMAL_BUTTON_HEIGHT / 2 - 5
                 );
-                currentWidth += backgroundBtn.getSize().width;
-
+                node.nameTxt.setVisible(true);
+                // node.nameTxt.setPosition(0,
+                //     cc.winSize.height/2);
+                currentWidth += backgroundBtn.getSize().width - 2;
             }
 
-            // cc.log(node.getChildByName('backgroundBtn'));
-
-            this.tabMap.set(tab, node);
         }
-        // cc.log(JSON.stringify(NavResources.TAB_LIST))
-        // NavResources.TAB_LIST.entries().forEach(tab => {
-        //     let node = ccs.load(res.BOTTOM_NAV, '').node;
-        //     this.addChild(node);
-        //     node.setPosition(NavResources.NORMAL_BUTTON_HEIGHT * (this.tabMap.size + 0.5),
-        //         NavResources.NORMAL_BUTTON_HEIGHT / 2);
-        //     this.tabMap.set(tab.key, node);
-        // })
-    },
-    loadTab: function (node, tabName, currentXPos) {
-        let backgroundBtn = node.getChildByName('backgroundBtn')
-        let iconImg = node.getChildByName('iconImg')
-        let nameTxt = node.getChildByName('nameTxt')
 
+    },*/
+    onTabClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            this.activeTab = sender.parent.name;
+            this.setPositionForTab();
+            this.handleScrollPageCallback(sender.parent.index);
+        }
+    },
+    setPositionForTab: function () {
+        let currentWidth = 0;
+        this.tabMap.forEach(function (tab, key) {
+            if (key === this.activeTab) {
+                tab.backgroundBtn.loadTextureNormal(
+                    NavResources.ACTIVE_TAB_BG
+                );
+                tab.setPosition(
+                    NavResources.ACTIVE_BUTTON_WIDTH * 0.5 + currentWidth,
+                    NavResources.NORMAL_BUTTON_HEIGHT / 2 - 5
+                );
+                tab.nameTxt.setVisible(true);
+                currentWidth += tab.backgroundBtn.getSize().width - 2;
+            } else {
+                tab.backgroundBtn.loadTextureNormal(
+                    NavResources.TAB_LIST[key].backgroundImg
+                );
+                tab.setPosition(
+                    NavResources.NORMAL_BUTTON_WIDTH * 0.5 + currentWidth,
+                    NavResources.NORMAL_BUTTON_HEIGHT / 2
+                );
+                tab.nameTxt.setVisible(false);
+                currentWidth += tab.backgroundBtn.getSize().width - 4;
+            }
+        }.bind(this));
+    },
+    loadTabList: function () {
+        for (let tab in NavResources.TAB_LIST) {
+            let node = ccs.load(NavResources.NAV_TAB, '').node;
+            this.addChild(node);
+            this.extendTabProperties(tab, node);
+            this.tabMap.set(tab, node);
+            node.backgroundBtn.addTouchEventListener(this.onTabClick.bind(this), this);
+            this.setResourceForTab(tab, node);
+        }
+    },
+    setResourceForTab: function (tabName, tabNode) {
+        if (NavResources.TAB_LIST[tabName].icon !== undefined) {
+            tabNode.iconImg.loadTexture(NavResources.TAB_LIST[tabName].icon);
+            tabNode.getChildByName('nameTxt').setString(NavResources.TAB_LIST[tabName].text);
+            tabNode.getChildByName('nameTxt').setVisible(false);
+        }
+    },
+    extendTabProperties: function (tabName, tabNode) {
+        tabNode.name = NavResources.TAB_LIST[tabName].name;
+        tabNode.iconImg = tabNode.getChildByName('iconImg');
+        tabNode.backgroundBtn = tabNode.getChildByName('backgroundBtn');
+        tabNode.nameTxt = tabNode.getChildByName('nameTxt');
+        tabNode.index = this.tabMap.size;
     }
 });

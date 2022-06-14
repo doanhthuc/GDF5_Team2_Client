@@ -302,7 +302,7 @@
               "X": 640.0,
               "Y": 1136.0
             },
-            "Name": "PageView_1",
+            "Name": "mainPageView",
             "ctype": "PageViewObjectData"
           },
           {
@@ -385,7 +385,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "concurencyHolder",
+            "Name": "concurrencyHolder",
             "ctype": "ProjectNodeObjectData"
           }
         ],

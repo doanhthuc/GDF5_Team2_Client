@@ -56,7 +56,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/openningSlot/openingSlot.json",
+              "Path": "ui/lobby/treasureHolders/treasureSlot/openingSlot/openingSlot.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -182,7 +182,7 @@
         "treasureSlot/emptySlot.json",
         "treasureSlot/finishedSlot.json",
         "treasureSlot/occupiedSlot.json",
-        "treasureSlot/openningSlot/openingSlot.json"
+        "treasureSlot/openingSlot/openingSlot.json"
       ],
       "ctype": "GameFileData"
     }
