@@ -34,13 +34,13 @@ let TowerInfoComponent = InfoComponent.extend({
 
     ctor: function (energy, bulletTargetType, bulletEffects, archType, targetType, attackRange, bulletType,
                     targetStrategy, attackCountdown, speedAttack, damage) {
-        this._super(GameConfig.COMPONENT_ID.MONSTER_INFO);
+        this._super(GameConfig.COMPONENT_ID.TOWER_INFO);
         this.energy = energy;
         this.bulletTargetType = bulletTargetType;
         this.bulletEffects = bulletEffects;
         this.archType = archType;
         this.targetType = targetType;
-        this.attackRange = attackRange;
+        this.attackRange = attackRange*GameConfig.TILE_WIDTH;
         this.bulletType = bulletType;
         this.targetStrategy = targetStrategy;
         this.attackCountdown = attackCountdown;

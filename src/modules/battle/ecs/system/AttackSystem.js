@@ -12,11 +12,7 @@ let AttackSystem = System.extend({
         let monsterList = EntityManager.getInstance()
             .getEntitiesByComponents(GameConfig.COMPONENT_ID.MONSTER_INFO);
 
-        cc.log("xxxxxxx")
-        cc.log(towerList.length);
-        cc.log(monsterList.length);
-        cc.log(JSON.stringify(EntityManager.getInstance().entities))
-        for (let tower in towerList) {
+        for (let tower of towerList) {
             let towerInfo = tower.getComponent(GameConfig.COMPONENT_ID.TOWER_INFO);
 
             // update count down time
@@ -24,21 +20,22 @@ let AttackSystem = System.extend({
             cc.log(towerInfo.attackCountdown)
             if (towerInfo.attackCountdown <= 0) {
                 let monsterInAttackRange = []
-                for (let monster in monsterList) {
+                for (let monster of monsterList) {
                     if (monster.getActive()) {
                         let distance = this._distanceFrom(tower, monster);
+                        cc.log(distance);
                         if (distance <= towerInfo.attackRange) {
                             monsterInAttackRange.push(monster);
                         }
                     }
                 }
-
                 if (monsterInAttackRange.length > 0) {
                     // TODO: switch case target_strategy here
+                    cc.log("===> Create bullet");
+
                     let targetMonster = this._findTargetMonsterByStrategy("max-hp", monsterInAttackRange);
                     let monsterPos = targetMonster.getComponent(GameConfig.COMPONENT_ID.POSITION);
                     let towerPos = tower.getComponent(GameConfig.COMPONENT_ID.POSITION);
-                    cc.log("===> Create bullet");
                     EntityFactory.createBullet(towerPos, monsterPos, []);
 
                     // reset count down time
@@ -55,6 +52,7 @@ let AttackSystem = System.extend({
     },
 
     _findTargetMonsterByStrategy: function (strategy, monsterInAttackRange) {
+        return monsterInAttackRange[0];
         let targetMonster = null;
         switch (strategy) {
             case "max-hp":

@@ -43,7 +43,7 @@ EntityFactory.createCannonOwlTower = function () {
     let node = createNodeAnimation();
 
     // NOTE: get component from pool
-    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [], "attack", 1, "bulletType", "max-hp", 2, 2, "damage");
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [], "attack", "monster", 1.5, "bulletType", "max-hp", 0, 2, "damage");
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
 
@@ -59,7 +59,7 @@ EntityFactory.createBullet = function (startPosition, targetPosition, effects) {
     let entity = this.createEntity(typeID);
 
     // NOTE: get component from pool
-    let node = new cc.Sprite("res/assets/monster/frame/swordsman/tower_cannon_bullet_0000.png");
+    let node = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
     let infoComponent = new BulletInfoComponent(effects);
     let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
     let appearanceComponent = new AppearanceComponent(node);

@@ -33,19 +33,19 @@ let EntityECS = cc.Class.extend({
         return this.component[typeID];
     },
 
-    hasAllComponent: function (...componentTypeIds) {
+    hasAllComponent: function (...componentTypeIDs) {
         let c = 0;
-        for (let i = 0; i < componentTypeIds.length; i++) {
-            if (this.getComponent(componentTypeIds[i])) {
+        for (let typeID of componentTypeIDs) {
+            if (this.getComponent(typeID)) {
                 c++;
             }
         }
-        return c === componentTypeIds.length;
+        return c === componentTypeIDs.length;
     },
 
-    hasAnyComponent: function (...componentTypeIds) {
-        for (let i = 0; i < componentTypeIds.length; i++) {
-            if (this.getComponent(componentTypeIds[i])) {
+    hasAnyComponent: function (...componentTypeIDs) {
+        for (let typeID of componentTypeIDs) {
+            if (this.getComponent(typeID)) {
                 return true;
             }
         }
