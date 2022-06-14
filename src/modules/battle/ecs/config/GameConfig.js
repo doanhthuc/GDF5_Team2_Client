@@ -11,18 +11,21 @@ GameConfig.COMPONENT_ID = {
     VELOCITY: 6,
     APPEARANCE: 7,
     PATH: 8,
+    COLLISION: 9
 }
 
 GameConfig.SYSTEM_ID = {
     MOVEMENT: 1,
     PATH_MONSTER: 2,
     RENDER: 3,
-    LIFE: 4
+    LIFE: 4,
+    ATTACK: 5
 }
 
 GameConfig.ENTITY_ID = {
     SWORD_MAN: 1,
-    CANNON_TOWER: 2
+    CANNON_TOWER: 2,
+    BULLET: 3
 }
 
 GameConfig.TILE_WIDTH = 77;

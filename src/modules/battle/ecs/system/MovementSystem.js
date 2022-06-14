@@ -8,7 +8,7 @@ let MovementSystem = System.extend({
 
     run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponent(GameConfig.COMPONENT_ID.VELOCITY, GameConfig.COMPONENT_ID.POSITION);
+            .getEntitiesByComponents(GameConfig.COMPONENT_ID.VELOCITY, GameConfig.COMPONENT_ID.POSITION);
         for (let entity of entityList) {
             let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
             let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
@@ -65,7 +65,7 @@ let MovementSystem = System.extend({
                         break;
                 }
             } else {
-                entity.removeComponent(velocityComponent.id);
+                entity.removeComponent(velocityComponent.typeID);
                 entity.setActive(false);
             }
         }

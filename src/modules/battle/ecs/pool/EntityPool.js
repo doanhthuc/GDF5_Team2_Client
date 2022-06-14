@@ -1,7 +1,7 @@
 let EntityPool = cc.Class.extend({
     pool: {},
 
-    getInvisibleEntity: function (entityTypeID) {
+    getInActiveEntity: function (entityTypeID) {
         let invisibleEntity = null;
         if (this.pool[entityTypeID]) {
             for (let i = 0; i < this.pool[entityTypeID].length; i++) {

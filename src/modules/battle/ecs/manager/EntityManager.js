@@ -14,7 +14,7 @@ let EntityManager = cc.Class.extend({
         return this.entities[entityID];
     },
 
-    getEntitiesByComponent: function (...componentIds) {
+    getEntitiesByComponents: function (...componentIds) {
         let entityList = [];
         for (let id of Object.keys(this.entities)) {
             if (this.entities[id].hasAllComponent(...componentIds)) {
@@ -25,6 +25,7 @@ let EntityManager = cc.Class.extend({
     },
 
     addEntity: function (entity) {
+        cc.log(JSON.stringify(this.entities))
         if (!entity instanceof EntityECS) {
             throw new InvalidArgumentTypeError(entity, EntityECS)
         }
@@ -32,9 +33,9 @@ let EntityManager = cc.Class.extend({
         this.entities[entity.id] = entity;
     },
 
-    destroyEntity: function (entityID) {
-        this.getEntity(entityID).setActive(false);
-        delete this.entities[entityID];
+    destroyEntity: function (id) {
+        this.getEntity(id).setActive(false);
+        delete this.entities[id];
     },
 });
 

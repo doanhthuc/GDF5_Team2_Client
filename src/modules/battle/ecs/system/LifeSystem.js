@@ -8,7 +8,7 @@ let LifeSystem = System.extend({
 
     run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponent(GameConfig.COMPONENT_ID.LIFE);
+            .getEntitiesByComponents(GameConfig.COMPONENT_ID.LIFE);
         for (let entity of entityList) {
             let lifeComponent = entity.getComponent(GameConfig.COMPONENT_ID.LIFE);
             if (lifeComponent.hp <= 0) {

@@ -51,6 +51,7 @@
         "src/modules/battle/ecs/manager/EntityManager.js",
         "src/modules/battle/ecs/system/System.js",
         "src/modules/battle/ecs/system/MovementSystem.js",
+        "src/modules/battle/ecs/system/AttackSystem.js",
         "src/modules/battle/ecs/system/PathMonsterSystem.js",
         "src/modules/battle/ecs/system/RenderSystem.js",
         "src/modules/battle/ecs/system/LifeSystem.js",

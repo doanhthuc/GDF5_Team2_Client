@@ -17,20 +17,18 @@ let GameLayer = cc.Layer.extend({
         this.renderSystem = new RenderSystem();
         this.movementSystem = new MovementSystem();
         this.lifeSystem = new LifeSystem();
+        this.attackSystem = new AttackSystem();
 
-        // this.initMonster();
+        this.initMonster();
         this.initTower();
         this.handleEventKey();
 
-        this.scheduleOnce(this.initMonster.bind(this), 1);
-        this.scheduleOnce(this.initMonster.bind(this), 9);
-        this.scheduleOnce(this.initMonster.bind(this), 9);
-        this.scheduleOnce(this.initMonster.bind(this), 9);
         this.scheduleUpdate();
     },
 
     update: function(dt) {
         this.movementSystem.run(dt);
+        this.attackSystem.run(dt);
         this.renderSystem.run(dt);
         this.lifeSystem.run(dt);
     },

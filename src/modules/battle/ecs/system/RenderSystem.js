@@ -7,7 +7,7 @@ let RenderSystem = System.extend({
     },
 
     run: function (tick) {
-        let entityList = EntityManager.getInstance().getEntitiesByComponent(GameConfig.COMPONENT_ID.APPEARANCE, GameConfig.COMPONENT_ID.POSITION);
+        let entityList = EntityManager.getInstance().getEntitiesByComponents(GameConfig.COMPONENT_ID.APPEARANCE, GameConfig.COMPONENT_ID.POSITION);
         for (let entity of entityList) {
             let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE);
             let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);

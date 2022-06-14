@@ -3,10 +3,10 @@ let InfoComponent = Component.extend({
 });
 
 let MonsterInfoComponent = InfoComponent.extend({
-    id: GameConfig.COMPONENT_ID.MONSTER_INFO,
     name: "MonsterInfoComponentECS",
 
     ctor: function (category, classs, weight, energy, gainEnergy, ability) {
+        this._super(GameConfig.COMPONENT_ID.MONSTER_INFO);
         this.setCategory(category);
         this.classs = classs;
         this.weight = weight;
@@ -30,11 +30,11 @@ let MonsterInfoComponent = InfoComponent.extend({
 });
 
 let TowerInfoComponent = InfoComponent.extend({
-    id: GameConfig.COMPONENT_ID.TOWER_INFO,
     name: "TowerInfoComponentECS",
 
     ctor: function (energy, bulletTargetType, bulletEffects, archType, targetType, attackRange, bulletType,
                     targetStrategy, attackCountdown, speedAttack, damage) {
+        this._super(GameConfig.COMPONENT_ID.MONSTER_INFO);
         this.energy = energy;
         this.bulletTargetType = bulletTargetType;
         this.bulletEffects = bulletEffects;
@@ -51,10 +51,12 @@ let TowerInfoComponent = InfoComponent.extend({
 });
 
 let BulletInfoComponent = InfoComponent.extend({
-    id: GameConfig.COMPONENT_ID.BULLET_INFO,
     name: "TowerInfoComponentECS",
 
-    ctor: function () {
+    ctor: function (effects) {
+        this._super(GameConfig.COMPONENT_ID.BULLET_INFO);
+        this.effect = effects;
+
         cc.log("new " + this.name);
     },
 });
@@ -62,11 +64,11 @@ let BulletInfoComponent = InfoComponent.extend({
 
 let LifeComponent = InfoComponent.extend({
     name: "LifeComponentECS",
-    id: GameConfig.COMPONENT_ID.LIFE,
-    hp: 0,
 
     ctor: function(hp) {
+        this._super(GameConfig.COMPONENT_ID.LIFE);
         this.hp = hp;
+
         cc.log("new " + this.name);
     },
 });

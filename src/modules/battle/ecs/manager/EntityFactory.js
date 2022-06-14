@@ -4,57 +4,77 @@ let EntityFactory = cc.Class.extend({
 
 EntityFactory.pool = new EntityPool()
 
-// Static method
-EntityFactory.createSwordsmanMonster = function () {
-    let typeID = GameConfig.ENTITY_ID.SWORD_MAN;
-    let entity = this.pool.getInvisibleEntity(typeID);
+EntityFactory.createEntity = function (typeID) {
+    let entity = this.pool.getInActiveEntity(typeID);
     if (entity === null) {
         entity = new EntityECS(typeID);
-
-        // NOTE: get component from pool
-        let initPos = Utils.tile2Pixel(0, 4);
-        let infoComponent = new MonsterInfoComponent("normal", "land", 30, 1, 1, undefined);
-        let positionComponent = new PositionComponent(initPos.x, initPos.y);
-        let velocityComponent = new VelocityComponent(2*GameConfig.TILE_WIDTH, 0);
-        let appearanceComponent = new AppearanceComponent(new cc.Sprite("res/assets/monster/frame/swordsman/monster_swordsman_run_0019.png"));
-        let pathComponent = new PathComponent([{x: 0, y: 4}, {x: 3, y: 4}, {x: 3, y: 2}, {x:6, y: 2}, {x: 6, y: 0}])
-
-        entity.addComponent(infoComponent)
-            .addComponent(positionComponent)
-            .addComponent(velocityComponent)
-            .addComponent(appearanceComponent)
-            .addComponent(pathComponent);
         this.pool.push(entity);
         EntityManager.getInstance().addEntity(entity);
     }
+    return entity;
+}
+
+EntityFactory.createSwordsmanMonster = function () {
+    let typeID = GameConfig.ENTITY_ID.SWORD_MAN;
+    let entity = this.createEntity(typeID);
+
+    // NOTE: get component from pool
+    let initPos = Utils.tile2Pixel(0, 4);
+    let infoComponent = new MonsterInfoComponent("normal", "land", 30, 1, 1, undefined);
+    let positionComponent = new PositionComponent(initPos.x, initPos.y);
+    let velocityComponent = new VelocityComponent(2*GameConfig.TILE_WIDTH, 0);
+    let appearanceComponent = new AppearanceComponent(new cc.Sprite("res/assets/monster/frame/swordsman/monster_swordsman_run_0019.png"));
+    let pathComponent = new PathComponent([{x: 0, y: 4}, {x: 3, y: 4}, {x: 3, y: 2}, {x:6, y: 2}, {x: 6, y: 0}])
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(velocityComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(pathComponent);
 
     return entity;
 };
 
 EntityFactory.createCannonOwlTower = function () {
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
-    let entity = this.pool.getInvisibleEntity(typeID);
-    if (entity === null) {
-        entity = new EntityECS(typeID);
+    let entity = this.createEntity(typeID);
 
-        // NOTE: get component from pool
-        let initPos = Utils.tile2Pixel(3, 3);
-        let node = createNodeAnimation();
+    let initPos = Utils.tile2Pixel(3, 3);
+    let node = createNodeAnimation();
 
-        let infoComponent = new TowerInfoComponent("normal", "land", 30, 1, 1, undefined);
-        let positionComponent = new PositionComponent(initPos.x, initPos.y);
-        let appearanceComponent = new AppearanceComponent(node);
+    // NOTE: get component from pool
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [], "attack", 1, "bulletType", "max-hp", 2, 2, "damage");
+    let positionComponent = new PositionComponent(initPos.x, initPos.y);
+    let appearanceComponent = new AppearanceComponent(node);
 
-        entity.addComponent(infoComponent)
-            .addComponent(positionComponent)
-            .addComponent(appearanceComponent)
-
-        this.pool.push(entity);
-        EntityManager.getInstance().addEntity(entity);
-    }
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(appearanceComponent)
 
     return entity;
 };
+
+EntityFactory.createBullet = function (startPosition, targetPosition, effects) {
+    let typeID = GameConfig.ENTITY_ID.BULLET;
+    let entity = this.createEntity(typeID);
+
+    // NOTE: get component from pool
+    let node = new cc.Sprite("res/assets/monster/frame/swordsman/tower_cannon_bullet_0000.png");
+    let infoComponent = new BulletInfoComponent(effects);
+    let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
+    let appearanceComponent = new AppearanceComponent(node);
+    let velocityComponent = new VelocityComponent(0.5*GameConfig.TILE_WIDTH, 0);
+    let collisionComponent = new CollisionComponent();
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(velocityComponent)
+        .addComponent(collisionComponent);
+    return entity;
+}
+
+
 
 function createNodeAnimation() {
     let node = new cc.Node();

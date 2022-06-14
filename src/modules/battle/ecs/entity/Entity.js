@@ -16,35 +16,36 @@ let EntityECS = cc.Class.extend({
             throw new Error("component must be an instance of Component");
         }
 
-        if (this.component[component.id]) {
-            throw new Error("Component with id = " + component.id + " exist");
+        if (this.component[component.typeID]) {
+            // TODO: add custom error
+            throw new Error("Component with typeID = " + component.typeID + " exist");
         }
 
-        this.component[component.id] = component;
+        this.component[component.typeID] = component;
         return this;
     },
 
-    removeComponent: function (componentId) {
-        delete this.component[componentId];
+    removeComponent: function (typeID) {
+        delete this.component[typeID];
     },
 
-    getComponent: function (componentId) {
-        return this.component[componentId];
+    getComponent: function (typeID) {
+        return this.component[typeID];
     },
 
-    hasAllComponent: function (...componentIds) {
+    hasAllComponent: function (...componentTypeIds) {
         let c = 0;
-        for (let i = 0; i < componentIds.length; i++) {
-            if (this.getComponent(componentIds[i])) {
+        for (let i = 0; i < componentTypeIds.length; i++) {
+            if (this.getComponent(componentTypeIds[i])) {
                 c++;
             }
         }
-        return c === componentIds.length;
+        return c === componentTypeIds.length;
     },
 
-    hasAnyComponent: function (...componentIds) {
-        for (let i = 0; i < componentIds.length; i++) {
-            if (this.getComponent(componentIds[i])) {
+    hasAnyComponent: function (...componentTypeIds) {
+        for (let i = 0; i < componentTypeIds.length; i++) {
+            if (this.getComponent(componentTypeIds[i])) {
                 return true;
             }
         }
