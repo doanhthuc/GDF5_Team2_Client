@@ -38,3 +38,8 @@ Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
 
     return direction1 + direction2;
 };
+
+Utils._incrementId = 0;
+Utils.genIncrementId = function () {
+    return Utils._incrementId++;
+}

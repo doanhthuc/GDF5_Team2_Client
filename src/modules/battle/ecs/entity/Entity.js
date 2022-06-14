@@ -1,10 +1,13 @@
 let EntityECS = cc.Class.extend({
-    id: 0,
+    typeID: 0,
     name: "EntityECS",
 
-    ctor: function (id) {
-        this.id = id;
+    ctor: function (typeID) {
+        this.typeID = typeID;
         this.component = {};
+        this.id = Utils.genIncrementId();
+        this._active = true;
+
         cc.log("new " + this.name);
     },
 
@@ -46,5 +49,13 @@ let EntityECS = cc.Class.extend({
             }
         }
         return false;
+    },
+
+    setActive: function (value) {
+        this._active = value;
+    },
+
+    getActive: function () {
+        return this._active;
     },
 });

@@ -37,7 +37,7 @@ let  AppearanceComponent = Component.extend({
 
     ctor: function (sprite) {
         this.sprite = sprite;
-        GameConfig.gameLayer.battleMapLayer.addChild(this.sprite, this.zOrder);
+        GameConfig.gameLayer.mapLayer.addChild(this.sprite, this.zOrder);
         cc.log("new " + this.name);
     }
 });

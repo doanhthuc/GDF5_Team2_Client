@@ -5,25 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/common/Utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/config/GameConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/LifeSystem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/PathMonsterSystem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/RenderSystem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/cocos2d_html5_develop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/cocos2d_html5_develop.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HelloJavascript.iml" beforeDir="false" afterPath="$PROJECT_DIR$/HelloJavascript.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/common/Exception.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/common/Exception.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/common/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/common/Utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/entity/Entity.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/entity/Entity.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/pool/PoolObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/pool/EntityPool.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/System.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/System.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/pool/EntityPool.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/pool/EntityPool.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -557,19 +547,6 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -725,6 +702,7 @@
       <workItem from="1654946578857" duration="72000" />
       <workItem from="1654955337912" duration="3723000" />
       <workItem from="1655084870407" duration="1453000" />
+      <workItem from="1655170322420" duration="5309000" />
     </task>
     <servers />
   </component>

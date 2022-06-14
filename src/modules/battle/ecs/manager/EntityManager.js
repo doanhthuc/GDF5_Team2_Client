@@ -33,7 +33,7 @@ let EntityManager = cc.Class.extend({
     },
 
     destroyEntity: function (entityID) {
-        this.getEntity(entityID).setVisible(false);
+        this.getEntity(entityID).setActive(false);
         delete this.entities[entityID];
     },
 });

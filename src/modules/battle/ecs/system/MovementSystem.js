@@ -66,7 +66,7 @@ let MovementSystem = System.extend({
                 }
             } else {
                 entity.removeComponent(velocityComponent.id);
-                cc.log("Removed");
+                entity.setActive(false);
             }
         }
     },
