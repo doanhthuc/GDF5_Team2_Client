@@ -12,7 +12,6 @@ const treasureSlot = cc.Node.extend({
         this.state = this.DEFAULT_STATE;
         this._super();
         this.init();
-        cc.log("line 16 : " + this.DEFAULT_STATE)
         this.setNodeByState(this.state);
 
     },
@@ -32,7 +31,6 @@ const treasureSlot = cc.Node.extend({
         this.state = state;
         if (this.node !== null) {
             this.node.removeFromParent(false)
-            cc.log("removed")
         }
         switch (state) {
             case TreasureSlotResources.STATE.EMPTY:
@@ -48,7 +46,6 @@ const treasureSlot = cc.Node.extend({
                 this.node = this.finishedSlotNode;
                 break;
         }
-        cc.log("treasureSlot " + state + "   " + this.emptySlotNode )
         this.addChild(this.node)
         this.setSlotProperties();
     },
@@ -78,7 +75,6 @@ const treasureSlot = cc.Node.extend({
             this.clientUIManager.showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
         }
     },
-
 
 
 })

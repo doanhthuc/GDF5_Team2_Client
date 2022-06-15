@@ -5,27 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_page_icon_cards.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_page_icon_shop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/inventory-resources/inventoryResources.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/inventory/inventoryLayer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/lobby/treasurePopup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/uimanager/clientUIConst.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/uimanager/clientUIManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/inventory/card.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/inventory/battleDeckHolder.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/battleDeckHolder.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/ui/inventory/inventoryNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/inventoryNode.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/lobbyHomeNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/lobbyHomeNode.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasurePopUp.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasurePopUp.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/main/MainScene.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/MainScene.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/treasure-resources/treasureSlotResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/treasure-resources/treasureSlotResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/lobbyLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/lobbyLayer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/inventory-resources/inventoryResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/inventory-resources/inventoryResources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/inventory/inventoryLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/inventoryLayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/lobby/treasureSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/treasureSlot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -370,6 +359,19 @@
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -567,19 +569,6 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -745,6 +734,7 @@
       <workItem from="1655211543120" duration="7857000" />
       <workItem from="1655257054402" duration="1832000" />
       <workItem from="1655273464661" duration="14431000" />
+      <workItem from="1655300336023" duration="7162000" />
     </task>
     <servers />
   </component>
