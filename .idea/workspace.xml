@@ -6,29 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/assets/lobby/lobby_page_icon_cards.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/assets/lobby/lobby_page_icon_shop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/demo/MainScene.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/occupiedSlot/countdownHolder.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/occupiedSlot/occupiedSlot.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/openingSlot.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotEmpty.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotFinished.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotOccupied.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/treasureSlotOpening.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/main/LobbyHomeNode.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/main/bottom/BottomNav.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/bottom/bottomNav.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/main/header/concurencyHolder.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/mainGUI/Main.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/mainGUI/layers/lobby.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/tresure-resources/treasureSlotResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/treasure-resources/treasureSlotResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/lobbyLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/lobbyLayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/lobby/treasureSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/treasureSlot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -743,6 +721,7 @@
       <workItem from="1655210696103" duration="54000" />
       <workItem from="1655210916075" duration="586000" />
       <workItem from="1655211543120" duration="7857000" />
+      <workItem from="1655257054402" duration="1832000" />
     </task>
     <servers />
   </component>

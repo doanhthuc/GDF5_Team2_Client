@@ -29,7 +29,10 @@ const treasureSlot = cc.Node.extend({
 
     setNodeByState: function (state) {
         this.state = state;
-        if (this.node !== null) this.node.removeFromParent(false);
+        if (this.node !== null) {
+            this.node.removeFromParent(false)
+            cc.log("removed")
+        }
         switch (state) {
             case TreasureSlotResources.STATE.EMPTY:
                 this.node = this.emptySlotNode;
