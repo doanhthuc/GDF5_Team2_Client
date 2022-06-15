@@ -8,6 +8,11 @@ const TreasureSlotResources = {
         OCCUPIED: 'OCCUPIED',
         OPENING: 'OPENING',
         FINISHED: 'FINISHED',
-    }
+    },
+    BACKGROUND_IMG_WIDTH: 143,
+    BACKGROUND_IMG_HEIGHT: 184,
+    SLOT_BETWEEN_MARGIN: 18,
+    CENTER_SCENE_MARGIN_TOP: -342,
+    SLOT_NUMBER: 4,
 }
 

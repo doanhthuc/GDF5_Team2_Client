@@ -1,7 +1,7 @@
 {
   "ID": "64ee7d40-a579-428a-93f7-9c062cefc8d6",
   "Version": "2.3.4",
-  "Name": "treasurePopUp",
+  "Name": "treasurePopup",
   "Content": {
     "Content": {
       "Animation": {
@@ -14,6 +14,55 @@
       "ObjectData": {
         "Tag": 163,
         "Children": [
+          {
+            "FileData": {
+              "Type": "Default",
+              "Path": "Default/ImageFile.png",
+              "Plist": ""
+            },
+            "Scale9Width": 46,
+            "Scale9Height": 46,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -320.0,
+            "RightMargin": -320.0,
+            "TopMargin": -568.0,
+            "BottomMargin": -568.0,
+            "Tag": 1033,
+            "ActionTag": 1407598595,
+            "Size": {
+              "X": 640.0,
+              "Y": 1136.0
+            },
+            "Alpha": 204,
+            "Name": "blur",
+            "ctype": "ImageViewObjectData"
+          },
           {
             "FileData": {
               "Type": "Normal",
@@ -56,7 +105,7 @@
               "X": 453.0,
               "Y": 393.0
             },
-            "Name": "Sprite_1",
+            "Name": "backgroundPanelImg",
             "ctype": "SpriteObjectData"
           },
           {
@@ -101,7 +150,7 @@
               "X": 424.0,
               "Y": 342.0
             },
-            "Name": "Sprite_2",
+            "Name": "frontPanelImg",
             "ctype": "SpriteObjectData"
           },
           {
@@ -126,7 +175,6 @@
               "ScaleX": 0.6,
               "ScaleY": 0.6
             },
-            "RotationSkewX": 0.0,
             "CColor": {},
             "IconVisible": false,
             "PrePosition": {
@@ -147,7 +195,7 @@
               "X": 338.0,
               "Y": 172.0
             },
-            "Name": "Sprite_3",
+            "Name": "pedestalImg",
             "ctype": "SpriteObjectData"
           },
           {
@@ -222,7 +270,7 @@
               "X": 47.0,
               "Y": 47.0
             },
-            "Name": "Button_1",
+            "Name": "closeBtn",
             "ctype": "ButtonObjectData"
           },
           {
@@ -267,7 +315,7 @@
               "X": 220.0,
               "Y": 201.0
             },
-            "Name": "Sprite_4",
+            "Name": "treasureImg",
             "ctype": "SpriteObjectData"
           },
           {
@@ -323,7 +371,7 @@
               "X": 172.0,
               "Y": 29.0
             },
-            "Name": "Text_1",
+            "Name": "treasureNameTxt",
             "ctype": "TextObjectData"
           },
           {
@@ -382,7 +430,7 @@
               "X": 129.0,
               "Y": 21.0
             },
-            "Name": "Text_2",
+            "Name": "treasureMapTxt",
             "ctype": "TextObjectData"
           },
           {
@@ -497,20 +545,20 @@
                   "Y": 0.6306
                 },
                 "PreSize": {
-                  "X": 0.7474,
-                  "Y": 0.2432
+                  "X": 0.7526,
+                  "Y": 0.2613
                 },
-                "LeftMargin": 24.5,
-                "RightMargin": 24.5,
-                "TopMargin": 27.5,
-                "BottomMargin": 56.5,
+                "LeftMargin": 24.0,
+                "RightMargin": 24.0,
+                "TopMargin": 26.5,
+                "BottomMargin": 55.5,
                 "Tag": 173,
                 "ActionTag": -60569993,
                 "Size": {
                   "X": 146.0,
                   "Y": 29.0
                 },
-                "Name": "Text_4",
+                "Name": "primaryActionTxt",
                 "ctype": "TextObjectData"
               }
             ],
@@ -519,7 +567,7 @@
               "X": 194.0,
               "Y": 111.0
             },
-            "Name": "Button_2",
+            "Name": "primaryBtn",
             "ctype": "ButtonObjectData"
           }
         ],
@@ -538,7 +586,8 @@
         "../../assets/common/common_treasure.png",
         "../../assets/font/SVN-Supercell Magic.ttf",
         "../../assets/lobby/treasure/common_treasure_pedestal.png",
-        "../../Default/Button_Disable.png"
+        "../../Default/Button_Disable.png",
+        "../../Default/ImageFile.png"
       ],
       "ctype": "GameFileData"
     }

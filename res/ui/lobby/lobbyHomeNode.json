@@ -179,6 +179,7 @@
               "X": 0.0,
               "Y": 0.0
             },
+            "VisibleForFrame": false,
             "Name": "treasureHolder",
             "ctype": "ProjectNodeObjectData"
           },

@@ -1,19 +1,20 @@
 const treasureSlot = cc.Node.extend({
     id: null,
     DEFAULT_STATE: TreasureSlotResources.STATE.EMPTY,
-    state: this.DEFAULT_STATE,
+    // state: this.DEFAULT_STATE,
     timeRemaining: 0,
     countdownTxt: 0,
     node: null,
 
 
     ctor: function () {
-        // this.node = node;
-        // this.parentLayer = parentLayer;
-        // cc.log(JSON.stringify(this.node))
+        this.clientUIManager = clientUIManager.getInstance();
+        this.state = this.DEFAULT_STATE;
         this._super();
         this.init();
+        cc.log("line 16 : " + this.DEFAULT_STATE)
         this.setNodeByState(this.state);
+
     },
 
     init: function () {
@@ -47,8 +48,9 @@ const treasureSlot = cc.Node.extend({
                 this.node = this.finishedSlotNode;
                 break;
         }
-        // this.addChild(this.node)
-        // this.parentLayer.addChild(this.node);
+        cc.log("treasureSlot " + state + "   " + this.emptySlotNode )
+        this.addChild(this.node)
+        this.setSlotProperties();
     },
 
 
@@ -64,6 +66,19 @@ const treasureSlot = cc.Node.extend({
             this.countdownTxt = countdownTxt;
             this.node.getChildByName('countdownTxt').setString(countdownTxt);
         }
-    }
+    },
+
+    setSlotProperties: function () {
+        this.backgroundBtn = this.node.getChildByName('backgroundBtn');
+        this.backgroundBtn.addTouchEventListener(this.onSlotClick.bind(this));
+    },
+
+    onSlotClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            this.clientUIManager.showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
+        }
+    },
+
+
 
 })

@@ -17,6 +17,7 @@ var res = {
     MAIN_SCREEN: 'ui/main/MainScene.json',
     BOTTOM_NAV: 'ui/main/bottom/bottomNav.json',
     LOBBY_NODE: 'ui/lobby/lobbyHomeNode.json',
+    TREASURE_POPUP_NODE: 'ui/lobby/treasurePopup.json',
 
 
     //popup
