@@ -1,4 +1,4 @@
-const lobbyLayer = cc.node.extend({
+const lobbyLayer = cc.Node.extend({
     ctor: function () {
         this._super();
         this.init();
@@ -12,8 +12,10 @@ const lobbyLayer = cc.node.extend({
         for (let i = 0; i < 4; i++) {
             let treasure = new treasureSlot();
             this.lobbyNode.addChild(treasure);
+            cc.log(treasure.getChildren().length)
             treasure.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
         }
+        cc.log(this.lobbyNode.getChildren())
     },
 
 

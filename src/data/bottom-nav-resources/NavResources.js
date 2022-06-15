@@ -2,6 +2,7 @@ const NavResources = {
     NAV_TAB: 'ui/main/bottom/navTab.json',
     TAB_LIST: {
         INVENTORY_TAB: {
+            index: 0,
             name: 'INVENTORY_TAB',
             backgroundImg: 'assets/lobby/lobby_page_btn_0.png',
             activeBackgroundImg: 'assets/lobby/lobby_page_btn_0.png',
@@ -9,6 +10,7 @@ const NavResources = {
             icon: 'assets/lobby/lobby_page_icon_cards.png'
         },
         SHOP_TAB: {
+            index: 1,
             name: 'SHOP_TAB',
             backgroundImg: 'assets/lobby/lobby_page_btn_1.png',
             activeBackgroundImg: 'assets/lobby/lobby_page_btn_1.png',
@@ -16,6 +18,7 @@ const NavResources = {
             icon: 'assets/lobby/lobby_page_icon_shop.png'
         },
         HOME_TAB: {
+            index: 2,
             name: 'HOME_TAB',
             backgroundImg: 'assets/lobby/lobby_page_btn_0.png',
             activeBackgroundImg: 'assets/lobby/lobby_page_btn_0.png',

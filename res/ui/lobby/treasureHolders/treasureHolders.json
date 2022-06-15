@@ -50,7 +50,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_5",
+            "Name": "slot0",
             "ctype": "ProjectNodeObjectData"
           },
           {
@@ -89,7 +89,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_7",
+            "Name": "slot1",
             "ctype": "ProjectNodeObjectData"
           },
           {
@@ -128,7 +128,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_6",
+            "Name": "slot2",
             "ctype": "ProjectNodeObjectData"
           },
           {
@@ -167,7 +167,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_4",
+            "Name": "slot3",
             "ctype": "ProjectNodeObjectData"
           }
         ],
