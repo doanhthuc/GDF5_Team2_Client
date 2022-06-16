@@ -24,6 +24,7 @@ let GameLayer = cc.Layer.extend({
         this.handleEventKey();
 
         this.scheduleUpdate();
+        this.schedule(this.initMonster, 8);
     },
 
     update: function(dt) {

@@ -16,10 +16,10 @@ let EntityECS = cc.Class.extend({
             throw new Error("component must be an instance of Component");
         }
 
-        if (this.component[component.typeID]) {
-            // TODO: add custom error
-            throw new Error("Component with typeID = " + component.typeID + " exist");
-        }
+        // if (this.component[component.typeID]) {
+        //     // TODO: add custom error
+        //     throw new Error("Component with typeID = " + component.typeID + " exist");
+        // }
 
         this.component[component.typeID] = component;
         return this;

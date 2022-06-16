@@ -22,9 +22,9 @@ EntityFactory.createSwordsmanMonster = function () {
     let initPos = Utils.tile2Pixel(0, 4);
     let infoComponent = new MonsterInfoComponent("normal", "land", 30, 1, 1, undefined);
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
-    let velocityComponent = new VelocityComponent(2*GameConfig.TILE_WIDTH, 0);
+    let velocityComponent = new VelocityComponent(0.8*GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = new AppearanceComponent(new cc.Sprite("res/assets/monster/frame/swordsman/monster_swordsman_run_0019.png"));
-    let pathComponent = new PathComponent([{x: 0, y: 4}, {x: 3, y: 4}, {x: 3, y: 2}, {x:6, y: 2}, {x: 6, y: 0}])
+    let pathComponent = new PathComponent([{x: 0, y: 4}, {x: 4, y: 4}, {x: 4, y: 2}, {x:6, y: 2}, {x: 6, y: 0}])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
@@ -43,7 +43,7 @@ EntityFactory.createCannonOwlTower = function () {
     let node = createNodeAnimation();
 
     // NOTE: get component from pool
-    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [], "attack", "monster", 1.5, "bulletType", "max-hp", 0, 2, "damage");
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [], "attack", "monster", 1.5, "bulletType", "max-hp", 0, 0.6, "damage");
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
 
@@ -63,7 +63,8 @@ EntityFactory.createBullet = function (startPosition, targetPosition, effects) {
     let infoComponent = new BulletInfoComponent(effects);
     let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
     let appearanceComponent = new AppearanceComponent(node);
-    let velocityComponent = new VelocityComponent(0.5*GameConfig.TILE_WIDTH, 0);
+    let speed = Utils.calculateVelocityVector(startPosition.x, startPosition.y, targetPosition.x, targetPosition.y, 5*GameConfig.TILE_WIDTH);
+    let velocityComponent = new VelocityComponent(speed.speedX, speed.speedY, targetPosition, 5*GameConfig.TILE_WIDTH);
     let collisionComponent = new CollisionComponent();
 
     entity.addComponent(infoComponent)
@@ -80,6 +81,8 @@ function createNodeAnimation() {
     let node = new cc.Node();
     let owlSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
     let cannonSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_2_0009.png");
+    let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
+    rangeAttackSprite.setScale(2*1.5*GameConfig.TILE_WIDTH/687)
 
     // cannon animation
     let cannonAnimation = new cc.Animation();
@@ -104,6 +107,7 @@ function createNodeAnimation() {
     cannonSprite.runAction(cc.repeatForever(cannonAction));
     owlSprite.runAction(cc.repeatForever(owlAction));
 
+    node.addChild(rangeAttackSprite, 0, "rangeAttack");
     node.addChild(owlSprite, 0, "owl");
     node.addChild(cannonSprite, 0, "cannon");
     return node;

@@ -16,6 +16,13 @@ let MovementSystem = System.extend({
             // side-effect
             this._updateMonsterDirection(entity, positionComponent, velocityComponent);
 
+            if (velocityComponent.dynamicPosition) {
+                let newSpeed = Utils.calculateVelocityVector(positionComponent.x, positionComponent.y,
+                    velocityComponent.dynamicPosition.x, velocityComponent.dynamicPosition.y, velocityComponent.originVelocity);
+                velocityComponent.speedX = newSpeed.speedX;
+                velocityComponent.speedY = newSpeed.speedY;
+            }
+
             positionComponent.x += velocityComponent.speedX * tick;
             positionComponent.y += velocityComponent.speedY * tick;
         }

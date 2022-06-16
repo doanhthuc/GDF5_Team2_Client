@@ -22,10 +22,12 @@ let PositionComponent = Component.extend({
 let VelocityComponent = Component.extend({
     name: "VelocityComponent",
 
-    ctor: function (speedX, speedY) {
+    ctor: function (speedX, speedY, dynamicPosition, originVelocity) {
         this._super(GameConfig.COMPONENT_ID.VELOCITY);
         this.speedX = speedX;
         this.speedY = speedY;
+        this.dynamicPosition = dynamicPosition;
+        this.originVelocity = originVelocity;
         cc.log("new " + this.name);
     }
 });

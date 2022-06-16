@@ -43,3 +43,18 @@ Utils._incrementId = 0;
 Utils.genIncrementId = function () {
     return Utils._incrementId++;
 }
+
+Utils.calculateVelocityVector = function (Xa, Ya, Xb, Yb, velocity) {
+    if (Xa - Xb === 0)
+        return {speedX: 0, speedY: Math.sign(Yb-Ya)*velocity};
+    if (Ya - Yb === 0)
+        return {speedX: Math.sign(Xb-Xa)*velocity, speedY: 0};
+
+    let k = Math.abs((Ya-Yb)/(Xa-Xb));
+    let speedX = Math.sqrt((velocity*velocity) / (1+k*k));
+    let speedY = k*speedX;
+    return {
+        speedX: Math.sign(Xb-Xa)*speedX,
+        speedY: Math.sign(Yb-Ya)*speedY
+    }
+}

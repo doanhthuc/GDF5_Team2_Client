@@ -17,13 +17,11 @@ let AttackSystem = System.extend({
 
             // update count down time
             towerInfo.attackCountdown -= tick;
-            cc.log(towerInfo.attackCountdown)
             if (towerInfo.attackCountdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
                     if (monster.getActive()) {
                         let distance = this._distanceFrom(tower, monster);
-                        cc.log(distance);
                         if (distance <= towerInfo.attackRange) {
                             monsterInAttackRange.push(monster);
                         }
