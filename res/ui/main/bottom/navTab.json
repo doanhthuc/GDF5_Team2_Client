@@ -1,0 +1,212 @@
+{
+  "ID": "d9d38441-1f4f-4faa-9b78-e37cfda60e3b",
+  "Version": "2.3.4",
+  "Name": "navTab",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 381,
+        "Children": [
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_page_btn_0.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_page_btn_0.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 93,
+            "Scale9Height": 88,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -61.5,
+            "RightMargin": -61.5,
+            "TopMargin": -55.0,
+            "BottomMargin": -55.0,
+            "Tag": 570,
+            "ActionTag": -862484869,
+            "Size": {
+              "X": 123.0,
+              "Y": 110.0
+            },
+            "Name": "backgroundBtn",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_page_icon_home.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 33,
+            "Scale9OriginY": 34,
+            "Scale9Width": 37,
+            "Scale9Height": 38,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0006,
+              "Y": 0.6716
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -51.4994,
+            "RightMargin": -51.5006,
+            "TopMargin": -53.6716,
+            "BottomMargin": -52.3284,
+            "Tag": 383,
+            "ActionTag": -907804070,
+            "Size": {
+              "X": 103.0,
+              "Y": 106.0
+            },
+            "Name": "iconImg",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "Text Label",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -35.1723
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -77.0,
+            "RightMargin": -77.0,
+            "TopMargin": 20.6723,
+            "BottomMargin": -49.6723,
+            "Tag": 437,
+            "ActionTag": -1322961077,
+            "Size": {
+              "X": 154.0,
+              "Y": 29.0
+            },
+            "VisibleForFrame": false,
+            "Name": "nameTxt",
+            "ctype": "TextObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../assets/font/SVN-Supercell Magic.ttf",
+        "../../../assets/lobby/lobby_page_btn_0.png",
+        "../../../assets/lobby/lobby_page_icon_home.png",
+        "../../../Default/Button_Disable.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ipConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ipConfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/network/GameClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/network/GameClient.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" afterDir="false" />
-    </list>
+    <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

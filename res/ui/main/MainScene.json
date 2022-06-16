@@ -1,0 +1,409 @@
+{
+  "ID": "f7b91ded-035d-41d0-adc0-f5845e8fc9d6",
+  "Version": "2.3.4",
+  "Name": "MainScene",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 18,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_background.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 281,
+            "Scale9OriginY": 435,
+            "Scale9Width": 290,
+            "Scale9Height": 451,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 320.0,
+              "Y": 568.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PositionPercentXEnabled": true,
+            "PositionPercentYEnabled": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.5
+            },
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "Tag": 19,
+            "ActionTag": 13797230,
+            "Size": {
+              "X": 640.0,
+              "Y": 1136.0
+            },
+            "Name": "background",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "ScrollDirectionType": 0,
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "ComboBoxIndex": 1,
+            "SingleColor": {
+              "R": 150,
+              "G": 150,
+              "B": 100
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 150,
+              "B": 100
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 320.0005,
+              "Y": 562.2285
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.4949
+            },
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "LeftMargin": 0.0005,
+            "RightMargin": -0.0005,
+            "TopMargin": 5.7715,
+            "BottomMargin": -5.7715,
+            "Tag": 349,
+            "Children": [
+              {
+                "ClipAble": false,
+                "BackColorAlpha": 102,
+                "ComboBoxIndex": 1,
+                "SingleColor": {
+                  "B": 0
+                },
+                "FirstColor": {
+                  "R": 150,
+                  "G": 200
+                },
+                "EndColor": {},
+                "ColorVector": {
+                  "ScaleY": 1.0
+                },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
+                "TouchEnable": true,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.3333,
+                  "Y": 1.0
+                },
+                "RightMargin": 1280.0,
+                "Tag": 352,
+                "ActionTag": -1222144110,
+                "Size": {
+                  "X": 640.0,
+                  "Y": 1136.0
+                },
+                "Name": "inventoryPanel",
+                "ctype": "PanelObjectData"
+              },
+              {
+                "ClipAble": false,
+                "BackColorAlpha": 102,
+                "ComboBoxIndex": 1,
+                "SingleColor": {
+                  "R": 150,
+                  "G": 200
+                },
+                "FirstColor": {
+                  "R": 150,
+                  "G": 200
+                },
+                "EndColor": {},
+                "ColorVector": {
+                  "ScaleY": 1.0
+                },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
+                "TouchEnable": true,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 640.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.3333,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.3333,
+                  "Y": 1.0
+                },
+                "LeftMargin": 640.0,
+                "RightMargin": 640.0,
+                "Tag": 351,
+                "ActionTag": 242347354,
+                "ZOrder": 1,
+                "Size": {
+                  "X": 640.0,
+                  "Y": 1136.0
+                },
+                "Name": "shopPanel",
+                "ctype": "PanelObjectData"
+              },
+              {
+                "ClipAble": false,
+                "BackColorAlpha": 102,
+                "ComboBoxIndex": 1,
+                "SingleColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "FirstColor": {
+                  "R": 150,
+                  "G": 200
+                },
+                "EndColor": {},
+                "ColorVector": {
+                  "ScaleY": 1.0
+                },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
+                "TouchEnable": true,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 1280.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.6667,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.3333,
+                  "Y": 1.0
+                },
+                "LeftMargin": 1280.0,
+                "Tag": 350,
+                "Children": [
+                  {
+                    "FileData": {
+                      "Type": "Normal",
+                      "Path": "ui/lobby/lobbyHomeNode.json",
+                      "Plist": ""
+                    },
+                    "StretchWidthEnable": false,
+                    "StretchHeightEnable": false,
+                    "InnerActionSpeed": 1.0,
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 320.0,
+                      "Y": 568.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": true,
+                    "PrePosition": {
+                      "X": 0.5,
+                      "Y": 0.5
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 320.0,
+                    "RightMargin": 320.0,
+                    "TopMargin": 568.0,
+                    "BottomMargin": 568.0,
+                    "Tag": 640,
+                    "ActionTag": 2117012557,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "lobbyHomeNode",
+                    "ctype": "ProjectNodeObjectData"
+                  }
+                ],
+                "ActionTag": 561413556,
+                "ZOrder": 2,
+                "Size": {
+                  "X": 640.0,
+                  "Y": 1136.0
+                },
+                "Name": "lobbyHomePanel",
+                "ctype": "PanelObjectData"
+              }
+            ],
+            "ActionTag": -345746020,
+            "Size": {
+              "X": 640.0,
+              "Y": 1136.0
+            },
+            "Name": "PageView_1",
+            "ctype": "PageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/main/bottom/bottomNav.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 320.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PositionPercentXEnabled": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 320.0,
+            "RightMargin": 320.0,
+            "TopMargin": 1136.0,
+            "Tag": 57,
+            "ActionTag": 2128432903,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "VisibleForFrame": false,
+            "Name": "bottomNav",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/main/header/header.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 320.0005,
+              "Y": 1091.3558
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.9607
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 320.0005,
+            "RightMargin": 319.9995,
+            "TopMargin": 44.6442,
+            "BottomMargin": 1091.3558,
+            "Tag": 113,
+            "ActionTag": -306060697,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "concurencyHolder",
+            "ctype": "ProjectNodeObjectData"
+          }
+        ],
+        "Size": {
+          "X": 640.0,
+          "Y": 1136.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../assets/lobby/lobby_background.png",
+        "../lobby/lobbyHomeNode.json",
+        "bottom/bottomNav.json",
+        "header/header.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}
