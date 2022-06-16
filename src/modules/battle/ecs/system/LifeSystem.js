@@ -12,7 +12,12 @@ let LifeSystem = System.extend({
         for (let entity of entityList) {
             let lifeComponent = entity.getComponent(GameConfig.COMPONENT_ID.LIFE);
             if (lifeComponent.hp <= 0) {
-                // fire event
+                let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
+                if (appearanceComponent) {
+                    let sprite = appearanceComponent.sprite;
+                    sprite.setVisible(false);
+                }
+                entity.setActive(false);
             }
         }
     }

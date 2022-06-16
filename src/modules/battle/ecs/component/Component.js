@@ -61,8 +61,10 @@ let PathComponent = Component.extend({
 let CollisionComponent = Component.extend({
     name: "CollisionComponent",
 
-    ctor: function () {
+    ctor: function (width, height) {
         this._super(GameConfig.COMPONENT_ID.COLLISION);
+        this.width = width;
+        this.height = height;
         cc.log("new " + this.name);
     }
 })

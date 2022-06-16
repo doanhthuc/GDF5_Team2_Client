@@ -5,14 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/EffectComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/event/EventDispatcher.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/event/EventECS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/event/EventHandler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/CollisionSystem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/EffectSystem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/battle/battle_map_layer/BattleMapLayer.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/battle/battle_map_layer/BattleMapLayer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/avatar/AvatarNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/avatar/AvatarNode.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/common/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/common/Utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/entity/Entity.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/entity/Entity.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/config/GameConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/config/GameConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/pool/EntityPool.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/pool/EntityPool.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/AttackSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/AttackSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/LifeSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/LifeSystem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/PathMonsterSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/PathMonsterSystem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,9 +137,6 @@
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -320,7 +331,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Project/lgrc_project/client/HelloJavascript/src/framework/Framework.js" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../common/cocos2d-html5-develop" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../team_2_server" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="options.lastSelected" value="web-ide.project.structure" />
     <property name="options.searchVisible" value="true" />
@@ -546,15 +557,13 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -716,6 +725,7 @@
       <workItem from="1655084870407" duration="1453000" />
       <workItem from="1655170322420" duration="11430000" />
       <workItem from="1655196248766" duration="1430000" />
+      <workItem from="1655373353695" duration="4480000" />
     </task>
     <servers />
   </component>

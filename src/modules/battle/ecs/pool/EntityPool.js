@@ -1,4 +1,7 @@
 let EntityPool = cc.Class.extend({
+    /*
+    * pool {typeID: [entity1, entity2, ...]}
+    * */
     pool: {},
 
     getInActiveEntity: function (entityTypeID) {

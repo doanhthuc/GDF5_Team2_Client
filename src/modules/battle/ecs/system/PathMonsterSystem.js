@@ -9,6 +9,6 @@ let PathMonsterSystem = System.extend({
     run: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesByComponents(GameConfig.COMPONENT_ID.MONSTER_INFO, GameConfig.COMPONENT_ID.VELOCITY, GameConfig.COMPONENT_ID.POSITION);
-        // TODO:
+        // add code here
     }
 });

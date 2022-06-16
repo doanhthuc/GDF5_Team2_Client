@@ -31,10 +31,12 @@ let AttackSystem = System.extend({
                     // TODO: switch case target_strategy here
                     cc.log("===> Create bullet");
 
-                    let targetMonster = this._findTargetMonsterByStrategy("max-hp", monsterInAttackRange);
+                    let targetMonster = this._findTargetMonsterByStrategy(towerInfo.targetStrategy, monsterInAttackRange);
                     let monsterPos = targetMonster.getComponent(GameConfig.COMPONENT_ID.POSITION);
                     let towerPos = tower.getComponent(GameConfig.COMPONENT_ID.POSITION);
-                    EntityFactory.createBullet(towerPos, monsterPos, []);
+                    cc.log("*****")
+                    cc.log(towerInfo.effects.length);
+                    EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, towerInfo.effects);
 
                     // reset count down time
                     towerInfo.attackCountdown = towerInfo.speedAttack;
@@ -53,7 +55,7 @@ let AttackSystem = System.extend({
         return monsterInAttackRange[0];
         let targetMonster = null;
         switch (strategy) {
-            case "max-hp":
+            case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP:
                 let maxHP = -1;
                 let maxIdx = -1;
                 for (let i = 0; i < monsterInAttackRange.length; i++) {
@@ -65,11 +67,11 @@ let AttackSystem = System.extend({
                 }
                 targetMonster = monsterInAttackRange[maxIdx];
                 break;
-            case "min-hp":
+            case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP:
                 break;
-            case "max-distance":
+            case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE:
                 break;
-            case "min-distance":
+            case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE:
                 break;
             default:
                 // TODO: create custom error type

@@ -15,13 +15,8 @@ let MovementSystem = System.extend({
 
             // side-effect
             this._updateMonsterDirection(entity, positionComponent, velocityComponent);
-
-            if (velocityComponent.dynamicPosition) {
-                let newSpeed = Utils.calculateVelocityVector(positionComponent.x, positionComponent.y,
-                    velocityComponent.dynamicPosition.x, velocityComponent.dynamicPosition.y, velocityComponent.originVelocity);
-                velocityComponent.speedX = newSpeed.speedX;
-                velocityComponent.speedY = newSpeed.speedY;
-            }
+            this._updateVelocityVector(velocityComponent, positionComponent);
+            // end side-effect
 
             positionComponent.x += velocityComponent.speedX * tick;
             positionComponent.y += velocityComponent.speedY * tick;
@@ -77,5 +72,12 @@ let MovementSystem = System.extend({
             }
         }
     },
-
+    _updateVelocityVector: function (velocityComponent, positionComponent) {
+        if (velocityComponent.dynamicPosition) {
+            let newSpeed = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
+                velocityComponent.originVelocity);
+            velocityComponent.speedX = newSpeed.speedX;
+            velocityComponent.speedY = newSpeed.speedY;
+        }
+    }
 });

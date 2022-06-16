@@ -44,7 +44,8 @@ Utils.genIncrementId = function () {
     return Utils._incrementId++;
 }
 
-Utils.calculateVelocityVector = function (Xa, Ya, Xb, Yb, velocity) {
+Utils.calculateVelocityVector = function (startPos, targetPos, velocity) {
+    let Xa = startPos.x, Ya = startPos.y, Xb = targetPos.x, Yb = targetPos.y;
     if (Xa - Xb === 0)
         return {speedX: 0, speedY: Math.sign(Yb-Ya)*velocity};
     if (Ya - Yb === 0)

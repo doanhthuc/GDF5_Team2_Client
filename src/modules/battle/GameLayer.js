@@ -18,6 +18,8 @@ let GameLayer = cc.Layer.extend({
         this.movementSystem = new MovementSystem();
         this.lifeSystem = new LifeSystem();
         this.attackSystem = new AttackSystem();
+        this.collisionSystem = new CollisionSystem();
+        this.effectSystem = new EffectSystem();
 
         this.initMonster();
         this.initTower();
@@ -32,6 +34,8 @@ let GameLayer = cc.Layer.extend({
         this.attackSystem.run(dt);
         this.renderSystem.run(dt);
         this.lifeSystem.run(dt);
+        this.collisionSystem.run(dt);
+        this.effectSystem.run(dt);
     },
 
     initMonster: function () {
@@ -40,6 +44,7 @@ let GameLayer = cc.Layer.extend({
 
     initTower: function () {
         EntityFactory.createCannonOwlTower();
+        EntityFactory.createIceGunPolarBearTower({x: 3, y: 1});
     },
 
     handleEventKey: function () {

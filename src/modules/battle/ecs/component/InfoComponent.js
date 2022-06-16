@@ -5,7 +5,7 @@ let InfoComponent = Component.extend({
 let MonsterInfoComponent = InfoComponent.extend({
     name: "MonsterInfoComponentECS",
 
-    ctor: function (category, classs, weight, energy, gainEnergy, ability) {
+    ctor: function (category, classs, weight, energy, gainEnergy, ability, effects) {
         this._super(GameConfig.COMPONENT_ID.MONSTER_INFO);
         this.setCategory(category);
         this.classs = classs;
@@ -13,6 +13,7 @@ let MonsterInfoComponent = InfoComponent.extend({
         this.energy = energy;
         this.gainEnergy = gainEnergy;
         this.ability = ability;
+        this.effects = effects;
         cc.log("new " + this.name);
     },
 
@@ -37,7 +38,7 @@ let TowerInfoComponent = InfoComponent.extend({
         this._super(GameConfig.COMPONENT_ID.TOWER_INFO);
         this.energy = energy;
         this.bulletTargetType = bulletTargetType;
-        this.bulletEffects = bulletEffects;
+        this.effects = bulletEffects;
         this.archType = archType;
         this.targetType = targetType;
         this.attackRange = attackRange*GameConfig.TILE_WIDTH;
@@ -55,7 +56,7 @@ let BulletInfoComponent = InfoComponent.extend({
 
     ctor: function (effects) {
         this._super(GameConfig.COMPONENT_ID.BULLET_INFO);
-        this.effect = effects;
+        this.effects = effects;
 
         cc.log("new " + this.name);
     },

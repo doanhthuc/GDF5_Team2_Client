@@ -1,5 +1,8 @@
 let EntityManager = cc.Class.extend({
     name: "EntityManager",
+    /*
+    * {entityID1: entity1, entityID2: entity2, ...}
+    * */
     entities: {},
 
     ctor: function () {
@@ -17,7 +20,7 @@ let EntityManager = cc.Class.extend({
     getEntitiesByComponents: function (...componentTypeIDs) {
         let entityList = [];
         for (let id of Object.keys(this.entities)) {
-            if (this.entities[id].hasAllComponent(...componentTypeIDs)) {
+            if (this.entities[id].getActive() && this.entities[id].hasAllComponent(...componentTypeIDs)) {
                 entityList.push(this.entities[id]);
             }
         }
