@@ -16,6 +16,7 @@ const MainScreen = cc.Layer.extend({
         this.scene = rootNode.node;
         this.clientUIManager = clientUIManager.getInstance();
         this.mainPageView = this.scene.getChildByName('mainPageView');
+        this.mainPageView.setCustomScrollThreshold(30);
         this.mainPageView.addEventListener(this.onPageViewEvent.bind(this));
         this.concurrencyHolder = this.scene.getChildByName('concurrencyHolder');
         this.nav = new bottomNav(this.scrollToIndexPage.bind(this));
@@ -26,12 +27,31 @@ const MainScreen = cc.Layer.extend({
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
         // this.treasureSlotList = this.homeLayer.getChildByName('treasureHolder').getChildren();
 
+        cc.log("~~~~~~~~main scene line 30: " +  this.mainPageView.getPages()[1].getChildByName('inventoryListView'))
+        this.listView = this.mainPageView.getPages()[1].getChildByName('inventoryListView');
+        this.listViewPanel = this.listView.getChildByName('listViewPanel');
         this.inventoryLayer = new inventoryLayer();
-        this.mainPageView.addWidgetToPage(this.inventoryLayer, NavResources.TAB_LIST.INVENTORY_TAB.index, true);
+        // this.mainPageView.addWidgetToPage(this.inventoryLayer, NavResources.TAB_LIST.INVENTORY_TAB.index, true);
+        this.listViewPanel.addChild(this.inventoryLayer);
+        // this.listViewPanel.addEventListener(this.onListViewEvent.bind(this), this);
+        this.listView.setTouchEnabled(!this.listView.isTouchEnabled());
+
+        this.listView.setSwallowTouches(false);
+        this.listViewPanel.setSwallowTouches(false);
+
+        this.shopLayer = new ShopLayer();
+        this.mainPageView.addWidgetToPage(this.shopLayer, NavResources.TAB_LIST.SHOP_TAB.index, true);
+
 
         this.scrollToDefaultPage();
         this.addTreasurePopup();
 
+    },
+
+    onListViewEvent: function (sender, type) {
+        switch (type) {
+
+        }
     },
 
     scrollToDefaultPage: function () {

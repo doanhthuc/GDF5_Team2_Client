@@ -1,7 +1,7 @@
 {
   "ID": "64ee7d40-a579-428a-93f7-9c062cefc8d6",
   "Version": "2.3.4",
-  "Name": "treasurePopup",
+  "Name": "treasurePopUp",
   "Content": {
     "Content": {
       "Animation": {
@@ -20,6 +20,7 @@
               "Path": "Default/ImageFile.png",
               "Plist": ""
             },
+            "Scale9Enable": true,
             "Scale9Width": 46,
             "Scale9Height": 46,
             "TouchEnable": true,

@@ -110,7 +110,6 @@
               {
                 "ClipAble": false,
                 "BackColorAlpha": 102,
-                "ComboBoxIndex": 1,
                 "SingleColor": {
                   "B": 0
                 },
@@ -151,7 +150,7 @@
                   "X": 640.0,
                   "Y": 1136.0
                 },
-                "Name": "inventoryPanel",
+                "Name": "shopPanel",
                 "ctype": "PanelObjectData"
               },
               {
@@ -194,13 +193,117 @@
                 "LeftMargin": 640.0,
                 "RightMargin": 640.0,
                 "Tag": 351,
+                "Children": [
+                  {
+                    "DirectionType": "Vertical",
+                    "HorizontalType": "Align_HorizontalCenter",
+                    "IsBounceEnabled": true,
+                    "ScrollDirectionType": 0,
+                    "ClipAble": true,
+                    "BackColorAlpha": 102,
+                    "ComboBoxIndex": 1,
+                    "SingleColor": {
+                      "R": 150,
+                      "G": 150
+                    },
+                    "FirstColor": {
+                      "R": 150,
+                      "G": 150
+                    },
+                    "EndColor": {},
+                    "ColorVector": {
+                      "ScaleY": 1.0
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 320.0002,
+                      "Y": 568.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PositionPercentXEnabled": true,
+                    "PositionPercentYEnabled": true,
+                    "PrePosition": {
+                      "X": 0.5,
+                      "Y": 0.5
+                    },
+                    "PreSize": {
+                      "X": 1.0,
+                      "Y": 1.0
+                    },
+                    "LeftMargin": 0.0002,
+                    "RightMargin": -0.0002,
+                    "Tag": 473,
+                    "Children": [
+                      {
+                        "ClipAble": false,
+                        "BackColorAlpha": 102,
+                        "ComboBoxIndex": 1,
+                        "SingleColor": {
+                          "R": 150,
+                          "G": 200
+                        },
+                        "FirstColor": {
+                          "R": 150,
+                          "G": 200
+                        },
+                        "EndColor": {},
+                        "ColorVector": {
+                          "ScaleY": 1.0
+                        },
+                        "TouchEnable": true,
+                        "AnchorPoint": {},
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 1.0,
+                          "Y": 1.0
+                        },
+                        "Tag": 494,
+                        "ActionTag": -1176751150,
+                        "Size": {
+                          "X": 640.0,
+                          "Y": 3000.0
+                        },
+                        "Name": "listViewPanel",
+                        "ctype": "PanelObjectData"
+                      }
+                    ],
+                    "ActionTag": -1873726942,
+                    "Size": {
+                      "X": 640.0,
+                      "Y": 1136.0
+                    },
+                    "Name": "inventoryListView",
+                    "ctype": "ListViewObjectData"
+                  }
+                ],
                 "ActionTag": 242347354,
                 "ZOrder": 1,
                 "Size": {
                   "X": 640.0,
                   "Y": 1136.0
                 },
-                "Name": "shopPanel",
+                "Name": "inventoryPanel",
                 "ctype": "PanelObjectData"
               },
               {
