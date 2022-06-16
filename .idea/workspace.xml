@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/inventory/card.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/inventory/battleDeckHolder.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/battleDeckHolder.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/inventory/inventoryNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/inventoryNode.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/inventory-resources/inventoryResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/inventory-resources/inventoryResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/inventory/inventoryLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/inventoryLayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/treasureSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/treasureSlot.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -735,6 +726,7 @@
       <workItem from="1655257054402" duration="1832000" />
       <workItem from="1655273464661" duration="14431000" />
       <workItem from="1655300336023" duration="7162000" />
+      <workItem from="1655343561743" duration="2223000" />
     </task>
     <servers />
   </component>
