@@ -5,7 +5,9 @@ let EntityFactory = cc.Class.extend({
 EntityFactory.pool = new EntityPool()
 
 EntityFactory.createEntity = function (typeID) {
-    let entity = this.pool.getInActiveEntity(typeID);
+    // TODO: create pool object for each type bullet
+    // let entity = this.pool.getInActiveEntity(typeID);
+    let entity = null;
     if (entity === null) {
         entity = new EntityECS(typeID);
         this.pool.push(entity);
@@ -59,14 +61,19 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         return entity;
     }
     else if (towerType === GameConfig.ENTITY_ID.FROG_TOWER) {
-        let typeID = GameConfig.ENTITY_ID.FROG_TOWER;
+        let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this.createEntity(typeID);
 
         let bulletNode = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_bullet_1_0000.png");
-        let infoComponent = new BulletInfoComponent(effects);
+        let infoComponent = new BulletInfoComponent(effects, "frog");
         let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
         let appearanceComponent = new AppearanceComponent(bulletNode);
         let collisionComponent = new CollisionComponent(20, 20);
+        let pathComponent = new PathComponent([
+            {x: startPosition.x, y: startPosition.y},
+            {x: targetPosition.x, y: targetPosition.y},
+            {x: startPosition.x, y: startPosition.y}
+        ]);
 
         let bulletVelocity = 4 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
@@ -76,7 +83,8 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
             .addComponent(positionComponent)
             .addComponent(appearanceComponent)
             .addComponent(velocityComponent)
-            .addComponent(collisionComponent);
+            .addComponent(collisionComponent)
+            .addComponent(pathComponent);
         return entity;
     }
     return null;
@@ -92,8 +100,9 @@ EntityFactory.createSwordsmanMonster = function () {
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let velocityComponent = new VelocityComponent(0.8*GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = new AppearanceComponent(new cc.Sprite("res/assets/monster/frame/swordsman/monster_swordsman_run_0019.png"));
-    let pathComponent = new PathComponent([{x: 0, y: 4}, {x: 4, y: 4}, {x: 4, y: 2}, {x:6, y: 2}, {x: 6, y: 0}])
+    let pathComponent = new PathComponent(Utils.tileArray2PixelArray([{x: 0, y: 4}, {x: 4, y: 4}, {x: 4, y: 2}, {x:6, y: 2}, {x: 6, y: 0}]))
     let collisionComponent = new CollisionComponent(10, 10);
+    // let lifeComponent = new LifeComponent(140);
     let lifeComponent = new LifeComponent(140);
 
     entity.addComponent(infoComponent)

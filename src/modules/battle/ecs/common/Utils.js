@@ -17,6 +17,14 @@ Utils.tile2Pixel = function (x, y) {
     return {x: xx, y: yy};
 };
 
+Utils.tileArray2PixelArray = function (positionArr) {
+    let result = [];
+    for (let pos of positionArr) {
+        result.push(Utils.tile2Pixel(pos.x, pos.y));
+    }
+    return result;
+}
+
 Utils.pixel2Tile = function (xx, yy) {
     let paddingX = (GameConfig.SCREEN_WIDTH - 7*GameConfig.TILE_WIDTH) / 2;
     let paddingY = 200;

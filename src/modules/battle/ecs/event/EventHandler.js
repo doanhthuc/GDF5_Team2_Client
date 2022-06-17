@@ -9,7 +9,11 @@ EventDispatcher.getInstance()
                 monster.addComponent(effect.clone());
         }
 
-        bullet.getComponent(GameConfig.COMPONENT_ID.APPEARANCE).sprite.setVisible(false);
-        bullet.setActive(false);
+        if (bulletInfo.type && bulletInfo.type === "frog") {
+
+        } else {
+                bullet.getComponent(GameConfig.COMPONENT_ID.APPEARANCE).sprite.setVisible(false);
+                bullet.setActive(false);
+        }
     }
 );
