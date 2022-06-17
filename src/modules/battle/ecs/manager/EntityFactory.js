@@ -14,6 +14,74 @@ EntityFactory.createEntity = function (typeID) {
     return entity;
 }
 
+EntityFactory.createBullet = function (towerType, startPosition, targetPosition, effects) {
+    if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
+        let typeID = GameConfig.ENTITY_ID.BULLET;
+        let entity = this.createEntity(typeID);
+
+        // NOTE: get component from pool
+        let bulletNode = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
+        let infoComponent = new BulletInfoComponent(effects);
+        let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
+        let appearanceComponent = new AppearanceComponent(bulletNode);
+        let collisionComponent = new CollisionComponent(20, 20);
+
+        let bulletVelocity = 5 * GameConfig.TILE_WIDTH;
+        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
+        let velocityComponent = new VelocityComponent(speed.speedX, speed.speedY, targetPosition, bulletVelocity);
+
+        entity.addComponent(infoComponent)
+            .addComponent(positionComponent)
+            .addComponent(appearanceComponent)
+            .addComponent(velocityComponent)
+            .addComponent(collisionComponent);
+        return entity;
+    }
+    else if (towerType === GameConfig.ENTITY_ID.BEAR_TOWER) {
+        let typeID = GameConfig.ENTITY_ID.BULLET;
+        let entity = this.createEntity(typeID);
+
+        let bulletNode = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_bullet_0000.png");
+        let infoComponent = new BulletInfoComponent(effects);
+        let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
+        let appearanceComponent = new AppearanceComponent(bulletNode);
+        let collisionComponent = new CollisionComponent(20, 20);
+
+        let bulletVelocity = 4 * GameConfig.TILE_WIDTH;
+        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
+        let velocityComponent = new VelocityComponent(speed.speedX, speed.speedY, targetPosition, bulletVelocity);
+
+        entity.addComponent(infoComponent)
+            .addComponent(positionComponent)
+            .addComponent(appearanceComponent)
+            .addComponent(velocityComponent)
+            .addComponent(collisionComponent);
+        return entity;
+    }
+    else if (towerType === GameConfig.ENTITY_ID.FROG_TOWER) {
+        let typeID = GameConfig.ENTITY_ID.FROG_TOWER;
+        let entity = this.createEntity(typeID);
+
+        let bulletNode = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_bullet_1_0000.png");
+        let infoComponent = new BulletInfoComponent(effects);
+        let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
+        let appearanceComponent = new AppearanceComponent(bulletNode);
+        let collisionComponent = new CollisionComponent(20, 20);
+
+        let bulletVelocity = 4 * GameConfig.TILE_WIDTH;
+        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
+        let velocityComponent = new VelocityComponent(speed.speedX, speed.speedY);
+
+        entity.addComponent(infoComponent)
+            .addComponent(positionComponent)
+            .addComponent(appearanceComponent)
+            .addComponent(velocityComponent)
+            .addComponent(collisionComponent);
+        return entity;
+    }
+    return null;
+}
+
 EntityFactory.createSwordsmanMonster = function () {
     let typeID = GameConfig.ENTITY_ID.SWORD_MAN;
     let entity = this.createEntity(typeID);
@@ -39,17 +107,17 @@ EntityFactory.createSwordsmanMonster = function () {
     return entity;
 };
 
-EntityFactory.createCannonOwlTower = function () {
+EntityFactory.createCannonOwlTower = function (pos) {
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this.createEntity(typeID);
 
-    let initPos = Utils.tile2Pixel(3, 3);
-    let node = createNodeAnimation();
+    let initPos = Utils.tile2Pixel(pos.x, pos.y);
+    let node = createOwlNodeAnimation();
 
     let damageEffect = new DamageEffect(10);
     // NOTE: get component from pool
     let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [damageEffect], "attack", "monster", 1.5, "bulletType",
-        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 0.6, "damage");
+        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 0.6);
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
 
@@ -71,8 +139,8 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     let frozenEffect = new FrozenEffect(1.5);
     let damageEffect = new DamageEffect(8);
     // NOTE: get component from pool
-    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [damageEffect, frozenEffect], "attack", "monster", 1.5, "bulletType",
-        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 3.4, "support");
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [damageEffect, frozenEffect], "support", "monster", 1.5, "bulletType",
+        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 3.4);
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
 
@@ -83,53 +151,29 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     return entity;
 }
 
-EntityFactory.createBullet = function (towerType, startPosition, targetPosition, effects) {
-    if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
-        let typeID = GameConfig.ENTITY_ID.BULLET;
-        let entity = this.createEntity(typeID);
+EntityFactory.createBoomerangFrogTower = function (pos) {
+    let typeID = GameConfig.ENTITY_ID.FROG_TOWER;
+    let entity = this.createEntity(typeID);
 
-        // NOTE: get component from pool
-        let node = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
-        let infoComponent = new BulletInfoComponent(effects);
-        let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
-        let appearanceComponent = new AppearanceComponent(node);
-        let collisionComponent = new CollisionComponent(20, 20);
+    let attackRange = 2;
+    let initPos = Utils.tile2Pixel(pos.x, pos.y);
+    let node = createFrogNodeAnimation(attackRange);
 
-        let bulletVelocity = 5 * GameConfig.TILE_WIDTH;
-        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
-        let velocityComponent = new VelocityComponent(speed.speedX, speed.speedY, targetPosition, bulletVelocity);
+    let damageEffect = new DamageEffect(3);
+    // NOTE: get component from pool
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [damageEffect], "attack", "monster", attackRange, "bulletType",
+        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 1.5);
+    let positionComponent = new PositionComponent(initPos.x, initPos.y);
+    let appearanceComponent = new AppearanceComponent(node);
 
-        entity.addComponent(infoComponent)
-            .addComponent(positionComponent)
-            .addComponent(appearanceComponent)
-            .addComponent(velocityComponent)
-            .addComponent(collisionComponent);
-        return entity;
-    } else if (towerType === GameConfig.ENTITY_ID.BEAR_TOWER) {
-        let typeID = GameConfig.ENTITY_ID.BULLET;
-        let entity = this.createEntity(typeID);
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(appearanceComponent)
 
-        let node = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_bullet_0000.png");
-        let infoComponent = new BulletInfoComponent(effects);
-        let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
-        let appearanceComponent = new AppearanceComponent(node);
-        let collisionComponent = new CollisionComponent(20, 20);
-
-        let bulletVelocity = 4 * GameConfig.TILE_WIDTH;
-        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
-        let velocityComponent = new VelocityComponent(speed.speedX, speed.speedY, targetPosition, bulletVelocity);
-
-        entity.addComponent(infoComponent)
-            .addComponent(positionComponent)
-            .addComponent(appearanceComponent)
-            .addComponent(velocityComponent)
-            .addComponent(collisionComponent);
-        return entity;
-    }
-    return null;
+    return entity;
 }
 
-function createNodeAnimation() {
+function createOwlNodeAnimation() {
     let node = new cc.Node();
     let owlSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
     let cannonSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_2_0009.png");
@@ -189,6 +233,42 @@ function createBearNodeAnimation () {
         weaponAnimation.addSpriteFrameWithFile(fileName);
     }
     weaponAnimation.setDelayPerUnit(1 / (19-10+1));
+    weaponAnimation.setRestoreOriginalFrame(true);
+    let weaponAction = cc.animate(weaponAnimation);
+
+    towerSprite.runAction(cc.repeatForever(towerAction));
+    weaponSprite.runAction(cc.repeatForever(weaponAction));
+
+    node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(towerSprite, 0, "tower");
+    node.addChild(weaponSprite, 0, "weapon");
+    return node;
+}
+
+function createFrogNodeAnimation (attackRange) {
+    let node = new cc.Node();
+    let towerSprite = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_0_0011.png");
+    let weaponSprite = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_1_0011.png");
+    let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
+    rangeAttackSprite.setScale(2*attackRange*GameConfig.TILE_WIDTH/687)
+
+    // tower animation
+    let towerAnimation = new cc.Animation();
+    for (let i = 11; i <= 22; i++) {
+        let fileName = "res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        towerAnimation.addSpriteFrameWithFile(fileName);
+    }
+    towerAnimation.setDelayPerUnit(1 / (22-11+1));
+    towerAnimation.setRestoreOriginalFrame(true);
+    let towerAction = cc.animate(towerAnimation);
+
+    // weapon animation
+    let weaponAnimation = new cc.Animation();
+    for (let i = 11; i <= 22; i++) {
+        let fileName = "res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_1_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        weaponAnimation.addSpriteFrameWithFile(fileName);
+    }
+    weaponAnimation.setDelayPerUnit(1 / (22-11+1));
     weaponAnimation.setRestoreOriginalFrame(true);
     let weaponAction = cc.animate(weaponAnimation);
 

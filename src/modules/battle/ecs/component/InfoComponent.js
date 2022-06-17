@@ -33,7 +33,7 @@ let TowerInfoComponent = InfoComponent.extend({
     name: "TowerInfoComponentECS",
 
     ctor: function (energy, bulletTargetType, bulletEffects, archType, targetType, attackRange, bulletType,
-                    targetStrategy, attackCountdown, speedAttack, damage) {
+                    targetStrategy, attackCountdown, speedAttack) {
         this._super(GameConfig.COMPONENT_ID.TOWER_INFO);
         this.energy = energy;
         this.bulletTargetType = bulletTargetType;
@@ -45,7 +45,6 @@ let TowerInfoComponent = InfoComponent.extend({
         this.targetStrategy = targetStrategy;
         this.attackCountdown = attackCountdown;
         this.speedAttack = speedAttack;
-        this.damage = damage;
     },
 });
 

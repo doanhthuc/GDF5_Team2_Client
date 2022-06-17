@@ -1,6 +1,10 @@
 let ComponentPool = cc.Class.extend({
     /*
-    * pool {typeID: [component1, component2, ...]}
+    * {
+    *   typeIDA: [component1, component2, ...],
+    *   typeIDB: [...],
+    *   ...
+    * }
     * */
     pool: {},
 

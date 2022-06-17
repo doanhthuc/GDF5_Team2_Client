@@ -1,7 +1,10 @@
 let EntityManager = cc.Class.extend({
     name: "EntityManager",
     /*
-    * {entityID1: entity1, entityID2: entity2, ...}
+    * {
+    * entityID1: entity1,
+    * entityID2: entity2,
+    * ...}
     * */
     entities: {},
 
