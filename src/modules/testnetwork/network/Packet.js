@@ -6,6 +6,8 @@ gv.CMD = gv.CMD ||{};
 gv.CMD.HAND_SHAKE = 0;
 gv.CMD.USER_LOGIN = 1;
 gv.CMD.USER_INFO = 1001;
+gv.CMD.ADD_USER_GOLD=1002;
+gv.CMD.BUY_SHOP_GOLD=2001;
 gv.CMD.MOVE = 2005;
 gv.CMD.MAP_INFO = 2004;
 gv.CMD.RESET_MAP = 2006;
@@ -64,39 +66,38 @@ CMDSendGetUserInfo= fr.OutPacket.extend(
         }
     }
 )
-
-CmdSendMove = fr.OutPacket.extend(
+CMDSendAddUserGold= fr.OutPacket.extend(
     {
-        ctor:function()
-        {
+        ctor:function() {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.MOVE);
+            this.setCmdId(gv.CMD.ADD_USER_GOLD);
         },
-        pack:function(x, y){
+        pack:function(gold) {
             this.packHeader();
-            // missing code here
-            this.putInt(x);
-            this.putInt(y);
+            this.putInt(gold);
             this.updateSize();
         }
     }
 )
 
-CmdSendResetMap = fr.OutPacket.extend(
+CMDBuyShopGold= fr.OutPacket.extend(
     {
-        ctor:function()
-        {
+        ctor:function() {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.RESET_MAP);
+            this.setCmdId(gv.CMD.BUY_SHOP_GOLD);
         },
-        pack:function(){
+        pack:function(itemId) {
             this.packHeader();
+            this.putInt(itemId);
             this.updateSize();
         }
     }
 )
+
+
+
 
 /**
  * InPacket
@@ -110,6 +111,7 @@ testnetwork.packetMap[gv.CMD.HAND_SHAKE] = fr.InPacket.extend(
             this._super();
         },
         readData:function(){
+
             this.token = this.getString();
         }
     }
@@ -136,6 +138,17 @@ testnetwork.packetMap[gv.CMD.RESET_MAP] = fr.InPacket.extend(
         }
     }
 );
+testnetwork.packetMap[gv.CMD.ADD_USER_GOLD] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+        },
+        readData:function(){
+           this.usergold=this.getInt();
+        }
+    }
+);
 
 
 testnetwork.packetMap[gv.CMD.USER_INFO] = fr.InPacket.extend(
@@ -150,6 +163,19 @@ testnetwork.packetMap[gv.CMD.USER_INFO] = fr.InPacket.extend(
             this.gold=this.getInt();
             this.gem=this.getInt();
             this.trophy=this.getInt();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.BUY_SHOP_GOLD] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+        },
+        readData:function(){
+           this.goldchange=this.getInt();
+           this.gemchange=this.getInt();
         }
     }
 );

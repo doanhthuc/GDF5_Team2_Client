@@ -26,6 +26,15 @@ testnetwork.Connector = cc.Class.extend({
                 userInfo.clone(packet);
                 userInfo.show();
                 break;
+            case gv.CMD.ADD_USER_GOLD:
+                cc.log(packet.usergold);
+                break;
+            case gv.CMD.BUY_SHOP_GOLD:
+                //cc.log("hmmmm");
+                userInfo.gold+=packet.goldchange;
+                userInfo.gem+=packet.gemchange;
+                userInfo.show();
+                break;
         }
     },
     sendLoginRequest:function() {
@@ -40,6 +49,18 @@ testnetwork.Connector = cc.Class.extend({
         cc.log("sendGetUserInfo");
         var pk= this.gameClient.getOutPacket(CMDSendGetUserInfo);
         pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendAddUserGold:function(gold){
+        cc.log("sendAdduserGold");
+        var pk=this.gameClient.getOutPacket(CMDSendAddUserGold);
+        pk.pack(gold);
+        this.gameClient.sendPacket(pk);
+    },
+    sendBuyShopGold:function(itemid){
+        cc.log("SendBuyShopGold");
+        var pk= this.gameClient.getOutPacket(CMDBuyShopGold);
+        pk.pack(itemid);
         this.gameClient.sendPacket(pk);
     },
     sendMove:function(x, y){
