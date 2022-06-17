@@ -14,7 +14,6 @@ let MonsterInfoComponent = InfoComponent.extend({
         this.gainEnergy = gainEnergy;
         this.ability = ability;
         this.effects = effects;
-        cc.log("new " + this.name);
     },
 
     setCategory: function (category) {
@@ -47,7 +46,6 @@ let TowerInfoComponent = InfoComponent.extend({
         this.attackCountdown = attackCountdown;
         this.speedAttack = speedAttack;
         this.damage = damage;
-        cc.log("new " + this.name);
     },
 });
 
@@ -57,8 +55,6 @@ let BulletInfoComponent = InfoComponent.extend({
     ctor: function (effects) {
         this._super(GameConfig.COMPONENT_ID.BULLET_INFO);
         this.effects = effects;
-
-        cc.log("new " + this.name);
     },
 });
 
@@ -69,7 +65,5 @@ let LifeComponent = InfoComponent.extend({
     ctor: function(hp) {
         this._super(GameConfig.COMPONENT_ID.LIFE);
         this.hp = hp;
-
-        cc.log("new " + this.name);
     },
 });

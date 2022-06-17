@@ -7,14 +7,10 @@ let EntityECS = cc.Class.extend({
         this.component = {};
         this.id = Utils.genIncrementId();
         this._active = true;
-
-        cc.log("new " + this.name);
     },
 
     addComponent: function (component) {
-        if (!(component instanceof Component)) {
-            throw new Error("component must be an instance of Component");
-        }
+        // this._isComponent();
 
         // if (this.component[component.typeID]) {
         //     // TODO: add custom error
@@ -25,8 +21,9 @@ let EntityECS = cc.Class.extend({
         return this;
     },
 
-    removeComponent: function (typeID) {
-        delete this.component[typeID];
+    removeComponent: function (component) {
+        // this._isComponent();
+        delete this.component[component.typeID];
     },
 
     getComponent: function (typeID) {
@@ -59,4 +56,10 @@ let EntityECS = cc.Class.extend({
     getActive: function () {
         return this._active;
     },
+
+    _isComponent: function (component) {
+        if (!(component instanceof Component)) {
+            throw new Error("component must be an instance of Component");
+        }
+    }
 });

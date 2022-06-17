@@ -6,7 +6,7 @@ EventDispatcher.getInstance()
         let monsterInfo = monster.getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
 
         for (let effect of bulletInfo.effects) {
-                monster.addComponent(effect);
+                monster.addComponent(effect.clone());
         }
 
         bullet.getComponent(GameConfig.COMPONENT_ID.APPEARANCE).sprite.setVisible(false);

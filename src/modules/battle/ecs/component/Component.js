@@ -5,6 +5,23 @@ let Component = cc.Class.extend({
     ctor: function (typeID) {
         this.typeID = typeID;
         this.id = Utils.genIncrementId();
+        this._active = true;
+    },
+
+    clone: function (...params) {
+        return this;
+    },
+
+    reset: function () {
+        throw new NotImplementedError();
+    },
+
+    getActive: function () {
+        return this._active;
+    },
+
+    setActive: function (value) {
+        this._active = value;
     }
 });
 
@@ -15,7 +32,6 @@ let PositionComponent = Component.extend({
         this._super(GameConfig.COMPONENT_ID.POSITION);
         this.x = x;
         this.y = y;
-        cc.log("new " + this.name);
     }
 });
 
@@ -28,7 +44,6 @@ let VelocityComponent = Component.extend({
         this.speedY = speedY;
         this.dynamicPosition = dynamicPosition;
         this.originVelocity = originVelocity;
-        cc.log("new " + this.name);
     }
 });
 
@@ -42,7 +57,6 @@ let  AppearanceComponent = Component.extend({
         this.zOrder = 100;
 
         GameConfig.gameLayer.mapLayer.addChild(this.sprite, this.zOrder);
-        cc.log("new " + this.name);
     }
 });
 
@@ -53,8 +67,6 @@ let PathComponent = Component.extend({
         this._super(GameConfig.COMPONENT_ID.PATH);
         this.path = path;
         this.currentPathIdx = 0;
-
-        cc.log("new " + this.name);
     }
 });
 
@@ -65,6 +77,5 @@ let CollisionComponent = Component.extend({
         this._super(GameConfig.COMPONENT_ID.COLLISION);
         this.width = width;
         this.height = height;
-        cc.log("new " + this.name);
     }
 })

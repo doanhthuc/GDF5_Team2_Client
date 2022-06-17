@@ -26,7 +26,7 @@ EntityFactory.createSwordsmanMonster = function () {
     let appearanceComponent = new AppearanceComponent(new cc.Sprite("res/assets/monster/frame/swordsman/monster_swordsman_run_0019.png"));
     let pathComponent = new PathComponent([{x: 0, y: 4}, {x: 4, y: 4}, {x: 4, y: 2}, {x:6, y: 2}, {x: 6, y: 0}])
     let collisionComponent = new CollisionComponent(10, 10);
-    let lifeComponent = new LifeComponent(18);
+    let lifeComponent = new LifeComponent(140);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
@@ -68,9 +68,11 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     let initPos = Utils.tile2Pixel(pos.x, pos.y);
     let node = createBearNodeAnimation();
 
+    let frozenEffect = new FrozenEffect(1.5);
+    let damageEffect = new DamageEffect(8);
     // NOTE: get component from pool
-    let infoComponent = new TowerInfoComponent(12, "bulletTargetType", [], "attack", "monster", 1.5, "bulletType",
-        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 3, "support");
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [damageEffect, frozenEffect], "attack", "monster", 1.5, "bulletType",
+        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 3.4, "support");
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
 
@@ -82,7 +84,7 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
 }
 
 EntityFactory.createBullet = function (towerType, startPosition, targetPosition, effects) {
-    if (GameConfig.ENTITY_ID.CANNON_TOWER === towerType) {
+    if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this.createEntity(typeID);
 
@@ -103,8 +105,26 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
             .addComponent(velocityComponent)
             .addComponent(collisionComponent);
         return entity;
-    } else if (GameConfig.ENTITY_ID.BEAR_TOWER === towerType) {
+    } else if (towerType === GameConfig.ENTITY_ID.BEAR_TOWER) {
+        let typeID = GameConfig.ENTITY_ID.BULLET;
+        let entity = this.createEntity(typeID);
 
+        let node = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_bullet_0000.png");
+        let infoComponent = new BulletInfoComponent(effects);
+        let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
+        let appearanceComponent = new AppearanceComponent(node);
+        let collisionComponent = new CollisionComponent(20, 20);
+
+        let bulletVelocity = 4 * GameConfig.TILE_WIDTH;
+        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
+        let velocityComponent = new VelocityComponent(speed.speedX, speed.speedY, targetPosition, bulletVelocity);
+
+        entity.addComponent(infoComponent)
+            .addComponent(positionComponent)
+            .addComponent(appearanceComponent)
+            .addComponent(velocityComponent)
+            .addComponent(collisionComponent);
+        return entity;
     }
     return null;
 }

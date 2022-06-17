@@ -6,7 +6,6 @@ let EntityManager = cc.Class.extend({
     entities: {},
 
     ctor: function () {
-        cc.log("new " + this.name);
     },
 
     createEntity: function () {
@@ -18,6 +17,7 @@ let EntityManager = cc.Class.extend({
     },
 
     getEntitiesByComponents: function (...componentTypeIDs) {
+        // only get active entity
         let entityList = [];
         for (let id of Object.keys(this.entities)) {
             if (this.entities[id].getActive() && this.entities[id].hasAllComponent(...componentTypeIDs)) {

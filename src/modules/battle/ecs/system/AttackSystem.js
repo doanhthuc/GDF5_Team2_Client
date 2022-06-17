@@ -29,13 +29,9 @@ let AttackSystem = System.extend({
                 }
                 if (monsterInAttackRange.length > 0) {
                     // TODO: switch case target_strategy here
-                    cc.log("===> Create bullet");
-
                     let targetMonster = this._findTargetMonsterByStrategy(towerInfo.targetStrategy, monsterInAttackRange);
                     let monsterPos = targetMonster.getComponent(GameConfig.COMPONENT_ID.POSITION);
                     let towerPos = tower.getComponent(GameConfig.COMPONENT_ID.POSITION);
-                    cc.log("*****")
-                    cc.log(towerInfo.effects.length);
                     EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, towerInfo.effects);
 
                     // reset count down time

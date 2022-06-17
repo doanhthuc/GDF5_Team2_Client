@@ -12,8 +12,6 @@ let EventDispatcher = cc.Class.extend({
     },
 
     dispatchEvent: function (eventName, data) {
-        cc.log("[EventDispatcher] Dispatch " + eventName + " event");
-
         if (this.eventCallbackStore[eventName]) {
             this.eventCallbackStore[eventName].fire(data);
         }

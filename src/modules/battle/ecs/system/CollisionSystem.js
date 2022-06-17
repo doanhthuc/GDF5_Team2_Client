@@ -14,7 +14,7 @@ let CollisionSystem = System.extend({
         for (let i = 0; i < entityList.length-1; i++) {
             for (let j = i+1; j < entityList.length; j++) {
                 let entity1 = entityList[i], entity2 = entityList[j];
-                if (entity1 !== entity2 && this._isCollide(entity1, entity2)) {
+                if (this._isCollide(entity1, entity2)) {
                     let data = this._isMonsterAndBullet(entity1, entity2)
                     if (data) {
                         EventDispatcher.getInstance().dispatchEvent(EventType.BULLET_COLLIDE_MONSTER, data);
