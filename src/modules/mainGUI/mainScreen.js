@@ -6,6 +6,7 @@ const MainScreen = cc.Layer.extend({
         this.init();
     },
 
+    startTouchX: 0,
     tabList: ['SHOP_TAB', 'INVENTORY_TAB', 'HOME_TAB'],
 
     init: function () {
@@ -27,7 +28,6 @@ const MainScreen = cc.Layer.extend({
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
         // this.treasureSlotList = this.homeLayer.getChildByName('treasureHolder').getChildren();
 
-        cc.log("~~~~~~~~main scene line 30: " +  this.mainPageView.getPages()[1].getChildByName('inventoryListView'))
         this.listView = this.mainPageView.getPages()[1].getChildByName('inventoryListView');
         this.listViewPanel = this.listView.getChildByName('listViewPanel');
         this.inventoryLayer = new inventoryLayer();
@@ -38,6 +38,13 @@ const MainScreen = cc.Layer.extend({
 
         this.listView.setSwallowTouches(false);
         this.listViewPanel.setSwallowTouches(false);
+        this.listViewPanel.onTouchBegan = function (touch, event) {
+            // this.startTouchX = touch.getLocationX();
+            cc.log(touch);
+            // return true;
+        }
+
+        // this.listViewPanel.addEventListener(this.onListViewEvent.bind(this), this)
 
         this.shopLayer = new ShopLayer();
         this.mainPageView.addWidgetToPage(this.shopLayer, NavResources.TAB_LIST.SHOP_TAB.index, true);
@@ -49,8 +56,12 @@ const MainScreen = cc.Layer.extend({
     },
 
     onListViewEvent: function (sender, type) {
+        cc.log("onPanelListViewEvent");
         switch (type) {
-
+            case ccui.Widget.TOUCH_BEGAN:
+                // this.startTouchX =;
+                // cc.log(this.startTouchX)
+                break;
         }
     },
 

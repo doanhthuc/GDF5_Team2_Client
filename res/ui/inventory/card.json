@@ -28,8 +28,8 @@
               "Plist": ""
             },
             "PressedFileData": {
-              "Type": "Default",
-              "Path": "Default/Button_Press.png",
+              "Type": "Normal",
+              "Path": "assets/card/card_background_2.png",
               "Plist": ""
             },
             "NormalFileData": {
@@ -81,6 +81,50 @@
             "TopMargin": -82.0,
             "BottomMargin": -82.0,
             "Tag": 126,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "ui/inventory/cardUpgradeProgress.json",
+                  "Plist": ""
+                },
+                "StretchWidthEnable": false,
+                "StretchHeightEnable": false,
+                "InnerActionSpeed": 1.0,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 59.0,
+                  "Y": -28.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PositionPercentXEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": -0.1707
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 59.0,
+                "RightMargin": 59.0,
+                "TopMargin": 192.0,
+                "BottomMargin": -28.0,
+                "Tag": 79,
+                "ActionTag": 750460195,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "FileNode_1",
+                "ctype": "ProjectNodeObjectData"
+              }
+            ],
             "ActionTag": -447634893,
             "Size": {
               "X": 118.0,
@@ -371,10 +415,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -70.6567,
-            "RightMargin": 40.6567,
-            "TopMargin": -89.1317,
-            "BottomMargin": 65.1317,
+            "LeftMargin": -70.6577,
+            "RightMargin": 40.6577,
+            "TopMargin": -89.1324,
+            "BottomMargin": 65.1324,
             "Tag": 132,
             "ActionTag": 977407168,
             "Size": {
@@ -400,7 +444,7 @@
         "../../assets/common/common_icon_energy.png",
         "../../assets/font/SVN-Supercell Magic.ttf",
         "../../Default/Button_Disable.png",
-        "../../Default/Button_Press.png"
+        "cardUpgradeProgress.json"
       ],
       "ctype": "GameFileData"
     }

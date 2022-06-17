@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/data/shop-resources/shopResources.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/shop/shopLayer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/shop/shopSection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/inventory/battleDeckHolder.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/battleDeckHolder.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasurePopUp.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasurePopUp.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/main/MainScene.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/MainScene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/inventory-resources/inventoryResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/inventory-resources/inventoryResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/inventory/inventoryLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/inventoryLayer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/inventory/card.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/card.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -361,6 +353,17 @@
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -558,17 +561,6 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -737,6 +729,7 @@
       <workItem from="1655300336023" duration="7162000" />
       <workItem from="1655343561743" duration="2223000" />
       <workItem from="1655360798676" duration="12876000" />
+      <workItem from="1655387430428" duration="5849000" />
     </task>
     <servers />
   </component>

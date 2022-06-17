@@ -106,7 +106,6 @@ const bottomNav = cc.Node.extend({
         cc.log(tabNode.iconImg)
         if (NavResources.TAB_LIST[tabName].icon !== undefined) {
             tabNode.iconImg.loadTexture(NavResources.TAB_LIST[tabName].icon);
-            cc.log(NavResources.TAB_LIST[tabName].icon)
             tabNode.getChildByName('nameTxt').setString(NavResources.TAB_LIST[tabName].text);
             tabNode.getChildByName('nameTxt').setVisible(false);
         }
