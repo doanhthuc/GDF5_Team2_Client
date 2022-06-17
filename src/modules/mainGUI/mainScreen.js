@@ -8,6 +8,7 @@ const MainScreen = cc.Layer.extend({
 
     startTouchX: 0,
     tabList: ['SHOP_TAB', 'INVENTORY_TAB', 'HOME_TAB'],
+    shouldSetTouch: true,
 
     init: function () {
 
@@ -34,16 +35,12 @@ const MainScreen = cc.Layer.extend({
         // this.mainPageView.addWidgetToPage(this.inventoryLayer, NavResources.TAB_LIST.INVENTORY_TAB.index, true);
         this.listViewPanel.addChild(this.inventoryLayer);
         // this.listViewPanel.addEventListener(this.onListViewEvent.bind(this), this);
-        this.listView.setTouchEnabled(!this.listView.isTouchEnabled());
+        this.listView.setTouchEnabled(true);
 
         this.listView.setSwallowTouches(false);
         this.listViewPanel.setSwallowTouches(false);
-        this.listViewPanel.onTouchBegan = function (touch, event) {
-            // this.startTouchX = touch.getLocationX();
-            cc.log(touch);
-            // return true;
-        }
 
+        // this.listViewPanel.setSizeHeight(this.inventoryLayer.heightNode);
         // this.listViewPanel.addEventListener(this.onListViewEvent.bind(this), this)
 
         this.shopLayer = new ShopLayer();
@@ -53,16 +50,7 @@ const MainScreen = cc.Layer.extend({
         this.scrollToDefaultPage();
         this.addTreasurePopup();
 
-    },
-
-    onListViewEvent: function (sender, type) {
-        cc.log("onPanelListViewEvent");
-        switch (type) {
-            case ccui.Widget.TOUCH_BEGAN:
-                // this.startTouchX =;
-                // cc.log(this.startTouchX)
-                break;
-        }
+        this.initListViewEventListener();
     },
 
     scrollToDefaultPage: function () {
@@ -90,6 +78,34 @@ const MainScreen = cc.Layer.extend({
             this.setNavActiveTab(sender.getCurPageIndex());
             this.nav.setPositionForTab();
         }
+    },
+
+    initListViewEventListener: function () {
+        var listener1 = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: false,
+            onTouchBegan: function (touch, event) {
+                this.touchPos = touch.getLocation();
+                this.shouldSetTouch = true;
+                return true;
+            }.bind(this),
+            onTouchMoved: function (touch, event) {
+                if (this.shouldSetTouch && Math.abs(touch.getLocation().x - this.touchPos.x) > InventoryResources.HORIZONTAL_SCROLL_THRESHOLD) {
+                    this.listView.setTouchEnabled(false);
+                    this.shouldSetTouch = false;
+                }
+                if (this.shouldSetTouch && Math.abs(touch.getLocation().y - this.touchPos.y) > InventoryResources.VERTICAL_SCROLL_THRESHOLD) {
+                    this.listView.setTouchEnabled(true);
+                    this.shouldSetTouch = false;
+                }
+            }.bind(this),
+            onTouchEnded: function (touch, event) {
+                this.shouldSetTouch = true;
+            }.bind(this)
+        });
+
+        cc.eventManager.addListener(listener1, this.inventoryLayer);
     }
+
 
 });

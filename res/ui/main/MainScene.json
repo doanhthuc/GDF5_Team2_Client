@@ -201,7 +201,6 @@
                     "ScrollDirectionType": 0,
                     "ClipAble": true,
                     "BackColorAlpha": 102,
-                    "ComboBoxIndex": 1,
                     "SingleColor": {
                       "R": 150,
                       "G": 150
@@ -214,12 +213,14 @@
                     "ColorVector": {
                       "ScaleY": 1.0
                     },
+                    "Scale9Width": 1,
+                    "Scale9Height": 1,
                     "AnchorPoint": {
                       "ScaleX": 0.5,
                       "ScaleY": 0.5
                     },
                     "Position": {
-                      "X": 320.0002,
+                      "X": 320.0,
                       "Y": 568.0
                     },
                     "Scale": {
@@ -238,8 +239,6 @@
                       "X": 1.0,
                       "Y": 1.0
                     },
-                    "LeftMargin": 0.0002,
-                    "RightMargin": -0.0002,
                     "Tag": 473,
                     "Children": [
                       {
@@ -258,6 +257,8 @@
                         "ColorVector": {
                           "ScaleY": 1.0
                         },
+                        "Scale9Width": 1,
+                        "Scale9Height": 1,
                         "TouchEnable": true,
                         "AnchorPoint": {},
                         "Position": {
@@ -278,11 +279,11 @@
                           "X": 1.0,
                           "Y": 1.0
                         },
-                        "Tag": 494,
-                        "ActionTag": -1176751150,
+                        "Tag": 188,
+                        "ActionTag": -147909061,
                         "Size": {
                           "X": 640.0,
-                          "Y": 3000.0
+                          "Y": 2000.0
                         },
                         "Name": "listViewPanel",
                         "ctype": "PanelObjectData"
@@ -293,6 +294,7 @@
                       "X": 640.0,
                       "Y": 1136.0
                     },
+                    "Alpha": 0,
                     "Name": "inventoryListView",
                     "ctype": "ListViewObjectData"
                   }

@@ -85,8 +85,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": -106.9127,
-              "Y": 257.3655
+              "X": -102.9125,
+              "Y": 262.7569
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -106,10 +106,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -263.4127,
-            "RightMargin": -49.5873,
-            "TopMargin": -273.8655,
-            "BottomMargin": 240.8655,
+            "LeftMargin": -259.4125,
+            "RightMargin": -53.5875,
+            "TopMargin": -279.2569,
+            "BottomMargin": 246.2569,
             "Tag": 153,
             "ActionTag": 504907641,
             "Size": {

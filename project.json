@@ -21,6 +21,7 @@
     "jsList": [
         "src/data/bottom-nav-resources/NavResources.js",
         "src/data/inventory-resources/inventoryResources.js",
+        "src/data/main-scene-resources/mainSceneResources.js",
         "src/data/Resource.js",
         "src/data/ResourceAnimation.js",
         "src/data/shop-resources/shopResources.js",
@@ -44,7 +45,9 @@
         "src/base/Resource.js",
         "src/base/UIFactory.js",
         "src/modules/animation/ScreenDragonbones.js",
+        "src/modules/inventory/battleDeck.js",
         "src/modules/inventory/card.js",
+        "src/modules/inventory/cardCollection.js",
         "src/modules/inventory/inventoryLayer.js",
         "src/modules/lobby/lobbyLayer.js",
         "src/modules/lobby/playerInfoHolder.js",
