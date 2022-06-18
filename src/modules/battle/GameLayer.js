@@ -30,7 +30,7 @@ let GameLayer = cc.Layer.extend({
         this.schedule(this.initMonster, 8);
     },
 
-    update: function(dt) {
+    update: function (dt) {
         this.movementSystem.run(dt);
         this.pathSystem.run(dt);
         this.attackSystem.run(dt);
@@ -51,13 +51,13 @@ let GameLayer = cc.Layer.extend({
     },
 
     handleEventKey: function () {
-        if( 'keyboard' in cc.sys.capabilities ) {
+        if ('keyboard' in cc.sys.capabilities) {
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
-                onKeyPressed:function(key, event) {
+                onKeyPressed: function (key, event) {
                     cc.log("Key down:" + key);
                 }.bind(this),
-                onKeyReleased:function(key, event) {
+                onKeyReleased: function (key, event) {
                     cc.log("Key up:" + key);
                 }.bind(this)
             }, this);

@@ -1,6 +1,6 @@
 let Utils = Utils || {};
 
-Utils.getVariableName = function(variable) {
+Utils.getVariableName = function (variable) {
     let name = Object.keys({variable})[0];
     return name;
 };
@@ -10,10 +10,10 @@ Utils.tile2Pixel = function (x, y) {
     // |
     // |-------->x
     // return center of tile pixel
-    let paddingX = (GameConfig.SCREEN_WIDTH - 7*GameConfig.TILE_WIDTH) / 2;
+    let paddingX = (GameConfig.SCREEN_WIDTH - 7 * GameConfig.TILE_WIDTH) / 2;
     let paddingY = 200;
-    let xx = x*GameConfig.TILE_WIDTH + paddingX + 0.5*GameConfig.TILE_WIDTH;
-    let yy = y*GameConfig.TILE_HEIGH + paddingY + 0.5*GameConfig.TILE_HEIGH;
+    let xx = x * GameConfig.TILE_WIDTH + paddingX + 0.5 * GameConfig.TILE_WIDTH;
+    let yy = y * GameConfig.TILE_HEIGH + paddingY + 0.5 * GameConfig.TILE_HEIGH;
     return {x: xx, y: yy};
 };
 
@@ -26,10 +26,10 @@ Utils.tileArray2PixelArray = function (positionArr) {
 }
 
 Utils.pixel2Tile = function (xx, yy) {
-    let paddingX = (GameConfig.SCREEN_WIDTH - 7*GameConfig.TILE_WIDTH) / 2;
+    let paddingX = (GameConfig.SCREEN_WIDTH - 7 * GameConfig.TILE_WIDTH) / 2;
     let paddingY = 200;
-    let x = (xx - paddingX - 0.5*GameConfig.TILE_WIDTH) / GameConfig.TILE_WIDTH;
-    let y = (yy - paddingY - 0.5*GameConfig.TILE_HEIGH) / GameConfig.TILE_HEIGH;
+    let x = (xx - paddingX - 0.5 * GameConfig.TILE_WIDTH) / GameConfig.TILE_WIDTH;
+    let y = (yy - paddingY - 0.5 * GameConfig.TILE_HEIGH) / GameConfig.TILE_HEIGH;
     return {x, y};
 }
 
@@ -55,15 +55,46 @@ Utils.genIncrementId = function () {
 Utils.calculateVelocityVector = function (startPos, targetPos, velocity) {
     let Xa = startPos.x, Ya = startPos.y, Xb = targetPos.x, Yb = targetPos.y;
     if (Xa - Xb === 0)
-        return {speedX: 0, speedY: Math.sign(Yb-Ya)*velocity};
+        return {speedX: 0, speedY: Math.sign(Yb - Ya) * velocity};
     if (Ya - Yb === 0)
-        return {speedX: Math.sign(Xb-Xa)*velocity, speedY: 0};
+        return {speedX: Math.sign(Xb - Xa) * velocity, speedY: 0};
 
-    let k = Math.abs((Ya-Yb)/(Xa-Xb));
-    let speedX = Math.sqrt((velocity*velocity) / (1+k*k));
-    let speedY = k*speedX;
+    let k = Math.abs((Ya - Yb) / (Xa - Xb));
+    let speedX = Math.sqrt((velocity * velocity) / (1 + k * k));
+    let speedY = k * speedX;
     return {
-        speedX: Math.sign(Xb-Xa)*speedX,
-        speedY: Math.sign(Yb-Ya)*speedY
+        speedX: Math.sign(Xb - Xa) * speedX,
+        speedY: Math.sign(Yb - Ya) * speedY
     }
+}
+
+Utils.euclidDistance = function (pointA, pointB) {
+    return Math.sqrt(Math.pow(pointA.x - pointB.x, 2) + Math.pow(pointA.y - pointB.y, 2));
+}
+
+Utils.isMonster = function (entity) {
+    for (let id of GameConfig.GROUP_ID.MONSTER_ENTITY) {
+        if (id === entity.typeID) {
+            return true;
+        }
+    }
+    return false;
+}
+
+Utils.isTower = function (entity) {
+    for (let id of GameConfig.GROUP_ID.TOWER_ENTITY) {
+        if (id === entity.typeID) {
+            return true;
+        }
+    }
+    return false;
+}
+
+Utils.isBullet = function (entity) {
+    for (let id of GameConfig.GROUP_ID.BULLET_ENTITY) {
+        if (id === entity.typeID) {
+            return true;
+        }
+    }
+    return false;
 }

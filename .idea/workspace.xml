@@ -6,13 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/battle/battle_map_layer/BattleMapLayer.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/battle/battle_map_layer/BattleMapLayer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/avatar/AvatarNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/avatar/AvatarNode.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/UILayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/UILayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/common/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/common/Utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/EffectComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/EffectComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/event/EventHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/event/EventHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/AttackSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/AttackSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/CollisionSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/CollisionSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/EffectSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/EffectSystem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/PathMonsterSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/PathMonsterSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/RenderSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/RenderSystem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -328,7 +336,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -543,15 +551,13 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -575,7 +581,7 @@
       <first key="disable_using_upload" booleanValue="false" />
       <first key="argument_map">
         <second key="macruntime" stringValue="" />
-        <second key="win32runtime" stringValue="D:\workspace\stm\team_2_client\simulator\win32\GameClientJS.exe" />
+        <second key="win32runtime" stringValue="E:\working\vng\code\stm\team_2_client\simulator\win32\GameClientJS.exe" />
         <second key="connector_id" stringValue="jsbinding.win32.attach.connector" />
         <second key="remotePlatform" stringValue="Android" />
         <second key="host" stringValue="127.0.0.1" />
@@ -715,6 +721,10 @@
       <workItem from="1655196248766" duration="1430000" />
       <workItem from="1655373353695" duration="4622000" />
       <workItem from="1655439409729" duration="18061000" />
+      <workItem from="1655519968576" duration="544000" />
+      <workItem from="1655520634031" duration="2918000" />
+      <workItem from="1655523742376" duration="2000" />
+      <workItem from="1655523897639" duration="3107000" />
     </task>
     <servers />
   </component>

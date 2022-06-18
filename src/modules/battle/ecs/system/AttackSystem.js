@@ -44,7 +44,7 @@ let AttackSystem = System.extend({
     _distanceFrom: function (tower, monster) {
         let towerPos = tower.getComponent(GameConfig.COMPONENT_ID.POSITION);
         let monsterPos = monster.getComponent(GameConfig.COMPONENT_ID.POSITION);
-        return Math.sqrt(Math.pow(towerPos.x - monsterPos.x, 2) + Math.pow(towerPos.y - monsterPos.y, 2));
+        return Utils.euclidDistance(towerPos, monsterPos);
     },
 
     _findTargetMonsterByStrategy: function (strategy, monsterInAttackRange) {

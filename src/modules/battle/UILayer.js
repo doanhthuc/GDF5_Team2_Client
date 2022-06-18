@@ -1,3 +1,1 @@
-let UILayer = cc.Layer.extend({
-
-});
+let UILayer = cc.Layer.extend({});

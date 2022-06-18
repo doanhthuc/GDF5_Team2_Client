@@ -1,0 +1,120 @@
+{
+  "ID": "04364057-7026-4ace-a1af-0d7073e52dd4",
+  "Version": "2.3.4",
+  "Name": "HpBarNode",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 141,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/battle/battle_target_hp_background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -28.0,
+            "RightMargin": -28.0,
+            "TopMargin": -1.5,
+            "BottomMargin": -1.5,
+            "Tag": 142,
+            "ActionTag": 1550046254,
+            "Size": {
+              "X": 56.0,
+              "Y": 3.0
+            },
+            "Name": "background",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "ProgressInfo": 100,
+            "ImageFileData": {
+              "Type": "Normal",
+              "Path": "assets/battle/battle_target_hp.png",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -28.0,
+            "RightMargin": -28.0,
+            "TopMargin": -1.5,
+            "BottomMargin": -1.5,
+            "Tag": 144,
+            "ActionTag": 2105529075,
+            "Size": {
+              "X": 56.0,
+              "Y": 3.0
+            },
+            "Name": "progress_bar",
+            "ctype": "LoadingBarObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../assets/battle/battle_target_hp.png",
+        "../../assets/battle/battle_target_hp_background.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

@@ -11,8 +11,8 @@ let CollisionSystem = System.extend({
             .getEntitiesByComponents(GameConfig.COMPONENT_ID.COLLISION);
 
         // TODO: Optimize
-        for (let i = 0; i < entityList.length-1; i++) {
-            for (let j = i+1; j < entityList.length; j++) {
+        for (let i = 0; i < entityList.length - 1; i++) {
+            for (let j = i + 1; j < entityList.length; j++) {
                 let entity1 = entityList[i], entity2 = entityList[j];
                 if (this._isCollide(entity1, entity2)) {
                     let data = this._isMonsterAndBullet(entity1, entity2)
@@ -37,25 +37,27 @@ let CollisionSystem = System.extend({
         let w2 = collision2.width, h2 = collision2.height;
 
         // DEBUG
-        // let rect1 = cc.DrawNode.create();
-        // let rect2 = cc.DrawNode.create();
-        // rect1.drawRect(cc.p(pos1.x - (w1 / 2), pos1.y - (h1 / 2)), cc.p(pos1.x + w1/2, pos1.y + h1/2), cc.color(255,255,255,255));
-        // GameConfig.gameLayer.addChild(rect1);
-        // rect2.drawRect(cc.p(pos2.x - (w2 / 2), pos2.y - (h2 / 2)), cc.p(pos2.x + w2/2, pos2.y + h2/2), cc.color(255,0,255,255));
-        // GameConfig.gameLayer.addChild(rect2);
-        // cc.log(w2);
+        // if (this._isMonsterAndBullet(entity1, entity2)
+        //     && cc.rectIntersectsRect(cc.rect(pos1.x - w1 / 2, pos1.y - h1 / 2, w1, h1), cc.rect(pos2.x - w2 / 2, pos2.y - h2 / 2, w2, h2))) {
+        //     let rect1 = cc.DrawNode.create();
+        //     let rect2 = cc.DrawNode.create();
+        //     rect1.drawRect(cc.p(pos1.x - (w1 / 2), pos1.y - (h1 / 2)), cc.p(pos1.x + w1/2, pos1.y + h1/2), cc.color(255,255,255,255));
+        //     GameConfig.gameLayer.addChild(rect1);
+        //     rect2.drawRect(cc.p(pos2.x - (w2 / 2), pos2.y - (h2 / 2)), cc.p(pos2.x + w2/2, pos2.y + h2/2), cc.color(255,0,255,255));
+        //     GameConfig.gameLayer.addChild(rect2);
+        // }
         // END DEBUG
 
-        return cc.rectIntersectsRect(cc.rect(pos1.x - w1/2, pos1.y - h1/2, w1, h1), cc.rect(pos2.x - w2/2, pos2.y - h2/2, w2, h2));
+        return cc.rectIntersectsRect(cc.rect(pos1.x - w1 / 2, pos1.y - h1 / 2, w1, h1), cc.rect(pos2.x - w2 / 2, pos2.y - h2 / 2, w2, h2));
     },
 
     _isMonsterAndBullet: function (entity1, entity2) {
         // TODO: check entity2 is monster, not only sword man
-        if ((entity1.typeID === GameConfig.ENTITY_ID.BULLET && entity2.typeID === GameConfig.ENTITY_ID.SWORD_MAN)
-            || entity2.typeID === GameConfig.ENTITY_ID.BULLET && entity1.typeID === GameConfig.ENTITY_ID.SWORD_MAN) {
+        if ((Utils.isBullet(entity1) && Utils.isMonster(entity2))
+            || (Utils.isBullet(entity2) && Utils.isMonster(entity1))) {
             // dispatch event
-            let bullet = entity1.typeID === GameConfig.ENTITY_ID.BULLET ? entity1 : entity2;
-            let monster = entity1.typeID === GameConfig.ENTITY_ID.SWORD_MAN ? entity1 : entity2;
+            let bullet = Utils.isBullet(entity1) ? entity1 : entity2;
+            let monster = Utils.isMonster(entity1) ? entity1 : entity2;
             return {bullet, monster}
         }
         return null

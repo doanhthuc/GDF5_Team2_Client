@@ -14,7 +14,7 @@ let PathMonsterSystem = System.extend({
             let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
             let path = pathComponent.path, currentPathIdx = pathComponent.currentPathIdx;
 
-            if (currentPathIdx < path.length-1) {
+            if (currentPathIdx < path.length - 1) {
                 let currentPos = path[currentPathIdx];
                 let nextPos = path[currentPathIdx + 1];
                 let velocity = Math.sqrt(Math.pow(velocityComponent.speedX, 2) + Math.pow(velocityComponent.speedY, 2));
@@ -27,8 +27,8 @@ let PathMonsterSystem = System.extend({
                 let Xa = positionComponent.x, Ya = positionComponent.y;
                 let signX = Math.sign(velocityComponent.speedX), signY = Math.sign(velocityComponent.speedY);
 
-                if (signX*(Xb-Xa) <= 0
-                    && signY*(Yb-Ya) <= 0
+                if (signX * (Xb - Xa) <= 0
+                    && signY * (Yb - Ya) <= 0
                     && !(signX === 0 && signY === 0)) {
                     pathComponent.currentPathIdx++;
                 }

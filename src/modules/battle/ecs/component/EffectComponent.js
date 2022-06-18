@@ -11,7 +11,7 @@ let DamageEffect = EffectComponent.extend({
     },
 
     clone: function () {
-      return new DamageEffect(this.damage);
+        return new DamageEffect(this.damage);
     },
 
     reset: function () {

@@ -47,7 +47,7 @@ let VelocityComponent = Component.extend({
     }
 });
 
-let  AppearanceComponent = Component.extend({
+let AppearanceComponent = Component.extend({
     name: "AppearanceComponent",
     sprite: null,
 

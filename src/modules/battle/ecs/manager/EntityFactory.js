@@ -1,6 +1,4 @@
-let EntityFactory = cc.Class.extend({
-
-});
+let EntityFactory = cc.Class.extend({});
 
 EntityFactory.pool = new EntityPool()
 
@@ -26,7 +24,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let infoComponent = new BulletInfoComponent(effects);
         let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
         let appearanceComponent = new AppearanceComponent(bulletNode);
-        let collisionComponent = new CollisionComponent(20, 20);
+        let collisionComponent = new CollisionComponent(1, 1);
 
         let bulletVelocity = 5 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
@@ -38,8 +36,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
             .addComponent(velocityComponent)
             .addComponent(collisionComponent);
         return entity;
-    }
-    else if (towerType === GameConfig.ENTITY_ID.BEAR_TOWER) {
+    } else if (towerType === GameConfig.ENTITY_ID.BEAR_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this.createEntity(typeID);
 
@@ -47,7 +44,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let infoComponent = new BulletInfoComponent(effects);
         let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
         let appearanceComponent = new AppearanceComponent(bulletNode);
-        let collisionComponent = new CollisionComponent(20, 20);
+        let collisionComponent = new CollisionComponent(1, 1);
 
         let bulletVelocity = 4 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
@@ -59,8 +56,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
             .addComponent(velocityComponent)
             .addComponent(collisionComponent);
         return entity;
-    }
-    else if (towerType === GameConfig.ENTITY_ID.FROG_TOWER) {
+    } else if (towerType === GameConfig.ENTITY_ID.FROG_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this.createEntity(typeID);
 
@@ -98,10 +94,13 @@ EntityFactory.createSwordsmanMonster = function () {
     let initPos = Utils.tile2Pixel(0, 4);
     let infoComponent = new MonsterInfoComponent("normal", "land", 30, 1, 1, undefined);
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
-    let velocityComponent = new VelocityComponent(0.8*GameConfig.TILE_WIDTH, 0);
-    let appearanceComponent = new AppearanceComponent(new cc.Sprite("res/assets/monster/frame/swordsman/monster_swordsman_run_0019.png"));
-    let pathComponent = new PathComponent(Utils.tileArray2PixelArray([{x: 0, y: 4}, {x: 4, y: 4}, {x: 4, y: 2}, {x:6, y: 2}, {x: 6, y: 0}]))
-    let collisionComponent = new CollisionComponent(10, 10);
+    let velocityComponent = new VelocityComponent(0.8 * GameConfig.TILE_WIDTH, 0);
+    let appearanceComponent = new AppearanceComponent(createSwordmanNodeAnimation());
+    let pathComponent = new PathComponent(Utils.tileArray2PixelArray([{x: 0, y: 4}, {x: 4, y: 4}, {x: 4, y: 2}, {
+        x: 6,
+        y: 2
+    }, {x: 6, y: 0}]))
+    let collisionComponent = new CollisionComponent(20, 30);
     // let lifeComponent = new LifeComponent(140);
     let lifeComponent = new LifeComponent(140);
 
@@ -148,7 +147,7 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     let frozenEffect = new FrozenEffect(1.5);
     let damageEffect = new DamageEffect(8);
     // NOTE: get component from pool
-    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [damageEffect, frozenEffect], "support", "monster", 1.5, "bulletType",
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [frozenEffect], "support", "monster", 1.5, "bulletType",
         GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 3.4);
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
@@ -182,48 +181,70 @@ EntityFactory.createBoomerangFrogTower = function (pos) {
     return entity;
 }
 
-function createOwlNodeAnimation() {
+function createSwordmanNodeAnimation() {
     let node = new cc.Node();
-    let owlSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
-    let cannonSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_2_0009.png");
-    let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2*1.5*GameConfig.TILE_WIDTH/687)
+    let monsterSprite = new cc.Sprite("res/assets/monster/frame/swordsman/monster_swordsman_run_0012.png");
+    let hpBarNode = ccs.load("ui/battle/HpBarNode.json", "")
 
-    // cannon animation
-    let cannonAnimation = new cc.Animation();
-    for (let i = 9; i <= 17; i++) {
-        let fileName = "res/assets/tower/frame/cannon_1_2/tower_cannon_attack_2_00" + ((i < 10) ? ("0" + i) : i) + ".png";
-        cannonAnimation.addSpriteFrameWithFile(fileName);
+    // monster animation
+    let monsterAnimation = new cc.Animation();
+    for (let i = 12; i <= 23; i++) {
+        let fileName = "res/assets/monster/frame/swordsman/monster_swordsman_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        monsterAnimation.addSpriteFrameWithFile(fileName);
     }
-    cannonAnimation.setDelayPerUnit(1 / (17-9+1));
-    cannonAnimation.setRestoreOriginalFrame(true);
-    let cannonAction = cc.animate(cannonAnimation);
+    monsterAnimation.setDelayPerUnit(1 / (23 - 12 + 1));
+    monsterAnimation.setRestoreOriginalFrame(true);
+    let monsterAction = cc.animate(monsterAnimation);
 
-    // tower animation
-    let owlAnimation = new cc.Animation();
-    for (let i = 9; i <= 17; i++) {
-        let fileName = "res/assets/tower/frame/cannon_1_2/tower_cannon_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
-        owlAnimation.addSpriteFrameWithFile(fileName);
-    }
-    owlAnimation.setDelayPerUnit(1 / (17-9+1));
-    owlAnimation.setRestoreOriginalFrame(true);
-    let owlAction = cc.animate(owlAnimation);
+    monsterSprite.runAction(cc.repeatForever(monsterAction));
 
-    cannonSprite.runAction(cc.repeatForever(cannonAction));
-    owlSprite.runAction(cc.repeatForever(owlAction));
-
-    node.addChild(rangeAttackSprite, 0, "rangeAttack");
-    node.addChild(owlSprite, 0, "owl");
-    node.addChild(cannonSprite, 0, "cannon");
+    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(hpBarNode.node, 0, "hp");
     return node;
 }
 
-function createBearNodeAnimation () {
+function createOwlNodeAnimation() {
+    let node = new cc.Node();
+    let towerSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
+    let weaponSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_2_0009.png");
+    let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
+    rangeAttackSprite.setScale(2 * 1.5 * GameConfig.TILE_WIDTH / 687)
+
+    // cannon animation
+    let weaponAnimation = new cc.Animation();
+    for (let i = 9; i <= 17; i++) {
+        let fileName = "res/assets/tower/frame/cannon_1_2/tower_cannon_attack_2_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        weaponAnimation.addSpriteFrameWithFile(fileName);
+    }
+    weaponAnimation.setDelayPerUnit(1 / (17 - 9 + 1));
+    weaponAnimation.setRestoreOriginalFrame(true);
+    let weaponAction = cc.animate(weaponAnimation);
+
+    // tower animation
+    let towerAnimation = new cc.Animation();
+    for (let i = 9; i <= 17; i++) {
+        let fileName = "res/assets/tower/frame/cannon_1_2/tower_cannon_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        towerAnimation.addSpriteFrameWithFile(fileName);
+    }
+    towerAnimation.setDelayPerUnit(1 / (17 - 9 + 1));
+    towerAnimation.setRestoreOriginalFrame(true);
+    let towerAction = cc.animate(towerAnimation);
+
+    weaponSprite.runAction(cc.repeatForever(weaponAction));
+    towerSprite.runAction(cc.repeatForever(towerAction));
+
+    node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(towerSprite, 0, "tower");
+    node.addChild(weaponSprite, 0, "weapon");
+    return node;
+}
+
+function createBearNodeAnimation() {
     let node = new cc.Node();
     let towerSprite = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_0010.png");
     let weaponSprite = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_0010.png");
     let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2*1.5*GameConfig.TILE_WIDTH/687)
+    rangeAttackSprite.setScale(2 * 1.5 * GameConfig.TILE_WIDTH / 687)
 
     // tower animation
     let towerAnimation = new cc.Animation();
@@ -231,7 +252,7 @@ function createBearNodeAnimation () {
         let fileName = "res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         towerAnimation.addSpriteFrameWithFile(fileName);
     }
-    towerAnimation.setDelayPerUnit(1 / (19-10+1));
+    towerAnimation.setDelayPerUnit(1 / (19 - 10 + 1));
     towerAnimation.setRestoreOriginalFrame(true);
     let towerAction = cc.animate(towerAnimation);
 
@@ -241,7 +262,7 @@ function createBearNodeAnimation () {
         let fileName = "res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         weaponAnimation.addSpriteFrameWithFile(fileName);
     }
-    weaponAnimation.setDelayPerUnit(1 / (19-10+1));
+    weaponAnimation.setDelayPerUnit(1 / (19 - 10 + 1));
     weaponAnimation.setRestoreOriginalFrame(true);
     let weaponAction = cc.animate(weaponAnimation);
 
@@ -254,12 +275,12 @@ function createBearNodeAnimation () {
     return node;
 }
 
-function createFrogNodeAnimation (attackRange) {
+function createFrogNodeAnimation(attackRange) {
     let node = new cc.Node();
     let towerSprite = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_0_0011.png");
     let weaponSprite = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_1_0011.png");
     let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2*attackRange*GameConfig.TILE_WIDTH/687)
+    rangeAttackSprite.setScale(2 * attackRange * GameConfig.TILE_WIDTH / 687)
 
     // tower animation
     let towerAnimation = new cc.Animation();
@@ -267,7 +288,7 @@ function createFrogNodeAnimation (attackRange) {
         let fileName = "res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         towerAnimation.addSpriteFrameWithFile(fileName);
     }
-    towerAnimation.setDelayPerUnit(1 / (22-11+1));
+    towerAnimation.setDelayPerUnit(1 / (22 - 11 + 1));
     towerAnimation.setRestoreOriginalFrame(true);
     let towerAction = cc.animate(towerAnimation);
 
@@ -277,7 +298,7 @@ function createFrogNodeAnimation (attackRange) {
         let fileName = "res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_1_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         weaponAnimation.addSpriteFrameWithFile(fileName);
     }
-    weaponAnimation.setDelayPerUnit(1 / (22-11+1));
+    weaponAnimation.setDelayPerUnit(1 / (22 - 11 + 1));
     weaponAnimation.setRestoreOriginalFrame(true);
     let weaponAction = cc.animate(weaponAnimation);
 

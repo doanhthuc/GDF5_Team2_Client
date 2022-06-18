@@ -12,6 +12,25 @@ let RenderSystem = System.extend({
             let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE);
             let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
             appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
+
+            // side effect
+            this._updateHpBarMonsterUI(entity);
         }
-    }
+    },
+
+    _updateHpBarMonsterUI: function (entity) {
+        if (Utils.isMonster(entity)) {
+            let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE);
+            let lifeComponent = entity.getComponent(GameConfig.COMPONENT_ID.LIFE);
+            if (appearanceComponent) {
+
+                let sprite = appearanceComponent.sprite;
+                let hpNode = sprite.getChildByName("hp");
+                if (hpNode) {
+                    let hpProgressBar = hpNode.getChildByName("progress_bar");
+                    hpProgressBar.setPercent(lifeComponent.hp / lifeComponent.maxHP * 100);
+                }
+            }
+        }
+    },
 });

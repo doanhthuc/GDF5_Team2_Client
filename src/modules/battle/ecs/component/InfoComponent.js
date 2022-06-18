@@ -40,7 +40,7 @@ let TowerInfoComponent = InfoComponent.extend({
         this.effects = bulletEffects;
         this.archType = archType;
         this.targetType = targetType;
-        this.attackRange = attackRange*GameConfig.TILE_WIDTH;
+        this.attackRange = attackRange * GameConfig.TILE_WIDTH;
         this.bulletType = bulletType;
         this.targetStrategy = targetStrategy;
         this.attackCountdown = attackCountdown;
@@ -62,8 +62,13 @@ let BulletInfoComponent = InfoComponent.extend({
 let LifeComponent = InfoComponent.extend({
     name: "LifeComponentECS",
 
-    ctor: function(hp) {
+    ctor: function (hp, maxHP) {
         this._super(GameConfig.COMPONENT_ID.LIFE);
         this.hp = hp;
+        if (maxHP) {
+            this.maxHP = maxHP;
+        } else {
+            this.maxHP = hp;
+        }
     },
 });

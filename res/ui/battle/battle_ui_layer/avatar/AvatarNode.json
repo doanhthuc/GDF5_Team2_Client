@@ -205,7 +205,7 @@
           },
           {
             "FontSize": 16,
-            "LabelText": "GDF5_team_2",
+            "LabelText": "GDF_5_team_2",
             "FontResource": {
               "Type": "Normal",
               "Path": "assets/font/SVN-Supercell Magic.ttf",
@@ -246,14 +246,14 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -54.5455,
-            "RightMargin": -96.4545,
+            "LeftMargin": -59.5455,
+            "RightMargin": -101.4545,
             "TopMargin": 4.2317,
             "BottomMargin": -26.2317,
             "Tag": 642,
             "ActionTag": 150169027,
             "Size": {
-              "X": 151.0,
+              "X": 161.0,
               "Y": 22.0
             },
             "Name": "clan_name",

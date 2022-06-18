@@ -21,6 +21,7 @@ let EffectSystem = System.extend({
                 let damageComponent = entity.getComponent(GameConfig.COMPONENT_ID.DAMAGE_EFFECT);
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
+                cc.log(lifeComponent.hp);
             }
         }
     },
