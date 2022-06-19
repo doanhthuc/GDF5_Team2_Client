@@ -1,7 +1,7 @@
 {
-  "ID": "4e22618b-1efe-41dc-a876-13df53cec372",
+  "ID": "65a2d116-1c42-469e-b48c-c5f7e6ee0394",
   "Version": "2.3.4",
-  "Name": "costButton",
+  "Name": "freeButton",
   "Content": {
     "Content": {
       "Animation": {
@@ -12,7 +12,7 @@
       },
       "AnimationList": [],
       "ObjectData": {
-        "Tag": 13,
+        "Tag": 107,
         "Children": [
           {
             "FontSize": 14,
@@ -29,12 +29,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_btn_orange.png",
+              "Path": "assets/common/common_btn_green.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_btn_orange.png",
+              "Path": "assets/common/common_btn_green.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -80,8 +80,8 @@
             "RightMargin": -97.0,
             "TopMargin": -55.5,
             "BottomMargin": -55.5,
-            "Tag": 139,
-            "ActionTag": -1959173261,
+            "Tag": 110,
+            "ActionTag": -376594729,
             "Size": {
               "X": 194.0,
               "Y": 111.0
@@ -91,7 +91,7 @@
           },
           {
             "FontSize": 20,
-            "LabelText": "600",
+            "LabelText": "Miễn phí",
             "FontResource": {
               "Type": "Normal",
               "Path": "assets/font/SVN-Supercell Magic.ttf",
@@ -113,7 +113,7 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 15.883,
+              "X": 0.0,
               "Y": 0.0
             },
             "Scale": {
@@ -130,63 +130,18 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -14.117,
-            "RightMargin": -45.883,
+            "LeftMargin": -61.5,
+            "RightMargin": -61.5,
             "TopMargin": -13.5,
             "BottomMargin": -13.5,
-            "Tag": 136,
-            "ActionTag": -429960077,
+            "Tag": 109,
+            "ActionTag": 1377517310,
             "Size": {
-              "X": 60.0,
+              "X": 123.0,
               "Y": 27.0
             },
             "Name": "priceTxt",
             "ctype": "TextObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "assets/common/common_icon_gold_small.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": -29.499,
-              "Y": 0.0
-            },
-            "Scale": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -59.499,
-            "RightMargin": -0.501,
-            "TopMargin": -32.0,
-            "BottomMargin": -32.0,
-            "Tag": 137,
-            "ActionTag": 1587929737,
-            "Size": {
-              "X": 60.0,
-              "Y": 64.0
-            },
-            "Name": "unitIconImg",
-            "ctype": "SpriteObjectData"
           }
         ],
         "Size": {
@@ -197,8 +152,7 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/common/common_btn_orange.png",
-        "../../assets/common/common_icon_gold_small.png",
+        "../../assets/common/common_btn_green.png",
         "../../assets/font/SVN-Supercell Magic.ttf",
         "../../Default/Button_Disable.png"
       ],

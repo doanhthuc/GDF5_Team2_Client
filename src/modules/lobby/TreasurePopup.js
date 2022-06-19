@@ -1,4 +1,4 @@
-const treasurePopup = cc.Node.extend({
+const TreasurePopup = cc.Node.extend({
     ctor: function () {
         this._super();
         this.init();

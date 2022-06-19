@@ -1,4 +1,4 @@
-const treasureSlot = cc.Node.extend({
+const TreasureSlot = cc.Node.extend({
     id: null,
     DEFAULT_STATE: TreasureSlotResources.STATE.EMPTY,
     // state: this.DEFAULT_STATE,

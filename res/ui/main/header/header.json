@@ -56,7 +56,7 @@
               "X": 640.0,
               "Y": 85.0
             },
-            "Name": "lobbyCurrencyBackground",
+            "Name": "headerBackgroundImg",
             "ctype": "ImageViewObjectData"
           },
           {
@@ -237,51 +237,6 @@
               "Y": 64.0
             },
             "Name": "goldIcon",
-            "ctype": "SpriteObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_btn_top_up.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 154.63,
-              "Y": 10.46
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 135.63,
-            "RightMargin": -173.63,
-            "TopMargin": -30.46,
-            "BottomMargin": -9.54,
-            "Tag": 112,
-            "ActionTag": -1403151985,
-            "Size": {
-              "X": 38.0,
-              "Y": 40.0
-            },
-            "Name": "gemTopUpBtn",
             "ctype": "SpriteObjectData"
           },
           {

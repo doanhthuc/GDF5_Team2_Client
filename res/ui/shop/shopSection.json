@@ -138,129 +138,6 @@
             },
             "Name": "shopCategoryNode",
             "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/shop/shopItemSlot.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": -185.6969,
-              "Y": -10.5355
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -185.6969,
-            "RightMargin": 185.6969,
-            "TopMargin": 10.5355,
-            "BottomMargin": -10.5355,
-            "Tag": 213,
-            "ActionTag": -363908380,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "FileNode_6",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/shop/shopItemSlot.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 0.0001,
-              "Y": -9.219
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 0.0001,
-            "RightMargin": -0.0001,
-            "TopMargin": 9.219,
-            "BottomMargin": -9.219,
-            "Tag": 227,
-            "ActionTag": 1542536379,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "FileNode_7",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/shop/shopItemSlot.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 184.3817,
-              "Y": -10.5355
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 184.3817,
-            "RightMargin": -184.3817,
-            "TopMargin": 10.5355,
-            "BottomMargin": -10.5355,
-            "Tag": 241,
-            "ActionTag": -140439845,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "FileNode_8",
-            "ctype": "ProjectNodeObjectData"
           }
         ],
         "Size": {
@@ -273,8 +150,7 @@
       "UsedResources": [
         "../../assets/lobby/lobby_shop_category.png",
         "refershShopNode.json",
-        "shopCategory.json",
-        "shopItemSlot.json"
+        "shopCategory.json"
       ],
       "ctype": "GameFileData"
     }

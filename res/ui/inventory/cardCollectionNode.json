@@ -250,47 +250,6 @@
             },
             "Name": "cardCollectionTitle",
             "ctype": "ImageViewObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/inventory/card.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": -231.0,
-              "Y": -164.0
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -231.0,
-            "RightMargin": 231.0,
-            "TopMargin": 164.0,
-            "BottomMargin": -164.0,
-            "Tag": 245,
-            "ActionTag": -1610960661,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "FileNode_2",
-            "ctype": "ProjectNodeObjectData"
           }
         ],
         "Size": {
@@ -304,8 +263,7 @@
         "../../assets/common/common_btn_blue.png",
         "../../assets/font/SVN-Supercell Magic.ttf",
         "../../assets/lobby/lobby_card_banner.png",
-        "../../Default/Button_Disable.png",
-        "card.json"
+        "../../Default/Button_Disable.png"
       ],
       "ctype": "GameFileData"
     }

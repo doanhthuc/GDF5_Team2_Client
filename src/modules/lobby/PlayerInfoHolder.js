@@ -1,4 +1,4 @@
-const playerInfoHolderUtils = cc.Class({
+const PlayerInfoHolderUtils = cc.Class({
     ctor: function (node) {
         this.userInfo = null;
         this.node = node;

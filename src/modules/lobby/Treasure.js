@@ -1,4 +1,4 @@
-const treasure = cc.Node.extend({
+const Treasure = cc.Node.extend({
 
     ctor: function (type) {
         this.type = type;

@@ -14,52 +14,12 @@ const bottomNav = cc.Node.extend({
     },
 
 
-    /*loadTabList: function () {
-        let currentWidth = 0;
-        for (let tab in NavResources.TAB_LIST) {
-            let node = ccs.load(NavResources.NAV_TAB, '').node;
-            this.addChild(node);
-            this.tabMap.set(tab, node);
-            node.name = NavResources.TAB_LIST[tab].name;
-            node.iconImg = node.getChildByName('iconImg');
-            node.backgroundBtn = node.getChildByName('backgroundBtn');
-            node.nameTxt = node.getChildByName('nameTxt');
-            cc.log(node.backgroundBtn);
-            node.backgroundBtn.addTouchEventListener(this.onTabClick.bind(this), this);
-            if (NavResources.TAB_LIST[tab].icon !== undefined) {
-                node.iconImg.loadTexture(NavResources.TAB_LIST[tab].icon);
-                node.getChildByName('nameTxt').setString(NavResources.TAB_LIST[tab].text);
-                node.getChildByName('nameTxt').setVisible(false);
-            }
-            let backgroundBtn = node.getChildByName('backgroundBtn')
-            if (tab !== this.activeTab) {
-                node.backgroundBtn.loadTextureNormal(
-                    NavResources.TAB_LIST[tab].backgroundImg
-                );
-                node.setPosition(
-                    NavResources.NORMAL_BUTTON_WIDTH * 0.5 + currentWidth,
-                    NavResources.NORMAL_BUTTON_HEIGHT / 2
-                );
-                currentWidth += backgroundBtn.getSize().width - 4;
-            } else {
-                node.backgroundBtn.loadTextureNormal(
-                    NavResources.ACTIVE_TAB_BG
-                )
-                node.setPosition(
-                    NavResources.ACTIVE_BUTTON_WIDTH * 0.5 + currentWidth,
-                    NavResources.NORMAL_BUTTON_HEIGHT / 2 - 5
-                );
-                node.nameTxt.setVisible(true);
-                // node.nameTxt.setPosition(0,
-                //     cc.winSize.height/2);
-                currentWidth += backgroundBtn.getSize().width - 2;
-            }
-
-        }
-
-    },*/
     onTabClick: function (sender, type) {
+        if (this.isTabRunningAnimation())
+            return;
         if (type === ccui.Widget.TOUCH_ENDED) {
+            // let moveIcon = cc.MoveBy.create(0.1, cc.p(0, -10));
+            // this.tabMap.get(this.activeTab).iconImg.runAction(moveIcon);
             this.activeTab = sender.parent.name;
             this.setPositionForTab();
             this.handleScrollPageCallback(sender.parent.index);
@@ -72,12 +32,18 @@ const bottomNav = cc.Node.extend({
                 tab.backgroundBtn.loadTextureNormal(
                     NavResources.ACTIVE_TAB_BG
                 );
+                tab.backgroundBtn.width = NavResources.NORMAL_BUTTON_WIDTH;
                 tab.setPosition(
                     NavResources.ACTIVE_BUTTON_WIDTH * 0.5 + currentWidth,
                     NavResources.NORMAL_BUTTON_HEIGHT / 2 - 5
                 );
                 tab.nameTxt.setVisible(true);
-                currentWidth += tab.backgroundBtn.getSize().width - 2;
+                currentWidth += NavResources.ACTIVE_BUTTON_WIDTH - 2;
+
+                this.schedule(this.changeWidth);
+
+                // let moveIcon = cc.MoveBy.create(0.1, cc.p(0, 10));
+                // tab.iconImg.runAction(moveIcon);
             } else {
                 tab.backgroundBtn.loadTextureNormal(
                     NavResources.TAB_LIST[key].backgroundImg
@@ -87,7 +53,7 @@ const bottomNav = cc.Node.extend({
                     NavResources.NORMAL_BUTTON_HEIGHT / 2
                 );
                 tab.nameTxt.setVisible(false);
-                currentWidth += tab.backgroundBtn.getSize().width - 4;
+                currentWidth += NavResources.NORMAL_BUTTON_WIDTH - 4;
             }
         }.bind(this));
     },
@@ -102,8 +68,6 @@ const bottomNav = cc.Node.extend({
         }
     },
     setResourceForTab: function (tabName, tabNode) {
-        cc.log(tabName)
-        cc.log(tabNode.iconImg)
         if (NavResources.TAB_LIST[tabName].icon !== undefined) {
             tabNode.iconImg.loadTexture(NavResources.TAB_LIST[tabName].icon);
             tabNode.getChildByName('nameTxt').setString(NavResources.TAB_LIST[tabName].text);
@@ -116,5 +80,25 @@ const bottomNav = cc.Node.extend({
         tabNode.backgroundBtn = tabNode.getChildByName('backgroundBtn');
         tabNode.nameTxt = tabNode.getChildByName('nameTxt');
         tabNode.index = this.tabMap.size;
-    }
+        tabNode.isTabRunningAnimation = false;
+    },
+
+    isTabRunningAnimation: function () {
+        this.tabMap.forEach(function (tab, key) {
+            if (tab.isTabRunningAnimation)
+                return true;
+        });
+        return false;
+    },
+
+    changeWidth: function (dt) {
+        let activeNav = this.tabMap.get(this.activeTab)
+        activeNav.backgroundBtn.width += 250 * dt;
+
+        if (activeNav.backgroundBtn.width >= NavResources.ACTIVE_BUTTON_WIDTH) {
+            activeNav.backgroundBtn.width = NavResources.ACTIVE_BUTTON_WIDTH;
+            this.unschedule(this.changeWidth);
+        }
+    },
+
 });
