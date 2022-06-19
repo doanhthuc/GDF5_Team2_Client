@@ -26,7 +26,7 @@ let MovementSystem = System.extend({
         // dynamic target
         if (velocityComponent.dynamicPosition) {
             let newSpeed = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
-                velocityComponent.originVelocity);
+                velocityComponent.originSpeed);
             velocityComponent.speedX = newSpeed.speedX;
             velocityComponent.speedY = newSpeed.speedY;
         }

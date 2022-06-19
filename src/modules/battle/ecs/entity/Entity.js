@@ -12,10 +12,9 @@ let EntityECS = cc.Class.extend({
     addComponent: function (component) {
         // this._isComponent();
 
-        // if (this.component[component.typeID]) {
-        //     // TODO: add custom error
-        //     throw new Error("Component with typeID = " + component.typeID + " exist");
-        // }
+        if (this.component[component.typeID]) {
+            // TODO: check override or not
+        }
 
         this.component[component.typeID] = component;
         return this;

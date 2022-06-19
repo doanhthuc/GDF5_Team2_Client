@@ -130,7 +130,7 @@
             },
             "LeftMargin": -286.7963,
             "RightMargin": 306.7963,
-            "TopMargin": -193.7085,
+            "TopMargin": -193.7086,
             "BottomMargin": 273.7086,
             "Tag": 155,
             "ActionTag": 1232262600,
@@ -437,7 +437,7 @@
             },
             "LeftMargin": -86.9811,
             "RightMargin": 581.9811,
-            "TopMargin": 799.1929,
+            "TopMargin": 799.1928,
             "BottomMargin": 166.8072,
             "Tag": 284,
             "ActionTag": 943015039,
@@ -1114,7 +1114,7 @@
             },
             "LeftMargin": 6.7482,
             "RightMargin": 586.2518,
-            "TopMargin": 765.9302,
+            "TopMargin": 765.9301,
             "BottomMargin": 337.0699,
             "Tag": 297,
             "ActionTag": -1174624218,
@@ -1259,6 +1259,96 @@
             },
             "Name": "Image_26_0",
             "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/map/map_house.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 557.1838,
+              "Y": 271.3546
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.8706,
+              "Y": 0.2389
+            },
+            "PreSize": {
+              "X": 0.175,
+              "Y": 0.118
+            },
+            "LeftMargin": 501.1838,
+            "RightMargin": 26.8162,
+            "TopMargin": 797.6454,
+            "BottomMargin": 204.3546,
+            "Tag": 958,
+            "ActionTag": -490668998,
+            "Size": {
+              "X": 112.0,
+              "Y": 134.0
+            },
+            "Name": "player_house",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/map/map_house.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 89.6025,
+              "Y": 1068.1968
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.14,
+              "Y": 0.9403
+            },
+            "PreSize": {
+              "X": 0.175,
+              "Y": 0.118
+            },
+            "LeftMargin": 33.6025,
+            "RightMargin": 494.3975,
+            "TopMargin": 0.8032,
+            "BottomMargin": 1001.1968,
+            "Tag": 959,
+            "ActionTag": -2042719896,
+            "Size": {
+              "X": 112.0,
+              "Y": 134.0
+            },
+            "Name": "opponent_house",
+            "ctype": "SpriteObjectData"
           }
         ],
         "Size": {
@@ -1280,6 +1370,7 @@
         "../../../assets/map/map_decoration_tree_0002.png",
         "../../../assets/map/map_decoration_tree_0003.png",
         "../../../assets/map/map_decoration_tree_0004.png",
+        "../../../assets/map/map_house.png",
         "BattleMapOpponent.json",
         "BattleMapPlayer.json",
         "BattleRiver.json"

@@ -21,14 +21,18 @@ let DamageEffect = EffectComponent.extend({
 
 let SlowEffect = EffectComponent.extend({
     name: "SlowEffect",
+    _initOriginVelocity: {speedX: 0, speedY: 0},
 
-    ctor: function (duration) {
+    ctor: function (duration, percent) {
         this._super(GameConfig.COMPONENT_ID.SLOW_EFFECT);
         this.duration = duration;
+        this.countdown = this.duration;
+        this.percent = percent;
+        this.originVelocity = this._initOriginVelocity;
     },
 
     clone: function () {
-
+        return new SlowEffect(this.duration, this.percent);
     },
 
     reset: function () {

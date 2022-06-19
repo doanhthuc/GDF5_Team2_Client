@@ -16,4 +16,9 @@ EventDispatcher.getInstance()
                 bullet.setActive(false);
             }
         }
-    );
+    )
+    .addEventHandler(EventType.RESET_INIT_VELOCITY, function (data) {
+        let velocityComponent = data.velocityComponent;
+        velocityComponent.speedX = velocityComponent.originSpeedX;
+        velocityComponent.speedY = velocityComponent.originSpeedY;
+    })

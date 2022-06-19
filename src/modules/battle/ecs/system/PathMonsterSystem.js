@@ -17,11 +17,11 @@ let PathMonsterSystem = System.extend({
             if (currentPathIdx < path.length - 1) {
                 let currentPos = path[currentPathIdx];
                 let nextPos = path[currentPathIdx + 1];
-                let velocity = Math.sqrt(Math.pow(velocityComponent.speedX, 2) + Math.pow(velocityComponent.speedY, 2));
+                let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
 
-                let newSpeed = Utils.calculateVelocityVector(currentPos, nextPos, velocity);
-                velocityComponent.speedX = newSpeed.speedX;
-                velocityComponent.speedY = newSpeed.speedY;
+                let newVelocity = Utils.calculateVelocityVector(currentPos, nextPos, speed);
+                velocityComponent.speedX = newVelocity.speedX;
+                velocityComponent.speedY = newVelocity.speedY;
 
                 let Xb = nextPos.x, Yb = nextPos.y;
                 let Xa = positionComponent.x, Ya = positionComponent.y;

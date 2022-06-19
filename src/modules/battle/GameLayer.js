@@ -31,13 +31,14 @@ let GameLayer = cc.Layer.extend({
     },
 
     update: function (dt) {
+        // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
         this.movementSystem.run(dt);
-        this.pathSystem.run(dt);
         this.attackSystem.run(dt);
         this.renderSystem.run(dt);
         this.lifeSystem.run(dt);
         this.collisionSystem.run(dt);
         this.effectSystem.run(dt);
+        this.pathSystem.run(dt);
     },
 
     initMonster: function () {
@@ -46,8 +47,8 @@ let GameLayer = cc.Layer.extend({
 
     initTower: function () {
         EntityFactory.createCannonOwlTower({x: 3, y: 3});
-        EntityFactory.createIceGunPolarBearTower({x: 5, y: 3});
-        EntityFactory.createBoomerangFrogTower({x: 0, y: 3});
+        // EntityFactory.createIceGunPolarBearTower({x: 5, y: 3});
+        // EntityFactory.createBoomerangFrogTower({x: 0, y: 3});
     },
 
     handleEventKey: function () {

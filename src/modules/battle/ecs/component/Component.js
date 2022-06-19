@@ -38,14 +38,20 @@ let PositionComponent = Component.extend({
 let VelocityComponent = Component.extend({
     name: "VelocityComponent",
 
-    ctor: function (speedX, speedY, dynamicPosition, originVelocity) {
+    ctor: function (speedX, speedY, dynamicPosition) {
         this._super(GameConfig.COMPONENT_ID.VELOCITY);
         this.speedX = speedX;
         this.speedY = speedY;
         this.dynamicPosition = dynamicPosition;
-        this.originVelocity = originVelocity;
+        this.originSpeed = Math.sqrt(Math.pow(this.speedX, 2) + Math.pow(this.speedY, 2));
+
+        this.originSpeedX = this.speedX;
+        this.originSpeedY = this.speedY;
     }
 });
+VelocityComponent.calculateSpeed = function (speedX, speedY) {
+    return Math.sqrt(Math.pow(speedX, 2) + Math.pow(speedY, 2));
+}
 
 let AppearanceComponent = Component.extend({
     name: "AppearanceComponent",

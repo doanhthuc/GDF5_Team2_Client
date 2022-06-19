@@ -8,6 +8,8 @@ let EffectSystem = System.extend({
 
     run: function (tick) {
         this._handleDamageEffect(tick);
+        // IMPORTANT: SlowEffect < FrozenEffect
+        this._handleSlowEffect(tick);
         this._handleFrozenEffect(tick);
     },
 
@@ -21,7 +23,6 @@ let EffectSystem = System.extend({
                 let damageComponent = entity.getComponent(GameConfig.COMPONENT_ID.DAMAGE_EFFECT);
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
-                cc.log(lifeComponent.hp);
             }
         }
     },
@@ -32,22 +33,42 @@ let EffectSystem = System.extend({
         for (let entity of entityList) {
             let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
             let frozenComponent = entity.getComponent(GameConfig.COMPONENT_ID.FROZEN_EFFECT);
-
-            // first time effects running
-            if (frozenComponent.countdown === frozenComponent.duration) {
-                frozenComponent.originVelocity = {speedX: velocityComponent.speedX, speedY: velocityComponent.speedY};
-            }
+            cc.log("frozen")
 
             frozenComponent.countdown = frozenComponent.countdown - tick;
             if (frozenComponent.countdown <= 0) {
-                velocityComponent.speedX = frozenComponent.originVelocity.speedX;
-                velocityComponent.speedY = frozenComponent.originVelocity.speedY;
-                // frozenComponent.countdown = frozenComponent.duration;
+                this._updateOriginVelocity(velocityComponent);
                 entity.removeComponent(frozenComponent);
             } else {
                 velocityComponent.speedX = 0;
                 velocityComponent.speedY = 0;
             }
         }
+    },
+
+    _handleSlowEffect: function (tick) {
+        let entityList = EntityManager.getInstance()
+            .getEntitiesByComponents(GameConfig.COMPONENT_ID.SLOW_EFFECT)
+        for (let entity of entityList) {
+            let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
+            let slowComponent = entity.getComponent(GameConfig.COMPONENT_ID.SLOW_EFFECT);
+            cc.log("slow")
+
+            slowComponent.countdown = slowComponent.countdown - tick;
+            if (slowComponent.countdown <= 0) {
+                // EventDispatcher.getInstance()
+                //     .dispatchEvent(EventType.RESET_INIT_VELOCITY, {velocityComponent: velocityComponent})
+                this._updateOriginVelocity(velocityComponent);
+                entity.removeComponent(slowComponent);
+            } else {
+                velocityComponent.speedX = slowComponent.percent * velocityComponent.originSpeedX;
+                velocityComponent.speedY = slowComponent.percent * velocityComponent.originSpeedY;
+            }
+        }
+    },
+
+    _updateOriginVelocity: function (velocityComponent) {
+        velocityComponent.speedX = velocityComponent.originSpeedX;
+        velocityComponent.speedY = velocityComponent.originSpeedY;
     }
 });

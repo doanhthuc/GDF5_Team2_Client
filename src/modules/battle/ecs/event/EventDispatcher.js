@@ -9,12 +9,14 @@ let EventDispatcher = cc.Class.extend({
             this.eventCallbackStore[eventName] = new EventECS(eventName);
         }
         this.eventCallbackStore[eventName].addCallback(callback);
+        return this;
     },
 
     dispatchEvent: function (eventName, data) {
         if (this.eventCallbackStore[eventName]) {
             this.eventCallbackStore[eventName].fire(data);
         }
+        return this;
     },
 
     unRegisterEvent: function (eventName, callback) {
