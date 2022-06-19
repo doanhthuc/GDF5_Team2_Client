@@ -14,7 +14,8 @@ GameConfig.COMPONENT_ID = {
     COLLISION: 9,
     DAMAGE_EFFECT: 10,
     SLOW_EFFECT: 11,
-    FROZEN_EFFECT: 12
+    FROZEN_EFFECT: 12,
+    ATTACK: 13,
 }
 
 GameConfig.SYSTEM_ID = {

@@ -8,34 +8,34 @@ let AttackSystem = System.extend({
 
     run: function (tick) {
         let towerList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.TOWER_INFO);
+            .getEntitiesByComponents(GameConfig.COMPONENT_ID.ATTACK);
         let monsterList = EntityManager.getInstance()
             .getEntitiesByComponents(GameConfig.COMPONENT_ID.MONSTER_INFO);
 
         for (let tower of towerList) {
-            let towerInfo = tower.getComponent(GameConfig.COMPONENT_ID.TOWER_INFO);
+            let attackComponent = tower.getComponent(GameConfig.COMPONENT_ID.ATTACK);
 
             // update count down time
-            towerInfo.attackCountdown -= tick;
-            if (towerInfo.attackCountdown <= 0) {
+            attackComponent.countdown -= tick;
+            if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
                     if (monster.getActive()) {
                         let distance = this._distanceFrom(tower, monster);
-                        if (distance <= towerInfo.attackRange) {
+                        if (distance <= attackComponent.range) {
                             monsterInAttackRange.push(monster);
                         }
                     }
                 }
                 if (monsterInAttackRange.length > 0) {
                     // TODO: switch case target_strategy here
-                    let targetMonster = this._findTargetMonsterByStrategy(towerInfo.targetStrategy, monsterInAttackRange);
+                    let targetMonster = this._findTargetMonsterByStrategy(attackComponent.targetStrategy, monsterInAttackRange);
                     let monsterPos = targetMonster.getComponent(GameConfig.COMPONENT_ID.POSITION);
                     let towerPos = tower.getComponent(GameConfig.COMPONENT_ID.POSITION);
-                    EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, towerInfo.effects);
+                    EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects);
 
                     // reset count down time
-                    towerInfo.attackCountdown = towerInfo.speedAttack;
+                    attackComponent.countdown = attackComponent.speed;
                 }
             }
         }

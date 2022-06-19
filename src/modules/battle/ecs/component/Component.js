@@ -84,4 +84,36 @@ let CollisionComponent = Component.extend({
         this.width = width;
         this.height = height;
     }
-})
+});
+
+let AttackComponent = Component.extend({
+    name: "AttackComponent",
+
+    ctor: function (damage, targetStrategy, range, speed, countdown, effects) {
+        this._super(GameConfig.COMPONENT_ID.ATTACK);
+        this._damage = damage;
+        this.targetStrategy = targetStrategy;
+        this.range = range;
+        this.speed = speed;
+        this.countdown = countdown;
+        this.effects = effects;
+        this.effects.push(new DamageEffect(this._damage));
+    },
+
+    setDamage: function (damage) {
+        this._damage = damage;
+        let effect;
+        for (let i = 0; i < this.effects.length; i++) {
+            effect = this.effects[i];
+            if (effect.typeID === GameConfig.COMPONENT_ID.ATTACK) {
+                this.effects.splice(i, 1);
+            }
+        }
+        // QUESTION: create new or change damage value of DamageEffect
+        this.bulletEffects.push(new DamageEffect(this._damage));
+    },
+
+    getDamage: function () {
+        return this._damage;
+    },
+});

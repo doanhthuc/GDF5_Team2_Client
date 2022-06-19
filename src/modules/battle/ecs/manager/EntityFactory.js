@@ -121,7 +121,8 @@ EntityFactory.createCannonOwlTower = function (pos) {
     let entity = this.createEntity(typeID);
 
     let initPos = Utils.tile2Pixel(pos.x, pos.y);
-    let node = createOwlNodeAnimation();
+    let attackRange = 1.5 * GameConfig.TILE_WIDTH;
+    let node = createOwlNodeAnimation(attackRange);
 
     let damageEffect = new DamageEffect(0);
     let frozenEffect = new FrozenEffect(1.5);
@@ -131,11 +132,12 @@ EntityFactory.createCannonOwlTower = function (pos) {
         GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 0.6);
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
+    let attackComponent = new AttackComponent(0, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [slowEffect])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
-
+        .addComponent(attackComponent)
     return entity;
 };
 
@@ -144,7 +146,8 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     let entity = this.createEntity(typeID);
 
     let initPos = Utils.tile2Pixel(pos.x, pos.y);
-    let node = createBearNodeAnimation();
+    let attackRange = 1.5 * GameConfig.TILE_WIDTH;
+    let node = createBearNodeAnimation(attackRange);
 
     let frozenEffect = new FrozenEffect(1.5);
     let damageEffect = new DamageEffect(8);
@@ -153,10 +156,12 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
         GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 3.4);
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
+    let attackComponent = new AttackComponent(3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 3.4, 0, [frozenEffect])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
+        .addComponent(attackComponent)
 
     return entity;
 }
@@ -165,7 +170,7 @@ EntityFactory.createBoomerangFrogTower = function (pos) {
     let typeID = GameConfig.ENTITY_ID.FROG_TOWER;
     let entity = this.createEntity(typeID);
 
-    let attackRange = 2;
+    let attackRange = 2 * GameConfig.TILE_WIDTH;
     let initPos = Utils.tile2Pixel(pos.x, pos.y);
     let node = createFrogNodeAnimation(attackRange);
 
@@ -175,10 +180,12 @@ EntityFactory.createBoomerangFrogTower = function (pos) {
         GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 1.5);
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
+    let attackComponent = new AttackComponent(3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
+        .addComponent(attackComponent)
 
     return entity;
 }
@@ -205,12 +212,12 @@ function createSwordmanNodeAnimation() {
     return node;
 }
 
-function createOwlNodeAnimation() {
+function createOwlNodeAnimation(range) {
     let node = new cc.Node();
     let towerSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
     let weaponSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_2_0009.png");
     let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2 * 1.5 * GameConfig.TILE_WIDTH / 687)
+    rangeAttackSprite.setScale(2 * range / 687)
 
     // cannon animation
     let weaponAnimation = new cc.Animation();
@@ -241,12 +248,12 @@ function createOwlNodeAnimation() {
     return node;
 }
 
-function createBearNodeAnimation() {
+function createBearNodeAnimation(attackRange) {
     let node = new cc.Node();
     let towerSprite = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_0010.png");
     let weaponSprite = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_0010.png");
     let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2 * 1.5 * GameConfig.TILE_WIDTH / 687)
+    rangeAttackSprite.setScale(2 * attackRange / 687)
 
     // tower animation
     let towerAnimation = new cc.Animation();
@@ -282,7 +289,7 @@ function createFrogNodeAnimation(attackRange) {
     let towerSprite = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_0_0011.png");
     let weaponSprite = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_1_0011.png");
     let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2 * attackRange * GameConfig.TILE_WIDTH / 687)
+    rangeAttackSprite.setScale(2 * attackRange / 687)
 
     // tower animation
     let towerAnimation = new cc.Animation();
