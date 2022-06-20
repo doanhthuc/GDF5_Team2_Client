@@ -7,7 +7,8 @@ gv.CMD.HAND_SHAKE = 0;
 gv.CMD.USER_LOGIN = 1;
 gv.CMD.USER_INFO = 1001;
 gv.CMD.ADD_USER_GOLD=1002;
-gv.CMD.BUY_SHOP_GOLD=2001;
+gv.CMD.BUY_GOLD_SHOP=2001;
+gv.CMD.BUY_DAILY_SHOP=2002;
 gv.CMD.MOVE = 2005;
 gv.CMD.MAP_INFO = 2004;
 gv.CMD.RESET_MAP = 2006;
@@ -81,12 +82,12 @@ CMDSendAddUserGold= fr.OutPacket.extend(
     }
 )
 
-CMDBuyShopGold= fr.OutPacket.extend(
+CMDBuyGoldShop= fr.OutPacket.extend(
     {
         ctor:function() {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.BUY_SHOP_GOLD);
+            this.setCmdId(gv.CMD.BUY_GOLD_SHOP);
         },
         pack:function(itemId) {
             this.packHeader();
@@ -95,6 +96,22 @@ CMDBuyShopGold= fr.OutPacket.extend(
         }
     }
 )
+
+CMDBuyDailyShop= fr.OutPacket.extend(
+    {
+        ctor:function() {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.BUY_DAILY_SHOP);
+        },
+        pack:function(itemId) {
+            this.packHeader();
+            this.putInt(itemId);
+            this.updateSize();
+        }
+    }
+)
+
 
 
 
@@ -167,7 +184,7 @@ testnetwork.packetMap[gv.CMD.USER_INFO] = fr.InPacket.extend(
     }
 );
 
-testnetwork.packetMap[gv.CMD.BUY_SHOP_GOLD] = fr.InPacket.extend(
+testnetwork.packetMap[gv.CMD.BUY_GOLD_SHOP] = fr.InPacket.extend(
     {
         ctor:function()
         {
@@ -176,6 +193,26 @@ testnetwork.packetMap[gv.CMD.BUY_SHOP_GOLD] = fr.InPacket.extend(
         readData:function(){
            this.goldchange=this.getInt();
            this.gemchange=this.getInt();
+        }
+    }
+);
+testnetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+        },
+        readData:function(){
+            this.goldchange=this.getInt();
+            this.gemchange=this.getInt();
+            this.itemAmount=this.getInt();
+            this.itemtype= [];
+            this.itemQuantity= [];
+            for(i=0;i<this.itemAmount;i++)
+            {
+                this.itemtype.push(this.getInt);
+                this.itemQuantity.push(this.getInt);
+            }
         }
     }
 );

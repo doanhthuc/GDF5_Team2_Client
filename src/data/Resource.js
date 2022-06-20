@@ -20,6 +20,14 @@ var userInfo ={
         cc.log(this.username+" "+this.gold+" "+this.gem+" "+this.id+" "+this.trophy);
     }
 }
+var userCardCollection = {
+    id:"",
+    cardCollection:[],
+    getItemList:function(pk)
+    {
+        this.cardCollection.push();
+    }
+}
 var res = {
     //font
     FONT_BITMAP_NUMBER_1:"fonts/number_1.fnt",
