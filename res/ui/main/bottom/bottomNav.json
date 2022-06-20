@@ -1,7 +1,7 @@
 {
   "ID": "b358006e-1f20-421c-a770-35ffeefd68bd",
   "Version": "2.3.4",
-  "Name": "bottomNav",
+  "Name": "BottomNav",
   "Content": {
     "Content": {
       "Animation": {
@@ -17,23 +17,27 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
+              "Path": "image/mainScene/bottom/lobby_page_btn_0.png",
               "Plist": ""
             },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
             "Position": {
-              "X": -261.9163,
-              "Y": 55.0
+              "X": -260.0532,
+              "Y": 0.0
             },
             "Scale": {
               "ScaleX": 1.0,
               "ScaleY": 1.0
             },
             "CColor": {},
-            "IconVisible": true,
+            "IconVisible": false,
             "PrePosition": {
               "X": 0.0,
               "Y": 0.0
@@ -42,39 +46,43 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -261.9163,
-            "RightMargin": 261.9163,
+            "LeftMargin": -321.5532,
+            "RightMargin": 198.5532,
             "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 438,
-            "ActionTag": -1493826437,
+            "BottomMargin": -55.0,
+            "Tag": 29,
+            "ActionTag": 1709523797,
             "Size": {
-              "X": 0.0,
-              "Y": 0.0
+              "X": 123.0,
+              "Y": 110.0
             },
-            "Name": "inventoryTab",
-            "ctype": "ProjectNodeObjectData"
+            "Name": "lobby_page_btn_0_1",
+            "ctype": "SpriteObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
+              "Path": "image/mainScene/bottom/lobby_page_btn_selecting.png",
               "Plist": ""
             },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
             "Position": {
-              "X": -142.3063,
-              "Y": 55.0
+              "X": 0.0,
+              "Y": -6.0
             },
             "Scale": {
               "ScaleX": 1.0,
               "ScaleY": 1.0
             },
             "CColor": {},
-            "IconVisible": true,
+            "IconVisible": false,
             "PrePosition": {
               "X": 0.0,
               "Y": 0.0
@@ -83,39 +91,43 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -142.3063,
-            "RightMargin": 142.3063,
+            "LeftMargin": -82.0,
+            "RightMargin": -82.0,
             "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 443,
-            "ActionTag": 1948612340,
+            "BottomMargin": -67.0,
+            "Tag": 30,
+            "ActionTag": -1424547908,
             "Size": {
-              "X": 0.0,
-              "Y": 0.0
+              "X": 164.0,
+              "Y": 122.0
             },
-            "Name": "shopTab",
-            "ctype": "ProjectNodeObjectData"
+            "Name": "lobby_page_btn_selecting_2",
+            "ctype": "SpriteObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
+              "Path": "image/mainScene/bottom/lobby_page_btn_1.png",
               "Plist": ""
             },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
             "Position": {
-              "X": 0.0,
-              "Y": 55.0
+              "X": -140.4,
+              "Y": 0.0
             },
             "Scale": {
               "ScaleX": 1.0,
               "ScaleY": 1.0
             },
             "CColor": {},
-            "IconVisible": true,
+            "IconVisible": false,
             "PrePosition": {
               "X": 0.0,
               "Y": 0.0
@@ -124,37 +136,43 @@
               "X": 0.0,
               "Y": 0.0
             },
+            "LeftMargin": -201.9,
+            "RightMargin": 78.9,
             "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 458,
-            "ActionTag": 1544646611,
+            "BottomMargin": -55.0,
+            "Tag": 31,
+            "ActionTag": 419997981,
             "Size": {
-              "X": 0.0,
-              "Y": 0.0
+              "X": 123.0,
+              "Y": 110.0
             },
-            "Name": "homeTab",
-            "ctype": "ProjectNodeObjectData"
+            "Name": "lobby_page_btn_1_3",
+            "ctype": "SpriteObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
+              "Path": "image/mainScene/bottom/lobby_page_btn_1.png",
               "Plist": ""
             },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
             "Position": {
-              "X": 140.6844,
-              "Y": 55.0
+              "X": 140.5381,
+              "Y": 0.0
             },
             "Scale": {
               "ScaleX": 1.0,
               "ScaleY": 1.0
             },
             "CColor": {},
-            "IconVisible": true,
+            "IconVisible": false,
             "PrePosition": {
               "X": 0.0,
               "Y": 0.0
@@ -163,39 +181,43 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 140.6844,
-            "RightMargin": -140.6844,
+            "LeftMargin": 79.0381,
+            "RightMargin": -202.0381,
             "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 448,
-            "ActionTag": -322565567,
+            "BottomMargin": -55.0,
+            "Tag": 32,
+            "ActionTag": 1721078884,
             "Size": {
-              "X": 0.0,
-              "Y": 0.0
+              "X": 123.0,
+              "Y": 110.0
             },
-            "Name": "emptyTab1",
-            "ctype": "ProjectNodeObjectData"
+            "Name": "lobby_page_btn_1_4",
+            "ctype": "SpriteObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/main/bottom/navTab.json",
+              "Path": "image/mainScene/bottom/lobby_page_btn_0.png",
               "Plist": ""
             },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
             "Position": {
-              "X": 259.7954,
-              "Y": 55.0
+              "X": 259.6542,
+              "Y": 0.0001
             },
             "Scale": {
               "ScaleX": 1.0,
               "ScaleY": 1.0
             },
             "CColor": {},
-            "IconVisible": true,
+            "IconVisible": false,
             "PrePosition": {
               "X": 0.0,
               "Y": 0.0
@@ -204,18 +226,209 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 259.7954,
-            "RightMargin": -259.7954,
-            "TopMargin": -55.0,
-            "BottomMargin": 55.0,
-            "Tag": 453,
-            "ActionTag": -1027649220,
+            "LeftMargin": 198.1542,
+            "RightMargin": -321.1542,
+            "TopMargin": -55.0001,
+            "BottomMargin": -54.9999,
+            "Tag": 33,
+            "ActionTag": -1751067791,
             "Size": {
+              "X": 123.0,
+              "Y": 110.0
+            },
+            "Name": "lobby_page_btn_0_5",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/bottom/lobby_page_icon_cards.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -141.4521,
+              "Y": -0.3242
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "emptyTab2",
-            "ctype": "ProjectNodeObjectData"
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -186.9521,
+            "RightMargin": 95.9521,
+            "TopMargin": -52.6758,
+            "BottomMargin": -53.3242,
+            "Tag": 34,
+            "ActionTag": -412341235,
+            "Size": {
+              "X": 91.0,
+              "Y": 106.0
+            },
+            "Name": "lobby_page_icon_cards_6",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/bottom/lobby_page_icon_shop.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -261.064,
+              "Y": 1.1902
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -308.064,
+            "RightMargin": 214.064,
+            "TopMargin": -52.1902,
+            "BottomMargin": -49.8098,
+            "Tag": 35,
+            "ActionTag": 1961127058,
+            "Size": {
+              "X": 94.0,
+              "Y": 102.0
+            },
+            "Name": "lobby_page_icon_shop_7",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/bottom/lobby_page_icon_home.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 14.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -51.5,
+            "RightMargin": -51.5,
+            "TopMargin": -67.0,
+            "BottomMargin": -39.0,
+            "Tag": 36,
+            "ActionTag": 1186422146,
+            "Size": {
+              "X": 103.0,
+              "Y": 106.0
+            },
+            "Name": "lobby_page_icon_home_8",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "HOME",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -39.9855
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -42.5,
+            "RightMargin": -42.5,
+            "TopMargin": 25.4855,
+            "BottomMargin": -54.4855,
+            "Tag": 371,
+            "ActionTag": 581734834,
+            "Size": {
+              "X": 85.0,
+              "Y": 29.0
+            },
+            "Name": "Text_9",
+            "ctype": "TextObjectData"
           }
         ],
         "Size": {
@@ -226,7 +439,13 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "navTab.json"
+        "../../../font/SVN-Supercell Magic.ttf",
+        "../../../image/mainScene/bottom/lobby_page_btn_0.png",
+        "../../../image/mainScene/bottom/lobby_page_btn_1.png",
+        "../../../image/mainScene/bottom/lobby_page_btn_selecting.png",
+        "../../../image/mainScene/bottom/lobby_page_icon_cards.png",
+        "../../../image/mainScene/bottom/lobby_page_icon_home.png",
+        "../../../image/mainScene/bottom/lobby_page_icon_shop.png"
       ],
       "ctype": "GameFileData"
     }
