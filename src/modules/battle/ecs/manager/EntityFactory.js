@@ -99,7 +99,7 @@ EntityFactory.createSwordsmanMonster = function () {
     let pathComponent = new PathComponent(Utils.tileArray2PixelArray([{x: 0, y: 4}, {x: 0, y: 2},
         {x: 3, y: 2}, {x: 3, y: 1}, {x: 6, y: 0}]))
     let collisionComponent = new CollisionComponent(20, 30);
-    let lifeComponent = new LifeComponent(140);
+    let lifeComponent = new LifeComponent(300);
 
     let frozenEffect = new FrozenEffect(1.5);
     let slowEffect = new SlowEffect(3, 0.3);
