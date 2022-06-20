@@ -5,18 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/battle/BattleUILayer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/battle/ui/BattleTimerNode.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/battle/ui/WaveNode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/card/card_tower_wizard.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/avatar/AvatarNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/avatar/AvatarNode.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/timer/BattleTimerNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/timer/BattleTimerNode.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/wave/WaveNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/wave/WaveNode.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/battle/HpBarNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/battle/HpBarNode.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/card/BattleCardNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/battle/battle_ui_layer/card/BattleCardNode.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/BattleUILayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/BattleUILayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/UILayer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/event/EventECS.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/event/EventECS.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/event/EventHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/event/EventHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/AttackSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/AttackSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/CollisionSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/CollisionSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/EffectSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/EffectSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ui/BattleTimerNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ui/BattleTimerNode.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -14,7 +14,7 @@ let MovementSystem = System.extend({
             let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
 
             // side-effect
-            this._updateVelocityVector(velocityComponent, positionComponent);
+            this._updateVelocityVector(entity, velocityComponent, positionComponent);
             // end side-effect
 
             positionComponent.x += velocityComponent.speedX * tick;
@@ -22,13 +22,28 @@ let MovementSystem = System.extend({
         }
     },
 
-    _updateVelocityVector: function (velocityComponent, positionComponent) {
+    _updateVelocityVector: function (entity, velocityComponent, positionComponent) {
         // dynamic target
+
         if (velocityComponent.dynamicPosition) {
-            let newSpeed = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
-                velocityComponent.originSpeed);
-            velocityComponent.speedX = newSpeed.speedX;
-            velocityComponent.speedY = newSpeed.speedY;
+            if (Math.abs(velocityComponent.dynamicPosition.x - positionComponent.x) <= 3
+                && Math.abs(velocityComponent.dynamicPosition.y - positionComponent.y) <= 3) {
+                // entity.removeComponent(velocityComponent);
+                let collisionComponent = entity.getComponent(GameConfig.COMPONENT_ID.COLLISION);
+                if (collisionComponent) {
+                    collisionComponent.width = 1;
+                    collisionComponent.height = 1;
+                }
+            } else {
+                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
+                    velocityComponent.originSpeed);
+                velocityComponent.speedX = newVelocity.speedX;
+                velocityComponent.speedY = newVelocity.speedY;
+                cc.log("update new vector");
+                cc.log("self: " + JSON.stringify(positionComponent));
+                cc.log("target: " + JSON.stringify(velocityComponent.dynamicPosition));
+                cc.log("=====")
+            }
         }
     }
 });

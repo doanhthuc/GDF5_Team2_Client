@@ -6,13 +6,18 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _setupUI: function () {
-        // timer
+        this._showTimer();
+        this._showWave();
+    },
+
+    _showTimer: function () {
         this.timerNode = new BattleTimerNode(5);
         this.addChild(this.timerNode);
         this.timerNode.x = this.width / 2 - this.timerNode.width / 2;
         this.timerNode.y = 800
+    },
 
-        // waveNode
+    _showWave: function () {
         this.waveNode = new WaveNode(3);
         this.addChild(this.waveNode);
         this.waveNode.x = this.width / 2 - this.waveNode.width / 2;

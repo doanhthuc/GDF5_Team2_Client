@@ -78,8 +78,8 @@
               "Y": 0.0
             },
             "Scale": {
-              "ScaleX": 0.8743,
-              "ScaleY": 0.8743
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "CColor": {},
             "IconVisible": false,
@@ -91,17 +91,62 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -54.0,
-            "RightMargin": -54.0,
-            "TopMargin": -71.5,
-            "BottomMargin": -71.5,
+            "LeftMargin": -43.5,
+            "RightMargin": -43.5,
+            "TopMargin": -57.5,
+            "BottomMargin": -57.5,
             "Tag": 1731,
             "ActionTag": 228484791,
             "Size": {
-              "X": 108.0,
-              "Y": 143.0
+              "X": 87.0,
+              "Y": 115.0
             },
             "Name": "card_background",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/card/card_tower_wizard.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 38,
+            "Scale9OriginY": 54,
+            "Scale9Width": 42,
+            "Scale9Height": 56,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -42.5,
+            "RightMargin": -42.5,
+            "TopMargin": -56.5,
+            "BottomMargin": -56.5,
+            "Tag": 1819,
+            "ActionTag": -293438576,
+            "Size": {
+              "X": 85.0,
+              "Y": 113.0
+            },
+            "Name": "entity_image",
             "ctype": "ImageViewObjectData"
           },
           {
@@ -185,7 +230,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_1",
+            "Name": "energy_node",
             "ctype": "ProjectNodeObjectData"
           }
         ],
@@ -200,6 +245,7 @@
         "../../../../assets/battle/battle_card_box.png",
         "../../../../assets/card/card_background_4.png",
         "../../../../assets/card/card_border_1.png",
+        "../../../../assets/card/card_tower_wizard.png",
         "CardEnergyNode.json"
       ],
       "ctype": "GameFileData"

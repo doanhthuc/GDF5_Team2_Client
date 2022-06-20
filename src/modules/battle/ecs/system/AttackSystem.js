@@ -16,7 +16,9 @@ let AttackSystem = System.extend({
             let attackComponent = tower.getComponent(GameConfig.COMPONENT_ID.ATTACK);
 
             // update count down time
-            attackComponent.countdown -= tick;
+            if (attackComponent.countdown > 0) {
+                attackComponent.countdown -= tick;
+            }
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
@@ -33,10 +35,8 @@ let AttackSystem = System.extend({
                     let monsterPos = targetMonster.getComponent(GameConfig.COMPONENT_ID.POSITION);
                     let towerPos = tower.getComponent(GameConfig.COMPONENT_ID.POSITION);
                     EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects);
-
                     // reset count down time
                     attackComponent.countdown = attackComponent.speed;
-                    cc.log("speed = " + attackComponent.speed)
                 }
             }
         }

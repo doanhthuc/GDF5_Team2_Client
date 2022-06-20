@@ -18,8 +18,8 @@ let GameLayer = cc.Layer.extend({
         this.addChild(this.uiLayer,2 );
 
         // create system
-        this.renderSystem = new RenderSystem();
         this.movementSystem = new MovementSystem();
+        this.renderSystem = new RenderSystem();
         this.lifeSystem = new LifeSystem();
         this.attackSystem = new AttackSystem();
         this.collisionSystem = new CollisionSystem();

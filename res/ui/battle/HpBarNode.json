@@ -20,10 +20,9 @@
               "Path": "assets/battle/battle_target_hp_background.png",
               "Plist": ""
             },
-            "BlendFunc": {
-              "Src": 770,
-              "Dst": 771
-            },
+            "Scale9OriginX": 18,
+            "Scale9Width": 20,
+            "Scale9Height": 3,
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
@@ -48,19 +47,19 @@
             },
             "LeftMargin": -28.0,
             "RightMargin": -28.0,
-            "TopMargin": -1.5,
-            "BottomMargin": -1.5,
-            "Tag": 142,
-            "ActionTag": 1550046254,
+            "TopMargin": -4.5,
+            "BottomMargin": -4.5,
+            "Tag": 1961,
+            "ActionTag": 149616487,
             "Size": {
               "X": 56.0,
-              "Y": 3.0
+              "Y": 9.0
             },
             "Name": "background",
-            "ctype": "SpriteObjectData"
+            "ctype": "ImageViewObjectData"
           },
           {
-            "ProgressInfo": 100,
+            "ProgressInfo": 70,
             "ImageFileData": {
               "Type": "Normal",
               "Path": "assets/battle/battle_target_hp.png",
@@ -90,13 +89,13 @@
             },
             "LeftMargin": -28.0,
             "RightMargin": -28.0,
-            "TopMargin": -1.5,
-            "BottomMargin": -1.5,
+            "TopMargin": -4.5,
+            "BottomMargin": -4.5,
             "Tag": 144,
             "ActionTag": 2105529075,
             "Size": {
               "X": 56.0,
-              "Y": 3.0
+              "Y": 9.0
             },
             "Name": "progress_bar",
             "ctype": "LoadingBarObjectData"

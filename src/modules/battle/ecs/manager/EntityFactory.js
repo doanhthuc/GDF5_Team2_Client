@@ -21,10 +21,10 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
 
         // NOTE: get component from pool
         let bulletNode = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
-        let infoComponent = new BulletInfoComponent(effects);
+        let infoComponent = new BulletInfoComponent(effects, 0.6);
         let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
         let appearanceComponent = new AppearanceComponent(bulletNode);
-        let collisionComponent = new CollisionComponent(1, 1);
+        let collisionComponent = new CollisionComponent(0, 0);
 
         let bulletSpeed = 5 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
@@ -46,8 +46,8 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let appearanceComponent = new AppearanceComponent(bulletNode);
         let collisionComponent = new CollisionComponent(1, 1);
 
-        let bulletVelocity = 4 * GameConfig.TILE_WIDTH;
-        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
+        let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
+        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
         let velocityComponent = new VelocityComponent(speed.speedX, speed.speedY, targetPosition);
 
         entity.addComponent(infoComponent)
@@ -71,8 +71,8 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
             {x: startPosition.x, y: startPosition.y}
         ]);
 
-        let bulletVelocity = 4 * GameConfig.TILE_WIDTH;
-        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletVelocity);
+        let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
+        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
         let velocityComponent = new VelocityComponent(speed.speedX, speed.speedY);
 
         entity.addComponent(infoComponent)
@@ -126,18 +126,20 @@ EntityFactory.createCannonOwlTower = function (pos) {
 
     let frozenEffect = new FrozenEffect(1.5);
     let slowEffect = new SlowEffect(3, 0.3);
-    let buffAttackDamageEffect = new BuffAttackDamageEffect(1.3);
+    let buffAttackDamageEffect = new BuffAttackDamageEffect(2);
+    let buffAttackSpeedEffect = new BuffAttackSpeedEffect(1.6);
     // TODO: get component from pool
     let infoComponent = new TowerInfoComponent(10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
-    let attackComponent = new AttackComponent(10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [slowEffect])
+    let attackComponent = new AttackComponent(10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.4, 0, [slowEffect])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
-        .addComponent(buffAttackDamageEffect)
+        // .addComponent(buffAttackDamageEffect)
+        .addComponent(buffAttackSpeedEffect)
     return entity;
 };
 

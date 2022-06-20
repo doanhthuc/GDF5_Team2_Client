@@ -45,10 +45,10 @@ let TowerInfoComponent = InfoComponent.extend({
 let BulletInfoComponent = InfoComponent.extend({
     name: "BulletInfoComponentECS",
 
-    ctor: function (effects, type) {
+    ctor: function (effects, range) {
         this._super(GameConfig.COMPONENT_ID.BULLET_INFO);
         this.effects = effects;
-        this.type = type;
+        this.range = range;
     },
 });
 

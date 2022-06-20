@@ -44,7 +44,6 @@ let EffectSystem = System.extend({
         for (let entity of entityList) {
             let lifeComponent = entity.getComponent(GameConfig.COMPONENT_ID.LIFE);
             if (lifeComponent) {
-                cc.log("HP = " + lifeComponent.hp);
                 let damageComponent = entity.getComponent(GameConfig.COMPONENT_ID.DAMAGE_EFFECT);
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)

@@ -10,8 +10,8 @@ let BattleTimerNode = cc.Node.extend({
         this.progress.setType(cc.ProgressTimer.TYPE_RADIAL);
         this.progress.setReverseDirection(true);
         this.node.addChild(this.progress, 2);
-        this.node.getChildByName("time").setZOrder(3);
-        this.node.getChildByName("battle_timer_border").setZOrder(3);
+        this.node.getChildByName("time").setLocalZOrder(3);
+        this.node.getChildByName("battle_timer_border").setLocalZOrder(3);
 
         this.startTimer();
     },
