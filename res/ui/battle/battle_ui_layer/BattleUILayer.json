@@ -1,0 +1,283 @@
+{
+  "ID": "c77bde20-26fd-4a06-a5d0-426c7d50d6fc",
+  "Version": "2.3.4",
+  "Name": "BattleUILayer",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 219,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/battle_ui_layer/timer/BattleTimerNode.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 320.0,
+              "Y": 635.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.559
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 320.0,
+            "RightMargin": 320.0,
+            "TopMargin": 501.0,
+            "BottomMargin": 635.0,
+            "Tag": 234,
+            "ActionTag": 611629908,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "timer",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/battle_ui_layer/avatar/AvatarNode.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 170.1617,
+              "Y": 1103.0302
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.2659,
+              "Y": 0.971
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 170.1617,
+            "RightMargin": 469.8383,
+            "TopMargin": 32.9698,
+            "BottomMargin": 1103.0302,
+            "Tag": 577,
+            "ActionTag": -1839402659,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "user_info_node",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/battle_ui_layer/tropy/TrophyNode.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 557.8373,
+              "Y": 1102.7639
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.8716,
+              "Y": 0.9707
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 557.8373,
+            "RightMargin": 82.1627,
+            "TopMargin": 33.2361,
+            "BottomMargin": 1102.7639,
+            "Tag": 881,
+            "ActionTag": -1193138234,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "tropy_node",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/battle_ui_layer/wave/WaveNode.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 53.2039,
+              "Y": 638.4139
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0831,
+              "Y": 0.562
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 53.2039,
+            "RightMargin": 586.7961,
+            "TopMargin": 497.5861,
+            "BottomMargin": 638.4139,
+            "Tag": 959,
+            "ActionTag": 2046538937,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "wave_node",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/battle_ui_layer/energy/BattleEnergy.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 614.2402,
+              "Y": 635.5
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.9598,
+              "Y": 0.5594
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 614.2402,
+            "RightMargin": 25.7598,
+            "TopMargin": 500.5,
+            "BottomMargin": 635.5,
+            "Tag": 1512,
+            "ActionTag": 189521000,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "battle_energy",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/battle_ui_layer/card/BattleCardDeckNode.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 320.0,
+              "Y": 100.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.088
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 320.0,
+            "RightMargin": 320.0,
+            "TopMargin": 1036.0,
+            "BottomMargin": 100.0,
+            "Tag": 2047,
+            "ActionTag": -784349193,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "FileNode_2",
+            "ctype": "ProjectNodeObjectData"
+          }
+        ],
+        "Size": {
+          "X": 640.0,
+          "Y": 1136.0
+        },
+        "Name": "Layer",
+        "ctype": "LayerObjectData"
+      },
+      "UsedResources": [
+        "avatar/AvatarNode.json",
+        "card/BattleCardDeckNode.json",
+        "energy/BattleEnergy.json",
+        "timer/BattleTimerNode.json",
+        "tropy/TrophyNode.json",
+        "wave/WaveNode.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Layer"
+}
