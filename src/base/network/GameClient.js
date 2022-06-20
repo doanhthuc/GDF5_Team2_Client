@@ -10,14 +10,12 @@ var GameClient = cc.Class.extend(
     {
         ctor: function () {
             this.loadConfig();
-
             this._tcpClient = fr.GsnClient.create();
             this._tcpClient.setFinishConnectListener(this.onFinishConnect.bind(this));
             this._tcpClient.setDisconnectListener(this.onDisconnected.bind(this));
             this._tcpClient.setReceiveDataListener(this._onReceived.bind(this));
             this.receivePacketSignal = new signals.Signal();
             this.packetFactory = new InPacketFactory();
-
             return true;
         },
         loadConfig: function () {
@@ -58,7 +56,6 @@ var GameClient = cc.Class.extend(
             if(isSuccess)
             {
                 fr.getCurrentScreen().onConnectSuccess();
-
                 var pk = gv.gameClient.getOutPacket(CmdSendHandshake);
                 pk.putData();
                 gv.gameClient.getNetwork().send(pk);
@@ -77,11 +74,12 @@ var GameClient = cc.Class.extend(
             var packet = gv.gameClient.getInPacket(cmd,pkg);
             if(packet == null)
                 return;
+           // cc.log(packet.readData());
             this.onReceivedPacket(cmd,packet);
             //pool
             gv.poolObjects.push(packet);
         },
-        onReceivedPacket:function(cmd, packet)
+        onReceivedPacket:function(cmd,packet)
         {
             this.receivePacketSignal.dispatch(cmd, packet);
         }

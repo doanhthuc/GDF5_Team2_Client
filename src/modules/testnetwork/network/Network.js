@@ -1,9 +1,8 @@
-/**
- * Created by KienVN on 10/2/2017.
- */
-
 var gv = gv||{};
 var testnetwork = testnetwork||{};
+
+gv.CONSTANT = gv.CONSTANT ||{};
+gv.CONSTANT.USERID = 1;
 
 testnetwork.Connector = cc.Class.extend({
     ctor:function(gameClient)
@@ -11,7 +10,6 @@ testnetwork.Connector = cc.Class.extend({
         this.gameClient = gameClient;
         gameClient.packetFactory.addPacketMap(testnetwork.packetMap);
         gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
-        this._userName = "username";
     },
     onReceivedPacket:function(cmd, packet)
     {
@@ -22,37 +20,71 @@ testnetwork.Connector = cc.Class.extend({
                 this.sendLoginRequest();
                 break;
             case gv.CMD.USER_LOGIN:
-                this.sendGetUserInfo();
                 fr.getCurrentScreen().onFinishLogin();
                 break;
             case gv.CMD.USER_INFO:
-                fr.getCurrentScreen().onUserInfo(packet.name, packet.x, packet.y);
+                userInfo.clone(packet);
+                userInfo.show();
                 break;
-            case gv.CMD.MOVE:
-                cc.log("MOVE:", packet.x, packet.y);
-                fr.getCurrentScreen().updateMove(packet.x, packet.y);
+            case gv.CMD.ADD_USER_GOLD:
+                cc.log(packet.usergold);
                 break;
+            case gv.CMD.BUY_GOLD_SHOP:
+                //cc.log("hmmmm");
+                userInfo.gold+=packet.goldchange;
+                userInfo.gem+=packet.gemchange;
+                //UpdateUI()
+                userInfo.show();
+                break;
+            case gv.CMD.BUY_DAILY_SHOP:
+
         }
     },
-    sendGetUserInfo:function()
-    {
+    sendLoginRequest:function() {
+        if (UID!=0) {
+            cc.log("sendLoginRequest");
+            var pk = this.gameClient.getOutPacket(CmdSendLogin);
+            pk.pack("", UID);
+            this.gameClient.sendPacket(pk);
+        }
+    },
+    sendGetUserInfo:function(){
         cc.log("sendGetUserInfo");
-        var pk = this.gameClient.getOutPacket(CmdSendUserInfo);
+        var pk= this.gameClient.getOutPacket(CMDSendGetUserInfo);
         pk.pack();
         this.gameClient.sendPacket(pk);
     },
-    sendLoginRequest: function () {
-        cc.log("sendLoginRequest");
-        var pk = this.gameClient.getOutPacket(CmdSendLogin);
-        pk.pack(this._userName);
+    sendAddUserGold:function(gold){
+        cc.log("sendAdduserGold");
+        var pk=this.gameClient.getOutPacket(CMDSendAddUserGold);
+        pk.pack(gold);
         this.gameClient.sendPacket(pk);
     },
-    sendMove:function(direction){
-        cc.log("SendMove:" + direction);
-        var pk = this.gameClient.getOutPacket(CmdSendMove);
-        pk.pack(direction);
+    sendBuyGoldShop:function(itemid){
+        cc.log("SendBuyShopGold");
+        var pk= this.gameClient.getOutPacket(CMDBuyGoldShop);
+        pk.pack(itemid);
         this.gameClient.sendPacket(pk);
-    }
+    },
+    sendBuyDailyShop:function(itemid){
+      cc.log("SendBuyDailyShop");
+      var pk= this.gameClient.getOutPacket(CMDBuyDailyShop);
+      pk.pack(itemid);
+      this.gameClient.sendPacket(pk);
+    },
+    sendMove:function(x, y){
+        cc.log("SendMove:", x, y);
+        var pk = this.gameClient.getOutPacket(CmdSendMove);
+        pk.pack(x, y);
+        this.gameClient.sendPacket(pk);
+    },
+    sendResetMap:function()
+    {
+        cc.log("sendResetMap");
+        var pk = this.gameClient.getOutPacket(CmdSendResetMap);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
 });
 
 

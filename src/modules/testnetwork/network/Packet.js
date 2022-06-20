@@ -5,9 +5,13 @@
 gv.CMD = gv.CMD ||{};
 gv.CMD.HAND_SHAKE = 0;
 gv.CMD.USER_LOGIN = 1;
-
 gv.CMD.USER_INFO = 1001;
-gv.CMD.MOVE = 2001;
+gv.CMD.ADD_USER_GOLD=1002;
+gv.CMD.BUY_GOLD_SHOP=2001;
+gv.CMD.BUY_DAILY_SHOP=2002;
+gv.CMD.MOVE = 2005;
+gv.CMD.MAP_INFO = 2004;
+gv.CMD.RESET_MAP = 2006;
 
 testnetwork = testnetwork||{};
 testnetwork.packetMap = {};
@@ -32,20 +36,6 @@ CmdSendHandshake = fr.OutPacket.extend(
         }
     }
 )
-CmdSendUserInfo = fr.OutPacket.extend(
-    {
-        ctor:function()
-        {
-            this._super();
-            this.initData(100);
-            this.setCmdId(gv.CMD.USER_INFO);
-        },
-        pack:function(){
-            this.packHeader();
-            this.updateSize();
-        }
-    }
-)
 
 CmdSendLogin = fr.OutPacket.extend(
     {
@@ -55,29 +45,76 @@ CmdSendLogin = fr.OutPacket.extend(
             this.initData(100);
             this.setCmdId(gv.CMD.USER_LOGIN);
         },
-        pack:function(user){
+        pack:function(sessionKey, userID){
             this.packHeader();
-            this.putString(user);
+            this.putString(sessionKey);
+            this.putInt(userID);
+            this.updateSize();
+        }
+    }
+)
+CMDSendGetUserInfo= fr.OutPacket.extend(
+    {
+        ctor:function() {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.USER_INFO);
+        },
+        pack:function() {
+            this.packHeader();
+            //this.putInt(userID);
+            this.updateSize();
+        }
+    }
+)
+CMDSendAddUserGold= fr.OutPacket.extend(
+    {
+        ctor:function() {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.ADD_USER_GOLD);
+        },
+        pack:function(gold) {
+            this.packHeader();
+            this.putInt(gold);
             this.updateSize();
         }
     }
 )
 
-CmdSendMove = fr.OutPacket.extend(
+CMDBuyGoldShop= fr.OutPacket.extend(
     {
-        ctor:function()
-        {
+        ctor:function() {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.MOVE);
+            this.setCmdId(gv.CMD.BUY_GOLD_SHOP);
         },
-        pack:function(direction){
+        pack:function(itemId) {
             this.packHeader();
-            this.putShort(direction);
+            this.putInt(itemId);
             this.updateSize();
         }
     }
 )
+
+CMDBuyDailyShop= fr.OutPacket.extend(
+    {
+        ctor:function() {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.BUY_DAILY_SHOP);
+        },
+        pack:function(itemId) {
+            this.packHeader();
+            this.putInt(itemId);
+            this.updateSize();
+        }
+    }
+)
+
+
+
+
 
 /**
  * InPacket
@@ -91,6 +128,7 @@ testnetwork.packetMap[gv.CMD.HAND_SHAKE] = fr.InPacket.extend(
             this._super();
         },
         readData:function(){
+
             this.token = this.getString();
         }
     }
@@ -107,6 +145,28 @@ testnetwork.packetMap[gv.CMD.USER_LOGIN] = fr.InPacket.extend(
     }
 );
 
+testnetwork.packetMap[gv.CMD.RESET_MAP] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+        },
+        readData:function(){
+        }
+    }
+);
+testnetwork.packetMap[gv.CMD.ADD_USER_GOLD] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+        },
+        readData:function(){
+           this.usergold=this.getInt();
+        }
+    }
+);
+
 
 testnetwork.packetMap[gv.CMD.USER_INFO] = fr.InPacket.extend(
     {
@@ -115,15 +175,49 @@ testnetwork.packetMap[gv.CMD.USER_INFO] = fr.InPacket.extend(
             this._super();
         },
         readData:function(){
-            this.token = this.getInt();
-            this.name = this.getString();
-            this.x = this.getInt();
-            this.y = this.getInt();
+            this.id = this.getInt();
+            this.username= this.getString();
+            this.gold=this.getInt();
+            this.gem=this.getInt();
+            this.trophy=this.getInt();
         }
     }
 );
 
-testnetwork.packetMap[gv.CMD.MOVE] = fr.InPacket.extend(
+testnetwork.packetMap[gv.CMD.BUY_GOLD_SHOP] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+        },
+        readData:function(){
+           this.goldchange=this.getInt();
+           this.gemchange=this.getInt();
+        }
+    }
+);
+testnetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+        },
+        readData:function(){
+            this.goldchange=this.getInt();
+            this.gemchange=this.getInt();
+            this.itemAmount=this.getInt();
+            this.itemtype= [];
+            this.itemQuantity= [];
+            for(i=0;i<this.itemAmount;i++)
+            {
+                this.itemtype.push(this.getInt);
+                this.itemQuantity.push(this.getInt);
+            }
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
     {
         ctor:function()
         {
@@ -132,10 +226,21 @@ testnetwork.packetMap[gv.CMD.MOVE] = fr.InPacket.extend(
         readData:function(){
             this.x = this.getInt();
             this.y = this.getInt();
+
+            var mapW = this.getInt();
+            var mapH = this.getInt();
+            this.mapState = [];
+            for(var i = 0; i < mapW; i++)
+            {
+                this.mapState[i] = [];
+                for(var j = 0; j < mapH; j++)
+                {
+                    this.mapState[i][j] = this.getBool();
+                }
+            }
         }
     }
 );
-
 
 
 

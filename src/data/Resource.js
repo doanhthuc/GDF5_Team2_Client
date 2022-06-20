@@ -2,7 +2,32 @@
  * Created by GSN on 6/2/2015.
  */
 
-
+var UID=0;
+var userInfo ={
+    id:"",
+    username:"",
+    gem:0,
+    gold:0,
+    trophy:0,
+    clone:function(pk){
+        this.username=pk.username;
+        this.gold=pk.gold;
+        this.gem=pk.gem;
+        this.id=pk.id;
+        this.trophy=pk.trophy;
+    },
+    show:function(){
+        cc.log(this.username+" "+this.gold+" "+this.gem+" "+this.id+" "+this.trophy);
+    }
+}
+var userCardCollection = {
+    id:"",
+    cardCollection:[],
+    getItemList:function(pk)
+    {
+        this.cardCollection.push();
+    }
+}
 var res = {
     //font
     FONT_BITMAP_NUMBER_1:"fonts/number_1.fnt",
@@ -17,7 +42,7 @@ var res = {
     ZCSD_SCREEN_ZALO:"zcsd/screen_zalo.json",
     //popup
     ZCSD_POPUP_MINI_GAME:"zcsd/game/mini_game/PopupMiniGame.json",
-
+    LOGINSCENCE: "ui/login/Login.json",
     //images
     Slot1_png : "zcsd/slot1.png"
 };

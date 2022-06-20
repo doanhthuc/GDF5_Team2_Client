@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
+    <list default="true" id="8473fac1-2eab-4372-bb38-4c897807001e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/res/assets/common/common_arena_forest.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/common/common_icon_g_small.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/common/common_icon_gold_small.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/common/common_treasure.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/common/fx/arena_particle.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/common/fx/arena_particle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_box.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_currency_background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_currency_btn_top_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_home_btn_battle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_home_btn_battle_pressing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_home_btn_battle_txt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_home_player.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_home_treasure_empty.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_home_treasure_finished.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_home_treasure_opening.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_home_treasure_opening_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_page_btn_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_page_icon_home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/lobby_stat_icon_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/assets/lobby/treasure/common_treasure_tutorial.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/lobby/lobbyHomeNode.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/emptySlot.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/finishedSlot.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/occupiedSlot.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/openningSlot/countdownHolder.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/openningSlot/openingSlot.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/login/Login.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/main/bottom/bottomNav.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/main/bottom/navTab.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/BattleUILayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/BattleUILayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/entity/Entity.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/entity/Entity.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/LifeSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/LifeSystem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/MovementSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ipConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ipConfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/battleBtn.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/battleBtn.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/playerInfoHolder.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/playerInfoHolder.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureHolders.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/MainScene.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/MainScene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/bottom/BottomNav.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/bottom/BottomNav.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/header/header.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/header/header.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/network/GameClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/network/GameClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

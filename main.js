@@ -20,7 +20,7 @@ cc.game.onStart = function () {
         var frameSize = cc.view.getFrameSize();
         var ratio = frameSize.width/frameSize.height;
         if(ratio < 2){
-            cc.view.setDesignResolutionSize(DESIGN_RESOLUTION_WIDTH,DESIGN_RESOLUTION_HEIGHT, cc.ResolutionPolicy.FIXED_WIDTH);
+            cc.view.setDesignResolutionSize(DESIGN_RESOLUTION_WIDTH,DESIGN_RESOLUTION_HEIGHT, cc.ResolutionPolicy.FIXED_HEIGHT);
         }else{
             cc.view.setDesignResolutionSize(DESIGN_RESOLUTION_WIDTH,DESIGN_RESOLUTION_WIDTH/2, cc.ResolutionPolicy.SHOW_ALL);
         }
@@ -33,7 +33,7 @@ cc.game.onStart = function () {
         //modules
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
 
-        fr.view(GameLayer);
+        fr.view(ScreenNetwork);
     }, this);
 };
 cc.game.run();
