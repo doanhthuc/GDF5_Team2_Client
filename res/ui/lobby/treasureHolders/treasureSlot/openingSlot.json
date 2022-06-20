@@ -298,7 +298,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/openningSlot/countdownHolder.json",
+              "Path": "ui/lobby/treasureHolders/treasureSlot/openingSlot/countdownHolder.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,

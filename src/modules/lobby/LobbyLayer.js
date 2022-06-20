@@ -10,6 +10,9 @@ const lobbyLayer = cc.Node.extend({
         this.addChild(this.lobbyNode);
         this.playerInfoHolder = this.lobbyNode.getChildByName('playerInfoHolder');
         this.usernameTxt = this.playerInfoHolder.getChildByName('usernameTxt');
+        this.battleBtnNode = this.lobbyNode.getChildByName('battleBtn');
+        this.battleBtnBackgroundImg = this.battleBtnNode.getChildByName('battleBtnBackgroundImg');
+        this.battleBtnBackgroundImg.addTouchEventListener(this.onBattleBtnClick.bind(this), this);
 
         this.lobbyNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
 
@@ -26,5 +29,9 @@ const lobbyLayer = cc.Node.extend({
 
     setUsername: function (username) {
         this.usernameTxt.setString(username);
+    },
+
+    onBattleBtnClick: function (sender, type) {
+        cc.log("Battle btn click");
     }
 })
