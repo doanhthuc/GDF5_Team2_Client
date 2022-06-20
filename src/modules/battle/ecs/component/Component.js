@@ -22,6 +22,11 @@ let Component = cc.Class.extend({
 
     setActive: function (value) {
         this._active = value;
+    },
+
+    compare: function (anotherComponent) {
+        // return 1 if A > B, -1 if A < B, 0 if A = B
+        return 1;
     }
 });
 
@@ -91,12 +96,14 @@ let AttackComponent = Component.extend({
 
     ctor: function (damage, targetStrategy, range, speed, countdown, effects) {
         this._super(GameConfig.COMPONENT_ID.ATTACK);
+        this.originDamage = damage;
         this._damage = damage;
         this.targetStrategy = targetStrategy;
         this.range = range;
+        this.originSpeed = speed;
         this.speed = speed;
         this.countdown = countdown;
-        this.effects = effects;
+        this.effects = effects || [];
         this.effects.push(new DamageEffect(this._damage));
     },
 
@@ -105,12 +112,13 @@ let AttackComponent = Component.extend({
         let effect;
         for (let i = 0; i < this.effects.length; i++) {
             effect = this.effects[i];
-            if (effect.typeID === GameConfig.COMPONENT_ID.ATTACK) {
+            if (effect.typeID === GameConfig.COMPONENT_ID.DAMAGE_EFFECT) {
                 this.effects.splice(i, 1);
+                // effect.damage = this._damage;
             }
         }
         // QUESTION: create new or change damage value of DamageEffect
-        this.bulletEffects.push(new DamageEffect(this._damage));
+        // this.effects.push(new DamageEffect(this._damage));
     },
 
     getDamage: function () {

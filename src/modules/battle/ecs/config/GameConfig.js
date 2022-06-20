@@ -16,6 +16,8 @@ GameConfig.COMPONENT_ID = {
     SLOW_EFFECT: 11,
     FROZEN_EFFECT: 12,
     ATTACK: 13,
+    BUFF_ATTACK_SPEED: 14,
+    BUFF_ATTACK_DAMAGE: 15,
 }
 
 GameConfig.SYSTEM_ID = {

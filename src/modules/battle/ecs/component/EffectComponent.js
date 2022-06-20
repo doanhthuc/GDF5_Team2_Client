@@ -21,14 +21,12 @@ let DamageEffect = EffectComponent.extend({
 
 let SlowEffect = EffectComponent.extend({
     name: "SlowEffect",
-    _initOriginVelocity: {speedX: 0, speedY: 0},
 
     ctor: function (duration, percent) {
         this._super(GameConfig.COMPONENT_ID.SLOW_EFFECT);
         this.duration = duration;
         this.countdown = this.duration;
         this.percent = percent;
-        this.originVelocity = this._initOriginVelocity;
     },
 
     clone: function () {
@@ -43,13 +41,11 @@ let SlowEffect = EffectComponent.extend({
 
 let FrozenEffect = EffectComponent.extend({
     name: "FrozenEffect",
-    _initOriginVelocity: {speedX: 0, speedY: 0},
 
     ctor: function (duration) {
         this._super(GameConfig.COMPONENT_ID.FROZEN_EFFECT);
         this.duration = duration;
         this.countdown = this.duration;
-        this.originVelocity = this._initOriginVelocity;
     },
 
     clone: function () {
@@ -58,6 +54,39 @@ let FrozenEffect = EffectComponent.extend({
 
     reset: function () {
         this.countdown = this.duration;
-        this.originVelocity = this._initOriginVelocity;
+    }
+});
+
+let BuffAttackSpeedEffect = EffectComponent.extend({
+    name: "BuffAttackSpeedEffect",
+
+    ctor: function (percent) {
+        this._super(GameConfig.COMPONENT_ID.BUFF_ATTACK_SPEED);
+        this.percent = percent;
+    },
+
+    clone: function () {
+        return new BuffAttackSpeedEffect(this.percent);
+    },
+
+    reset: function () {
+
+    }
+});
+
+let BuffAttackDamageEffect = EffectComponent.extend({
+    name: "BuffAttackDamageEffect",
+
+    ctor: function (percent) {
+        this._super(GameConfig.COMPONENT_ID.BUFF_ATTACK_DAMAGE);
+        this.percent = percent;
+    },
+
+    clone: function () {
+        return new BuffAttackDamageEffect(this.percent);
+    },
+
+    reset: function () {
+
     }
 });

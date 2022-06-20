@@ -124,20 +124,20 @@ EntityFactory.createCannonOwlTower = function (pos) {
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createOwlNodeAnimation(attackRange);
 
-    let damageEffect = new DamageEffect(0);
     let frozenEffect = new FrozenEffect(1.5);
     let slowEffect = new SlowEffect(3, 0.3);
+    let buffAttackDamageEffect = new BuffAttackDamageEffect(1.3);
     // TODO: get component from pool
-    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [damageEffect, slowEffect], "attack", "monster", 1.5, "bulletType",
-        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 0.6);
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
-    let attackComponent = new AttackComponent(0, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [slowEffect])
+    let attackComponent = new AttackComponent(10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [slowEffect])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
+        .addComponent(buffAttackDamageEffect)
     return entity;
 };
 
@@ -152,8 +152,7 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     let frozenEffect = new FrozenEffect(1.5);
     let damageEffect = new DamageEffect(8);
     // NOTE: get component from pool
-    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [frozenEffect], "support", "monster", 1.5, "bulletType",
-        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 3.4);
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", "support", "monster", "bulletType");
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
     let attackComponent = new AttackComponent(3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 3.4, 0, [frozenEffect])
@@ -176,8 +175,7 @@ EntityFactory.createBoomerangFrogTower = function (pos) {
 
     let damageEffect = new DamageEffect(3);
     // NOTE: get component from pool
-    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", [damageEffect], "attack", "monster", attackRange, "bulletType",
-        GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, 0, 1.5);
+    let infoComponent = new TowerInfoComponent(10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
     let attackComponent = new AttackComponent(3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [])

@@ -32,19 +32,13 @@ let MonsterInfoComponent = InfoComponent.extend({
 let TowerInfoComponent = InfoComponent.extend({
     name: "TowerInfoComponentECS",
 
-    ctor: function (energy, bulletTargetType, bulletEffects, archType, targetType, attackRange, bulletType,
-                    targetStrategy, attackCountdown, speedAttack) {
+    ctor: function (energy, bulletTargetType, bulletEffects, archType, targetType, attackRange, bulletType) {
         this._super(GameConfig.COMPONENT_ID.TOWER_INFO);
         this.energy = energy;
         this.bulletTargetType = bulletTargetType;
-        this.effects = bulletEffects;
         this.archType = archType;
         this.targetType = targetType;
-        this.attackRange = attackRange * GameConfig.TILE_WIDTH;
         this.bulletType = bulletType;
-        this.targetStrategy = targetStrategy;
-        this.attackCountdown = attackCountdown;
-        this.speedAttack = speedAttack;
     },
 });
 

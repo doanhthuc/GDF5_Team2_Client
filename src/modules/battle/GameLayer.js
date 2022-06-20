@@ -46,9 +46,9 @@ let GameLayer = cc.Layer.extend({
     },
 
     initTower: function () {
-        EntityFactory.createCannonOwlTower({x: 3, y: 3});
-        EntityFactory.createIceGunPolarBearTower({x: 1, y: 1});
-        EntityFactory.createBoomerangFrogTower({x: 1, y: 3});
+        EntityFactory.createCannonOwlTower({x: 1, y: 3});
+        // EntityFactory.createIceGunPolarBearTower({x: 1, y: 1});
+        // EntityFactory.createBoomerangFrogTower({x: 1, y: 3});
     },
 
     handleEventKey: function () {

@@ -36,6 +36,7 @@ let AttackSystem = System.extend({
 
                     // reset count down time
                     attackComponent.countdown = attackComponent.speed;
+                    cc.log("speed = " + attackComponent.speed)
                 }
             }
         }

@@ -8,10 +8,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/GameLayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/Component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/EffectComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/EffectComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/component/InfoComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/config/GameConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/config/GameConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/manager/EntityFactory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/AttackSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/AttackSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/battle/ecs/system/EffectSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/battle/ecs/system/EffectSystem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -572,7 +574,7 @@
       <first key="disable_using_upload" booleanValue="false" />
       <first key="argument_map">
         <second key="macruntime" stringValue="" />
-        <second key="win32runtime" stringValue="E:\working\vng\code\stm\team_2_client\simulator\win32\GameClientJS.exe" />
+        <second key="win32runtime" stringValue="D:\workspace\stm\team_2_client\simulator\win32\GameClientJS.exe" />
         <second key="connector_id" stringValue="jsbinding.win32.attach.connector" />
         <second key="remotePlatform" stringValue="Android" />
         <second key="host" stringValue="127.0.0.1" />
