@@ -25,6 +25,9 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.USER_INFO:
                 userInfo.clone(packet);
                 userInfo.show();
+                let userContext = contextManager.getContext(ContextManagerConst.USER_CONTEXT);
+                userContext.setUserInfoFromPackage(userInfo);
+                userContext.updateUserInfoUI();
                 break;
             case gv.CMD.ADD_USER_GOLD:
                 cc.log(packet.usergold);
@@ -85,6 +88,11 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack();
         this.gameClient.sendPacket(pk);
     },
+    // updateUserInfo(pk){
+    //     userInfo.gold+=pk.goldchange;
+    //     userInfo.gem+=pk.gemchange;
+    //
+    // }
 });
 
 

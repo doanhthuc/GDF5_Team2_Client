@@ -1,0 +1,228 @@
+{
+  "ID": "ead2b393-d072-4f62-a31b-59ed5f866f1d",
+  "Version": "2.3.4",
+  "Name": "shopTreasureSlot",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 92,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_shop_item_background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -78.5,
+            "RightMargin": -78.5,
+            "TopMargin": -101.0,
+            "BottomMargin": -101.0,
+            "Tag": 93,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "assets/common/common_treasure.png",
+                  "Plist": ""
+                },
+                "Scale9OriginX": 72,
+                "Scale9OriginY": 66,
+                "Scale9Width": 76,
+                "Scale9Height": 69,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 78.5,
+                  "Y": 101.0
+                },
+                "Scale": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 1.4013,
+                  "Y": 0.995
+                },
+                "LeftMargin": -31.5,
+                "RightMargin": -31.5,
+                "TopMargin": 0.5,
+                "BottomMargin": 0.5,
+                "Tag": 105,
+                "ActionTag": 1917728092,
+                "Size": {
+                  "X": 220.0,
+                  "Y": 201.0
+                },
+                "Name": "treasureImg",
+                "ctype": "ImageViewObjectData"
+              },
+              {
+                "FontSize": 20,
+                "LabelText": "Bạc",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "assets/font/SVN-Supercell Magic.ttf",
+                  "Plist": ""
+                },
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 78.5,
+                  "Y": 161.6
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.8
+                },
+                "PreSize": {
+                  "X": 0.3567,
+                  "Y": 0.1337
+                },
+                "LeftMargin": 50.5,
+                "RightMargin": 50.5,
+                "TopMargin": 26.9,
+                "BottomMargin": 148.1,
+                "Tag": 106,
+                "ActionTag": 979864167,
+                "Size": {
+                  "X": 56.0,
+                  "Y": 27.0
+                },
+                "Name": "treasureNameTxt",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "ui/shop/freeButton.json",
+                  "Plist": ""
+                },
+                "StretchWidthEnable": false,
+                "StretchHeightEnable": false,
+                "InnerActionSpeed": 1.0,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 78.5,
+                  "Y": 22.22
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.11
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 78.5,
+                "RightMargin": 78.5,
+                "TopMargin": 179.78,
+                "BottomMargin": 22.22,
+                "Tag": 111,
+                "ActionTag": 1304955225,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "shopItemBtn",
+                "ctype": "ProjectNodeObjectData"
+              }
+            ],
+            "ActionTag": -1910801882,
+            "Size": {
+              "X": 157.0,
+              "Y": 202.0
+            },
+            "Name": "shopItemBackgroundImg",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../assets/common/common_treasure.png",
+        "../../assets/font/SVN-Supercell Magic.ttf",
+        "../../assets/lobby/lobby_shop_item_background.png",
+        "freeButton.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

@@ -159,9 +159,13 @@ var ScreenNetwork = cc.Layer.extend({
     onFinishLogin:function()
     {
         testnetwork.connector.sendGetUserInfo(UID); // Nhanaj UserInfo
-        testnetwork.connector.sendAddUserGold(100);
-        testnetwork.connector.sendBuyGoldShop(0);
-        testnetwork.connector.sendBuyDailyShop(0);
+        // testnetwork.connector.sendAddUserGold(100);
+        // testnetwork.connector.sendBuyGoldShop(0);
+        // testnetwork.connector.sendBuyDailyShop(0);
+        fr.view(MainScreen);
+        let userContext = new UserContext();
+        contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
+        // userContext.updateUserInfoUI();
         cc.log("Finished login");
     },
     updateMove:function(isCanMove, x, y)

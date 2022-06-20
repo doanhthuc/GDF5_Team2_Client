@@ -1,7 +1,7 @@
 {
-  "ID": "42dbe349-8e47-4553-b2f9-19bf25150772",
+  "ID": "4553cf42-a133-48d2-a041-b9b4adcbf11b",
   "Version": "2.3.4",
-  "Name": "treasureHolders",
+  "Name": "shopSection",
   "Content": {
     "Content": {
       "Animation": {
@@ -12,12 +12,57 @@
       },
       "AnimationList": [],
       "ObjectData": {
-        "Tag": 89,
+        "Tag": 216,
         "Children": [
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/finishedSlot.json",
+              "Path": "assets/lobby/lobby_shop_category.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -304.0,
+            "RightMargin": -304.0,
+            "TopMargin": -139.5,
+            "BottomMargin": -139.5,
+            "Tag": 217,
+            "ActionTag": -531045196,
+            "Size": {
+              "X": 608.0,
+              "Y": 279.0
+            },
+            "Name": "shopPanelBackgroundImg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/shop/refershShopNode.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -25,8 +70,8 @@
             "InnerActionSpeed": 1.0,
             "AnchorPoint": {},
             "Position": {
-              "X": -244.5,
-              "Y": 0.0
+              "X": 0.0,
+              "Y": 110.0001
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -42,21 +87,21 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -244.5,
-            "RightMargin": 244.5,
-            "Tag": 161,
-            "ActionTag": 880218339,
+            "TopMargin": -110.0001,
+            "BottomMargin": 110.0001,
+            "Tag": 177,
+            "ActionTag": 557135834,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_5",
+            "Name": "shopRefreshNode",
             "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/openningSlot/openingSlot.json",
+              "Path": "ui/shop/shopCategory.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -64,8 +109,8 @@
             "InnerActionSpeed": 1.0,
             "AnchorPoint": {},
             "Position": {
-              "X": -81.5,
-              "Y": 0.0
+              "X": -0.0002,
+              "Y": 164.9991
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -81,93 +126,17 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -81.5,
-            "RightMargin": 81.5,
-            "Tag": 175,
-            "ActionTag": -169206743,
+            "LeftMargin": -0.0002,
+            "RightMargin": 0.0002,
+            "TopMargin": -164.9991,
+            "BottomMargin": 164.9991,
+            "Tag": 173,
+            "ActionTag": 191586194,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_7",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/occupiedSlot.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 81.6,
-              "Y": 0.0
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 81.6,
-            "RightMargin": -81.6,
-            "Tag": 166,
-            "ActionTag": 692979117,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "FileNode_6",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/lobby/treasureHolders/treasureSlot/emptySlot.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 244.5,
-              "Y": 0.0
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 244.5,
-            "RightMargin": -244.5,
-            "Tag": 205,
-            "ActionTag": 1861328998,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "FileNode_4",
+            "Name": "shopCategoryNode",
             "ctype": "ProjectNodeObjectData"
           }
         ],
@@ -179,10 +148,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "treasureSlot/emptySlot.json",
-        "treasureSlot/finishedSlot.json",
-        "treasureSlot/occupiedSlot.json",
-        "treasureSlot/openningSlot/openingSlot.json"
+        "../../assets/lobby/lobby_shop_category.png",
+        "refershShopNode.json",
+        "shopCategory.json"
       ],
       "ctype": "GameFileData"
     }
