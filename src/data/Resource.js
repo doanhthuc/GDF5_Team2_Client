@@ -42,7 +42,7 @@ var res = {
     ZCSD_SCREEN_ZALO: 'zcsd/screen_zalo.json',
     MAIN_SCREEN: 'ui/main/MainScene.json',
     BOTTOM_NAV: 'ui/main/bottom/bottomNav.json',
-    LOBBY_NODE: 'ui/lobby/LobbyHomeNode.json',
+    LOBBY_NODE: 'ui/lobby/lobbyHomeNode.json',
     TREASURE_POPUP_NODE: 'ui/lobby/treasurePopup.json',
 
 
