@@ -1,7 +1,7 @@
 {
   "ID": "b4607db1-f693-4d77-9f8f-84db8f90665b",
   "Version": "2.3.4",
-  "Name": "shopGoldPopUp",
+  "Name": "shopGoldPopup",
   "Content": {
     "Content": {
       "Animation": {
@@ -107,6 +107,51 @@
               "Y": 393.0
             },
             "Name": "backgroundPanelImg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/lobby/lobby_shop_item_background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 7.9038
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -78.5,
+            "RightMargin": -78.5,
+            "TopMargin": -108.9038,
+            "BottomMargin": -93.0962,
+            "Tag": 204,
+            "ActionTag": 1458734514,
+            "Size": {
+              "X": 157.0,
+              "Y": 202.0
+            },
+            "Name": "Sprite_16",
             "ctype": "SpriteObjectData"
           },
           {
@@ -242,7 +287,7 @@
           },
           {
             "FontSize": 20,
-            "LabelText": "Pháo Cú",
+            "LabelText": "Mua Vàng",
             "FontResource": {
               "Type": "Normal",
               "Path": "assets/font/SVN-Supercell Magic.ttf",
@@ -283,17 +328,17 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -58.0,
-            "RightMargin": -58.0,
+            "LeftMargin": -69.5,
+            "RightMargin": -69.5,
             "TopMargin": -173.688,
             "BottomMargin": 144.688,
             "Tag": 198,
             "ActionTag": -1032990539,
             "Size": {
-              "X": 116.0,
+              "X": 139.0,
               "Y": 29.0
             },
-            "Name": "cardNameTxt",
+            "Name": "popUpTitleTxt",
             "ctype": "TextObjectData"
           },
           {
@@ -334,6 +379,51 @@
             },
             "Name": "FileNode_5",
             "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/common/common_icon_gold.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0001,
+              "Y": 34.4809
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -22.9999,
+            "RightMargin": -23.0001,
+            "TopMargin": -57.4809,
+            "BottomMargin": 11.4809,
+            "Tag": 203,
+            "ActionTag": -605898278,
+            "Size": {
+              "X": 88.0,
+              "Y": 108.0
+            },
+            "Name": "Sprite_15",
+            "ctype": "SpriteObjectData"
           }
         ],
         "Size": {
@@ -344,9 +434,11 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
+        "../../assets/common/common_icon_gold.png",
         "../../assets/common/common_panel_background.png",
         "../../assets/common/common_panel_btn_close.png",
         "../../assets/font/SVN-Supercell Magic.ttf",
+        "../../assets/lobby/lobby_shop_item_background.png",
         "../../Default/Button_Disable.png",
         "../../Default/ImageFile.png",
         "costButton.json"

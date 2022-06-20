@@ -4,6 +4,9 @@ const ShopResources = {
     SHOP_GOLD_SLOT_NODE: 'ui/shop/shopGoldSlot.json',
     SHOP_TREASURE_SLOT_NODE: 'ui/shop/shopTreasureSlot.json',
 
+    BUY_CARD_POPUP_NODE: 'ui/shop/shopCardPopup.json',
+    BUY_GOLD_POPUP_NODE: 'ui/shop/shopGoldPopup.json',
+
     SHOP_SECTION_CATEGORY_TITLE_GOLD: 'assets/lobby/lobby_shop_category_gold.png',
     GEM_ICON_SMALL: 'assets/common/common_icon_g_small.png',
 

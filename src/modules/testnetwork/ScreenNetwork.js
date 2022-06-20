@@ -74,8 +74,6 @@ var ScreenNetwork = cc.Layer.extend({
             testnetwork.connector.sendMove(Direction.DOWN);
         }.bind(this));
 
-
-
     },
     onSelectBack:function(sender)
     {

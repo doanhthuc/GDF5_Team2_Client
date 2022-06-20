@@ -48,7 +48,7 @@ const MainScreen = cc.Layer.extend({
 
 
         this.scrollToDefaultPage();
-        this.addTreasurePopup();
+        this.initPopups();
 
         this.initListViewEventListener();
     },
@@ -57,12 +57,23 @@ const MainScreen = cc.Layer.extend({
         this.mainPageView.scrollToPage(NavResources.TAB_LIST[this.DEFAULT_TAB].index);
     },
 
-    addTreasurePopup: function () {
+    initPopups: function () {
         this.treasurePopupNode = new TreasurePopup();
-        this.clientUIManager.registerUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE, this.treasurePopupNode);
-        this.treasurePopupNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
-        this.addChild(this.treasurePopupNode, CLIENT_UI_CONST.Z_ORDER.POP_UP);
+        this.buyCardPopupNode = new BuyCardPopup();
+        this.buyGoldPopupNode = new BuyGoldPopup();
+
+        this.addPopup(this.treasurePopupNode);
+        this.addPopup(this.buyCardPopupNode);
+        this.addPopup(this.buyGoldPopupNode);
     },
+
+    addPopup: function (popupNode) {
+        this.clientUIManager.registerUI(popupNode.name, popupNode);
+        popupNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+        this.addChild(popupNode, CLIENT_UI_CONST.Z_ORDER.POP_UP);
+    },
+
+
 
     scrollToIndexPage: function (index) {
         this.mainPageView.scrollToPage(index);
@@ -76,7 +87,7 @@ const MainScreen = cc.Layer.extend({
     onPageViewEvent: function (sender, eventType) {
         if (eventType === ccui.PageView.EVENT_TURNING) {
             this.setNavActiveTab(sender.getCurPageIndex());
-            this.nav.setPositionForTab();
+            if(this.nav.prevActiveTab !== this.activeTab) this.nav.setPositionForTab();
         }
     },
 

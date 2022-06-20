@@ -5,45 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/context/ContextManager.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/context/ContextManagerConst.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/context/UserContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/mainGUI/Header.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/model/Card.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/model/User.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/shop/ShopGoldSlot.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/shop/ShopItemSlot.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/shop/ShopTreasureSlot.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/UiUtil.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/shop/shopCardPopup.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/shop/BuyCardPopup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/shop/BuyGoldPopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frameworks/js-bindings/api/jsb_cocos2dx_auto_api.js" beforeDir="false" afterPath="$PROJECT_DIR$/frameworks/js-bindings/api/jsb_cocos2dx_auto_api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/inventory/cardCollectionNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/cardCollectionNode.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/main/header/header.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/header/header.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/shop/costButton.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/shop/costButton.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/shop/shopCategory.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/shop/shopCategory.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/shop/shopSection.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/shop/shopSection.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/bottom-nav-resources/NavResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/inventory-resources/inventoryResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/inventory-resources/InventoryResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/main-scene-resources/mainSceneResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/main-scene-resources/MainSceneResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/shop-resources/shopResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/shop-resources/ShopResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/treasure-resources/treasureSlotResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/treasure-resources/TreasureSlotResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/inventory/battleDeck.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/BattleDeck.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/inventory/card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/Card.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/inventory/cardCollection.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/CardCollection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/inventory/inventoryLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/InventoryLayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/lobbyLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/LobbyLayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/playerInfoHolder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/PlayerInfoHolder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/treasure.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/Treasure.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/treasurePopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/TreasurePopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/treasureSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/TreasureSlot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/bottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/BottomNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/mainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/shop/shopLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/shop/ShopLayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/shop/shopSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/shop/ShopSection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/uimanager/clientUIConst.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/uimanager/ClientUIConst.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/uimanager/clientUIManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/uimanager/ClientUIManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasurePopUp.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasurePopUp.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/shop/shopCarPopUp.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/shop/shopGoldPopUp.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/shop/shopGoldPopup.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/shop-resources/ShopResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/shop-resources/ShopResources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/lobby/TreasurePopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/TreasurePopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/BottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/BottomNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/shop/ShopGoldSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/shop/ShopGoldSlot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/shop/ShopItemSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/shop/ShopItemSlot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/shop/ShopTreasureSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/shop/ShopTreasureSlot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/uimanager/ClientUIConst.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/uimanager/ClientUIConst.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -388,17 +368,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -596,6 +565,19 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -770,6 +752,7 @@
       <workItem from="1655559997011" duration="8014000" />
       <workItem from="1655605756872" duration="9867000" />
       <workItem from="1655627075309" duration="9246000" />
+      <workItem from="1655689380863" duration="13250000" />
     </task>
     <servers />
   </component>

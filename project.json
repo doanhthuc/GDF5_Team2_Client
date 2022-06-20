@@ -64,6 +64,8 @@
         "src/modules/mainmenu/ScreenMenu.js",
         "src/modules/model/Card.js",
         "src/modules/model/User.js",
+        "src/modules/shop/BuyCardPopup.js",
+        "src/modules/shop/BuyGoldPopup.js",
         "src/modules/shop/ShopGoldSlot.js",
         "src/modules/shop/ShopItemSlot.js",
         "src/modules/shop/ShopLayer.js",

@@ -5,6 +5,7 @@ const TreasurePopup = cc.Node.extend({
     },
 
     init: function () {
+        this.name = CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE;
         this.treasurePopupNode = ccs.load(res.TREASURE_POPUP_NODE, '').node;
         this.addChild(this.treasurePopupNode);
         this.closeBtn = this.treasurePopupNode.getChildByName('closeBtn');
