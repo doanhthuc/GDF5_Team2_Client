@@ -1,10 +1,10 @@
 const UserContext = cc.Class.extend({
     ctor: function () {
-        this._super();
-        this.user = null;
+        this.user = {};
         this.isAuthenticated = false;
         this.isAuthenticating = false;
         this.contextmanager = contextManager.getInstance();
+        this.clientUIManager = clientUIManager.getInstance();
     },
 
     setUser: function (user) {
@@ -53,5 +53,18 @@ const UserContext = cc.Class.extend({
 
     updateUserGem: function (gem) {
         this.user.gem += gem;
+    },
+
+    updateUserInfoUI: function ()  {
+        this.clientUIManager.getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).setUsername(this.user.username);
+        cc.log(JSON.stringify(this.user));
+    },
+
+    setUserInfoFromPackage: function (package) {
+        this.user.id = package.id;
+        this.user.username = package.username;
+        this.user.gold = package.gold;
+        this.user.gem = package.gem;
+        this.user.trophy = package.trophy;
     }
 })

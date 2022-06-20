@@ -5,24 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/res/ui/shop/shopCardPopup.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/shop/BuyCardPopup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/shop/BuyGoldPopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/openningSlot/countdownHolder.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/lobby/treasureHolders/treasureSlot/openningSlot/openingSlot.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ui/login/Login.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/lobby/treasurePopUp.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/treasurePopUp.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/shop/shopCarPopUp.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ui/shop/shopGoldPopUp.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/shop/shopGoldPopup.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ipConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ipConfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/network/GameClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/network/GameClient.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/shop-resources/ShopResources.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/shop-resources/ShopResources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/TreasurePopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/TreasurePopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/BottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/BottomNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/context/UserContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/context/UserContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/lobby/LobbyLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/LobbyLayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/shop/ShopGoldSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/shop/ShopGoldSlot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/shop/ShopItemSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/shop/ShopItemSlot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/shop/ShopTreasureSlot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/shop/ShopTreasureSlot.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/uimanager/ClientUIConst.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/uimanager/ClientUIConst.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,6 +134,9 @@
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="showPreview" value="true" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -565,19 +564,6 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -753,6 +739,7 @@
       <workItem from="1655605756872" duration="9867000" />
       <workItem from="1655627075309" duration="9246000" />
       <workItem from="1655689380863" duration="13250000" />
+      <workItem from="1655710833404" duration="4036000" />
     </task>
     <servers />
   </component>

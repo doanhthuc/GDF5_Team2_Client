@@ -28,6 +28,8 @@ const MainScreen = cc.Layer.extend({
 
         this.homeLayer = new lobbyLayer();
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
+        this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE, this.homeLayer);
+        this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE);
         // this.treasureSlotList = this.homeLayer.getChildByName('treasureHolder').getChildren();
 
         this.listView = this.mainPageView.getPages()[NavResources.TAB_LIST.INVENTORY_TAB.index].getChildByName('inventoryListView');

@@ -8,6 +8,9 @@ const lobbyLayer = cc.Node.extend({
         this.treasureSlotList = [];
         this.lobbyNode = ccs.load(res.LOBBY_NODE, '').node;
         this.addChild(this.lobbyNode);
+        this.playerInfoHolder = this.lobbyNode.getChildByName('playerInfoHolder');
+        this.usernameTxt = this.playerInfoHolder.getChildByName('usernameTxt');
+
         this.lobbyNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
 
         let startX = -cc.winSize.width / 2 + Math.ceil(TreasureSlotResources.BACKGROUND_IMG_WIDTH / 2) + TreasureSlotResources.SLOT_START_MARGIN;
@@ -21,5 +24,7 @@ const lobbyLayer = cc.Node.extend({
         }
     },
 
-
+    setUsername: function (username) {
+        this.usernameTxt.setString(username);
+    }
 })

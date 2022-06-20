@@ -6,6 +6,10 @@ const CLIENT_UI_CONST = {
         GUI_BUY_CARD: 'buyCardPopup',
     },
 
+    NODE_NAME: {
+        HOME_NODE: 'homeNode',
+    },
+
     // Order Manager
     Z_ORDER: {
         POP_UP: 100,
