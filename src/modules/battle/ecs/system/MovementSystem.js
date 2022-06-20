@@ -24,8 +24,7 @@ let MovementSystem = System.extend({
 
     _updateVelocityVector: function (entity, velocityComponent, positionComponent) {
         // dynamic target
-
-        if (velocityComponent.dynamicPosition) {
+        if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive()) {
             if (Math.abs(velocityComponent.dynamicPosition.x - positionComponent.x) <= 3
                 && Math.abs(velocityComponent.dynamicPosition.y - positionComponent.y) <= 3) {
                 // entity.removeComponent(velocityComponent);
@@ -39,10 +38,7 @@ let MovementSystem = System.extend({
                     velocityComponent.originSpeed);
                 velocityComponent.speedX = newVelocity.speedX;
                 velocityComponent.speedY = newVelocity.speedY;
-                cc.log("update new vector");
-                cc.log("self: " + JSON.stringify(positionComponent));
-                cc.log("target: " + JSON.stringify(velocityComponent.dynamicPosition));
-                cc.log("=====")
+
             }
         }
     }

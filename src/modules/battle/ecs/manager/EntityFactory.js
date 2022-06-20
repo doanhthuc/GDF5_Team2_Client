@@ -110,8 +110,8 @@ EntityFactory.createSwordsmanMonster = function () {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
-        .addComponent(slowEffect)
-        .addComponent(frozenEffect)
+        // .addComponent(slowEffect)
+        // .addComponent(frozenEffect)
 
     return entity;
 };
@@ -126,20 +126,20 @@ EntityFactory.createCannonOwlTower = function (pos) {
 
     let frozenEffect = new FrozenEffect(1.5);
     let slowEffect = new SlowEffect(3, 0.3);
-    let buffAttackDamageEffect = new BuffAttackDamageEffect(2);
-    let buffAttackSpeedEffect = new BuffAttackSpeedEffect(1.6);
+    let buffAttackDamageEffect = new BuffAttackDamageEffect(1.3);
+    let buffAttackSpeedEffect = new BuffAttackSpeedEffect(1.3);
     // TODO: get component from pool
     let infoComponent = new TowerInfoComponent(10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let appearanceComponent = new AppearanceComponent(node);
-    let attackComponent = new AttackComponent(10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.4, 0, [slowEffect])
+    let attackComponent = new AttackComponent(10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.4, 0, [])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
         // .addComponent(buffAttackDamageEffect)
-        .addComponent(buffAttackSpeedEffect)
+        // .addComponent(buffAttackSpeedEffect)
     return entity;
 };
 

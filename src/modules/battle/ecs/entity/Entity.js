@@ -4,7 +4,7 @@ let EntityECS = cc.Class.extend({
 
     ctor: function (typeID) {
         this.typeID = typeID;
-        this.component = {};
+        this.components = {};
         this.id = Utils.genIncrementId();
         this._active = true;
     },
@@ -12,21 +12,21 @@ let EntityECS = cc.Class.extend({
     addComponent: function (component) {
         // this._isComponent();
 
-        if (this.component[component.typeID]) {
+        if (this.components[component.typeID]) {
             // TODO: check override or not
         }
 
-        this.component[component.typeID] = component;
+        this.components[component.typeID] = component;
         return this;
     },
 
     removeComponent: function (component) {
         // this._isComponent();
-        delete this.component[component.typeID];
+        delete this.components[component.typeID];
     },
 
     getComponent: function (typeID) {
-        return this.component[typeID];
+        return this.components[typeID];
     },
 
     hasAllComponent: function (...componentTypeIDs) {
