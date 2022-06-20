@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_timer_background.png",
+              "Path": "assets/battle/battle_timer.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -56,52 +56,7 @@
               "X": 74.0,
               "Y": 74.0
             },
-            "Name": "battle_timer_background_1",
-            "ctype": "SpriteObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "assets/battle/battle_timer.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -37.0,
-            "RightMargin": -37.0,
-            "TopMargin": -37.0,
-            "BottomMargin": -37.0,
-            "Tag": 231,
-            "ActionTag": 1946311796,
-            "Size": {
-              "X": 74.0,
-              "Y": 74.0
-            },
-            "Name": "battle_timer_3",
+            "Name": "battle_timer_background",
             "ctype": "SpriteObjectData"
           },
           {
@@ -123,8 +78,8 @@
               "Y": 0.0
             },
             "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
+              "ScaleX": 1.0192,
+              "ScaleY": 1.0192
             },
             "CColor": {},
             "IconVisible": false,
@@ -146,17 +101,18 @@
               "X": 74.0,
               "Y": 74.0
             },
-            "Name": "battle_timer_border_2",
+            "Name": "battle_timer_border",
             "ctype": "SpriteObjectData"
           },
           {
-            "FontSize": 36,
+            "FontSize": 32,
             "LabelText": "19",
             "FontResource": {
               "Type": "Normal",
               "Path": "assets/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
+            "HorizontalAlignmentType": "HT_Center",
             "OutlineColor": {
               "G": 0,
               "B": 0
@@ -190,15 +146,15 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -25.0,
-            "RightMargin": -25.0,
-            "TopMargin": -24.5,
-            "BottomMargin": -24.5,
+            "LeftMargin": -22.5,
+            "RightMargin": -22.5,
+            "TopMargin": -22.0,
+            "BottomMargin": -22.0,
             "Tag": 233,
             "ActionTag": -654135112,
             "Size": {
-              "X": 50.0,
-              "Y": 49.0
+              "X": 45.0,
+              "Y": 44.0
             },
             "Name": "time",
             "ctype": "TextObjectData"
@@ -213,7 +169,6 @@
       },
       "UsedResources": [
         "../../../../assets/battle/battle_timer.png",
-        "../../../../assets/battle/battle_timer_background.png",
         "../../../../assets/battle/battle_timer_border.png",
         "../../../../assets/font/SVN-Supercell Magic.ttf"
       ],

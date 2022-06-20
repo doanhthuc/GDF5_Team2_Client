@@ -18,4 +18,6 @@ let EventECS = cc.Class.extend({
 let EventType = {
     BULLET_COLLIDE_MONSTER: 0,
     RESET_INIT_VELOCITY: 1,
+    END_TIMER: 2,
+    END_ALL_WAVE: 3
 }

@@ -22,3 +22,7 @@ EventDispatcher.getInstance()
         velocityComponent.speedX = velocityComponent.originSpeedX;
         velocityComponent.speedY = velocityComponent.originSpeedY;
     })
+    .addEventHandler(EventType.END_TIMER, function (data) {
+        let uiLayer = GameConfig.gameLayer.uiLayer;
+        uiLayer.waveNode.increaseWave();
+    })

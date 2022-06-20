@@ -8,10 +8,14 @@ let GameLayer = cc.Layer.extend({
         this._super();
         GameConfig.gameLayer = this;
 
+        // create UI
         let rootNode = ccs.load("ui/battle/BattleScene.json", "");
         this.addChild(rootNode.node);
         this.mapLayer = rootNode.node.getChildByName("battle_map_layer");
-        this.uiLayer = rootNode.node.getChildByName("battle_ui_layer");
+        // this.uiLayer = rootNode.node.getChildByName("battle_ui_layer");
+
+        this.uiLayer = new BattleUILayer();
+        this.addChild(this.uiLayer,2 );
 
         // create system
         this.renderSystem = new RenderSystem();
