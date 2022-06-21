@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" afterDir="false" />
+    <list default="true" id="196b5f2e-e6e4-47f3-b75c-66729969ae54" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/res/ipConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ipConfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/bottom/BottomNav.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +43,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -103,16 +114,16 @@
       </list>
     </option>
   </component>
+  <component name="JsBowerSettings">
+    <bower-package value="" />
+    <bower.json value="" />
+  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Bundled (Maven 3)" />
-      </MavenGeneralSettings>
-    </option>
+  <component name="ProblemsViewState">
+    <option name="showPreview" value="true" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -120,7 +131,7 @@
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
-  <component name="ProjectId" id="2AbNQgYID8i8MwaKqdulXVxyUvk" />
+  <component name="ProjectId" id="2AKPfXEuN7ch8EFh6Fhqu3W0yDO" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -301,14 +312,19 @@
   </component>
   <component name="PropertiesComponent">
     <property name="FullScreen" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Project/lgrc_project/client/HelloJavascript/src/framework/Framework.js" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../team_2_server" />
+    <property name="format.on.save" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/res/ui/main/bottom" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="options.lastSelected" value="web-ide.project.structure" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -316,23 +332,26 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="rearrange.code.on.save" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="ReaderModeSettings">
+    <option name="showLigatures" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\team_2_client\res\ui\main\bottom" />
+      <recent name="D:\team_2_client\res\ui\main" />
+      <recent name="D:\team_2_client\res\assets\lobby" />
       <recent name="D:\Project\TemplateGame\src\framework\plugins" />
       <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\network\auto" />
-      <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\game\render\effect" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\VNG\GDF5_Team2_Client\res\assets\lobby" />
+      <recent name="D:\team_2_client\res" />
       <recent name="D:\Project\TemplateGame\src\framework" />
       <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\framework\gui" />
       <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\framework\libs" />
-      <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\network\custom" />
-      <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\offline" />
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
@@ -592,6 +611,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="JSBinding.Win32Debug" />
+        <item itemvalue="Node.js.InPacketGenerate.js" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
     </recent_temporary>
@@ -602,7 +622,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="" />
+      <changelist id="196b5f2e-e6e4-47f3-b75c-66729969ae54" name="Default Changelist" comment="" />
       <created>1431480896373</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -683,8 +703,32 @@
       <workItem from="1551931734807" duration="68000" />
       <workItem from="1552028738912" duration="21000" />
       <workItem from="1553831685560" duration="3045000" />
-      <workItem from="1655274311075" duration="15206000" />
-      <workItem from="1655359813753" duration="2401000" />
+      <workItem from="1654755411407" duration="797000" />
+      <workItem from="1654756280641" duration="6310000" />
+      <workItem from="1654766224133" duration="369000" />
+      <workItem from="1654853238110" duration="3696000" />
+      <workItem from="1655085459835" duration="4378000" />
+      <workItem from="1655103950924" duration="12042000" />
+      <workItem from="1655128103614" duration="7773000" />
+      <workItem from="1655137474022" duration="183000" />
+      <workItem from="1655137724044" duration="294000" />
+      <workItem from="1655210696103" duration="54000" />
+      <workItem from="1655210916075" duration="586000" />
+      <workItem from="1655211543120" duration="7857000" />
+      <workItem from="1655257054402" duration="1832000" />
+      <workItem from="1655273464661" duration="14431000" />
+      <workItem from="1655300336023" duration="7162000" />
+      <workItem from="1655343561743" duration="2223000" />
+      <workItem from="1655360798676" duration="12876000" />
+      <workItem from="1655387430428" duration="5849000" />
+      <workItem from="1655429592108" duration="469000" />
+      <workItem from="1655476125839" duration="1535000" />
+      <workItem from="1655559997011" duration="8014000" />
+      <workItem from="1655605756872" duration="9867000" />
+      <workItem from="1655627075309" duration="9246000" />
+      <workItem from="1655689380863" duration="13250000" />
+      <workItem from="1655710833404" duration="4036000" />
+      <workItem from="1655725056419" duration="23000" />
     </task>
     <servers />
   </component>
@@ -761,6 +805,18 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
       <collection />
@@ -776,6 +832,10 @@
         <breakpoint enabled="true" log-message="true" type="javascript-exception" />
       </default-breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

@@ -13,10 +13,6 @@ var ScreenNetwork = cc.Layer.extend({
         this.btnLogin= this.loginNode.getChildByName("Button_1");
         this.btnLogin.addClickEventListener(this.onSelectLogin.bind(this));
         this.textFieldUID= this.loginNode.getChildByName("TextField_1");
-        this.schedule(function (){
-            if (UID==userInfo.id) this.lblLog.setString("Đăng Nhập Thành Công");
-            else this.lblLog.setString("Bạn nhập sai ID")
-        });
         // var yBtn = 2*size.height/3;
         // this.nodeUI = new cc.Node();
         //
@@ -133,6 +129,10 @@ var ScreenNetwork = cc.Layer.extend({
     },
     onSelectLogin:function(sender)
     {
+        this.schedule(function (){
+            if (UID==userInfo.id) this.lblLog.setString("Đăng Nhập Thành Công");
+            else this.lblLog.setString("Bạn nhập sai ID")
+        });
         if (this.textFieldUID.getString()=="") this.lblLog.setString("Bạn Chưa nhập ID");
         else {
             UID = this.textFieldUID.getString();
@@ -158,7 +158,14 @@ var ScreenNetwork = cc.Layer.extend({
     },
     onFinishLogin:function()
     {
-        testnetwork.connector.sendGetUserInfo(UID);
+        testnetwork.connector.sendGetUserInfo(UID); // Nhanaj UserInfo
+        // testnetwork.connector.sendAddUserGold(100);
+        // testnetwork.connector.sendBuyGoldShop(0);
+        // testnetwork.connector.sendBuyDailyShop(0);
+        fr.view(MainScreen);
+        let userContext = new UserContext();
+        contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
+        // userContext.updateUserInfoUI();
         cc.log("Finished login");
     },
     updateMove:function(isCanMove, x, y)

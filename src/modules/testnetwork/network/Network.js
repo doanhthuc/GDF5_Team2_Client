@@ -25,7 +25,22 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.USER_INFO:
                 userInfo.clone(packet);
                 userInfo.show();
+                let userContext = contextManager.getContext(ContextManagerConst.USER_CONTEXT);
+                userContext.setUserInfoFromPackage(userInfo);
+                userContext.updateUserInfoUI();
                 break;
+            case gv.CMD.ADD_USER_GOLD:
+                cc.log(packet.usergold);
+                break;
+            case gv.CMD.BUY_GOLD_SHOP:
+                //cc.log("hmmmm");
+                userInfo.gold+=packet.goldchange;
+                userInfo.gem+=packet.gemchange;
+                //UpdateUI()
+                userInfo.show();
+                break;
+            case gv.CMD.BUY_DAILY_SHOP:
+
         }
     },
     sendLoginRequest:function() {
@@ -42,6 +57,24 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack();
         this.gameClient.sendPacket(pk);
     },
+    sendAddUserGold:function(gold){
+        cc.log("sendAdduserGold");
+        var pk=this.gameClient.getOutPacket(CMDSendAddUserGold);
+        pk.pack(gold);
+        this.gameClient.sendPacket(pk);
+    },
+    sendBuyGoldShop:function(itemid){
+        cc.log("SendBuyShopGold");
+        var pk= this.gameClient.getOutPacket(CMDBuyGoldShop);
+        pk.pack(itemid);
+        this.gameClient.sendPacket(pk);
+    },
+    sendBuyDailyShop:function(itemid){
+      cc.log("SendBuyDailyShop");
+      var pk= this.gameClient.getOutPacket(CMDBuyDailyShop);
+      pk.pack(itemid);
+      this.gameClient.sendPacket(pk);
+    },
     sendMove:function(x, y){
         cc.log("SendMove:", x, y);
         var pk = this.gameClient.getOutPacket(CmdSendMove);
@@ -54,7 +87,12 @@ testnetwork.Connector = cc.Class.extend({
         var pk = this.gameClient.getOutPacket(CmdSendResetMap);
         pk.pack();
         this.gameClient.sendPacket(pk);
-    }
+    },
+    // updateUserInfo(pk){
+    //     userInfo.gold+=pk.goldchange;
+    //     userInfo.gem+=pk.gemchange;
+    //
+    // }
 });
 
 

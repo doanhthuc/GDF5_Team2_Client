@@ -1,0 +1,24 @@
+{
+  "ID": "ab8e440f-0b63-4514-bc02-15d6b88fca64",
+  "Version": "2.3.4",
+  "Name": "treasureSlotOpening",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 383,
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}
