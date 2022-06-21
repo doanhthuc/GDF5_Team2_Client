@@ -1,4 +1,4 @@
-const Card = cc.Class.extend({
+const CardModel = cc.Class.extend({
     ctor: function(id, level, accumulated) {
         this.id = id;
         this.name = JsonReader.getTowerConfig().tower[id].name;
