@@ -10,6 +10,7 @@ const lobbyLayer = cc.Node.extend({
         this.addChild(this.lobbyNode);
         this.playerInfoHolder = this.lobbyNode.getChildByName('playerInfoHolder');
         this.usernameTxt = this.playerInfoHolder.getChildByName('usernameTxt');
+        this.userTrophyTxt = this.playerInfoHolder.getChildByName('userTrophyTxt');
 
         this.lobbyNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
 
@@ -26,5 +27,9 @@ const lobbyLayer = cc.Node.extend({
 
     setUsername: function (username) {
         this.usernameTxt.setString(username);
-    }
+    },
+
+    setUserTrophy: function (trophy) {
+        this.userTrophyTxt.setString(trophy);
+    },
 })

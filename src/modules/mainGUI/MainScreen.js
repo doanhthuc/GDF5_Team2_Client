@@ -25,6 +25,8 @@ const MainScreen = cc.Layer.extend({
 
         this.header = new Header();
         this.addChild(this.header);
+        this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE, this.header);
+        this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE);
 
         this.homeLayer = new lobbyLayer();
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
@@ -35,6 +37,8 @@ const MainScreen = cc.Layer.extend({
         this.listView = this.mainPageView.getPages()[NavResources.TAB_LIST.INVENTORY_TAB.index].getChildByName('inventoryListView');
         this.listViewPanel = this.listView.getChildByName('listViewPanel');
         this.inventoryLayer = new InventoryLayer();
+        this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE, this.inventoryLayer);
+        this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE);
 
         this.listViewPanel.addChild(this.inventoryLayer);
         this.listView.setTouchEnabled(true);
@@ -47,7 +51,8 @@ const MainScreen = cc.Layer.extend({
 
         this.shopLayer = new ShopLayer();
         this.mainPageView.addWidgetToPage(this.shopLayer, NavResources.TAB_LIST.SHOP_TAB.index, true);
-
+        this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE, this.shopLayer);
+        this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE);
 
         this.scrollToDefaultPage();
         this.initPopups();
@@ -76,7 +81,6 @@ const MainScreen = cc.Layer.extend({
     },
 
 
-
     scrollToIndexPage: function (index) {
         this.mainPageView.scrollToPage(index);
     },
@@ -89,7 +93,7 @@ const MainScreen = cc.Layer.extend({
     onPageViewEvent: function (sender, eventType) {
         if (eventType === ccui.PageView.EVENT_TURNING) {
             this.setNavActiveTab(sender.getCurPageIndex());
-            if(this.nav.prevActiveTab !== this.activeTab) this.nav.setPositionForTab();
+            if (this.nav.prevActiveTab !== this.activeTab) this.nav.setPositionForTab();
         }
     },
 

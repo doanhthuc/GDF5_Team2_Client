@@ -55,8 +55,14 @@ const UserContext = cc.Class.extend({
         this.user.gem += gem;
     },
 
-    updateUserInfoUI: function ()  {
-        this.clientUIManager.getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).setUsername(this.user.username);
+    updateUserInfoUI: function () {
+        let HomeNode = this.clientUIManager.getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE);
+        HomeNode.setUsername(this.user.username);
+        HomeNode.setUserTrophy(this.user.trophy);
+
+        let headerNode = this.clientUIManager.getUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE);
+        headerNode.setUserGold(this.user.gold);
+        headerNode.setUserGem(this.user.gem);
         cc.log(JSON.stringify(this.user));
     },
 

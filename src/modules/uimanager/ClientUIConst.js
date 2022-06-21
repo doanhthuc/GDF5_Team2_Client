@@ -8,6 +8,9 @@ const CLIENT_UI_CONST = {
 
     NODE_NAME: {
         HOME_NODE: 'homeNode',
+        INVENTORY_NODE: 'inventoryNode',
+        SHOP_NODE: 'shopNode',
+        HEADER_NODE: 'headerNode',
     },
 
     // Order Manager
