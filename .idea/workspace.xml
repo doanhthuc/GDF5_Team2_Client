@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/config/Tower.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/model/CarRankConst.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/model/CardTypeConst.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/model/TowerCard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/JsonReader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/context/InitContexts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/context/InitContexts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/context/InventoryContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/context/InventoryContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/inventory/BattleDeck.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/BattleDeck.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/lobby/PlayerInfoHolder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/PlayerInfoHolder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/model/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/model/Card.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,7 +330,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="format.on.save" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../team_2_server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/res/config" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -332,6 +344,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="rearrange.code.on.save" value="true" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="ReaderModeSettings">
@@ -339,6 +352,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\team_2_client\res\config" />
       <recent name="D:\team_2_client\res\assets\lobby" />
       <recent name="D:\Project\TemplateGame\src\framework\plugins" />
       <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\network\auto" />
@@ -550,6 +564,17 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -729,6 +754,7 @@
       <workItem from="1655737929583" duration="260000" />
       <workItem from="1655778395938" duration="5198000" />
       <workItem from="1655787384813" duration="243000" />
+      <workItem from="1655799958138" duration="6781000" />
     </task>
     <servers />
   </component>

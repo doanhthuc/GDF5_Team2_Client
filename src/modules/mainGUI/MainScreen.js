@@ -58,6 +58,9 @@ const MainScreen = cc.Layer.extend({
         this.initPopups();
 
         this.initListViewEventListener();
+
+        let towerCard = new TowerCard(1, "canon", "aaaa", 9, 11);
+        towerCard.logCard();
     },
 
     scrollToDefaultPage: function () {

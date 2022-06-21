@@ -1,12 +1,10 @@
-/*
-class Card {
-    constructor(id, name, description, level, energy) {
+const Card = cc.Class.extend({
+    ctor: function(id, level, accumulated) {
         this.id = id;
-        this.name = name;
-        this.description = description;
+        this.name = JsonReader.getTowerConfig().tower[id].name;
+        this.description = 'description';
         this.level = level;
-        this.energy = energy;
+        this.energy = JsonReader.getTowerConfig().tower[id].energy;
+        this.accumulated = accumulated;
     }
-
-
-}*/
+});

@@ -30,6 +30,6 @@ const BattleDeckNode = cc.Node.extend({
     },
 
     setNodeHeight: function () {
-        this.height += this.battleDeckHolder.getContentSize().height;
+        this.nodeHeight += this.battleDeckHolder.getContentSize().height;
     }
 });
