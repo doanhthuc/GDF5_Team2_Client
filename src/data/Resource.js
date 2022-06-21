@@ -25,7 +25,25 @@ var userCardCollection = {
     cardCollection:[],
     getItemList:function(pk)
     {
-        this.cardCollection.push();
+        for(i=0;i<pk.size;i++)
+            this.cardCollection.push(pk.cardCollection[i]);
+    },
+    show:function(){
+        for(i=0;i<this.cardCollection.length;i++)
+            this.cardCollection[i].show();
+    }
+}
+var userDailyShop = {
+    id:"",
+    dailyShopItem:[],
+    getItemList:function(pk)
+    {
+        for(i=0;i<pk.size;i++)
+            this.dailyShopItem.push(pk.dailyShopItem[i]);
+    },
+    show:function(){
+        for(i=0;i<this.dailyShopItem.length;i++)
+            this.dailyShopItem[i].show();
     }
 }
 var res = {

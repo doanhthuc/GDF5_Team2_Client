@@ -96,6 +96,7 @@
         "src/modules/shop/ShopGoldSlot.js",
         "src/modules/shop/ShopItemSlot.js",
         "src/modules/shop/ShopLayer.js",
+        "src/modules/shop/ShopItem.js",
         "src/modules/shop/ShopSection.js",
         "src/modules/shop/ShopTreasureSlot.js",
         "src/modules/testnetwork/network/Network.js",
