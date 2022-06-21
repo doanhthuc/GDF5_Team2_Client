@@ -30,18 +30,33 @@ testnetwork.Connector = cc.Class.extend({
 
                 userContext.updateUserInfoUI();
                 break;
+            case gv.CMD.USER_INVENTORY:
+                userCardCollection.getItemList(packet);
+                cc.log("GetInventory");
+                userCardCollection.show();
+                break;
+            case gv.CMD.USER_DAILY_SHOP:
+                userDailyShop.getItemList(packet);
+                cc.log("GetDailyShop");
+                userDailyShop.show();
+                break;
             case gv.CMD.ADD_USER_GOLD:
                 cc.log(packet.usergold);
                 break;
+            case gv.CMD.ADD_USER_GEM:
+                cc.log(packet.usergem);
+                break;
             case gv.CMD.BUY_GOLD_SHOP:
-                //cc.log("hmmmm");
-                userInfo.gold += packet.goldchange;
-                userInfo.gem += packet.gemchange;
-                //UpdateUI()
+                userInfo.gold+=packet.goldchange;
+                userInfo.gem+=packet.gemchange;
                 userInfo.show();
                 break;
             case gv.CMD.BUY_DAILY_SHOP:
-
+                cc.log("BUY DAILY SHOP");
+                cc.log(packet.gemchange+" "+packet.goldchange);
+                for(i=0;i<packet.itemAmount;i++)
+                    cc.log(packet.itemQuantity[i]+" "+packet.itemtype[i]);
+                break;
         }
     },
     sendLoginRequest: function () {
@@ -64,17 +79,36 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(gold);
         this.gameClient.sendPacket(pk);
     },
-    sendBuyGoldShop: function (itemid) {
+    sendAddUserGem:function(gem)
+    {
+        cc.log("sendAdduserGem");
+        var pk=this.gameClient.getOutPacket(CMDSendAddUserGem);
+        pk.pack(gem);
+        this.gameClient.sendPacket(pk);
+    },
+    sendBuyGoldShop:function(itemid){
         cc.log("SendBuyShopGold");
         var pk = this.gameClient.getOutPacket(CMDBuyGoldShop);
         pk.pack(itemid);
         this.gameClient.sendPacket(pk);
     },
-    sendBuyDailyShop: function (itemid) {
-        cc.log("SendBuyDailyShop");
-        var pk = this.gameClient.getOutPacket(CMDBuyDailyShop);
-        pk.pack(itemid);
+    sendGetUserInventory:function(){
+        cc.log("sendGetuserInventory");
+        var pk= this.gameClient.getOutPacket(CMDSendGetUserInventory);
+        pk.pack();
         this.gameClient.sendPacket(pk);
+    },
+    sendGetUserDailyShop:function(){
+        cc.log("sendGetuserInventory");
+        var pk= this.gameClient.getOutPacket(CMDSendGetDailyShop);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendBuyDailyShop:function(itemid){
+      cc.log("SendBuyDailyShop");
+      var pk= this.gameClient.getOutPacket(CMDBuyDailyShop);
+      pk.pack(itemid);
+      this.gameClient.sendPacket(pk);
     },
     sendMove: function (x, y) {
         cc.log("SendMove:", x, y);

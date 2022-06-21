@@ -25,7 +25,25 @@ var userCardCollection = {
     cardCollection:[],
     getItemList:function(pk)
     {
-        this.cardCollection.push();
+        for(i=0;i<pk.size;i++)
+            this.cardCollection.push(pk.cardCollection[i]);
+    },
+    show:function(){
+        for(i=0;i<this.cardCollection.length;i++)
+            this.cardCollection[i].show();
+    }
+}
+var userDailyShop = {
+    id:"",
+    dailyShopItem:[],
+    getItemList:function(pk)
+    {
+        for(i=0;i<pk.size;i++)
+            this.dailyShopItem.push(pk.dailyShopItem[i]);
+    },
+    show:function(){
+        for(i=0;i<this.dailyShopItem.length;i++)
+            this.dailyShopItem[i].show();
     }
 }
 var res = {
@@ -41,7 +59,7 @@ var res = {
     ZCSD_SCREEN_DECRYPTION: 'zcsd/screen_decryption.json',
     ZCSD_SCREEN_ZALO: 'zcsd/screen_zalo.json',
     MAIN_SCREEN: 'ui/main/MainScene.json',
-    BOTTOM_NAV: 'ui/main/bottom/bottomNav.json',
+    BOTTOM_NAV: 'ui/main/bottom/BottomNav.json',
     LOBBY_NODE: 'ui/lobby/lobbyHomeNode.json',
     TREASURE_POPUP_NODE: 'ui/lobby/treasurePopup.json',
 

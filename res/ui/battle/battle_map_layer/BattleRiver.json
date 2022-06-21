@@ -1,0 +1,123 @@
+{
+  "ID": "9b48c122-77e7-4b7d-89fa-6e7928fd27d6",
+  "Version": "2.3.4",
+  "Name": "BattleRiver",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 516,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/map/map_river_0000.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 335,
+            "Scale9OriginY": 68,
+            "Scale9Width": 348,
+            "Scale9Height": 71,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -509.0,
+            "RightMargin": -509.0,
+            "TopMargin": -103.5,
+            "BottomMargin": -103.5,
+            "Tag": 517,
+            "ActionTag": -871283287,
+            "Size": {
+              "X": 1018.0,
+              "Y": 207.0
+            },
+            "Name": "Image_1",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "assets/map/map_river_0001.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 335,
+            "Scale9OriginY": 68,
+            "Scale9Width": 348,
+            "Scale9Height": 71,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -509.0,
+            "RightMargin": -509.0,
+            "TopMargin": -103.5,
+            "BottomMargin": -103.5,
+            "Tag": 518,
+            "ActionTag": -1185335721,
+            "Size": {
+              "X": 1018.0,
+              "Y": 207.0
+            },
+            "Name": "Image_2",
+            "ctype": "ImageViewObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../assets/map/map_river_0000.png",
+        "../../../assets/map/map_river_0001.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}
