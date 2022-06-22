@@ -55,6 +55,7 @@
         "src/modules/battle/ecs/config/GameConfig.js",
         "src/modules/battle/ecs/common/Exception.js",
         "src/modules/battle/ecs/common/Utils.js",
+        "src/modules/battle/ecs/common/FindPathUtil.js",
         "src/modules/battle/ecs/component/Component.js",
         "src/modules/battle/ecs/component/InfoComponent.js",
         "src/modules/battle/ecs/component/EffectComponent.js",

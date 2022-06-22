@@ -95,8 +95,7 @@ EntityFactory.createSwordsmanMonster = function (initPos) {
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let velocityComponent = new VelocityComponent(0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = new AppearanceComponent(createSwordmanNodeAnimation());
-    let pathComponent = new PathComponent(Utils.tileArray2PixelArray([{x: positionComponent.x, y: positionComponent.y}, {x: 0, y: 2},
-        {x: 3, y: 2}, {x: 3, y: 1}, {x: 6, y: 0}]))
+    let pathComponent = new PathComponent(GameConfig.gameLayer.mapLayer.path);
     let collisionComponent = new CollisionComponent(20, 30);
     let lifeComponent = new LifeComponent(300);
 

@@ -13,13 +13,15 @@ FindPathUtil.create2DMatrix = function(numRow, numCol, defaultValue) {
     return matrix;
 }
 
-
-FindPathUtil.findShortestPath = function(map, start, dest) {
-    // y
-    // ^
-    // |
-    // |
+FindPathUtil.findShortestPath = function(map, startt, destt) {
+    // convert tile
+    let start = {x: startt.x, y: GameConfig.MAP_HEIGH - 1-startt.y}
+    let dest = {x: destt.x, y: GameConfig.MAP_HEIGH - 1-destt.y}
     // -----------> x
+    // |
+    // |
+    // |
+    // V y
     let visited = FindPathUtil.create2DMatrix(map.length, map[0].length, false);
 
     function getNeigbors(point) {
@@ -35,7 +37,6 @@ FindPathUtil.findShortestPath = function(map, start, dest) {
                 || nextY >= map.length) continue;
             if (visited[nextY][nextX]) continue;
             if (map[nextY][nextX] !== 0) continue;
-
             neighbors.push({x: nextX, y: nextY});
             visited[nextY][nextX] = true;
         }
@@ -53,6 +54,7 @@ FindPathUtil.findShortestPath = function(map, start, dest) {
                 return path;
             }
             let neighbors = getNeigbors(current);
+
             for (let neighbor of neighbors) {
                 path[neighbor.y][neighbor.x] = current;
                 queue.push(neighbor);
@@ -63,6 +65,9 @@ FindPathUtil.findShortestPath = function(map, start, dest) {
     }
 
     let path = bfs(start, dest)
+    if (!path[dest.y][dest.x]) {
+        return null;
+    }
     let current = path[dest.y][dest.x];
     let storePath = [dest];
 
@@ -72,5 +77,9 @@ FindPathUtil.findShortestPath = function(map, start, dest) {
     }
     storePath.push(start);
 
+    // convert to matrix coordination to tile coordination
+    for (let i = 0; i < storePath.length; i++) {
+        storePath[i].y = GameConfig.MAP_HEIGH - 1 - storePath[i].y;
+    }
     return storePath.reverse();
 }

@@ -24,7 +24,7 @@ let GameLayer = cc.Layer.extend({
         this.effectSystem = new EffectSystem();
         this.pathSystem = new PathMonsterSystem();
 
-        this._initTower();
+        // this._initTower();
         this._handleEventKey();
 
         this.scheduleUpdate();
@@ -56,7 +56,7 @@ let GameLayer = cc.Layer.extend({
         if (type === GameConfig.ENTITY_ID.CANNON_TOWER) {
             EntityFactory.createCannonOwlTower(pos);
             EventDispatcher.getInstance()
-                .dispatchEvent(EventType.PUT_NEW_TOWER);
+                .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: pos});
         }
     },
 
