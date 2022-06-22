@@ -13,6 +13,27 @@ let MovementSystem = System.extend({
             let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
             let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
 
+            // check if monster goes to the player house, then minus the player energy house
+            if (Utils.isMonster(entity)) {
+                let monsterInfo = entity.getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
+                let posTile = Utils.pixel2Tile(positionComponent.x, positionComponent.y);
+                if (posTile.x === GameConfig.HOUSE_POSITION.x && posTile.y === GameConfig.HOUSE_POSITION.y) {
+                    BattleUILayer.minusPlayerEnergy(monsterInfo.damageEnergy);
+
+                    // destroy
+                    // IMPORTANT: duplicate code
+                    let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
+                    if (appearanceComponent) {
+                        let sprite = appearanceComponent.sprite;
+                        sprite.setVisible(false);
+                    }
+                    entity.setActive(false);
+                    for (let key of Object.keys(entity.components)) {
+                        entity.components[key].setActive(false);
+                    }
+                }
+            }
+
             // side-effect
             this._updateVelocityVector(entity, velocityComponent, positionComponent);
             // end side-effect

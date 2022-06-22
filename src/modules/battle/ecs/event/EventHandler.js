@@ -10,19 +10,39 @@ EventDispatcher.getInstance()
             }
 
             if (bulletInfo.type && bulletInfo.type === "frog") {
-                cc.log("frog collide");
+                // handle here
             } else {
                 bullet.getComponent(GameConfig.COMPONENT_ID.APPEARANCE).sprite.setVisible(false);
                 bullet.setActive(false);
             }
-        }
-    )
-    .addEventHandler(EventType.RESET_INIT_VELOCITY, function (data) {
-        let velocityComponent = data.velocityComponent;
-        velocityComponent.speedX = velocityComponent.originSpeedX;
-        velocityComponent.speedY = velocityComponent.originSpeedY;
-    })
-    .addEventHandler(EventType.END_TIMER, function (data) {
+        })
+    .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = GameConfig.gameLayer.uiLayer;
         uiLayer.waveNode.increaseWave();
+        GameConfig.gameLayer.bornMonster(0, 4);
+    })
+    .addEventHandler(EventType.FINISH_PATH, function (data) {
+        let entity = data.entity;
+
+        if (entity.hasAllComponent(GameConfig.COMPONENT_ID.VELOCITY)) {
+            entity.removeComponent(entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY));
+        }
+
+        if (entity.hasAllComponent(GameConfig.COMPONENT_ID.BULLET_INFO)) {
+            let bulletInfoComponent = entity.getComponent(GameConfig.COMPONENT_ID.BULLET_INFO);
+            if (bulletInfoComponent.type === "frog") {
+                let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
+                if (appearanceComponent) {
+                    appearanceComponent.sprite.setVisible(false);
+                }
+            }
+        }
+
+        entity.setActive(false);
+    })
+    .addEventHandler(EventType.ZERO_ENERGY_PLAYER_HOUSE, function (data) {
+        GameConfig.gameLayer.stopGame();
+    })
+    .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
+
     })

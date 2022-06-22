@@ -2,11 +2,16 @@ let WaveNode = cc.Node.extend({
     ctor: function (maxWave) {
         this._super();
         this.maxWave = maxWave || 25;
-        this.currentWave = 1;
+        this.currentWave = 0;
 
-        this.node = ccs.load("ui/battle/battle_ui_layer/wave/WaveNode.json", "").node;
-        this.addChild(this.node);
-        this.waveText = this.node.getChildByName("wave_text");
+        this.rootNode = ccs.load(BattleResource.WAVE_NODE, "").node;
+        this.addChild(this.rootNode);
+
+        let background = this.rootNode.getChildByName("background");
+        this.width = background.width;
+        this.height = background.height;
+
+        this.waveText = this.rootNode.getChildByName("wave_text");
         this.waveText.setString(this.currentWave + "/" + this.maxWave);
     },
 

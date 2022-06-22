@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_background.png",
+              "Path": "image/mainScene/header/lobby_currency_background.png",
               "Plist": ""
             },
             "Scale9OriginX": 281,
@@ -56,13 +56,13 @@
               "X": 640.0,
               "Y": 85.0
             },
-            "Name": "headerBackgroundImg",
+            "Name": "lobbyCurrencyBackground",
             "ctype": "ImageViewObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_box.png",
+              "Path": "image/mainScene/header/lobby_box.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -107,7 +107,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_box.png",
+              "Path": "image/mainScene/header/lobby_box.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -152,7 +152,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_icon_g_small.png",
+              "Path": "image/common/common_icon_g_small.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -197,7 +197,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_icon_gold_small.png",
+              "Path": "image/common/common_icon_gold_small.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -240,14 +240,103 @@
             "ctype": "SpriteObjectData"
           },
           {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/header/lobby_currency_btn_top_up.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -24.8177,
+              "Y": 10.3829
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -43.8177,
+            "RightMargin": 5.8177,
+            "TopMargin": -30.3829,
+            "BottomMargin": -9.6171,
+            "Tag": 111,
+            "ActionTag": -960341146,
+            "Size": {
+              "X": 38.0,
+              "Y": 40.0
+            },
+            "Name": "goldTopUpBtn",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "image/mainScene/header/lobby_currency_btn_top_up.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 154.6263,
+              "Y": 10.4587
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 135.6263,
+            "RightMargin": -173.6263,
+            "TopMargin": -30.4587,
+            "BottomMargin": -9.5413,
+            "Tag": 112,
+            "ActionTag": -1403151985,
+            "Size": {
+              "X": 38.0,
+              "Y": 40.0
+            },
+            "Name": "gemTopUpBtn",
+            "ctype": "SpriteObjectData"
+          },
+          {
             "FontSize": 20,
             "LabelText": "923.000",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
-            "HorizontalAlignmentType": "HT_Center",
             "OutlineColor": {
               "G": 0,
               "B": 0
@@ -299,10 +388,9 @@
             "LabelText": "25.337",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
-            "HorizontalAlignmentType": "HT_Center",
             "OutlineColor": {
               "G": 0,
               "B": 0
@@ -348,156 +436,6 @@
             },
             "Name": "gemTxt",
             "ctype": "TextObjectData"
-          },
-          {
-            "FontSize": 14,
-            "ButtonText": "",
-            "TextColor": {
-              "R": 65,
-              "G": 65,
-              "B": 70
-            },
-            "DisabledFileData": {
-              "Type": "Default",
-              "Path": "Default/Button_Disable.png",
-              "Plist": ""
-            },
-            "PressedFileData": {
-              "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_btn_top_up.png",
-              "Plist": ""
-            },
-            "NormalFileData": {
-              "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_btn_top_up.png",
-              "Plist": ""
-            },
-            "Scale9Enable": true,
-            "Scale9OriginX": 15,
-            "Scale9OriginY": 11,
-            "Scale9Width": 8,
-            "Scale9Height": 18,
-            "OutlineColor": {
-              "G": 0,
-              "B": 0
-            },
-            "ShadowColor": {
-              "R": 110,
-              "G": 110,
-              "B": 110
-            },
-            "ShadowOffsetX": 2.0,
-            "ShadowOffsetY": -2.0,
-            "TouchEnable": true,
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": -24.82,
-              "Y": 10.38
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -43.82,
-            "RightMargin": 5.82,
-            "TopMargin": -30.38,
-            "BottomMargin": -9.62,
-            "Tag": 276,
-            "ActionTag": 33029837,
-            "Size": {
-              "X": 38.0,
-              "Y": 40.0
-            },
-            "Name": "goldTopUpBtn",
-            "ctype": "ButtonObjectData"
-          },
-          {
-            "FontSize": 14,
-            "ButtonText": "",
-            "TextColor": {
-              "R": 65,
-              "G": 65,
-              "B": 70
-            },
-            "DisabledFileData": {
-              "Type": "Default",
-              "Path": "Default/Button_Disable.png",
-              "Plist": ""
-            },
-            "PressedFileData": {
-              "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_btn_top_up.png",
-              "Plist": ""
-            },
-            "NormalFileData": {
-              "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_btn_top_up.png",
-              "Plist": ""
-            },
-            "Scale9Enable": true,
-            "Scale9OriginX": 15,
-            "Scale9OriginY": 11,
-            "Scale9Width": 8,
-            "Scale9Height": 18,
-            "OutlineColor": {
-              "G": 0,
-              "B": 0
-            },
-            "ShadowColor": {
-              "R": 110,
-              "G": 110,
-              "B": 110
-            },
-            "ShadowOffsetX": 2.0,
-            "ShadowOffsetY": -2.0,
-            "TouchEnable": true,
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 154.63,
-              "Y": 10.46
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 135.63,
-            "RightMargin": -173.63,
-            "TopMargin": -30.46,
-            "BottomMargin": -9.54,
-            "Tag": 297,
-            "ActionTag": 1603225009,
-            "Size": {
-              "X": 38.0,
-              "Y": 40.0
-            },
-            "Name": "gemTopUpBtn",
-            "ctype": "ButtonObjectData"
           }
         ],
         "Size": {
@@ -508,13 +446,12 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../assets/common/common_icon_g_small.png",
-        "../../../assets/common/common_icon_gold_small.png",
-        "../../../assets/font/SVN-Supercell Magic.ttf",
-        "../../../assets/lobby/lobby_box.png",
-        "../../../assets/lobby/lobby_currency_background.png",
-        "../../../assets/lobby/lobby_currency_btn_top_up.png",
-        "../../../Default/Button_Disable.png"
+        "../../../font/SVN-Supercell Magic.ttf",
+        "../../../image/common/common_icon_g_small.png",
+        "../../../image/common/common_icon_gold_small.png",
+        "../../../image/mainScene/header/lobby_box.png",
+        "../../../image/mainScene/header/lobby_currency_background.png",
+        "../../../image/mainScene/header/lobby_currency_btn_top_up.png"
       ],
       "ctype": "GameFileData"
     }

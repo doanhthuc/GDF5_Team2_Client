@@ -34,7 +34,7 @@ cc.game.onStart = function () {
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
 
         // fr.view(MainScreen);
-        fr.view(ScreenNetwork);
+        fr.view(GameLayer);
     }, this);
 };
 cc.game.run();
