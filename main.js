@@ -1,4 +1,3 @@
-
 var gv = gv || {};
 
 var DESIGN_RESOLUTION_WIDTH = 640;
@@ -18,11 +17,11 @@ cc.game.onStart = function () {
         cc.director.setDisplayStats(true);
         // Setup the resolution policy and design resolution size
         var frameSize = cc.view.getFrameSize();
-        var ratio = frameSize.width/frameSize.height;
-        if(ratio < 2){
-            cc.view.setDesignResolutionSize(DESIGN_RESOLUTION_WIDTH,DESIGN_RESOLUTION_HEIGHT, cc.ResolutionPolicy.FIXED_HEIGHT);
-        }else{
-            cc.view.setDesignResolutionSize(DESIGN_RESOLUTION_WIDTH,DESIGN_RESOLUTION_WIDTH/2, cc.ResolutionPolicy.SHOW_ALL);
+        var ratio = frameSize.width / frameSize.height;
+        if (ratio < 2) {
+            cc.view.setDesignResolutionSize(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_HEIGHT, cc.ResolutionPolicy.FIXED_HEIGHT);
+        } else {
+            cc.view.setDesignResolutionSize(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_WIDTH / 2, cc.ResolutionPolicy.SHOW_ALL);
         }
 
         // The game will be resized when browser size change
@@ -33,8 +32,8 @@ cc.game.onStart = function () {
         //modules
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
 
-        // fr.view(MainScreen);
-        fr.view(ScreenNetwork);
+        fr.view(MainScreen);
+        // fr.view(ScreenNetwork);
     }, this);
 };
 cc.game.run();

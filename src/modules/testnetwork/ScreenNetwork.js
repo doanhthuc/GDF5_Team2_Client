@@ -142,11 +142,10 @@ var ScreenNetwork = cc.Layer.extend({
     onConnectFail: function (text) {
         this.lblLog.setString("Connect fail: " + text);
     },
-    onFinishLogin:function()
-    {
+    onFinishLogin: function () {
         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
         testnetwork.connector.sendGetUserInventory();
-        //testnetwork.connector.sendGetUserDailyShop();
+        // testnetwork.connector.sendGetUserDailyShop();
         // testnetwork.connector.sendAddUserGem(100);
         // testnetwork.connector.sendAddUserGold(100);
         // testnetwork.connector.sendBuyGoldShop(0);

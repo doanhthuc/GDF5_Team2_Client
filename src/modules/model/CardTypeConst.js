@@ -1,6 +1,6 @@
 const CARD_TYPE = {
     TOWER: {
-        CANNON_OWL: {
+        0: {
             id: 0,
             name: "cannon - owl",
             image: {
@@ -9,9 +9,10 @@ const CARD_TYPE = {
                 C: "assets/card/miniature_tower_cannon_1.png",
             },
             background: "assets/card/card_background_2.png",
+            cardImage: "assets/card/card_tower_cannon.png",
             energy: 8,
         },
-        WIZARD_CROW: {
+        1: {
             id: 1,
             name: "wizard - crow",
             image: {
@@ -20,9 +21,10 @@ const CARD_TYPE = {
                 C: "assets/card/miniature_tower_wizard_1.png",
             },
             background: "assets/card/card_background_2.png",
+            cardImage: "assets/card/card_tower_wizard.png",
             energy: 12,
         },
-        BOOMERANG_FROG: {
+        2: {
             id: 2,
             name: "boomerang - frog",
             image: {
@@ -31,9 +33,10 @@ const CARD_TYPE = {
                 C: "assets/card/miniature_tower_boomerang_1.png",
             },
             background: "assets/card/card_background_3.png",
+            cardImage: "assets/card/card_tower_boomerang.png",
             energy: 10,
         },
-        OIL_GUN_BUNNY: {
+        3: {
             id: 3,
             name: "oilGun - bunny",
             image: {
@@ -42,9 +45,10 @@ const CARD_TYPE = {
                 C: "assets/card/miniature_tower_oil_gun_1.png",
             },
             background: "assets/card/card_background_2.png",
+            cardImage: 'assets/card/card_tower_oil_gun.png',
             energy: 12,
         },
-        ICE_GUN_POLAR_BEAR: {
+        4: {
             id: 4,
             name: "iceGun - polarBear",
             image: {
@@ -53,9 +57,10 @@ const CARD_TYPE = {
                 C: "assets/card/miniature_tower_ice_gun_1.png",
             },
             background: "assets/card/card_background_2.png",
+            cardImage: 'assets/card/card_tower_ice_gun.png',
             energy: 10,
         },
-        DAMAGE_GOAT: {
+        5: {
             id: 5,
             name: "damage - goat",
             image: {
@@ -64,9 +69,10 @@ const CARD_TYPE = {
                 C: "assets/card/miniature_tower_damage_1.png",
             },
             background: "assets/card/card_background_4.png",
+            cardImage: 'assets/card/card_tower_damage.png',
             energy: 12,
         },
-        ATTACK_SPEED_SNAKE: {
+        6: {
             id: 6,
             name: "attackSpeed - snake",
             image: {
@@ -75,6 +81,7 @@ const CARD_TYPE = {
                 C: "assets/card/miniature_tower_attack_speed_1.png",
             },
             background: "assets/card/card_background_1.png",
+            cardImage: 'assets/card/card_tower_attack_speed.png',
             energy: 12,
         },
     }
