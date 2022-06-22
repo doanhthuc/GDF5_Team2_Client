@@ -23,14 +23,19 @@ var userInfo ={
 var userCardCollection = {
     id:"",
     cardCollection:[],
+    battleDeckCard: [],
     getItemList:function(pk)
     {
-        for(i=0;i<pk.size;i++)
+        for(i=0;i<pk.cardCollectionSize;i++)
             this.cardCollection.push(pk.cardCollection[i]);
+        for(i=0;i<pk.battleDeckSize;i++)
+            this.battleDeckCard.push(pk.battleDeckCard[i]);
     },
     show:function(){
         for(i=0;i<this.cardCollection.length;i++)
             this.cardCollection[i].show();
+        for(i=0;i<this.battleDeckCard.length;i++)
+            cc.log(this.battleDeckCard[i]+" ");
     }
 }
 var userDailyShop = {
@@ -44,6 +49,19 @@ var userDailyShop = {
     show:function(){
         for(i=0;i<this.dailyShopItem.length;i++)
             this.dailyShopItem[i].show();
+    }
+}
+var userLobbyChest = {
+    id:"",
+    lobbyChest:[],
+    getItemList:function(pk)
+    {
+        for(i=0;i<pk.lobbyChestSize;i++)
+            this.lobbyChest.push(pk.lobbyChest[i]);
+    },
+    show:function(){
+        for(i=0;i<this.lobbyChest.length;i++)
+            this.lobbyChest[i].show();
     }
 }
 var res = {
