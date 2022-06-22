@@ -15,7 +15,7 @@ const BattleDeckNode = cc.Node.extend({
         let startY = InventoryResources.BATTLE_DECK_HOLDER_BOTTOM_BORDER_WIDTH + 1.5 * InventoryResources.CARD_HEIGHT
             + InventoryResources.CARD_BOTTOM_MARGIN + InventoryResources.CARD_BOTTOM_HOLDER_MARGIN;
         for (let i = 0; i < 8; i++) {
-            let testCard = new CardModel(5, 1, 0);
+            let testCard = new CardModel(2, 1, 0);
             // testCard.logCardInfo();
             let card = new CardNode(testCard);
             card.retain();

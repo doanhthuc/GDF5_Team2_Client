@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
+    <list default="true" id="68477dad-f837-41b6-9889-cb74882e5aff" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/modules/lobby/LobbyChest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/inventory/BattleDeck.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/BattleDeck.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

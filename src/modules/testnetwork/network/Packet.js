@@ -2,24 +2,27 @@
  * Created by KienVN on 10/2/2017.
  */
 
-gv.CMD = gv.CMD || {};
+gv.CMD = gv.CMD ||{};
 gv.CMD.HAND_SHAKE = 0;
 gv.CMD.USER_LOGIN = 1;
-gv.CMD.USER_INFO = 1001;
-gv.CMD.ADD_USER_GOLD = 1002;
-gv.CMD.ADD_USER_GEM = 1003;
+gv.CMD.GET_USER_INFO = 1001;
+gv.CMD.ADD_USER_GOLD=1002;
+gv.CMD.ADD_USER_GEM=1003;
 
-gv.CMD.BUY_GOLD_SHOP = 2001;
-gv.CMD.BUY_DAILY_SHOP = 2002;
-gv.CMD.USER_DAILY_SHOP = 2003;
+gv.CMD.BUY_GOLD_SHOP=2001;
+gv.CMD.BUY_DAILY_SHOP=2002;
+gv.CMD.GET_USER_DAILY_SHOP=2003;
 
-gv.CMD.USER_INVENTORY = 3001;
+gv.CMD.GET_USER_INVENTORY=3001;
+gv.CMD.UPGRADE_CARD=3002;
+
+gv.CMD.GET_USER_LOBBY=4001;
 
 gv.CMD.MOVE = 2005;
 gv.CMD.MAP_INFO = 2004;
 gv.CMD.RESET_MAP = 2006;
 
-testnetwork = testnetwork || {};
+testnetwork = testnetwork||{};
 testnetwork.packetMap = {};
 
 /** Outpacket */
@@ -27,13 +30,14 @@ testnetwork.packetMap = {};
 //Handshake
 CmdSendHandshake = fr.OutPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
             this.initData(100);
             this.setControllerId(gv.CONTROLLER_ID.SPECIAL_CONTROLLER);
             this.setCmdId(gv.CMD.HAND_SHAKE);
         },
-        putData: function () {
+        putData:function(){
             //pack
             this.packHeader();
             //update
@@ -44,12 +48,13 @@ CmdSendHandshake = fr.OutPacket.extend(
 
 CmdSendLogin = fr.OutPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
             this.initData(100);
             this.setCmdId(gv.CMD.USER_LOGIN);
         },
-        pack: function (sessionKey, userID) {
+        pack:function(sessionKey, userID){
             this.packHeader();
             this.putString(sessionKey);
             this.putInt(userID);
@@ -57,55 +62,82 @@ CmdSendLogin = fr.OutPacket.extend(
         }
     }
 )
-CMDSendGetUserInfo = fr.OutPacket.extend(
+CMDSendGetUserInfo= fr.OutPacket.extend(
     {
-        ctor: function () {
+        ctor:function() {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.USER_INFO);
+            this.setCmdId(gv.CMD.GET_USER_INFO);
         },
-        pack: function () {
+        pack:function() {
             this.packHeader();
             //this.putInt(userID);
             this.updateSize();
         }
     }
 )
-CMDSendGetUserInventory = fr.OutPacket.extend(
+CMDSendGetUserLobbyChest= fr.OutPacket.extend(
     {
-        ctor: function () {
+        ctor:function() {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.USER_INVENTORY);
+            this.setCmdId(gv.CMD.GET_USER_LOBBY);
         },
-        pack: function () {
+        pack:function() {
             this.packHeader();
+            this.updateSize();
+        }
+    }
+)
+CMDSendGetUserInventory= fr.OutPacket.extend(
+    {
+        ctor:function() {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.GET_USER_INVENTORY);
+        },
+        pack:function() {
+            this.packHeader();
+            this.updateSize();
+        }
+    }
+)
+CMDSendUpgradeCard= fr.OutPacket.extend(
+    {
+        ctor:function() {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.UPGRADE_CARD);
+        },
+        pack:function(cardType) {
+            this.packHeader();
+            this.putInt(cardType);
             this.updateSize();
         }
     }
 )
 
-CMDSendGetDailyShop = fr.OutPacket.extend(
+CMDSendGetDailyShop= fr.OutPacket.extend(
     {
-        ctor: function () {
+        ctor:function() {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.USER_DAILY_SHOP);
+            this.setCmdId(gv.CMD.GET_USER_DAILY_SHOP);
         },
-        pack: function () {
+        pack:function() {
             this.packHeader();
             this.updateSize();
         }
     }
 )
-CMDSendAddUserGold = fr.OutPacket.extend(
+CMDSendAddUserGold= fr.OutPacket.extend(
     {
-        ctor: function () {
+        ctor:function() {
             this._super();
             this.initData(100);
             this.setCmdId(gv.CMD.ADD_USER_GOLD);
         },
-        pack: function (gold) {
+        pack:function(gold) {
             this.packHeader();
             this.putInt(gold);
             this.updateSize();
@@ -113,14 +145,14 @@ CMDSendAddUserGold = fr.OutPacket.extend(
     }
 )
 
-CMDSendAddUserGem = fr.OutPacket.extend(
+CMDSendAddUserGem= fr.OutPacket.extend(
     {
-        ctor: function () {
+        ctor:function() {
             this._super();
             this.initData(100);
             this.setCmdId(gv.CMD.ADD_USER_GEM);
         },
-        pack: function (gem) {
+        pack:function(gem) {
             this.packHeader();
             this.putInt(gem);
             this.updateSize();
@@ -128,14 +160,14 @@ CMDSendAddUserGem = fr.OutPacket.extend(
     }
 )
 
-CMDBuyGoldShop = fr.OutPacket.extend(
+CMDBuyGoldShop= fr.OutPacket.extend(
     {
-        ctor: function () {
+        ctor:function() {
             this._super();
             this.initData(100);
             this.setCmdId(gv.CMD.BUY_GOLD_SHOP);
         },
-        pack: function (itemId) {
+        pack:function(itemId) {
             this.packHeader();
             this.putInt(itemId);
             this.updateSize();
@@ -143,20 +175,23 @@ CMDBuyGoldShop = fr.OutPacket.extend(
     }
 )
 
-CMDBuyDailyShop = fr.OutPacket.extend(
+CMDBuyDailyShop= fr.OutPacket.extend(
     {
-        ctor: function () {
+        ctor:function() {
             this._super();
             this.initData(100);
             this.setCmdId(gv.CMD.BUY_DAILY_SHOP);
         },
-        pack: function (itemId) {
+        pack:function(itemId) {
             this.packHeader();
             this.putInt(itemId);
             this.updateSize();
         }
     }
 )
+
+
+
 
 
 /**
@@ -166,10 +201,11 @@ CMDBuyDailyShop = fr.OutPacket.extend(
 //Handshake
 testnetwork.packetMap[gv.CMD.HAND_SHAKE] = fr.InPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
         },
-        readData: function () {
+        readData:function(){
 
             this.token = this.getString();
         }
@@ -178,76 +214,82 @@ testnetwork.packetMap[gv.CMD.HAND_SHAKE] = fr.InPacket.extend(
 
 testnetwork.packetMap[gv.CMD.USER_LOGIN] = fr.InPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
         },
-        readData: function () {
+        readData:function(){
         }
     }
 );
 
 testnetwork.packetMap[gv.CMD.ADD_USER_GOLD] = fr.InPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
         },
-        readData: function () {
-            this.usergold = this.getInt();
+        readData:function(){
+           this.usergold=this.getInt();
         }
     }
 );
 
 testnetwork.packetMap[gv.CMD.ADD_USER_GEM] = fr.InPacket.extend(
     {
-        ctor: function () {
-            s
+        ctor:function()
+        {s
             this._super();
         },
-        readData: function () {
-            this.usergem = this.getInt();
+        readData:function(){
+            this.usergem=this.getInt();
         }
     }
 );
 
 
-testnetwork.packetMap[gv.CMD.USER_INFO] = fr.InPacket.extend(
+testnetwork.packetMap[gv.CMD.GET_USER_INFO] = fr.InPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
         },
-        readData: function () {
+        readData:function(){
             this.id = this.getInt();
-            this.username = this.getString();
-            this.gold = this.getInt();
-            this.gem = this.getInt();
-            this.trophy = this.getInt();
+            this.username= this.getString();
+            this.gold=this.getInt();
+            this.gem=this.getInt();
+            this.trophy=this.getInt();
         }
     }
 );
 
 testnetwork.packetMap[gv.CMD.BUY_GOLD_SHOP] = fr.InPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
         },
-        readData: function () {
-            this.goldchange = this.getInt();
-            this.gemchange = this.getInt();
+        readData:function(){
+           this.goldchange=this.getInt();
+           this.gemchange=this.getInt();
         }
     }
 );
 testnetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
-            this.itemtype = [];
-            this.itemQuantity = [];
+            this.itemtype= [];
+            this.itemQuantity= [];
         },
-        readData: function () {
-            this.goldchange = this.getInt();
-            this.gemchange = this.getInt();
-            this.itemAmount = this.getInt();
-            for (i = 0; i < this.itemAmount; i++) {
+        readData:function(){
+            this.goldchange=this.getInt();
+            this.gemchange=this.getInt();
+            this.itemAmount=this.getInt();
+            for(i=0;i<this.itemAmount;i++)
+            {
                 this.itemtype.push(this.getInt());
                 this.itemQuantity.push(this.getInt());
             }
@@ -255,39 +297,77 @@ testnetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend(
     }
 );
 
-testnetwork.packetMap[gv.CMD.USER_INVENTORY] = fr.InPacket.extend(
+testnetwork.packetMap[gv.CMD.GET_USER_INVENTORY] = fr.InPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
-            this.cardCollection = [];
-
+            this.cardCollection= [];
+            this.battleDeckCard=[]
         },
-        readData: function () {
-            this.size = this.getInt();
-            for (i = 0; i < this.size; i++) {
-                type = this.getInt();
-                level = this.getInt();
-                amount = this.getInt();
-                this.cardCollection.push(new Card(type, level, amount));
+        readData:function(){
+            this.cardCollectionSize = this.getInt();
+            for(i=0;i<this.cardCollectionSize;i++)
+            {
+                type=this.getInt();
+                level=this.getInt();
+                amount=this.getInt();
+                this.cardCollection.push(new Card(type,level,amount));
+            }
+            this.battleDeckSize = this.getInt();
+            for(i=0;i<this.battleDeckSize;i++)
+                this.battleDeckCard.push(this.getInt());
+        }
+    }
+);
+testnetwork.packetMap[gv.CMD.GET_USER_LOBBY] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+            this.lobbyChest = [];
+        },
+        readData:function(){
+            this.lobbyChestSize= this.getInt();
+            for(i=0;i<this.lobbyChestSize;i++)
+            {
+                state=this.getInt();
+                claimTime=this.getLong();
+                this.lobbyChest.push(new LobbyChest(state,claimTime));
             }
         }
     }
 );
-testnetwork.packetMap[gv.CMD.USER_DAILY_SHOP] = fr.InPacket.extend(
+testnetwork.packetMap[gv.CMD.UPGRADE_CARD] = fr.InPacket.extend(
     {
-        ctor: function () {
+        ctor:function()
+        {
             this._super();
-            this.dailyShopItem = [];
+        },
+        readData:function(){
+            this.goldchange=this.getInt();
+            this.cardType=this.getInt();
+            this.fragmentChange=this.getInt();
+        }
+    }
+);
+testnetwork.packetMap[gv.CMD.GET_USER_DAILY_SHOP] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+            this.dailyShopItem= [];
 
         },
-        readData: function () {
+        readData:function(){
             this.size = this.getInt();
-            for (i = 0; i < this.size; i++) {
-                itemType = this.getInt();
-                itemQuantity = this.getInt();
-                itemPrice = this.getInt();
-                itemState = this.getInt();
-                this.dailyShopItem.push(new ShopItem(itemType, itemQuantity, itemPrice, itemState));
+            for(i=0;i<this.size;i++)
+            {
+                itemType=this.getInt();
+                itemQuantity=this.getInt();
+                itemPrice=this.getInt();
+                itemState=this.getInt();
+                this.dailyShopItem.push(new ShopItem(itemType,itemQuantity,itemPrice,itemState));
             }
         }
     }

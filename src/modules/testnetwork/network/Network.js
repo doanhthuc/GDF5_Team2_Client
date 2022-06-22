@@ -19,7 +19,7 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.USER_LOGIN:
                 fr.getCurrentScreen().onFinishLogin();
                 break;
-            case gv.CMD.USER_INFO:
+            case gv.CMD.GET_USER_INFO:
                 userInfo.clone(packet);
                 userInfo.show();
                 // let userContext = contextManager.getContext(ContextManagerConst.USER_CONTEXT);
@@ -30,15 +30,22 @@ testnetwork.Connector = cc.Class.extend({
 
                 userContext.updateUserInfoUI();
                 break;
-            case gv.CMD.USER_INVENTORY:
+            case gv.CMD.GET_USER_INVENTORY:
                 userCardCollection.getItemList(packet);
                 cc.log("GetInventory");
                 userCardCollection.show();
                 break;
-            case gv.CMD.USER_DAILY_SHOP:
+            case gv.CMD.UPGRADE_CARD:
+                cc.log(packet.goldchange+" "+packet.cardType+" "+packet.fragmentChange);
+                break;
+            case gv.CMD.GET_USER_DAILY_SHOP:
                 userDailyShop.getItemList(packet);
                 cc.log("GetDailyShop");
                 userDailyShop.show();
+                break;
+            case gv.CMD.GET_USER_LOBBY:
+                userLobbyChest.getItemList(packet);
+                userLobbyChest.show();
                 break;
             case gv.CMD.ADD_USER_GOLD:
                 cc.log(packet.usergold);
@@ -55,7 +62,7 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("BUY DAILY SHOP");
                 cc.log(packet.gemchange+" "+packet.goldchange);
                 for(i=0;i<packet.itemAmount;i++)
-                    cc.log(packet.itemQuantity[i]+" "+packet.itemtype[i]);
+                    cc.log(itemType[i]+" "+packet.itemQuantity[i]);
                 break;
         }
     },
@@ -86,16 +93,28 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(gem);
         this.gameClient.sendPacket(pk);
     },
-    sendBuyGoldShop:function(itemid){
-        cc.log("SendBuyShopGold");
-        var pk = this.gameClient.getOutPacket(CMDBuyGoldShop);
-        pk.pack(itemid);
-        this.gameClient.sendPacket(pk);
-    },
     sendGetUserInventory:function(){
         cc.log("sendGetuserInventory");
         var pk= this.gameClient.getOutPacket(CMDSendGetUserInventory);
         pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendUpgradeCard:function(cardType){
+        cc.log("sendUpgradeCard");
+        var pk= this.gameClient.getOutPacket(CMDSendUpgradeCard);
+        pk.pack(cardType);
+        this.gameClient.sendPacket(pk);
+    },
+    sendGetUserLobbyChest:function(){
+        cc.log("sendGetUserInfo");
+        var pk = this.gameClient.getOutPacket(CMDSendGetUserLobbyChest);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendBuyGoldShop:function(itemid){
+        cc.log("SendBuyShopGold");
+        var pk= this.gameClient.getOutPacket(CMDBuyGoldShop);
+        pk.pack(itemid);
         this.gameClient.sendPacket(pk);
     },
     sendGetUserDailyShop:function(){

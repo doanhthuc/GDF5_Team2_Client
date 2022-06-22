@@ -91,6 +91,7 @@
         "src/modules/lobby/Treasure.js",
         "src/modules/lobby/TreasurePopup.js",
         "src/modules/lobby/TreasureSlot.js",
+        "src/modules/lobby/LobbyChest.js",
         "src/modules/localization/ScreenLocalization.js",
         "src/modules/mainGUI/BottomNav.js",
         "src/modules/mainGUI/Header.js",
