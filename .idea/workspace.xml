@@ -5,19 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/res/config/Tower.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/model/CarRankConst.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/model/CardTypeConst.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/model/TowerCard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/JsonReader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/config/TowerBuff.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/model/CardNameConst.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/context/InitContexts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/context/InitContexts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/context/InventoryContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/context/InventoryContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/inventory/card.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/card.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/inventory/cardImageNode.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/cardImageNode.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/inventory/cardUpgradeProgress.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/inventory/cardUpgradeProgress.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/lobby/playerInfoHolder.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/lobby/playerInfoHolder.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/MainScene.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/MainScene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ui/main/header/header.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ui/main/header/header.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/inventory/BattleDeck.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/BattleDeck.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/PlayerInfoHolder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/PlayerInfoHolder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/inventory/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/Card.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/model/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/model/Card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/model/CardModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/model/CardModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/model/CardTypeConst.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/model/CardTypeConst.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/JsonReader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/JsonReader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/UiUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/UiUtil.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -344,7 +351,6 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="rearrange.code.on.save" value="true" />
-    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="ReaderModeSettings">
@@ -352,11 +358,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\VNG\GDF5_Team2_Client\res\config" />
       <recent name="D:\team_2_client\res\config" />
       <recent name="D:\team_2_client\res\assets\lobby" />
       <recent name="D:\Project\TemplateGame\src\framework\plugins" />
       <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\network\auto" />
-      <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\game\render\effect" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\VNG\GDF5_Team2_Client\res\assets\lobby" />
@@ -367,6 +373,17 @@
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -437,6 +454,7 @@
       <method />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="HelloJavascript" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -447,12 +465,15 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="HelloJavascript" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -475,15 +496,14 @@
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="HelloJavascript" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="HelloJavascript" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
       <option name="CLASS_NAME" value="" />
@@ -492,88 +512,55 @@
       <option name="TEST_TYPE" value="TEST_SCRIPT" />
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
-      <method />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Nosetests">
+      <module name="HelloJavascript" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="HelloJavascript" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
+      <option name="_new_regexPattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
+      <module name="HelloJavascript" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="HelloJavascript" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="py.test">
+      <module name="HelloJavascript" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="HelloJavascript" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="testToRun" value="" />
-      <option name="keywords" value="" />
-      <option name="params" value="" />
-      <option name="USE_PARAM" value="false" />
-      <option name="USE_KEYWORD" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
@@ -634,8 +621,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="JSBinding.Win32Debug" />
-        <item itemvalue="Node.js.InPacketGenerate.js" />
-        <item itemvalue="JavaScript Debug.index.html" />
       </list>
     </recent_temporary>
   </component>
@@ -755,6 +740,7 @@
       <workItem from="1655778395938" duration="5198000" />
       <workItem from="1655787384813" duration="243000" />
       <workItem from="1655799958138" duration="6781000" />
+      <workItem from="1655859477466" duration="11251000" />
     </task>
     <servers />
   </component>
@@ -850,14 +836,6 @@
     <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <default-breakpoints>
-        <breakpoint enabled="true" suspend="THREAD" type="java-exception" />
-        <breakpoint enabled="true" log-message="true" type="javascript-exception" />
-      </default-breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

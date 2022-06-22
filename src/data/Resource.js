@@ -2,47 +2,45 @@
  * Created by GSN on 6/2/2015.
  */
 
-var UID=0;
-var userInfo ={
-    id:"",
-    username:"",
-    gem:0,
-    gold:0,
-    trophy:0,
-    clone:function(pk){
-        this.username=pk.username;
-        this.gold=pk.gold;
-        this.gem=pk.gem;
-        this.id=pk.id;
-        this.trophy=pk.trophy;
+var UID = 0;
+var userInfo = {
+    id: "",
+    username: "",
+    gem: 0,
+    gold: 0,
+    trophy: 0,
+    clone: function (pk) {
+        this.username = pk.username;
+        this.gold = pk.gold;
+        this.gem = pk.gem;
+        this.id = pk.id;
+        this.trophy = pk.trophy;
     },
-    show:function(){
-        cc.log(this.username+" "+this.gold+" "+this.gem+" "+this.id+" "+this.trophy);
+    show: function () {
+        cc.log(this.username + " " + this.gold + " " + this.gem + " " + this.id + " " + this.trophy);
     }
 }
 var userCardCollection = {
-    id:"",
-    cardCollection:[],
-    getItemList:function(pk)
-    {
-        for(i=0;i<pk.size;i++)
+    id: "",
+    cardCollection: [],
+    getItemList: function (pk) {
+        for (i = 0; i < pk.size; i++)
             this.cardCollection.push(pk.cardCollection[i]);
     },
-    show:function(){
-        for(i=0;i<this.cardCollection.length;i++)
+    show: function () {
+        for (i = 0; i < this.cardCollection.length; i++)
             this.cardCollection[i].show();
     }
 }
 var userDailyShop = {
-    id:"",
-    dailyShopItem:[],
-    getItemList:function(pk)
-    {
-        for(i=0;i<pk.size;i++)
+    id: "",
+    dailyShopItem: [],
+    getItemList: function (pk) {
+        for (i = 0; i < pk.size; i++)
             this.dailyShopItem.push(pk.dailyShopItem[i]);
     },
-    show:function(){
-        for(i=0;i<this.dailyShopItem.length;i++)
+    show: function () {
+        for (i = 0; i < this.dailyShopItem.length; i++)
             this.dailyShopItem[i].show();
     }
 }
@@ -59,7 +57,7 @@ var res = {
     ZCSD_SCREEN_DECRYPTION: 'zcsd/screen_decryption.json',
     ZCSD_SCREEN_ZALO: 'zcsd/screen_zalo.json',
     MAIN_SCREEN: 'ui/main/MainScene.json',
-    BOTTOM_NAV: 'ui/main/bottom/BottomNav.json',
+    // BOTTOM_NAV: 'ui/main/bottom/BottomNav.json',
     LOBBY_NODE: 'ui/lobby/lobbyHomeNode.json',
     TREASURE_POPUP_NODE: 'ui/lobby/treasurePopup.json',
 
