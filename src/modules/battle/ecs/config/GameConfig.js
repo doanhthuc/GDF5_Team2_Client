@@ -52,10 +52,12 @@ GameConfig.TOWER_TARGET_STRATEGY = {
     MIN_DISTANCE: 4
 }
 
+GameConfig.HOUSE_POSITION = {x: 6, y: 0};
 GameConfig.TILE_WIDTH = 77;
 GameConfig.TILE_HEIGH = 77;
 GameConfig.MAP_WIDTH = 7;
 GameConfig.MAP_HEIGH = 5;
+GameConfig.RIVER_MAP_HEIGH = 100;
 GameConfig.SCREEN_WIDTH = 640;
 GameConfig.SCREEN_HEIGH = 1136;
 

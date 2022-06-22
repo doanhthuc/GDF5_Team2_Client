@@ -12,8 +12,8 @@ Utils.tile2Pixel = function (x, y) {
     // return center of tile pixel
     let paddingX = (GameConfig.SCREEN_WIDTH - 7 * GameConfig.TILE_WIDTH) / 2;
     let paddingY = 200;
-    let xx = x * GameConfig.TILE_WIDTH + paddingX + 0.5 * GameConfig.TILE_WIDTH;
-    let yy = y * GameConfig.TILE_HEIGH + paddingY + 0.5 * GameConfig.TILE_HEIGH;
+    let xx = x * GameConfig.TILE_WIDTH + paddingX + GameConfig.TILE_WIDTH / 2;
+    let yy = y * GameConfig.TILE_HEIGH + paddingY + GameConfig.TILE_HEIGH / 2;
     return {x: xx, y: yy};
 };
 
@@ -27,9 +27,10 @@ Utils.tileArray2PixelArray = function (positionArr) {
 
 Utils.pixel2Tile = function (xx, yy) {
     let paddingX = (GameConfig.SCREEN_WIDTH - 7 * GameConfig.TILE_WIDTH) / 2;
+    // TODO: hardcode, get height of deck card
     let paddingY = 200;
-    let x = (xx - paddingX - 0.5 * GameConfig.TILE_WIDTH) / GameConfig.TILE_WIDTH;
-    let y = (yy - paddingY - 0.5 * GameConfig.TILE_HEIGH) / GameConfig.TILE_HEIGH;
+    let x = Math.floor((xx - paddingX) / GameConfig.TILE_WIDTH);
+    let y = Math.floor((yy - paddingY) / GameConfig.TILE_HEIGH);
     return {x, y};
 }
 

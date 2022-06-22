@@ -1,7 +1,7 @@
 {
   "ID": "6983592f-eaf3-4ec9-aa80-d92d35608e3f",
   "Version": "2.3.4",
-  "Name": "AvatarNode",
+  "Name": "PlayerInfoNode",
   "Content": {
     "Content": {
       "Animation": {
@@ -29,12 +29,12 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": -0.866,
-              "Y": 0.0075
+              "X": 0.0,
+              "Y": 0.0
             },
             "Scale": {
-              "ScaleX": 1.3799,
-              "ScaleY": 0.6862
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "CColor": {},
             "IconVisible": false,
@@ -46,15 +46,15 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -100.866,
-            "RightMargin": -99.134,
-            "TopMargin": -44.0075,
-            "BottomMargin": -43.9925,
-            "Tag": 513,
-            "ActionTag": 886504479,
+            "LeftMargin": -151.0,
+            "RightMargin": -151.0,
+            "TopMargin": -30.5,
+            "BottomMargin": -30.5,
+            "Tag": 624,
+            "ActionTag": 2040607865,
             "Size": {
-              "X": 200.0,
-              "Y": 88.0
+              "X": 302.0,
+              "Y": 61.0
             },
             "Name": "background",
             "ctype": "ImageViewObjectData"
@@ -157,6 +157,7 @@
               "Path": "assets/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
+            "HorizontalAlignmentType": "HT_Center",
             "OutlineColor": {
               "G": 0,
               "B": 0
@@ -211,6 +212,7 @@
               "Path": "assets/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
+            "HorizontalAlignmentType": "HT_Center",
             "OutlineColor": {
               "G": 0,
               "B": 0
