@@ -24,7 +24,7 @@ let GameLayer = cc.Layer.extend({
         this.effectSystem = new EffectSystem();
         this.pathSystem = new PathMonsterSystem();
 
-        // this._initTower();
+        this._initTower();
         this._handleEventKey();
 
         this.scheduleUpdate();
