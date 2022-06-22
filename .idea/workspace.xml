@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/res/config/Tower.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/model/CarRankConst.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/model/CardTypeConst.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/model/TowerCard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/JsonReader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/context/InitContexts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/context/InitContexts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/context/InventoryContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/context/InventoryContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/inventory/BattleDeck.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/inventory/BattleDeck.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/lobby/PlayerInfoHolder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/lobby/PlayerInfoHolder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainGUI/MainScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/model/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/model/Card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

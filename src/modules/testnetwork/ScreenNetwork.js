@@ -145,12 +145,12 @@ var ScreenNetwork = cc.Layer.extend({
     onFinishLogin:function()
     {
         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
-        //testnetwork.connector.sendGetUserInventory();
-        testnetwork.connector.sendGetUserDailyShop();
+        testnetwork.connector.sendGetUserInventory();
+        //testnetwork.connector.sendGetUserDailyShop();
         // testnetwork.connector.sendAddUserGem(100);
         // testnetwork.connector.sendAddUserGold(100);
         // testnetwork.connector.sendBuyGoldShop(0);
-         testnetwork.connector.sendBuyDailyShop(2);
+        //testnetwork.connector.sendBuyDailyShop(2);
         fr.view(MainScreen);
 
         // userContext.updateUserInfoUI();
