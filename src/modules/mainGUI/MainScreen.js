@@ -70,10 +70,12 @@ const MainScreen = cc.Layer.extend({
         this.treasurePopupNode = new TreasurePopup();
         this.buyCardPopupNode = new BuyCardPopup();
         this.buyGoldPopupNode = new BuyGoldPopup();
+        this.cardDetailPopupNode = new CardDetailPopup();
 
         this.addPopup(this.treasurePopupNode);
         this.addPopup(this.buyCardPopupNode);
         this.addPopup(this.buyGoldPopupNode);
+        this.addPopup(this.cardDetailPopupNode);
     },
 
     addPopup: function (popupNode) {

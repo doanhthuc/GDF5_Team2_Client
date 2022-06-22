@@ -16,7 +16,7 @@ const CARD_TYPE = {
             id: 1,
             name: "wizard - crow",
             image: {
-                A: "assets/card/miniature_tower_wizard_3.png",
+                A: "assets/card/miniature_tower_wizard _3.png",
                 B: "assets/card/miniature_tower_wizard_2.png",
                 C: "assets/card/miniature_tower_wizard_1.png",
             },
@@ -84,5 +84,7 @@ const CARD_TYPE = {
             cardImage: 'assets/card/card_tower_attack_speed.png',
             energy: 12,
         },
-    }
+    },
+
+
 }

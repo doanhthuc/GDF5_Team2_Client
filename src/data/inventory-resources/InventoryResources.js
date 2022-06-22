@@ -3,6 +3,8 @@ const InventoryResources = {
     CARD_NODE: 'ui/inventory/card.json',
     BATTLE_DECK_HOLDER: 'ui/inventory/battleDeckHolder.json',
     CARD_COLLECTION_NODE: 'ui/inventory/cardCollectionNode.json',
+    CARD_DETAIL_POPUP_NODE: 'ui/inventory/cardDetailPopup.json',
+    CARD_STAT_HOLDER_NODE: 'ui/inventory/cardStatHolder.json',
     CARD_WIDTH: 138,
     CARD_HEIGHT: 216,
     BATTLE_DECK_HOLDER_BOTTOM_BORDER_WIDTH: 76,
