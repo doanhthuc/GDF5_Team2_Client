@@ -17,6 +17,11 @@ gv.CMD.GET_USER_INVENTORY=3001;
 gv.CMD.UPGRADE_CARD=3002;
 
 gv.CMD.GET_USER_LOBBY=4001;
+gv.CMD.UNLOCK_LOBBY_CHEST=4002;
+gv.CMD.SPEEDUP_LOBBY_CHEST=4003;
+gv.CMD.CLAIM_LOBBY_CHEST=4004;
+
+
 
 gv.CMD.MOVE = 2005;
 gv.CMD.MAP_INFO = 2004;
@@ -89,6 +94,52 @@ CMDSendGetUserLobbyChest= fr.OutPacket.extend(
         }
     }
 )
+
+CMDSendUnlockLobbyChest= fr.OutPacket.extend(
+    {
+        ctor:function() {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.UNLOCK_LOBBY_CHEST);
+        },
+        pack:function(chestid) {
+            this.packHeader();
+            this.putInt(chestid);
+            this.updateSize();
+        }
+    }
+)
+
+CMDSendSpeedUpLobbyChest= fr.OutPacket.extend(
+    {
+        ctor:function() {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.SPEEDUP_LOBBY_CHEST);
+        },
+        pack:function(chestid) {
+            this.packHeader();
+            this.putInt(chestid);
+            this.updateSize();
+        }
+    }
+)
+
+CMDSendClaimLobbyChest= fr.OutPacket.extend(
+    {
+        ctor:function() {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.CLAIM_LOBBY_CHEST);
+        },
+        pack:function(chestid) {
+            this.packHeader();
+            this.putInt(chestid);
+            this.updateSize();
+        }
+    }
+)
+
 CMDSendGetUserInventory= fr.OutPacket.extend(
     {
         ctor:function() {
@@ -281,7 +332,7 @@ testnetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend(
         ctor:function()
         {
             this._super();
-            this.itemtype= [];
+            this.itemType= [];
             this.itemQuantity= [];
         },
         readData:function(){
@@ -290,7 +341,7 @@ testnetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend(
             this.itemAmount=this.getInt();
             for(i=0;i<this.itemAmount;i++)
             {
-                this.itemtype.push(this.getInt());
+                this.itemType.push(this.getInt());
                 this.itemQuantity.push(this.getInt());
             }
         }
@@ -338,6 +389,65 @@ testnetwork.packetMap[gv.CMD.GET_USER_LOBBY] = fr.InPacket.extend(
         }
     }
 );
+
+testnetwork.packetMap[gv.CMD.UNLOCK_LOBBY_CHEST] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+            this.lobbyChest = [];
+        },
+        readData:function(){
+            this.lobbyChestid= this.getInt();
+            this.state=this.getInt();
+            this.claimTime=this.getLong();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.SPEEDUP_LOBBY_CHEST] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+            this.itemType=[];
+            this.itemQuantity=[];
+        },
+        readData:function(){
+            this.lobbyChestid= this.getInt();
+            this.state=this.getInt();
+            this.gemchange=this.getInt();
+            this.rewardsize=this.getInt();
+            for(i=0;i<this.rewardsize;i++) {
+                this.itemType.push(this.getInt());
+                this.itemQuantity.push(this.getInt());
+            }
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.CLAIM_LOBBY_CHEST] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+            this.rewardType=[];
+            this.rewardQuantity=[];
+        },
+        readData:function(){
+            this.lobbyChestid= this.getInt();
+            this.state=this.getInt();
+            this.gemchange=this.getInt();
+            this.rewardsize=this.getInt();
+            for(i=0;i<rewardsize;i++) {
+                this.rewardType.push(this.getInt());
+                this.rewardQuantity.push(this.getInt());
+            }
+        }
+    }
+);
+
+
 testnetwork.packetMap[gv.CMD.UPGRADE_CARD] = fr.InPacket.extend(
     {
         ctor:function()

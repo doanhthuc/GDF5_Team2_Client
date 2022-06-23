@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="196b5f2e-e6e4-47f3-b75c-66729969ae54" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/lobby/LobbyChest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Network.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js" afterDir="false" />
@@ -557,19 +554,6 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" uri="http://localhost:63342/HelloJavascript/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -747,7 +731,8 @@
       <workItem from="1655689380863" duration="13250000" />
       <workItem from="1655710833404" duration="4036000" />
       <workItem from="1655725056419" duration="23000" />
-      <workItem from="1655862385400" duration="4698000" />
+      <workItem from="1655862385400" duration="5659000" />
+      <workItem from="1655964364431" duration="4661000" />
     </task>
     <servers />
   </component>
