@@ -1,4 +1,4 @@
-var CardNode = cc.Node.extend({
+const CardNode = cc.Node.extend({
     ctor: function (cardModel) {
         this._super();
         this.init();
@@ -7,6 +7,7 @@ var CardNode = cc.Node.extend({
 
     setModel: function (cardModel) {
         this.cardModel = cardModel
+        this.setUpgradeProgressBar(this.cardModel.accumulated)
         this.setCardTexture();
     },
 
@@ -21,6 +22,11 @@ var CardNode = cc.Node.extend({
         this.cardBackgroundBtn = this.cardImageNode.getChildByName('cardBackgroundBtn');
         this.cardImage = this.cardImageNode.getChildByName('cardImage');
         this.cardBorderImg = this.cardImageNode.getChildByName('cardBorderImg');
+
+        this.progressBorderImg = this.upgradeProgressNode.getChildByName('progressBorderImg');
+        this.progressBackgroundImg = this.progressBorderImg.getChildByName('progressBackgroundImg');
+        this.accumulateTxt = this.progressBorderImg.getChildByName('accumulateTxt');
+
         this.cardBackgroundBtn.addTouchEventListener(this.onCardClick.bind(this), this);
     },
 
@@ -45,6 +51,17 @@ var CardNode = cc.Node.extend({
 
     setCardClickEnabled: function (enabled) {
         this.cardBackgroundBtn.setTouchEnabled(enabled);
+    },
+
+    setUpgradeProgressBar: function (accumulatedCard) {
+        //TODO: exception when max level
+        if (accumulatedCard < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
+            this.progressBackgroundImg.setScaleX(accumulatedCard / JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
+            this.accumulateTxt.setString(accumulatedCard + '/' + JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
+        } else {
+            this.progressBackgroundImg.setScaleX(1);
+            this.accumulateTxt.setString(accumulatedCard + '/' + JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
+        }
     }
 
 

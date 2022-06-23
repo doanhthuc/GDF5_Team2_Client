@@ -143,7 +143,7 @@
                   "X": 120.0,
                   "Y": 24.0
                 },
-                "Name": "Sprite_2",
+                "Name": "progressBackgroundImg",
                 "ctype": "SpriteObjectData"
               },
               {
@@ -201,7 +201,7 @@
                   "X": 91.0,
                   "Y": 25.0
                 },
-                "Name": "Text_1",
+                "Name": "accumulateTxt",
                 "ctype": "TextObjectData"
               }
             ],
@@ -210,7 +210,7 @@
               "X": 126.0,
               "Y": 30.0
             },
-            "Name": "Sprite_1",
+            "Name": "progressBorderImg",
             "ctype": "SpriteObjectData"
           }
         ],

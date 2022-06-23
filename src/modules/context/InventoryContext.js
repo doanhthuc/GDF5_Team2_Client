@@ -15,7 +15,7 @@ const InventoryContext = cc.Class.extend({
     },
 
     mapIdListToBattleDeckList: function () {
-        this.battleDeckIdList.forEach( (id) => {
+        this.battleDeckIdList.forEach((id) => {
             //TODO: add spell add
             for (let i = 0; i < this.battleDeckIdList.length - 2; i++) {
                 if (this.cardCollectionList[i].cardType === id) {
@@ -34,6 +34,10 @@ const InventoryContext = cc.Class.extend({
         this.cardCollectionList.forEach(function (cardCollection) {
             cc.log('cardCollection: ' + JSON.stringify(cardCollection));
         });
+    },
+
+    upgradeCard: function (cardId) {
+        cc.log('InventoryContext.js line 40 ~~~~~ upgradeCard: ' + cardId);
     }
 
 });

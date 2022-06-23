@@ -7,6 +7,8 @@ const CardModel = cc.Class.extend({
         this.energy = JsonReader.getTowerConfig()[id].energy;
         this.accumulated = accumulated;
         this.stat = {};
+
+        this.setCardRankByLevel(this.level);
         this.setTypeOfCard(this.id);
     },
 
@@ -19,31 +21,41 @@ const CardModel = cc.Class.extend({
         cc.log(JSON.stringify(this.stat));
     },
 
+    setCardRankByLevel: function (level) {
+        if (level <= 1) {
+            this.rank = 1;
+        } else if (level <= 2) {
+            this.rank = 2;
+        } else if (level <= 4) {
+            this.rank = 3;
+        }
+    },
+
     setTypeOfCard: function (id) {
         let towerConfig = JsonReader.getTowerConfig()[id]
         let archetype = towerConfig.archetype;
         if (archetype === 'attack' || archetype === 'magic') {
-            this.stat.damage = towerConfig.stat[this.level].damage;
-            this.stat.attackSpeed = towerConfig.stat[this.level].attackSpeed;
-            this.stat.range = towerConfig.stat[this.level].range;
+            this.stat.damage = towerConfig.stat[this.rank].damage;
+            this.stat.attackSpeed = towerConfig.stat[this.rank].attackSpeed;
+            this.stat.range = towerConfig.stat[this.rank].range;
             this.stat.bulletType = towerConfig.bulletType;
             if (archetype === 'magic') {
-                this.setMagicSkillByName(this.name, this.level)
+                this.setMagicSkillByName(this.name, this.rank)
             }
         } else if (archetype === 'support') {
-            this.stat.range = towerConfig.stat[this.level].range;
+            this.stat.range = towerConfig.stat[this.rank].range;
             if (towerConfig.name === 'damage - goat') {
-                this.setBuffStatByName('attackAura - goatAura', this.level);
+                this.setBuffStatByNameAndRank('attackAura - goatAura', this.rank);
             } else if (towerConfig.name === 'attackSpeed - snake') {
-                this.setBuffStatByName('attackSpeedAura - snakeAura', this.level);
+                this.setBuffStatByNameAndRank('attackSpeedAura - snakeAura', this.rank);
             }
         }
     },
 
-    setBuffStatByName: function (name, level) {
+    setBuffStatByNameAndRank: function (name, rank) {
         let towerBuffId = JsonReader.getTowerBuffIdByName(name);
-        this.stat.buffName = JsonReader.getTowerBuffConfig()[towerBuffId].effects[this.level][0].name;
-        this.stat.buffValue = JsonReader.getTowerBuffConfig()[towerBuffId].effects[this.level][0].value;
+        this.stat.buffName = JsonReader.getTowerBuffConfig()[towerBuffId].effects[rank][0].name;
+        this.stat.buffValue = JsonReader.getTowerBuffConfig()[towerBuffId].effects[rank][0].value;
     },
 
     setMagicSkillByName: function (name, level) {

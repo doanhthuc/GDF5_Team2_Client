@@ -37,7 +37,7 @@ const JsonReader = {
         if (this.cardUpgradeConfigData) {
             return this.cardUpgradeConfigData;
         }
-        cc.loader.loadJson("config/CardUpgrade.json", (error, data) => {
+        cc.loader.loadJson("config/Card.json", (error, data) => {
             this.cardUpgradeConfigData = data.card;
         });
         return this.cardUpgradeConfigData;

@@ -24,7 +24,7 @@ testnetwork.Connector = cc.Class.extend({
                 userInfo.show();
                 // let userContext = contextManager.getContext(ContextManagerConst.USER_CONTEXT);
                 let userContext = new UserContext();
-                contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
+                contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT, userContext);
                 // let inventoryContext = new InventoryContext();
                 // contextManager.registerContext(ContextManagerConst.INVENTORY_CONTEXT, inventoryContext);
 
@@ -34,7 +34,7 @@ testnetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.GET_USER_INVENTORY:
                 let inventoryContext = new InventoryContext();
-                contextManager.registerContext(ContextManagerConst.INVENTORY_CONTEXT, inventoryContext);
+                contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT, inventoryContext);
                 inventoryContext.setCardCollectionList(packet.cardCollection);
                 inventoryContext.setBattleDeckIdList(packet.battleDeckCard);
                 clientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setBattleDeck(inventoryContext.battleDeckList);

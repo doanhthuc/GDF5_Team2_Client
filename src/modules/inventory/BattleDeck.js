@@ -6,8 +6,6 @@ const BattleDeckNode = cc.Node.extend({
         this.init();
     },
 
-    heightNode: 0,
-
     init: function () {
         this.node = ccs.load(InventoryResources.BATTLE_DECK_HOLDER, '').node;
         this.addChild(this.node);
@@ -17,7 +15,7 @@ const BattleDeckNode = cc.Node.extend({
     },
 
     setNodeHeight: function () {
-        this.nodeHeight += this.battleDeckHolder.getContentSize().height;
+        this.nodeHeight = this.battleDeckHolder.getContentSize().height;
     },
 
     setBattleDeck: function (battleDeck) {
@@ -28,18 +26,18 @@ const BattleDeckNode = cc.Node.extend({
         let startX = InventoryResources.CARD_WIDTH / 2 + InventoryResources.CARD_START_MARGIN;
         let startY = InventoryResources.BATTLE_DECK_HOLDER_BOTTOM_BORDER_WIDTH + 1.5 * InventoryResources.CARD_HEIGHT
             + InventoryResources.CARD_BOTTOM_MARGIN + InventoryResources.CARD_BOTTOM_HOLDER_MARGIN;
-        for (let i = 0; i < this.battleDeck.length - 2; i++) {
+        for (let i = 0; i < this.battleDeck.length - 1; i++) {
             // let testCard = new CardModel(2, 1, 0);
             // testCard.logCardInfo();
-            let testCard = new CardModel(
+            let cardModel = new CardModel(
                 this.battleDeck[i].cardType,
                 this.battleDeck[i].cardLevel,
                 this.battleDeck[i].amount
             );
-            let card = new CardNode(testCard);
+            let card = new CardNode(cardModel);
             card.retain();
             this.battleDeckHolder.addChild(card);
-            // this.battleDeck.push(card);
+
             if (i !== 0 && i % InventoryResources.NUM_CARD_ONE_LINE === 0) {
                 startX = InventoryResources.CARD_WIDTH / 2 + InventoryResources.CARD_START_MARGIN;
                 startY -= (i / InventoryResources.NUM_CARD_ONE_LINE) * InventoryResources.CARD_HEIGHT + InventoryResources.CARD_BOTTOM_MARGIN;

@@ -5,6 +5,16 @@ const InventoryResources = {
     CARD_COLLECTION_NODE: 'ui/inventory/cardCollectionNode.json',
     CARD_DETAIL_POPUP_NODE: 'ui/inventory/cardDetailPopup.json',
     CARD_STAT_HOLDER_NODE: 'ui/inventory/cardStatHolder.json',
+
+    UPGRADE_BTN_DISABLE_BACKGROUND: 'assets/common/common_btn_gray.png',
+    UPGRADE_BTN_BACKGROUND: 'assets/common/common_btn_green.png',
+
+    UPGRADE_BTN_STATE: {
+        NORMAL: 0,
+        DISABLE: 1,
+        NOT_ENOUGH_GOLD: 2
+    },
+
     CARD_WIDTH: 138,
     CARD_HEIGHT: 216,
     BATTLE_DECK_HOLDER_BOTTOM_BORDER_WIDTH: 76,
