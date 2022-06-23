@@ -20,8 +20,12 @@
               "Path": "Default/ImageFile.png",
               "Plist": ""
             },
-            "Scale9Width": 46,
-            "Scale9Height": 46,
+            "Scale9Enable": true,
+            "Scale9OriginX": 10,
+            "Scale9OriginY": 10,
+            "Scale9Width": 26,
+            "Scale9Height": 26,
+            "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
@@ -101,211 +105,6 @@
             "Tag": 107,
             "Children": [
               {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/inventory/cardStatHolder.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 286.9396,
-                  "Y": 667.4529
-                },
-                "Scale": {
-                  "ScaleX": 0.7,
-                  "ScaleY": 0.7
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.4628,
-                  "Y": 0.8343
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 286.9396,
-                "RightMargin": 333.0604,
-                "TopMargin": 132.5471,
-                "BottomMargin": 667.4529,
-                "Tag": 238,
-                "ActionTag": -1392324686,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "FileNode_3",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/inventory/cardStatHolder.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 285.4592,
-                  "Y": 615.3806
-                },
-                "Scale": {
-                  "ScaleX": 0.7,
-                  "ScaleY": 0.7
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.4604,
-                  "Y": 0.7692
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 285.4592,
-                "RightMargin": 334.5408,
-                "TopMargin": 184.6194,
-                "BottomMargin": 615.3806,
-                "Tag": 262,
-                "ActionTag": -1383208241,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "FileNode_3_0",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/inventory/cardStatHolder.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 284.0735,
-                  "Y": 559.8231
-                },
-                "Scale": {
-                  "ScaleX": 0.7,
-                  "ScaleY": 0.7
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.4582,
-                  "Y": 0.6998
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 284.0735,
-                "RightMargin": 335.9265,
-                "TopMargin": 240.1769,
-                "BottomMargin": 559.8231,
-                "Tag": 268,
-                "ActionTag": 1936130431,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "FileNode_3_1",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/inventory/cardStatHolder.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 470.0151,
-                  "Y": 667.1812
-                },
-                "Scale": {
-                  "ScaleX": 0.7,
-                  "ScaleY": 0.7
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.7581,
-                  "Y": 0.834
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 470.0151,
-                "RightMargin": 149.9849,
-                "TopMargin": 132.8188,
-                "BottomMargin": 667.1812,
-                "Tag": 274,
-                "ActionTag": 893900858,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "FileNode_3_2",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/inventory/card.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 118.3072,
-                  "Y": 639.1072
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.1908,
-                  "Y": 0.7989
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 118.3072,
-                "RightMargin": 501.6928,
-                "TopMargin": 160.8928,
-                "BottomMargin": 639.1072,
-                "Tag": 216,
-                "ActionTag": -558480636,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "cardNode",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
                 "FontSize": 20,
                 "LabelText": "Pháo Cú",
                 "FontResource": {
@@ -313,6 +112,7 @@
                   "Path": "assets/font/SVN-Supercell Magic.ttf",
                   "Plist": ""
                 },
+                "HorizontalAlignmentType": "HT_Center",
                 "OutlineColor": {
                   "R": 26,
                   "G": 26,
@@ -348,10 +148,10 @@
                   "X": 0.1871,
                   "Y": 0.0362
                 },
-                "LeftMargin": 276.1722,
-                "RightMargin": 227.8278,
-                "TopMargin": 44.92,
-                "BottomMargin": 726.08,
+                "LeftMargin": 276.167,
+                "RightMargin": 227.833,
+                "TopMargin": 44.9212,
+                "BottomMargin": 726.0788,
                 "Tag": 235,
                 "ActionTag": -700111239,
                 "Size": {
@@ -444,6 +244,7 @@
                   "Path": "assets/font/SVN-Avo bold.ttf",
                   "Plist": ""
                 },
+                "HorizontalAlignmentType": "HT_Center",
                 "OutlineColor": {
                   "G": 0,
                   "B": 0
@@ -775,6 +576,52 @@
                 },
                 "Name": "skillBtnNode",
                 "ctype": "ProjectNodeObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "assets/card/miniature_tower_cannon_1.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.6013,
+                  "ScaleY": 0.4413
+                },
+                "Position": {
+                  "X": 309.9998,
+                  "Y": 861.9827
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 1.0775
+                },
+                "PreSize": {
+                  "X": 0.3032,
+                  "Y": 0.2725
+                },
+                "LeftMargin": 196.9554,
+                "RightMargin": 235.0446,
+                "TopMargin": -183.7798,
+                "BottomMargin": 765.7798,
+                "Tag": 620,
+                "ActionTag": 250663107,
+                "Size": {
+                  "X": 188.0,
+                  "Y": 218.0
+                },
+                "Name": "towerImg",
+                "ctype": "SpriteObjectData"
               }
             ],
             "ActionTag": -36862881,
@@ -784,51 +631,6 @@
             },
             "Name": "backgroundImg",
             "ctype": "ImageViewObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "assets/card/miniature_tower_cannon_1.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 0.0002,
-              "Y": 390.7498
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -93.9998,
-            "RightMargin": -94.0002,
-            "TopMargin": -499.7498,
-            "BottomMargin": 281.7498,
-            "Tag": 620,
-            "ActionTag": 250663107,
-            "Size": {
-              "X": 188.0,
-              "Y": 218.0
-            },
-            "Name": "Sprite_36",
-            "ctype": "SpriteObjectData"
           }
         ],
         "Size": {
@@ -849,9 +651,7 @@
         "../../Default/ImageFile.png",
         "button/selectBtn.json",
         "button/skillBtn.json",
-        "button/UpgradeBtn.json",
-        "card.json",
-        "cardStatHolder.json"
+        "button/UpgradeBtn.json"
       ],
       "ctype": "GameFileData"
     }

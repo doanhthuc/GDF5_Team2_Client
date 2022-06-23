@@ -31,5 +31,15 @@ const JsonReader = {
             }
         }
         return null;
+    },
+
+    getCardUpgradeConfig: function () {
+        if (this.cardUpgradeConfigData) {
+            return this.cardUpgradeConfigData;
+        }
+        cc.loader.loadJson("config/CardUpgrade.json", (error, data) => {
+            this.cardUpgradeConfigData = data.card;
+        });
+        return this.cardUpgradeConfigData;
     }
 }

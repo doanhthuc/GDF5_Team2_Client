@@ -1,8 +1,13 @@
 var CardNode = cc.Node.extend({
     ctor: function (cardModel) {
         this._super();
-        this.cardModel = cardModel
         this.init();
+        if (cardModel) this.setModel(cardModel)
+    },
+
+    setModel: function (cardModel) {
+        this.cardModel = cardModel
+        this.setCardTexture();
     },
 
     init: function () {
@@ -16,11 +21,7 @@ var CardNode = cc.Node.extend({
         this.cardBackgroundBtn = this.cardImageNode.getChildByName('cardBackgroundBtn');
         this.cardImage = this.cardImageNode.getChildByName('cardImage');
         this.cardBorderImg = this.cardImageNode.getChildByName('cardBorderImg');
-        if (this.cardModel) {
-            this.setCardTexture();
-            this.cardBackgroundBtn.addTouchEventListener(this.onCardClick.bind(this), this);
-        }
-
+        this.cardBackgroundBtn.addTouchEventListener(this.onCardClick.bind(this), this);
     },
 
     setCardEnergyTxt: function (energy) {
@@ -36,11 +37,14 @@ var CardNode = cc.Node.extend({
     },
 
     onCardClick: function (sender, type) {
-        if (type === ccui.Widget.TOUCH_ENDED) {
-            cc.log(clientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).name)
+        if (type === ccui.Widget.TOUCH_ENDED && this.cardModel) {
             clientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setCardModel(this.cardModel);
             clientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL);
         }
+    },
+
+    setCardClickEnabled: function (enabled) {
+        this.cardBackgroundBtn.setTouchEnabled(enabled);
     }
 
 

@@ -36,7 +36,10 @@ const MainScreen = cc.Layer.extend({
 
         this.listView = this.mainPageView.getPages()[NavResources.TAB_LIST.INVENTORY_TAB.index].getChildByName('inventoryListView');
         this.listViewPanel = this.listView.getChildByName('listViewPanel');
+
+        cc.log('mainGui inventory layer start create')
         this.inventoryLayer = new InventoryLayer();
+        cc.log('mainGui inventory layer end create')
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE, this.inventoryLayer);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE);
 

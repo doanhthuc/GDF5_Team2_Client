@@ -7,3 +7,13 @@ const CARD_NAME = {
     5: 'DAMAGE_GOAT',
     6: 'ATTACK_SPEED_SNAKE'
 }
+
+const CARD_NAME_VI = {
+    0: 'Pháo cú',
+    1: 'Quạ Pháp Sư',
+    2: 'Ếch Đồ Tể',
+    3: 'Thỏ Xả Nhớt',
+    4: 'Gấu Bắc Cực',
+    5: 'Rắn Tóc Đỏ',
+    6: 'Dê Phát Động'
+}

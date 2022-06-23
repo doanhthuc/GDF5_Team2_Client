@@ -32,8 +32,8 @@ cc.game.onStart = function () {
         //modules
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
 
-        fr.view(MainScreen);
-        // fr.view(ScreenNetwork);
+        // fr.view(MainScreen);
+        fr.view(ScreenNetwork);
     }, this);
 };
 cc.game.run();
