@@ -103,170 +103,6 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "ui/inventory/cardStatHolder.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 286.9396,
-                  "Y": 667.4529
-                },
-                "Scale": {
-                  "ScaleX": 0.7,
-                  "ScaleY": 0.7
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.4628,
-                  "Y": 0.8343
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 286.9396,
-                "RightMargin": 333.0604,
-                "TopMargin": 132.5471,
-                "BottomMargin": 667.4529,
-                "Tag": 238,
-                "ActionTag": -1392324686,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "FileNode_3",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/inventory/cardStatHolder.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 285.4592,
-                  "Y": 615.3806
-                },
-                "Scale": {
-                  "ScaleX": 0.7,
-                  "ScaleY": 0.7
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.4604,
-                  "Y": 0.7692
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 285.4592,
-                "RightMargin": 334.5408,
-                "TopMargin": 184.6194,
-                "BottomMargin": 615.3806,
-                "Tag": 262,
-                "ActionTag": -1383208241,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "FileNode_3_0",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/inventory/cardStatHolder.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 284.0735,
-                  "Y": 559.8231
-                },
-                "Scale": {
-                  "ScaleX": 0.7,
-                  "ScaleY": 0.7
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.4582,
-                  "Y": 0.6998
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 284.0735,
-                "RightMargin": 335.9265,
-                "TopMargin": 240.1769,
-                "BottomMargin": 559.8231,
-                "Tag": 268,
-                "ActionTag": 1936130431,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "FileNode_3_1",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/inventory/cardStatHolder.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 470.0151,
-                  "Y": 667.1812
-                },
-                "Scale": {
-                  "ScaleX": 0.7,
-                  "ScaleY": 0.7
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.7581,
-                  "Y": 0.834
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 470.0151,
-                "RightMargin": 149.9849,
-                "TopMargin": 132.8188,
-                "BottomMargin": 667.1812,
-                "Tag": 274,
-                "ActionTag": 893900858,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "FileNode_3_2",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
                   "Path": "ui/inventory/card.json",
                   "Plist": ""
                 },
@@ -275,8 +111,8 @@
                 "InnerActionSpeed": 1.0,
                 "AnchorPoint": {},
                 "Position": {
-                  "X": 118.3072,
-                  "Y": 639.1072
+                  "X": 118.31,
+                  "Y": 639.11
                 },
                 "Scale": {
                   "ScaleX": 1.0,
@@ -292,10 +128,10 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": 118.3072,
-                "RightMargin": 501.6928,
-                "TopMargin": 160.8928,
-                "BottomMargin": 639.1072,
+                "LeftMargin": 118.31,
+                "RightMargin": 501.69,
+                "TopMargin": 160.89,
+                "BottomMargin": 639.11,
                 "Tag": 216,
                 "ActionTag": -558480636,
                 "Size": {
@@ -348,10 +184,10 @@
                   "X": 0.1871,
                   "Y": 0.0362
                 },
-                "LeftMargin": 276.1722,
-                "RightMargin": 227.8278,
-                "TopMargin": 44.92,
-                "BottomMargin": 726.08,
+                "LeftMargin": 276.167,
+                "RightMargin": 227.833,
+                "TopMargin": 44.9212,
+                "BottomMargin": 726.0788,
                 "Tag": 235,
                 "ActionTag": -700111239,
                 "Size": {
@@ -850,8 +686,7 @@
         "button/selectBtn.json",
         "button/skillBtn.json",
         "button/UpgradeBtn.json",
-        "card.json",
-        "cardStatHolder.json"
+        "card.json"
       ],
       "ctype": "GameFileData"
     }

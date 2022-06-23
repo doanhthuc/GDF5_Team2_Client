@@ -5,4 +5,12 @@ const InventoryContext = cc.Class.extend({
         // this.init();
     },
 
+    setBattleDeckList: function (battleDeckList) {
+        this.battleDeckList = battleDeckList;
+    },
+
+    setCardCollectionList: function (cardCollectionList) {
+        this.cardCollectionList = cardCollectionList;
+    }
+
 });

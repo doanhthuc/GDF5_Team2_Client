@@ -27,6 +27,9 @@ const CardModel = cc.Class.extend({
             this.stat.attackSpeed = towerConfig.stat[this.level].attackSpeed;
             this.stat.range = towerConfig.stat[this.level].range;
             this.stat.bulletType = towerConfig.bulletType;
+            if (archetype === 'magic') {
+                this.setMagicSkillByName(this.name, this.level)
+            }
         } else if (archetype === 'support') {
             this.stat.range = towerConfig.stat[this.level].range;
             if (towerConfig.name === 'damage - goat') {
@@ -41,5 +44,14 @@ const CardModel = cc.Class.extend({
         let towerBuffId = JsonReader.getTowerBuffIdByName(name);
         this.stat.buffName = JsonReader.getTowerBuffConfig()[towerBuffId].effects[this.level][0].name;
         this.stat.buffValue = JsonReader.getTowerBuffConfig()[towerBuffId].effects[this.level][0].value;
+    },
+
+    setMagicSkillByName: function (name, level) {
+        if (name === 'iceGun - polarBear') {
+            // this.stat.frozenTime = JsonReader.getTowerBuffConfig()['iceGun'].effects[level][0].value;
+        } else if (name === 'oilGun - bunny') {
+            // this.stat.slowPercent = JsonReader.getTowerBuffConfig()['oilGun'].effects[level][0].value;
+            // this.affectedTime =
+        }
     }
 });

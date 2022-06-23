@@ -38,6 +38,7 @@ var CardNode = cc.Node.extend({
     onCardClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             cc.log(clientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).name)
+            // clientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setCardNode(this);
             clientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setCardModel(this.cardModel);
             clientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL);
         }

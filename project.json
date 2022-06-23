@@ -101,6 +101,7 @@
         "src/modules/mainmenu/ScreenMenu.js",
         "src/modules/model/CardModel.js",
         "src/modules/model/CardNameConst.js",
+        "src/modules/model/CardStatConst.js",
         "src/modules/model/CardTypeConst.js",
         "src/modules/model/CarRankConst.js",
         "src/modules/model/TowerCard.js",
