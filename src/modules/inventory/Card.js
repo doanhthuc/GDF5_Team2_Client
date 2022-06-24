@@ -21,7 +21,7 @@ var Card= cc.Class.extend({
     {
         this.cardType=type;
         this.cardLevel=level;
-        this.amount=amount;
+        this.cardAmount=amount;
     },
     show:function(){
         cc.log(this.cardType+" "+this.cardLevel+" "+this.cardAmount);

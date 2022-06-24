@@ -4,10 +4,10 @@ var LobbyChest= cc.Class.extend({
     ctor:function(state){
     this.state=state;
     },
-    ctor:function(state,claimtime)
+    ctor:function(state,claimTime)
     {
         this.state=state;
-        this.claimtime=claimtime;
+        this.claimtime=claimTime;
     },
     show:function(){
         cc.log(this.state+" "+this.claimtime+" ");

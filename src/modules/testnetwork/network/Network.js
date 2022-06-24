@@ -32,7 +32,7 @@ testnetwork.Connector = cc.Class.extend({
                 userCardCollection.show();
                 break;
             case gv.CMD.UPGRADE_CARD:
-                cc.log(packet.goldchange + " " + packet.cardType + " " + packet.fragmentChange);
+                cc.log(packet.goldChange + " " + packet.cardType + " " + packet.fragmentChange);
                 break;
             case gv.CMD.GET_USER_DAILY_SHOP:
                 userDailyShop.getItemList(packet);
@@ -51,33 +51,33 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.SPEEDUP_LOBBY_CHEST:
                 cc.log(packet.lobbyChestid);
                 cc.log(packet.state);
-                cc.log(packet.gemchange);
-                for(i=0;i<packet.rewardsize;i++)
+                cc.log(packet.gemChange);
+                for(i=0;i<packet.rewardSize;i++)
                     cc.log(packet.itemType[i]+" "+packet.itemQuantity[i]);
                 break;
             case gv.CMD.CLAIM_LOBBY_CHEST:
                 cc.log(packet.lobbyChestid);
                 cc.log(packet.state);
-                cc.log(packet.gemchange);
-                for(i=0;i<packet.rewardsize;i++)
+                cc.log(packet.gemChange);
+                for(i=0;i<packet.rewardSize;i++)
                     cc.log(packet.itemType[i]+" "+packet.itemQuantity[i]);
                 break;
             case gv.CMD.ADD_USER_GOLD:
-                cc.log(packet.usergold);
+                cc.log(packet.goldChange);
                 break;
             case gv.CMD.ADD_USER_GEM:
-                cc.log(packet.usergem);
+                cc.log(packet.gemChange);
                 break;
             case gv.CMD.BUY_GOLD_SHOP:
-                userInfo.gold += packet.goldchange;
-                userInfo.gem += packet.gemchange;
+                userInfo.gold += packet.goldChange;
+                userInfo.gem += packet.gemChange;
                 userInfo.show();
                 break;
             case gv.CMD.BUY_DAILY_SHOP:
                 cc.log("BUY DAILY SHOP");
-                cc.log(packet.gemchange + " " + packet.goldchange);
+                cc.log(packet.gemChange + " " + packet.goldChange);
                 for (i = 0; i < packet.itemAmount; i++)
-                    cc.log(itemType[i] + " " + packet.itemQuantity[i]);
+                    cc.log(packet.itemType[i] + " " + packet.itemQuantity[i]);
                 break;
         }
     },
