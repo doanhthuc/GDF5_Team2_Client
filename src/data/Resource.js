@@ -89,7 +89,7 @@ var res = {
     LOGINSCENCE: "ui/login/Login.json",
     //images
     Slot1_png: 'zcsd/slot1.png',
-    ACTIVE_TAB_BG: '/assets/lobby/lobby_page_btn_selecting.png'
+    ACTIVE_TAB_BG: '/textures/lobby/lobby_page_btn_selecting.png'
 
 };
 

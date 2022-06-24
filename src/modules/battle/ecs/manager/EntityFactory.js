@@ -20,7 +20,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let entity = this.createEntity(typeID);
 
         // NOTE: get component from pool
-        let bulletNode = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
+        let bulletNode = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
         let infoComponent = new BulletInfoComponent(effects, 0.6);
         let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
         let appearanceComponent = new AppearanceComponent(bulletNode);
@@ -40,7 +40,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this.createEntity(typeID);
 
-        let bulletNode = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_bullet_0000.png");
+        let bulletNode = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_bullet_0000.png");
         let infoComponent = new BulletInfoComponent(effects);
         let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
         let appearanceComponent = new AppearanceComponent(bulletNode);
@@ -60,7 +60,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this.createEntity(typeID);
 
-        let bulletNode = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_bullet_1_0000.png");
+        let bulletNode = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_bullet_1_0000.png");
         let infoComponent = new BulletInfoComponent(effects, "frog");
         let positionComponent = new PositionComponent(startPosition.x, startPosition.y);
         let appearanceComponent = new AppearanceComponent(bulletNode);
@@ -190,13 +190,13 @@ EntityFactory.createBoomerangFrogTower = function (pos) {
 
 function createSwordmanNodeAnimation() {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/assets/monster/frame/swordsman/monster_swordsman_run_0012.png");
+    let monsterSprite = new cc.Sprite("res/textures/monster/frame/swordsman/monster_swordsman_run_0012.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "")
 
     // monster animation
     let monsterAnimation = new cc.Animation();
     for (let i = 12; i <= 23; i++) {
-        let fileName = "res/assets/monster/frame/swordsman/monster_swordsman_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        let fileName = "res/textures/monster/frame/swordsman/monster_swordsman_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         monsterAnimation.addSpriteFrameWithFile(fileName);
     }
     monsterAnimation.setDelayPerUnit(1 / (23 - 12 + 1));
@@ -212,15 +212,15 @@ function createSwordmanNodeAnimation() {
 
 function createOwlNodeAnimation(range) {
     let node = new cc.Node();
-    let towerSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
-    let weaponSprite = new cc.Sprite("res/assets/tower/frame/cannon_1_2/tower_cannon_attack_2_0009.png");
-    let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
+    let towerSprite = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
+    let weaponSprite = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_attack_2_0009.png");
+    let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
     rangeAttackSprite.setScale(2 * range / 687)
 
     // cannon animation
     let weaponAnimation = new cc.Animation();
     for (let i = 9; i <= 17; i++) {
-        let fileName = "res/assets/tower/frame/cannon_1_2/tower_cannon_attack_2_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        let fileName = "res/textures/tower/frame/cannon_1_2/tower_cannon_attack_2_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         weaponAnimation.addSpriteFrameWithFile(fileName);
     }
     weaponAnimation.setDelayPerUnit(1 / (17 - 9 + 1));
@@ -230,7 +230,7 @@ function createOwlNodeAnimation(range) {
     // tower animation
     let towerAnimation = new cc.Animation();
     for (let i = 9; i <= 17; i++) {
-        let fileName = "res/assets/tower/frame/cannon_1_2/tower_cannon_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        let fileName = "res/textures/tower/frame/cannon_1_2/tower_cannon_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         towerAnimation.addSpriteFrameWithFile(fileName);
     }
     towerAnimation.setDelayPerUnit(1 / (17 - 9 + 1));
@@ -248,15 +248,15 @@ function createOwlNodeAnimation(range) {
 
 function createBearNodeAnimation(attackRange) {
     let node = new cc.Node();
-    let towerSprite = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_0010.png");
-    let weaponSprite = new cc.Sprite("res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_0010.png");
-    let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
+    let towerSprite = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_0010.png");
+    let weaponSprite = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_0010.png");
+    let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
     rangeAttackSprite.setScale(2 * attackRange / 687)
 
     // tower animation
     let towerAnimation = new cc.Animation();
     for (let i = 10; i <= 19; i++) {
-        let fileName = "res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        let fileName = "res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         towerAnimation.addSpriteFrameWithFile(fileName);
     }
     towerAnimation.setDelayPerUnit(1 / (19 - 10 + 1));
@@ -266,7 +266,7 @@ function createBearNodeAnimation(attackRange) {
     // weapon animation
     let weaponAnimation = new cc.Animation();
     for (let i = 10; i <= 19; i++) {
-        let fileName = "res/assets/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        let fileName = "res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         weaponAnimation.addSpriteFrameWithFile(fileName);
     }
     weaponAnimation.setDelayPerUnit(1 / (19 - 10 + 1));
@@ -284,15 +284,15 @@ function createBearNodeAnimation(attackRange) {
 
 function createFrogNodeAnimation(attackRange) {
     let node = new cc.Node();
-    let towerSprite = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_0_0011.png");
-    let weaponSprite = new cc.Sprite("res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_1_0011.png");
-    let rangeAttackSprite = new cc.Sprite("res/assets/battle/battle_tower_range_player.png");
+    let towerSprite = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_attack_0_0011.png");
+    let weaponSprite = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_attack_1_0011.png");
+    let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
     rangeAttackSprite.setScale(2 * attackRange / 687)
 
     // tower animation
     let towerAnimation = new cc.Animation();
     for (let i = 11; i <= 22; i++) {
-        let fileName = "res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        let fileName = "res/textures/tower/frame/boomerang_1_2/tower_boomerang_attack_0_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         towerAnimation.addSpriteFrameWithFile(fileName);
     }
     towerAnimation.setDelayPerUnit(1 / (22 - 11 + 1));
@@ -302,7 +302,7 @@ function createFrogNodeAnimation(attackRange) {
     // weapon animation
     let weaponAnimation = new cc.Animation();
     for (let i = 11; i <= 22; i++) {
-        let fileName = "res/assets/tower/frame/boomerang_1_2/tower_boomerang_attack_1_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        let fileName = "res/textures/tower/frame/boomerang_1_2/tower_boomerang_attack_1_00" + ((i < 10) ? ("0" + i) : i) + ".png";
         weaponAnimation.addSpriteFrameWithFile(fileName);
     }
     weaponAnimation.setDelayPerUnit(1 / (22 - 11 + 1));
