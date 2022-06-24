@@ -33,8 +33,7 @@ let PathMonsterSystem = System.extend({
                     pathComponent.currentPathIdx++;
                 }
             } else {
-                entity.removeComponent(velocityComponent);
-                entity.setActive(false);
+                EventDispatcher.getInstance().dispatchEvent(EventType.FINISH_PATH, {entity: entity});
             }
         }
     }

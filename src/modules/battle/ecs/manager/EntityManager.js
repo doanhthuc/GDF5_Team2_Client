@@ -25,6 +25,9 @@ let EntityManager = cc.Class.extend({
         for (let id of Object.keys(this.entities)) {
             if (this.entities[id].getActive() && this.entities[id].hasAllComponent(...componentTypeIDs)) {
                 entityList.push(this.entities[id]);
+            } else if (this.entities[id].getActive() === false) {
+                // remove entity
+                // delete this.entities[id];
             }
         }
         return entityList;

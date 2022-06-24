@@ -4,9 +4,9 @@ let BattleTimerNode = cc.Node.extend({
         this._duration = duration || 20;
         this._countdown = this._duration;
 
-        this.node = ccs.load("ui/battle/battle_ui_layer/timer/BattleTimerNode.json", "").node;
+        this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
         this.addChild(this.node);
-        this.progress = new cc.ProgressTimer(new cc.Sprite("res/assets/battle/battle_timer_background.png"));
+        this.progress = new cc.ProgressTimer(new cc.Sprite(BattleResource.TIMER_BACKGROUND));
         this.progress.setType(cc.ProgressTimer.TYPE_RADIAL);
         this.progress.setReverseDirection(true);
         this.node.addChild(this.progress, 2);
@@ -32,7 +32,7 @@ let BattleTimerNode = cc.Node.extend({
         if (this._countdown <= 0) {
             this._countdown = this._duration;
             EventDispatcher.getInstance()
-                .dispatchEvent(EventType.END_TIMER);
+                .dispatchEvent(EventType.END_ONE_TIMER);
         }
 
         this.progress.setPercentage(this._countdown / this._duration * 100);

@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_treasure_empty.png",
+              "Path": "image/lobby/lobby_home_treasure_empty.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -64,7 +64,7 @@
             "LabelText": "Ô Trống",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -125,8 +125,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/font/SVN-Supercell Magic.ttf",
-        "../../../../assets/lobby/lobby_home_treasure_empty.png"
+        "../../../../font/SVN-Supercell Magic.ttf",
+        "../../../../image/lobby/lobby_home_treasure_empty.png"
       ],
       "ctype": "GameFileData"
     }

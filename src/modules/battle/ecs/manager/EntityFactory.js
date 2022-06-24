@@ -86,18 +86,16 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
     return null;
 }
 
-EntityFactory.createSwordsmanMonster = function () {
+EntityFactory.createSwordsmanMonster = function (initPos) {
     let typeID = GameConfig.ENTITY_ID.SWORD_MAN;
     let entity = this.createEntity(typeID);
 
     // NOTE: get component from pool
-    let initPos = Utils.tile2Pixel(0, 4);
     let infoComponent = new MonsterInfoComponent("normal", "land", 30, 1, 1, undefined);
     let positionComponent = new PositionComponent(initPos.x, initPos.y);
     let velocityComponent = new VelocityComponent(0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = new AppearanceComponent(createSwordmanNodeAnimation());
-    let pathComponent = new PathComponent(Utils.tileArray2PixelArray([{x: 0, y: 4}, {x: 0, y: 2},
-        {x: 3, y: 2}, {x: 3, y: 1}, {x: 6, y: 0}]))
+    let pathComponent = new PathComponent(GameConfig.gameLayer.mapLayer.path);
     let collisionComponent = new CollisionComponent(20, 30);
     let lifeComponent = new LifeComponent(300);
 
@@ -193,7 +191,7 @@ EntityFactory.createBoomerangFrogTower = function (pos) {
 function createSwordmanNodeAnimation() {
     let node = new cc.Node();
     let monsterSprite = new cc.Sprite("res/assets/monster/frame/swordsman/monster_swordsman_run_0012.png");
-    let hpBarNode = ccs.load("ui/battle/HpBarNode.json", "")
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "")
 
     // monster animation
     let monsterAnimation = new cc.Animation();
