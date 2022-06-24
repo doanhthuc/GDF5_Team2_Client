@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_card_panel_stat.png",
+              "Path": "textures/lobby/lobby_card_panel_stat.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -55,7 +55,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "assets/card/stat_icon/stat_icon_damage.png",
+                  "Path": "textures/card/stat_icon/stat_icon_damage.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -102,7 +102,7 @@
                 "LabelText": "Sát thương:",
                 "FontResource": {
                   "Type": "Normal",
-                  "Path": "assets/font/SVN-Supercell Magic.ttf",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
                   "Plist": ""
                 },
                 "OutlineColor": {
@@ -160,7 +160,7 @@
                 "LabelText": "50.3",
                 "FontResource": {
                   "Type": "Normal",
-                  "Path": "assets/font/SVN-Supercell Magic.ttf",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
                   "Plist": ""
                 },
                 "OutlineColor": {
@@ -228,9 +228,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/card/stat_icon/stat_icon_damage.png",
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../assets/lobby/lobby_card_panel_stat.png"
+        "../../textures/card/stat_icon/stat_icon_damage.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_card_panel_stat.png"
       ],
       "ctype": "GameFileData"
     }

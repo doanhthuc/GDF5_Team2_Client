@@ -67,7 +67,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_panel_background.png",
+              "Path": "textures/common/common_panel_background.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -112,7 +112,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_shop_item_background.png",
+              "Path": "textures/lobby/lobby_shop_item_background.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -159,7 +159,7 @@
             "LabelText": "1.000",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -225,12 +225,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_panel_btn_close.png",
+              "Path": "textures/common/common_panel_btn_close.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_panel_btn_close.png",
+              "Path": "textures/common/common_panel_btn_close.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -290,7 +290,7 @@
             "LabelText": "Mua Vàng",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -383,7 +383,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_icon_gold.png",
+              "Path": "textures/common/common_icon_gold.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -434,13 +434,13 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/common/common_icon_gold.png",
-        "../../assets/common/common_panel_background.png",
-        "../../assets/common/common_panel_btn_close.png",
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../assets/lobby/lobby_shop_item_background.png",
         "../../Default/Button_Disable.png",
         "../../Default/ImageFile.png",
+        "../../textures/common/common_icon_gold.png",
+        "../../textures/common/common_panel_background.png",
+        "../../textures/common/common_panel_btn_close.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_shop_item_background.png",
         "costButton.json"
       ],
       "ctype": "GameFileData"

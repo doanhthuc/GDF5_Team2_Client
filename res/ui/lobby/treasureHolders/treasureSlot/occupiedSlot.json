@@ -29,12 +29,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_treasure_empty.png",
+              "Path": "textures/lobby/lobby_home_treasure_empty.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_treasure_empty.png",
+              "Path": "textures/lobby/lobby_home_treasure_empty.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -94,7 +94,7 @@
             "LabelText": "3H",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -149,7 +149,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_treasure.png",
+              "Path": "textures/common/common_treasure.png",
               "Plist": ""
             },
             "Scale9OriginX": 72,
@@ -196,7 +196,7 @@
             "LabelText": "Rừng thiêng",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -257,10 +257,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/common/common_treasure.png",
-        "../../../../assets/font/SVN-Supercell Magic.ttf",
-        "../../../../assets/lobby/lobby_home_treasure_empty.png",
-        "../../../../Default/Button_Disable.png"
+        "../../../../Default/Button_Disable.png",
+        "../../../../textures/common/common_treasure.png",
+        "../../../../textures/font/SVN-Supercell Magic.ttf",
+        "../../../../textures/lobby/lobby_home_treasure_empty.png"
       ],
       "ctype": "GameFileData"
     }

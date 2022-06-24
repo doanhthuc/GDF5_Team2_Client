@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_shop_category_refresh.png",
+              "Path": "textures/lobby/lobby_shop_category_refresh.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -64,7 +64,7 @@
             "LabelText": "Làm mới sau: ",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Avo bold.ttf",
+              "Path": "textures/font/SVN-Avo bold.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -122,7 +122,7 @@
             "LabelText": "15h 43m",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Avo bold.ttf",
+              "Path": "textures/font/SVN-Avo bold.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -184,8 +184,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/font/SVN-Avo bold.ttf",
-        "../../assets/lobby/lobby_shop_category_refresh.png"
+        "../../textures/font/SVN-Avo bold.ttf",
+        "../../textures/lobby/lobby_shop_category_refresh.png"
       ],
       "ctype": "GameFileData"
     }

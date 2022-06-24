@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_card_deck.png",
+              "Path": "textures/lobby/lobby_card_deck.png",
               "Plist": ""
             },
             "Scale9OriginX": 225,
@@ -64,7 +64,7 @@
             "LabelText": "BỘ BÀI CHIẾN ĐẤU",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -128,8 +128,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../assets/lobby/lobby_card_deck.png"
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_card_deck.png"
       ],
       "ctype": "GameFileData"
     }

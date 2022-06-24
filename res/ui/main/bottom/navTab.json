@@ -29,12 +29,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_page_btn_0.png",
+              "Path": "textures/lobby/lobby_page_btn_0.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_page_btn_0.png",
+              "Path": "textures/lobby/lobby_page_btn_0.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -92,7 +92,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_page_icon_home.png",
+              "Path": "textures/lobby/lobby_page_icon_home.png",
               "Plist": ""
             },
             "Scale9OriginX": 33,
@@ -139,7 +139,7 @@
             "LabelText": "Text Label",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "HorizontalAlignmentType": "HT_Center",
@@ -201,10 +201,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../assets/font/SVN-Supercell Magic.ttf",
-        "../../../assets/lobby/lobby_page_btn_0.png",
-        "../../../assets/lobby/lobby_page_icon_home.png",
-        "../../../Default/Button_Disable.png"
+        "../../../Default/Button_Disable.png",
+        "../../../textures/font/SVN-Supercell Magic.ttf",
+        "../../../textures/lobby/lobby_page_btn_0.png",
+        "../../../textures/lobby/lobby_page_icon_home.png"
       ],
       "ctype": "GameFileData"
     }

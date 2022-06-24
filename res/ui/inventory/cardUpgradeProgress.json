@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_card_progress_background.png",
+              "Path": "textures/lobby/lobby_card_progress_background.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -56,7 +56,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "assets/lobby/lobby_card_progress.png",
+                  "Path": "textures/lobby/lobby_card_progress.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -94,7 +94,7 @@
                   {
                     "FileData": {
                       "Type": "Normal",
-                      "Path": "assets/lobby/lobby_card_progress_glow.png",
+                      "Path": "textures/lobby/lobby_card_progress_glow.png",
                       "Plist": ""
                     },
                     "BlendFunc": {
@@ -151,7 +151,7 @@
                 "LabelText": "59/100",
                 "FontResource": {
                   "Type": "Normal",
-                  "Path": "assets/font/SVN-Supercell Magic.ttf",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
                   "Plist": ""
                 },
                 "HorizontalAlignmentType": "HT_Center",
@@ -222,10 +222,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../assets/lobby/lobby_card_progress.png",
-        "../../assets/lobby/lobby_card_progress_background.png",
-        "../../assets/lobby/lobby_card_progress_glow.png"
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_card_progress.png",
+        "../../textures/lobby/lobby_card_progress_background.png",
+        "../../textures/lobby/lobby_card_progress_glow.png"
       ],
       "ctype": "GameFileData"
     }

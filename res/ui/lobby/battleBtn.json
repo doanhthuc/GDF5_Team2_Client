@@ -29,12 +29,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "image/lobby/lobby_home_btn_battle_pressing.png",
+              "Path": "textures/lobby/lobby_home_btn_battle_pressing.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "image/lobby/lobby_home_btn_battle.png",
+              "Path": "textures/lobby/lobby_home_btn_battle.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -86,13 +86,13 @@
               "X": 417.0,
               "Y": 181.0
             },
-            "Name": "Button_1",
+            "Name": "battleBtnBackgroundImg",
             "ctype": "ButtonObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "image/lobby/lobby_home_btn_battle_txt.png",
+              "Path": "textures/lobby/lobby_home_btn_battle_txt.png",
               "Plist": ""
             },
             "Scale9OriginX": 76,
@@ -144,9 +144,9 @@
       },
       "UsedResources": [
         "../../Default/Button_Disable.png",
-        "../../image/lobby/lobby_home_btn_battle.png",
-        "../../image/lobby/lobby_home_btn_battle_pressing.png",
-        "../../image/lobby/lobby_home_btn_battle_txt.png"
+        "../../textures/lobby/lobby_home_btn_battle.png",
+        "../../textures/lobby/lobby_home_btn_battle_pressing.png",
+        "../../textures/lobby/lobby_home_btn_battle_txt.png"
       ],
       "ctype": "GameFileData"
     }

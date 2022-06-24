@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_shop_item_background.png",
+              "Path": "textures/lobby/lobby_shop_item_background.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -156,7 +156,7 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/lobby/lobby_shop_item_background.png",
+        "../../textures/lobby/lobby_shop_item_background.png",
         "costButton.json",
         "shopCardItem.json"
       ],

@@ -29,12 +29,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_treasure_finished.png",
+              "Path": "textures/lobby/lobby_home_treasure_finished.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_treasure_finished.png",
+              "Path": "textures/lobby/lobby_home_treasure_finished.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -92,7 +92,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/treasure/common_treasure_tutorial.png",
+              "Path": "textures/lobby/treasure/common_treasure_tutorial.png",
               "Plist": ""
             },
             "Scale9OriginX": 42,
@@ -139,7 +139,7 @@
             "LabelText": "Mở ngay",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -199,10 +199,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/font/SVN-Supercell Magic.ttf",
-        "../../../../assets/lobby/lobby_home_treasure_finished.png",
-        "../../../../assets/lobby/treasure/common_treasure_tutorial.png",
-        "../../../../Default/Button_Disable.png"
+        "../../../../Default/Button_Disable.png",
+        "../../../../textures/font/SVN-Supercell Magic.ttf",
+        "../../../../textures/lobby/lobby_home_treasure_finished.png",
+        "../../../../textures/lobby/treasure/common_treasure_tutorial.png"
       ],
       "ctype": "GameFileData"
     }

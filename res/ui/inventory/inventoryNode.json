@@ -56,7 +56,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_card_banner.png",
+              "Path": "textures/lobby/lobby_card_banner.png",
               "Plist": ""
             },
             "Scale9OriginX": 199,
@@ -103,7 +103,7 @@
             "LabelText": "BỘ SƯU TẬP THẺ BÀI",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -171,12 +171,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_btn_blue.png",
+              "Path": "textures/common/common_btn_blue.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_btn_blue.png",
+              "Path": "textures/common/common_btn_blue.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -236,7 +236,7 @@
             "LabelText": "Theo năng lượng",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -294,10 +294,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/common/common_btn_blue.png",
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../assets/lobby/lobby_card_banner.png",
         "../../Default/Button_Disable.png",
+        "../../textures/common/common_btn_blue.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_card_banner.png",
         "battleDeckHolder.json"
       ],
       "ctype": "GameFileData"

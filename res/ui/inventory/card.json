@@ -138,7 +138,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/card/card_level.png",
+              "Path": "textures/card/card_level.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -185,7 +185,7 @@
             "LabelText": "Lv.20",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "HorizontalAlignmentType": "HT_Center",
@@ -246,8 +246,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/card/card_level.png",
-        "../../assets/font/SVN-Supercell Magic.ttf",
+        "../../textures/card/card_level.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
         "cardEnergyNode.json",
         "cardImageNode.json",
         "cardUpgradeProgress.json"

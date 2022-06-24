@@ -29,12 +29,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_btn_orange.png",
+              "Path": "textures/common/common_btn_orange.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_btn_orange.png",
+              "Path": "textures/common/common_btn_orange.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -94,7 +94,7 @@
             "LabelText": "600",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -146,7 +146,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_icon_gold_small.png",
+              "Path": "textures/common/common_icon_gold_small.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -197,10 +197,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/common/common_btn_orange.png",
-        "../../assets/common/common_icon_gold_small.png",
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../Default/Button_Disable.png"
+        "../../Default/Button_Disable.png",
+        "../../textures/common/common_btn_orange.png",
+        "../../textures/common/common_icon_gold_small.png",
+        "../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }

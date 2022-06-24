@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_shop_item_background.png",
+              "Path": "textures/lobby/lobby_shop_item_background.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -55,7 +55,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "assets/common/common_treasure.png",
+                  "Path": "textures/common/common_treasure.png",
                   "Plist": ""
                 },
                 "Scale9OriginX": 72,
@@ -104,7 +104,7 @@
                 "LabelText": "Bạc",
                 "FontResource": {
                   "Type": "Normal",
-                  "Path": "assets/font/SVN-Supercell Magic.ttf",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
                   "Plist": ""
                 },
                 "OutlineColor": {
@@ -216,9 +216,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/common/common_treasure.png",
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../assets/lobby/lobby_shop_item_background.png",
+        "../../textures/common/common_treasure.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_shop_item_background.png",
         "freeButton.json"
       ],
       "ctype": "GameFileData"

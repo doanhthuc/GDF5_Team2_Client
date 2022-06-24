@@ -34,7 +34,7 @@
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_btn_blue.png",
+              "Path": "textures/common/common_btn_blue.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -87,7 +87,7 @@
                 "LabelText": "Chọn",
                 "FontResource": {
                   "Type": "Normal",
-                  "Path": "assets/font/SVN-Supercell Magic.ttf",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
                   "Plist": ""
                 },
                 "OutlineColor": {
@@ -158,10 +158,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../assets/common/common_btn_blue.png",
-        "../../../assets/font/SVN-Supercell Magic.ttf",
         "../../../Default/Button_Disable.png",
-        "../../../Default/Button_Press.png"
+        "../../../Default/Button_Press.png",
+        "../../../textures/common/common_btn_blue.png",
+        "../../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }

@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_shop_item_gold_1.png",
+              "Path": "textures/lobby/lobby_shop_item_gold_1.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -66,7 +66,7 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/lobby/lobby_shop_item_gold_1.png"
+        "../../textures/lobby/lobby_shop_item_gold_1.png"
       ],
       "ctype": "GameFileData"
     }

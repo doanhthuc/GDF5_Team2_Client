@@ -29,12 +29,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/card/card_background_2.png",
+              "Path": "textures/card/card_background_2.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/card/card_background_2.png",
+              "Path": "textures/card/card_background_2.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -92,7 +92,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/card/card_tower_cannon.png",
+              "Path": "textures/card/card_tower_cannon.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -137,7 +137,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/card/card_border_1.png",
+              "Path": "textures/card/card_border_1.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -188,10 +188,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/card/card_background_2.png",
-        "../../assets/card/card_border_1.png",
-        "../../assets/card/card_tower_cannon.png",
-        "../../Default/Button_Disable.png"
+        "../../Default/Button_Disable.png",
+        "../../textures/card/card_background_2.png",
+        "../../textures/card/card_border_1.png",
+        "../../textures/card/card_tower_cannon.png"
       ],
       "ctype": "GameFileData"
     }

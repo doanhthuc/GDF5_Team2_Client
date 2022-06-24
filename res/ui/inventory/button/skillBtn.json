@@ -29,12 +29,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_btn_orange.png",
+              "Path": "textures/common/common_btn_orange.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_btn_orange.png",
+              "Path": "textures/common/common_btn_orange.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -87,7 +87,7 @@
                 "LabelText": "Kỹ Năng",
                 "FontResource": {
                   "Type": "Normal",
-                  "Path": "assets/font/SVN-Supercell Magic.ttf",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
                   "Plist": ""
                 },
                 "OutlineColor": {
@@ -158,9 +158,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../assets/common/common_btn_orange.png",
-        "../../../assets/font/SVN-Supercell Magic.ttf",
-        "../../../Default/Button_Disable.png"
+        "../../../Default/Button_Disable.png",
+        "../../../textures/common/common_btn_orange.png",
+        "../../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }
