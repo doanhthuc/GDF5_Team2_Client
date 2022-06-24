@@ -318,8 +318,7 @@
             "Name": "TextField_2",
             "ctype": "TextFieldObjectData"
           }
-        ],
-        "Size": {
+        ],        "Size": {
           "X": 640.0,
           "Y": 1136.0
         },

@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_timer.png",
+              "Path": "textures/battle/battle_timer.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -62,7 +62,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_timer_border.png",
+              "Path": "textures/battle/battle_timer_border.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -109,7 +109,7 @@
             "LabelText": "19",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "HorizontalAlignmentType": "HT_Center",
@@ -168,9 +168,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/battle/battle_timer.png",
-        "../../../../assets/battle/battle_timer_border.png",
-        "../../../../assets/font/SVN-Supercell Magic.ttf"
+        "../../../../textures/battle/battle_timer.png",
+        "../../../../textures/battle/battle_timer_border.png",
+        "../../../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }

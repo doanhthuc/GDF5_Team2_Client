@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_player.png",
+              "Path": "image/mainScene/lobby_home_player.png",
               "Plist": ""
             },
             "Scale9OriginX": 208,
@@ -62,7 +62,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_avatar.png",
+              "Path": "image/common/common_avatar.png",
               "Plist": ""
             },
             "Scale9OriginX": 12,
@@ -109,7 +109,7 @@
             "LabelText": "UNSTOPABLE_13",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -165,7 +165,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_box.png",
+              "Path": "image/mainScene/header/lobby_box.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -210,7 +210,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_icon_trophy.png",
+              "Path": "image/common/common_icon_trophy.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -257,10 +257,9 @@
             "LabelText": "93.774",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
-            "HorizontalAlignmentType": "HT_Center",
             "OutlineColor": {
               "G": 0,
               "B": 0
@@ -320,11 +319,11 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/common/common_avatar.png",
-        "../../assets/common/common_icon_trophy.png",
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../assets/lobby/lobby_box.png",
-        "../../assets/lobby/lobby_home_player.png"
+        "../../font/SVN-Supercell Magic.ttf",
+        "../../image/common/common_avatar.png",
+        "../../image/common/common_icon_trophy.png",
+        "../../image/mainScene/header/lobby_box.png",
+        "../../image/mainScene/lobby_home_player.png"
       ],
       "ctype": "GameFileData"
     }

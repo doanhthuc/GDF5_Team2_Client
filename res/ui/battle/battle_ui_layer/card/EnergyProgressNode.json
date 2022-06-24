@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_card_progress_background_deck.png",
+              "Path": "textures/lobby/lobby_card_progress_background_deck.png",
               "Plist": ""
             },
             "Scale9OriginX": 35,
@@ -63,7 +63,7 @@
             "ProgressInfo": 60,
             "ImageFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_card_progress.png",
+              "Path": "textures/lobby/lobby_card_progress.png",
               "Plist": ""
             },
             "AnchorPoint": {
@@ -148,7 +148,7 @@
             "LabelText": "Tối đa: 30",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -206,9 +206,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/font/SVN-Supercell Magic.ttf",
-        "../../../../assets/lobby/lobby_card_progress.png",
-        "../../../../assets/lobby/lobby_card_progress_background_deck.png",
+        "../../../../textures/font/SVN-Supercell Magic.ttf",
+        "../../../../textures/lobby/lobby_card_progress.png",
+        "../../../../textures/lobby/lobby_card_progress_background_deck.png",
         "CardEnergyNode.json"
       ],
       "ctype": "GameFileData"

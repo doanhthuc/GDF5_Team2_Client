@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_background_0003.png",
+              "Path": "textures/map/map_background_0003.png",
               "Plist": ""
             },
             "Scale9OriginX": 208,
@@ -62,7 +62,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_background_0001.png",
+              "Path": "textures/map/map_background_0001.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -107,7 +107,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/UI/ui_grid.png",
+              "Path": "textures/battle/UI/ui_grid.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -158,9 +158,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../assets/battle/UI/ui_grid.png",
-        "../../../assets/map/map_background_0001.png",
-        "../../../assets/map/map_background_0003.png"
+        "../../../textures/battle/UI/ui_grid.png",
+        "../../../textures/map/map_background_0001.png",
+        "../../../textures/map/map_background_0003.png"
       ],
       "ctype": "GameFileData"
     }
