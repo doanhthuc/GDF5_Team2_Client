@@ -145,7 +145,6 @@ var ScreenNetwork = cc.Layer.extend({
     onFinishLogin: function () {
         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
         // testnetwork.connector.sendGetUserLobbyChest();
-        testnetwork.connector.sendGetUserInventory();
         //testnetwork.connector.sendUpgradeCard(2);
         //testnetwork.connector.sendGetUserDailyShop();
         // testnetwork.connector.sendAddUserGem(100);
@@ -153,6 +152,7 @@ var ScreenNetwork = cc.Layer.extend({
         // testnetwork.connector.sendBuyGoldShop(0);
         //testnetwork.connector.sendBuyDailyShop(2);
         fr.view(MainScreen);
+        testnetwork.connector.sendGetUserInventory();
 
         // userContext.updateUserInfoUI();
         cc.log("Finished login");
