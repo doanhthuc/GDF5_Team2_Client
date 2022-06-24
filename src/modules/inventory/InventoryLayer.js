@@ -13,8 +13,8 @@ const InventoryLayer = cc.Node.extend({
         // this.inventoryNode.setPosition(cc.winSize.width / 2, 0);
         this.battleDeckNode = new BattleDeckNode();
         this.addChild(this.battleDeckNode);
-        clientUIManager.getInstance().registerUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE, this.battleDeckNode);
-        clientUIManager.getInstance().showUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE);
+        ClientUIManager.getInstance().registerUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE, this.battleDeckNode);
+        ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE);
 
         this.cardCollectionNode = new CardCollectionNode();
         this.addChild(this.cardCollectionNode);

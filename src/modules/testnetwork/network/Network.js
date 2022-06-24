@@ -37,8 +37,8 @@ testnetwork.Connector = cc.Class.extend({
                 contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT, inventoryContext);
                 inventoryContext.setCardCollectionList(packet.cardCollection);
                 inventoryContext.setBattleDeckIdList(packet.battleDeckCard);
-                clientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setBattleDeck(inventoryContext.battleDeckList);
-                clientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setCardInBattleDeckPosition();
+                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setBattleDeck(inventoryContext.battleDeckList);
+                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setCardInBattleDeckPosition();
                 userCardCollection.getItemList(packet);
                 cc.log("GetInventory");
                 // userCardCollection.show();

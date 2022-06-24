@@ -5,7 +5,7 @@ const ShopTreasureSlot = cc.Node.extend({
     },
 
     init: function () {
-        this.clientUIManager = clientUIManager.getInstance();
+        this.clientUIManager = ClientUIManager.getInstance();
         this.shopTreasureSlotNode = ccs.load(ShopResources.SHOP_TREASURE_SLOT_NODE, '').node;
         this.addChild(this.shopTreasureSlotNode);
         this.shopItemBackgroundImg = this.shopTreasureSlotNode.getChildByName('shopItemBackgroundImg');

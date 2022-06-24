@@ -14,7 +14,7 @@ const MainScreen = cc.Layer.extend({
         let rootNode = ccs.load(res.MAIN_SCREEN, '');
         this.addChild(rootNode.node);
         this.scene = rootNode.node;
-        this.clientUIManager = clientUIManager.getInstance();
+        this.clientUIManager = ClientUIManager.getInstance();
 
         this.mainPageView = this.scene.getChildByName('mainPageView');
         this.mainPageView.setCustomScrollThreshold(30);
