@@ -38,6 +38,11 @@ const InventoryContext = cc.Class.extend({
 
     upgradeCard: function (cardId) {
         cc.log('InventoryContext.js line 40 ~~~~~ upgradeCard: ' + cardId);
+        let card = this.cardCollectionList.find(card => (card.cardType === cardId));
+        if (card) {
+
+        }
+
     }
 
 });

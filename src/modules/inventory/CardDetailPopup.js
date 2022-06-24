@@ -15,6 +15,10 @@ const CardDetailPopup = cc.Node.extend({
         this.closeBtn.addTouchEventListener(this.onCloseClick.bind(this), this);
         this.upgradeBtnNode = this.backgroundImg.getChildByName('upgradeBtnNode');
         this.upgradeBtnBackground = this.upgradeBtnNode.getChildByName('backgroundBtn');
+        this.selectBtnNode = this.backgroundImg.getChildByName('selectBtnlNode');
+        this.selectBtnBackground = this.selectBtnNode.getChildByName('backgroundBtn');
+        this.skillBtnNode = this.backgroundImg.getChildByName('skillBtnNode');
+        this.skillBtnBackground = this.skillBtnNode.getChildByName('backgroundBtn')
         this.cardNameTxt = this.backgroundImg.getChildByName('cardNameTxt');
         this.cardNameTxt.ignoreContentAdaptWithSize(true);
         this.upgradeLevelTxt = this.backgroundImg.getChildByName('upgradeLevelTxt');
@@ -23,6 +27,8 @@ const CardDetailPopup = cc.Node.extend({
 
         this.upgradeBtnState = InventoryResources.UPGRADE_BTN_STATE.NORMAL;
         this.upgradeBtnBackground.addTouchEventListener(this.onUpgradeBtnClick.bind(this), this);
+        this.skillBtnBackground.addTouchEventListener(this.onSkillBtnClick.bind(this), this);
+        this.selectBtnBackground.addTouchEventListener(this.onSelectBtnClick.bind(this), this);
     },
 
     initCardStatHolders: function () {
@@ -73,6 +79,9 @@ const CardDetailPopup = cc.Node.extend({
         this.setCardNodeModel(cardModel)
         this.setUpgradeBtnState(cardModel.accumulated);
         this.setUpgradeLevelTxt(cardModel.rank);
+        // TODO: check condition card from where click
+        this.setFromBattleDeckPopupBtnPos();
+        // this.setFromCardCollectionPopupBtnPos()
     },
 
     setCardNodeModel: function (cardModel) {
@@ -112,16 +121,59 @@ const CardDetailPopup = cc.Node.extend({
         }
     },
 
+    onSelectBtnClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            cc.log('Card DetailPopup line 122 : onSelectBtnClick');
+        }
+    },
+
+    onSkillBtnClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            cc.log('Card DetailPopup line 127 : onSkillbtnClick');
+        }
+    },
+
+    setFromBattleDeckPopupBtnPos: function () {
+        this.selectBtnNode.setVisible(false);
+        this.upgradeBtnNode.setPosition(198.12, 105.55);
+        this.skillBtnNode.setPosition(435.80, 105.55);
+        // this.skillBtnNode.getChildByName('backgroundBtn').width = 194.00;
+        this.skillBtnNode.setScaleX(1);
+    },
+
+    setFromCardCollectionPopupBtnPos: function () {
+        this.selectBtnNode.setVisible(true);
+        this.selectBtnNode.setPosition(133.68, 105.55);
+        this.upgradeBtnNode.setPosition(313.81, 105.55);
+        this.skillBtnNode.setPosition(495.02, 105.55);
+
+        // this.skillBtnNode.getChildByName('backgroundBtn').width = 194.00 * 0.8;
+        // this.selectBtnNode.getChildByName('backgroundBtn').width = 194.00 * 0.8;
+        this.skillBtnNode.setScaleX(0.8);
+        this.selectBtnNode.setScaleX(0.8);
+    },
+
     setUpgradeBtnState: function (accumulatedCard) {
         if (accumulatedCard < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
-            this.upgradeBtnBackground.loadTextures(InventoryResources.UPGRADE_BTN_DISABLE_BACKGROUND, InventoryResources.UPGRADE_BTN_DISABLE_BACKGROUND);
+            this.setUpgradeBtnTexture(InventoryResources.UPGRADE_BTN_DISABLE_BACKGROUND, cc.color(255, 255, 255));
             this.upgradeBtnState = InventoryResources.UPGRADE_BTN_STATE.DISABLE;
-        } else if (accumulatedCard >= JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
-            this.upgradeBtnBackground.loadTextures(InventoryResources.UPGRADE_BTN_BACKGROUND, InventoryResources.UPGRADE_BTN_BACKGROUND);
+        } else if (accumulatedCard >= JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments &&
+            contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold
+            < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].gold) {
+            {
+                this.setUpgradeBtnTexture(InventoryResources.UPGRADE_BTN_BACKGROUND, cc.color(255, 0, 0));
+                this.upgradeBtnState = InventoryResources.UPGRADE_BTN_STATE.NOT_ENOUGH_GOLD;
+            }
+        } else {
+            this.setUpgradeBtnTexture(InventoryResources.UPGRADE_BTN_BACKGROUND, cc.color(255, 255, 255));
             this.upgradeBtnState = InventoryResources.UPGRADE_BTN_STATE.NORMAL;
         }
-    }
-    ,
+    },
+
+    setUpgradeBtnTexture: function (backgroundImg, goldValueTxtColor) {
+        this.upgradeBtnBackground.loadTextures(backgroundImg, backgroundImg);
+        this.upgradeBtnBackground.getChildByName('goldValueTxt').setColor(goldValueTxtColor);
+    },
 
     setUpgradeLevelTxt: function (rank) {
         this.upgradeLevelTxt.setString('Tiến hóa ' + rank);
