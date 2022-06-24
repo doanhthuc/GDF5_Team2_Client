@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_icon_energy.png",
+              "Path": "textures/common/common_icon_energy.png",
               "Plist": ""
             },
             "Scale9OriginX": 24,
@@ -64,7 +64,7 @@
             "LabelText": "7",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineSize": 2,
@@ -125,8 +125,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/common/common_icon_energy.png",
-        "../../../../assets/font/SVN-Supercell Magic.ttf"
+        "../../../../textures/common/common_icon_energy.png",
+        "../../../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }

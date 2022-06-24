@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_card_box.png",
+              "Path": "textures/battle/battle_card_box.png",
               "Plist": ""
             },
             "Scale9OriginX": 35,
@@ -62,7 +62,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/card/card_background_4.png",
+              "Path": "textures/card/card_background_4.png",
               "Plist": ""
             },
             "Scale9OriginX": 38,
@@ -107,7 +107,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/card/card_tower_wizard.png",
+              "Path": "textures/card/card_tower_wizard.png",
               "Plist": ""
             },
             "Scale9OriginX": 38,
@@ -152,7 +152,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/card/card_border_1.png",
+              "Path": "textures/card/card_border_1.png",
               "Plist": ""
             },
             "Scale9OriginX": 45,
@@ -242,10 +242,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/battle/battle_card_box.png",
-        "../../../../assets/card/card_background_4.png",
-        "../../../../assets/card/card_border_1.png",
-        "../../../../assets/card/card_tower_wizard.png",
+        "../../../../textures/battle/battle_card_box.png",
+        "../../../../textures/card/card_background_4.png",
+        "../../../../textures/card/card_border_1.png",
+        "../../../../textures/card/card_tower_wizard.png",
         "CardEnergyNode.json"
       ],
       "ctype": "GameFileData"

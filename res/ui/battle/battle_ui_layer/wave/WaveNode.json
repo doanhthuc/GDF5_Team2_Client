@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_info_box.png",
+              "Path": "textures/battle/battle_info_box.png",
               "Plist": ""
             },
             "Scale9OriginX": 29,
@@ -180,8 +180,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/battle/battle_info_box.png",
-        "../../../../font/SVN-Supercell Magic.ttf"
+        "../../../../font/SVN-Supercell Magic.ttf",
+        "../../../../textures/battle/battle_info_box.png"
       ],
       "ctype": "GameFileData"
     }

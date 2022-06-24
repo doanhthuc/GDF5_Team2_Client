@@ -47,6 +47,7 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log(packet.goldchange + " " + packet.cardType + " " + packet.fragmentChange);
                 break;
             case gv.CMD.GET_USER_DAILY_SHOP:
+                cc.log(JSON.stringify(packet))
                 userDailyShop.getItemList(packet);
                 cc.log("GetDailyShop");
                 userDailyShop.show();
@@ -136,23 +137,7 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(itemid);
         this.gameClient.sendPacket(pk);
     },
-    sendMove: function (x, y) {
-        cc.log("SendMove:", x, y);
-        var pk = this.gameClient.getOutPacket(CmdSendMove);
-        pk.pack(x, y);
-        this.gameClient.sendPacket(pk);
-    },
-    sendResetMap: function () {
-        cc.log("sendResetMap");
-        var pk = this.gameClient.getOutPacket(CmdSendResetMap);
-        pk.pack();
-        this.gameClient.sendPacket(pk);
-    },
-    // updateUserInfo(pk){
-    //     userInfo.gold+=pk.goldchange;
-    //     userInfo.gem+=pk.gemchange;
-    //
-    // }
+
 });
 
 
