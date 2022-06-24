@@ -40,7 +40,15 @@ const InventoryContext = cc.Class.extend({
         cc.log('InventoryContext.js line 40 ~~~~~ upgradeCard: ' + cardId);
         let card = this.cardCollectionList.find(card => (card.cardType === cardId));
         if (card) {
+            if (card.accumulated >= JsonReader.getCardUpgradeConfig()[card.level + 1].fragments &&
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold >=
+                JsonReader.getCardUpgradeConfig()[card.level + 1].gold) {
 
+                /*card.level += 1;
+                card.accumulated += 1;
+                card.setCardRankByLevel(card.level);
+                card.setTypeOfCard(card.cardType);*/
+            }
         }
 
     }
