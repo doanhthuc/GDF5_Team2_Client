@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_background.png",
+              "Path": "textures/lobby/lobby_currency_background.png",
               "Plist": ""
             },
             "Scale9OriginX": 281,
@@ -62,7 +62,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_box.png",
+              "Path": "textures/lobby/lobby_box.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -107,7 +107,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_box.png",
+              "Path": "textures/lobby/lobby_box.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -152,7 +152,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_icon_g_small.png",
+              "Path": "textures/common/common_icon_g_small.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -197,7 +197,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_icon_gold_small.png",
+              "Path": "textures/common/common_icon_gold_small.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -244,7 +244,7 @@
             "LabelText": "923.000",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "HorizontalAlignmentType": "HT_Center",
@@ -268,7 +268,7 @@
               "Y": 10.4541
             },
             "Scale": {
-              "ScaleX": 0.6584,
+              "ScaleX": 0.7617,
               "ScaleY": 0.871
             },
             "CColor": {},
@@ -299,7 +299,7 @@
             "LabelText": "25.337",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "HorizontalAlignmentType": "HT_Center",
@@ -315,12 +315,12 @@
             "ShadowOffsetX": 2.0,
             "ShadowOffsetY": -2.0,
             "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
+              "ScaleX": 0.5948,
+              "ScaleY": 0.6355
             },
             "Position": {
-              "X": 93.0394,
-              "Y": 10.3308
+              "X": 99.5353,
+              "Y": 13.5171
             },
             "Scale": {
               "ScaleX": 0.7617,
@@ -336,10 +336,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 48.0394,
-            "RightMargin": -138.0394,
-            "TopMargin": -23.8308,
-            "BottomMargin": -3.1692,
+            "LeftMargin": 46.0071,
+            "RightMargin": -136.0071,
+            "TopMargin": -23.3589,
+            "BottomMargin": -3.6411,
             "Tag": 242,
             "ActionTag": 303207535,
             "Size": {
@@ -364,12 +364,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_btn_top_up.png",
+              "Path": "textures/lobby/lobby_currency_btn_top_up.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_btn_top_up.png",
+              "Path": "textures/lobby/lobby_currency_btn_top_up.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -439,12 +439,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_btn_top_up.png",
+              "Path": "textures/lobby/lobby_currency_btn_top_up.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_currency_btn_top_up.png",
+              "Path": "textures/lobby/lobby_currency_btn_top_up.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -508,13 +508,13 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../assets/common/common_icon_g_small.png",
-        "../../../assets/common/common_icon_gold_small.png",
-        "../../../assets/font/SVN-Supercell Magic.ttf",
-        "../../../assets/lobby/lobby_box.png",
-        "../../../assets/lobby/lobby_currency_background.png",
-        "../../../assets/lobby/lobby_currency_btn_top_up.png",
-        "../../../Default/Button_Disable.png"
+        "../../../Default/Button_Disable.png",
+        "../../../textures/common/common_icon_g_small.png",
+        "../../../textures/common/common_icon_gold_small.png",
+        "../../../textures/font/SVN-Supercell Magic.ttf",
+        "../../../textures/lobby/lobby_box.png",
+        "../../../textures/lobby/lobby_currency_background.png",
+        "../../../textures/lobby/lobby_currency_btn_top_up.png"
       ],
       "ctype": "GameFileData"
     }

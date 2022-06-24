@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_shop_item_background.png",
+              "Path": "textures/lobby/lobby_shop_item_background.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -98,7 +98,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "assets/lobby/lobby_shop_item_gold_3.png",
+                  "Path": "textures/lobby/lobby_shop_item_gold_3.png",
                   "Plist": ""
                 },
                 "Scale9OriginX": 42,
@@ -145,7 +145,7 @@
                 "LabelText": "10.000",
                 "FontResource": {
                   "Type": "Normal",
-                  "Path": "assets/font/SVN-Supercell Magic.ttf",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
                   "Plist": ""
                 },
                 "OutlineColor": {
@@ -218,9 +218,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../assets/lobby/lobby_shop_item_background.png",
-        "../../assets/lobby/lobby_shop_item_gold_3.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_shop_item_background.png",
+        "../../textures/lobby/lobby_shop_item_gold_3.png",
         "costButton.json"
       ],
       "ctype": "GameFileData"

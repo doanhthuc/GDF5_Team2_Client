@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_background.png",
+              "Path": "textures/lobby/lobby_background.png",
               "Plist": ""
             },
             "Scale9OriginX": 281,
@@ -150,6 +150,7 @@
                   "X": 640.0,
                   "Y": 1136.0
                 },
+                "Alpha": 0,
                 "Name": "shopPanel",
                 "ctype": "PanelObjectData"
               },
@@ -362,50 +363,9 @@
               "X": 640.0,
               "Y": 1136.0
             },
+            "Alpha": 0,
             "Name": "mainPageView",
             "ctype": "PageViewObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/main/bottom/bottomNav.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 320.0,
-              "Y": 0.0
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PositionPercentXEnabled": true,
-            "PrePosition": {
-              "X": 0.5,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 320.0,
-            "RightMargin": 320.0,
-            "TopMargin": 1136.0,
-            "Tag": 57,
-            "ActionTag": 2128432903,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "VisibleForFrame": false,
-            "Name": "bottomNav",
-            "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
@@ -457,8 +417,7 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/lobby/lobby_background.png",
-        "bottom/bottomNav.json",
+        "../../textures/lobby/lobby_background.png",
         "header/header.json"
       ],
       "ctype": "GameFileData"

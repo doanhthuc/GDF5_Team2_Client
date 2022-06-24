@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_target_hp_background.png",
+              "Path": "textures/battle/battle_target_hp_background.png",
               "Plist": ""
             },
             "Scale9OriginX": 18,
@@ -62,7 +62,7 @@
             "ProgressInfo": 70,
             "ImageFileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_target_hp.png",
+              "Path": "textures/battle/battle_target_hp.png",
               "Plist": ""
             },
             "AnchorPoint": {
@@ -109,8 +109,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/battle/battle_target_hp.png",
-        "../../assets/battle/battle_target_hp_background.png"
+        "../../textures/battle/battle_target_hp.png",
+        "../../textures/battle/battle_target_hp_background.png"
       ],
       "ctype": "GameFileData"
     }

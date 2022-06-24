@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_deck.png",
+              "Path": "textures/battle/battle_deck.png",
               "Plist": ""
             },
             "Scale9OriginX": 213,
@@ -226,7 +226,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_btn_chat.png",
+              "Path": "textures/battle/battle_btn_chat.png",
               "Plist": ""
             },
             "Scale9OriginX": 23,
@@ -273,7 +273,7 @@
             "LabelText": "Tiếp theo:",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -413,9 +413,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/battle/battle_btn_chat.png",
-        "../../../../assets/battle/battle_deck.png",
-        "../../../../assets/font/SVN-Supercell Magic.ttf",
+        "../../../../textures/battle/battle_btn_chat.png",
+        "../../../../textures/battle/battle_deck.png",
+        "../../../../textures/font/SVN-Supercell Magic.ttf",
         "BattleCardNode.json",
         "EnergyProgressNode.json"
       ],

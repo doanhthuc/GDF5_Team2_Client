@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_treasure_opening_time.png",
+              "Path": "textures/lobby/lobby_home_treasure_opening_time.png",
               "Plist": ""
             },
             "Scale9OriginX": 46,
@@ -64,7 +64,7 @@
             "LabelText": "15h 32m",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -122,7 +122,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_stat_icon_time.png",
+              "Path": "textures/lobby/lobby_stat_icon_time.png",
               "Plist": ""
             },
             "Scale9OriginX": 15,
@@ -173,9 +173,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../../assets/font/SVN-Supercell Magic.ttf",
-        "../../../../../assets/lobby/lobby_home_treasure_opening_time.png",
-        "../../../../../assets/lobby/lobby_stat_icon_time.png"
+        "../../../../../textures/font/SVN-Supercell Magic.ttf",
+        "../../../../../textures/lobby/lobby_home_treasure_opening_time.png",
+        "../../../../../textures/lobby/lobby_stat_icon_time.png"
       ],
       "ctype": "GameFileData"
     }

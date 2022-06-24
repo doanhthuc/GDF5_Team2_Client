@@ -22,13 +22,15 @@ const bottomNav = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
 
             this.activeTab = sender.parent.name;
-            this.tabMap.get(this.activeTab).isTabRunningAnimation = true;
-            this.setPositionForTab(null);
-            this.handleScrollPageCallback(sender.parent.index);
+            if (this.activeTab !== this.prevActiveTab) {
+                this.tabMap.get(this.activeTab).isTabRunningAnimation = true;
+                this.setPositionForTab();
+                this.handleScrollPageCallback(sender.parent.index);
+            }
         }
     },
     setPositionForTab: function () {
-        if(this.isTabRunningAnimation()) return;
+        if (this.isTabRunningAnimation()) return;
         let moveIconDown = cc.MoveBy.create(0.1, cc.p(0, -20));
         this.tabMap.get(this.prevActiveTab).iconImg.runAction(moveIconDown);
         let currentWidth = 0;

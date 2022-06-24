@@ -8,7 +8,7 @@ const TreasureSlot = cc.Node.extend({
 
 
     ctor: function () {
-        this.clientUIManager = clientUIManager.getInstance();
+        this.clientUIManager = ClientUIManager.getInstance();
         this.state = this.DEFAULT_STATE;
         this._super();
         this.init();

@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_shop_banner.png",
+              "Path": "textures/lobby/lobby_shop_banner.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -55,7 +55,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "assets/lobby/lobby_shop_category_daily.png",
+                  "Path": "textures/lobby/lobby_shop_category_daily.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -116,8 +116,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/lobby/lobby_shop_banner.png",
-        "../../assets/lobby/lobby_shop_category_daily.png"
+        "../../textures/lobby/lobby_shop_banner.png",
+        "../../textures/lobby/lobby_shop_category_daily.png"
       ],
       "ctype": "GameFileData"
     }

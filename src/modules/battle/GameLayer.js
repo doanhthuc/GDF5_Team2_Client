@@ -9,13 +9,11 @@ let GameLayer = cc.Layer.extend({
         GameConfig.gameLayer = this;
 
         // create UI
-        let rootNode = ccs.load("ui/battle/BattleScene.json", "");
-        this.addChild(rootNode.node);
-        this.mapLayer = rootNode.node.getChildByName("battle_map_layer");
-        // this.uiLayer = rootNode.node.getChildByName("battle_ui_layer");
+        this.mapLayer = new BattleMapLayer();
+        this.addChild(this.mapLayer, 1);
 
         this.uiLayer = new BattleUILayer();
-        this.addChild(this.uiLayer,2 );
+        this.addChild(this.uiLayer, 1);
 
         // create system
         this.movementSystem = new MovementSystem();
@@ -26,12 +24,10 @@ let GameLayer = cc.Layer.extend({
         this.effectSystem = new EffectSystem();
         this.pathSystem = new PathMonsterSystem();
 
-        this.initMonster();
-        this.initTower();
-        this.handleEventKey();
+        // this._initTower();
+        this._handleEventKey();
 
         this.scheduleUpdate();
-        this.schedule(this.initMonster, 8);
     },
 
     update: function (dt) {
@@ -45,17 +41,32 @@ let GameLayer = cc.Layer.extend({
         this.pathSystem.run(dt);
     },
 
-    initMonster: function () {
-        EntityFactory.createSwordsmanMonster();
+    bornMonster: function (pos) {
+        // pos is in tile coordinator
+        if (!pos) {
+            pos = Utils.tile2Pixel(0, 4);
+        } else {
+            pos = Utils.tile2Pixel(pos.x, pos.y);
+        }
+        EntityFactory.createSwordsmanMonster(pos);
     },
 
-    initTower: function () {
+    putTowerAt: function (type, pos) {
+        // pos is tile coordinator
+        if (type === GameConfig.ENTITY_ID.CANNON_TOWER) {
+            EntityFactory.createCannonOwlTower(pos);
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: pos});
+        }
+    },
+
+    _initTower: function () {
         EntityFactory.createCannonOwlTower({x: 1, y: 3});
         EntityFactory.createIceGunPolarBearTower({x: 1, y: 1});
         EntityFactory.createBoomerangFrogTower({x: 3, y: 3});
     },
 
-    handleEventKey: function () {
+    _handleEventKey: function () {
         if ('keyboard' in cc.sys.capabilities) {
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
@@ -69,5 +80,21 @@ let GameLayer = cc.Layer.extend({
         } else {
             cc.log("KEYBOARD Not supported");
         }
-    }
+
+        cc.eventManager.addListener(cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ALL_AT_ONCE,
+            onTouchesEnded: function (touches, event) {
+                if (touches.length <= 0)
+                    return;
+                let pixel = touches[0].getLocation();
+                let pos = Utils.pixel2Tile(pixel.x, pixel.y);
+                GameConfig.gameLayer.putTowerAt(GameConfig.ENTITY_ID.CANNON_TOWER, pos);
+
+            }
+        }), this.uiLayer)
+    },
+
+    stopGame: function () {
+        this.unscheduleUpdate();
+    },
 });

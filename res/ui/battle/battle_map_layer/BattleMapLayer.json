@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_background.png",
+              "Path": "textures/map/map_background.png",
               "Plist": ""
             },
             "Scale9OriginX": 204,
@@ -99,7 +99,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_background.png",
+              "Path": "textures/map/map_background.png",
               "Plist": ""
             },
             "Scale9OriginX": 204,
@@ -144,7 +144,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_background.png",
+              "Path": "textures/map/map_background.png",
               "Plist": ""
             },
             "Scale9OriginX": 204,
@@ -271,7 +271,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_0002.png",
+              "Path": "textures/map/map_decoration_0002.png",
               "Plist": ""
             },
             "Scale9OriginX": 92,
@@ -316,7 +316,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_0001.png",
+              "Path": "textures/map/map_decoration_0001.png",
               "Plist": ""
             },
             "Scale9OriginX": 81,
@@ -361,7 +361,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0001.png",
+              "Path": "textures/map/map_decoration_tree_0001.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -406,7 +406,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0003.png",
+              "Path": "textures/map/map_decoration_tree_0003.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -451,7 +451,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0003.png",
+              "Path": "textures/map/map_decoration_tree_0003.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -496,7 +496,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0002.png",
+              "Path": "textures/map/map_decoration_tree_0002.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -541,7 +541,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0004.png",
+              "Path": "textures/map/map_decoration_tree_0004.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -586,7 +586,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0003.png",
+              "Path": "textures/map/map_decoration_tree_0003.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -631,7 +631,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0001.png",
+              "Path": "textures/map/map_decoration_tree_0001.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -676,7 +676,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0004.png",
+              "Path": "textures/map/map_decoration_tree_0004.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -721,7 +721,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0004.png",
+              "Path": "textures/map/map_decoration_tree_0004.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -766,7 +766,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0003.png",
+              "Path": "textures/map/map_decoration_tree_0003.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -811,7 +811,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0003.png",
+              "Path": "textures/map/map_decoration_tree_0003.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -856,7 +856,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_grass_0002.png",
+              "Path": "textures/map/map_decoration_grass_0002.png",
               "Plist": ""
             },
             "Scale9OriginX": 12,
@@ -901,7 +901,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_grass_0001.png",
+              "Path": "textures/map/map_decoration_grass_0001.png",
               "Plist": ""
             },
             "Scale9OriginX": 15,
@@ -946,7 +946,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_rock_0003.png",
+              "Path": "textures/map/map_decoration_rock_0003.png",
               "Plist": ""
             },
             "Scale9OriginX": 20,
@@ -991,7 +991,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_rock_0005.png",
+              "Path": "textures/map/map_decoration_rock_0005.png",
               "Plist": ""
             },
             "Scale9OriginX": 15,
@@ -1036,7 +1036,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_grass_0001.png",
+              "Path": "textures/map/map_decoration_grass_0001.png",
               "Plist": ""
             },
             "Scale9OriginX": 15,
@@ -1081,7 +1081,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_grass_0001.png",
+              "Path": "textures/map/map_decoration_grass_0001.png",
               "Plist": ""
             },
             "Scale9OriginX": 15,
@@ -1128,7 +1128,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0003.png",
+              "Path": "textures/map/map_decoration_tree_0003.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -1173,7 +1173,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0003.png",
+              "Path": "textures/map/map_decoration_tree_0003.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -1218,7 +1218,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_decoration_tree_0004.png",
+              "Path": "textures/map/map_decoration_tree_0004.png",
               "Plist": ""
             },
             "Scale9OriginX": 47,
@@ -1263,7 +1263,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_house.png",
+              "Path": "textures/map/map_house.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -1308,7 +1308,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_house.png",
+              "Path": "textures/map/map_house.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -1359,18 +1359,18 @@
         "ctype": "LayerObjectData"
       },
       "UsedResources": [
-        "../../../assets/map/map_background.png",
-        "../../../assets/map/map_decoration_0001.png",
-        "../../../assets/map/map_decoration_0002.png",
-        "../../../assets/map/map_decoration_grass_0001.png",
-        "../../../assets/map/map_decoration_grass_0002.png",
-        "../../../assets/map/map_decoration_rock_0003.png",
-        "../../../assets/map/map_decoration_rock_0005.png",
-        "../../../assets/map/map_decoration_tree_0001.png",
-        "../../../assets/map/map_decoration_tree_0002.png",
-        "../../../assets/map/map_decoration_tree_0003.png",
-        "../../../assets/map/map_decoration_tree_0004.png",
-        "../../../assets/map/map_house.png",
+        "../../../textures/map/map_background.png",
+        "../../../textures/map/map_decoration_0001.png",
+        "../../../textures/map/map_decoration_0002.png",
+        "../../../textures/map/map_decoration_grass_0001.png",
+        "../../../textures/map/map_decoration_grass_0002.png",
+        "../../../textures/map/map_decoration_rock_0003.png",
+        "../../../textures/map/map_decoration_rock_0005.png",
+        "../../../textures/map/map_decoration_tree_0001.png",
+        "../../../textures/map/map_decoration_tree_0002.png",
+        "../../../textures/map/map_decoration_tree_0003.png",
+        "../../../textures/map/map_decoration_tree_0004.png",
+        "../../../textures/map/map_house.png",
         "BattleMapOpponent.json",
         "BattleMapPlayer.json",
         "BattleRiver.json"

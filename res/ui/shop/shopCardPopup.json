@@ -67,7 +67,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_panel_background.png",
+              "Path": "textures/common/common_panel_background.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -114,7 +114,7 @@
             "LabelText": "Pháo Cú",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -180,12 +180,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_panel_btn_close.png",
+              "Path": "textures/common/common_panel_btn_close.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_panel_btn_close.png",
+              "Path": "textures/common/common_panel_btn_close.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -323,7 +323,7 @@
             "LabelText": "x50",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -422,11 +422,11 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/common/common_panel_background.png",
-        "../../assets/common/common_panel_btn_close.png",
-        "../../assets/font/SVN-Supercell Magic.ttf",
         "../../Default/Button_Disable.png",
         "../../Default/ImageFile.png",
+        "../../textures/common/common_panel_background.png",
+        "../../textures/common/common_panel_btn_close.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
         "../inventory/cardImageNode.json",
         "../inventory/cardUpgradeProgress.json",
         "costButton.json"

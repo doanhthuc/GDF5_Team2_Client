@@ -1,0 +1,273 @@
+{
+  "ID": "e8e5dbd9-9885-49a0-b76f-ba9453904213",
+  "Version": "2.3.4",
+  "Name": "UpgradeBtn",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 389,
+        "Children": [
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Press.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_btn_green.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 164,
+            "Scale9Height": 89,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -97.0,
+            "RightMargin": -97.0,
+            "TopMargin": -55.5,
+            "BottomMargin": -55.5,
+            "Tag": 509,
+            "Children": [
+              {
+                "FontSize": 20,
+                "LabelText": "Nâng Cấp",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
+                  "Plist": ""
+                },
+                "OutlineColor": {
+                  "R": 0,
+                  "G": 0,
+                  "B": 0
+                },
+                "OutlineEnabled": true,
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 97.0,
+                  "Y": 77.7
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.7
+                },
+                "PreSize": {
+                  "X": 0.701,
+                  "Y": 0.2613
+                },
+                "LeftMargin": 29.0,
+                "RightMargin": 29.0,
+                "TopMargin": 18.8,
+                "BottomMargin": 63.2,
+                "Tag": 510,
+                "ActionTag": 1934057397,
+                "Size": {
+                  "X": 136.0,
+                  "Y": 29.0
+                },
+                "Name": "Text_1",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "textures/common/common_icon_gold_small.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 44.4066,
+                  "Y": 42.6809
+                },
+                "Scale": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.2289,
+                  "Y": 0.3845
+                },
+                "PreSize": {
+                  "X": 0.3093,
+                  "Y": 0.5766
+                },
+                "LeftMargin": 14.4066,
+                "RightMargin": 119.5934,
+                "TopMargin": 36.3191,
+                "BottomMargin": 10.6809,
+                "Tag": 511,
+                "ActionTag": -331919386,
+                "Size": {
+                  "X": 60.0,
+                  "Y": 64.0
+                },
+                "Name": "Sprite_1",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FontSize": 20,
+                "LabelText": "2,800",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
+                  "Plist": ""
+                },
+                "HorizontalAlignmentType": "HT_Center",
+                "OutlineColor": {
+                  "R": 0,
+                  "G": 0,
+                  "B": 0
+                },
+                "OutlineEnabled": true,
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 109.4433,
+                  "Y": 41.1808
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5641,
+                  "Y": 0.371
+                },
+                "PreSize": {
+                  "X": 0.433,
+                  "Y": 0.2613
+                },
+                "LeftMargin": 67.4433,
+                "RightMargin": 42.5567,
+                "TopMargin": 55.3192,
+                "BottomMargin": 26.6808,
+                "Tag": 512,
+                "ActionTag": 1899256977,
+                "Size": {
+                  "X": 84.0,
+                  "Y": 29.0
+                },
+                "Name": "goldValueTxt",
+                "ctype": "TextObjectData"
+              }
+            ],
+            "ActionTag": 1278656280,
+            "Size": {
+              "X": 194.0,
+              "Y": 111.0
+            },
+            "Name": "backgroundBtn",
+            "ctype": "ButtonObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../Default/Button_Disable.png",
+        "../../../Default/Button_Press.png",
+        "../../../textures/common/common_btn_green.png",
+        "../../../textures/common/common_icon_gold_small.png",
+        "../../../textures/font/SVN-Supercell Magic.ttf"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

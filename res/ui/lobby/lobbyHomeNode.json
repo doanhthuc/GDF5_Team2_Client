@@ -58,7 +58,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_arena_forest.png",
+              "Path": "textures/common/common_arena_forest.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -144,7 +144,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/fx/arena_particle.plist",
+              "Path": "textures/common/fx/arena_particle.plist",
               "Plist": ""
             },
             "BlendFunc": {
@@ -190,9 +190,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/common/common_arena_forest.png",
-        "../../assets/common/fx/arena_particle.plist",
-        "../../assets/common/fx/arena_particle.png",
+        "../../textures/common/common_arena_forest.png",
+        "../../textures/common/fx/arena_particle.plist",
+        "../../textures/common/fx/arena_particle.png",
         "battleBtn.json",
         "playerInfoHolder.json"
       ],

@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_river_0000.png",
+              "Path": "textures/map/map_river_0000.png",
               "Plist": ""
             },
             "Scale9OriginX": 335,
@@ -62,7 +62,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/map/map_river_0001.png",
+              "Path": "textures/map/map_river_0001.png",
               "Plist": ""
             },
             "Scale9OriginX": 335,
@@ -113,8 +113,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../assets/map/map_river_0000.png",
-        "../../../assets/map/map_river_0001.png"
+        "../../../textures/map/map_river_0000.png",
+        "../../../textures/map/map_river_0001.png"
       ],
       "ctype": "GameFileData"
     }

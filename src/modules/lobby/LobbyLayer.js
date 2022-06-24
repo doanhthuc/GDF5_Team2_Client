@@ -13,6 +13,7 @@ const lobbyLayer = cc.Node.extend({
         this.battleBtnNode = this.lobbyNode.getChildByName('battleBtn');
         this.battleBtnBackgroundImg = this.battleBtnNode.getChildByName('battleBtnBackgroundImg');
         this.battleBtnBackgroundImg.addTouchEventListener(this.onBattleBtnClick.bind(this), this);
+        this.userTrophyTxt = this.playerInfoHolder.getChildByName('userTrophyTxt');
 
         this.lobbyNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
 
@@ -43,5 +44,9 @@ const lobbyLayer = cc.Node.extend({
             transitionTime = 1.2;
         }
         cc.director.runScene(new cc.TransitionFade(transitionTime, scene));
-    }
+    },
+
+    setUserTrophy: function (trophy) {
+        this.userTrophyTxt.setString(trophy);
+    },
 })

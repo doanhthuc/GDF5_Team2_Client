@@ -1,6 +1,6 @@
 const ShopItemSlotNode = cc.Node.extend({
     ctor: function (type, price, unit, quantity = 1) {
-        this.clientUIManager = clientUIManager.getInstance();
+        this.clientUIManager = ClientUIManager.getInstance();
         this._super();
         this.type = type;
         this.price = price;

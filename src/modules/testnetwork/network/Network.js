@@ -22,19 +22,32 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.GET_USER_INFO:
                 userInfo.clone(packet);
                 userInfo.show();
-                let userContext = contextManager.getContext(ContextManagerConst.USER_CONTEXT);
+                // let userContext = contextManager.getContext(ContextManagerConst.USER_CONTEXT);
+                let userContext = new UserContext();
+                contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT, userContext);
+                // let inventoryContext = new InventoryContext();
+                // contextManager.registerContext(ContextManagerConst.INVENTORY_CONTEXT, inventoryContext);
+
                 userContext.setUserInfoFromPackage(userInfo);
+
                 userContext.updateUserInfoUI();
                 break;
             case gv.CMD.GET_USER_INVENTORY:
+                let inventoryContext = new InventoryContext();
+                contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT, inventoryContext);
+                inventoryContext.setCardCollectionList(packet.cardCollection);
+                inventoryContext.setBattleDeckIdList(packet.battleDeckCard);
+                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setBattleDeck(inventoryContext.battleDeckList);
+                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setCardInBattleDeckPosition();
                 userCardCollection.getItemList(packet);
                 cc.log("GetInventory");
-                userCardCollection.show();
+                // userCardCollection.show();
                 break;
             case gv.CMD.UPGRADE_CARD:
                 cc.log(packet.goldChange + " " + packet.cardType + " " + packet.fragmentChange);
                 break;
             case gv.CMD.GET_USER_DAILY_SHOP:
+                cc.log(JSON.stringify(packet))
                 userDailyShop.getItemList(packet);
                 cc.log("GetDailyShop");
                 userDailyShop.show();
@@ -161,23 +174,7 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(itemid);
         this.gameClient.sendPacket(pk);
     },
-    sendMove: function (x, y) {
-        cc.log("SendMove:", x, y);
-        var pk = this.gameClient.getOutPacket(CmdSendMove);
-        pk.pack(x, y);
-        this.gameClient.sendPacket(pk);
-    },
-    sendResetMap: function () {
-        cc.log("sendResetMap");
-        var pk = this.gameClient.getOutPacket(CmdSendResetMap);
-        pk.pack();
-        this.gameClient.sendPacket(pk);
-    },
-    // updateUserInfo(pk){
-    //     userInfo.gold+=pk.goldchange;
-    //     userInfo.gem+=pk.gemchange;
-    //
-    // }
+
 });
 
 

@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/card/card_border_1.png",
+              "Path": "textures/card/card_border_1.png",
               "Plist": ""
             },
             "Scale9OriginX": 45,
@@ -55,7 +55,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "assets/card/card_background_1.png",
+                  "Path": "textures/card/card_background_1.png",
                   "Plist": ""
                 },
                 "Scale9OriginX": 38,
@@ -102,7 +102,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "assets/card/card_tower_attack_speed.png",
+                  "Path": "textures/card/card_tower_attack_speed.png",
                   "Plist": ""
                 },
                 "Scale9OriginX": 38,
@@ -151,7 +151,7 @@
                 "LabelText": "x60",
                 "FontResource": {
                   "Type": "Normal",
-                  "Path": "assets/font/SVN-Supercell Magic.ttf",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
                   "Plist": ""
                 },
                 "OutlineColor": {
@@ -222,10 +222,10 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/card/card_background_1.png",
-        "../../assets/card/card_border_1.png",
-        "../../assets/card/card_tower_attack_speed.png",
-        "../../assets/font/SVN-Supercell Magic.ttf"
+        "../../textures/card/card_background_1.png",
+        "../../textures/card/card_border_1.png",
+        "../../textures/card/card_tower_attack_speed.png",
+        "../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }

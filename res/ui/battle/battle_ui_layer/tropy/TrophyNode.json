@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/battle/battle_info_box.png",
+              "Path": "textures/battle/battle_info_box.png",
               "Plist": ""
             },
             "Scale9OriginX": 29,
@@ -62,7 +62,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_icon_trophy.png",
+              "Path": "textures/common/common_icon_trophy.png",
               "Plist": ""
             },
             "Scale9OriginX": 35,
@@ -109,7 +109,7 @@
             "LabelText": "93.774",
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "HorizontalAlignmentType": "HT_Center",
@@ -168,9 +168,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../assets/battle/battle_info_box.png",
-        "../../../../assets/common/common_icon_trophy.png",
-        "../../../../assets/font/SVN-Supercell Magic.ttf"
+        "../../../../textures/battle/battle_info_box.png",
+        "../../../../textures/common/common_icon_trophy.png",
+        "../../../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }

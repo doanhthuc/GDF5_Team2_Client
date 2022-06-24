@@ -7,8 +7,8 @@ const ShopResources = {
     BUY_CARD_POPUP_NODE: 'ui/shop/shopCardPopup.json',
     BUY_GOLD_POPUP_NODE: 'ui/shop/shopGoldPopup.json',
 
-    SHOP_SECTION_CATEGORY_TITLE_GOLD: 'assets/lobby/lobby_shop_category_gold.png',
-    GEM_ICON_SMALL: 'assets/common/common_icon_g_small.png',
+    SHOP_SECTION_CATEGORY_TITLE_GOLD: 'textures/lobby/lobby_shop_category_gold.png',
+    GEM_ICON_SMALL: 'textures/common/common_icon_g_small.png',
 
     SHOP_SECTION_NODE_HEIGHT: 346,
     SHOP_ITEM_SLOT_WIDTH: 157,

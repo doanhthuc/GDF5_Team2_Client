@@ -1,0 +1,239 @@
+{
+  "ID": "a515c58f-ab2c-4e03-bc44-0fd2e8b61e05",
+  "Version": "2.3.4",
+  "Name": "cardStatHolder",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 47,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/lobby/lobby_card_panel_stat.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -128.5,
+            "RightMargin": -128.5,
+            "TopMargin": -37.0,
+            "BottomMargin": -37.0,
+            "Tag": 133,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "textures/card/stat_icon/stat_icon_damage.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 34.5,
+                  "Y": 37.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.1342,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.1868,
+                  "Y": 0.6892
+                },
+                "LeftMargin": 10.5,
+                "RightMargin": 198.5,
+                "TopMargin": 11.5,
+                "BottomMargin": 11.5,
+                "Tag": 134,
+                "ActionTag": 1674153974,
+                "Size": {
+                  "X": 48.0,
+                  "Y": 51.0
+                },
+                "Name": "statIconImg",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FontSize": 16,
+                "LabelText": "Sát thương:",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
+                  "Plist": ""
+                },
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 66.34,
+                  "Y": 57.516
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {
+                  "R": 55,
+                  "G": 51,
+                  "B": 51
+                },
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.2581,
+                  "Y": 0.7772
+                },
+                "PreSize": {
+                  "X": 0.537,
+                  "Y": 0.2973
+                },
+                "LeftMargin": 66.34,
+                "RightMargin": 52.66,
+                "TopMargin": 5.484,
+                "BottomMargin": 46.516,
+                "Tag": 135,
+                "ActionTag": 481327212,
+                "Size": {
+                  "X": 138.0,
+                  "Y": 22.0
+                },
+                "Alpha": 204,
+                "Name": "statNameTxt",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FontSize": 20,
+                "LabelText": "50.3",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
+                  "Plist": ""
+                },
+                "OutlineColor": {
+                  "R": 0,
+                  "G": 0,
+                  "B": 0
+                },
+                "OutlineEnabled": true,
+                "ShadowColor": {
+                  "R": 0,
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 66.34,
+                  "Y": 25.7823
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.2581,
+                  "Y": 0.3484
+                },
+                "PreSize": {
+                  "X": 0.249,
+                  "Y": 0.3649
+                },
+                "LeftMargin": 66.34,
+                "RightMargin": 125.66,
+                "TopMargin": 33.7177,
+                "BottomMargin": 11.2823,
+                "Tag": 136,
+                "ActionTag": 1725241411,
+                "Size": {
+                  "X": 65.0,
+                  "Y": 29.0
+                },
+                "Name": "statValueTxt",
+                "ctype": "TextObjectData"
+              }
+            ],
+            "ActionTag": -1443482651,
+            "Size": {
+              "X": 257.0,
+              "Y": 74.0
+            },
+            "Name": "statBackgroundImg",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../textures/card/stat_icon/stat_icon_damage.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_card_panel_stat.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

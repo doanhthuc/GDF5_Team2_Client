@@ -1,7 +1,6 @@
 const Header = cc.Node.extend({
     ctor: function () {
         this._super();
-        this.contextManager = contextManager.getInstance();
         this.userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
         this.init();
     },

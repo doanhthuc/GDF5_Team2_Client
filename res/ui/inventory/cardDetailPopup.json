@@ -1,0 +1,660 @@
+{
+  "ID": "a196e087-ec31-4aa0-b08f-9c6ade9fb008",
+  "Version": "2.3.4",
+  "Name": "cardDetailPopup",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 165,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Default",
+              "Path": "Default/ImageFile.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 10,
+            "Scale9OriginY": 10,
+            "Scale9Width": 26,
+            "Scale9Height": 26,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -320.0,
+            "RightMargin": -320.0,
+            "TopMargin": -568.0,
+            "BottomMargin": -568.0,
+            "Tag": 660,
+            "ActionTag": 296423708,
+            "Size": {
+              "X": 640.0,
+              "Y": 1136.0
+            },
+            "Alpha": 202,
+            "Name": "blur",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_panel_background.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 149,
+            "Scale9OriginY": 129,
+            "Scale9Width": 155,
+            "Scale9Height": 135,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -75.3658
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -310.0,
+            "RightMargin": -310.0,
+            "TopMargin": -324.6342,
+            "BottomMargin": -475.3658,
+            "Tag": 107,
+            "Children": [
+              {
+                "FontSize": 20,
+                "LabelText": "Pháo Cú",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
+                  "Plist": ""
+                },
+                "HorizontalAlignmentType": "HT_Center",
+                "OutlineColor": {
+                  "R": 26,
+                  "G": 26,
+                  "B": 26
+                },
+                "OutlineEnabled": true,
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.4887,
+                  "ScaleY": 0.4644
+                },
+                "Position": {
+                  "X": 332.8562,
+                  "Y": 739.5464
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5369,
+                  "Y": 0.9244
+                },
+                "PreSize": {
+                  "X": 0.1871,
+                  "Y": 0.0362
+                },
+                "LeftMargin": 276.167,
+                "RightMargin": 227.833,
+                "TopMargin": 44.9212,
+                "BottomMargin": 726.0788,
+                "Tag": 235,
+                "ActionTag": -700111239,
+                "Size": {
+                  "X": 116.0,
+                  "Y": 29.0
+                },
+                "Name": "cardNameTxt",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
+                  "Type": "Default",
+                  "Path": "Default/Button_Disable.png",
+                  "Plist": ""
+                },
+                "PressedFileData": {
+                  "Type": "Normal",
+                  "Path": "textures/common/common_panel_btn_close.png",
+                  "Plist": ""
+                },
+                "NormalFileData": {
+                  "Type": "Normal",
+                  "Path": "textures/common/common_panel_btn_close.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 15,
+                "Scale9OriginY": 11,
+                "Scale9Width": 17,
+                "Scale9Height": 25,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 570.4572,
+                  "Y": 745.3795
+                },
+                "Scale": {
+                  "ScaleX": 1.2,
+                  "ScaleY": 1.2
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.9201,
+                  "Y": 0.9317
+                },
+                "PreSize": {
+                  "X": 0.0758,
+                  "Y": 0.0587
+                },
+                "LeftMargin": 546.9572,
+                "RightMargin": 26.0428,
+                "TopMargin": 31.1205,
+                "BottomMargin": 721.8795,
+                "Tag": 236,
+                "ActionTag": 142427093,
+                "Size": {
+                  "X": 47.0,
+                  "Y": 47.0
+                },
+                "Name": "closeBtn",
+                "ctype": "ButtonObjectData"
+              },
+              {
+                "FontSize": 20,
+                "LabelText": "Tiến hoá 1",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Avo bold.ttf",
+                  "Plist": ""
+                },
+                "HorizontalAlignmentType": "HT_Center",
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 342.4916,
+                  "Y": 717.0029
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {
+                  "R": 69,
+                  "G": 222,
+                  "B": 251
+                },
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5524,
+                  "Y": 0.8963
+                },
+                "PreSize": {
+                  "X": 0.1629,
+                  "Y": 0.035
+                },
+                "LeftMargin": 291.9916,
+                "RightMargin": 227.0084,
+                "TopMargin": 68.9971,
+                "BottomMargin": 703.0029,
+                "Tag": 207,
+                "ActionTag": -276847914,
+                "Size": {
+                  "X": 101.0,
+                  "Y": 28.0
+                },
+                "Name": "upgradeLevelTxt",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "textures/common/common_panel_front.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 310.0,
+                  "Y": 355.869
+                },
+                "Scale": {
+                  "ScaleX": 1.3034,
+                  "ScaleY": 0.9846
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.4448
+                },
+                "PreSize": {
+                  "X": 0.6839,
+                  "Y": 0.4275
+                },
+                "LeftMargin": 98.0,
+                "RightMargin": 98.0,
+                "TopMargin": 273.131,
+                "BottomMargin": 184.869,
+                "Tag": 303,
+                "ActionTag": 808529176,
+                "Size": {
+                  "X": 424.0,
+                  "Y": 342.0
+                },
+                "Name": "Sprite_20",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FontSize": 20,
+                "LabelText": "Nâng cấp thẻ nhận: ",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Avo bold.ttf",
+                  "Plist": ""
+                },
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 255.9529,
+                  "Y": 173.6718
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.4128,
+                  "Y": 0.2171
+                },
+                "PreSize": {
+                  "X": 0.3242,
+                  "Y": 0.035
+                },
+                "LeftMargin": 155.4529,
+                "RightMargin": 263.5471,
+                "TopMargin": 612.3282,
+                "BottomMargin": 159.6718,
+                "Tag": 344,
+                "ActionTag": 838816163,
+                "Size": {
+                  "X": 201.0,
+                  "Y": 28.0
+                },
+                "Name": "Text_17",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FontSize": 20,
+                "LabelText": "1,650 EXP",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Avo bold.ttf",
+                  "Plist": ""
+                },
+                "HorizontalAlignmentType": "HT_Center",
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 416.7404,
+                  "Y": 173.6718
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {
+                  "R": 69,
+                  "G": 222,
+                  "B": 251
+                },
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.6722,
+                  "Y": 0.2171
+                },
+                "PreSize": {
+                  "X": 0.1581,
+                  "Y": 0.035
+                },
+                "LeftMargin": 367.7404,
+                "RightMargin": 154.2596,
+                "TopMargin": 612.3282,
+                "BottomMargin": 159.6718,
+                "Tag": 348,
+                "ActionTag": 783973954,
+                "Size": {
+                  "X": 98.0,
+                  "Y": 28.0
+                },
+                "Name": "revceivedExpTxt",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "ui/inventory/button/selectBtn.json",
+                  "Plist": ""
+                },
+                "StretchWidthEnable": false,
+                "StretchHeightEnable": false,
+                "InnerActionSpeed": 1.0,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 133.6766,
+                  "Y": 105.6552
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.2156,
+                  "Y": 0.1321
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 133.6766,
+                "RightMargin": 486.3234,
+                "TopMargin": 694.3448,
+                "BottomMargin": 105.6552,
+                "Tag": 775,
+                "ActionTag": -803234513,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "selectBtnlNode",
+                "ctype": "ProjectNodeObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "ui/inventory/button/UpgradeBtn.json",
+                  "Plist": ""
+                },
+                "StretchWidthEnable": false,
+                "StretchHeightEnable": false,
+                "InnerActionSpeed": 1.0,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 313.8134,
+                  "Y": 105.5541
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.5062,
+                  "Y": 0.1319
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 313.8134,
+                "RightMargin": 306.1866,
+                "TopMargin": 694.4459,
+                "BottomMargin": 105.5541,
+                "Tag": 779,
+                "ActionTag": -1196524162,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "upgradeBtnNode",
+                "ctype": "ProjectNodeObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "ui/inventory/button/skillBtn.json",
+                  "Plist": ""
+                },
+                "StretchWidthEnable": false,
+                "StretchHeightEnable": false,
+                "InnerActionSpeed": 1.0,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 495.0176,
+                  "Y": 106.1968
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.7984,
+                  "Y": 0.1327
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 495.0176,
+                "RightMargin": 124.9824,
+                "TopMargin": 693.8032,
+                "BottomMargin": 106.1968,
+                "Tag": 785,
+                "ActionTag": 381881331,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "skillBtnNode",
+                "ctype": "ProjectNodeObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "textures/card/miniature_tower_cannon_1.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.6013,
+                  "ScaleY": 0.4413
+                },
+                "Position": {
+                  "X": 309.9998,
+                  "Y": 861.9827
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 1.0775
+                },
+                "PreSize": {
+                  "X": 0.3032,
+                  "Y": 0.2725
+                },
+                "LeftMargin": 196.9554,
+                "RightMargin": 235.0446,
+                "TopMargin": -183.7798,
+                "BottomMargin": 765.7798,
+                "Tag": 620,
+                "ActionTag": 250663107,
+                "Size": {
+                  "X": 188.0,
+                  "Y": 218.0
+                },
+                "Name": "towerImg",
+                "ctype": "SpriteObjectData"
+              }
+            ],
+            "ActionTag": -36862881,
+            "Size": {
+              "X": 620.0,
+              "Y": 800.0
+            },
+            "Name": "backgroundImg",
+            "ctype": "ImageViewObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../Default/Button_Disable.png",
+        "../../Default/ImageFile.png",
+        "../../textures/card/miniature_tower_cannon_1.png",
+        "../../textures/common/common_panel_background.png",
+        "../../textures/common/common_panel_btn_close.png",
+        "../../textures/common/common_panel_front.png",
+        "../../textures/font/SVN-Avo bold.ttf",
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "button/selectBtn.json",
+        "button/skillBtn.json",
+        "button/UpgradeBtn.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

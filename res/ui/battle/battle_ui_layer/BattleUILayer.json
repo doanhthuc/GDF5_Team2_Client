@@ -58,7 +58,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/battle/battle_ui_layer/avatar/AvatarNode.json",
+              "Path": "ui/battle/battle_ui_layer/avatar/PlayerInfoNode.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -181,7 +181,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/battle/battle_ui_layer/energy/BattleEnergy.json",
+              "Path": "ui/battle/battle_ui_layer/energy/HouseEnergy.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -269,9 +269,9 @@
         "ctype": "LayerObjectData"
       },
       "UsedResources": [
-        "avatar/AvatarNode.json",
+        "avatar/PlayerInfoNode.json",
         "card/BattleCardDeckNode.json",
-        "energy/BattleEnergy.json",
+        "energy/HouseEnergy.json",
         "timer/BattleTimerNode.json",
         "tropy/TrophyNode.json",
         "wave/WaveNode.json"

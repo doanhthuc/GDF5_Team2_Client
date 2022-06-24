@@ -2,65 +2,66 @@
  * Created by GSN on 6/2/2015.
  */
 
-var UID=0;
-var userInfo ={
-    id:"",
-    username:"",
-    gem:0,
-    gold:0,
-    trophy:0,
-    clone:function(pk){
-        this.username=pk.username;
-        this.gold=pk.gold;
-        this.gem=pk.gem;
-        this.id=pk.id;
-        this.trophy=pk.trophy;
+var UID = 0;
+var userInfo = {
+    id: "",
+    username: "",
+    gem: 0,
+    gold: 0,
+    trophy: 0,
+    clone: function (pk) {
+        this.username = pk.username;
+        this.gold = pk.gold;
+        this.gem = pk.gem;
+        this.id = pk.id;
+        this.trophy = pk.trophy;
     },
-    show:function(){
-        cc.log(this.username+" "+this.gold+" "+this.gem+" "+this.id+" "+this.trophy);
+    show: function () {
+        cc.log(this.username + " " + this.gold + " " + this.gem + " " + this.id + " " + this.trophy);
     }
 }
 var userCardCollection = {
-    id:"",
-    cardCollection:[],
+    id: "",
+    cardCollection: [],
     battleDeckCard: [],
-    getItemList:function(pk)
-    {
-        for(i=0;i<pk.cardCollectionSize;i++)
+    getItemList: function (pk) {
+        for (i = 0; i < pk.cardCollectionSize; i++)
             this.cardCollection.push(pk.cardCollection[i]);
-        for(i=0;i<pk.battleDeckSize;i++)
+        for (i = 0; i < pk.battleDeckSize; i++)
             this.battleDeckCard.push(pk.battleDeckCard[i]);
     },
-    show:function(){
-        for(i=0;i<this.cardCollection.length;i++)
+    show: function () {
+        for (i = 0; i < this.cardCollection.length; i++)
             this.cardCollection[i].show();
-        for(i=0;i<this.battleDeckCard.length;i++)
-            cc.log(this.battleDeckCard[i]+" ");
+        for (i = 0; i < this.battleDeckCard.length; i++)
+            cc.log(this.battleDeckCard[i] + " ");
     }
 }
-var userDailyShop = {
-    id:"",
-    dailyShopItem:[],
-    getItemList:function(pk)
-    {
-        for(i=0;i<pk.size;i++)
+let userDailyShop = {
+    id: "",
+    dailyShopItem: [],
+
+    getItemList: function (pk) {
+        for (let i = 0; i < pk.size; i++) {
             this.dailyShopItem.push(pk.dailyShopItem[i]);
+        }
     },
-    show:function(){
-        for(i=0;i<this.dailyShopItem.length;i++)
+
+    show: function () {
+        for (let i = 0; i < this.dailyShopItem.length; i++) {
             this.dailyShopItem[i].show();
+        }
     }
 }
 var userLobbyChest = {
-    id:"",
-    lobbyChest:[],
-    getItemList:function(pk)
-    {
-        for(i=0;i<pk.lobbyChestSize;i++)
+    id: "",
+    lobbyChest: [],
+    getItemList: function (pk) {
+        for (i = 0; i < pk.lobbyChestSize; i++)
             this.lobbyChest.push(pk.lobbyChest[i]);
     },
-    show:function(){
-        for(i=0;i<this.lobbyChest.length;i++)
+    show: function () {
+        for (i = 0; i < this.lobbyChest.length; i++)
             this.lobbyChest[i].show();
     }
 }
@@ -77,7 +78,7 @@ var res = {
     ZCSD_SCREEN_DECRYPTION: 'zcsd/screen_decryption.json',
     ZCSD_SCREEN_ZALO: 'zcsd/screen_zalo.json',
     MAIN_SCREEN: 'ui/main/MainScene.json',
-    BOTTOM_NAV: 'ui/main/bottom/BottomNav.json',
+    // BOTTOM_NAV: 'ui/main/bottom/BottomNav.json',
     LOBBY_NODE: 'ui/lobby/lobbyHomeNode.json',
     TREASURE_POPUP_NODE: 'ui/lobby/treasurePopup.json',
 
@@ -88,7 +89,7 @@ var res = {
     LOGINSCENCE: "ui/login/Login.json",
     //images
     Slot1_png: 'zcsd/slot1.png',
-    ACTIVE_TAB_BG: '/assets/lobby/lobby_page_btn_selecting.png'
+    ACTIVE_TAB_BG: '/textures/lobby/lobby_page_btn_selecting.png'
 
 };
 

@@ -17,7 +17,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_background.png",
+              "Path": "textures/lobby/lobby_background.png",
               "Plist": ""
             },
             "Scale9OriginX": 281,
@@ -62,7 +62,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/common/common_arena_forest.png",
+              "Path": "textures/common/common_arena_forest.png",
               "Plist": ""
             },
             "Scale9OriginX": 199,
@@ -153,7 +153,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_card_progress_background_deck.png",
+              "Path": "textures/lobby/lobby_card_progress_background_deck.png",
               "Plist": ""
             },
             "Scale9OriginX": 46,
@@ -212,12 +212,12 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_btn_battle_pressing.png",
+              "Path": "textures/lobby/lobby_home_btn_battle_pressing.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "assets/lobby/lobby_home_btn_battle.png",
+              "Path": "textures/lobby/lobby_home_btn_battle.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -275,7 +275,7 @@
           {
             "FontResource": {
               "Type": "Normal",
-              "Path": "assets/font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "FontSize": 10,
@@ -318,8 +318,7 @@
             "Name": "TextField_2",
             "ctype": "TextFieldObjectData"
           }
-        ],
-        "Size": {
+        ],        "Size": {
           "X": 640.0,
           "Y": 1136.0
         },
@@ -327,12 +326,12 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../assets/common/common_arena_forest.png",
-        "../../assets/font/SVN-Supercell Magic.ttf",
-        "../../assets/lobby/lobby_background.png",
-        "../../assets/lobby/lobby_card_progress_background_deck.png",
-        "../../assets/lobby/lobby_home_btn_battle.png",
-        "../../assets/lobby/lobby_home_btn_battle_pressing.png",
+        "../../textures/common/common_arena_forest.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_background.png",
+        "../../textures/lobby/lobby_card_progress_background_deck.png",
+        "../../textures/lobby/lobby_home_btn_battle.png",
+        "../../textures/lobby/lobby_home_btn_battle_pressing.png",
         "../../Default/Button_Disable.png"
       ],
       "ctype": "GameFileData"

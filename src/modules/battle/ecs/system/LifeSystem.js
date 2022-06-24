@@ -12,18 +12,20 @@ let LifeSystem = System.extend({
         for (let entity of entityList) {
             let lifeComponent = entity.getComponent(GameConfig.COMPONENT_ID.LIFE);
             if (lifeComponent.hp <= 0) {
+                if (Utils.isMonster(entity)) {
+                    let monsterInfo = entity.getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
 
-                // destroy
-                let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
-                if (appearanceComponent) {
-                    let sprite = appearanceComponent.sprite;
-                    sprite.setVisible(false);
+                    // destroy
+                    let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
+                    if (appearanceComponent) {
+                        let sprite = appearanceComponent.sprite;
+                        sprite.setVisible(false);
+                    }
+                    entity.setActive(false);
+                    for (let key of Object.keys(entity.components)) {
+                        entity.components[key].setActive(false);
+                    }
                 }
-                entity.setActive(false);
-                for (let key of Object.keys(entity.components)) {
-                    entity.components[key].setActive(false);
-                }
-
             }
         }
     }
