@@ -67,19 +67,20 @@ const CardNode = cc.Node.extend({
 
 });
 
-var Card = cc.Class.extend({
-    cardType: 0,
-    cardLevel: 0,
-    cardAmount: 0,
-    ctor: function () {
+var Card= cc.Class.extend({
+    cardType:0,
+    cardLevel:0,
+    amount:0,
+    ctor:function(){
 
     },
-    ctor: function (type, level, amount) {
-        this.cardType = type;
-        this.cardLevel = level;
-        this.amount = amount;
+    ctor:function(type,level,amount)
+    {
+        this.cardType=type;
+        this.cardLevel=level;
+        this.amount=amount;
     },
     show: function () {
-        cc.log(this.cardType + " " + this.cardLevel + " " + this.cardAmount);
+        cc.log(this.cardType + " " + this.cardLevel + " " + this.amount);
     }
 })

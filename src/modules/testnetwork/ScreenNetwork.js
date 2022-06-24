@@ -143,17 +143,21 @@ var ScreenNetwork = cc.Layer.extend({
         this.lblLog.setString("Connect fail: " + text);
     },
     onFinishLogin: function () {
+        fr.view(MainScreen);
+        testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
+        //testnetwork.connector.sendGetUserLobbyChest();
+        testnetwork.connector.sendGetUserInventory();
         //testnetwork.connector.sendUpgradeCard(2);
         //testnetwork.connector.sendGetUserDailyShop();
         // testnetwork.connector.sendAddUserGem(100);
         // testnetwork.connector.sendAddUserGold(100);
-        // testnetwork.connector.sendBuyGoldShop(0);
+        //testnetwork.connector.sendBuyGoldShop(0);
         //testnetwork.connector.sendBuyDailyShop(2);
-        fr.view(MainScreen);
-        testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
-        // testnetwork.connector.sendGetUserLobbyChest();
-        testnetwork.connector.sendGetUserInventory();
-
+        //testnetwork.connector.sendUnlockLobbyChest(0);
+        //testnetwork.connector.sendSpeedUpLobbyChest(1);
+        testnetwork.connector.sendClaimLobbyChest(2);
+        // let userContext = new UserContext();
+        // contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
         // userContext.updateUserInfoUI();
         cc.log("Finished login");
     },
