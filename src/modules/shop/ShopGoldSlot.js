@@ -7,7 +7,7 @@ const ShopGoldSlot = cc.Node.extend({
     },
 
     init: function () {
-        this.clientUIManager = clientUIManager.getInstance();
+        this.clientUIManager = ClientUIManager.getInstance();
         this.shopGoldSlotNode = ccs.load(ShopResources.SHOP_GOLD_SLOT_NODE, '').node;
         this.addChild(this.shopGoldSlotNode);
         this.shopItemBackgroundImg = this.shopGoldSlotNode.getChildByName('shopItemBackgroundImg');

@@ -68,7 +68,7 @@
                 },
                 "Position": {
                   "X": 3.0,
-                  "Y": 15.2702
+                  "Y": 15.27
                 },
                 "Scale": {
                   "ScaleX": 0.59,
@@ -87,8 +87,8 @@
                 },
                 "LeftMargin": 3.0,
                 "RightMargin": 3.0,
-                "TopMargin": 2.7298,
-                "BottomMargin": 3.2702,
+                "TopMargin": 2.73,
+                "BottomMargin": 3.27,
                 "Tag": 68,
                 "Children": [
                   {
@@ -107,7 +107,7 @@
                     },
                     "Position": {
                       "X": 120.0,
-                      "Y": 12.4073
+                      "Y": 12.408
                     },
                     "Scale": {
                       "ScaleX": 1.0,
@@ -126,8 +126,8 @@
                       "Y": 1.0
                     },
                     "LeftMargin": 31.0,
-                    "TopMargin": -0.4073,
-                    "BottomMargin": 0.4073,
+                    "TopMargin": -0.408,
+                    "BottomMargin": 0.408,
                     "Tag": 69,
                     "ActionTag": 1748909294,
                     "Size": {
@@ -143,7 +143,7 @@
                   "X": 120.0,
                   "Y": 24.0
                 },
-                "Name": "Sprite_2",
+                "Name": "progressBackgroundImg",
                 "ctype": "SpriteObjectData"
               },
               {
@@ -201,7 +201,7 @@
                   "X": 91.0,
                   "Y": 25.0
                 },
-                "Name": "Text_1",
+                "Name": "accumulateTxt",
                 "ctype": "TextObjectData"
               }
             ],
@@ -210,7 +210,7 @@
               "X": 126.0,
               "Y": 30.0
             },
-            "Name": "Sprite_1",
+            "Name": "progressBorderImg",
             "ctype": "SpriteObjectData"
           }
         ],
