@@ -22,6 +22,7 @@ const CardDetailPopup = cc.Node.extend({
         this.cardNameTxt = this.backgroundImg.getChildByName('cardNameTxt');
         this.cardNameTxt.ignoreContentAdaptWithSize(true);
         this.upgradeLevelTxt = this.backgroundImg.getChildByName('upgradeLevelTxt');
+        this.upgradeLevelTxt.ignoreContentAdaptWithSize(true);
         this.towerImg = this.backgroundImg.getChildByName('towerImg');
         this.initCardStatHolders();
 
@@ -43,7 +44,7 @@ const CardDetailPopup = cc.Node.extend({
             this.backgroundImg.addChild(cardStatHolder);
             if (i !== 0 && i % 2 === 0) {
                 startX = 286.94;
-                startY -= (i / 2) * statHolderHeight + 5;
+                startY -= statHolderHeight + 5;
             }
             cardStatHolder.setPosition(startX, startY);
             startX += statHolderWidth + 10;
@@ -80,8 +81,10 @@ const CardDetailPopup = cc.Node.extend({
         this.setUpgradeBtnState(cardModel.accumulated);
         this.setUpgradeLevelTxt(cardModel.rank);
         // TODO: check condition card from where click
-        this.setFromBattleDeckPopupBtnPos();
-        // this.setFromCardCollectionPopupBtnPos()
+        // cardModel.isBattleDeck
+        //     ? this.setBtnPosPopupFromBattleDeck()
+        //     : this.setBtnPosPopupFromCardCollection();
+        this.setBtnPosPopupFromBattleDeck()
     },
 
     setCardNodeModel: function (cardModel) {
@@ -95,9 +98,13 @@ const CardDetailPopup = cc.Node.extend({
     },
 
     setCardDetailPopupTexture: function () {
-        let cardType = CARD_TYPE.TOWER[this.cardModel.id];
         this.cardNameTxt.setString(CARD_NAME_VI[this.cardModel.id]);
-        this.towerImg.setTexture(CARD_TYPE.TOWER[this.cardModel.id].image['C']);
+        cc.log('CardDetailPopup line 100: ' + getRankCharacter(this.cardModel.level));
+        if (this.cardModel.id <= 6) {
+            this.towerImg.setTexture(CARD_TYPE.TOWER[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
+        } else {
+            this.towerImg.setTexture(CARD_TYPE.SPELL[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
+        }
         // this.backgroundImg.loadTexture(cardType.background, ccui.Widget.PLIST_TEXTURE);
         this.setCardStat()
     },
@@ -133,7 +140,7 @@ const CardDetailPopup = cc.Node.extend({
         }
     },
 
-    setFromBattleDeckPopupBtnPos: function () {
+    setBtnPosPopupFromBattleDeck: function () {
         this.selectBtnNode.setVisible(false);
         this.upgradeBtnNode.setPosition(198.12, 105.55);
         this.skillBtnNode.setPosition(435.80, 105.55);
@@ -141,7 +148,7 @@ const CardDetailPopup = cc.Node.extend({
         this.skillBtnNode.setScaleX(1);
     },
 
-    setFromCardCollectionPopupBtnPos: function () {
+    setBtnPosPopupFromCardCollection: function () {
         this.selectBtnNode.setVisible(true);
         this.selectBtnNode.setPosition(133.68, 105.55);
         this.upgradeBtnNode.setPosition(313.81, 105.55);
@@ -173,9 +180,19 @@ const CardDetailPopup = cc.Node.extend({
     setUpgradeBtnTexture: function (backgroundImg, goldValueTxtColor) {
         this.upgradeBtnBackground.loadTextures(backgroundImg, backgroundImg);
         this.upgradeBtnBackground.getChildByName('goldValueTxt').setColor(goldValueTxtColor);
+        this.upgradeBtnBackground.getChildByName('goldValueTxt').setString(JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].gold);
     },
 
     setUpgradeLevelTxt: function (rank) {
         this.upgradeLevelTxt.setString('Tiến hóa ' + rank);
+    },
+
+    updateUIByLevelAndAccumulatedCard: function (level, accumulated) {
+        this.cardModel.upgradeCardModel(level, accumulated);
+        this.cardNode.updateCardNodeUI(this.cardModel.accumulated);
+        // this.setCardStat();
+        this.setCardDetailPopupTexture();
+        this.setUpgradeLevelTxt(this.cardModel.rank);
+        this.setUpgradeBtnState()
     }
 });

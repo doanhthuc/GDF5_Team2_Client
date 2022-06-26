@@ -6,6 +6,10 @@ const CARD_STAT_ICON = {
     range: 'textures/card/stat_icon/stat_icon_range.png',
     bulletType: 'textures/card/stat_icon/stat_icon_bullet_radius.png',
     immobilize: 'textures/card/stat_icon/stat_icon_immobilize.png',
+    radius: 'textures/card/stat_icon/stat_icon_range.png',
+    frozenTime: 'textures/card/stat_icon/stat_icon_immobilize.png',
+    slowPercent: 'textures/card/stat_icon/stat_icon_immobilize.png',
+    time: 'textures/card/stat_icon/stat_icon_time.png'
 }
 
 const CARD_STAT_NAME = {
@@ -15,6 +19,8 @@ const CARD_STAT_NAME = {
     attackSpeedUp: 'Tốc độ đánh tăng',
     range: 'Tầm đánh',
     bulletType: 'Loại bắn',
-    frozen: 'Đóng băng',
-    slow: 'Làm chậm'
+    frozenTime: 'Đóng băng trong',
+    slowPercent: 'Làm chậm',
+    immobilize: 'Khống chế',
+    radius: 'bán kính'
 }

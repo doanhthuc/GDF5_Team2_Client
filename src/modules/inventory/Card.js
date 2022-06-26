@@ -7,7 +7,16 @@ const CardNode = cc.Node.extend({
 
     setModel: function (cardModel) {
         this.cardModel = cardModel
-        this.setUpgradeProgressBar(this.cardModel.accumulated)
+        this.updateCardNodeUI(this.cardModel.accumulated);
+    },
+
+    onUpgradeCard: function (cardLevel, accumulatedCard) {
+        this.cardModel.upgradeCardModel(cardLevel, accumulatedCard);
+        this.updateCardNodeUI(this.cardModel.accumulated);
+    },
+
+    updateCardNodeUI: function (accumulatedCard) {
+        this.setUpgradeProgressBar(accumulatedCard)
         this.setCardTexture();
     },
 
@@ -36,6 +45,10 @@ const CardNode = cc.Node.extend({
 
     setCardTexture: function () {
         let cardType = CARD_TYPE.TOWER[this.cardModel.id];
+        if (!cardType) {
+            cardType = CARD_TYPE.SPELL[this.cardModel.id];
+
+        }
         this.cardBackgroundBtn.loadTextures(cardType.background, cardType.background);
         this.cardImage.setTexture(cardType.cardImage);
         this.setCardEnergyTxt(this.cardModel.energy);
@@ -67,18 +80,17 @@ const CardNode = cc.Node.extend({
 
 });
 
-var Card= cc.Class.extend({
-    cardType:0,
-    cardLevel:0,
-    amount:0,
-    ctor:function(){
+var Card = cc.Class.extend({
+    cardType: 0,
+    cardLevel: 0,
+    amount: 0,
+    ctor: function () {
 
     },
-    ctor:function(type,level,amount)
-    {
-        this.cardType=type;
-        this.cardLevel=level;
-        this.amount=amount;
+    ctor: function (type, level, amount) {
+        this.cardType = type;
+        this.cardLevel = level;
+        this.amount = amount;
     },
     show: function () {
         cc.log(this.cardType + " " + this.cardLevel + " " + this.amount);

@@ -48,6 +48,7 @@ const UserContext = cc.Class.extend({
 
     updateUserGold: function (gold) {
         this.user.gold += gold;
+        ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE).setUserGold(this.user.gold);
 
     },
 

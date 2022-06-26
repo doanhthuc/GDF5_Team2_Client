@@ -5,7 +5,10 @@ const CARD_NAME = {
     3: 'OIL_GUN_BUNNY',
     4: 'ICE_GUN_POLAR_BEAR',
     5: 'DAMAGE_GOAT',
-    6: 'ATTACK_SPEED_SNAKE'
+    6: 'ATTACK_SPEED_SNAKE',
+    7: 'FIRE_BALL',
+    8: 'FROZEN',
+    9: 'TRAP',
 }
 
 const CARD_NAME_VI = {
@@ -15,5 +18,8 @@ const CARD_NAME_VI = {
     3: 'Thỏ Xả Nhớt',
     4: 'Gấu Bắc Cực',
     5: 'Rắn Tóc Đỏ',
-    6: 'Dê Phát Động'
+    6: 'Dê Phát Động',
+    7: 'Cầu lửa',
+    8: 'Cầu Băng',
+    9: 'Bẫy'
 }

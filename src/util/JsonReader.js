@@ -1,6 +1,8 @@
 const JsonReader = {
     towerConfigData: null,
     towerBuffConfigData: null,
+    targetBuffConfigData: null,
+    potionConfigData: null,
 
     getTowerConfig: function () {
         if (this.towerConfigData) {
@@ -41,5 +43,26 @@ const JsonReader = {
             this.cardUpgradeConfigData = data.card;
         });
         return this.cardUpgradeConfigData;
+    },
+
+    getTargetBuffConfig: function () {
+        if (this.targetBuffConfigData) {
+            return this.targetBuffConfigData;
+        }
+        cc.loader.loadJson("config/TargetBuff.json", (error, data) => {
+                this.targetBuffConfigData = data.targetBuff;
+            }
+        );
+        return this.targetBuffConfigData;
+    },
+
+    getPotionConfig: function () {
+        if (this.potionConfigData) {
+            return this.potionConfigData;
+        }
+        cc.loader.loadJson("config/Potion.json", (error, data) => {
+            this.potionConfigData = data.potion;
+        });
+        return this.potionConfigData;
     }
 }

@@ -26,7 +26,7 @@ const BattleDeckNode = cc.Node.extend({
         let startX = InventoryResources.CARD_WIDTH / 2 + InventoryResources.CARD_START_MARGIN;
         let startY = InventoryResources.BATTLE_DECK_HOLDER_BOTTOM_BORDER_WIDTH + 1.5 * InventoryResources.CARD_HEIGHT
             + InventoryResources.CARD_BOTTOM_MARGIN + InventoryResources.CARD_BOTTOM_HOLDER_MARGIN;
-        for (let i = 0; i < this.battleDeck.length - 1; i++) {
+        for (let i = 0; i < this.battleDeck.length; i++) {
             // let testCard = new CardModel(2, 1, 0);
             // testCard.logCardInfo();
             let cardModel = new CardModel(
@@ -36,6 +36,7 @@ const BattleDeckNode = cc.Node.extend({
             );
             let card = new CardNode(cardModel);
             card.retain();
+            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE).cardNodeMap.set(cardModel.id, card);
             this.battleDeckHolder.addChild(card);
 
             if (i !== 0 && i % InventoryResources.NUM_CARD_ONE_LINE === 0) {

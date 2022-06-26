@@ -34,3 +34,23 @@ Object.entries = function (obj) {
 
     return resArray;
 };
+
+const getRankCharacter = (rankNumber) => {
+    // Because rankNumber is from 1 so we need to minus 1 to get the correct character
+    if (rankNumber <= 1) {
+        return "C";
+    } else if (rankNumber > 1 && rankNumber <= 3) {
+        return "B";
+    } else if (rankNumber >= 4) {
+        return "A";
+    }
+}
+
+const isSpellCard = (carId) => {
+    for (let key of Object.keys(CARD_TYPE.SPELL)) {
+        if (key == carId) {
+            return true;
+        }
+    }
+    return false;
+}
