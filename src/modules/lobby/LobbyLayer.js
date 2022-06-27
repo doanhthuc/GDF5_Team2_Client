@@ -17,8 +17,15 @@ const lobbyLayer = cc.Node.extend({
         this.userTrophyTxt = this.playerInfoHolder.getChildByName('userTrophyTxt');
 
         this.lobbyNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+        this.playerInfoHolderBackgroundImg = this.playerInfoHolder.getChildByName('Image_1');
 
 
+    },
+
+    setPositionForPlayerInfo: function (headerHeight) {
+        let playerInfoHolderHeight = this.playerInfoHolderBackgroundImg.getSize().height;
+
+        this.playerInfoHolder.setPositionY(cc.winSize.height / 2 - playerInfoHolderHeight / 2 - headerHeight);
     },
 
     setTreasureSlotNodeList: function (treasureSlotList) {
