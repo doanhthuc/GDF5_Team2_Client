@@ -2,78 +2,50 @@ const TreasureSlot = cc.Node.extend({
     id: null,
     DEFAULT_STATE: TreasureSlotResources.STATE.EMPTY,
     // state: this.DEFAULT_STATE,
-    timeRemaining: 0,
-    countdownTxt: 0,
     node: null,
 
 
     ctor: function () {
         this.clientUIManager = ClientUIManager.getInstance();
-        this.state = this.DEFAULT_STATE;
+        this.slotNodeMap = new Map();
+        this.state = null;
         this._super();
-        this.init();
-        this.setNodeByState(this.state);
-
+        this.initAllSlotTypes();
+        this.setSlotVisibleByState(this.DEFAULT_STATE);
     },
 
-    init: function () {
-        this.emptySlotNode = ccs.load(TreasureSlotResources.EMPTY_SLOT_RES, '').node;
-        this.emptySlotNode.retain();
-        this.occupiedSlotNode = ccs.load(TreasureSlotResources.OCCUPIED_SLOT_RES, '').node;
-        this.occupiedSlotNode.retain();
-        this.openingSlotNode = ccs.load(TreasureSlotResources.OPENING_SLOT_RES, '').node;
-        this.openingSlotNode.retain();
-        this.finishedSlotNode = ccs.load(TreasureSlotResources.FINISHED_SLOT_RES, '').node;
-        this.finishedSlotNode.retain();
+    initAllSlotTypes: function () {
+        this.emptySlotNode = new EmptySlotNode();
+        this.addChild(this.emptySlotNode);
+        this.emptySlotNode.setVisible(false);
+        this.slotNodeMap.set(TreasureSlotResources.STATE.EMPTY, this.emptySlotNode);
+
+        this.openingSlotNode = new OpeningSlotNode();
+        this.openingSlotNode.setVisible(false);
+        this.addChild(this.openingSlotNode);
+        this.slotNodeMap.set(TreasureSlotResources.STATE.OPENING, this.openingSlotNode);
+
+        this.occupiedSlotNode = new OccupiedSlotNode();
+        this.addChild(this.occupiedSlotNode);
+        this.occupiedSlotNode.setVisible(false);
+        this.slotNodeMap.set(TreasureSlotResources.STATE.OCCUPIED, this.occupiedSlotNode);
+
+        this.finishedSlotNode = new FinishedSlotNode();
+        this.addChild(this.finishedSlotNode);
+        this.finishedSlotNode.setVisible(false);
+        this.slotNodeMap.set(TreasureSlotResources.STATE.FINISHED, this.finishedSlotNode);
     },
 
-    setNodeByState: function (state) {
+    setStateOfSlot: function(state) {
         this.state = state;
-        if (this.node !== null) {
-            this.node.removeFromParent(false)
-        }
-        switch (state) {
-            case TreasureSlotResources.STATE.EMPTY:
-                this.node = this.emptySlotNode;
-                break;
-            case TreasureSlotResources.STATE.OCCUPIED:
-                this.node = this.occupiedSlotNode;
-                break;
-            case TreasureSlotResources.STATE.OPENING:
-                this.node = this.openingSlotNode;
-                break;
-            case TreasureSlotResources.STATE.FINISHED:
-                this.node = this.finishedSlotNode;
-                break;
-        }
-        this.addChild(this.node)
-        this.setSlotProperties();
     },
 
-
-    setTimeRemainingTxt: function (time) {
-        if (this.state === TreasureSlotResources.STATE.OCCUPIED) {
-            this.timeRemaining = time;
-            this.node.getChildByName('countdownTxt').setString(time);
+    setSlotVisibleByState: function (state) {
+        if (this.state) {
+            this.slotNodeMap.get(this.state).setVisible(false);
         }
-    },
-
-    setCountdownTxt: function (countdownTxt) {
-        if (this.state === TreasureSlotResources.STATE.OPENING) {
-            this.countdownTxt = countdownTxt;
-            this.node.getChildByName('countdownTxt').setString(countdownTxt);
-        }
-    },
-
-    setSlotProperties: function () {
-        this.backgroundBtn = this.node.getChildByName('backgroundBtn');
-        this.backgroundBtn.addTouchEventListener(this.onSlotClick.bind(this));
-    },
-
-    onSlotClick: function (sender, type) {
-        if (type === ccui.Widget.TOUCH_ENDED) {
-            this.clientUIManager.showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
-        }
+        this.setStateOfSlot(state);
+        this.slotNodeMap.get(this.state).setVisible(true);
     },
 
 

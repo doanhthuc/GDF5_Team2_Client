@@ -3,6 +3,7 @@ const JsonReader = {
     towerBuffConfigData: null,
     targetBuffConfigData: null,
     potionConfigData: null,
+    treasureConfigData: null,
 
     getTowerConfig: function () {
         if (this.towerConfigData) {
@@ -64,5 +65,15 @@ const JsonReader = {
             this.potionConfigData = data.potion;
         });
         return this.potionConfigData;
+    },
+
+    getTreasureConfig: function () {
+        if (this.treasureConfigData) {
+            return this.treasureConfigData;
+        }
+        cc.loader.loadJson("config/Treasure.json", (error, data) => {
+            this.treasureConfigData = data;
+        });
+        return this.treasureConfigData;
     }
 }

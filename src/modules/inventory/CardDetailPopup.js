@@ -99,13 +99,11 @@ const CardDetailPopup = cc.Node.extend({
 
     setCardDetailPopupTexture: function () {
         this.cardNameTxt.setString(CARD_NAME_VI[this.cardModel.id]);
-        cc.log('CardDetailPopup line 100: ' + getRankCharacter(this.cardModel.level));
         if (this.cardModel.id <= 6) {
             this.towerImg.setTexture(CARD_TYPE.TOWER[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
         } else {
             this.towerImg.setTexture(CARD_TYPE.SPELL[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
         }
-        // this.backgroundImg.loadTexture(cardType.background, ccui.Widget.PLIST_TEXTURE);
         this.setCardStat()
     },
 
@@ -144,7 +142,6 @@ const CardDetailPopup = cc.Node.extend({
         this.selectBtnNode.setVisible(false);
         this.upgradeBtnNode.setPosition(198.12, 105.55);
         this.skillBtnNode.setPosition(435.80, 105.55);
-        // this.skillBtnNode.getChildByName('backgroundBtn').width = 194.00;
         this.skillBtnNode.setScaleX(1);
     },
 
@@ -154,8 +151,6 @@ const CardDetailPopup = cc.Node.extend({
         this.upgradeBtnNode.setPosition(313.81, 105.55);
         this.skillBtnNode.setPosition(495.02, 105.55);
 
-        // this.skillBtnNode.getChildByName('backgroundBtn').width = 194.00 * 0.8;
-        // this.selectBtnNode.getChildByName('backgroundBtn').width = 194.00 * 0.8;
         this.skillBtnNode.setScaleX(0.8);
         this.selectBtnNode.setScaleX(0.8);
     },
@@ -193,6 +188,6 @@ const CardDetailPopup = cc.Node.extend({
         // this.setCardStat();
         this.setCardDetailPopupTexture();
         this.setUpgradeLevelTxt(this.cardModel.rank);
-        this.setUpgradeBtnState()
+        this.setUpgradeBtnState(accumulated)
     }
 });

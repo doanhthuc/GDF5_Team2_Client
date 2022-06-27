@@ -3,7 +3,6 @@ const UserContext = cc.Class.extend({
         this.user = {};
         this.isAuthenticated = false;
         this.isAuthenticating = false;
-        this.contextmanager = contextManager.getInstance();
         this.clientUIManager = ClientUIManager.getInstance();
     },
 

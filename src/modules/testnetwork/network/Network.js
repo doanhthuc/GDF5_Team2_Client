@@ -37,11 +37,13 @@ testnetwork.Connector = cc.Class.extend({
                 contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT, inventoryContext);
                 inventoryContext.setCardCollectionList(packet.cardCollection);
                 inventoryContext.setBattleDeckIdList(packet.battleDeckCard);
-                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setBattleDeck(inventoryContext.battleDeckList);
-                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setCardInBattleDeckPosition();
+                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).updateBattleDeck(inventoryContext.battleDeckList);
+                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setBattleDeck(inventoryContext.battleDeckList);
+                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setCardInBattleDeckPosition();
 
-                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).setCardCollection(inventoryContext.cardCollectionList);
-                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).setPositionForCardCollection();
+                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).updateCardCollection(inventoryContext.cardCollectionList);
+                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).setCardCollection(inventoryContext.cardCollectionList);
+                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).setPositionForCardCollection();
 
                 userCardCollection.getItemList(packet);
                 cc.log("GetInventory");
@@ -58,6 +60,10 @@ testnetwork.Connector = cc.Class.extend({
                 userDailyShop.show();
                 break;
             case gv.CMD.GET_USER_LOBBY:
+                let treasureContext = new TreasureContext();
+                contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT, treasureContext);
+                treasureContext.setTreasureList(packet);
+
                 userLobbyChest.getItemList(packet);
                 userLobbyChest.show();
                 break;

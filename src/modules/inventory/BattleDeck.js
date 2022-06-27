@@ -18,6 +18,11 @@ const BattleDeckNode = cc.Node.extend({
         this.nodeHeight = this.battleDeckHolder.getContentSize().height;
     },
 
+    updateBattleDeck: function (battleDeck) {
+        this.setBattleDeck(battleDeck);
+        this.setCardInBattleDeckPosition();
+    },
+
     setBattleDeck: function (battleDeck) {
         this.battleDeck = battleDeck;
     },

@@ -277,7 +277,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "textures/common/common_treasure.png",
+              "Path": "textures/lobby/treasure/common_treasure_tutorial.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -293,8 +293,8 @@
               "Y": 250.0
             },
             "Scale": {
-              "ScaleX": 0.6,
-              "ScaleY": 0.6
+              "ScaleX": 1.3,
+              "ScaleY": 1.3
             },
             "CColor": {},
             "IconVisible": false,
@@ -306,22 +306,22 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -110.0,
-            "RightMargin": -110.0,
-            "TopMargin": -350.5,
-            "BottomMargin": 149.5,
+            "LeftMargin": -64.0,
+            "RightMargin": -64.0,
+            "TopMargin": -314.0,
+            "BottomMargin": 186.0,
             "Tag": 168,
             "ActionTag": -475151025,
             "Size": {
-              "X": 220.0,
-              "Y": 201.0
+              "X": 128.0,
+              "Y": 128.0
             },
             "Name": "treasureImg",
             "ctype": "SpriteObjectData"
           },
           {
             "FontSize": 20,
-            "LabelText": "Rương Vàng",
+            "LabelText": "Rương gỗ",
             "FontResource": {
               "Type": "Normal",
               "Path": "textures/font/SVN-Supercell Magic.ttf",
@@ -362,14 +362,14 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -86.0,
-            "RightMargin": -86.0,
+            "LeftMargin": -69.0,
+            "RightMargin": -69.0,
             "TopMargin": -144.5,
             "BottomMargin": 115.5,
             "Tag": 169,
             "ActionTag": 1911365521,
             "Size": {
-              "X": 172.0,
+              "X": 138.0,
               "Y": 29.0
             },
             "Name": "treasureNameTxt",
@@ -1185,14 +1185,14 @@
         "../../textures/common/common_panel_background.png",
         "../../textures/common/common_panel_btn_close.png",
         "../../textures/common/common_panel_front.png",
-        "../../textures/common/common_treasure.png",
         "../../textures/font/SVN-Supercell Magic.ttf",
         "../../textures/lobby/lobby_box.png",
         "../../textures/lobby/treasure/common_icon_card_multiple.png",
         "../../textures/lobby/treasure/common_icon_card_multiple_1.png",
         "../../textures/lobby/treasure/common_icon_card_multiple_2.png",
         "../../textures/lobby/treasure/common_icon_card_multiple_4.png",
-        "../../textures/lobby/treasure/common_treasure_pedestal.png"
+        "../../textures/lobby/treasure/common_treasure_pedestal.png",
+        "../../textures/lobby/treasure/common_treasure_tutorial.png"
       ],
       "ctype": "GameFileData"
     }

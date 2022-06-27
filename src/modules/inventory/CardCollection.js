@@ -17,6 +17,11 @@ const CardCollectionNode = cc.Node.extend({
         this.toggleSort = false;
     },
 
+    updateCardCollection: function (cardCollection) {
+        this.setCardCollection(cardCollection);
+        this.setPositionForCardCollection();
+    },
+
     setCardCollection: function (cardCollectionList) {
         cardCollectionList.forEach(card => {
             if (!card.isBattleDeck) {

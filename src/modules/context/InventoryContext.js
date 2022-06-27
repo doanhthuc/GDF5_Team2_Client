@@ -3,20 +3,16 @@ const InventoryContext = cc.Class.extend({
         this.battleDeckIdList = [];
         this.battleDeckList = [];
         this.cardCollectionList = [];
-        // this.init();
     },
 
     setBattleDeckIdList: function (battleDeckIdList) {
         this.battleDeckIdList = battleDeckIdList;
-        // this.battleDeckIdList.forEach(function (battleDeck) {
-        //     cc.log('battleDeck: ' + JSON.stringify(battleDeck));
-        // });
         this.mapIdListToBattleDeckList();
     },
 
     mapIdListToBattleDeckList: function () {
         this.battleDeckIdList.forEach((id) => {
-            //TODO: add spell add
+            //TODO: add spell
             for (let i = 0; i < this.battleDeckIdList.length; i++) {
                 if (this.cardCollectionList[i].cardType === id) {
                     this.cardCollectionList[i].isBattleDeck = true;
@@ -24,10 +20,6 @@ const InventoryContext = cc.Class.extend({
                 }
             }
         });
-
-        /*this.battleDeckList.forEach(function (battleDeck) {
-            cc.log('battleDeck: ' + JSON.stringify(battleDeck));
-        });*/
     },
 
     setCardCollectionList: function (cardCollectionList) {
@@ -40,14 +32,9 @@ const InventoryContext = cc.Class.extend({
                 isBattleDeck: false,
             };
         })
-        this.cardCollectionList.forEach(function (cardCollection) {
-            cc.log('cardCollection: ' + JSON.stringify(cardCollection));
-        });
     },
 
     upgradeCard: function (cardId) {
-        cc.log('InventoryContext.js line 40 ~~~~~ upgradeCard: ' + cardId);
-        cc.log('userGold: ' + contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold)
         for (let card of this.cardCollectionList) {
             if (card.cardType === cardId) {
                 if (card.amount >= JsonReader.getCardUpgradeConfig()[card.cardLevel + 1].fragments &&
@@ -61,7 +48,6 @@ const InventoryContext = cc.Class.extend({
     },
 
     onUpgradeCardSuccess: function (data) {
-        cc.log('InventoryContext.js line 51 ~~~~~ onUpgradeCardSuccess: ' + JSON.stringify(data));
         let index = this.cardCollectionList.findIndex(card => (card.cardType === data.cardType));
         if (index !== -1) {
             let card = this.cardCollectionList[index];
@@ -70,13 +56,9 @@ const InventoryContext = cc.Class.extend({
             contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold += data.goldChange;
 
             this.cardCollectionList[index] = card;
-            // let testCardModel = new CardModel(card.cardType, card.cardLevel, card.amount);
             ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE)
                 .cardNodeMap.get(data.cardType)
                 .onUpgradeCard(card.cardLevel, card.amount);
-
-            // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL)
-            //     .cardNode.updateCardNodeUI(card.amount);
 
             contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).updateUserGold(data.goldChange);
 
