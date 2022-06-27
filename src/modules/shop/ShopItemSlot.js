@@ -1,12 +1,14 @@
 const ShopItemSlotNode = cc.Node.extend({
     ctor: function (type, price, unit, quantity = 1) {
-        this.clientUIManager = ClientUIManager.getInstance();
         this._super();
+        this.init();
+
+        this.clientUIManager = ClientUIManager.getInstance();
+
         this.type = type;
-        this.price = price;
+        this.setPrice(price);
         this.unit = unit;
         this.quantity = quantity;
-        this.init();
     },
 
     init: function () {
@@ -18,6 +20,16 @@ const ShopItemSlotNode = cc.Node.extend({
         this.shopItemNode = this.shopItemBackgroundImg.getChildByName('shopItemNode');
 
         this.backgroundBtn.addTouchEventListener(this.onBuyBtnClick.bind(this), this);
+    },
+
+    setPrice: function (price) {
+        this.price = price;
+        this.shopItemBtnNode.getChildByName("priceTxt").setString(this.price);
+    },
+
+    setType: function (type) {
+        this.type = type;
+        // this.shopItemNode.
     },
 
     onBuyBtnClick: function (sender, type) {

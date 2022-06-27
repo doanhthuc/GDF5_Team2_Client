@@ -8,7 +8,7 @@ testnetwork.Connector = cc.Class.extend({
     ctor: function (gameClient) {
         this.gameClient = gameClient;
         gameClient.packetFactory.addPacketMap(testnetwork.packetMap);
-        gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
+            gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
     },
     onReceivedPacket: function (cmd, packet) {
         cc.log("onReceivedPacket:", cmd);
@@ -46,12 +46,6 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.UPGRADE_CARD:
                 cc.log(packet.goldChange + " " + packet.cardType + " " + packet.fragmentChange);
                 break;
-            case gv.CMD.GET_USER_DAILY_SHOP:
-                cc.log(JSON.stringify(packet))
-                userDailyShop.getItemList(packet);
-                cc.log("GetDailyShop");
-                userDailyShop.show();
-                break;
             case gv.CMD.GET_USER_LOBBY:
                 userLobbyChest.getItemList(packet);
                 userLobbyChest.show();
@@ -80,17 +74,6 @@ testnetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.ADD_USER_GEM:
                 cc.log(packet.gemChange);
-                break;
-            case gv.CMD.BUY_GOLD_SHOP:
-                userInfo.gold += packet.goldChange;
-                userInfo.gem += packet.gemChange;
-                userInfo.show();
-                break;
-            case gv.CMD.BUY_DAILY_SHOP:
-                cc.log("BUY DAILY SHOP");
-                cc.log(packet.gemChange + " " + packet.goldChange);
-                for (i = 0; i < packet.itemAmount; i++)
-                    cc.log(packet.itemType[i] + " " + packet.itemQuantity[i]);
                 break;
         }
     },

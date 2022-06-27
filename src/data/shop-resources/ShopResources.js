@@ -3,11 +3,13 @@ const ShopResources = {
     SHOP_ITEM_SLOT_NODE: 'ui/shop/shopItemSlot.json',
     SHOP_GOLD_SLOT_NODE: 'ui/shop/shopGoldSlot.json',
     SHOP_TREASURE_SLOT_NODE: 'ui/shop/shopTreasureSlot.json',
+    CARD_UPGRADE_PROGRESS: 'ui/shop/CardUpgradeProgressBar.json',
 
     BUY_CARD_POPUP_NODE: 'ui/shop/shopCardPopup.json',
     BUY_GOLD_POPUP_NODE: 'ui/shop/shopGoldPopup.json',
 
-    SHOP_SECTION_CATEGORY_TITLE_GOLD: 'textures/lobby/lobby_shop_category_gold.png',
+    SHOP_SECTION_TITLE_LOGIN_TXT: 'textures/lobby/lobby_shop_category_daily.png',
+    SHOP_SECTION_TITLE_GOLD_TXT: 'textures/lobby/lobby_shop_category_gold.png',
     GEM_ICON_SMALL: 'textures/common/common_icon_g_small.png',
 
     SHOP_SECTION_NODE_HEIGHT: 346,

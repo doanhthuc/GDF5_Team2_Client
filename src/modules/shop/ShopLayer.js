@@ -1,21 +1,28 @@
 const ShopLayer = cc.Node.extend({
     ctor: function () {
         this._super();
-        this.init();
+        this._init();
     },
 
     shopSectionList: [],
 
-    init: function () {
+    _init: function () {
         let startX = cc.winSize.width / 2;
         let startY = 820;
-        for (let i = 0; i < 2; i++) {
-            let shopSection = new ShopSection(i === 0 ? "treasure" : "gold");
-            this.addChild(shopSection);
-            this.shopSectionList.push(shopSection);
-            shopSection.setPosition(startX, startY - i * (ShopResources.SHOP_SECTION_NODE_HEIGHT + ShopResources.SHOP_SECTION_MARGIN_BOTTOM));
-        }
+
+        this.dailySection = new ShopSection("treasure");
+        this.addChild(this.dailySection);
+        this.shopSectionList.push(this.dailySection);
+        this.dailySection.setPosition(startX, startY);
+
+        let goldSection = new ShopSection("gold");
+        this.addChild(goldSection);
+        this.shopSectionList.push(goldSection);
+        goldSection.setPosition(startX, startY - 1 * (ShopResources.SHOP_SECTION_NODE_HEIGHT + ShopResources.SHOP_SECTION_MARGIN_BOTTOM))
     },
 
+    renderDailySection: function (itemList) {
+        this.dailySection.setShopItemSlotPosition(itemList);
+    }
 
 })

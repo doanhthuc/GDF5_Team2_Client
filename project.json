@@ -23,6 +23,7 @@
         "src/**/*.js"
     ],
     "jsList": [
+        "src/modules/shop/ItemDefine.js",
         "src/data/battle-resource/BattleResource.js",
         "src/data/bottom-nav-resources/NavResources.js",
         "src/data/inventory-resources/InventoryResources.js",
@@ -87,6 +88,8 @@
         "src/modules/context/InitContexts.js",
         "src/modules/context/InventoryContext.js",
         "src/modules/context/UserContext.js",
+        "src/modules/context/ShopContext.js",
+        "src/modules/context/ContextFactory.js",
         "src/modules/inventory/BattleDeck.js",
         "src/modules/inventory/Card.js",
         "src/modules/inventory/CardCollection.js",
@@ -121,6 +124,8 @@
         "src/modules/shop/ShopTreasureSlot.js",
         "src/modules/testnetwork/network/Network.js",
         "src/modules/testnetwork/network/Packet.js",
+        "src/modules/testnetwork/network/ShopNetwork.js",
+        "src/modules/testnetwork/network/ShopPacket.js",
         "src/modules/testnetwork/ScreenNetwork.js",
         "src/modules/uimanager/ClientUIConst.js",
         "src/modules/uimanager/ClientUIManager.js",
