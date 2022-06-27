@@ -191,7 +191,7 @@
               "X": 101.0,
               "Y": 24.0
             },
-            "Name": "actionTxt",
+            "Name": "openingActionTxt",
             "ctype": "TextObjectData"
           },
           {
@@ -292,7 +292,7 @@
               "X": 55.0,
               "Y": 63.0
             },
-            "Name": "Image_30",
+            "Name": "openingGemIcon",
             "ctype": "ImageViewObjectData"
           },
           {
@@ -335,6 +335,233 @@
             },
             "Name": "countDownNode",
             "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FontSize": 12,
+            "LabelText": "Rừng thiêng",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -67.9635
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -54.0,
+            "RightMargin": -54.0,
+            "TopMargin": 58.9635,
+            "BottomMargin": -76.9635,
+            "Tag": 28,
+            "ActionTag": 884776250,
+            "Size": {
+              "X": 108.0,
+              "Y": 18.0
+            },
+            "Alpha": 76,
+            "Name": "mapNameTxt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FontSize": 18,
+            "LabelText": "Ô Trống",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.005,
+              "Y": -0.0011
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -55.005,
+            "RightMargin": -54.995,
+            "TopMargin": -13.4989,
+            "BottomMargin": -13.5011,
+            "Tag": 29,
+            "ActionTag": 179188741,
+            "Size": {
+              "X": 110.0,
+              "Y": 27.0
+            },
+            "Alpha": 76,
+            "Name": "emptySlotTxt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FontSize": 18,
+            "LabelText": "Mở ngay",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -57.5127
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -56.0,
+            "RightMargin": -56.0,
+            "TopMargin": 44.0127,
+            "BottomMargin": -71.0127,
+            "Tag": 30,
+            "ActionTag": 677554085,
+            "Size": {
+              "X": 112.0,
+              "Y": 27.0
+            },
+            "Name": "finishedActionTxt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FontSize": 18,
+            "LabelText": "3H",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 69.6191
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -17.0,
+            "RightMargin": -17.0,
+            "TopMargin": -83.1191,
+            "BottomMargin": 56.1191,
+            "Tag": 31,
+            "ActionTag": -310153422,
+            "Size": {
+              "X": 34.0,
+              "Y": 27.0
+            },
+            "Alpha": 76,
+            "Name": "occupiedCountdownTxt",
+            "ctype": "TextObjectData"
           }
         ],
         "Size": {

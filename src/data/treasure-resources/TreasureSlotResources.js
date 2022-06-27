@@ -15,5 +15,9 @@ const TreasureSlotResources = {
     SLOT_START_MARGIN: 8,
     CENTER_SCENE_MARGIN_TOP: -342,
     SLOT_NUMBER: 4,
+    EMPTY_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_empty.png',
+    OCCUPIED_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_empty.png',
+    OPENING_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_opening.png',
+    FINISHED_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_finished.png',
 }
 

@@ -25,7 +25,8 @@ const lobbyLayer = cc.Node.extend({
         for (let i = 0; i < treasureSlotList.length; i++) {
             let treasure = treasureSlotList[i];
             let treasureSlotNode = new TreasureSlot();
-            treasureSlotNode.setSlotVisibleByState(treasure.state);
+            // treasureSlotNode.setSlotVisibleByState(treasure.state);
+            treasureSlotNode.setSlotTexturesByState(treasure.state);
             this.treasureSlotNodeList.push(treasureSlotNode);
             this.lobbyNode.addChild(treasureSlotNode);
         }
@@ -39,7 +40,8 @@ const lobbyLayer = cc.Node.extend({
             let treasureSlotNode = this.treasureSlotNodeList[i];
             // treasure.setNodeByState(TreasureSlotResources.STATE.FINISHED);
             treasureSlotNode.setPosition(startX, TreasureSlotResources.CENTER_SCENE_MARGIN_TOP);
-            startX += treasureSlotNode.slotNodeMap.get(treasureSlotNode.state).backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
+            // startX += treasureSlotNode.slotNodeMap.get(treasureSlotNode.state).backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
+            startX += treasureSlotNode.backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
         }
     },
 
