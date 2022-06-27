@@ -13,6 +13,7 @@ const CLIENT_UI_CONST = {
         SHOP_NODE: 'shopNode',
         HEADER_NODE: 'headerNode',
         BATTLE_DECK_NODE: 'battleDeckNode',
+        CARD_COLLECTION_NODE: 'cardCollectionNode',
     },
 
     // Order Manager

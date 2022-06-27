@@ -149,13 +149,13 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "textures/common/common_treasure.png",
+              "Path": "textures/lobby/treasure/common_treasure_tutorial.png",
               "Plist": ""
             },
-            "Scale9OriginX": 72,
-            "Scale9OriginY": 66,
-            "Scale9Width": 76,
-            "Scale9Height": 69,
+            "Scale9OriginX": 42,
+            "Scale9OriginY": 42,
+            "Scale9Width": 44,
+            "Scale9Height": 44,
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
@@ -165,8 +165,8 @@
               "Y": 0.0
             },
             "Scale": {
-              "ScaleX": 0.35,
-              "ScaleY": 0.35
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "CColor": {},
             "IconVisible": false,
@@ -178,15 +178,15 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -110.0001,
-            "RightMargin": -109.9999,
-            "TopMargin": -100.5,
-            "BottomMargin": -100.5,
+            "LeftMargin": -64.0001,
+            "RightMargin": -63.9999,
+            "TopMargin": -64.0,
+            "BottomMargin": -64.0,
             "Tag": 1672,
             "ActionTag": -973128561,
             "Size": {
-              "X": 220.0,
-              "Y": 201.0
+              "X": 128.0,
+              "Y": 128.0
             },
             "Name": "treasureImg",
             "ctype": "ImageViewObjectData"
@@ -258,9 +258,9 @@
       },
       "UsedResources": [
         "../../../../Default/Button_Disable.png",
-        "../../../../textures/common/common_treasure.png",
         "../../../../textures/font/SVN-Supercell Magic.ttf",
-        "../../../../textures/lobby/lobby_home_treasure_empty.png"
+        "../../../../textures/lobby/lobby_home_treasure_empty.png",
+        "../../../../textures/lobby/treasure/common_treasure_tutorial.png"
       ],
       "ctype": "GameFileData"
     }

@@ -64,7 +64,7 @@
             "LabelText": "Lượt:",
             "FontResource": {
               "Type": "Normal",
-              "Path": "font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -122,7 +122,7 @@
             "LabelText": "1/25",
             "FontResource": {
               "Type": "Normal",
-              "Path": "font/SVN-Supercell Magic.ttf",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
             "OutlineColor": {
@@ -180,8 +180,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../../../font/SVN-Supercell Magic.ttf",
-        "../../../../textures/battle/battle_info_box.png"
+        "../../../../textures/battle/battle_info_box.png",
+        "../../../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }

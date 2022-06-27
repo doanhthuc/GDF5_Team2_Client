@@ -37,14 +37,21 @@ testnetwork.Connector = cc.Class.extend({
                 contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT, inventoryContext);
                 inventoryContext.setCardCollectionList(packet.cardCollection);
                 inventoryContext.setBattleDeckIdList(packet.battleDeckCard);
-                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setBattleDeck(inventoryContext.battleDeckList);
-                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setCardInBattleDeckPosition();
+                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).updateBattleDeck(inventoryContext.battleDeckList);
+                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setBattleDeck(inventoryContext.battleDeckList);
+                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setCardInBattleDeckPosition();
+
+                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).updateCardCollection(inventoryContext.cardCollectionList);
+                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).setCardCollection(inventoryContext.cardCollectionList);
+                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).setPositionForCardCollection();
+
                 userCardCollection.getItemList(packet);
                 cc.log("GetInventory");
                 // userCardCollection.show();
                 break;
             case gv.CMD.UPGRADE_CARD:
                 cc.log(packet.goldChange + " " + packet.cardType + " " + packet.fragmentChange);
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).onUpgradeCardSuccess(packet);
                 break;
             case gv.CMD.GET_USER_DAILY_SHOP:
                 cc.log(JSON.stringify(packet))
@@ -53,6 +60,10 @@ testnetwork.Connector = cc.Class.extend({
                 userDailyShop.show();
                 break;
             case gv.CMD.GET_USER_LOBBY:
+                let treasureContext = new TreasureContext();
+                contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT, treasureContext);
+                treasureContext.setTreasureList(packet);
+
                 userLobbyChest.getItemList(packet);
                 userLobbyChest.show();
                 break;
@@ -65,15 +76,15 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log(packet.lobbyChestid);
                 cc.log(packet.state);
                 cc.log(packet.gemChange);
-                for(i=0;i<packet.rewardSize;i++)
-                    cc.log(packet.itemType[i]+" "+packet.itemQuantity[i]);
+                for (i = 0; i < packet.rewardSize; i++)
+                    cc.log(packet.itemType[i] + " " + packet.itemQuantity[i]);
                 break;
             case gv.CMD.CLAIM_LOBBY_CHEST:
                 cc.log(packet.lobbyChestid);
                 cc.log(packet.state);
                 cc.log(packet.gemChange);
-                for(i=0;i<packet.rewardSize;i++)
-                    cc.log(packet.itemType[i]+" "+packet.itemQuantity[i]);
+                for (i = 0; i < packet.rewardSize; i++)
+                    cc.log(packet.itemType[i] + " " + packet.itemQuantity[i]);
                 break;
             case gv.CMD.ADD_USER_GOLD:
                 cc.log(packet.goldChange);

@@ -16,7 +16,7 @@ const CARD_TYPE = {
             id: 1,
             name: "wizard - crow",
             image: {
-                A: "textures/card/miniature_tower_wizard _3.png",
+                A: "textures/card/miniature_tower_wizard_3.png",
                 B: "textures/card/miniature_tower_wizard_2.png",
                 C: "textures/card/miniature_tower_wizard_1.png",
             },
@@ -86,5 +86,42 @@ const CARD_TYPE = {
         },
     },
 
-
+    SPELL: {
+        7: {
+            id: 7,
+            name: "fireball",
+            image: {
+                A: "textures/card/card_potion_fireball.png",
+                B: "textures/card/card_potion_fireball.png",
+                C: "textures/card/card_potion_fireball.png",
+            },
+            background: "textures/card/card_background_2.png",
+            cardImage: "textures/card/card_potion_fireball.png",
+            energy: 8,
+        },
+        8: {
+            id: 8,
+            name: "frozen",
+            image: {
+                A: "textures/card/card_potion_frozen.png",
+                B: "textures/card/card_potion_frozen.png",
+                C: "textures/card/card_potion_frozen.png",
+            },
+            background: "textures/card/card_background_4.png",
+            cardImage: "textures/card/card_potion_frozen.png",
+            energy: 8,
+        },
+        9: {
+            id: 9,
+            name: "trap",
+            image: {
+                A: "textures/card/card_potion_trap.png",
+                B: "textures/card/card_potion_trap.png",
+                C: "textures/card/card_potion_trap.png",
+            },
+            background: "textures/card/card_background_1.png",
+            cardImage: "textures/card/card_potion_trap.png",
+            energy: 10,
+        }
+    }
 }
