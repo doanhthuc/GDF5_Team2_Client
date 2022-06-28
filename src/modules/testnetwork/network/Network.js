@@ -23,8 +23,8 @@ testnetwork.Connector = cc.Class.extend({
                 userInfo.clone(packet);
                 userInfo.show();
                 // let userContext = contextManager.getContext(ContextManagerConst.USER_CONTEXT);
-                let userContext = new UserContext();
-                contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT, userContext);
+                let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
+                // contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT, userContext);
                 // let inventoryContext = new InventoryContext();
                 // contextManager.registerContext(ContextManagerConst.INVENTORY_CONTEXT, inventoryContext);
 
@@ -33,8 +33,8 @@ testnetwork.Connector = cc.Class.extend({
                 userContext.updateUserInfoUI();
                 break;
             case gv.CMD.GET_USER_INVENTORY:
-                let inventoryContext = new InventoryContext();
-                contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT, inventoryContext);
+                let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
+
                 inventoryContext.setCardCollectionList(packet.cardCollection);
                 inventoryContext.setBattleDeckIdList(packet.battleDeckCard);
                 ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).updateBattleDeck(inventoryContext.battleDeckList);
@@ -60,8 +60,8 @@ testnetwork.Connector = cc.Class.extend({
                 userDailyShop.show();
                 break;
             case gv.CMD.GET_USER_LOBBY:
-                let treasureContext = new TreasureContext();
-                contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT, treasureContext);
+                let treasureContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT);
+                
                 treasureContext.setTreasureList(packet);
 
                 userLobbyChest.getItemList(packet);
@@ -71,6 +71,7 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log(packet.lobbyChestid);
                 cc.log(packet.state);
                 cc.log(packet.claimTime);
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).onUnlockChestSuccess(packet);
                 break;
             case gv.CMD.SPEEDUP_LOBBY_CHEST:
                 cc.log(packet.lobbyChestid);
@@ -78,6 +79,7 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log(packet.gemChange);
                 for (i = 0; i < packet.rewardSize; i++)
                     cc.log(packet.itemType[i] + " " + packet.itemQuantity[i]);
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).onSpeedUpChestSuccess(packet);
                 break;
             case gv.CMD.CLAIM_LOBBY_CHEST:
                 cc.log(packet.lobbyChestid);
@@ -85,6 +87,7 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log(packet.gemChange);
                 for (i = 0; i < packet.rewardSize; i++)
                     cc.log(packet.itemType[i] + " " + packet.itemQuantity[i]);
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).onClaimChestSuccess(packet);
                 break;
             case gv.CMD.ADD_USER_GOLD:
                 cc.log(packet.goldChange);
@@ -144,25 +147,25 @@ testnetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
     sendGetUserLobbyChest: function () {
-        cc.log("sendGetUserInfo");
+        cc.log("sendGetUserLobbyChest");
         var pk = this.gameClient.getOutPacket(CMDSendGetUserLobbyChest);
         pk.pack();
         this.gameClient.sendPacket(pk);
     },
     sendUnlockLobbyChest: function (chestid) {
-        cc.log("sendGetUserInfo");
+        cc.log("sendUnlockLobbyChest");
         var pk = this.gameClient.getOutPacket(CMDSendUnlockLobbyChest);
         pk.pack(chestid);
         this.gameClient.sendPacket(pk);
     },
     sendSpeedUpLobbyChest: function (chestid) {
-        cc.log("sendGetUserInfo");
+        cc.log("sendSpeedUpLobbyChest");
         var pk = this.gameClient.getOutPacket(CMDSendSpeedUpLobbyChest);
         pk.pack(chestid);
         this.gameClient.sendPacket(pk);
     },
     sendClaimLobbyChest: function (chestid) {
-        cc.log("sendGetUserInfo");
+        cc.log("sendClaimLobbyChest");
         var pk = this.gameClient.getOutPacket(CMDSendClaimLobbyChest);
         pk.pack(chestid);
         this.gameClient.sendPacket(pk);

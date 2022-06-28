@@ -24,9 +24,9 @@ const lobbyLayer = cc.Node.extend({
     setTreasureSlotNodeList: function (treasureSlotList) {
         for (let i = 0; i < treasureSlotList.length; i++) {
             let treasure = treasureSlotList[i];
-            let treasureSlotNode = new TreasureSlot();
+            let treasureSlotNode = new TreasureSlot(i);
             // treasureSlotNode.setSlotVisibleByState(treasure.state);
-            treasureSlotNode.setSlotTexturesByState(treasure.state);
+            treasureSlotNode.setStateOfSlot(treasure.state, treasure.claimTime);
             this.treasureSlotNodeList.push(treasureSlotNode);
             this.lobbyNode.addChild(treasureSlotNode);
         }
@@ -65,4 +65,16 @@ const lobbyLayer = cc.Node.extend({
     setUserTrophy: function (trophy) {
         this.userTrophyTxt.setString(trophy);
     },
+
+    onUnlockChestSuccess: function (data) {
+        this.treasureSlotNodeList[data.lobbyChestid].setStateOfSlot(data.state, data.claimTime);
+    },
+
+    onClaimChestSuccess: function (data) {
+        this.treasureSlotNodeList[data.lobbyChestid].setStateOfSlot(data.state);
+    },
+
+    onSpeedUpChestSuccess: function (data) {
+        this.treasureSlotNodeList[data.lobbyChestid].setStateOfSlot(data.state);
+    }
 })

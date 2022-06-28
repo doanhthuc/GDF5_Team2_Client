@@ -54,3 +54,18 @@ const isSpellCard = (carId) => {
     }
     return false;
 }
+
+const millisecondToTimeString = (distance) => {
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    if (days > 0) {
+       return (days + "d " + hours + "h ");
+    } else if (hours > 0) {
+        return (hours + "h " + minutes + "m ");
+    } else {
+        return (minutes + "m " + seconds + "s ");
+    }
+}

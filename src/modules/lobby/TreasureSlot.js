@@ -1,10 +1,10 @@
 const TreasureSlot = cc.Node.extend({
     id: null,
 
-    ctor: function () {
+    ctor: function (id) {
+        this.id = id;
         this.DEFAULT_STATE = TreasureSlotResources.STATE.EMPTY;
         this.clientUIManager = ClientUIManager.getInstance();
-        this.slotNodeMap = new Map();
         this.state = this.DEFAULT_STATE;
         this._super();
         // this.initAllSlotTypes();
@@ -14,7 +14,7 @@ const TreasureSlot = cc.Node.extend({
     },
 
     init: function () {
-        this.nodeSlot = ccs.load(TreasureSlotResources.OPENING_SLOT_RES).node;
+        this.nodeSlot = ccs.load(TreasureSlotResources.OPENING_SLOT_RES, '').node;
         this.addChild(this.nodeSlot);
         this.backgroundBtn = this.nodeSlot.getChildByName("backgroundBtn");
         this.treasureImg = this.nodeSlot.getChildByName("treasureImg");
@@ -23,48 +23,27 @@ const TreasureSlot = cc.Node.extend({
         this.skipGemTxt = this.nodeSlot.getChildByName("skipGemTxt");
         this.openingGemIcon = this.nodeSlot.getChildByName("openingGemIcon");
         this.countDownNode = this.nodeSlot.getChildByName("countDownNode");
+        this.openingCountDownTxt = this.countDownNode.getChildByName("countdownTxt");
         this.mapNameTxt = this.nodeSlot.getChildByName("mapNameTxt");
         this.emptySlotTxt = this.nodeSlot.getChildByName("emptySlotTxt");
         this.finishedActionTxt = this.nodeSlot.getChildByName("finishedActionTxt");
         this.backgroundBtn.addTouchEventListener(this.onSlotClick.bind(this), this);
     },
 
-    initAllSlotTypes: function () {
-        this.emptySlotNode = new EmptySlotNode();
-        this.addChild(this.emptySlotNode);
-        this.emptySlotNode.setVisible(false);
-        this.slotNodeMap.set(TreasureSlotResources.STATE.EMPTY, this.emptySlotNode);
-
-        this.openingSlotNode = new OpeningSlotNode();
-        this.openingSlotNode.setVisible(false);
-        this.addChild(this.openingSlotNode);
-        this.slotNodeMap.set(TreasureSlotResources.STATE.OPENING, this.openingSlotNode);
-
-        this.occupiedSlotNode = new OccupiedSlotNode();
-        this.addChild(this.occupiedSlotNode);
-        this.occupiedSlotNode.setVisible(false);
-        this.slotNodeMap.set(TreasureSlotResources.STATE.OCCUPIED, this.occupiedSlotNode);
-
-        this.finishedSlotNode = new FinishedSlotNode();
-        this.addChild(this.finishedSlotNode);
-        this.finishedSlotNode.setVisible(false);
-        this.slotNodeMap.set(TreasureSlotResources.STATE.FINISHED, this.finishedSlotNode);
-    },
-
-    setStateOfSlot: function (state) {
+    setStateOfSlot: function (state, claimTime = 0) {
         this.state = state;
+        cc.log('TreasureSlot line 35 setStateOfSlot: ' + this.state);
+        if (claimTime > 0) {
+            this.setClaimTime(claimTime);
+        }
+        this.onStateOfSlotUpdated();
     },
 
-    setSlotVisibleByState: function (state) {
-        if (this.state) {
-            this.slotNodeMap.get(this.state).setVisible(false);
-        }
-        this.setStateOfSlot(state);
-        this.slotNodeMap.get(this.state).setVisible(true);
+    onStateOfSlotUpdated: function () {
+        this.setSlotTexturesByState(this.state);
     },
 
     setSlotTexturesByState: function (state) {
-        this.setStateOfSlot(state);
         switch (state) {
             case TreasureSlotResources.STATE.EMPTY:
                 this.setEmptySlotTextures(true);
@@ -87,6 +66,7 @@ const TreasureSlot = cc.Node.extend({
             this.setOccupiedSlotTextures(false);
             this.setOpeningSlotTextures(false);
             this.setFinishedSlotTextures(false);
+            this.treasureImg.setVisible(false);
         }
         this.emptySlotTxt.setVisible(shouldVisible);
     },
@@ -97,10 +77,11 @@ const TreasureSlot = cc.Node.extend({
             this.setEmptySlotTextures(false);
             this.setOpeningSlotTextures(false);
             this.setFinishedSlotTextures(false);
+            this.treasureImg.setVisible(true);
         }
         this.occupiedCountdownTxt.setVisible(shouldVisible);
         this.mapNameTxt.setVisible(shouldVisible);
-
+        this.treasureImg.setVisible(shouldVisible);
     },
 
     setOpeningSlotTextures: function (shouldVisible) {
@@ -109,7 +90,9 @@ const TreasureSlot = cc.Node.extend({
             this.setEmptySlotTextures(false);
             this.setOccupiedSlotTextures(false);
             this.setFinishedSlotTextures(false);
+            this.treasureImg.setVisible(true);
         }
+        this.countDownNode.setVisible(shouldVisible);
         this.openingActionTxt.setVisible(shouldVisible);
         this.openingGemIcon.setVisible(shouldVisible);
         this.skipGemTxt.setVisible(shouldVisible);
@@ -121,14 +104,52 @@ const TreasureSlot = cc.Node.extend({
             this.setEmptySlotTextures(false);
             this.setOccupiedSlotTextures(false);
             this.setOpeningSlotTextures(false);
+            this.treasureImg.setVisible(true);
         }
         this.finishedActionTxt.setVisible(shouldVisible);
     },
 
     onSlotClick: function (sender, type) {
         if (this.state !== TreasureSlotResources.STATE.EMPTY && type === ccui.Widget.TOUCH_ENDED) {
-            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE).setPopUpInfoFromTreasureType(0);
+            let action = 0;
+            switch (this.state) {
+                case TreasureSlotResources.STATE.OCCUPIED:
+                    action = ChestConst.ACTION.OPEN;
+                    break;
+                case TreasureSlotResources.STATE.OPENING:
+                    action = ChestConst.ACTION.SPEED_UP;
+                    break;
+                case TreasureSlotResources.STATE.FINISHED:
+                    action = ChestConst.ACTION.CLAIM;
+                    break;
+                default:
+                    break;
+            }
+            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE).setPopUpInfoFromTreasureType(this.id, action, 0);
             ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
         }
     },
+
+    setClaimTime : function(claimTime){
+        this.claimTime = claimTime;
+        this.setCountDownString();
+        this.schedule(this.setCountDownString, 1);
+    },
+
+    setCountDownString: function () {
+        // let distance = claimTime - Date.now();
+
+        let distance = this.claimTime - Date.now();
+
+        this.openingCountDownTxt.setString(millisecondToTimeString(distance));
+        if (distance < 0) {
+            this.onFinishCountDown();
+        }
+    },
+
+    onFinishCountDown: function () {
+        this.unschedule(this.setCountDownString);
+        this.openingCountDownTxt.setString("0m 0s");
+        this.setStateOfSlot(TreasureSlotResources.STATE.FINISHED, 0);
+    }
 })

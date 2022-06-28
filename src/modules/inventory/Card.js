@@ -15,6 +15,11 @@ const CardNode = cc.Node.extend({
         this.updateCardNodeUI(this.cardModel.accumulated);
     },
 
+    onUpdateCard: function (accumulatedCardChange) {
+        this.cardModel.upgradeCardModel(this.cardModel.level, this.cardModel.accumulated + accumulatedCardChange);
+        this.updateCardNodeUI(this.cardModel.accumulated);
+    },
+
     updateCardNodeUI: function (accumulatedCard) {
         this.setUpgradeProgressBar(accumulatedCard)
         this.setCardTexture();
