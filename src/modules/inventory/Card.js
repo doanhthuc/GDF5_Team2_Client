@@ -47,7 +47,6 @@ const CardNode = cc.Node.extend({
         let cardType = CARD_TYPE.TOWER[this.cardModel.id];
         if (!cardType) {
             cardType = CARD_TYPE.SPELL[this.cardModel.id];
-
         }
         this.cardBackgroundBtn.loadTextures(cardType.background, cardType.background);
         this.cardImage.setTexture(cardType.cardImage);

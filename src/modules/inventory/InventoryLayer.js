@@ -1,6 +1,7 @@
 const InventoryLayer = cc.Node.extend({
     ctor: function () {
         this.cardNodeMap = new Map();
+        this.cardNodeList = [];
         this._super();
         this.init();
     },
@@ -23,6 +24,11 @@ const InventoryLayer = cc.Node.extend({
         this.cardCollectionNode.setPosition(cc.winSize.width / 2, MainResources.BOTTOM_HEIGHT + this.cardCollectionNode.heightNode + InventoryResources.CARD_COLLECTION_TITLE_HEIGHT);
 
         this.setNodeHeight();
+    },
+
+    initCardNodeList: function () {
+        this.cardNodeList = [];
+
     },
 
     setNodeHeight: function () {

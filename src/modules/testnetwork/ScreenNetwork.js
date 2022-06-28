@@ -153,9 +153,9 @@ var ScreenNetwork = cc.Layer.extend({
         // testnetwork.connector.sendAddUserGold(100);
         //testnetwork.connector.sendBuyGoldShop(0);
         //testnetwork.connector.sendBuyDailyShop(2);
-        //testnetwork.connector.sendUnlockLobbyChest(0);
-        //testnetwork.connector.sendSpeedUpLobbyChest(1);
-        // testnetwork.connector.sendClaimLobbyChest(2);
+        testnetwork.connector.sendUnlockLobbyChest(0);
+        testnetwork.connector.sendSpeedUpLobbyChest(1);
+        testnetwork.connector.sendClaimLobbyChest(2);
         // let userContext = new UserContext();
         // contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
         // userContext.updateUserInfoUI();
