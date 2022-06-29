@@ -43,6 +43,9 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.ZERO_ENERGY_PLAYER_HOUSE, function (data) {
         GameConfig.gameLayer.stopGame();
     })
+    .addEventHandler(EventType.END_ALL_WAVE, function (data) {
+        GameConfig.gameLayer.stopGame();
+    })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let map = GameConfig.gameLayer.mapLayer.mapMatrix;
         map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 1;

@@ -60,7 +60,6 @@ VelocityComponent.calculateSpeed = function (speedX, speedY) {
 
 let AppearanceComponent = Component.extend({
     name: "AppearanceComponent",
-    sprite: null,
 
     ctor: function (sprite) {
         this._super(GameConfig.COMPONENT_ID.APPEARANCE);

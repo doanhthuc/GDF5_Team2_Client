@@ -34,15 +34,8 @@ const lobbyLayer = cc.Node.extend({
 
     onBattleBtnClick: function (sender, type) {
         // cc.director.runScene(new cc.TransitionCrossFade(1.0, new GameLayer()));
-        var layer = new GameLayer();
-        layer.setName("screen");
-        var scene = new cc.Scene();
-        scene.addChild(layer);
-        let transitionTime = null;
-        if(!transitionTime)
-        {
-            transitionTime = 1.2;
-        }
+        let scene = new MatchingScene();
+        let transitionTime = 1.2;
         cc.director.runScene(new cc.TransitionFade(transitionTime, scene));
     },
 

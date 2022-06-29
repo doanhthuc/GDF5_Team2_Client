@@ -11,6 +11,7 @@ let BattleUILayer = cc.Layer.extend({
         this._showWave();
         this._showHouseEnergy();
         this._showPlayerInfo();
+        this._showBackButton();
     },
 
     _showDeckCard: function () {
@@ -47,6 +48,21 @@ let BattleUILayer = cc.Layer.extend({
         this.playerInfoNode.y = this.height - this.playerInfoNode.height / 2;
         this.addChild(this.playerInfoNode);
     },
+
+    _showBackButton: function () {
+        let buttonNode = ccs.load(BattleResource.RED_BACK_BUTTON_NODE, "").node;
+        buttonNode.getChildByName("button").addClickEventListener(this._backToLobby.bind(this));
+        buttonNode.setPosition(50, 225);
+        this.addChild(buttonNode);
+    },
+
+    stop: function () {
+        this.timerNode.endTimer();
+    },
+
+    _backToLobby: function () {
+        fr.view(MainScreen);
+    }
 });
 
 BattleUILayer.plusPlayerHouseEnergy = function (energy) {

@@ -7,7 +7,9 @@ let ComponentManager = cc.Class.extend({
     *   ...
     * }
     * */
-    components: {},
+    ctor: function () {
+        this.components = {}
+    },
 
     getComponent: function (componentID) {
         return this.components[componentID];
@@ -39,10 +41,10 @@ let ComponentManager = cc.Class.extend({
     },
 });
 
-let _entityManager = _entityManager || null;
-EntityManager.getInstance = function () {
-    if (_entityManager === null) {
-        _entityManager = new EntityManager();
-    }
-    return _entityManager;
-};
+// let _entityManager = _entityManager || null;
+// EntityManager.getInstance = function () {
+//     if (_entityManager === null) {
+//         _entityManager = new EntityManager();
+//     }
+//     return _entityManager;
+// };

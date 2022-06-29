@@ -6,7 +6,10 @@ let ComponentPool = cc.Class.extend({
     *   ...
     * }
     * */
-    pool: {},
+
+    ctor: function () {
+        this.pool = {}
+    },
 
     getInActiveComponent: function (componentTypeId) {
         let inactiveComponent = null;

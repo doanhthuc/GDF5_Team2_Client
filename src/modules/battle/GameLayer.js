@@ -1,8 +1,4 @@
 let GameLayer = cc.Layer.extend({
-    mapLayer: null,
-    uiLayer: null,
-    renderSystem: null,
-    movementSystem: null,
 
     ctor: function () {
         this._super();
@@ -14,6 +10,12 @@ let GameLayer = cc.Layer.extend({
 
         this.uiLayer = new BattleUILayer();
         this.addChild(this.uiLayer, 1);
+
+        this._entityManager = new EntityManager();;
+        EntityManager.getInstance = function () {
+            return this._entityManager;
+        }.bind(this);
+
 
         // create system
         this.movementSystem = new MovementSystem();
@@ -96,5 +98,8 @@ let GameLayer = cc.Layer.extend({
 
     stopGame: function () {
         this.unscheduleUpdate();
+        this.uiLayer.stop();
+        this.addChild(new BattleResultLayer(), 2);
+        delete this._entityManager;
     },
 });

@@ -10,7 +10,6 @@ ShopNetwork.Connector = cc.Class.extend({
     onReceivedPacket: function (cmd, packet) {
         switch (cmd) {
             case gv.CMD.GET_USER_DAILY_SHOP:
-                cc.log("UUUUUUUUUUUU")
                 this._handleGetUserDailyShop(cmd, packet);
                 break;
             case gv.CMD.BUY_GOLD_SHOP:

@@ -4,6 +4,7 @@ let MatchingScene = cc.Scene.extend({
         this._setupUI();
         this.count = 0;
         this.schedule(this._updateUI, 1);
+        this.scheduleOnce(this.onFinishMatching, 3);
     },
 
     _setupUI: function () {
@@ -46,6 +47,7 @@ let MatchingScene = cc.Scene.extend({
             x: centerScreenX,
             y: centerScreenY - mapIconHeight / 2 - buttonHeight / 2
         });
+        cancelButtonNode.getChildByName("button").addClickEventListener(this._backToLobby.bind(this));
         this.addChild(cancelButtonNode);
     },
 
@@ -61,5 +63,19 @@ let MatchingScene = cc.Scene.extend({
             str += ".";
         }
         return str;
+    },
+
+    onFinishMatching: function () {
+        let layer = new GameLayer();
+        layer.setName("Screen");
+
+        let scene = new cc.Scene();
+        scene.addChild(layer);
+
+        cc.director.runScene(new cc.TransitionFade(1, scene));
+    },
+
+    _backToLobby: function () {
+        fr.view(MainScreen);
     }
 })

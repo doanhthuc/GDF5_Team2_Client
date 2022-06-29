@@ -7,4 +7,16 @@ const BattleResource = {
     CARD_DECK_NODE: "ui/battle/battle_ui_layer/card/BattleCardDeckNode.json",
     HOUSE_ENERGY_NODE: "ui/battle/battle_ui_layer/energy/HouseEnergy.json",
     PLAYER_INFO_NODE: "ui/battle/battle_ui_layer/avatar/PlayerInfoNode.json",
+    RED_BACK_BUTTON_NODE: "ui/battle/battle_ui_layer/button/BackButtonNode.json",
+
+    WIN_SKELETON_ANIMATION: "textures/battle_result/fx/fx_result_win.json",
+    LOSE_SKELETON_ANIMATION: "textures/battle_result/fx/fx_result_lose.json",
+    DRAW_SKELETON_ANIMATION: "textures/battle_result/fx/fx_result_draw.json",
+    WIN_SKELETON_ALIAS: "textures/battle_result/fx/fx_result_win.atlas",
+    LOSE_SKELETON_ALIAS: "textures/battle_result/fx/fx_result_lose.atlas",
+    DRAW_SKELETON_ALIAS: "textures/battle_result/fx/fx_result_draw.atlas",
+    RESULT_PLAYER_INFO_NODE: "ui/battle/battle_result_layer/PlayerInfoNode.json",
+    SWORD_WIN_ICON: "textures/battle_result/battle_result_icon_swords_win.png",
+    SWORD_LOSE_ICON: "textures/battle_result/battle_result_icon_swords_lose.png",
+    BLUE_BACK_BUTTON_NODE: "ui/battle/battle_result_layer/BackButtonNode.json"
 }
