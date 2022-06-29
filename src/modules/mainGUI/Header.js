@@ -18,6 +18,8 @@ const Header = cc.Node.extend({
         this.gemTopUpBtn.addClickEventListener(this.onGemTopUpBtnClicked.bind(this));
 
         this.setPosition(cc.winSize.width / 2, cc.winSize.height - this.headerBackgroundImg.getSize().height / 2);
+
+        this.addCheatButton();
     },
 
     setUserGold: function (gold) {
@@ -34,6 +36,20 @@ const Header = cc.Node.extend({
 
     onGemTopUpBtnClicked: function () {
 
+    },
+
+    addCheatButton: function () {
+        this.cheatBtnNode = ccs.load('ui/cheat/cheatButton.json', '').node;
+        this.addChild(this.cheatBtnNode);
+        this.cheatBtn = this.cheatBtnNode.getChildByName('cheatBtn');
+        this.cheatBtn.addTouchEventListener(this.onCheatBtnClicked.bind(this), this);
+        this.cheatBtnNode.setPosition(cc.winSize.width / 2 - this.cheatBtn.getSize().width / 2, 0);
+    },
+
+    onCheatBtnClicked: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT);
+        }
     }
 
 });

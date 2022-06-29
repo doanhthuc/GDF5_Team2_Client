@@ -5,6 +5,7 @@ const CLIENT_UI_CONST = {
         GUI_BUY_GOLD: 'buyGoldPopup',
         GUI_BUY_CARD: 'buyCardPopup',
         GUI_CARD_DETAIL: 'cardDetailPopup',
+        GUI_CHEAT: 'cheatPopup',
     },
 
     NODE_NAME: {
