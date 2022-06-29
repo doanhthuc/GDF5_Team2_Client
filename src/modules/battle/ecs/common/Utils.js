@@ -11,6 +11,7 @@ Utils.tile2Pixel = function (x, y) {
     // |-------->x
     // return center of tile pixel
     let paddingX = (GameConfig.SCREEN_WIDTH - 7 * GameConfig.TILE_WIDTH) / 2;
+    // FIXME: hard code
     let paddingY = 200;
     let xx = x * GameConfig.TILE_WIDTH + paddingX + GameConfig.TILE_WIDTH / 2;
     let yy = y * GameConfig.TILE_HEIGH + paddingY + GameConfig.TILE_HEIGH / 2;

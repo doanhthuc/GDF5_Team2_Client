@@ -83,6 +83,7 @@
         "src/modules/battle/ui/HouseEnergyNode.js",
         "src/modules/battle/ui/PlayerInfoNode.js",
         "src/modules/battle/ui/WaveNode.js",
+        "src/modules/battle/ui/MatchingScene.js",
         "src/modules/context/ContextManager.js",
         "src/modules/context/ContextManagerConst.js",
         "src/modules/context/InitContexts.js",
