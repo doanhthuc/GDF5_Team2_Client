@@ -5,7 +5,7 @@ const TreasureContext = cc.Class.extend({
 
     setTreasureList: function (treasureList) {
         this.treasureList = treasureList.lobbyChest;
-        cc.log(JSON.stringify(this.treasureList.lobbyChest));
+        cc.log('TreasureContext Line 8: ' + JSON.stringify(this.treasureList));
         this.onTreasureListUpdated();
     },
 

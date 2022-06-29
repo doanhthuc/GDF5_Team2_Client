@@ -61,7 +61,6 @@ testnetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.GET_USER_LOBBY:
                 let treasureContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT);
-                
                 treasureContext.setTreasureList(packet);
 
                 userLobbyChest.getItemList(packet);
@@ -105,6 +104,22 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log(packet.gemChange + " " + packet.goldChange);
                 for (i = 0; i < packet.itemAmount; i++)
                     cc.log(packet.itemType[i] + " " + packet.itemQuantity[i]);
+                break;
+            //cheat
+            case gv.CMD.CHEAT_USER_INFO:
+                cc.log("CHEAT USER INFO");
+                cc.log(packet.gold + " " + packet.gem + " " + packet.trophy);
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).onUserInfoCheatSuccess(packet);
+                break;
+            case gv.CMD.CHEAT_USER_CARD:
+                cc.log("CHEAT USER CARD")
+                cc.log(packet.cardType + " " + packet.cardLevel + " " + packet.amount);
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).onCardCheatSuccess(packet);
+                break;
+            case gv.CMD.CHEAT_USER_LOBBY_CHEST:
+                cc.log("CHEAT LOBBY CHEST");
+                cc.log(packet.chestId + " " + packet.chestState + " " + packet.chestClaimTime);
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).onChestCheatSuccess(packet);
                 break;
         }
     },
@@ -188,6 +203,25 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(itemid);
         this.gameClient.sendPacket(pk);
     },
+    // cheat:
+    sendCheatUserInfo: function (userInfoCheat) {
+        cc.log("CheatUserInfo");
+        var pk = this.gameClient.getOutPacket(CMDCheatUserInfo);
+        pk.pack(userInfoCheat);
+        this.gameClient.sendPacket(pk);
+    },
+    sendCheatUserCard: function (cardInfoCheat) {
+        cc.log("CheatUserCardCollection");
+        var pk = this.gameClient.getOutPacket(CMDCheatUserCard);
+        pk.pack(cardInfoCheat);
+        this.gameClient.sendPacket(pk);
+    },
+    sendCheatUserLobbyChest: function (chestInfoCheat) {
+        cc.log("CheatLobbyChest");
+        var pk = this.gameClient.getOutPacket(CMDCheatUserLobbyChest);
+        pk.pack(chestInfoCheat);
+        this.gameClient.sendPacket(pk);
+    }
 
 });
 

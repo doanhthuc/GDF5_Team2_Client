@@ -14,9 +14,18 @@ const CheatPopup = cc.Node.extend({
         this.cardIdCheatInput = this.popUpNode.getChildByName('cardIdCheatInput');
         this.cardLevelCheatInput = this.popUpNode.getChildByName('cardLevelCheatInput');
         this.cardQuantityCheatInput = this.popUpNode.getChildByName('cardQuantityCheatInput');
+        this.cardImg = this.popUpNode.getChildByName('cardImg');
+        this.cardImg.setVisible(false);
+        this.lelelTxt = this.popUpNode.getChildByName('levelTxt');
+        this.lelelTxt.ignoreContentAdaptWithSize(true);
+        this.lelelTxt.setString('');
         this.submitBtn = this.popUpNode.getChildByName('submitBtn');
         this.closeBtn = this.popUpNode.getChildByName('closeBtn');
+        this.chestCheatBtn = this.popUpNode.getChildByName('chestCheatBtn');
         this.closeBtn.addTouchEventListener(this.onCloseBtnClick.bind(this), this);
+        this.submitBtn.addTouchEventListener(this.onSubmitBtnClick.bind(this), this);
+        this.cardIdCheatInput.addEventListener(this.cardIdCheatInputListener.bind(this), this);
+        this.chestCheatBtn.addTouchEventListener(this.onChestCheatBtnClick.bind(this), this);
     },
 
     onCloseBtnClick: function (sender, type) {
@@ -33,25 +42,39 @@ const CheatPopup = cc.Node.extend({
             let cardId = this.cardIdCheatInput.getString();
             let cardLevel = this.cardLevelCheatInput.getString();
             let cardQuantity = this.cardQuantityCheatInput.getString();
-            if (gold) {
-                this.cheatContext.cheatGold(gold);
+            if (gold || gem || trophy) {
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatUserInfo(gold, gem, trophy);
             }
-            if (gem) {
-                this.cheatContext.cheatGem(gem);
-            }
-            if (trophy) {
-                this.cheatContext.cheatTrophy(trophy);
-            }
-            if (cardId) {
-                this.cheatContext.cheatCardId(cardId);
-                if (cardLevel) {
-                    this.cheatContext.cheatCardLevel(cardLevel);
-                }
-                if (cardQuantity) {
-                    this.cheatContext.cheatCardQuantity(cardQuantity);
-                }
+            if (cardId && cardLevel || cardQuantity) {
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatUserCard(cardId, cardLevel, cardQuantity);
             }
             this.setVisible(false);
+        }
+    },
+
+    cardIdCheatInputListener: function (sender, type) {
+        if (type === ccui.TextField.EVENT_INSERT_TEXT) {
+            let cardId = sender.getString();
+            if (cardId < 10) {
+                let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
+                let card = inventoryContext.getCardById(+cardId);
+                this.cardImg.setTexture(CARD_CONST[cardId].cardImage);
+                this.cardImg.setVisible(true);
+                this.lelelTxt.setString('Level ' + card.cardLevel);
+                this.cardLevelCheatInput.setString(card.cardLevel);
+                this.cardQuantityCheatInput.setString(card.amount);
+            } else {
+                this.cardImg.setVisible(false);
+                this.lelelTxt.setString('');
+                this.cardLevelCheatInput.setString('');
+                this.cardQuantityCheatInput.setString('');
+            }
+        }
+    },
+
+    onChestCheatBtnClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatFullChest();
         }
     }
 });

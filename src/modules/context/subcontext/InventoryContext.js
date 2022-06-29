@@ -65,6 +65,16 @@ const InventoryContext = cc.Class.extend({
             ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL)
                 .updateUIByLevelAndAccumulatedCard(card.cardLevel, card.amount);
         }
-    }
+    },
 
+
+    getCardById: function (cardId) {
+        for (let card of this.cardCollectionList) {
+            cc.log(JSON.stringify(card))
+            if (card.cardType === cardId) {
+                return card;
+            }
+        }
+        return null;
+    }
 });

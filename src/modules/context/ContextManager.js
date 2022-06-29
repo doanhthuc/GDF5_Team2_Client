@@ -4,6 +4,7 @@ const ContextManager = cc.Class.extend({
         this.registerContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT, new UserContext());
         this.registerContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT, new InventoryContext());
         this.registerContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT, new TreasureContext());
+        this.registerContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT, new CheatContext());
     },
 
     getInstance: function () {

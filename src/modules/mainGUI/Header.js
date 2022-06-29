@@ -43,7 +43,8 @@ const Header = cc.Node.extend({
         this.addChild(this.cheatBtnNode);
         this.cheatBtn = this.cheatBtnNode.getChildByName('cheatBtn');
         this.cheatBtn.addTouchEventListener(this.onCheatBtnClicked.bind(this), this);
-        this.cheatBtnNode.setPosition(cc.winSize.width / 2 - this.cheatBtn.getSize().width / 2, 0);
+        cc.log('this.cheatBtn.getSize().width / 2 ' + this.cheatBtn.getSize().width / 2);
+        this.cheatBtnNode.setPosition(cc.winSize.width / 2 - (this.cheatBtn.getSize().width * 0.8) / 2 + 3, this.cheatBtn.getSize().height * 0.2 / 2);
     },
 
     onCheatBtnClicked: function (sender, type) {
