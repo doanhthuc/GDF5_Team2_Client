@@ -19,5 +19,8 @@ const TreasureSlotResources = {
     OCCUPIED_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_empty.png',
     OPENING_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_opening.png',
     FINISHED_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_finished.png',
+    OPEN_TREASURE_FX_JSON: 'textures/lobby/treasure/fx/fx_chest_lv1.json',
+    OPEN_TREASURE_FX_ATLAS: 'textures/lobby/treasure/fx/fx_chest_lv1.atlas',
+    OPEN_TREASURE_POPUP: 'ui/lobby/openTreasurePopup.json'
 }
 

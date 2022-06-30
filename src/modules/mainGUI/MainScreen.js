@@ -1,4 +1,5 @@
 const MainScreen = cc.Layer.extend({
+    _className: "MainScreen",
     ctor: function () {
         this.DEFAULT_TAB = 'HOME_TAB';
         this.activeTab = this.DEFAULT_TAB;
@@ -60,8 +61,6 @@ const MainScreen = cc.Layer.extend({
         this.initPopups();
 
         this.initListViewEventListener();
-
-
     },
 
     scrollToDefaultPage: function () {
@@ -74,18 +73,19 @@ const MainScreen = cc.Layer.extend({
         this.buyGoldPopupNode = new BuyGoldPopup();
         this.cardDetailPopupNode = new CardDetailPopup();
         this.cheatPopupNode = new CheatPopup();
+        this.openTreasurePopupNode = new OpenTreasurePopup();
 
         this.addPopup(this.treasurePopupNode);
         this.addPopup(this.buyCardPopupNode);
         this.addPopup(this.buyGoldPopupNode);
         this.addPopup(this.cardDetailPopupNode);
         this.addPopup(this.cheatPopupNode);
+        this.addPopup(this.openTreasurePopupNode);
     },
 
     addPopup: function (popupNode) {
-        this.clientUIManager.registerUI(popupNode.name, popupNode);
-        popupNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
-        this.addChild(popupNode, CLIENT_UI_CONST.Z_ORDER.POP_UP);
+        popupNode.retain();
+        PopupUIManager.getInstance().registerUI(popupNode.name, popupNode);
     },
 
 

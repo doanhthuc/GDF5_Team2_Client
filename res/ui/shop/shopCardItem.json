@@ -102,13 +102,13 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "textures/card/card_tower_attack_speed.png",
+                  "Path": "textures/card/card_tower_boomerang.png",
                   "Plist": ""
                 },
-                "Scale9OriginX": 38,
-                "Scale9OriginY": 70,
-                "Scale9Width": 42,
-                "Scale9Height": 24,
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
                 "AnchorPoint": {
                   "ScaleX": 0.5,
                   "ScaleY": 0.5
@@ -137,14 +137,14 @@
                 "RightMargin": 10.0,
                 "TopMargin": 11.0,
                 "BottomMargin": 11.0,
-                "Tag": 162,
-                "ActionTag": 1463167838,
+                "Tag": 68,
+                "ActionTag": -315870377,
                 "Size": {
                   "X": 118.0,
                   "Y": 164.0
                 },
                 "Name": "cardImg",
-                "ctype": "ImageViewObjectData"
+                "ctype": "SpriteObjectData"
               },
               {
                 "FontSize": 28,
@@ -224,7 +224,7 @@
       "UsedResources": [
         "../../textures/card/card_background_1.png",
         "../../textures/card/card_border_1.png",
-        "../../textures/card/card_tower_attack_speed.png",
+        "../../textures/card/card_tower_boomerang.png",
         "../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"

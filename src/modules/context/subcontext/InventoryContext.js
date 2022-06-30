@@ -61,7 +61,7 @@ const InventoryContext = cc.Class.extend({
 
             contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).updateUserGold(data.goldChange);
 
-            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL)
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL)
                 .updateUIByLevelAndAccumulatedCard(card.cardLevel, card.amount);
         }
     },

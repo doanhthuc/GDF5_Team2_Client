@@ -105,8 +105,10 @@
         "src/modules/inventory/CardDetailPopup.js",
         "src/modules/inventory/CardStatHolder.js",
         "src/modules/inventory/InventoryLayer.js",
+        "src/modules/lobby/CardWithQuantity.js",
         "src/modules/lobby/LobbyChest.js",
         "src/modules/lobby/LobbyLayer.js",
+        "src/modules/lobby/OpenTreasurePopup.js",
         "src/modules/lobby/PlayerInfoHolder.js",
         "src/modules/lobby/Treasure.js",
         "src/modules/lobby/TreasurePopup.js",
@@ -139,6 +141,7 @@
         "src/modules/testnetwork/network/Network.js",
         "src/modules/testnetwork/network/Packet.js",
         "src/modules/testnetwork/ScreenNetwork.js",
+        "src/modules/uimanager/PopupUIManager.js",
         "src/util/JsonReader.js",
         "src/util/UiUtil.js"
     ]

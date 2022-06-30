@@ -52,8 +52,8 @@ const Header = cc.Node.extend({
 
     onCheatBtnClicked: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT);
-            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT).resetCheatForm();
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT);
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT).resetCheatForm();
         }
     }
 
