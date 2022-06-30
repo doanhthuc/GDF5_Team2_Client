@@ -26,11 +26,11 @@
             },
             "AnchorPoint": {
               "ScaleX": 0.5,
-              "ScaleY": 0.5
+              "ScaleY": 1.0
             },
             "Position": {
-              "X": 0.0,
-              "Y": 0.0
+              "X": -0.0001,
+              "Y": 143.5001
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -46,10 +46,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -304.0,
-            "RightMargin": -304.0,
-            "TopMargin": -139.5,
-            "BottomMargin": -139.5,
+            "LeftMargin": -304.0001,
+            "RightMargin": -303.9999,
+            "TopMargin": -143.5001,
+            "BottomMargin": -135.4999,
             "Tag": 217,
             "ActionTag": -531045196,
             "Size": {
