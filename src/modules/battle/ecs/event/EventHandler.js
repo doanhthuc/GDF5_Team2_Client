@@ -44,10 +44,15 @@ EventDispatcher.getInstance()
         GameConfig.gameLayer.stopGame();
     })
     .addEventHandler(EventType.END_ALL_WAVE, function (data) {
-        GameConfig.gameLayer.stopGame();
+        // GameConfig.gameLayer.stopGame();
+        GameConfig.gameLayer.uiLayer.stopTimer();
     })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let map = GameConfig.gameLayer.mapLayer.mapMatrix;
+        if (GameConfig.MAP_HEIGH-1-data.pos.y < 0 || GameConfig.MAP_HEIGH-1-data.pos.y >= GameConfig.MAP_HEIGH
+            || data.pos.x < 0 || data.pos.x >= GameConfig.MAP_WIDTH) {
+            return;
+        }
         map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 1;
         let paths = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
 

@@ -8,7 +8,8 @@ let GameLayer = cc.Layer.extend({
         this.mapLayer = new BattleMapLayer();
         this.addChild(this.mapLayer, 1);
 
-        this.uiLayer = new BattleUILayer();
+        let maxTimerDuration = 3, maxWave = 10, playerHouseEnergy = 4, opponentHouseEnergy = 10;
+        this.uiLayer = new BattleUILayer(maxTimerDuration, maxWave, playerHouseEnergy, opponentHouseEnergy);
         this.addChild(this.uiLayer, 1);
 
         this._entityManager = new EntityManager();;
@@ -98,8 +99,9 @@ let GameLayer = cc.Layer.extend({
 
     stopGame: function () {
         this.unscheduleUpdate();
-        this.uiLayer.stop();
-        this.addChild(new BattleResultLayer(), 2);
+        this.uiLayer.stopTimer();
+
+        this.addChild(new BattleResultLayer("lose"), 2);
         delete this._entityManager;
     },
 });

@@ -47,7 +47,7 @@ let MatchingScene = cc.Scene.extend({
             x: centerScreenX,
             y: centerScreenY - mapIconHeight / 2 - buttonHeight / 2
         });
-        cancelButtonNode.getChildByName("button").addClickEventListener(this._backToLobby.bind(this));
+        cancelButtonNode.getChildByName("button").addTouchEventListener(this._backToLobby.bind(this));
         this.addChild(cancelButtonNode);
     },
 

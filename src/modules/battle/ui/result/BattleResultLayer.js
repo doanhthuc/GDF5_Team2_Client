@@ -1,8 +1,8 @@
 let BattleResultLayer = cc.Layer.extend({
-    ctor: function () {
+    ctor: function (result) {
         this._super();
 
-        this.result = "draw";
+        this.result = result;
         this.ANIMATION_TYPE = {
             ANIMATION_START: 0,
             ANIMATION_END: 1,

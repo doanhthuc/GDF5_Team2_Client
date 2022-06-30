@@ -1,0 +1,382 @@
+{
+  "ID": "5f70b65f-8b06-480a-bd4e-40bc77c53643",
+  "Version": "2.3.4",
+  "Name": "TwoPlayerInfoNode",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 468,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/battle_result/battle_result_avatar_border_loser.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 44,
+            "Scale9OriginY": 48,
+            "Scale9Width": 47,
+            "Scale9Height": 50,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 200.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -67.5,
+            "RightMargin": -67.5,
+            "TopMargin": -273.0,
+            "BottomMargin": 127.0,
+            "Tag": 478,
+            "ActionTag": -1243786185,
+            "Size": {
+              "X": 135.0,
+              "Y": 146.0
+            },
+            "Name": "player_border",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_avatar.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.999,
+              "Y": 205.0002
+            },
+            "Scale": {
+              "ScaleX": 2.9252,
+              "ScaleY": 2.9252
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -19.499,
+            "RightMargin": -17.501,
+            "TopMargin": -223.5002,
+            "BottomMargin": 186.5002,
+            "Tag": 482,
+            "ActionTag": 1114446269,
+            "Size": {
+              "X": 37.0,
+              "Y": 37.0
+            },
+            "Name": "player_avatar",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/battle_result/battle_result_avatar_border_loser.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 44,
+            "Scale9OriginY": 48,
+            "Scale9Width": 47,
+            "Scale9Height": 50,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -200.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -67.5,
+            "RightMargin": -67.5,
+            "TopMargin": 127.0,
+            "BottomMargin": -273.0,
+            "Tag": 480,
+            "ActionTag": 154890062,
+            "Size": {
+              "X": 135.0,
+              "Y": 146.0
+            },
+            "Name": "opponent_border",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_avatar.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0011,
+              "Y": -194.9998
+            },
+            "Scale": {
+              "ScaleX": 2.9759,
+              "ScaleY": 2.9759
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -18.4989,
+            "RightMargin": -18.5011,
+            "TopMargin": 176.4998,
+            "BottomMargin": -213.4998,
+            "Tag": 481,
+            "ActionTag": -1944509156,
+            "Size": {
+              "X": 37.0,
+              "Y": 37.0
+            },
+            "Name": "opponent_avatar",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/battle_result/battle_result_icon_swords_lose.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 32,
+            "Scale9OriginY": 33,
+            "Scale9Width": 35,
+            "Scale9Height": 34,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -49.5,
+            "RightMargin": -49.5,
+            "TopMargin": -50.0,
+            "BottomMargin": -50.0,
+            "Tag": 484,
+            "ActionTag": 1845070991,
+            "Size": {
+              "X": 99.0,
+              "Y": 100.0
+            },
+            "Name": "Image_7",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "HOVANVY",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
+            "OutlineColor": {
+              "R": 60,
+              "G": 22,
+              "B": 22
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "ShadowEnabled": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 100.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -69.0,
+            "RightMargin": -69.0,
+            "TopMargin": -114.5,
+            "BottomMargin": 85.5,
+            "Tag": 485,
+            "ActionTag": -561745054,
+            "Size": {
+              "X": 138.0,
+              "Y": 29.0
+            },
+            "Name": "player_name",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "HOVANVY",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
+            "OutlineColor": {
+              "R": 60,
+              "G": 22,
+              "B": 22
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "ShadowEnabled": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -100.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -69.0,
+            "RightMargin": -69.0,
+            "TopMargin": 85.5,
+            "BottomMargin": -114.5,
+            "Tag": 486,
+            "ActionTag": -1190442984,
+            "Size": {
+              "X": 138.0,
+              "Y": 29.0
+            },
+            "Name": "opponent_name",
+            "ctype": "TextObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../../textures/battle_result/battle_result_avatar_border_loser.png",
+        "../../../../textures/battle_result/battle_result_icon_swords_lose.png",
+        "../../../../textures/common/common_avatar.png",
+        "../../../../textures/font/SVN-Supercell Magic.ttf"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

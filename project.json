@@ -86,6 +86,7 @@
         "src/modules/battle/ui/matching/MatchingScene.js",
         "src/modules/battle/ui/result/BattleResultLayer.js",
         "src/modules/battle/ui/result/BattleResultPlayerInfo.js",
+        "src/modules/battle/ui/TwoPlayerInfo/TwoPlayerInfoLayer.js",
         "src/modules/context/ContextManager.js",
         "src/modules/context/ContextManagerConst.js",
         "src/modules/context/InitContexts.js",
