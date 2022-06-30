@@ -8,8 +8,8 @@ let MatchingScene = cc.Scene.extend({
     },
 
     _setupUI: function () {
-        let centerScreenX = GameConfig.SCREEN_WIDTH / 2;
-        let centerScreenY = GameConfig.SCREEN_HEIGH / 2;
+        let centerScreenX = cc.winSize.width / 2;
+        let centerScreenY = cc.winSize.height / 2;
 
         let backgroundImage = new cc.Sprite("textures/lobby/lobby_background.png");
         backgroundImage.attr({x: centerScreenX, y: centerScreenY});
@@ -18,10 +18,10 @@ let MatchingScene = cc.Scene.extend({
         let matchingTxtNode = ccs.load("ui/battle/matching/MatchingTextNode.json", "").node;
         this.dotTxt = matchingTxtNode.getChildByName("dot_txt");
         let lookupIcon = matchingTxtNode.getChildByName("lookup_icon");
-        let marginTopScreen = 0.1 * GameConfig.SCREEN_HEIGH;
+        let marginTopScreen = 0.1 * cc.winSize.height;
         matchingTxtNode.attr({
             x: centerScreenX,
-            y: GameConfig.SCREEN_HEIGH - marginTopScreen
+            y: cc.winSize.height - marginTopScreen
         });
         this.addChild(matchingTxtNode);
 

@@ -3,13 +3,13 @@ let TwoPlayerInfoLayer = cc.Layer.extend({
         this._super();
 
         // background layer
-        let backgroundLayer = new cc.LayerColor(new cc.Color(0, 0, 0, 150), GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGH);
+        let backgroundLayer = new cc.LayerColor(new cc.Color(0, 0, 0, 150), cc.winSize.width, cc.winSize.height);
         this.addChild(backgroundLayer);
 
         this.rootNode = ccs.load(BattleResource.TWO_PLAYER_INFO_NODE, "").node;
         this.rootNode.attr({
-            x: GameConfig.SCREEN_WIDTH / 2,
-            y: GameConfig.SCREEN_HEIGH / 2,
+            x: cc.winSize.width / 2,
+            y: cc.winSize.height / 2,
         });
         this.addChild(this.rootNode);
 

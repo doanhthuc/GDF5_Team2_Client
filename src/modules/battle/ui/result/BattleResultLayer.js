@@ -15,7 +15,7 @@ let BattleResultLayer = cc.Layer.extend({
 
     _setupUI: function () {
         // background layer
-        let backgroundLayer = new cc.LayerColor(new cc.Color(0, 0, 0, 150), GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGH);
+        let backgroundLayer = new cc.LayerColor(new cc.Color(0, 0, 0, 150), cc.winSize.width, cc.winSize.height);
         this.addChild(backgroundLayer);
 
         let resource = {skeleton: null, alias: null};
@@ -48,8 +48,8 @@ let BattleResultLayer = cc.Layer.extend({
         this.spine.addAnimation(1, this.animationName.idle, true, 3);
         this.spine.setAnimationListener(this, this.animationStateEvent);
         this.spine.attr({
-            x: GameConfig.SCREEN_WIDTH / 2,
-            y: GameConfig.SCREEN_HEIGH / 2
+            x: cc.winSize.width / 2,
+            y: cc.winSize.height / 2
         })
         this.addChild(this.spine);
     },
@@ -81,22 +81,22 @@ let BattleResultLayer = cc.Layer.extend({
     _showResult: function () {
         let playerInfoNode = new BattleResultPlayerInfo("HOVANVYDUT", 20, "textures/common/common_avatar.png", 30);
         playerInfoNode.attr({
-            y: GameConfig.SCREEN_HEIGH / 2,
-            x: GameConfig.SCREEN_WIDTH / 4
+            y: cc.winSize.height / 2,
+            x: cc.winSize.width / 4
         });
         this.addChild(playerInfoNode);
 
         let opponentInfoNode = new BattleResultPlayerInfo("OPPONENT", 0, "textures/common/common_avatar.png", 50);
         opponentInfoNode.attr({
-            y: GameConfig.SCREEN_HEIGH / 2,
-            x: 3 * GameConfig.SCREEN_WIDTH / 4
+            y: cc.winSize.height / 2,
+            x: 3 * cc.winSize.width / 4
         });
         this.addChild(opponentInfoNode);
 
         let icon = new cc.Sprite(BattleResource.SWORD_WIN_ICON, "");
         icon.attr({
-            y: GameConfig.SCREEN_HEIGH / 2,
-            x: GameConfig.SCREEN_WIDTH / 2
+            y: cc.winSize.height / 2,
+            x: cc.winSize.width / 2
         });
         this.addChild(icon);
 
@@ -104,7 +104,7 @@ let BattleResultLayer = cc.Layer.extend({
         let backButton = backButtonNode.getChildByName("button");
         backButton.addTouchEventListener(this._backToLobby.bind(this));
         backButtonNode.attr({
-            x: GameConfig.SCREEN_WIDTH / 2,
+            x: cc.winSize.width / 2,
             y: backButton.height / 2
         });
         this.addChild(backButtonNode);
