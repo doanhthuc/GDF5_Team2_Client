@@ -20,40 +20,44 @@
               "Path": "textures/map/map_background.png",
               "Plist": ""
             },
-            "Scale9OriginX": 204,
-            "Scale9OriginY": 348,
-            "Scale9Width": 212,
-            "Scale9Height": 360,
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 320.0,
-              "Y": 568.0
+              "X": 362.6273,
+              "Y": 592.9274
             },
             "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
+              "ScaleX": 1.9168,
+              "ScaleY": 1.5012
             },
             "CColor": {},
             "IconVisible": false,
             "PrePosition": {
-              "X": 0.5,
-              "Y": 0.5
+              "X": 0.5666,
+              "Y": 0.5219
             },
             "PreSize": {
-              "X": 1.0,
-              "Y": 1.0
+              "X": 0.9688,
+              "Y": 0.9296
             },
-            "Tag": 405,
-            "ActionTag": -544435943,
+            "LeftMargin": 52.6273,
+            "RightMargin": -32.6273,
+            "TopMargin": 15.0725,
+            "BottomMargin": 64.9274,
+            "Tag": 70,
+            "ActionTag": -1249285938,
             "Size": {
-              "X": 640.0,
-              "Y": 1136.0
+              "X": 620.0,
+              "Y": 1056.0
             },
             "Name": "background",
-            "ctype": "ImageViewObjectData"
+            "ctype": "SpriteObjectData"
           },
           {
             "FileData": {
@@ -527,8 +531,8 @@
             },
             "LeftMargin": -74.5751,
             "RightMargin": 569.5751,
-            "TopMargin": -20.2813,
-            "BottomMargin": 986.2813,
+            "TopMargin": -20.2812,
+            "BottomMargin": 986.2812,
             "Tag": 238,
             "ActionTag": 332553899,
             "Size": {

@@ -30,22 +30,22 @@ let BattleUILayer = cc.Layer.extend({
 
     _showTimer: function () {
         this.timerNode = new BattleTimerNode(this.maxTimerDuration);
-        this.timerNode.x = this.width / 2 - this.timerNode.width / 2;
-        this.timerNode.y = this.cardDeckNode.height + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH + GameConfig.RIVER_MAP_HEIGH / 2;
+        this.timerNode.x = cc.winSize.width / 2 - this.timerNode.width / 2;
+        this.timerNode.y = (cc.winSize.height - this.cardDeckNode.height) / 2 + this.cardDeckNode.height;
         this.addChild(this.timerNode);
     },
 
     _showWave: function () {
         this.waveNode = new WaveNode(this.maxWave);
         this.waveNode.x = this.waveNode.width / 2;
-        this.waveNode.y = this.cardDeckNode.height + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH + GameConfig.RIVER_MAP_HEIGH / 2;
+        this.waveNode.y = (cc.winSize.height - this.cardDeckNode.height) / 2 + this.cardDeckNode.height;
         this.addChild(this.waveNode);
     },
 
     _showHouseEnergy: function () {
         this.houseEnergyNode = new HouseEnergyNode(this.playerHouseEnergy, this.opponentHouseEnergy);
         this.houseEnergyNode.x = this.width - this.houseEnergyNode.width / 2;
-        this.houseEnergyNode.y = this.cardDeckNode.height + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH + GameConfig.RIVER_MAP_HEIGH / 2;
+        this.houseEnergyNode.y = (cc.winSize.height - 200) / 2 + 200;
         this.addChild(this.houseEnergyNode);
     },
 
