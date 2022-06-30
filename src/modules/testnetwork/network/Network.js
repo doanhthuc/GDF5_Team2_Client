@@ -127,7 +127,7 @@ testnetwork.Connector = cc.Class.extend({
         if (UID != 0) {
             cc.log("sendLoginRequest");
             var pk = this.gameClient.getOutPacket(CmdSendLogin);
-            pk.pack("", UID);
+            pk.pack("",UID);
             this.gameClient.sendPacket(pk);
         }
     },

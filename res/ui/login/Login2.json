@@ -29,38 +29,32 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 308.0992,
-              "Y": 586.2555
+              "X": 320.0,
+              "Y": 570.0448
             },
             "Scale": {
-              "ScaleX": 1.4368,
-              "ScaleY": 1.1127
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "CColor": {},
             "IconVisible": false,
             "PositionPercentXEnabled": true,
             "PositionPercentYEnabled": true,
             "PrePosition": {
-              "X": 0.4814,
-              "Y": 0.5161
+              "X": 0.5,
+              "Y": 0.5018
             },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
             "PreSize": {
-              "X": 1.3313,
-              "Y": 1.1629
+              "X": 1.0,
+              "Y": 1.0
             },
-            "LeftMargin": -117.9167,
-            "RightMargin": -94.1152,
-            "TopMargin": -110.7827,
-            "BottomMargin": -74.2717,
+            "TopMargin": -2.0448,
+            "BottomMargin": 2.0448,
             "Tag": 604,
             "ActionTag": -51723058,
             "Size": {
-              "X": 852.032,
-              "Y": 1321.0544
+              "X": 640.0,
+              "Y": 1136.0
             },
             "Name": "Image_1",
             "ctype": "ImageViewObjectData"
@@ -80,8 +74,8 @@
               "ScaleY": 0.8074
             },
             "Position": {
-              "X": 297.6879,
-              "Y": 874.6978
+              "X": 298.3051,
+              "Y": 851.497
             },
             "Scale": {
               "ScaleX": 0.6277,
@@ -89,29 +83,23 @@
             },
             "CColor": {},
             "IconVisible": false,
-            "PositionPercentXEnabled": true,
-            "PositionPercentYEnabled": true,
             "PrePosition": {
-              "X": 0.4651,
-              "Y": 0.77
+              "X": 0.4661,
+              "Y": 0.7496
             },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
             "PreSize": {
               "X": 0.9453,
               "Y": 0.5563
             },
-            "LeftMargin": 43.8937,
-            "RightMargin": -8.8857,
-            "TopMargin": 139.5873,
-            "BottomMargin": 364.4558,
+            "LeftMargin": 44.5076,
+            "RightMargin": -9.5076,
+            "TopMargin": 162.7798,
+            "BottomMargin": 341.2202,
             "Tag": 605,
             "ActionTag": 73665165,
             "Size": {
-              "X": 604.992,
-              "Y": 631.9568
+              "X": 605.0,
+              "Y": 632.0
             },
             "Name": "Image_2",
             "ctype": "ImageViewObjectData"
@@ -128,8 +116,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 344.64,
-              "Y": 463.9424
+              "X": 348.8044,
+              "Y": 471.1593
             },
             "Scale": {
               "ScaleX": 3.6072,
@@ -141,32 +129,73 @@
               "B": 229
             },
             "IconVisible": false,
-            "PositionPercentXEnabled": true,
-            "PositionPercentYEnabled": true,
             "PrePosition": {
-              "X": 0.5385,
-              "Y": 0.4084
+              "X": 0.545,
+              "Y": 0.4148
             },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
             "PreSize": {
-              "X": 0.1313,
+              "X": 0.1312,
               "Y": 0.0202
             },
-            "LeftMargin": 302.624,
-            "RightMargin": 253.344,
-            "TopMargin": 660.584,
-            "BottomMargin": 452.4688,
+            "LeftMargin": 306.8044,
+            "RightMargin": 249.1956,
+            "TopMargin": 653.3407,
+            "BottomMargin": 459.6593,
             "Tag": 606,
             "ActionTag": -394581719,
             "Size": {
-              "X": 84.032,
-              "Y": 22.9472
+              "X": 84.0,
+              "Y": 23.0
             },
             "Name": "TextField_1",
             "ctype": "TextFieldObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/lobby/lobby_card_progress_background_deck.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 46,
+            "Scale9OriginY": 13,
+            "Scale9Width": 34,
+            "Scale9Height": 4,
+            "AnchorPoint": {
+              "ScaleX": 0.1945,
+              "ScaleY": -0.4387
+            },
+            "Position": {
+              "X": 222.1498,
+              "Y": 354.9935
+            },
+            "Scale": {
+              "ScaleX": 2.5902,
+              "ScaleY": 4.0069
+            },
+            "RotationSkewX": -0.0083,
+            "RotationSkewY": -0.0169,
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.3471,
+              "Y": 0.3125
+            },
+            "PreSize": {
+              "X": 0.1969,
+              "Y": 0.0264
+            },
+            "LeftMargin": 197.6428,
+            "RightMargin": 316.3572,
+            "TopMargin": 737.8455,
+            "BottomMargin": 368.1545,
+            "Tag": 607,
+            "ActionTag": -463209433,
+            "Size": {
+              "X": 126.0,
+              "Y": 30.0
+            },
+            "Name": "Image_3",
+            "ctype": "ImageViewObjectData"
           },
           {
             "FontSize": 22,
@@ -213,38 +242,32 @@
               "ScaleY": 1.0
             },
             "Position": {
-              "X": 320.064,
-              "Y": 387.376
+              "X": 318.5079,
+              "Y": 374.879
             },
             "Scale": {
-              "ScaleX": 1.1008,
+              "ScaleX": 0.75,
               "ScaleY": 0.75
             },
             "CColor": {},
             "IconVisible": false,
-            "PositionPercentXEnabled": true,
-            "PositionPercentYEnabled": true,
             "PrePosition": {
-              "X": 0.5001,
-              "Y": 0.341
+              "X": 0.4977,
+              "Y": 0.33
             },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
             "PreSize": {
               "X": 0.6516,
               "Y": 0.1593
             },
-            "LeftMargin": 111.552,
-            "RightMargin": 111.4241,
-            "TopMargin": 748.624,
-            "BottomMargin": 206.4112,
+            "LeftMargin": 110.0079,
+            "RightMargin": 112.9921,
+            "TopMargin": 761.121,
+            "BottomMargin": 193.879,
             "Tag": 608,
             "ActionTag": 1298295327,
             "Size": {
-              "X": 417.024,
-              "Y": 180.9648
+              "X": 417.0,
+              "Y": 181.0
             },
             "Name": "Button_1",
             "ctype": "ButtonObjectData"
@@ -261,103 +284,41 @@
             "PlaceHolderText": "Đăng nhập",
             "MaxLengthText": 10,
             "AnchorPoint": {
-              "ScaleX": 0.52,
-              "ScaleY": 0.519
-            },
-            "Position": {
-              "X": 338.7524,
-              "Y": 320.6012
-            },
-            "Scale": {
-              "ScaleX": 4.5668,
-              "ScaleY": 3.516
-            },
-            "CColor": {
-              "R": 199,
-              "G": 43,
-              "B": 167
-            },
-            "IconVisible": false,
-            "PositionPercentXEnabled": true,
-            "PositionPercentYEnabled": true,
-            "PrePosition": {
-              "X": 0.5293,
-              "Y": 0.2822
-            },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
-            "PreSize": {
-              "X": 0.1313,
-              "Y": 0.0202
-            },
-            "LeftMargin": 295.0558,
-            "RightMargin": 260.9122,
-            "TopMargin": 804.3612,
-            "BottomMargin": 308.6916,
-            "Tag": 609,
-            "ActionTag": -1603028119,
-            "Size": {
-              "X": 84.032,
-              "Y": 22.9472
-            },
-            "Name": "TextField_2",
-            "ctype": "TextFieldObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "textures/lobby/lobby_box.png",
-              "Plist": ""
-            },
-            "Scale9OriginX": 46,
-            "Scale9OriginY": 13,
-            "Scale9Width": 48,
-            "Scale9Height": 14,
-            "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 316.419,
-              "Y": 457.1773
+              "X": 324.3654,
+              "Y": 315.1925
             },
             "Scale": {
-              "ScaleX": 2.2947,
-              "ScaleY": 2.5673
+              "ScaleX": 3.0,
+              "ScaleY": 3.0
             },
             "CColor": {},
             "IconVisible": false,
-            "PositionPercentXEnabled": true,
-            "PositionPercentYEnabled": true,
             "PrePosition": {
-              "X": 0.4944,
-              "Y": 0.4024
+              "X": 0.5068,
+              "Y": 0.2775
             },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
             "PreSize": {
-              "X": 0.2188,
-              "Y": 0.0352
+              "X": 0.1312,
+              "Y": 0.0202
             },
-            "LeftMargin": 246.403,
-            "RightMargin": 253.565,
-            "TopMargin": 658.8291,
-            "BottomMargin": 437.1837,
-            "Tag": 253,
-            "ActionTag": -1659999984,
+            "LeftMargin": 282.3654,
+            "RightMargin": 273.6346,
+            "TopMargin": 809.3075,
+            "BottomMargin": 303.6925,
+            "Tag": 609,
+            "ActionTag": -1603028119,
             "Size": {
-              "X": 140.032,
-              "Y": 39.9872
+              "X": 84.0,
+              "Y": 23.0
             },
-            "Name": "Image_3",
-            "ctype": "ImageViewObjectData"
+            "Name": "TextField_2",
+            "ctype": "TextFieldObjectData"
           }
-        ],
-        "Size": {
+        ],        "Size": {
           "X": 640.0,
           "Y": 1136.0
         },
@@ -365,13 +326,13 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../Default/Button_Disable.png",
         "../../textures/common/common_arena_forest.png",
         "../../textures/font/SVN-Supercell Magic.ttf",
         "../../textures/lobby/lobby_background.png",
-        "../../textures/lobby/lobby_box.png",
+        "../../textures/lobby/lobby_card_progress_background_deck.png",
         "../../textures/lobby/lobby_home_btn_battle.png",
-        "../../textures/lobby/lobby_home_btn_battle_pressing.png"
+        "../../textures/lobby/lobby_home_btn_battle_pressing.png",
+        "../../Default/Button_Disable.png"
       ],
       "ctype": "GameFileData"
     }

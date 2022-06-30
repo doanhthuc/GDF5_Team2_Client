@@ -351,7 +351,7 @@ testnetwork.packetMap[gv.CMD.GET_USER_INFO] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getShort();
-            this.id = this.getInt();
+            this.id = this.getLong();
             this.username = this.getString();
             this.gold = this.getInt();
             this.gem = this.getInt();
