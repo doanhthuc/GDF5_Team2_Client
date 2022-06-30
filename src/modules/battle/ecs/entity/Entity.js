@@ -5,7 +5,7 @@ let EntityECS = cc.Class.extend({
     ctor: function (typeID) {
         this.typeID = typeID;
         this.components = {};
-        this.id = Utils.genIncrementId();
+        this.id = Utils.UUID.genInstanceID();
         this._active = true;
     },
 

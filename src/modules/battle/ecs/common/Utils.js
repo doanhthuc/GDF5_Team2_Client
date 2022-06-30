@@ -49,10 +49,20 @@ Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     return direction1 + direction2;
 };
 
-Utils._incrementId = 0;
-Utils.genIncrementId = function () {
-    return Utils._incrementId++;
-}
+Utils.UUID = (function () {
+    let _instanceID = 0;
+    let _componentTypeID = 0;
+
+    return {
+        genComponentTypeID: function () {
+            return ++_componentTypeID;
+        },
+
+        genInstanceID: function () {
+            return ++_instanceID;
+        }
+    }
+})();
 
 Utils.calculateVelocityVector = function (startPos, targetPos, speed) {
     let Xa = startPos.x, Ya = startPos.y, Xb = targetPos.x, Yb = targetPos.y;

@@ -68,7 +68,7 @@
         "src/modules/battle/ecs/config/GameConfig.js",
         "src/modules/battle/ecs/entity/Entity.js",
         "src/modules/battle/ecs/manager/ComponentManager.js",
-        "src/modules/battle/ecs/manager/EntityFactory.js",
+        "src/modules/battle/ecs/factory/EntityFactory.js",
         "src/modules/battle/ecs/pool/ComponentPool.js",
         "src/modules/battle/ecs/system/AttackSystem.js",
         "src/modules/battle/ecs/system/CollisionSystem.js",

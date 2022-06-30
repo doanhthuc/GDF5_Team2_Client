@@ -12,6 +12,7 @@ let GameLayer = cc.Layer.extend({
         this.uiLayer = new BattleUILayer(maxTimerDuration, maxWave, playerHouseEnergy, opponentHouseEnergy);
         this.addChild(this.uiLayer, 1);
 
+        // init entity manager
         this._entityManager = new EntityManager();;
         EntityManager.getInstance = function () {
             return this._entityManager;

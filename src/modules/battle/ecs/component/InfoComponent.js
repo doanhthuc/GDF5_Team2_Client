@@ -1,9 +1,11 @@
 let InfoComponent = Component.extend({
     name: "InfoComponentECS",
+    typeID: Utils.UUID.genComponentTypeID(),
 });
 
 let MonsterInfoComponent = InfoComponent.extend({
     name: "MonsterInfoComponentECS",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (category, classs, weight, energy, gainEnergy, ability, effects) {
         this._super(GameConfig.COMPONENT_ID.MONSTER_INFO);
@@ -31,6 +33,7 @@ let MonsterInfoComponent = InfoComponent.extend({
 
 let TowerInfoComponent = InfoComponent.extend({
     name: "TowerInfoComponentECS",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (energy, bulletTargetType, bulletEffects, archType, targetType, attackRange, bulletType) {
         this._super(GameConfig.COMPONENT_ID.TOWER_INFO);
@@ -44,6 +47,7 @@ let TowerInfoComponent = InfoComponent.extend({
 
 let BulletInfoComponent = InfoComponent.extend({
     name: "BulletInfoComponentECS",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (effects, type) {
         this._super(GameConfig.COMPONENT_ID.BULLET_INFO);

@@ -1,10 +1,10 @@
 let Component = cc.Class.extend({
-    typeID: 0,
+    typeID: Utils.UUID.genComponentTypeID(),
     name: "ComponentECS",
 
     ctor: function (typeID) {
         this.typeID = typeID;
-        this.id = Utils.genIncrementId();
+        this.id = Utils.UUID.genInstanceID();
         this._active = true;
     },
 
@@ -32,6 +32,7 @@ let Component = cc.Class.extend({
 
 let PositionComponent = Component.extend({
     name: "PositionComponent",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (x, y) {
         this._super(GameConfig.COMPONENT_ID.POSITION);
@@ -42,6 +43,7 @@ let PositionComponent = Component.extend({
 
 let VelocityComponent = Component.extend({
     name: "VelocityComponent",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (speedX, speedY, dynamicPosition) {
         this._super(GameConfig.COMPONENT_ID.VELOCITY);
@@ -60,6 +62,7 @@ VelocityComponent.calculateSpeed = function (speedX, speedY) {
 
 let AppearanceComponent = Component.extend({
     name: "AppearanceComponent",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (sprite) {
         this._super(GameConfig.COMPONENT_ID.APPEARANCE);
@@ -72,6 +75,7 @@ let AppearanceComponent = Component.extend({
 
 let PathComponent = Component.extend({
     name: "PathComponent",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (path) {
         this._super(GameConfig.COMPONENT_ID.PATH);
@@ -82,6 +86,7 @@ let PathComponent = Component.extend({
 
 let CollisionComponent = Component.extend({
     name: "CollisionComponent",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (width, height) {
         this._super(GameConfig.COMPONENT_ID.COLLISION);
@@ -92,6 +97,7 @@ let CollisionComponent = Component.extend({
 
 let AttackComponent = Component.extend({
     name: "AttackComponent",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (damage, targetStrategy, range, speed, countdown, effects) {
         this._super(GameConfig.COMPONENT_ID.ATTACK);

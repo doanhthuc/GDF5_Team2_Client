@@ -1,9 +1,12 @@
 let EffectComponent = Component.extend({
     name: "EffectComponent",
+    typeID: Utils.UUID.genComponentTypeID(),
+
 });
 
 let DamageEffect = EffectComponent.extend({
     name: "DamageEffect",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (damage) {
         this._super(GameConfig.COMPONENT_ID.DAMAGE_EFFECT);
@@ -21,6 +24,7 @@ let DamageEffect = EffectComponent.extend({
 
 let SlowEffect = EffectComponent.extend({
     name: "SlowEffect",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (duration, percent) {
         this._super(GameConfig.COMPONENT_ID.SLOW_EFFECT);
@@ -41,6 +45,7 @@ let SlowEffect = EffectComponent.extend({
 
 let FrozenEffect = EffectComponent.extend({
     name: "FrozenEffect",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (duration) {
         this._super(GameConfig.COMPONENT_ID.FROZEN_EFFECT);
@@ -59,6 +64,7 @@ let FrozenEffect = EffectComponent.extend({
 
 let BuffAttackSpeedEffect = EffectComponent.extend({
     name: "BuffAttackSpeedEffect",
+    typeID: Utils.UUID.genComponentTypeID(),
 
     ctor: function (percent) {
         this._super(GameConfig.COMPONENT_ID.BUFF_ATTACK_SPEED);
@@ -76,7 +82,8 @@ let BuffAttackSpeedEffect = EffectComponent.extend({
 
 let BuffAttackDamageEffect = EffectComponent.extend({
     name: "BuffAttackDamageEffect",
-
+    typeID: Utils.UUID.genComponentTypeID(),
+    
     ctor: function (percent) {
         this._super(GameConfig.COMPONENT_ID.BUFF_ATTACK_DAMAGE);
         this.percent = percent;
