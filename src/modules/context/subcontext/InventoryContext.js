@@ -53,7 +53,6 @@ const InventoryContext = cc.Class.extend({
             let card = this.cardCollectionList[index];
             card.cardLevel += 1;
             card.amount += data.fragmentChange;
-            contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold += data.goldChange;
 
             this.cardCollectionList[index] = card;
             ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE)

@@ -1,5 +1,6 @@
 const InventoryLayer = cc.Node.extend({
-    ctor: function () {
+    ctor: function (headerHeight) {
+        this.headerHeight = headerHeight
         this.cardNodeMap = new Map();
         this.cardNodeList = [];
         this._super();

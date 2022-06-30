@@ -27,6 +27,7 @@ const MainScreen = cc.Layer.extend({
         this.addChild(this.header);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE, this.header);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE);
+        let headerHeight = this.header.getNodeHeight();
 
         this.homeLayer = new lobbyLayer();
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
@@ -37,9 +38,7 @@ const MainScreen = cc.Layer.extend({
         this.listView = this.mainPageView.getPages()[NavResources.TAB_LIST.INVENTORY_TAB.index].getChildByName('inventoryListView');
         this.listViewPanel = this.listView.getChildByName('listViewPanel');
 
-        cc.log('mainGui inventory layer start create')
-        this.inventoryLayer = new InventoryLayer();
-        cc.log('mainGui inventory layer end create')
+        this.inventoryLayer = new InventoryLayer(headerHeight);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE, this.inventoryLayer);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE);
 

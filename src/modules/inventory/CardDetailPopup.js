@@ -156,7 +156,10 @@ const CardDetailPopup = cc.Node.extend({
     },
 
     setUpgradeBtnState: function (accumulatedCard) {
-        if (accumulatedCard < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
+        if (this.cardModel.level >= MAX_CARD_LEVEL) {
+            this.setUpgradeBtnTexture(InventoryResources.UPGRADE_BTN_DISABLE_BACKGROUND, cc.color(255, 255, 255));
+            this.upgradeBtnState = InventoryResources.UPGRADE_BTN_STATE.DISABLE;
+        } else if (accumulatedCard < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
             this.setUpgradeBtnTexture(InventoryResources.UPGRADE_BTN_DISABLE_BACKGROUND, cc.color(255, 255, 255));
             this.upgradeBtnState = InventoryResources.UPGRADE_BTN_STATE.DISABLE;
         } else if (accumulatedCard >= JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments &&
@@ -175,7 +178,11 @@ const CardDetailPopup = cc.Node.extend({
     setUpgradeBtnTexture: function (backgroundImg, goldValueTxtColor) {
         this.upgradeBtnBackground.loadTextures(backgroundImg, backgroundImg);
         this.upgradeBtnBackground.getChildByName('goldValueTxt').setColor(goldValueTxtColor);
-        this.upgradeBtnBackground.getChildByName('goldValueTxt').setString(JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].gold);
+        if (this.cardModel.level >= MAX_CARD_LEVEL) {
+            this.upgradeBtnBackground.getChildByName('goldValueTxt').setString('MAX');
+        } else {
+            this.upgradeBtnBackground.getChildByName('goldValueTxt').setString(JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].gold);
+        }
     },
 
     setUpgradeLevelTxt: function (rank) {
