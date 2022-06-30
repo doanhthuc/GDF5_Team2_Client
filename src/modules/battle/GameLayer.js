@@ -72,6 +72,10 @@ let GameLayer = cc.Layer.extend({
 
     putTowerAt: function (type, pos) {
         // pos is tile coordinator
+        if (pos.x < 0 || pos.x >= GameConfig.MAP_WIDTH || pos.y < 0 || pos.y >= GameConfig.MAP_HEIGH) {
+            return;
+        }
+
         if (type === GameConfig.ENTITY_ID.CANNON_TOWER) {
             EntityFactory.createCannonOwlTower(pos);
             EventDispatcher.getInstance()
@@ -93,6 +97,7 @@ let GameLayer = cc.Layer.extend({
                     return;
                 let pixel = touches[0].getLocation();
                 let pos = Utils.pixel2Tile(pixel.x, pixel.y);
+
                 GameConfig.gameLayer.putTowerAt(GameConfig.ENTITY_ID.CANNON_TOWER, pos);
 
             }
