@@ -48,6 +48,7 @@ const CardCollectionNode = cc.Node.extend({
         this.node.addChild(cardNode);
         this.cardNodeList.push(cardNode);
         ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE).cardNodeMap.set(cardModel.id, cardNode);
+        ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE).cardNodeList.push(cardNode);
     },
 
     setPositionForCardCollection: function () {

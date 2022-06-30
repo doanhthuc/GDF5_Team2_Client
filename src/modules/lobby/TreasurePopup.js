@@ -1,5 +1,7 @@
 const TreasurePopup = cc.Node.extend({
     ctor: function () {
+        this.slotId = null;
+        this.action = null;
         this._super();
         this.init();
     },
@@ -13,10 +15,12 @@ const TreasurePopup = cc.Node.extend({
         this.treasureGoldQuantityTxt = this.treasurePopupNode.getChildByName('treasureGoldQuantityTxt');
         this.treasureCardQuantityTxt = this.treasurePopupNode.getChildByName('treasureCardQuantityTxt');
         this.primaryBtn = this.treasurePopupNode.getChildByName('primaryBtn');
-        this.primaryBtn.addTouchEventListener(this.onPrimartBtnClick.bind(this), this);
+        this.primaryBtn.addTouchEventListener(this.onPrimaryBtnClick.bind(this), this);
     },
 
-    setPopUpInfoFromTreasureType: function (treasureTypeId) {
+    setPopUpInfoFromTreasureType: function (slotId, action, treasureTypeId) {
+        this.slotId = slotId;
+        this.action = action;
         let treasureReward = JsonReader.getTreasureConfig().treasures[treasureTypeId].rewards[0];
         this.treasureGoldQuantityTxt.setString(treasureReward.minGold + " - " + treasureReward.maxGold);
         this.treasureCardQuantityTxt.setString(treasureReward.minFragment + " - " + treasureReward.maxFragment);
@@ -28,9 +32,21 @@ const TreasurePopup = cc.Node.extend({
         }
     },
 
-    onPrimartBtnClick: function (sender, type) {
+    onPrimaryBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            cc.log("primary click")
+            switch (this.action) {
+                case ChestConst.ACTION.OPEN:
+                    contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).openChest(this.slotId);
+                    break;
+                case ChestConst.ACTION.SPEED_UP:
+                    contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).speedUpChest(this.slotId);
+                    break;
+                case ChestConst.ACTION.CLAIM:
+                    contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).claimChest(this.slotId);
+                    break;
+                default:
+                    break;
+            }
             this.setVisible(false);
         }
     }

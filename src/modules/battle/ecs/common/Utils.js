@@ -10,12 +10,25 @@ Utils.tile2Pixel = function (x, y) {
     // |
     // |-------->x
     // return center of tile pixel
-    let paddingX = (GameConfig.SCREEN_WIDTH - 7 * GameConfig.TILE_WIDTH) / 2;
-    let paddingY = 200;
-    let xx = x * GameConfig.TILE_WIDTH + paddingX + GameConfig.TILE_WIDTH / 2;
-    let yy = y * GameConfig.TILE_HEIGH + paddingY + GameConfig.TILE_HEIGH / 2;
+
+    // center of map y = 4
+    let centerY = (cc.winSize.height - 200) / 2 + 200 - (50 + GameConfig.TILE_HEIGH / 2);
+    let startX = (cc.winSize.width - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH) / 2 + GameConfig.TILE_WIDTH / 2;
+
+    let yy = centerY - (GameConfig.MAP_HEIGH - 1 - y) * GameConfig.TILE_HEIGH;
+    let xx = startX + GameConfig.TILE_WIDTH * x;
     return {x: xx, y: yy};
 };
+
+Utils.pixel2Tile = function (xx, yy) {
+    let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
+    let x = Math.floor((xx - paddingX) / GameConfig.TILE_WIDTH);
+
+    let paddingY = (cc.winSize.height - 200) / 2 + 200 - (50 + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH);
+    let y = Math.floor((yy - paddingY) / GameConfig.TILE_HEIGH);
+
+    return {x, y};
+}
 
 Utils.tileArray2PixelArray = function (positionArr) {
     let result = [];
@@ -23,15 +36,6 @@ Utils.tileArray2PixelArray = function (positionArr) {
         result.push(Utils.tile2Pixel(pos.x, pos.y));
     }
     return result;
-}
-
-Utils.pixel2Tile = function (xx, yy) {
-    let paddingX = (GameConfig.SCREEN_WIDTH - 7 * GameConfig.TILE_WIDTH) / 2;
-    // TODO: hardcode, get height of deck card
-    let paddingY = 200;
-    let x = Math.floor((xx - paddingX) / GameConfig.TILE_WIDTH);
-    let y = Math.floor((yy - paddingY) / GameConfig.TILE_HEIGH);
-    return {x, y};
 }
 
 Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
@@ -48,10 +52,20 @@ Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     return direction1 + direction2;
 };
 
-Utils._incrementId = 0;
-Utils.genIncrementId = function () {
-    return Utils._incrementId++;
-}
+Utils.UUID = (function () {
+    let _instanceID = 0;
+    let _componentTypeID = 0;
+
+    return {
+        genComponentTypeID: function () {
+            return ++_componentTypeID;
+        },
+
+        genInstanceID: function () {
+            return ++_instanceID;
+        }
+    }
+})();
 
 Utils.calculateVelocityVector = function (startPos, targetPos, speed) {
     let Xa = startPos.x, Ya = startPos.y, Xb = targetPos.x, Yb = targetPos.y;

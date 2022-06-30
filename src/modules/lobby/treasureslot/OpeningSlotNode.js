@@ -28,7 +28,7 @@ const OpeningSlotNode = cc.Node.extend({
 
     onSlotClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
         }
     },
 })

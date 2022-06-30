@@ -15,5 +15,12 @@ const TreasureSlotResources = {
     SLOT_START_MARGIN: 8,
     CENTER_SCENE_MARGIN_TOP: -342,
     SLOT_NUMBER: 4,
+    EMPTY_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_empty.png',
+    OCCUPIED_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_empty.png',
+    OPENING_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_opening.png',
+    FINISHED_SLOT_BACKGROUND: 'textures/lobby/lobby_home_treasure_finished.png',
+    OPEN_TREASURE_FX_JSON: 'textures/lobby/treasure/fx/fx_chest_lv1.json',
+    OPEN_TREASURE_FX_ATLAS: 'textures/lobby/treasure/fx/fx_chest_lv1.atlas',
+    OPEN_TREASURE_POPUP: 'ui/lobby/openTreasurePopup.json'
 }
 

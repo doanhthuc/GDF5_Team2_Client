@@ -101,5 +101,9 @@ const CardModel = cc.Class.extend({
         this.accumulated = accumulated;
         this.setCardRankByLevel(this.level);
         this.setTypeOfCard(this.id);
+    },
+
+    updateCardModelAccumulated: function (accumulated) {
+        this.accumulated += accumulated;
     }
 });

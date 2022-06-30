@@ -43,8 +43,16 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.ZERO_ENERGY_PLAYER_HOUSE, function (data) {
         GameConfig.gameLayer.stopGame();
     })
+    .addEventHandler(EventType.END_ALL_WAVE, function (data) {
+        // GameConfig.gameLayer.stopGame();
+        GameConfig.gameLayer.uiLayer.stopTimer();
+    })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let map = GameConfig.gameLayer.mapLayer.mapMatrix;
+        if (GameConfig.MAP_HEIGH-1-data.pos.y < 0 || GameConfig.MAP_HEIGH-1-data.pos.y >= GameConfig.MAP_HEIGH
+            || data.pos.x < 0 || data.pos.x >= GameConfig.MAP_WIDTH) {
+            return;
+        }
         map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 1;
         let paths = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
 
@@ -72,8 +80,6 @@ EventDispatcher.getInstance()
             let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
             if (positionComponent) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y);
-                cc.log("===")
-                cc.log("x = " + tilePos.x + ", y = " + tilePos.y);
                 let path = paths[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
                 if (path) {
                     if (path.length > 0) {
