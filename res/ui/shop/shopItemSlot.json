@@ -51,101 +51,52 @@
             "TopMargin": -101.0,
             "BottomMargin": -101.0,
             "Tag": 81,
-            "Children": [
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/shop/costButton.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 78.5,
-                  "Y": 22.22
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PositionPercentXEnabled": true,
-                "PositionPercentYEnabled": true,
-                "PrePosition": {
-                  "X": 0.5,
-                  "Y": 0.11
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 78.5,
-                "RightMargin": 78.5,
-                "TopMargin": 179.78,
-                "BottomMargin": 22.22,
-                "Tag": 140,
-                "ActionTag": -1401908763,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "shopItemBtn",
-                "ctype": "ProjectNodeObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ui/shop/shopCardItem.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 78.5,
-                  "Y": 121.2
-                },
-                "Scale": {
-                  "ScaleX": 0.6,
-                  "ScaleY": 0.6
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PositionPercentXEnabled": true,
-                "PositionPercentYEnabled": true,
-                "PrePosition": {
-                  "X": 0.5,
-                  "Y": 0.6
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 78.5,
-                "RightMargin": 78.5,
-                "TopMargin": 80.8,
-                "BottomMargin": 121.2,
-                "Tag": 196,
-                "ActionTag": -1538797329,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "shopItemNode",
-                "ctype": "ProjectNodeObjectData"
-              }
-            ],
             "ActionTag": 1098910356,
             "Size": {
               "X": 157.0,
               "Y": 202.0
             },
-            "Name": "shopItemBackgroundImg",
+            "Name": "background",
             "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/shop/costButton.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": -73.9995
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": 73.9995,
+            "BottomMargin": -73.9995,
+            "Tag": 157,
+            "ActionTag": 692417193,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "buy_btn",
+            "ctype": "ProjectNodeObjectData"
           }
         ],
         "Size": {
@@ -157,8 +108,7 @@
       },
       "UsedResources": [
         "../../textures/lobby/lobby_shop_item_background.png",
-        "costButton.json",
-        "shopCardItem.json"
+        "costButton.json"
       ],
       "ctype": "GameFileData"
     }
