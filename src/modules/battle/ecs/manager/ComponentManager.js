@@ -1,50 +1,44 @@
 let ComponentManager = cc.Class.extend({
     name: "ComponentManager",
-    /*
-    * {
-    *   typeIDA: {id1: component1, id2: component2},
-    *   typeIDB: {},
-    *   ...
-    * }
-    * */
+
     ctor: function () {
-        this.components = {}
+        this._storeInstance = new Map();
+        this._storeCls = new Map();
     },
 
-    getComponent: function (componentID) {
-        return this.components[componentID];
+    registerClass: function (cls) {
+        this._storeCls.set(cls.typeID, cls);
     },
 
-    getActiveComponent: function (...componentTypeIDs) {
-        // only get active entity
-        let entityList = [];
-        for (let id of Object.keys(this.components)) {
-            if (this.components[id].getActive() && this.components[id].hasAllComponent(...componentTypeIDs)) {
-                entityList.push(this.components[id]);
-            }
+    getClass: function (typeID) {
+        if (this._storeCls.has(typeID)) {
+            throw new Error("Component Class with typeID = " + typeID + " doesn't exist");
         }
-        return entityList;
     },
 
-    addComponent: function (component) {
-        if (!this.components[component.typeID]) {
-            this.components[component.typeID] = {};
+    add: function (component) {
+        if (this._storeInstance.has(component.id)) {
+            throw new Error("Component with typeID = " + component.typeID + ", id = " + component.id + " exists.");
         }
-        this.components[component.typeID][component.id] = component;
+
+        this._storeInstance.set(component.id, component);
     },
 
-    removeComponent: function (component) {
-        if (this.components[component.typeID] && this.components[component.typeID].length > 0) {
+    findByInstanceId: function (instanceId) {
+        this._storeInstance.get(instanceId);
+    },
 
-        }
-        delete this.components[component.typeID][component.id];
+    remove: function (component) {
+        this._storeInstance.delete(component.id);
     },
 });
 
-// let _entityManager = _entityManager || null;
-// EntityManager.getInstance = function () {
-//     if (_entityManager === null) {
-//         _entityManager = new EntityManager();
-//     }
-//     return _entityManager;
-// };
+ComponentManager.getInstance = (function () {
+    let _instance = null;
+    return function () {
+        if (_instance === null) {
+            _instance = new ComponentManager();
+        }
+        return _instance;
+    }
+})();

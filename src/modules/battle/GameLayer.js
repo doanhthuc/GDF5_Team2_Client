@@ -18,7 +18,6 @@ let GameLayer = cc.Layer.extend({
             return this._entityManager;
         }.bind(this);
 
-
         // create system
         this.movementSystem = new MovementSystem();
         this.renderSystem = new RenderSystem();
@@ -104,5 +103,6 @@ let GameLayer = cc.Layer.extend({
 
         this.addChild(new BattleResultLayer("lose"), 2);
         delete this._entityManager;
+        delete ComponentManager.getInstance();
     },
 });

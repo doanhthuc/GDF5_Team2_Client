@@ -80,8 +80,6 @@ EventDispatcher.getInstance()
             let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
             if (positionComponent) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y);
-                cc.log("===")
-                cc.log("x = " + tilePos.x + ", y = " + tilePos.y);
                 let path = paths[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
                 if (path) {
                     if (path.length > 0) {
