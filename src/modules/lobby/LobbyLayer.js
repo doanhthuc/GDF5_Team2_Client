@@ -25,8 +25,9 @@ const lobbyLayer = cc.Node.extend({
     setTreasureSlotNodeList: function (treasureSlotList) {
         for (let i = 0; i < treasureSlotList.length; i++) {
             let treasure = treasureSlotList[i];
-            let treasureSlotNode = new TreasureSlot();
-            treasureSlotNode.setSlotVisibleByState(treasure.state);
+            let treasureSlotNode = new TreasureSlot(i);
+            // treasureSlotNode.setSlotVisibleByState(treasure.state);
+            treasureSlotNode.setStateOfSlot(treasure.state, treasure.claimTime);
             this.treasureSlotNodeList.push(treasureSlotNode);
             this.lobbyNode.addChild(treasureSlotNode);
         }
@@ -37,12 +38,11 @@ const lobbyLayer = cc.Node.extend({
     setPositionForTreasureSlot: function () {
         let startX = -cc.winSize.width / 2 + Math.ceil(TreasureSlotResources.BACKGROUND_IMG_WIDTH / 2) + TreasureSlotResources.SLOT_START_MARGIN;
         for (let i = 0; i < TreasureSlotResources.SLOT_NUMBER; i++) {
-            let treasure = new TreasureSlot();
-            this.lobbyNode.addChild(treasure);
-            this.treasureSlotList.push(treasure);
-            treasure.setNodeByState(TreasureSlotResources.STATE.FINISHED);
-            treasure.setPosition(startX, TreasureSlotResources.CENTER_SCENE_MARGIN_TOP);
-            startX += treasure.backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
+            let treasureSlotNode = this.treasureSlotNodeList[i];
+            // treasure.setNodeByState(TreasureSlotResources.STATE.FINISHED);
+            treasureSlotNode.setPosition(startX, TreasureSlotResources.CENTER_SCENE_MARGIN_TOP);
+            // startX += treasureSlotNode.slotNodeMap.get(treasureSlotNode.state).backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
+            startX += treasureSlotNode.backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
         }
     },
 
@@ -60,4 +60,16 @@ const lobbyLayer = cc.Node.extend({
     setUserTrophy: function (trophy) {
         this.userTrophyTxt.setString(trophy);
     },
+
+    onUnlockChestSuccess: function (data) {
+        this.treasureSlotNodeList[data.lobbyChestid].setStateOfSlot(data.state, data.claimTime);
+    },
+
+    onClaimChestSuccess: function (data) {
+        this.treasureSlotNodeList[data.lobbyChestid].setStateOfSlot(data.state);
+    },
+
+    onSpeedUpChestSuccess: function (data) {
+        this.treasureSlotNodeList[data.lobbyChestid].setStateOfSlot(data.state);
+    }
 })

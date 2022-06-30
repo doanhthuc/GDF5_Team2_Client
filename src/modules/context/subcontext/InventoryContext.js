@@ -53,7 +53,6 @@ const InventoryContext = cc.Class.extend({
             let card = this.cardCollectionList[index];
             card.cardLevel += 1;
             card.amount += data.fragmentChange;
-            contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold += data.goldChange;
 
             this.cardCollectionList[index] = card;
             ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE)
@@ -62,9 +61,19 @@ const InventoryContext = cc.Class.extend({
 
             contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).updateUserGold(data.goldChange);
 
-            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL)
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL)
                 .updateUIByLevelAndAccumulatedCard(card.cardLevel, card.amount);
         }
-    }
+    },
 
+
+    getCardById: function (cardId) {
+        for (let card of this.cardCollectionList) {
+            cc.log(JSON.stringify(card))
+            if (card.cardType === cardId) {
+                return card;
+            }
+        }
+        return null;
+    }
 });

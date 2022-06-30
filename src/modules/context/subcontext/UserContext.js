@@ -53,6 +53,7 @@ const UserContext = cc.Class.extend({
 
     updateUserGem: function (gem) {
         this.user.gem += gem;
+        ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE).setUserGem(this.user.gem);
     },
 
     updateUserInfoUI: function () {

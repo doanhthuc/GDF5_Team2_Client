@@ -20,8 +20,8 @@ const ShopTreasureSlot = cc.Node.extend({
 
     onBuyBtnClick: function(sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            let treasurePopup = this.clientUIManager.getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
-            this.clientUIManager.showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
+            let treasurePopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
         }
     }
 
