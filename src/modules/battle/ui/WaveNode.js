@@ -17,12 +17,11 @@ let WaveNode = cc.Node.extend({
 
     increaseWave: function () {
         this.currentWave++;
+        this._updateWave();
 
-        if (this.currentWave > this.maxWave) {
+        if (this.currentWave >= this.maxWave) {
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.END_ALL_WAVE)  ;
-        } else {
-            this._updateWave();
         }
     },
 

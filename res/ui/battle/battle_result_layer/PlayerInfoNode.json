@@ -1,0 +1,474 @@
+{
+  "ID": "f5e119c0-14d9-4de7-b7fb-960e1d28368d",
+  "Version": "2.3.4",
+  "Name": "PlayerInfoNode",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 173,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/battle_result/battle_result_avatar_border_loser.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 44,
+            "Scale9OriginY": 48,
+            "Scale9Width": 47,
+            "Scale9Height": 50,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -67.5,
+            "RightMargin": -67.5,
+            "TopMargin": -73.0,
+            "BottomMargin": -73.0,
+            "Tag": 174,
+            "ActionTag": -2123328397,
+            "Size": {
+              "X": 135.0,
+              "Y": 146.0
+            },
+            "Name": "avatar_border",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "HOVANVYDUT",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
+            "OutlineColor": {
+              "R": 6,
+              "G": 0,
+              "B": 0
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 2.6103,
+              "Y": 199.787
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "G": 191,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -95.3897,
+            "RightMargin": -100.6103,
+            "TopMargin": -214.287,
+            "BottomMargin": 185.287,
+            "Tag": 175,
+            "ActionTag": -1166058560,
+            "Size": {
+              "X": 196.0,
+              "Y": 29.0
+            },
+            "Name": "player_name",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/battle_result/battle_result_health_box.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 28,
+            "Scale9OriginY": 11,
+            "Scale9Width": 29,
+            "Scale9Height": 13,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -113.07
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -67.5,
+            "RightMargin": -67.5,
+            "TopMargin": 95.57,
+            "BottomMargin": -130.57,
+            "Tag": 177,
+            "ActionTag": -1937478179,
+            "Size": {
+              "X": 135.0,
+              "Y": 35.0
+            },
+            "Name": "energy_background",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "5",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 6.0092,
+              "Y": -111.2163
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -3.4908,
+            "RightMargin": -15.5092,
+            "TopMargin": 97.7163,
+            "BottomMargin": -124.7163,
+            "Tag": 179,
+            "ActionTag": -231007456,
+            "Size": {
+              "X": 19.0,
+              "Y": 27.0
+            },
+            "Name": "energy_txt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_icon_house.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 14,
+            "Scale9OriginY": 19,
+            "Scale9Width": 15,
+            "Scale9Height": 21,
+            "AnchorPoint": {
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -73.4316,
+              "Y": -108.1041
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -73.4316,
+            "RightMargin": 30.4316,
+            "TopMargin": 78.6041,
+            "BottomMargin": -137.6041,
+            "Tag": 178,
+            "ActionTag": 1293907804,
+            "Size": {
+              "X": 43.0,
+              "Y": 59.0
+            },
+            "Name": "icon_energy",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/battle_result/battle_result_health_box.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 28,
+            "Scale9OriginY": 11,
+            "Scale9Width": 29,
+            "Scale9Height": 13,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 1.6692,
+              "Y": 131.9245
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -65.8308,
+            "RightMargin": -69.1692,
+            "TopMargin": -149.4245,
+            "BottomMargin": 114.4245,
+            "Tag": 206,
+            "ActionTag": 191428306,
+            "Size": {
+              "X": 135.0,
+              "Y": 35.0
+            },
+            "Name": "trophy_background",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "5",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 7.6785,
+              "Y": 133.7773
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -1.8215,
+            "RightMargin": -17.1785,
+            "TopMargin": -147.2773,
+            "BottomMargin": 120.2773,
+            "Tag": 207,
+            "ActionTag": -1549784901,
+            "Size": {
+              "X": 19.0,
+              "Y": 27.0
+            },
+            "Name": "trophy_txt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_icon_trophy.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 14,
+            "Scale9OriginY": 19,
+            "Scale9Width": 80,
+            "Scale9Height": 67,
+            "AnchorPoint": {
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -89.7544,
+              "Y": 136.8918
+            },
+            "Scale": {
+              "ScaleX": 0.4136,
+              "ScaleY": 0.4136
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -89.7544,
+            "RightMargin": -18.2456,
+            "TopMargin": -189.3918,
+            "BottomMargin": 84.3918,
+            "Tag": 208,
+            "ActionTag": -590228808,
+            "Size": {
+              "X": 108.0,
+              "Y": 105.0
+            },
+            "Name": "icon_trophy",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_avatar.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.0009,
+              "Y": 2.9999
+            },
+            "Scale": {
+              "ScaleX": 2.9448,
+              "ScaleY": 2.9448
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -18.5009,
+            "RightMargin": -18.4991,
+            "TopMargin": -21.4999,
+            "BottomMargin": -15.5001,
+            "Tag": 242,
+            "ActionTag": 784994913,
+            "Size": {
+              "X": 37.0,
+              "Y": 37.0
+            },
+            "Name": "avatar",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../textures/battle_result/battle_result_avatar_border_loser.png",
+        "../../../textures/battle_result/battle_result_health_box.png",
+        "../../../textures/common/common_avatar.png",
+        "../../../textures/common/common_icon_house.png",
+        "../../../textures/common/common_icon_trophy.png",
+        "../../../textures/font/SVN-Supercell Magic.ttf"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

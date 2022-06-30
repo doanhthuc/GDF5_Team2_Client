@@ -26,11 +26,11 @@
             },
             "AnchorPoint": {
               "ScaleX": 0.5,
-              "ScaleY": 0.5
+              "ScaleY": 1.0
             },
             "Position": {
-              "X": 0.0,
-              "Y": 0.0
+              "X": -0.0001,
+              "Y": 143.5001
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -46,10 +46,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -304.0,
-            "RightMargin": -304.0,
-            "TopMargin": -139.5,
-            "BottomMargin": -139.5,
+            "LeftMargin": -304.0001,
+            "RightMargin": -303.9999,
+            "TopMargin": -143.5001,
+            "BottomMargin": -135.4999,
             "Tag": 217,
             "ActionTag": -531045196,
             "Size": {
@@ -101,7 +101,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/shop/shopCategory.json",
+              "Path": "ui/shop/ShopSectionTitleNode.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -109,8 +109,8 @@
             "InnerActionSpeed": 1.0,
             "AnchorPoint": {},
             "Position": {
-              "X": -0.0002,
-              "Y": 164.9991
+              "X": 1.0001,
+              "Y": 161.0
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -126,17 +126,17 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -0.0002,
-            "RightMargin": 0.0002,
-            "TopMargin": -164.9991,
-            "BottomMargin": 164.9991,
-            "Tag": 173,
-            "ActionTag": 191586194,
+            "LeftMargin": 1.0001,
+            "RightMargin": -1.0001,
+            "TopMargin": -161.0,
+            "BottomMargin": 161.0,
+            "Tag": 781,
+            "ActionTag": -1128120966,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "shopCategoryNode",
+            "Name": "ShopSectionTitleNode",
             "ctype": "ProjectNodeObjectData"
           }
         ],
@@ -150,7 +150,7 @@
       "UsedResources": [
         "../../textures/lobby/lobby_shop_category.png",
         "refershShopNode.json",
-        "shopCategory.json"
+        "ShopSectionTitleNode.json"
       ],
       "ctype": "GameFileData"
     }

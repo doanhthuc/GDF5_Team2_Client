@@ -23,8 +23,8 @@
               "B": 70
             },
             "DisabledFileData": {
-              "Type": "Default",
-              "Path": "Default/Button_Disable.png",
+              "Type": "Normal",
+              "Path": "textures/common/common_btn_gray.png",
               "Plist": ""
             },
             "PressedFileData": {
@@ -97,6 +97,8 @@
               "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
             "OutlineColor": {
               "G": 0,
               "B": 0
@@ -113,8 +115,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 15.883,
-              "Y": 0.0
+              "X": 15.8557,
+              "Y": 2.3522
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -130,10 +132,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -14.117,
-            "RightMargin": -45.883,
-            "TopMargin": -13.5,
-            "BottomMargin": -13.5,
+            "LeftMargin": -14.1443,
+            "RightMargin": -45.8557,
+            "TopMargin": -15.8522,
+            "BottomMargin": -11.1478,
             "Tag": 136,
             "ActionTag": -429960077,
             "Size": {
@@ -158,7 +160,7 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": -29.499,
+              "X": -42.4985,
               "Y": 0.0
             },
             "Scale": {
@@ -175,8 +177,8 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -59.499,
-            "RightMargin": -0.501,
+            "LeftMargin": -72.4985,
+            "RightMargin": 12.4985,
             "TopMargin": -32.0,
             "BottomMargin": -32.0,
             "Tag": 137,
@@ -197,7 +199,7 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../Default/Button_Disable.png",
+        "../../textures/common/common_btn_gray.png",
         "../../textures/common/common_btn_orange.png",
         "../../textures/common/common_icon_gold_small.png",
         "../../textures/font/SVN-Supercell Magic.ttf"

@@ -7,6 +7,7 @@ const lobbyLayer = cc.Node.extend({
     },
 
     init: function () {
+        this.treasureSlotList = [];
         this.lobbyNode = ccs.load(res.LOBBY_NODE, '').node;
         this.addChild(this.lobbyNode);
         this.playerInfoHolder = this.lobbyNode.getChildByName('playerInfoHolder');
@@ -36,10 +37,12 @@ const lobbyLayer = cc.Node.extend({
     setPositionForTreasureSlot: function () {
         let startX = -cc.winSize.width / 2 + Math.ceil(TreasureSlotResources.BACKGROUND_IMG_WIDTH / 2) + TreasureSlotResources.SLOT_START_MARGIN;
         for (let i = 0; i < TreasureSlotResources.SLOT_NUMBER; i++) {
-            let treasureSlotNode = this.treasureSlotNodeList[i];
-            // treasure.setNodeByState(TreasureSlotResources.STATE.FINISHED);
-            treasureSlotNode.setPosition(startX, TreasureSlotResources.CENTER_SCENE_MARGIN_TOP);
-            startX += treasureSlotNode.slotNodeMap.get(treasureSlotNode.state).backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
+            let treasure = new TreasureSlot();
+            this.lobbyNode.addChild(treasure);
+            this.treasureSlotList.push(treasure);
+            treasure.setNodeByState(TreasureSlotResources.STATE.FINISHED);
+            treasure.setPosition(startX, TreasureSlotResources.CENTER_SCENE_MARGIN_TOP);
+            startX += treasure.backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
         }
     },
 
@@ -49,14 +52,8 @@ const lobbyLayer = cc.Node.extend({
 
     onBattleBtnClick: function (sender, type) {
         // cc.director.runScene(new cc.TransitionCrossFade(1.0, new GameLayer()));
-        var layer = new GameLayer();
-        layer.setName("screen");
-        var scene = new cc.Scene();
-        scene.addChild(layer);
-        let transitionTime = null;
-        if (!transitionTime) {
-            transitionTime = 1.2;
-        }
+        let scene = new MatchingScene();
+        let transitionTime = 1.2;
         cc.director.runScene(new cc.TransitionFade(transitionTime, scene));
     },
 
