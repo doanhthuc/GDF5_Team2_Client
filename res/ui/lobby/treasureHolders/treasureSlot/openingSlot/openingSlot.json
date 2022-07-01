@@ -196,12 +196,14 @@
           },
           {
             "FontSize": 20,
-            "LabelText": "4",
+            "LabelText": "1435",
             "FontResource": {
               "Type": "Normal",
               "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
             "OutlineColor": {
               "R": 0,
               "G": 0,
@@ -237,14 +239,14 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -23.6732,
-            "RightMargin": 1.6732,
+            "LeftMargin": -45.1732,
+            "RightMargin": -19.8268,
             "TopMargin": 46.4142,
             "BottomMargin": -75.4142,
             "Tag": 2028,
             "ActionTag": 1940256830,
             "Size": {
-              "X": 22.0,
+              "X": 65.0,
               "Y": 29.0
             },
             "Name": "skipGemTxt",

@@ -8,7 +8,7 @@ const CardWithQuantity = cc.Node.extend({
     },
 
     init: function () {
-        this.node = ccs.load('ui/shop/shopCardItem.json', '').node;
+        this.node = ccs.load('ui/lobby/cardWithQuantity.json', '').node;
         this.addChild(this.node);
         this.cardBorder = this.node.getChildByName('cardBorder');
         this.cardImg = this.cardBorder.getChildByName('cardImg');
