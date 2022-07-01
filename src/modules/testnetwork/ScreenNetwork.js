@@ -46,21 +46,23 @@ var ScreenNetwork = cc.Layer.extend({
     onFinishLogin: function () {
         fr.view(MainScreen);
         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
-        testnetwork.connector.sendGetUserLobbyChest();
-        testnetwork.connector.sendGetUserInventory();
-        testnetwork.connector.sendGetUserGoldShop();
+        // testnetwork.connector.sendGetUserLobbyChest();
+         //testnetwork.connector.sendGetUserInventory();
+        // testnetwork.connector.sendGetUserGoldShop();
         //testnetwork.connector.sendUpgradeCard(2);
         //testnetwork.connector.sendGetUserDailyShop();
         // testnetwork.connector.sendAddUserGem(100);
         // testnetwork.connector.sendAddUserGold(100);
-        //testnetwork.connector.sendBuyGoldShop(0);
-        //testnetwork.connector.sendBuyDailyShop(2);
-        // testnetwork.connector.sendUnlockLobbyChest(0);
+        // testnetwork.connector.sendBuyGoldShop(0);
+        // testnetwork.connector.sendBuyDailyShop(0);
+        //testnetwork.connector.sendUnlockLobbyChest(0);
         // testnetwork.connector.sendSpeedUpLobbyChest(1);
         // testnetwork.connector.sendClaimLobbyChest(2);
         // testnetwork.connector.sendCheatUserInfo(new UserInfoCheat(10000,2000,1000));
         // testnetwork.connector.sendCheatUserCard(new Card(2,5,200));
         // testnetwork.connector.sendCheatUserLobbyChest(new ChestInfoCheat(0, 1, 30 * 60 * 1000));
+        //testnetwork.connector.sendBuyDailyShop(2);
+        testnetwork.connector.sendGetBattleMap();
         cc.log("Finished login");
     }
 });

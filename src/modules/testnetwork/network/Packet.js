@@ -23,6 +23,8 @@ gv.CMD.UNLOCK_LOBBY_CHEST = 4002;
 gv.CMD.SPEEDUP_LOBBY_CHEST = 4003;
 gv.CMD.CLAIM_LOBBY_CHEST = 4004;
 
+gv.CMD.SEND_GET_BATTLE_MAP = 5001;
+
 gv.CMD.CHEAT_USER_INFO = 7001;
 gv.CMD.CHEAT_USER_CARD = 7002;
 gv.CMD.CHEAT_USER_LOBBY_CHEST = 7003;
@@ -308,6 +310,19 @@ CMDCheatUserLobbyChest = fr.OutPacket.extend(
         }
     }
 )
+CMDSendGetBattleMap = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.SEND_GET_BATTLE_MAP);
+        },
+        pack: function () {
+            this.packHeader();
+            this.updateSize();
+        }
+    }
+)
 
 /**
  * InPacket
@@ -383,6 +398,7 @@ testnetwork.packetMap[gv.CMD.BUY_GOLD_SHOP] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getShort();
+            this.itemID = this.getInt();
             this.goldChange = this.getInt();
             this.gemChange = this.getInt();
         }
@@ -392,11 +408,13 @@ testnetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend(
     {
         ctor: function () {
             this._super();
-            this.itemType = [];
-            this.itemQuantity = [];
+
         },
         readData: function () {
+            this.itemType = [];
+            this.itemQuantity = [];
             this.error = this.getShort();
+            this.itemID = this.getInt();
             this.goldChange = this.getInt();
             this.gemChange = this.getInt();
             this.itemAmount = this.getInt();
@@ -413,7 +431,7 @@ testnetwork.packetMap[gv.CMD.GET_USER_INVENTORY] = fr.InPacket.extend(
         ctor: function () {
             this._super();
             this.cardCollection = [];
-            this.battleDeckCard = []
+            this.battleDeckCard = [];
         },
         readData: function () {
             this.error = this.getShort();
@@ -548,11 +566,12 @@ testnetwork.packetMap[gv.CMD.GET_USER_GOLD_SHOP] = fr.InPacket.extend(
             this.error = this.getShort();
             this.size = this.getInt();
             for (i = 0; i < this.size; i++) {
+                itemID = this.getInt();
                 itemType = this.getInt();
                 itemQuantity = this.getInt();
                 itemPrice = this.getInt();
                 itemState = this.getInt();
-                this.goldShop.push(new ShopItem(itemType, itemQuantity, itemPrice, itemState));
+                this.goldShop.push(new ShopItem(itemID, itemType, itemQuantity, itemPrice, itemState));
             }
         }
     }
@@ -594,6 +613,32 @@ testnetwork.packetMap[gv.CMD.CHEAT_USER_LOBBY_CHEST] = fr.InPacket.extend(
             this.chestId = this.getInt();
             this.chestState = this.getInt();
             this.chestClaimTime = this.getLong();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.SEND_GET_BATTLE_MAP] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.mapW = this.getInt();
+            this.mapH = this.getInt();
+            this.btmap = new Array(this.mapW);
+            for(i=0;i<this.mapW;i++)
+                this.btmap[i]= new Array(this.mapH);
+            this.path= []
+            for (i = 0; i < this.mapW; i++)
+                for (j = 0; j < this.mapH; j++)
+                    this.btmap[i][j] = this.getInt();
+
+            this.pathSize = this.getInt();
+            for (i = 0; i < this.pathSize; i++) {
+                pathX = this.getInt();
+                pathY = this.getInt();
+                this.path.push({pathX, pathY})
+            }
         }
     }
 );

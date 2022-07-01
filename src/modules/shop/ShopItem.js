@@ -1,4 +1,5 @@
 var ShopItem= cc.Class.extend({
+    itemId:0,
     type:0,
     quantity:0,
     price:0,
@@ -6,14 +7,15 @@ var ShopItem= cc.Class.extend({
     ctor:function(){
 
     },
-    ctor:function(type,quantity,price,state)
+    ctor:function(id,type,quantity,price,state)
     {
+        this.itemID=id;
         this.type=type;
         this.quantity=quantity;
         this.price=price;
         this.state=state;
     },
     show:function(){
-        cc.log(this.type+" "+this.quantity+" "+this.price+" "+this.state);
+        cc.log(this.itemID+" "+this.type+" "+this.quantity+" "+this.price+" "+this.state);
     }
 })
