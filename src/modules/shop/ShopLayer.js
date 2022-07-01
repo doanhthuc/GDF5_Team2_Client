@@ -30,6 +30,7 @@ const ShopLayer = cc.Node.extend({
 
     closePopup: function () {
         PopupUIManager.getInstance().closeUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
+        PopupUIManager.getInstance().closeUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
     },
 
     renderDailySection: function (itemList) {
@@ -37,6 +38,6 @@ const ShopLayer = cc.Node.extend({
     },
 
     renderGoldSection: function (itemList) {
-        // this.goldSection.addDataForGoldSection(itemList);
+        this.goldSection.addDataForGoldSection(itemList);
     }
 });

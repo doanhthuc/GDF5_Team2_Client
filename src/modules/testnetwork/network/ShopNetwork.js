@@ -34,15 +34,21 @@ ShopNetwork.Connector = cc.Class.extend({
     _handleGetGoldShop: function (cmd, packet) {
         cc.log("@@@@@@@@@@@ Gold shop")
         cc.log(JSON.stringify(packet.goldShopItems));
-        shopContext.set
-        // shopContext.setDailyShopItemList(packet.dailyShopItem);
+        shopContext.setGoldItemList(packet.goldShopItems);
         cc.log("Call_handleGetUserDailyShop")
     },
 
     _handleBuyGoldShop: function (cmd, packet) {
-        userInfo.gold += packet.goldChange;
-        userInfo.gem += packet.gemChange;
-        userInfo.show();
+        if (packet.error === 0) {
+            cc.log("[ShopNetwork.js] response buy gold shop goldChange = " + packet.goldChange + ", gemChange = " + packet.gemChange);
+            let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
+            userContext.updateUserGem(packet.gemChange);
+            userContext.updateUserGold(packet.goldChange);
+            let shopLayer = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE);
+            shopLayer.closePopup();
+        } else {
+            cc.log("[ShopNetwork.js] error response buy gold shop");
+        }
     },
 
     _handleBuyDailyShop: function (cmd, packet) {
