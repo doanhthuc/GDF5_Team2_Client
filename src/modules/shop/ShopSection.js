@@ -1,6 +1,6 @@
 const ShopSection = cc.Node.extend({
     ctor: function (type) {
-        this.shopItemSlotList = [];
+        this.shopItemSlotList = new Map();
         this.type = type;
         this._super();
         this._setupUI();
@@ -30,7 +30,7 @@ const ShopSection = cc.Node.extend({
             let item;
             item = new ShopItemSlotNode(itemData.type, itemData.price, itemData.unit, itemData.quantity, itemData.state, itemData.id);
             item.setPosition(startX, startY);
-            this.shopItemSlotList.push(item);
+            this.shopItemSlotList.set(item.id, item);
             this.backgroundImg.addChild(item);
             startX += ShopResources.SHOP_ITEM_SLOT_WIDTH + ShopResources.SHOP_ITEM_SLOT_MARGIN_BETWEEN;
         }
@@ -39,11 +39,22 @@ const ShopSection = cc.Node.extend({
     addDataForGoldSection: function (itemList) {
         let startX = ShopResources.SHOP_ITEM_SLOT_START_X;
         let startY = ShopResources.SHOP_ITEM_SLOT_START_Y;
-        for (let i = 0; i < ShopResources.SHOP_ITEM_SLOT_PER_LINE; i++) {
+        for (let i = 0; i < 3; i++) {
             let shopGoldSlot = new ShopGoldSlot(i + 1);
             shopGoldSlot.setPosition(startX, startY);
             this.backgroundImg.addChild(shopGoldSlot);
             startX += ShopResources.SHOP_ITEM_SLOT_WIDTH + ShopResources.SHOP_ITEM_SLOT_MARGIN_BETWEEN;
         }
     },
+
+    getItemSlotById: function (id) {
+        return this.shopItemSlotList.get(id);
+    },
+
+    disableCardSlot: function (id) {
+        let card = this.getItemSlotById(id);
+        // FIXME: hardcode
+        let PURCHASED = 0;
+        card.setState(PURCHASED);
+    }
 });

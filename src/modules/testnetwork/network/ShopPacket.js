@@ -109,11 +109,11 @@ ShopNetwork.packetMap[gv.CMD.BUY_GOLD_SHOP] = fr.InPacket.extend({
 ShopNetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend({
     ctor: function () {
         this._super();
-        this.itemType = [];
-        this.itemQuantity = [];
     },
 
     readData: function () {
+        this.itemType = [];
+        this.itemQuantity = [];
         this.error = this.getShort();
         this.id = this.getInt();
         this.goldChange = this.getInt();

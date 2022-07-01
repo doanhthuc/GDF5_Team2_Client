@@ -10,6 +10,15 @@ const PopupUIManager = ClientUIManager.extend({
         }
     },
 
+    closeUI: function (uiName) {
+        cc.log('PopupUIManager.closeUI: ' + uiName);
+        let uiNode = this.getUI(uiName);
+        if (uiNode) {
+            // can add animation here
+            uiNode.setVisible(false);
+        }
+    },
+
     addUIToCurrentScene: function (uiName) {
         let uiNode = this.getUI(uiName);
         if (uiNode) {

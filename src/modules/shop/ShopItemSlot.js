@@ -73,12 +73,14 @@ const ShopItemSlotNode = cc.Node.extend({
 
     _onBuyBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
+            cc.log("[ShopItemSlot] Click on buy btn")
             let buyItemPopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
             buyItemPopup.setId(this.id);
             buyItemPopup.setTitle(this.slotName);
             buyItemPopup.setPrice(this.price);
             buyItemPopup.setImage(this.texture);
             buyItemPopup.setQuantity(this.quantity);
+            buyItemPopup.setType(this.type);
             PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
         }
     }

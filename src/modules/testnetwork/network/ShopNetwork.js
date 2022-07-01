@@ -34,6 +34,7 @@ ShopNetwork.Connector = cc.Class.extend({
     _handleGetGoldShop: function (cmd, packet) {
         cc.log("@@@@@@@@@@@ Gold shop")
         cc.log(JSON.stringify(packet.goldShopItems));
+        shopContext.set
         // shopContext.setDailyShopItemList(packet.dailyShopItem);
         cc.log("Call_handleGetUserDailyShop")
     },
@@ -45,17 +46,25 @@ ShopNetwork.Connector = cc.Class.extend({
     },
 
     _handleBuyDailyShop: function (cmd, packet) {
-        cc.log("BUY DAILY SHOP");
-        cc.log(packet.gemChange + " " + packet.goldChange);
-        let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
-        let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
+        if (packet.error === 0) {
+            cc.log("[ShopNetwork.js] Response Buy Daily Shop");
+            cc.log(JSON.stringify(packet));
+            cc.log(packet.gemChange + " " + packet.goldChange);
 
-        userContext.updateUserGold(packet.goldChange);
-        userContext.updateUserGem(packet.gemChange);
+            let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
+            let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
 
-        for (let i = 0; i < packet.itemAmount; i++) {
-            let card = inventoryContext.getCardById(packet.itemType[i]);
-            card.amount += packet.itemQuantity[i];
+            userContext.updateUserGold(packet.goldChange);
+            userContext.updateUserGem(packet.gemChange);
+            for (let i = 0; i < packet.itemAmount; i++) {
+                inventoryContext.updateCardAmount(packet.itemType[i], packet.itemQuantity[i]);
+            }
+
+            let shopLayer = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE);
+            shopLayer.disableCardItemInDailySection(packet.id);
+            shopLayer.closePopup();
+        } else {
+            cc.log("[ShopNetwork.js] error Buy Daily Shop");
         }
     },
 

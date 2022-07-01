@@ -5,6 +5,7 @@ let Context = cc.Class.extend({
 let ShopContext = Context.extend({
     ctor: function () {
         this._dailyShopItemList = [];
+        this._goldItemList = [];
     },
 
     setDailyShopItemList: function (itemList) {
@@ -12,4 +13,10 @@ let ShopContext = Context.extend({
         ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE)
             .renderDailySection(this._dailyShopItemList);
     },
+
+    setGoldItemList: function (itemList) {
+        this._goldItemList = itemList;
+        ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE)
+            .renderGoldSection(this._goldItemList);
+    }
 });

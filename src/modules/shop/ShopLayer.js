@@ -24,12 +24,19 @@ const ShopLayer = cc.Node.extend({
         this.shopSectionList.push(this.goldSection);
     },
 
+    disableCardItemInDailySection: function (cardId) {
+        this.dailySection.disableCardSlot(cardId);
+    },
+
+    closePopup: function () {
+        PopupUIManager.getInstance().closeUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
+    },
+
     renderDailySection: function (itemList) {
         this.dailySection.addDataForDailySection(itemList);
     },
 
     renderGoldSection: function (itemList) {
-        this.goldSection.addDataForGoldSection(itemList);
+        // this.goldSection.addDataForGoldSection(itemList);
     }
-
-})
+});

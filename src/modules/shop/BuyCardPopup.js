@@ -13,10 +13,29 @@ const BuyCardPopup = cc.Node.extend({
         this.buyBtn = this.popupNode.getChildByName("buy_btn");
         this.closeBtn.addTouchEventListener(this.onCloseClick.bind(this), this);
         this.buyBtn.getChildByName("backgroundBtn").addTouchEventListener(this.onBuyBtnClick.bind(this), this);
+
+        this.upgradeProgressNode = this.popupNode.getChildByName('progress');
+        this.progressBorderImg = this.upgradeProgressNode.getChildByName('progressBorderImg');
+        this.progressBackgroundImg = this.progressBorderImg.getChildByName('progressBackgroundImg');
+        this.accumulateTxt = this.progressBorderImg.getChildByName('accumulateTxt');
     },
 
     setId: function (id) {
         this.id = id;
+    },
+
+    setType: function (type) {
+        this.type = type;
+        let card = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT)
+            .getCardById(this.type);
+        let amount = 0;
+        if (card) {
+            amount = card.amount;
+        }
+        let percent = amount / JsonReader.getCardUpgradeConfig()[card.cardLevel + 1].fragments;
+        percent = percent > 1 ? 1 : percent;
+        this.progressBackgroundImg.setScaleX(percent);
+        this.accumulateTxt.setString(amount + '/' + JsonReader.getCardUpgradeConfig()[card.cardLevel + 1].fragments);
     },
 
     setTitle: function (title) {
@@ -48,6 +67,7 @@ const BuyCardPopup = cc.Node.extend({
 
     onBuyBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
+            cc.log("[BuyCardPopup.js] click on buy btn, card id = " + this.id);
             ShopNetwork.connector.sendBuyDailyShop(this.id)
         }
     },
