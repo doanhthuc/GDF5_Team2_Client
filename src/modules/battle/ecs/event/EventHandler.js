@@ -50,11 +50,14 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let map = GameConfig.battleData.getPlayerMap();
 
+        // FIXME: map
         if (GameConfig.MAP_HEIGH-1-data.pos.y < 0 || GameConfig.MAP_HEIGH-1-data.pos.y >= GameConfig.MAP_HEIGH
             || data.pos.x < 0 || data.pos.x >= GameConfig.MAP_WIDTH) {
             return;
         }
-        map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 1;
+
+        // put tower at x, y
+        map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 7;
         let paths = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
 
         cc.log("^^^^^^^^^")
@@ -103,4 +106,13 @@ EventDispatcher.getInstance()
                 }
             }
         }
+    })
+    .addEventHandler(EventType.FINISH_MATCHING, function (data) {
+        let layer = new GameLayer();
+        layer.setName("Screen");
+
+        let scene = new cc.Scene();
+        scene.addChild(layer);
+        cc.log("AAAAAAAAAAAAAAAAAAA")
+        cc.director.runScene(new cc.TransitionFade(1, scene));
     })

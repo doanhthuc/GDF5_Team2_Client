@@ -10,6 +10,7 @@ let BattleData = cc.Class.extend({
                 trophy: 30,
                 energyHouse: 6,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
+                path: null,
             },
             opponent: {
                 username: "OPPONENT333",
@@ -17,8 +18,17 @@ let BattleData = cc.Class.extend({
                 trophy: 20,
                 energyHouse: 4,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
+                path: null,
             }
         }
+
+        // this.dataInGame.player.map = [
+        //     [0, 5, 0, 0 ,0, 0, 0],
+        //     [0, 0, 0, 0 ,6, 0, 0],
+        //     [0, 0, 0, 0 ,0, 0, 0],
+        //     [0, 3, 0, 2 ,0, 1, 0],
+        //     [0, 0, 0, 0 ,0, 0, 0],
+        // ]
     },
 
     getTimer: function () {
@@ -71,8 +81,11 @@ let BattleData = cc.Class.extend({
     },
 
     getPlayerMap: function () {
-        this.dataInGame.player.map[0][1] = 1;
         return this.dataInGame.player.map;
+    },
+
+    setPlayerMap: function (map) {
+        return this.dataInGame.player.map = map;
     },
 
     getOpponentMap: function () {
@@ -80,7 +93,12 @@ let BattleData = cc.Class.extend({
     },
 
     getPlayerBestPath: function () {
-        return Utils.tileArray2PixelArray([{x: 0, y: GameConfig.MAP_HEIGH-1}, {x: 0, y: 2},
-            {x: 3, y: 2}, {x: 3, y: 1}, {x: 6, y: 0}]);
+        // return Utils.tileArray2PixelArray([{x: 0, y: GameConfig.MAP_HEIGH-1}, {x: 0, y: 2},
+        //     {x: 3, y: 2}, {x: 3, y: 1}, {x: 6, y: 0}]);
+        return this.dataInGame.player.path;
+    },
+
+    setPlayerBestPath: function (path) {
+        return this.dataInGame.player.path = Utils.tileArray2PixelArray(path);
     }
 });

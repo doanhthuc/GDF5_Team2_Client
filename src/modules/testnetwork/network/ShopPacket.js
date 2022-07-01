@@ -159,7 +159,7 @@ ShopNetwork.packetMap[gv.CMD.SEND_GET_BATTLE_MAP] = fr.InPacket.extend(
             for (let i = 0; i < this.pathSize; i++) {
                 let pathX = this.getInt();
                 let pathY = this.getInt();
-                this.path.push({pathX, pathY})
+                this.path.push({x: pathX, y: pathY})
             }
         }
     }

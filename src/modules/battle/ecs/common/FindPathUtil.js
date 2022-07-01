@@ -39,7 +39,8 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
             if (nextX < 0 || nextY < 0 || nextX >= map[0].length
                 || nextY >= map.length) continue;
             if (visited[nextY][nextX]) continue;
-            if (map[nextY][nextX] !== 0) continue;
+            // FIXME: map
+            if (map[nextY][nextX] !== 0 && map[nextY][nextX] !== 1 && map[nextY][nextX] !== 2 && map[nextY][nextX] !== 3) continue;
             neighbors.push({x: nextX, y: nextY});
             visited[nextY][nextX] = true;
         }
@@ -68,6 +69,7 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
     }
 
     let path = bfs(start, dest)
+    cc.log("Debug dest.x = " + dest.x + " dest.y = " + dest.y);
     if (!path[dest.y][dest.x]) {
         return null;
     }

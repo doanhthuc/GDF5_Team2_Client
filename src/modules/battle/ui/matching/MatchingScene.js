@@ -4,7 +4,14 @@ let MatchingScene = cc.Scene.extend({
         this._setupUI();
         this.count = 0;
         this.schedule(this._updateUI, 1);
-        this.scheduleOnce(this.onFinishMatching, 3);
+        // this.scheduleOnce(this.onFinishMatching, 3);
+
+        // call api
+        // get map data
+        GameConfig.matchingScene = this;
+        this.scheduleOnce(function () {
+            ShopNetwork.connector.sendGetBattleMap();
+        }, 3);
     },
 
     _setupUI: function () {
@@ -50,6 +57,8 @@ let MatchingScene = cc.Scene.extend({
         });
         cancelButtonNode.getChildByName("button").addTouchEventListener(this._backToLobby.bind(this));
         this.addChild(cancelButtonNode);
+
+
     },
 
     _updateUI: function (tick) {
@@ -64,18 +73,6 @@ let MatchingScene = cc.Scene.extend({
             str += ".";
         }
         return str;
-    },
-
-    onFinishMatching: function () {
-        let layer = new GameLayer();
-        layer.setName("Screen");
-
-        let scene = new cc.Scene();
-        scene.addChild(layer);
-
-        // get map data
-        ShopNetwork.connector.sendGetBattleMap();
-        cc.director.runScene(new cc.TransitionFade(1, scene));
     },
 
     _backToLobby: function () {

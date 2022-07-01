@@ -80,6 +80,19 @@ ShopNetwork.Connector = cc.Class.extend({
     _handleGetBattleMap: function (cmd, packet) {
         cc.log("[ShopNetwork.js] response get battle map");
         cc.log(JSON.stringify(packet))
+        GameConfig.battleData = new BattleData();
+        GameConfig.battleData.setPlayerMap(packet.btmap);
+        GameConfig.battleData.setPlayerBestPath(packet.path);
+        // GameConfig.battleData.setPlayerMap([
+        //     [0, 5, 0, 0 ,0, 0, 0],
+        //     [0, 0, 0, 0 ,6, 0, 0],
+        //     [0, 0, 0, 0 ,0, 0, 0],
+        //     [0, 3, 0, 2 ,0, 1, 0],
+        //     [0, 0, 0, 0 ,0, 0, 0],
+        // ]);
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.FINISH_MATCHING);
+        // GameConfig.matchingScene.onFinishMatching();
     },
 
     sendBuyGoldShop: function (itemId) {

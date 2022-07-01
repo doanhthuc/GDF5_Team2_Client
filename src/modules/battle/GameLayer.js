@@ -5,8 +5,7 @@ let GameLayer = cc.Layer.extend({
         GameConfig.gameLayer = this;
 
         // data game
-        this.battleData = new BattleData();
-        GameConfig.battleData = this.battleData;
+        this.battleData = GameConfig.battleData;
 
         // create UI
         this.uiLayer = new BattleUILayer(this.battleData);
@@ -59,6 +58,14 @@ let GameLayer = cc.Layer.extend({
     putTowerAt: function (type, pos) {
         // pos is tile coordinator
         if (pos.x < 0 || pos.x >= GameConfig.MAP_WIDTH || pos.y < 0 || pos.y >= GameConfig.MAP_HEIGH) {
+            return;
+        }
+
+        // FIXME: map
+        let xMap = GameConfig.MAP_HEIGH-1-pos.y;
+        let yMap = pos.x;
+        let map = this.battleData.getPlayerMap();
+        if (map[xMap][yMap] === 6 || map[xMap][yMap] === 5) {
             return;
         }
 
