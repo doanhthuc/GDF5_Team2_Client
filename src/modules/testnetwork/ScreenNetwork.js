@@ -153,12 +153,13 @@ var ScreenNetwork = cc.Layer.extend({
         // testnetwork.connector.sendAddUserGold(100);
         //testnetwork.connector.sendBuyGoldShop(0);
         //testnetwork.connector.sendBuyDailyShop(2);
-        // testnetwork.connector.sendUnlockLobbyChest(0);
-        // testnetwork.connector.sendSpeedUpLobbyChest(1);
+        //testnetwork.connector.sendUnlockLobbyChest(0);
+        //testnetwork.connector.sendSpeedUpLobbyChest(1);
         // testnetwork.connector.sendClaimLobbyChest(2);
-        // testnetwork.connector.sendCheatUserInfo(new UserInfoCheat(10000,2000,1000));
-        // testnetwork.connector.sendCheatUserCard(new Card(2,5,200));
-        // testnetwork.connector.sendCheatUserLobbyChest(new ChestInfoCheat(0, 1, 30 * 60 * 1000));
+        // let userContext = new UserContext();
+        // contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
+        // userContext.updateUserInfoUI();
+        testnetwork.connector.sendGetUserDailyShop();
         cc.log("Finished login");
     },
     updateMove: function (isCanMove, x, y) {

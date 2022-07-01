@@ -1,7 +1,7 @@
 {
-  "ID": "2e85bc6b-95dc-4231-bb47-69a4bb6bff33",
+  "ID": "a3939638-a669-48fd-b4ed-d50d6b6d0274",
   "Version": "2.3.4",
-  "Name": "shopCategory",
+  "Name": "ShopSectionTitleNode",
   "Content": {
     "Content": {
       "Animation": {
@@ -12,7 +12,7 @@
       },
       "AnimationList": [],
       "ObjectData": {
-        "Tag": 169,
+        "Tag": 774,
         "Children": [
           {
             "FileData": {
@@ -20,10 +20,10 @@
               "Path": "textures/lobby/lobby_shop_banner.png",
               "Plist": ""
             },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
+            "Scale9OriginX": 200,
+            "Scale9OriginY": 33,
+            "Scale9Width": 208,
+            "Scale9Height": 36,
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
@@ -50,7 +50,7 @@
             "RightMargin": -304.0,
             "TopMargin": -51.0,
             "BottomMargin": -51.0,
-            "Tag": 171,
+            "Tag": 775,
             "Children": [
               {
                 "FileData": {
@@ -68,7 +68,7 @@
                 },
                 "Position": {
                   "X": 304.0,
-                  "Y": 50.0
+                  "Y": 51.0
                 },
                 "Scale": {
                   "ScaleX": 1.0,
@@ -76,21 +76,20 @@
                 },
                 "CColor": {},
                 "IconVisible": false,
-                "PositionPercentXEnabled": true,
                 "PrePosition": {
                   "X": 0.5,
-                  "Y": 0.4902
-                },
-                "PreSize": {
-                  "X": 0.6842,
                   "Y": 0.5
                 },
-                "LeftMargin": 96.0,
-                "RightMargin": 96.0,
-                "TopMargin": 26.5,
-                "BottomMargin": 24.5,
-                "Tag": 172,
-                "ActionTag": 1103964567,
+                "PreSize": {
+                  "X": 0.0757,
+                  "Y": 0.451
+                },
+                "LeftMargin": 281.0,
+                "RightMargin": 281.0,
+                "TopMargin": 28.0,
+                "BottomMargin": 28.0,
+                "Tag": 793,
+                "ActionTag": 1252984777,
                 "Size": {
                   "X": 416.0,
                   "Y": 51.0
@@ -99,13 +98,13 @@
                 "ctype": "SpriteObjectData"
               }
             ],
-            "ActionTag": 1185924230,
+            "ActionTag": 391135438,
             "Size": {
               "X": 608.0,
               "Y": 102.0
             },
             "Name": "categoryBackgroundImg",
-            "ctype": "SpriteObjectData"
+            "ctype": "ImageViewObjectData"
           }
         ],
         "Size": {

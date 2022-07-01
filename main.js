@@ -26,11 +26,13 @@ cc.game.onStart = function () {
 
         // The game will be resized when browser size change
         cc.view.resizeWithBrowserSize(true);
+
         //socket
         gv.gameClient = new GameClient();
         gv.poolObjects = new PoolObject();
         //modules
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
+        ShopNetwork.connector = new ShopNetwork.Connector(gv.gameClient);
 
         // fr.view(MainScreen);
         fr.view(ScreenNetwork);

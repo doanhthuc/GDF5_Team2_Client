@@ -7,6 +7,7 @@ const lobbyLayer = cc.Node.extend({
     },
 
     init: function () {
+        this.treasureSlotList = [];
         this.lobbyNode = ccs.load(res.LOBBY_NODE, '').node;
         this.addChild(this.lobbyNode);
         this.playerInfoHolder = this.lobbyNode.getChildByName('playerInfoHolder');
@@ -17,8 +18,15 @@ const lobbyLayer = cc.Node.extend({
         this.userTrophyTxt = this.playerInfoHolder.getChildByName('userTrophyTxt');
 
         this.lobbyNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+        this.playerInfoHolderBackgroundImg = this.playerInfoHolder.getChildByName('Image_1');
 
 
+    },
+
+    setPositionForPlayerInfo: function (headerHeight) {
+        let playerInfoHolderHeight = this.playerInfoHolderBackgroundImg.getSize().height;
+
+        this.playerInfoHolder.setPositionY(cc.winSize.height / 2 - playerInfoHolderHeight / 2 - headerHeight);
     },
 
     setTreasureSlotNodeList: function (treasureSlotList) {
@@ -51,14 +59,8 @@ const lobbyLayer = cc.Node.extend({
 
     onBattleBtnClick: function (sender, type) {
         // cc.director.runScene(new cc.TransitionCrossFade(1.0, new GameLayer()));
-        var layer = new GameLayer();
-        layer.setName("screen");
-        var scene = new cc.Scene();
-        scene.addChild(layer);
-        let transitionTime = null;
-        if (!transitionTime) {
-            transitionTime = 1.2;
-        }
+        let scene = new MatchingScene();
+        let transitionTime = 1.2;
         cc.director.runScene(new cc.TransitionFade(transitionTime, scene));
     },
 

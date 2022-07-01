@@ -25,5 +25,4 @@ const ShopTreasureSlot = cc.Node.extend({
         }
     }
 
-
 })

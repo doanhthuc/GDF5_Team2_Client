@@ -8,7 +8,7 @@ testnetwork.Connector = cc.Class.extend({
     ctor: function (gameClient) {
         this.gameClient = gameClient;
         gameClient.packetFactory.addPacketMap(testnetwork.packetMap);
-        gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
+            gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
     },
     onReceivedPacket: function (cmd, packet) {
         cc.log("onReceivedPacket:", cmd);
@@ -52,12 +52,6 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.UPGRADE_CARD:
                 cc.log(packet.goldChange + " " + packet.cardType + " " + packet.fragmentChange);
                 contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).onUpgradeCardSuccess(packet);
-                break;
-            case gv.CMD.GET_USER_DAILY_SHOP:
-                cc.log(JSON.stringify(packet))
-                userDailyShop.getItemList(packet);
-                cc.log("GetDailyShop");
-                userDailyShop.show();
                 break;
             case gv.CMD.GET_USER_LOBBY:
                 let treasureContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT);
