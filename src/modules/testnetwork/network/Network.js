@@ -59,6 +59,9 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("GetDailyShop");
                 userDailyShop.show();
                 break;
+            case gv.CMD.GET_USER_GOLD_SHOP:
+                cc.log(JSON.stringify(packet))
+                break;
             case gv.CMD.GET_USER_LOBBY:
                 let treasureContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT);
                 treasureContext.setTreasureList(packet);
@@ -192,8 +195,14 @@ testnetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
     sendGetUserDailyShop: function () {
-        cc.log("sendGetuserInventory");
+        cc.log("sendGetUserDailyShop");
         var pk = this.gameClient.getOutPacket(CMDSendGetDailyShop);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendGetUserGoldShop: function () {
+        cc.log("sendGetUserGoldShop");
+        var pk = this.gameClient.getOutPacket(CMDSendGetGoldShop);
         pk.pack();
         this.gameClient.sendPacket(pk);
     },
