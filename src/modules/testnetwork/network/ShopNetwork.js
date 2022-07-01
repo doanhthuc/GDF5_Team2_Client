@@ -21,6 +21,9 @@ ShopNetwork.Connector = cc.Class.extend({
             case gv.CMD.BUY_DAILY_SHOP:
                 this._handleBuyDailyShop(cmd, packet);
                 break;
+            case gv.CMD.SEND_GET_BATTLE_MAP:
+                this._handleGetBattleMap(cmd, packet);
+                break;
         }
     },
 
@@ -74,6 +77,11 @@ ShopNetwork.Connector = cc.Class.extend({
         }
     },
 
+    _handleGetBattleMap: function (cmd, packet) {
+        cc.log("[ShopNetwork.js] response get battle map");
+        cc.log(JSON.stringify(packet))
+    },
+
     sendBuyGoldShop: function (itemId) {
         cc.log("SendBuyShopGold");
         let pk = this.gameClient.getOutPacket(CMDBuyGoldShop);
@@ -100,4 +108,10 @@ ShopNetwork.Connector = cc.Class.extend({
         pk.pack(itemId);
         this.gameClient.sendPacket(pk);
     },
+
+    sendGetBattleMap: function () {
+        let pk = this.gameClient.getOutPacket(CMDSendGetBattleMap);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    }
 })

@@ -1,8 +1,8 @@
 let WaveNode = cc.Node.extend({
-    ctor: function (maxWave) {
+    ctor: function (currentWave, maxWave) {
         this._super();
         this.maxWave = maxWave || 25;
-        this.currentWave = 0;
+        this.currentWave = currentWave || 0;
 
         this.rootNode = ccs.load(BattleResource.WAVE_NODE, "").node;
         this.addChild(this.rootNode);
@@ -17,6 +17,7 @@ let WaveNode = cc.Node.extend({
 
     increaseWave: function () {
         this.currentWave++;
+        GameConfig.battleData.setCurrentWave(this.currentWave);
         this._updateWave();
 
         if (this.currentWave >= this.maxWave) {

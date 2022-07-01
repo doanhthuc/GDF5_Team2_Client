@@ -1,8 +1,10 @@
 let BattleResultLayer = cc.Layer.extend({
-    ctor: function (result) {
+    ctor: function (result, battleData) {
         this._super();
 
         this.result = result;
+        this.battleData = battleData;
+
         this.ANIMATION_TYPE = {
             ANIMATION_START: 0,
             ANIMATION_END: 1,
@@ -79,14 +81,17 @@ let BattleResultLayer = cc.Layer.extend({
     },
 
     _showResult: function () {
-        let playerInfoNode = new BattleResultPlayerInfo("HOVANVYDUT", 20, "textures/common/common_avatar.png", 30);
+        // FIXME: harcode here
+        let playerInfoNode = new BattleResultPlayerInfo(this.battleData.getPlayerUsername(), this.battleData.getPlayerTrophy(),
+            "textures/common/common_avatar.png", this.battleData.getPlayerEnergyHouse());
         playerInfoNode.attr({
             y: cc.winSize.height / 2,
             x: cc.winSize.width / 4
         });
         this.addChild(playerInfoNode);
 
-        let opponentInfoNode = new BattleResultPlayerInfo("OPPONENT", 0, "textures/common/common_avatar.png", 50);
+        let opponentInfoNode = new BattleResultPlayerInfo(this.battleData.getOpponentUsername(), this.battleData.getOpponentTrophy(),
+            "textures/common/common_avatar.png", this.battleData.getOpponentEnergyHouse());
         opponentInfoNode.attr({
             y: cc.winSize.height / 2,
             x: 3 * cc.winSize.width / 4

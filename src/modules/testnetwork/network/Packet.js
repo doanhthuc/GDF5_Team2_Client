@@ -31,6 +31,8 @@ gv.CMD.MOVE = 2005;
 gv.CMD.MAP_INFO = 2004;
 gv.CMD.RESET_MAP = 2006;
 
+gv.CMD.SEND_GET_BATTLE_MAP = 5001;
+
 testnetwork = testnetwork || {};
 testnetwork.packetMap = {};
 

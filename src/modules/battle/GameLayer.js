@@ -5,28 +5,14 @@ let GameLayer = cc.Layer.extend({
         GameConfig.gameLayer = this;
 
         // data game
-        this.dataInGame = {
-            currentWave: 0,
-            maxWave: 10,
-            timer: 5,
-            player: {
-                username: "HOVANVYDUT",
-                trophy: 30,
-                energyHouse: 10,
-            },
-            opponent: {
-                username: "OPPONENT",
-                trophy: 20,
-                energyHouse: 10,
-            }
-        }
+        this.battleData = new BattleData();
+        GameConfig.battleData = this.battleData;
 
         // create UI
-        this.uiLayer = new BattleUILayer(this.dataInGame.timer, this.dataInGame.maxWave,
-            this.dataInGame.player.energyHouse, this.dataInGame.player.energyHouse);
+        this.uiLayer = new BattleUILayer(this.battleData);
         this.addChild(this.uiLayer, 2);
 
-        this.mapLayer = new BattleMapLayer();
+        this.mapLayer = new BattleMapLayer(this.battleData);
         this.addChild(this.mapLayer, 1);
 
         // init entity manager
@@ -108,7 +94,7 @@ let GameLayer = cc.Layer.extend({
         this.unscheduleUpdate();
         this.uiLayer.stopTimer();
 
-        this.addChild(new BattleResultLayer("lose"), 2);
+        this.addChild(new BattleResultLayer("lose", this.battleData), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
         GameConfig.gameLayer = null;

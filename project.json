@@ -30,6 +30,7 @@
         "src/**/*.js"
     ],
     "jsList": [
+        "src/modules/battle/BattleData.js",
         "src/data/battle-resource/BattleResource.js",
         "src/data/bottom-nav-resources/NavResources.js",
         "src/data/inventory-resources/InventoryResources.js",

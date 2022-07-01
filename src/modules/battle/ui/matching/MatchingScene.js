@@ -73,6 +73,8 @@ let MatchingScene = cc.Scene.extend({
         let scene = new cc.Scene();
         scene.addChild(layer);
 
+        // get map data
+        ShopNetwork.connector.sendGetBattleMap();
         cc.director.runScene(new cc.TransitionFade(1, scene));
     },
 

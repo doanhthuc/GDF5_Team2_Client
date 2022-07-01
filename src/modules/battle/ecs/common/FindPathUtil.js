@@ -1,6 +1,9 @@
 let FindPathUtil = FindPathUtil || {};
 
 FindPathUtil.create2DMatrix = function (numRow, numCol, defaultValue) {
+    if (!defaultValue) {
+        defaultValue = 0;
+    }
     let matrix = [];
 
     for (let i = 0; i < numRow; i++) {

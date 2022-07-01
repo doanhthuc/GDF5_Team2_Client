@@ -48,13 +48,23 @@ EventDispatcher.getInstance()
         GameConfig.gameLayer.uiLayer.stopTimer();
     })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
-        let map = GameConfig.gameLayer.mapLayer.mapMatrix;
+        let map = GameConfig.battleData.getPlayerMap();
+
         if (GameConfig.MAP_HEIGH-1-data.pos.y < 0 || GameConfig.MAP_HEIGH-1-data.pos.y >= GameConfig.MAP_HEIGH
             || data.pos.x < 0 || data.pos.x >= GameConfig.MAP_WIDTH) {
             return;
         }
         map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 1;
         let paths = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
+
+        cc.log("^^^^^^^^^")
+        for (let r = 0; r < map.length; r++) {
+            let str = "";
+            for (let c = 0; c < map[0].length; c++) {
+                str += map[r][c] + "\t";
+            }
+            cc.log(str);
+        }
 
         for (let row = 0; row < map.length; row++) {
             for (let col = 0; col < map[0].length; col++) {
