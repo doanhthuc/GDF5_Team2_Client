@@ -382,7 +382,7 @@ testnetwork.packetMap[gv.CMD.GET_USER_INFO] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getShort();
-            this.id = this.getLong();
+            this.id = this.getInt();
             this.username = this.getString();
             this.gold = this.getInt();
             this.gem = this.getInt();
@@ -485,10 +485,11 @@ testnetwork.packetMap[gv.CMD.SPEEDUP_LOBBY_CHEST] = fr.InPacket.extend(
     {
         ctor: function () {
             this._super();
-            this.itemType = [];
-            this.itemQuantity = [];
+
         },
         readData: function () {
+            this.itemType = [];
+            this.itemQuantity = [];
             this.error = this.getShort();
             this.lobbyChestid = this.getInt();
             this.state = this.getInt();
@@ -506,10 +507,11 @@ testnetwork.packetMap[gv.CMD.CLAIM_LOBBY_CHEST] = fr.InPacket.extend(
     {
         ctor: function () {
             this._super();
-            this.itemType = [];
-            this.itemQuantity = [];
+
         },
         readData: function () {
+            this.itemType = [];
+            this.itemQuantity = [];
             this.error = this.getShort();
             this.lobbyChestid = this.getInt();
             this.state = this.getInt();
@@ -623,14 +625,14 @@ testnetwork.packetMap[gv.CMD.SEND_GET_BATTLE_MAP] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-            this.mapW = this.getInt();
             this.mapH = this.getInt();
-            this.btmap = new Array(this.mapW);
-            for(i=0;i<this.mapW;i++)
-                this.btmap[i]= new Array(this.mapH);
+            this.mapW = this.getInt();
+            this.btmap = new Array(this.mapH);
+            for(i=this.mapH-1;i>=0;i--)
+                this.btmap[i]= new Array(this.mapW);
             this.path= []
-            for (i = 0; i < this.mapW; i++)
-                for (j = 0; j < this.mapH; j++)
+            for (i = 0; i < this.mapH; i++)
+                for (j = 0; j < this.mapW; j++)
                     this.btmap[i][j] = this.getInt();
 
             this.pathSize = this.getInt();

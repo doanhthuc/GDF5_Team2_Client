@@ -123,6 +123,7 @@ testnetwork.Connector = cc.Class.extend({
                 contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).onChestCheatSuccess(packet);
                 break;
             case gv.CMD.SEND_GET_BATTLE_MAP:
+                cc.log("asdasdas");
                 cc.log(JSON.stringify(packet));
                 break;
         }
