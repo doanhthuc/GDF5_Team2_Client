@@ -22,7 +22,7 @@ const InventoryLayer = cc.Node.extend({
 
         this.battleDeckNode.setPosition(cc.winSize.width / 2, this.cardCollectionNode.heightNode + MainResources.BOTTOM_HEIGHT + this.cardCollectionNode.heightNode / 2);
 
-        this.cardCollectionNode.setPosition(cc.winSize.width / 2, MainResources.BOTTOM_HEIGHT + this.cardCollectionNode.heightNode + InventoryResources.CARD_COLLECTION_TITLE_HEIGHT);
+        this.cardCollectionNode.setPosition(cc.winSize.width / 2, MainResources.BOTTOM_HEIGHT + this.cardCollectionNode.heightNode + InventoryResources.CARD_COLLECTION_TITLE_HEIGHT + 80);
 
         this.setNodeHeight();
     },

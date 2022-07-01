@@ -33,7 +33,7 @@ const TreasureSlot = cc.Node.extend({
     setStateOfSlot: function (state, claimTime = 0) {
         this.state = state;
         cc.log('TreasureSlot line 35 setStateOfSlot: ' + this.state);
-        if (claimTime > 0) {
+        if (state === TreasureSlotResources.STATE.OPENING &&  claimTime > 0) {
             this.setClaimTime(claimTime);
         }
         this.onStateOfSlotUpdated();
@@ -140,7 +140,7 @@ const TreasureSlot = cc.Node.extend({
         // let distance = claimTime - Date.now();
 
         let distance = this.claimTime - Date.now();
-
+        this.skipGemTxt.setString(Math.round(distance / (600 * 1000)));
         this.openingCountDownTxt.setString(millisecondToTimeString(distance));
         if (distance < 0) {
             this.onFinishCountDown();

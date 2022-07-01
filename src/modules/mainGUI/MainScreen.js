@@ -121,11 +121,13 @@ const MainScreen = cc.Layer.extend({
                 }
                 if (this.shouldSetTouchPos && Math.abs(touch.getLocation().y - this.touchPos.y) > InventoryResources.VERTICAL_SCROLL_THRESHOLD) {
                     this.listView.setTouchEnabled(true);
+                    if (this.activeTab === NavResources.TAB_LIST.INVENTORY_TAB.name) this.mainPageView.setTouchEnabled(false);
                     this.shouldSetTouchPos = false;
                 }
             }.bind(this),
             onTouchEnded: function (touch, event) {
                 this.shouldSetTouchPos = true;
+                this.mainPageView.setTouchEnabled(true);
             }.bind(this)
         });
 
