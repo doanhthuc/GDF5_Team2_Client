@@ -10,11 +10,13 @@ const ShopLayer = cc.Node.extend({
         let startX = cc.winSize.width / 2;
         let startY = 820;
 
+        // Daily section
         this.dailySection = new ShopSection("treasure");
         this.dailySection.setPosition(startX, startY);
         this.addChild(this.dailySection);
         this.shopSectionList.push(this.dailySection);
 
+        // Buy gold section
         this.goldSection = new ShopSection("gold");
         this.goldSection.setPosition(startX, startY
             - (ShopResources.SHOP_SECTION_NODE_HEIGHT + ShopResources.SHOP_SECTION_MARGIN_BOTTOM))
@@ -23,11 +25,11 @@ const ShopLayer = cc.Node.extend({
     },
 
     renderDailySection: function (itemList) {
-        this.dailySection.setShopItemSlotPosition(itemList);
+        this.dailySection.addDataForDailySection(itemList);
     },
 
     renderGoldSection: function (itemList) {
-        this.goldSection.setShopGoldSlotPosition(itemList);
+        this.goldSection.addDataForGoldSection(itemList);
     }
 
 })

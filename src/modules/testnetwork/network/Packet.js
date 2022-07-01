@@ -12,6 +12,7 @@ gv.CMD.ADD_USER_GEM = 1003;
 gv.CMD.BUY_GOLD_SHOP = 2001;
 gv.CMD.BUY_DAILY_SHOP = 2002;
 gv.CMD.GET_USER_DAILY_SHOP = 2003;
+gv.CMD.GET_GOLD_SHOP = 2004;
 
 gv.CMD.GET_USER_INVENTORY = 3001;
 gv.CMD.UPGRADE_CARD = 3002;
@@ -169,19 +170,6 @@ CMDSendUpgradeCard = fr.OutPacket.extend(
     }
 )
 
-CMDSendGetDailyShop = fr.OutPacket.extend(
-    {
-        ctor: function () {
-            this._super();
-            this.initData(100);
-            this.setCmdId(gv.CMD.GET_USER_DAILY_SHOP);
-        },
-        pack: function () {
-            this.packHeader();
-            this.updateSize();
-        }
-    }
-)
 CMDSendAddUserGold = fr.OutPacket.extend(
     {
         ctor: function () {
@@ -212,35 +200,6 @@ CMDSendAddUserGem = fr.OutPacket.extend(
     }
 )
 
-CMDBuyGoldShop = fr.OutPacket.extend(
-    {
-        ctor: function () {
-            this._super();
-            this.initData(100);
-            this.setCmdId(gv.CMD.BUY_GOLD_SHOP);
-        },
-        pack: function (itemId) {
-            this.packHeader();
-            this.putInt(itemId);
-            this.updateSize();
-        }
-    }
-)
-
-CMDBuyDailyShop = fr.OutPacket.extend(
-    {
-        ctor: function () {
-            this._super();
-            this.initData(100);
-            this.setCmdId(gv.CMD.BUY_DAILY_SHOP);
-        },
-        pack: function (itemId) {
-            this.packHeader();
-            this.putInt(itemId);
-            this.updateSize();
-        }
-    }
-)
 //Cheat
 CMDCheatUserInfo = fr.OutPacket.extend(
     {
@@ -360,38 +319,6 @@ testnetwork.packetMap[gv.CMD.GET_USER_INFO] = fr.InPacket.extend(
     }
 );
 
-testnetwork.packetMap[gv.CMD.BUY_GOLD_SHOP] = fr.InPacket.extend(
-    {
-        ctor: function () {
-            this._super();
-        },
-        readData: function () {
-            this.error = this.getShort();
-            this.goldChange = this.getInt();
-            this.gemChange = this.getInt();
-        }
-    }
-);
-testnetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend(
-    {
-        ctor: function () {
-            this._super();
-            this.itemType = [];
-            this.itemQuantity = [];
-        },
-        readData: function () {
-            this.error = this.getShort();
-            this.goldChange = this.getInt();
-            this.gemChange = this.getInt();
-            this.itemAmount = this.getInt();
-            for (i = 0; i < this.itemAmount; i++) {
-                this.itemType.push(this.getInt());
-                this.itemQuantity.push(this.getInt());
-            }
-        }
-    }
-);
-
 testnetwork.packetMap[gv.CMD.GET_USER_INVENTORY] = fr.InPacket.extend(
     {
         ctor: function () {
@@ -503,26 +430,7 @@ testnetwork.packetMap[gv.CMD.UPGRADE_CARD] = fr.InPacket.extend(
         }
     }
 );
-testnetwork.packetMap[gv.CMD.GET_USER_DAILY_SHOP] = fr.InPacket.extend(
-    {
-        ctor: function () {
-            this._super();
-            this.dailyShopItem = [];
 
-        },
-        readData: function () {
-            this.error = this.getShort();
-            this.size = this.getInt();
-            for (i = 0; i < this.size; i++) {
-                itemType = this.getInt();
-                itemQuantity = this.getInt();
-                itemPrice = this.getInt();
-                itemState = this.getInt();
-                this.dailyShopItem.push(new ShopItem(itemType, itemQuantity, itemPrice, itemState));
-            }
-        }
-    }
-);
 //Cheat in Packet
 testnetwork.packetMap[gv.CMD.CHEAT_USER_INFO] = fr.InPacket.extend(
     {

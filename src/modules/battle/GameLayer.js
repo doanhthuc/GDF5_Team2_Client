@@ -22,8 +22,8 @@ let GameLayer = cc.Layer.extend({
         }
 
         // create UI
-        let maxTimerDuration = 3, maxWave = 10, playerHouseEnergy = 4, opponentHouseEnergy = 10;
-        this.uiLayer = new BattleUILayer(maxTimerDuration, maxWave, playerHouseEnergy, opponentHouseEnergy);
+        this.uiLayer = new BattleUILayer(this.dataInGame.timer, this.dataInGame.maxWave,
+            this.dataInGame.player.energyHouse, this.dataInGame.player.energyHouse);
         this.addChild(this.uiLayer, 2);
 
         this.mapLayer = new BattleMapLayer();
@@ -111,5 +111,6 @@ let GameLayer = cc.Layer.extend({
         this.addChild(new BattleResultLayer("lose"), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
+        GameConfig.gameLayer = null;
     },
 });

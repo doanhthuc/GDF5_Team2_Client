@@ -117,6 +117,8 @@
               "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
             "OutlineColor": {
               "R": 32,
               "G": 0,
@@ -136,7 +138,7 @@
             },
             "Position": {
               "X": 0.0,
-              "Y": 159.188
+              "Y": 159.19
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -154,8 +156,8 @@
             },
             "LeftMargin": -58.0,
             "RightMargin": -58.0,
-            "TopMargin": -173.688,
-            "BottomMargin": 144.688,
+            "TopMargin": -173.69,
+            "BottomMargin": 144.69,
             "Tag": 82,
             "ActionTag": -1224373932,
             "Size": {
@@ -291,7 +293,7 @@
             "AnchorPoint": {},
             "Position": {
               "X": 0.0,
-              "Y": 4.0682
+              "Y": 0.0
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -307,15 +309,13 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "TopMargin": -4.0682,
-            "BottomMargin": 4.0682,
-            "Tag": 168,
-            "ActionTag": -685421362,
+            "Tag": 252,
+            "ActionTag": -2432156,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_4",
+            "Name": "card",
             "ctype": "ProjectNodeObjectData"
           },
           {
@@ -363,15 +363,15 @@
             },
             "LeftMargin": -31.5584,
             "RightMargin": -33.4416,
-            "TopMargin": 42.5162,
-            "BottomMargin": -75.5162,
+            "TopMargin": 41.5162,
+            "BottomMargin": -76.5162,
             "Tag": 173,
             "ActionTag": 1469294587,
             "Size": {
               "X": 65.0,
               "Y": 35.0
             },
-            "Name": "Text_15",
+            "Name": "quantity",
             "ctype": "TextObjectData"
           },
           {
@@ -410,7 +410,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_5",
+            "Name": "buy_btn",
             "ctype": "ProjectNodeObjectData"
           }
         ],

@@ -115,7 +115,7 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 15.8557,
+              "X": 15.86,
               "Y": 2.3522
             },
             "Scale": {
@@ -132,8 +132,8 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -14.1443,
-            "RightMargin": -45.8557,
+            "LeftMargin": -14.14,
+            "RightMargin": -45.86,
             "TopMargin": -15.8522,
             "BottomMargin": -11.1478,
             "Tag": 136,

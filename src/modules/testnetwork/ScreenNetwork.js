@@ -159,7 +159,8 @@ var ScreenNetwork = cc.Layer.extend({
         // let userContext = new UserContext();
         // contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
         // userContext.updateUserInfoUI();
-        testnetwork.connector.sendGetUserDailyShop();
+        ShopNetwork.connector.sendGetUserDailyShop();
+        ShopNetwork.connector.sendGetGoldShop();
         cc.log("Finished login");
     },
     updateMove: function (isCanMove, x, y) {

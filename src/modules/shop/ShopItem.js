@@ -1,14 +1,10 @@
 let ShopItem = cc.Class.extend({
-    type: 0,
-    quantity: 0,
-    price: 0,
-    state: 0,
-
     ctor: function () {
 
     },
 
-    ctor: function (type, quantity, price, state) {
+    ctor: function (id, type, quantity, price, state) {
+        this.id = id;
         this.type = type;
         this.quantity = quantity;
         this.price = price;
@@ -16,6 +12,6 @@ let ShopItem = cc.Class.extend({
     },
 
     show: function () {
-        cc.log(this.type + " " + this.quantity + " " + this.price + " " + this.state);
+        cc.log(this.id + " " + this.type + " " + this.quantity + " " + this.price + " " + this.state);
     }
-})
+});

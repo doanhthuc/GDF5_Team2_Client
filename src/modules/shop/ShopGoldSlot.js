@@ -3,10 +3,10 @@ const ShopGoldSlot = cc.Node.extend({
         this.gold = gold;
         this.price = price;
         this._super();
-        this.init();
+        this._setupUI();
     },
 
-    init: function () {
+    _setupUI: function () {
         this.clientUIManager = ClientUIManager.getInstance();
         this.shopGoldSlotNode = ccs.load(ShopResources.SHOP_GOLD_SLOT_NODE, '').node;
         this.addChild(this.shopGoldSlotNode);
@@ -22,10 +22,21 @@ const ShopGoldSlot = cc.Node.extend({
         this.backgroundBtn.addTouchEventListener(this.onBuyBtnClick.bind(this));
     },
 
+    setGold: function (gold) {
+        this.gold = gold;
+        this.goldSlotValueTxt.setString(this.gold);
+    },
+
+    setPrice: function (price) {
+        this.price = price;
+        this.shopItemBtnNode.getChildByName("priceTxt").setString(this.price);
+    },
+
     onBuyBtnClick: function(sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             let buyGoldPopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
             PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
+            buyGoldPopup.gold
         }
     }
 });

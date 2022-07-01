@@ -11,8 +11,9 @@ let MatchingScene = cc.Scene.extend({
         let centerScreenX = cc.winSize.width / 2;
         let centerScreenY = cc.winSize.height / 2;
 
+        // FIXME: hardcode
         let backgroundImage = new cc.Sprite("textures/lobby/lobby_background.png");
-        backgroundImage.attr({x: centerScreenX, y: centerScreenY});
+        backgroundImage.attr({x: centerScreenX, y: centerScreenY, scaleX: 1.5, scaleY: 1.5});
         this.addChild(backgroundImage);
 
         let matchingTxtNode = ccs.load("ui/battle/matching/MatchingTextNode.json", "").node;

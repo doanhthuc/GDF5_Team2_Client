@@ -179,24 +179,7 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(chestid);
         this.gameClient.sendPacket(pk);
     },
-    sendBuyGoldShop: function (itemid) {
-        cc.log("SendBuyShopGold");
-        var pk = this.gameClient.getOutPacket(CMDBuyGoldShop);
-        pk.pack(itemid);
-        this.gameClient.sendPacket(pk);
-    },
-    sendGetUserDailyShop: function () {
-        cc.log("sendGetuserInventory");
-        var pk = this.gameClient.getOutPacket(CMDSendGetDailyShop);
-        pk.pack();
-        this.gameClient.sendPacket(pk);
-    },
-    sendBuyDailyShop: function (itemid) {
-        cc.log("SendBuyDailyShop");
-        var pk = this.gameClient.getOutPacket(CMDBuyDailyShop);
-        pk.pack(itemid);
-        this.gameClient.sendPacket(pk);
-    },
+
     // cheat:
     sendCheatUserInfo: function (userInfoCheat) {
         cc.log("CheatUserInfo");

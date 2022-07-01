@@ -1,6 +1,6 @@
 let FindPathUtil = FindPathUtil || {};
 
-FindPathUtil.create2DMatrix = function(numRow, numCol, defaultValue) {
+FindPathUtil.create2DMatrix = function (numRow, numCol, defaultValue) {
     let matrix = [];
 
     for (let i = 0; i < numRow; i++) {
@@ -13,10 +13,10 @@ FindPathUtil.create2DMatrix = function(numRow, numCol, defaultValue) {
     return matrix;
 }
 
-FindPathUtil.findShortestPath = function(map, startt, destt) {
+FindPathUtil.findShortestPath = function (map, startt, destt) {
     // convert tile
-    let start = {x: startt.x, y: GameConfig.MAP_HEIGH - 1-startt.y}
-    let dest = {x: destt.x, y: GameConfig.MAP_HEIGH - 1-destt.y}
+    let start = {x: startt.x, y: GameConfig.MAP_HEIGH - 1 - startt.y}
+    let dest = {x: destt.x, y: GameConfig.MAP_HEIGH - 1 - destt.y}
     // -----------> x
     // |
     // |
