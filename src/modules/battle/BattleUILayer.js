@@ -4,8 +4,8 @@ let BattleUILayer = cc.Layer.extend({
 
         this.battleData = battleData;
 
-        this.twoPlayerInfoLayer = new TwoPlayerInfoLayer(BattleResource.AVATAR_IMAGE, this.battleData.getPlayerUsername()
-            , BattleResource.AVATAR_IMAGE, this.battleData.getOpponentUsername());
+        this.twoPlayerInfoLayer = new TwoPlayerInfoLayer(BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.PLAYER)
+            , BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.OPPONENT));
         this.addChild(this.twoPlayerInfoLayer);
         this.scheduleOnce(this.startGame, 2);
     },
@@ -41,16 +41,16 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _showHouseEnergy: function () {
-        this.houseEnergyNode = new HouseEnergyNode(this.battleData.getPlayerEnergyHouse(),
-            this.battleData.getOpponentEnergyHouse());
+        this.houseEnergyNode = new HouseEnergyNode(this.battleData.getEnergyHouse(GameConfig.PLAYER),
+            this.battleData.getEnergyHouse(GameConfig.OPPONENT));
         this.houseEnergyNode.x = this.width - this.houseEnergyNode.width / 2;
         this.houseEnergyNode.y = (cc.winSize.height - 200) / 2 + 200;
         this.addChild(this.houseEnergyNode);
     },
 
     _showPlayerInfo: function () {
-        this.playerInfoNode = new PlayerInfoNode(this.battleData.getOpponentUsername(),
-            this.battleData.getOpponentClanName());
+        this.playerInfoNode = new PlayerInfoNode(this.battleData.getUsername(GameConfig.OPPONENT),
+            this.battleData.getClanName(GameConfig.OPPONENT));
         this.playerInfoNode.x = this.playerInfoNode.width / 2;
         this.playerInfoNode.y = this.height - this.playerInfoNode.height / 2;
         this.addChild(this.playerInfoNode);
@@ -77,10 +77,6 @@ let BattleUILayer = cc.Layer.extend({
     }
 });
 
-BattleUILayer.plusPlayerHouseEnergy = function (energy) {
-    GameConfig.gameLayer.uiLayer.houseEnergyNode.plusPlayerEnergy(energy);
-}
-
-BattleUILayer.minusPlayerEnergy = function (energy) {
-    GameConfig.gameLayer.uiLayer.houseEnergyNode.minusPlayerEnergy(energy);
+BattleUILayer.minusHouseEnergy = function (energy, mode) {
+    GameConfig.gameLayer.uiLayer.houseEnergyNode.minusEnergyHouse(energy, mode);
 }

@@ -19,7 +19,8 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = GameConfig.gameLayer.uiLayer;
         uiLayer.waveNode.increaseWave();
-        GameConfig.gameLayer.bornMonster(0, 4);
+        GameConfig.gameLayer.bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        GameConfig.gameLayer.bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
     })
     .addEventHandler(EventType.FINISH_PATH, function (data) {
         let entity = data.entity;
@@ -49,60 +50,38 @@ EventDispatcher.getInstance()
         GameConfig.gameLayer.uiLayer.stopTimer();
     })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
-        let map = GameConfig.battleData.getPlayerMap();
+        let map = GameConfig.battleData.getMap(GameConfig.PLAYER);
 
         // FIXME: map
         if (GameConfig.MAP_HEIGH-1-data.pos.y < 0 || GameConfig.MAP_HEIGH-1-data.pos.y >= GameConfig.MAP_HEIGH
             || data.pos.x < 0 || data.pos.x >= GameConfig.MAP_WIDTH) {
             return;
         }
+        cc.log("put new tower event: " + JSON.stringify(data));
 
         // put tower at x, y
         map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 7;
-        let paths = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
-
-        cc.log("^^^^^^^^^")
-        for (let r = 0; r < map.length; r++) {
-            let str = "";
-            for (let c = 0; c < map[0].length; c++) {
-                str += map[r][c] + "\t";
-            }
-            cc.log(str);
-        }
-
-        for (let row = 0; row < map.length; row++) {
-            for (let col = 0; col < map[0].length; col++) {
-                if (map[row][col] === 0) {
-                    let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
-                    if (path && path.length > 0) {
-                        path = Utils.tileArray2PixelArray(path);
-                        paths[row][col] = path;
-                    }
-                }
-            }
-        }
-
-        if (paths && paths[0][0]) {
-            GameConfig.gameLayer.mapLayer.path = paths[0][0];
-        }
-
+        let shortestPathForEachTile = findShortestPathForEachTile(GameConfig.PLAYER);
         let entityList = EntityManager.getInstance()
             .getEntitiesByComponents(GameConfig.COMPONENT_ID.PATH);
 
+        let currentMode = GameConfig.PLAYER;
         for (let entity of entityList) {
-            let pathComponent = entity.getComponent(GameConfig.COMPONENT_ID.PATH);
-            let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
-            if (positionComponent) {
-                let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y);
-                let path = paths[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
-                if (path) {
-                    if (path.length > 0) {
-                        let newPath = [Utils.tile2Pixel(positionComponent.x, positionComponent.y)]
-                        for (let i = 0; i < path.length; i++) {
-                            newPath.push(path[i]);
+            if (entity.mode === currentMode) {
+                let pathComponent = entity.getComponent(GameConfig.COMPONENT_ID.PATH);
+                let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
+                if (positionComponent) {
+                    let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
+                    let path = shortestPathForEachTile[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
+                    if (path) {
+                        if (path.length > 0) {
+                            let newPath = [Utils.tile2Pixel(positionComponent.x, positionComponent.y, currentMode)]
+                            for (let i = 0; i < path.length; i++) {
+                                newPath.push(path[i]);
+                            }
+                            pathComponent.path = newPath;
+                            pathComponent.currentPathIdx = 0;
                         }
-                        pathComponent.path = newPath;
-                        pathComponent.currentPathIdx = 0;
                     }
                 }
             }
@@ -115,3 +94,34 @@ EventDispatcher.getInstance()
         scene.addChild(layer);
         cc.director.runScene(new cc.TransitionFade(1, scene));
     })
+
+function findShortestPathForEachTile (mode) {
+    let map = GameConfig.battleData.getMap(mode);
+    let shortestPathForEachTiles = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
+
+    cc.log("^^^^^^^^^")
+    for (let r = 0; r < map.length; r++) {
+        let str = "";
+        for (let c = 0; c < map[0].length; c++) {
+            str += map[r][c] + "\t";
+        }
+        cc.log(str);
+    }
+
+    for (let row = 0; row < map.length; row++) {
+        for (let col = 0; col < map[0].length; col++) {
+            if (map[row][col] === 0) {
+                let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
+                if (path && path.length > 0) {
+                    path = Utils.tileArray2PixelArray(path, mode);
+                    shortestPathForEachTiles[row][col] = path;
+                }
+            }
+        }
+    }
+
+    if (shortestPathForEachTiles && shortestPathForEachTiles[0][0]) {
+        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTiles, mode);
+    }
+    return GameConfig.battleData.getShortestPathForEachTile(mode);
+}

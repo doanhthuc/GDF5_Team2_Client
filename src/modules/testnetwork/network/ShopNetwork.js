@@ -80,10 +80,16 @@ ShopNetwork.Connector = cc.Class.extend({
     _handleGetBattleMap: function (cmd, packet) {
         cc.log("[ShopNetwork.js] response get battle map");
         GameConfig.battleData = new BattleData();
-        GameConfig.battleData.setPlayerMap(packet.btmap);
-        GameConfig.battleData.setOpponentMap(packet.btmap);
-        GameConfig.battleData.setPlayerLongestPath(packet.path);
-        GameConfig.battleData.setOpponentLongestPath(packet.path);
+        GameConfig.battleData.setMap(packet.btmap, GameConfig.PLAYER);
+        GameConfig.battleData.setMap(packet.btmap, GameConfig.OPPONENT);
+        GameConfig.battleData.setLongestPath(packet.path, GameConfig.PLAYER);
+        GameConfig.battleData.setLongestPath(packet.path, GameConfig.OPPONENT);
+
+        let shortestPathForEachTilePlayer = findShortestPathForEachTile(GameConfig.PLAYER);
+        let shortestPathForEachTileOpponent = findShortestPathForEachTile(GameConfig.OPPONENT);
+
+        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
+        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.FINISH_MATCHING);
     },

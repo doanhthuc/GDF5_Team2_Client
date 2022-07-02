@@ -2,8 +2,8 @@ let GameConfig = GameConfig || {};
 
 GameConfig.gameLayer = GameConfig.gameLayer || null;
 
-GameConfig.PLAYER = 0;
-GameConfig.OPPONENT = 1;
+GameConfig.PLAYER = "player";
+GameConfig.OPPONENT = "opponent";
 
 GameConfig.COMPONENT_ID = {
     MONSTER_INFO: 1,

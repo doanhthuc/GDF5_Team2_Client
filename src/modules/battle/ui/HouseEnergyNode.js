@@ -16,27 +16,31 @@ let HouseEnergyNode = cc.Node.extend({
         this.setOpponentEnergy(opponentEnergy);
     },
 
-    setPlayerEnergy: function (energy) {
-        this.playerEnergy.setString(energy);
-    },
-
-    getPlayerEnergy: function () {
-        return parseInt(this.playerEnergy.getString(), 10);
-    },
-
     plusPlayerEnergy: function (energy) {
         this.playerEnergy.setString(this.getPlayerEnergy() + energy);
     },
 
-    minusPlayerEnergy: function (energy) {
-        this.playerEnergy.setString(this.getPlayerEnergy() - energy);
-        GameConfig.battleData.setPlayerEnergyHouse(this.getPlayerEnergy() - energy);
-        if (this.getPlayerEnergy() <= 0) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.ZERO_ENERGY_PLAYER_HOUSE);
+    minusEnergyHouse: function (energy, mode) {
+        // FIXME: optimize
+        if (mode === GameConfig.PLAYER) {
+            this.setPlayerEnergy(this.getPlayerEnergy() - energy);
+            GameConfig.battleData.setEnergyHouse(this.getPlayerEnergy() - energy, mode);
+            if (this.getPlayerEnergy() <= 0) {
+                EventDispatcher.getInstance()
+                    .dispatchEvent(EventType.ZERO_ENERGY_PLAYER_HOUSE);
+            }
+        } else if (mode === GameConfig.OPPONENT) {
+            this.setOpponentEnergy(this.getOpponentEnergy() - energy);
+            GameConfig.battleData.setEnergyHouse(this.getPlayerEnergy() - energy, mode);
+            if (this.getOpponentEnergy() <= 0) {
+                EventDispatcher.getInstance()
+                    .dispatchEvent(EventType.ZERO_ENERGY_PLAYER_HOUSE);
+            }
         }
+
     },
 
+    // FIXME: optimize
     setOpponentEnergy: function (energy) {
         this.opponentEnergy.setString(energy)
     },
@@ -45,15 +49,11 @@ let HouseEnergyNode = cc.Node.extend({
         return parseInt(this.opponentEnergy.getString(), 10);
     },
 
-    plusOpponentEnergy: function (energy) {
-        this.opponentEnergy.setString(this.getOpponentEnergy() + energy);
+    setPlayerEnergy: function (energy) {
+        this.playerEnergy.setString(energy);
     },
 
-    minusOpponentEnergy: function (energy) {
-        this.opponentEnergy.setString(this.getOpponentEnergy() - energy);
-        if (this.getOpponentEnergy() <= 0) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.ZERO_ENERGY_OPPONENT_HOUSE);
-        }
-    }
+    getPlayerEnergy: function () {
+        return parseInt(this.playerEnergy.getString(), 10);
+    },
 });

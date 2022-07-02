@@ -33,7 +33,6 @@ Utils.tile2Pixel = function (x, y, mode) {
         //             |
         //             V
         //             y
-        // return center of tile pixel
 
         // center of  y = 4
         let centerY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT + (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH / 2);
@@ -61,10 +60,10 @@ Utils.pixel2Tile = function (xx, yy, mode) {
         return {x, y};
     } else if (mode === GameConfig.OPPONENT) {
         let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
-        let x = Math.floor(((cc.winSize - xx) - paddingX) / GameConfig.TILE_WIDTH);
-
-        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT + (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH);
-        let y = Math.floor((cc.winSize.height - yy - paddingY) / GameConfig.TILE_HEIGH);
+        let x = Math.floor(((cc.winSize.width - xx) - paddingX) / GameConfig.TILE_WIDTH);
+        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT - GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH) / 2;
+        let y = Math.floor(((cc.winSize.height - yy) - paddingY) / GameConfig.TILE_HEIGH);
+        cc.log("PIXEL to tile opponent x= " + x + ", y = " + y);
 
         return {x, y};
     }

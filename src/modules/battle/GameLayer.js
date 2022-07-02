@@ -45,14 +45,16 @@ let GameLayer = cc.Layer.extend({
         this.pathSystem.run(dt);
     },
 
-    bornMonster: function (pos) {
+    bornMonster: function (pos, mode) {
         // pos is in tile coordinator
+        cc.log("position tile " + JSON.stringify(pos))
+
         if (!pos) {
-            pos = Utils.tile2Pixel(0, 4);
+            pos = Utils.tile2Pixel(0, 4, mode);
         } else {
-            pos = Utils.tile2Pixel(pos.x, pos.y);
+            pos = Utils.tile2Pixel(pos.x, pos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pos);
+        EntityFactory.createSwordsmanMonster(pos, mode);
     },
 
     putTowerAt: function (type, pos) {
@@ -64,7 +66,7 @@ let GameLayer = cc.Layer.extend({
         // FIXME: map
         let xMap = GameConfig.MAP_HEIGH-1-pos.y;
         let yMap = pos.x;
-        let map = this.battleData.getPlayerMap();
+        let map = this.battleData.getMap(GameConfig.PLAYER);
         if (map[xMap][yMap] === 6 || map[xMap][yMap] === 5) {
             return;
         }
@@ -101,7 +103,17 @@ let GameLayer = cc.Layer.extend({
         this.unscheduleUpdate();
         this.uiLayer.stopTimer();
 
-        this.addChild(new BattleResultLayer("lose", this.battleData), 2);
+        let playerEnergyHouse = this.battleData.getEnergyHouse(GameConfig.PLAYER);
+        let opponentEnergyHouse = this.battleData.getEnergyHouse(GameConfig.OPPONENT);
+
+        // FIXME: hardcode result value
+        let result = "draw";
+        if (playerEnergyHouse > opponentEnergyHouse) {
+            result = "win";
+        } else if (playerEnergyHouse < opponentEnergyHouse) {
+            result = "lose";
+        }
+        this.addChild(new BattleResultLayer(result, this.battleData), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
         GameConfig.gameLayer = null;

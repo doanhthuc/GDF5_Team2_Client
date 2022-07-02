@@ -10,14 +10,12 @@ let BattleMapLayer = cc.Layer.extend({
             y: (cc.winSize.height - BattleResource.DECK_CARD_HEIGHT) / 2 + BattleResource.DECK_CARD_HEIGHT
         });
 
-        this.playerMap = this.battleData.getPlayerMap();
-        this.opponentMap = this.battleData.getOpponentMap();
-        this.path = this.battleData.getPlayerLongestPath();
-        this._genPlayerMap(this.playerMap, GameConfig.PLAYER);
-        this._genPlayerMap(this.opponentMap, GameConfig.OPPONENT);
+        this._genMap(GameConfig.PLAYER);
+        this._genMap(GameConfig.OPPONENT);
     },
 
-    _genPlayerMap: function (map, mode) {
+    _genMap: function (mode) {
+        let map = this.battleData.getMap(mode);
         for (let r = 0; r < map.length; r++) {
             for (let c = 0; c < map[0].length; c++) {
                 let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r, mode);

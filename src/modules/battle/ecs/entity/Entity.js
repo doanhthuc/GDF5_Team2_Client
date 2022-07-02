@@ -2,11 +2,16 @@ let EntityECS = cc.Class.extend({
     typeID: 0,
     name: "EntityECS",
 
-    ctor: function (typeID) {
+    ctor: function (typeID, mode) {
         this.typeID = typeID;
         this.components = {};
         this.id = Utils.UUID.genInstanceID();
         this._active = true;
+
+        if (!mode) {
+            mode = GameConfig.PLAYER;
+        }
+        this.mode = mode;
     },
 
     addComponent: function (component) {

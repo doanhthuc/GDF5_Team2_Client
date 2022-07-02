@@ -10,7 +10,8 @@ let BattleData = cc.Class.extend({
                 trophy: 30,
                 energyHouse: 6,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
-                path: null,
+                longestPath: null,
+                shortestPathForEachTile: null,
             },
             opponent: {
                 username: "OPPONENT333",
@@ -18,7 +19,8 @@ let BattleData = cc.Class.extend({
                 trophy: 20,
                 energyHouse: 4,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
-                path: null,
+                longestPath: null,
+                shortestPathForEachTile: null,
             }
         }
 
@@ -43,43 +45,28 @@ let BattleData = cc.Class.extend({
         return this.dataInGame.currentWave;
     },
 
-    getPlayerUsername: function () {
-        return this.dataInGame.player.username;
+    getUsername: function (mode) {
+        return this.dataInGame[mode].username;
     },
 
-    getOpponentUsername: function () {
-        return this.dataInGame.opponent.username;
+    getClanName: function (mode) {
+        return this.dataInGame[mode].clanName;
     },
 
-    getPlayerClanName: function () {
-        return this.dataInGame.player.clanName;
-    },
 
-    getOpponentClanName: function () {
-        return this.dataInGame.opponent.clanName;
-    },
-
-    getPlayerEnergyHouse: function () {
-        return this.dataInGame.player.energyHouse;
-    },
-
-    setPlayerEnergyHouse: function (val) {
+    setEnergyHouse: function (val, mode) {
         if (val < 0) {
             val = 0;
         }
-        this.dataInGame.player.energyHouse = val;
+        this.dataInGame[mode].energyHouse = val;
     },
 
-    getOpponentEnergyHouse: function () {
-        return this.dataInGame.opponent.energyHouse;
+    getEnergyHouse: function (mode) {
+        return this.dataInGame[mode].energyHouse;
     },
 
-    getPlayerTrophy: function () {
-        return this.dataInGame.player.trophy;
-    },
-
-    getOpponentTrophy: function () {
-        return this.dataInGame.opponent.trophy;
+    getTrophy: function (mode) {
+        return this.dataInGame[mode].trophy;
     },
 
     setCurrentWave: function (currentWave) {
@@ -87,43 +74,27 @@ let BattleData = cc.Class.extend({
         return this.dataInGame.currentWave;
     },
 
-    getPlayerMap: function () {
-        return this.dataInGame.player.map;
-    },
 
-    setPlayerMap: function (map) {
+    setMap: function (map, mode) {
         if (GameConfig.MAP_HEIGH !== map.length && GameConfig.MAP_WIDTH !== map[0].length) {
             throw new Error("Map size is invalid")
         }
-        return this.dataInGame.player.map = map;
+        return this.dataInGame[mode].map = map;
     },
 
-    setOpponentMap: function (map) {
-        if (GameConfig.MAP_HEIGH !== map.length && GameConfig.MAP_WIDTH !== map[0].length) {
-            throw new Error("Map size is invalid")
-        }
-        return this.dataInGame.opponent.map = map;
+    getMap: function (mode) {
+        return this.dataInGame[mode].map;
     },
 
-    getOpponentMap: function () {
-        return this.dataInGame.opponent.map;
+    getShortestPathForEachTile: function (mode) {
+        return this.dataInGame[mode].shortestPathForEachTile;
     },
 
-    getPlayerLongestPath: function () {
-        // return Utils.tileArray2PixelArray([{x: 0, y: GameConfig.MAP_HEIGH-1}, {x: 0, y: 2},
-        //     {x: 3, y: 2}, {x: 3, y: 1}, {x: 6, y: 0}]);
-        return this.dataInGame.player.path;
+    setShortestPathForEachTile: function (shortestPathForEachTile, mode) {
+        this.dataInGame[mode].shortestPathForEachTile = shortestPathForEachTile;
     },
 
-    setPlayerLongestPath: function (path) {
-        return this.dataInGame.player.path = Utils.tileArray2PixelArray(path);
-    },
-
-    getOpponentLongestPath: function () {
-        return this.dataInGame.opponent.path = Utils.tileArray2PixelArray(path);
-    },
-
-    setOpponentLongestPath: function (path) {
-        return this.dataInGame.opponent.path = Utils.tileArray2PixelArray(path);
+    setLongestPath: function (longestPath, mode) {
+        return this.dataInGame[mode].longestPath = Utils.tileArray2PixelArray(longestPath);
     },
 });
