@@ -7,9 +7,20 @@ var ScreenNetwork = cc.Layer.extend({
     ctor: function () {
         this._super();
         var size = cc.director.getVisibleSize();
-        var loginscene = ccs.load(res.LOGINSCENCE, "");
-        this.addChild(loginscene.node);
-        this.loginNode = loginscene.node;
+        var loginscene = ccs.load(res.LOGINSCENCE, "").node;
+        this.addChild(loginscene);
+        loginscene.attr({
+            anchorX:0.5,
+            anchorY:0.5,
+            x:cc.winSize.width/2,
+            y:cc.winSize.height/2,
+        });
+        this.loginNode = loginscene;
+        let background=this.loginNode.getChildByName("Image_1")
+        background.setScale(Math.max(cc.winSize.height/background.height,cc.winSize.width/background.width));
+        // for (i in this.loginNode.getChildren().length){
+        //     (this.loginNode.getChildren())[i].setScale(Math.max(cc.winSize.height/background.height,cc.winSize.width/background.width));
+        // }
         this.btnLogin = this.loginNode.getChildByName("Button_1");
         this.btnLogin.addClickEventListener(this.onSelectLogin.bind(this));
         this.textFieldUID = this.loginNode.getChildByName("TextField_1");
@@ -46,8 +57,8 @@ var ScreenNetwork = cc.Layer.extend({
     onFinishLogin: function () {
         fr.view(MainScreen);
         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
-        // testnetwork.connector.sendGetUserLobbyChest();
-         //testnetwork.connector.sendGetUserInventory();
+        testnetwork.connector.sendGetUserLobbyChest();
+         testnetwork.connector.sendGetUserInventory();
          //testnetwork.connector.sendGetUserGoldShop();
         //testnetwork.connector.sendUpgradeCard(2);
         //.connector.sendGetUserDailyShop();
