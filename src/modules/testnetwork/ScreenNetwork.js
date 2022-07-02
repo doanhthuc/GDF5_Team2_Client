@@ -10,33 +10,50 @@ var ScreenNetwork = cc.Layer.extend({
         var loginscene = ccs.load(res.LOGINSCENCE, "").node;
         this.addChild(loginscene);
         loginscene.attr({
-            anchorX:0.5,
-            anchorY:0.5,
-            x:cc.winSize.width/2,
-            y:cc.winSize.height/2,
+            anchorX: 0.5,
+            anchorY: 0.5,
+            x: cc.winSize.width / 2,
+            y: cc.winSize.height / 2,
         });
+        this.loginNotice= ccs.load(res.LOGINNOTICE,"").node;
+        this.loginNotice.attr({
+            anchorX: 0.5,
+            anchorY: 0.5,
+            x: cc.winSize.width / 2,
+            y: cc.winSize.height / 2,
+            //scale:cc.winSize.width/this.loginNotice.width,
+        })
+        this.loginNotice.setVisible(false);
+        this.addChild(this.loginNotice);
+        this.loginNoticeField=this.loginNotice.getChildByName("TextField_2");
         this.loginNode = loginscene;
-        let background=this.loginNode.getChildByName("Image_1")
-        background.setScale(Math.max(cc.winSize.height/background.height,cc.winSize.width/background.width));
+        let background = this.loginNode.getChildByName("Image_1")
+        background.setScale(Math.max(cc.winSize.height / background.height, cc.winSize.width / background.width));
         // for (i in this.loginNode.getChildren().length){
         //     (this.loginNode.getChildren())[i].setScale(Math.max(cc.winSize.height/background.height,cc.winSize.width/background.width));
         // }
         this.btnLogin = this.loginNode.getChildByName("Button_1");
         this.btnLogin.addClickEventListener(this.onSelectLogin.bind(this));
         this.textFieldUID = this.loginNode.getChildByName("TextField_1");
-        this.lblLog = gv.commonText(fr.Localization.text("..."), size.width * 0.5, size.height * 0.05);
+         this.lblLog = gv.commonText(fr.Localization.text(""), size.width * 0.5, size.height * 0.5);
         this.addChild(this.lblLog);
-
+        this.scheduleUpdate();
+    },
+    update:function(dt)
+    {
+        if (this.noticeTimer<=0) this.loginNotice.setVisible(false);
+        else this.noticeTimer-=dt;
     },
     onSelectBack: function (sender) {
         fr.view(ScreenMenu);
     },
     onSelectLogin: function (sender) {
-        inputUID = this.textFieldUID.getString();
-        if (inputUID=="") this.lblLog.setString("Bạn Chưa nhập ID");
-        else if (isNaN(inputUID)) this.lblLog.setString("Vui lòng nhập ID là các chữ số")
-        else if (inputUID.length > 15) this.lblLog.setString("Vui lòng nhập UID dưới 15 kí tự");
+        let inputUID = this.textFieldUID.getString();
+        if (inputUID == "") this.showNotice("Vui lòng nhập ID");
+        else if (this.checkSpecial(inputUID) == true) this.showNotice("ID không chứa kí tự đặc biệt");
+        else if (inputUID.length > 15) this.showNotice("Vui lòng nhập UID dưới 15 kí tự");
         else {
+            this.showNotice("Đăng nhập thành công")
             UID = this.textFieldUID.getString();
             cc.log(UID);
             gv.gameClient.connect();
@@ -58,8 +75,8 @@ var ScreenNetwork = cc.Layer.extend({
         fr.view(MainScreen);
         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
         testnetwork.connector.sendGetUserLobbyChest();
-         testnetwork.connector.sendGetUserInventory();
-         //testnetwork.connector.sendGetUserGoldShop();
+        testnetwork.connector.sendGetUserInventory();
+        //testnetwork.connector.sendGetUserGoldShop();
         //testnetwork.connector.sendUpgradeCard(2);
         //.connector.sendGetUserDailyShop();
         // testnetwork.connector.sendAddUserGem(100);
@@ -73,7 +90,20 @@ var ScreenNetwork = cc.Layer.extend({
         // testnetwork.connector.sendCheatUserCard(new Card(2,5,200));
         // testnetwork.connector.sendCheatUserLobbyChest(new ChestInfoCheat(0, 1, 30 * 60 * 1000));
         //testnetwork.connector.sendBuyDailyShop(2);
-        testnetwork.connector.sendGetBattleMap();
+        //testnetwork.connector.sendGetBattleMap();
         cc.log("Finished login");
+    },
+    checkSpecial: function (inputUID) {
+        for (i = 0; i < inputUID.length; i++) {
+            c = inputUID[i];
+            if ((c >= 'a' && c >= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+            } else return true;
+        }
+        return false;
+    },
+    showNotice:function(message){
+            this.loginNotice.setVisible(true);
+            this.loginNoticeField.setString(message);
+            this.noticeTimer=3;
     }
 });

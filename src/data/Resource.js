@@ -87,6 +87,7 @@ var res = {
     ZCSD_POPUP_MINI_GAME: 'zcsd/game/mini_game/PopupMiniGame.json',
 
     LOGINSCENCE: "ui/login/Login.json",
+    LOGINNOTICE: "ui/login/LoginNoticeNode.json",
     //images
     Slot1_png: 'zcsd/slot1.png',
     ACTIVE_TAB_BG: '/textures/lobby/lobby_page_btn_selecting.png'
