@@ -56,6 +56,8 @@ const TreasureContext = cc.Class.extend({
                     .cardNodeMap.get(rewardType).onUpdateCard(packet.itemQuantity[i]);
             }
         }
+        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet);
+        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
     },
 
     onClaimChestSuccess: function (packet) {
@@ -79,6 +81,8 @@ const TreasureContext = cc.Class.extend({
                     .cardNodeMap.get(rewardType).onUpdateCard(packet.itemQuantity[i]);
             }
         }
+        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet)
+        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
     },
 
 

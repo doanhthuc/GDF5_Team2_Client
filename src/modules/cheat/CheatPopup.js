@@ -76,5 +76,16 @@ const CheatPopup = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatFullChest();
         }
+    },
+
+    resetCheatForm: function () {
+        this.goldCheatInput.setString('');
+        this.gemCheatInput.setString('');
+        this.trophyCheatInput.setString('');
+        this.cardIdCheatInput.setString('');
+        this.cardLevelCheatInput.setString('');
+        this.cardQuantityCheatInput.setString('');
+        this.cardImg.setVisible(false);
+        this.lelelTxt.setString('');
     }
 });

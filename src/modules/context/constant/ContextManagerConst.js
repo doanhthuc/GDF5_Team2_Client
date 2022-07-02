@@ -4,5 +4,6 @@ const ContextManagerConst = {
         INVENTORY_CONTEXT: 'inventoryContext',
         TREASURE_CONTEXT: 'treasureContext',
         CHEAT_CONTEXT: 'cheatContext',
+        SHOP_CONTEXT: 'shopContext',
     }
 }

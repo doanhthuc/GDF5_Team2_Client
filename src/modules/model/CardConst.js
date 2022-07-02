@@ -120,3 +120,5 @@ const CARD_CONST = {
         energy: 10,
     }
 }
+
+const MAX_CARD_LEVEL = 10;

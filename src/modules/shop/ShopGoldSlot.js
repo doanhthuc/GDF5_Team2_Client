@@ -24,8 +24,8 @@ const ShopGoldSlot = cc.Node.extend({
 
     onBuyBtnClick: function(sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            let buyGoldPopup = this.clientUIManager.getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
-            this.clientUIManager.showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
+            let buyGoldPopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
         }
     }
 });

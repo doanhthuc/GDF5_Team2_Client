@@ -29,6 +29,7 @@ const CheatContext = cc.Class.extend({
         let InventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
         let index = InventoryContext.cardCollectionList.findIndex(card => (card.cardType === cardId));
         if (index !== -1) return;
+        if (cardLevel > MAX_CARD_LEVEL) cardLevel = MAX_CARD_LEVEL;
         if (cardId && cardLevel && accumulatedCard) {
             testnetwork.connector.sendCheatUserCard(new Card(cardId, cardLevel, accumulatedCard));
         } else if (cardId && !cardLevel && accumulatedCard) {

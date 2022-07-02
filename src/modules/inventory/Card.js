@@ -61,8 +61,8 @@ const CardNode = cc.Node.extend({
 
     onCardClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED && this.cardModel) {
-            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setCardModel(this.cardModel);
-            ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL);
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setCardModel(this.cardModel);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL);
         }
     },
 
@@ -72,7 +72,10 @@ const CardNode = cc.Node.extend({
 
     setUpgradeProgressBar: function (accumulatedCard) {
         //TODO: exception when max level
-        if (accumulatedCard < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
+        if (this.cardModel.level >= MAX_CARD_LEVEL) {
+            this.accumulateTxt.setString('MAX');
+            this.progressBackgroundImg.setScaleX(1);
+        } else if (accumulatedCard < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
             this.progressBackgroundImg.setScaleX(accumulatedCard / JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
             this.accumulateTxt.setString(accumulatedCard + '/' + JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
         } else {
@@ -80,8 +83,6 @@ const CardNode = cc.Node.extend({
             this.accumulateTxt.setString(accumulatedCard + '/' + JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
         }
     }
-
-
 });
 
 var Card = cc.Class.extend({

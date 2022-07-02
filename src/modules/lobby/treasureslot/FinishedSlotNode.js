@@ -19,8 +19,8 @@ const FinishedSlotNode = cc.Node.extend({
 
     onSlotClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE).setPopUpInfoFromTreasureType(this.treasureTypeId);
-            ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE).setPopUpInfoFromTreasureType(this.treasureTypeId);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
         }
     },
 

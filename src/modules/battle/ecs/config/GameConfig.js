@@ -58,8 +58,6 @@ GameConfig.TILE_HEIGH = 77;
 GameConfig.MAP_WIDTH = 7;
 GameConfig.MAP_HEIGH = 5;
 GameConfig.RIVER_MAP_HEIGH = 100;
-GameConfig.SCREEN_WIDTH = 640;
-GameConfig.SCREEN_HEIGH = 1136;
 
 GameConfig.DIRECTION = {
     BOTTOM: 2,

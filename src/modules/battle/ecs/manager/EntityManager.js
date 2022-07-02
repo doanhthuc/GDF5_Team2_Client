@@ -6,9 +6,9 @@ let EntityManager = cc.Class.extend({
     * entityID2: entity2,
     * ...}
     * */
-    entities: {},
 
     ctor: function () {
+        this.entities = {}
     },
 
     createEntity: function () {
@@ -47,10 +47,3 @@ let EntityManager = cc.Class.extend({
     },
 });
 
-let _entityManager = _entityManager || null;
-EntityManager.getInstance = function () {
-    if (_entityManager === null) {
-        _entityManager = new EntityManager();
-    }
-    return _entityManager;
-};

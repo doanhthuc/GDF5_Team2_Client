@@ -1,19 +1,39 @@
 let GameLayer = cc.Layer.extend({
-    mapLayer: null,
-    uiLayer: null,
-    renderSystem: null,
-    movementSystem: null,
 
     ctor: function () {
         this._super();
         GameConfig.gameLayer = this;
 
+        // data game
+        this.dataInGame = {
+            currentWave: 0,
+            maxWave: 10,
+            timer: 5,
+            player: {
+                username: "HOVANVYDUT",
+                trophy: 30,
+                energyHouse: 10,
+            },
+            opponent: {
+                username: "OPPONENT",
+                trophy: 20,
+                energyHouse: 10,
+            }
+        }
+
         // create UI
+        let maxTimerDuration = 3, maxWave = 10, playerHouseEnergy = 4, opponentHouseEnergy = 10;
+        this.uiLayer = new BattleUILayer(maxTimerDuration, maxWave, playerHouseEnergy, opponentHouseEnergy);
+        this.addChild(this.uiLayer, 2);
+
         this.mapLayer = new BattleMapLayer();
         this.addChild(this.mapLayer, 1);
 
-        this.uiLayer = new BattleUILayer();
-        this.addChild(this.uiLayer, 1);
+        // init entity manager
+        this._entityManager = new EntityManager();;
+        EntityManager.getInstance = function () {
+            return this._entityManager;
+        }.bind(this);
 
         // create system
         this.movementSystem = new MovementSystem();
@@ -26,7 +46,6 @@ let GameLayer = cc.Layer.extend({
 
         // this._initTower();
         this._handleEventKey();
-
         this.scheduleUpdate();
     },
 
@@ -67,20 +86,6 @@ let GameLayer = cc.Layer.extend({
     },
 
     _handleEventKey: function () {
-        if ('keyboard' in cc.sys.capabilities) {
-            cc.eventManager.addListener({
-                event: cc.EventListener.KEYBOARD,
-                onKeyPressed: function (key, event) {
-                    cc.log("Key down:" + key);
-                }.bind(this),
-                onKeyReleased: function (key, event) {
-                    cc.log("Key up:" + key);
-                }.bind(this)
-            }, this);
-        } else {
-            cc.log("KEYBOARD Not supported");
-        }
-
         cc.eventManager.addListener(cc.EventListener.create({
             event: cc.EventListener.TOUCH_ALL_AT_ONCE,
             onTouchesEnded: function (touches, event) {
@@ -96,5 +101,10 @@ let GameLayer = cc.Layer.extend({
 
     stopGame: function () {
         this.unscheduleUpdate();
+        this.uiLayer.stopTimer();
+
+        this.addChild(new BattleResultLayer("lose"), 2);
+        delete this._entityManager;
+        delete ComponentManager.getInstance();
     },
 });

@@ -8,7 +8,7 @@ testnetwork.Connector = cc.Class.extend({
     ctor: function (gameClient) {
         this.gameClient = gameClient;
         gameClient.packetFactory.addPacketMap(testnetwork.packetMap);
-        gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
+            gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
     },
     onReceivedPacket: function (cmd, packet) {
         cc.log("onReceivedPacket:", cmd);
@@ -132,7 +132,7 @@ testnetwork.Connector = cc.Class.extend({
         if (UID != 0) {
             cc.log("sendLoginRequest");
             var pk = this.gameClient.getOutPacket(CmdSendLogin);
-            pk.pack("",UID);
+            pk.pack("", UID);
             this.gameClient.sendPacket(pk);
         }
     },

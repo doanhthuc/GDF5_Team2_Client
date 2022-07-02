@@ -28,5 +28,3 @@ ClientUIManager.getInstance = function () {
     }
     return ClientUIManager._instance;
 }
-
-// const clientUIManager = new ClientUIManager();

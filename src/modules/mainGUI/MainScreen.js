@@ -1,4 +1,5 @@
 const MainScreen = cc.Layer.extend({
+    _className: "MainScreen",
     ctor: function () {
         this.DEFAULT_TAB = 'HOME_TAB';
         this.activeTab = this.DEFAULT_TAB;
@@ -27,19 +28,20 @@ const MainScreen = cc.Layer.extend({
         this.addChild(this.header);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE, this.header);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE);
+        let headerHeight = this.header.getNodeHeight();
 
         this.homeLayer = new lobbyLayer();
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE, this.homeLayer);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE);
+        let headerHeight = this.header.headerBackgroundImg.getSize().height;
+        this.homeLayer.setPositionForPlayerInfo(headerHeight);
         // this.treasureSlotList = this.homeLayer.getChildByName('treasureHolder').getChildren();
 
         this.listView = this.mainPageView.getPages()[NavResources.TAB_LIST.INVENTORY_TAB.index].getChildByName('inventoryListView');
         this.listViewPanel = this.listView.getChildByName('listViewPanel');
 
-        cc.log('mainGui inventory layer start create')
-        this.inventoryLayer = new InventoryLayer();
-        cc.log('mainGui inventory layer end create')
+        this.inventoryLayer = new InventoryLayer(headerHeight);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE, this.inventoryLayer);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE);
 
@@ -61,8 +63,6 @@ const MainScreen = cc.Layer.extend({
         this.initPopups();
 
         this.initListViewEventListener();
-
-
     },
 
     scrollToDefaultPage: function () {
@@ -75,18 +75,19 @@ const MainScreen = cc.Layer.extend({
         this.buyGoldPopupNode = new BuyGoldPopup();
         this.cardDetailPopupNode = new CardDetailPopup();
         this.cheatPopupNode = new CheatPopup();
+        this.openTreasurePopupNode = new OpenTreasurePopup();
 
         this.addPopup(this.treasurePopupNode);
         this.addPopup(this.buyCardPopupNode);
         this.addPopup(this.buyGoldPopupNode);
         this.addPopup(this.cardDetailPopupNode);
         this.addPopup(this.cheatPopupNode);
+        this.addPopup(this.openTreasurePopupNode);
     },
 
     addPopup: function (popupNode) {
-        this.clientUIManager.registerUI(popupNode.name, popupNode);
-        popupNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
-        this.addChild(popupNode, CLIENT_UI_CONST.Z_ORDER.POP_UP);
+        popupNode.retain();
+        PopupUIManager.getInstance().registerUI(popupNode.name, popupNode);
     },
 
 
@@ -122,11 +123,13 @@ const MainScreen = cc.Layer.extend({
                 }
                 if (this.shouldSetTouchPos && Math.abs(touch.getLocation().y - this.touchPos.y) > InventoryResources.VERTICAL_SCROLL_THRESHOLD) {
                     this.listView.setTouchEnabled(true);
+                    if (this.activeTab === NavResources.TAB_LIST.INVENTORY_TAB.name) this.mainPageView.setTouchEnabled(false);
                     this.shouldSetTouchPos = false;
                 }
             }.bind(this),
             onTouchEnded: function (touch, event) {
                 this.shouldSetTouchPos = true;
+                this.mainPageView.setTouchEnabled(true);
             }.bind(this)
         });
 

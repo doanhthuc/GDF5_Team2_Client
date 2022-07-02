@@ -22,6 +22,10 @@ const Header = cc.Node.extend({
         this.addCheatButton();
     },
 
+    getNodeHeight: function () {
+        return this.headerBackgroundImg.getSize().height;
+    },
+
     setUserGold: function (gold) {
         this.userGoldTxt.setString(gold);
     },
@@ -32,10 +36,15 @@ const Header = cc.Node.extend({
 
     onGoldTopUpBtnClicked: function () {
         // this.userGoldTxt.setString((this.userGoldTxt.getString() - 0) + 100);
+        let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
+        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatUserInfo(userContext.user.gold + 1000, userContext.user.gem, userContext.user.trophy);
+        this.parent.mainPageView.scrollToPage(NavResources.TAB_LIST.SHOP_TAB.index)
     },
 
     onGemTopUpBtnClicked: function () {
-
+        let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
+        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatUserInfo(userContext.user.gold, userContext.user.gem + 1000, userContext.user.trophy);
+        this.parent.mainPageView.scrollToPage(NavResources.TAB_LIST.SHOP_TAB.index)
     },
 
     addCheatButton: function () {
@@ -43,13 +52,13 @@ const Header = cc.Node.extend({
         this.addChild(this.cheatBtnNode);
         this.cheatBtn = this.cheatBtnNode.getChildByName('cheatBtn');
         this.cheatBtn.addTouchEventListener(this.onCheatBtnClicked.bind(this), this);
-        cc.log('this.cheatBtn.getSize().width / 2 ' + this.cheatBtn.getSize().width / 2);
         this.cheatBtnNode.setPosition(cc.winSize.width / 2 - (this.cheatBtn.getSize().width * 0.8) / 2 + 3, this.cheatBtn.getSize().height * 0.2 / 2);
     },
 
     onCheatBtnClicked: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT);
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT).resetCheatForm();
         }
     }
 

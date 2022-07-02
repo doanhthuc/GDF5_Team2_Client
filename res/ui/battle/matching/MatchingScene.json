@@ -1,0 +1,161 @@
+{
+  "ID": "bc4b6553-5563-434a-ac58-1c3a0e49b6a1",
+  "Version": "2.3.4",
+  "Name": "MatchingScene",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 24,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/lobby/lobby_background.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 281,
+            "Scale9OriginY": 435,
+            "Scale9Width": 290,
+            "Scale9Height": 451,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 320.0,
+              "Y": 568.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.5
+            },
+            "PreSize": {
+              "X": 1.3312,
+              "Y": 1.1629
+            },
+            "LeftMargin": -106.0,
+            "RightMargin": -106.0,
+            "TopMargin": -92.5,
+            "BottomMargin": -92.5,
+            "Tag": 63,
+            "ActionTag": 1722891427,
+            "Size": {
+              "X": 852.0,
+              "Y": 1321.0
+            },
+            "Name": "background",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/matching/MapIconNode.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 334.245,
+              "Y": 581.67
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.5223,
+              "Y": 0.512
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 334.245,
+            "RightMargin": 305.755,
+            "TopMargin": 554.33,
+            "BottomMargin": 581.67,
+            "Tag": 47,
+            "ActionTag": -1005995887,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "map_icon",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/matching/MatchingTextNode.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 320.0,
+              "Y": 894.5366
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.7874
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 320.0,
+            "RightMargin": 320.0,
+            "TopMargin": 241.4634,
+            "BottomMargin": 894.5366,
+            "Tag": 132,
+            "ActionTag": -355443418,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "matching_text_node",
+            "ctype": "ProjectNodeObjectData"
+          }
+        ],
+        "Size": {
+          "X": 640.0,
+          "Y": 1136.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../../textures/lobby/lobby_background.png",
+        "MapIconNode.json",
+        "MatchingTextNode.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}
