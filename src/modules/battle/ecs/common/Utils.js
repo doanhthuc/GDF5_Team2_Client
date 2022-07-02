@@ -5,35 +5,76 @@ Utils.getVariableName = function (variable) {
     return name;
 };
 
-Utils.tile2Pixel = function (x, y) {
-    // ^ y
-    // |
-    // |-------->x
+// FIXME: hard code
+const CARD_DECK_HEIGHT = BattleResource.DECK_CARD_HEIGHT;
+const RIVER_HEIGHT = BattleResource.RIVER_HEIGHT;
+Utils.tile2Pixel = function (x, y, mode) {
     // return center of tile pixel
+    if (!mode) {
+        mode = GameConfig.PLAYER;
+    }
 
-    // center of map y = 4
-    let centerY = (cc.winSize.height - 200) / 2 + 200 - (50 + GameConfig.TILE_HEIGH / 2);
-    let startX = (cc.winSize.width - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH) / 2 + GameConfig.TILE_WIDTH / 2;
+    if (mode === GameConfig.PLAYER) {
+        // ^ y
+        // |
+        // |
+        // |-------->x
+        // center of tile y = 4
+        let centerY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT - (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH / 2);
+        let paddingX = (cc.winSize.width - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH) / 2;
+        let startX = paddingX + GameConfig.TILE_WIDTH / 2;
 
-    let yy = centerY - (GameConfig.MAP_HEIGH - 1 - y) * GameConfig.TILE_HEIGH;
-    let xx = startX + GameConfig.TILE_WIDTH * x;
-    return {x: xx, y: yy};
+        let yy = centerY - (GameConfig.MAP_HEIGH - 1 - y) * GameConfig.TILE_HEIGH;
+        let xx = startX + GameConfig.TILE_WIDTH * x;
+        return {x: xx, y: yy};
+    } else if (mode === GameConfig.OPPONENT) {
+        // x <---------o
+        //             |
+        //             |
+        //             V
+        //             y
+        // return center of tile pixel
+
+        // center of  y = 4
+        let centerY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT + (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH / 2);
+        let paddingX = (cc.winSize.width - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH) / 2;
+        let startX = cc.winSize.width - paddingX - GameConfig.TILE_WIDTH / 2;
+
+        let yy = centerY + (GameConfig.MAP_HEIGH - 1 - y) * GameConfig.TILE_HEIGH;
+        let xx = startX - GameConfig.TILE_WIDTH * x;
+        return {x: xx, y: yy};
+    }
 };
 
-Utils.pixel2Tile = function (xx, yy) {
-    let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
-    let x = Math.floor((xx - paddingX) / GameConfig.TILE_WIDTH);
+Utils.pixel2Tile = function (xx, yy, mode) {
+    if (!mode) {
+        mode = GameConfig.PLAYER;
+    }
 
-    let paddingY = (cc.winSize.height - 200) / 2 + 200 - (50 + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH);
-    let y = Math.floor((yy - paddingY) / GameConfig.TILE_HEIGH);
+    if (mode === GameConfig.PLAYER) {
+        let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
+        let x = Math.floor((xx - paddingX) / GameConfig.TILE_WIDTH);
 
-    return {x, y};
+        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT - (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH);
+        let y = Math.floor((yy - paddingY) / GameConfig.TILE_HEIGH);
+
+        return {x, y};
+    } else if (mode === GameConfig.OPPONENT) {
+        let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
+        let x = Math.floor(((cc.winSize - xx) - paddingX) / GameConfig.TILE_WIDTH);
+
+        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT + (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH);
+        let y = Math.floor((cc.winSize.height - yy - paddingY) / GameConfig.TILE_HEIGH);
+
+        return {x, y};
+    }
 }
 
-Utils.tileArray2PixelArray = function (positionArr) {
+Utils.tileArray2PixelArray = function (positionArr, mode) {
+    mode = mode || GameConfig.PLAYER;
     let result = [];
     for (let pos of positionArr) {
-        result.push(Utils.tile2Pixel(pos.x, pos.y));
+        result.push(Utils.tile2Pixel(pos.x, pos.y, mode));
     }
     return result;
 }

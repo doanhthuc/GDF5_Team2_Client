@@ -63,6 +63,13 @@ let BattleData = cc.Class.extend({
         return this.dataInGame.player.energyHouse;
     },
 
+    setPlayerEnergyHouse: function (val) {
+        if (val < 0) {
+            val = 0;
+        }
+        this.dataInGame.player.energyHouse = val;
+    },
+
     getOpponentEnergyHouse: function () {
         return this.dataInGame.opponent.energyHouse;
     },
@@ -85,20 +92,38 @@ let BattleData = cc.Class.extend({
     },
 
     setPlayerMap: function (map) {
+        if (GameConfig.MAP_HEIGH !== map.length && GameConfig.MAP_WIDTH !== map[0].length) {
+            throw new Error("Map size is invalid")
+        }
         return this.dataInGame.player.map = map;
+    },
+
+    setOpponentMap: function (map) {
+        if (GameConfig.MAP_HEIGH !== map.length && GameConfig.MAP_WIDTH !== map[0].length) {
+            throw new Error("Map size is invalid")
+        }
+        return this.dataInGame.opponent.map = map;
     },
 
     getOpponentMap: function () {
         return this.dataInGame.opponent.map;
     },
 
-    getPlayerBestPath: function () {
+    getPlayerLongestPath: function () {
         // return Utils.tileArray2PixelArray([{x: 0, y: GameConfig.MAP_HEIGH-1}, {x: 0, y: 2},
         //     {x: 3, y: 2}, {x: 3, y: 1}, {x: 6, y: 0}]);
         return this.dataInGame.player.path;
     },
 
-    setPlayerBestPath: function (path) {
+    setPlayerLongestPath: function (path) {
         return this.dataInGame.player.path = Utils.tileArray2PixelArray(path);
-    }
+    },
+
+    getOpponentLongestPath: function () {
+        return this.dataInGame.opponent.path = Utils.tileArray2PixelArray(path);
+    },
+
+    setOpponentLongestPath: function (path) {
+        return this.dataInGame.opponent.path = Utils.tileArray2PixelArray(path);
+    },
 });

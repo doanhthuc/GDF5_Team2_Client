@@ -93,7 +93,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "opponent_map",
+            "Name": "river",
             "ctype": "ProjectNodeObjectData"
           },
           {
@@ -108,7 +108,7 @@
             "AnchorPoint": {},
             "Position": {
               "X": 0.0,
-              "Y": -237.5
+              "Y": -242.5
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -124,8 +124,8 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "TopMargin": 237.5,
-            "BottomMargin": -237.5,
+            "TopMargin": 242.5,
+            "BottomMargin": -242.5,
             "Tag": 1100,
             "ActionTag": 870241969,
             "Size": {
@@ -147,7 +147,7 @@
             "AnchorPoint": {},
             "Position": {
               "X": 0.0,
-              "Y": 237.5
+              "Y": 242.5
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -163,15 +163,15 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "TopMargin": -237.5,
-            "BottomMargin": 237.5,
+            "TopMargin": -242.5,
+            "BottomMargin": 242.5,
             "Tag": 1095,
             "ActionTag": 1363554369,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "river",
+            "Name": "opponent_map",
             "ctype": "ProjectNodeObjectData"
           },
           {

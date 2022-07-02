@@ -28,6 +28,7 @@ EventDispatcher.getInstance()
             entity.removeComponent(entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY));
         }
 
+        // FIXME: what is this?
         if (entity.hasAllComponent(GameConfig.COMPONENT_ID.BULLET_INFO)) {
             let bulletInfoComponent = entity.getComponent(GameConfig.COMPONENT_ID.BULLET_INFO);
             if (bulletInfoComponent.type === "frog") {
@@ -110,9 +111,7 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.FINISH_MATCHING, function (data) {
         let layer = new GameLayer();
         layer.setName("Screen");
-
         let scene = new cc.Scene();
         scene.addChild(layer);
-        cc.log("AAAAAAAAAAAAAAAAAAA")
         cc.director.runScene(new cc.TransitionFade(1, scene));
     })

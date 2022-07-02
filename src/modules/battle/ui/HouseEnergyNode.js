@@ -30,6 +30,7 @@ let HouseEnergyNode = cc.Node.extend({
 
     minusPlayerEnergy: function (energy) {
         this.playerEnergy.setString(this.getPlayerEnergy() - energy);
+        GameConfig.battleData.setPlayerEnergyHouse(this.getPlayerEnergy() - energy);
         if (this.getPlayerEnergy() <= 0) {
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.ZERO_ENERGY_PLAYER_HOUSE);

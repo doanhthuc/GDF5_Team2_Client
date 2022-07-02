@@ -7,67 +7,52 @@ let BattleMapLayer = cc.Layer.extend({
 
         rootNode.attr({
             x: cc.winSize.width / 2,
-            y: (cc.winSize.height - BattleResource.DECK_CARD_HEIGH) / 2 + BattleResource.DECK_CARD_HEIGH
+            y: (cc.winSize.height - BattleResource.DECK_CARD_HEIGHT) / 2 + BattleResource.DECK_CARD_HEIGHT
         });
 
         this.playerMap = this.battleData.getPlayerMap();
-        this.path = this.battleData.getPlayerBestPath();
-        this._genPlayerMap();
+        this.opponentMap = this.battleData.getOpponentMap();
+        this.path = this.battleData.getPlayerLongestPath();
+        this._genPlayerMap(this.playerMap, GameConfig.PLAYER);
+        this._genPlayerMap(this.opponentMap, GameConfig.OPPONENT);
     },
 
-    _genPlayerMap: function () {
-        for (let r = 0; r < this.playerMap.length; r++) {
-            for (let c = 0; c < this.playerMap[0].length; c++) {
-                if (this.playerMap[r][c] === 1) {
-                    let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r);
-                    let sp = new cc.Sprite("textures/battle/battle_item_attack_speed.png");
-                    sp.attr({
-                        x: pos.x,
-                        y: pos.y
-                    })
-                    this.addChild(sp);
+    _genPlayerMap: function (map, mode) {
+        for (let r = 0; r < map.length; r++) {
+            for (let c = 0; c < map[0].length; c++) {
+                let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r, mode);
+                let texture = null;
+
+                // FIXME define 1, 2, 3, 5, 6
+                switch (map[r][c]) {
+                    case 1:
+                        texture = BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG;
+                        break;
+                    case 2:
+                        texture = BattleResource.ITEM_BUFF_RANGE_IMG;
+                        break;
+                    case 3:
+                        texture = BattleResource.ITEM_BUFF_DAMAGE_IMG;
+                        break;
+                    case 5:
+                        texture = BattleResource.OBSTACLE_IMG_2;
+                        break;
+                    case 6:
+                        texture = BattleResource.HOLE_IMG;
+                        break;
+                    default:
+                        continue;
                 }
 
-                if (this.playerMap[r][c] === 2) {
-                    let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r);
-                    let sp = new cc.Sprite("textures/battle/battle_item_range.png");
-                    sp.attr({
-                        x: pos.x,
-                        y: pos.y
-                    })
-                    this.addChild(sp);
-                }
-
-                if (this.playerMap[r][c] === 3) {
-                    let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r);
-                    let sp = new cc.Sprite("textures/battle/battle_item_damage.png");
-                    sp.attr({
-                        x: pos.x,
-                        y: pos.y
-                    })
-                    this.addChild(sp);
-                }
-
-                if (this.playerMap[r][c] === 5) {
-                    let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r);
-                    let sp = new cc.Sprite("textures/map/map_forest_obstacle_2.png");
-                    sp.attr({
-                        x: pos.x,
-                        y: pos.y
-                    })
-                    this.addChild(sp);
-                }
-
-                if (this.playerMap[r][c] === 6) {
-                    let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r);
-                    let sp = new cc.Sprite("textures/battle/UI/ui_hole.png");
-                    sp.attr({
-                        x: pos.x,
-                        y: pos.y
-                    })
-                    this.addChild(sp);
-                }
+                let sp = new cc.Sprite(texture);
+                sp.attr({
+                    x: pos.x,
+                    y: pos.y
+                })
+                this.addChild(sp);
             }
         }
-    }
+    },
+
+
 });
