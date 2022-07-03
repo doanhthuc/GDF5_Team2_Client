@@ -96,7 +96,7 @@ var ScreenNetwork = cc.Layer.extend({
     checkSpecial: function (inputUID) {
         for (i = 0; i < inputUID.length; i++) {
             c = inputUID[i];
-            if ((c >= 'a' && c >= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+            if (c >= '0' && c <= '9') {
             } else return true;
         }
         return false;
