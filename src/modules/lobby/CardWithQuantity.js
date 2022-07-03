@@ -11,8 +11,8 @@ const CardWithQuantity = cc.Node.extend({
         this.node = ccs.load('ui/lobby/cardWithQuantity.json', '').node;
         this.addChild(this.node);
         this.cardBorder = this.node.getChildByName('cardBorder');
-        this.cardImg = this.node.getChildByName('image');
-        this.cardQuantityTxt = this.node.getChildByName('quantity');
+        this.cardImg = this.cardBorder.getChildByName('cardImg');
+        this.cardQuantityTxt = this.cardBorder.getChildByName('cardQuantityTxt');
     },
 
     setCardTexture: function (cardId = 0, quantity = 10) {
