@@ -1,6 +1,4 @@
 const TreasureSlot = cc.Node.extend({
-    id: null,
-
     ctor: function (id) {
         this.id = id;
         this.DEFAULT_STATE = TreasureSlotResources.STATE.EMPTY;
@@ -33,7 +31,7 @@ const TreasureSlot = cc.Node.extend({
     setStateOfSlot: function (state, claimTime = 0) {
         this.state = state;
         cc.log('TreasureSlot line 35 setStateOfSlot: ' + this.state);
-        if (state === TreasureSlotResources.STATE.OPENING &&  claimTime > 0) {
+        if (state === TreasureSlotResources.STATE.OPENING && claimTime > 0) {
             this.setClaimTime(claimTime);
         }
         this.onStateOfSlotUpdated();
@@ -110,11 +108,22 @@ const TreasureSlot = cc.Node.extend({
     },
 
     onSlotClick: function (sender, type) {
+
         if (this.state !== TreasureSlotResources.STATE.EMPTY && type === ccui.Widget.TOUCH_ENDED) {
+            let treasureSlotNodeList = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).treasureSlotNodeList;
+            let openingSlot = treasureSlotNodeList.reduce((acc, curr) => {
+                cc.log('TreasureSlot line 84 onSlotClick: ' + curr.state);
+                return curr.state === TreasureSlotResources.STATE.OPENING ? acc + 1 : acc;
+            }, 0);
+            cc.log('TreasureSlot,js line 99 onSlotClick: ' + openingSlot);
             let action = 0;
             switch (this.state) {
                 case TreasureSlotResources.STATE.OCCUPIED:
-                    action = ChestConst.ACTION.OPEN;
+                    if (openingSlot > 0) {
+                        action = ChestConst.ACTION.SPEED_UP;
+                    } else {
+                        action = ChestConst.ACTION.OPEN;
+                    }
                     break;
                 case TreasureSlotResources.STATE.OPENING:
                     action = ChestConst.ACTION.SPEED_UP;
@@ -130,7 +139,7 @@ const TreasureSlot = cc.Node.extend({
         }
     },
 
-    setClaimTime : function(claimTime){
+    setClaimTime: function (claimTime) {
         this.claimTime = claimTime;
         this.setCountDownString();
         this.schedule(this.setCountDownString, 1);

@@ -16,11 +16,20 @@ const TreasurePopup = cc.Node.extend({
         this.treasureCardQuantityTxt = this.treasurePopupNode.getChildByName('treasureCardQuantityTxt');
         this.primaryBtn = this.treasurePopupNode.getChildByName('primaryBtn');
         this.primaryBtn.addTouchEventListener(this.onPrimaryBtnClick.bind(this), this);
+        this.modal = this.treasurePopupNode.getChildByName('modal');
+        this.modal.addTouchEventListener(this.onModalClick.bind(this), this);
+        this.constrainTxt = this.treasurePopupNode.getChildByName('constrainTxt');
     },
 
     setPopUpInfoFromTreasureType: function (slotId, action, treasureTypeId) {
         this.slotId = slotId;
         this.action = action;
+        let TreasureSlotNodeList = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).treasureSlotNodeList;
+        if (TreasureSlotNodeList[slotId].state === TreasureSlotResources.STATE.OCCUPIED && action === ChestConst.ACTION.SPEED_UP) {
+            this.constrainTxt.setString(TreasureSlotResources.CONSTRAINT_TXT);
+        } else {
+            this.constrainTxt.setString('');
+        }
         let treasureReward = JsonReader.getTreasureConfig().treasures[treasureTypeId].rewards[0];
         this.treasureGoldQuantityTxt.setString(treasureReward.minGold + " - " + treasureReward.maxGold);
         this.treasureCardQuantityTxt.setString(treasureReward.minFragment + " - " + treasureReward.maxFragment);
@@ -49,5 +58,11 @@ const TreasurePopup = cc.Node.extend({
             }
             this.setVisible(false);
         }
-    }
+    },
+
+    onModalClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            this.setVisible(false);
+        }
+    },
 });

@@ -24,6 +24,8 @@ const CardDetailPopup = cc.Node.extend({
         this.upgradeLevelTxt = this.backgroundImg.getChildByName('upgradeLevelTxt');
         this.upgradeLevelTxt.ignoreContentAdaptWithSize(true);
         this.towerImg = this.backgroundImg.getChildByName('towerImg');
+        this.modal = this.cardDetailPopupNode.getChildByName('modal');
+        this.modal.addTouchEventListener(this.onModalClick.bind(this), this);
         this.initCardStatHolders();
 
         this.upgradeBtnState = InventoryResources.UPGRADE_BTN_STATE.NORMAL;
@@ -114,13 +116,39 @@ const CardDetailPopup = cc.Node.extend({
     },
 
     onUpgradeBtnClick: function (sender, type) {
-        if (this.upgradeBtnState === InventoryResources.UPGRADE_BTN_STATE.NORMAL && type === ccui.Widget.TOUCH_ENDED) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
             // cc.log('Card DetailPopup line 102 : onUpgradeBtnClick' + JSON.stringify(contextManager.getContext(ContextManagerConst.USER_CONTEXT)));
+            /*if (this.cardModel.accumulated < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
+
+                return;
+            }
+            if (contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold <
+                JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].gold
+            ) {
+
+                return;
+            }
             if (this.cardModel.accumulated >= JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments &&
                 contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold >=
                 JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].gold) {
-                //TODO: upgrade card
-                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).upgradeCard(this.cardModel.id);
+
+
+            }*/
+            switch (this.upgradeBtnState) {
+                case InventoryResources.UPGRADE_BTN_STATE.DISABLE:
+                    PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES).setType(InventoryResources.RESOURCE_TYPE.CARD)
+                    PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES);
+                    break;
+                case InventoryResources.UPGRADE_BTN_STATE.NOT_ENOUGH_GOLD:
+                    PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES).setType(InventoryResources.RESOURCE_TYPE.GOLD)
+                    PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES);
+                    break;
+                case InventoryResources.UPGRADE_BTN_STATE.NORMAL:
+                    //TODO: upgrade card
+                    contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).upgradeCard(this.cardModel.id);
+                    break;
+                default:
+                    break;
 
             }
         }
@@ -196,5 +224,11 @@ const CardDetailPopup = cc.Node.extend({
         this.setCardDetailPopupTexture();
         this.setUpgradeLevelTxt(this.cardModel.rank);
         this.setUpgradeBtnState(accumulated)
-    }
+    },
+
+    onModalClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            this.setVisible(false);
+        }
+    },
 });
