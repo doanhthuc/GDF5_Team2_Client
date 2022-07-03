@@ -42,12 +42,11 @@ EventDispatcher.getInstance()
 
         entity.setActive(false);
     })
-    .addEventHandler(EventType.ZERO_ENERGY_PLAYER_HOUSE, function (data) {
+    .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
         GameConfig.gameLayer.stopGame();
     })
     .addEventHandler(EventType.END_ALL_WAVE, function (data) {
-        // GameConfig.gameLayer.stopGame();
-        GameConfig.gameLayer.uiLayer.stopTimer();
+        GameConfig.gameLayer.stopGame();
     })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let map = GameConfig.battleData.getMap(GameConfig.PLAYER);
@@ -61,7 +60,7 @@ EventDispatcher.getInstance()
 
         // put tower at x, y
         map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 7;
-        let shortestPathForEachTile = findShortestPathForEachTile(GameConfig.PLAYER);
+        let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
         let entityList = EntityManager.getInstance()
             .getEntitiesByComponents(GameConfig.COMPONENT_ID.PATH);
 
@@ -94,34 +93,3 @@ EventDispatcher.getInstance()
         scene.addChild(layer);
         cc.director.runScene(new cc.TransitionFade(1, scene));
     })
-
-function findShortestPathForEachTile (mode) {
-    let map = GameConfig.battleData.getMap(mode);
-    let shortestPathForEachTiles = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
-
-    cc.log("^^^^^^^^^")
-    for (let r = 0; r < map.length; r++) {
-        let str = "";
-        for (let c = 0; c < map[0].length; c++) {
-            str += map[r][c] + "\t";
-        }
-        cc.log(str);
-    }
-
-    for (let row = 0; row < map.length; row++) {
-        for (let col = 0; col < map[0].length; col++) {
-            if (map[row][col] === 0) {
-                let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
-                if (path && path.length > 0) {
-                    path = Utils.tileArray2PixelArray(path, mode);
-                    shortestPathForEachTiles[row][col] = path;
-                }
-            }
-        }
-    }
-
-    if (shortestPathForEachTiles && shortestPathForEachTiles[0][0]) {
-        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTiles, mode);
-    }
-    return GameConfig.battleData.getShortestPathForEachTile(mode);
-}

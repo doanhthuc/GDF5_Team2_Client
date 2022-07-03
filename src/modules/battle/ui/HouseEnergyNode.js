@@ -1,59 +1,45 @@
 let HouseEnergyNode = cc.Node.extend({
-    ctor: function (playerEnergy, opponentEnergy) {
+    ctor: function () {
         this._super();
+        this._setupUI();
 
+        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.PLAYER), GameConfig.PLAYER);
+        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.OPPONENT), GameConfig.OPPONENT);
+    },
+
+    _setupUI: function () {
         let rootNode = ccs.load(BattleResource.HOUSE_ENERGY_NODE, "").node;
         this.addChild(rootNode);
         let background = rootNode.getChildByName("background");
 
         this.width = background.width;
         this.height = background.height;
+        this.battleData = GameConfig.battleData;
 
         this.playerEnergy = rootNode.getChildByName("player_energy");
         this.opponentEnergy = rootNode.getChildByName("opponent_energy");
-
-        this.setPlayerEnergy(playerEnergy);
-        this.setOpponentEnergy(opponentEnergy);
-    },
-
-    plusPlayerEnergy: function (energy) {
-        this.playerEnergy.setString(this.getPlayerEnergy() + energy);
     },
 
     minusEnergyHouse: function (energy, mode) {
-        // FIXME: optimize
-        if (mode === GameConfig.PLAYER) {
-            this.setPlayerEnergy(this.getPlayerEnergy() - energy);
-            GameConfig.battleData.setEnergyHouse(this.getPlayerEnergy() - energy, mode);
-            if (this.getPlayerEnergy() <= 0) {
-                EventDispatcher.getInstance()
-                    .dispatchEvent(EventType.ZERO_ENERGY_PLAYER_HOUSE);
-            }
-        } else if (mode === GameConfig.OPPONENT) {
-            this.setOpponentEnergy(this.getOpponentEnergy() - energy);
-            GameConfig.battleData.setEnergyHouse(this.getPlayerEnergy() - energy, mode);
-            if (this.getOpponentEnergy() <= 0) {
-                EventDispatcher.getInstance()
-                    .dispatchEvent(EventType.ZERO_ENERGY_PLAYER_HOUSE);
-            }
+        GameConfig.battleData.setEnergyHouse(this.battleData.getEnergyHouse(mode) - energy, mode);
+        this.setEnergyString(this.battleData.getEnergyHouse(mode), mode);
+        if (this.battleData.getEnergyHouse(mode) <= 0) {
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.ZERO_ENERGY_HOUSE);
         }
-
     },
 
-    // FIXME: optimize
-    setOpponentEnergy: function (energy) {
-        this.opponentEnergy.setString(energy)
+    setEnergyString: function (energy, mode) {
+        switch (mode) {
+            case GameConfig.PLAYER:
+                this.playerEnergy.setString(energy);
+                break;
+            case GameConfig.OPPONENT:
+                this.opponentEnergy.setString(energy)
+                break;
+            default:
+                throw new Error("mode is invalid");
+        }
     },
 
-    getOpponentEnergy: function () {
-        return parseInt(this.opponentEnergy.getString(), 10);
-    },
-
-    setPlayerEnergy: function (energy) {
-        this.playerEnergy.setString(energy);
-    },
-
-    getPlayerEnergy: function () {
-        return parseInt(this.playerEnergy.getString(), 10);
-    },
 });

@@ -87,3 +87,34 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
     }
     return storePath.reverse();
 }
+
+FindPathUtil.findShortestPathForEachTile = function (mode) {
+    let map = GameConfig.battleData.getMap(mode);
+    let shortestPathForEachTiles = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
+
+    cc.log("^^^^^^^^^")
+    for (let r = 0; r < map.length; r++) {
+        let str = "";
+        for (let c = 0; c < map[0].length; c++) {
+            str += map[r][c] + "\t";
+        }
+        cc.log(str);
+    }
+
+    for (let row = 0; row < map.length; row++) {
+        for (let col = 0; col < map[0].length; col++) {
+            if (map[row][col] === 0) {
+                let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
+                if (path && path.length > 0) {
+                    path = Utils.tileArray2PixelArray(path, mode);
+                    shortestPathForEachTiles[row][col] = path;
+                }
+            }
+        }
+    }
+
+    if (shortestPathForEachTiles && shortestPathForEachTiles[0][0]) {
+        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTiles, mode);
+    }
+    return GameConfig.battleData.getShortestPathForEachTile(mode);
+}

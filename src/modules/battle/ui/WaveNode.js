@@ -1,8 +1,8 @@
 let WaveNode = cc.Node.extend({
     ctor: function (currentWave, maxWave) {
         this._super();
-        this.maxWave = maxWave || 25;
-        this.currentWave = currentWave || 0;
+        this.maxWave = maxWave;
+        this.currentWave = currentWave;
 
         this.rootNode = ccs.load(BattleResource.WAVE_NODE, "").node;
         this.addChild(this.rootNode);
@@ -17,16 +17,18 @@ let WaveNode = cc.Node.extend({
 
     increaseWave: function () {
         this.currentWave++;
-        GameConfig.battleData.setCurrentWave(this.currentWave);
-        this._updateWave();
+        if (this.currentWave <= this.maxWave) {
+            GameConfig.battleData.setCurrentWave(this.currentWave);
+            this._updateWaveUI();
+        }
 
-        if (this.currentWave >= this.maxWave) {
+        if (this.currentWave >= this.maxWave + 1) {
             EventDispatcher.getInstance()
-                .dispatchEvent(EventType.END_ALL_WAVE)  ;
+                .dispatchEvent(EventType.END_ALL_WAVE);
         }
     },
 
-    _updateWave: function () {
+    _updateWaveUI: function () {
         if (this.currentWave <= this.maxWave) {
             this.waveText.setString(this.currentWave + "/" + this.maxWave)
         }

@@ -1,7 +1,7 @@
 let BattleData = cc.Class.extend({
     ctor: function () {
         this.dataInGame = {
-            currentWave: 3,
+            currentWave: 9,
             maxWave: 10,
             timer: 5,
             player: {
