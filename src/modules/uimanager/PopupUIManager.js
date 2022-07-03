@@ -2,11 +2,14 @@ const PopupUIManager = ClientUIManager.extend({
     showUI: function (uiName) {
         cc.log('PopupUIManager.showUI: ' + uiName);
         let uiNode = this.getUI(uiName);
-        if (!uiNode.parent) {
-            this.addUIToCurrentScene(uiName);
+        if (uiNode) {
+            if (!uiNode.parent) {
+                this.addUIToCurrentScene(uiName);
+            }
             uiNode.setVisible(true);
-        } else if (uiNode) {
-            uiNode.setVisible(true);
+            /*uiNode.setScale(0.8);
+            let scale = cc.ScaleTo(0.4, 1).easing(cc.easeBackInOut());
+            uiNode.runAction(scale);*/
         }
     },
 

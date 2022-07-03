@@ -34,6 +34,8 @@ const MainScreen = cc.Layer.extend({
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE, this.homeLayer);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE);
+        let headerHeight = this.header.headerBackgroundImg.getSize().height;
+        this.homeLayer.setPositionForPlayerInfo(headerHeight);
         // this.treasureSlotList = this.homeLayer.getChildByName('treasureHolder').getChildren();
 
         this.listView = this.mainPageView.getPages()[NavResources.TAB_LIST.INVENTORY_TAB.index].getChildByName('inventoryListView');
@@ -121,11 +123,13 @@ const MainScreen = cc.Layer.extend({
                 }
                 if (this.shouldSetTouchPos && Math.abs(touch.getLocation().y - this.touchPos.y) > InventoryResources.VERTICAL_SCROLL_THRESHOLD) {
                     this.listView.setTouchEnabled(true);
+                    if (this.activeTab === NavResources.TAB_LIST.INVENTORY_TAB.name) this.mainPageView.setTouchEnabled(false);
                     this.shouldSetTouchPos = false;
                 }
             }.bind(this),
             onTouchEnded: function (touch, event) {
                 this.shouldSetTouchPos = true;
+                this.mainPageView.setTouchEnabled(true);
             }.bind(this)
         });
 
