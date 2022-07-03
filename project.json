@@ -76,6 +76,7 @@
         "src/modules/animation/ScreenDragonbones.js",
         "src/modules/battle/BattleMapLayer.js",
         "src/modules/battle/BattleUILayer.js",
+        "src/modules/battle/BattleDeckLayer.js",
         "src/modules/battle/ecs/common/Exception.js",
         "src/modules/battle/ecs/common/FindPathUtil.js",
         "src/modules/battle/ecs/common/Utils.js",

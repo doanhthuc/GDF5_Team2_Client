@@ -4,6 +4,8 @@ let GameLayer = cc.Layer.extend({
         this._super();
         GameConfig.gameLayer = this;
 
+        this.selectedTowerCard = null;
+
         // data game
         this.battleData = GameConfig.battleData;
 
@@ -71,11 +73,22 @@ let GameLayer = cc.Layer.extend({
             return;
         }
 
-        if (type === GameConfig.ENTITY_ID.CANNON_TOWER) {
-            EntityFactory.createCannonOwlTower(pos);
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: pos});
+        switch (type) {
+            case GameConfig.ENTITY_ID.CANNON_TOWER:
+                EntityFactory.createCannonOwlTower(pos);
+                break;
+            case GameConfig.ENTITY_ID.FROG_TOWER:
+                EntityFactory.createBoomerangFrogTower(pos);
+                break;
+            case GameConfig.ENTITY_ID.BEAR_TOWER:
+                EntityFactory.createIceGunPolarBearTower(pos);
+                break;
+            default:
+                return;
         }
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: pos});
+        GameConfig.gameLayer.selectedTowerCard = null;
     },
 
     _initTower: function () {
@@ -88,13 +101,19 @@ let GameLayer = cc.Layer.extend({
         cc.eventManager.addListener(cc.EventListener.create({
             event: cc.EventListener.TOUCH_ALL_AT_ONCE,
             onTouchesEnded: function (touches, event) {
+                cc.log("AAAAAAAAAAAAAAA")
+                cc.log(GameConfig.gameLayer.selectedTowerCard);
                 if (touches.length <= 0)
                     return;
-                let pixel = touches[0].getLocation();
-                let pos = Utils.pixel2Tile(pixel.x, pixel.y);
 
-                GameConfig.gameLayer.putTowerAt(GameConfig.ENTITY_ID.CANNON_TOWER, pos);
-
+                if (GameConfig.gameLayer.selectedTowerCard !== null) {
+                    let pixel = touches[0].getLocation();
+                    let pos = Utils.pixel2Tile(pixel.x, pixel.y);
+                    cc.log("here");
+                    GameConfig.gameLayer.putTowerAt(GameConfig.gameLayer.selectedTowerCard, pos);
+                } else {
+                    cc.log("NULLLLLLLLLLLLLLLLLLLLL")
+                }
             }
         }), this.uiLayer)
     },
