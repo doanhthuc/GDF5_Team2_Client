@@ -22,6 +22,8 @@ gv.CMD.UNLOCK_LOBBY_CHEST = 4002;
 gv.CMD.SPEEDUP_LOBBY_CHEST = 4003;
 gv.CMD.CLAIM_LOBBY_CHEST = 4004;
 
+gv.CMD.SEND_GET_BATTLE_MAP = 5001;
+
 gv.CMD.CHEAT_USER_INFO = 7001;
 gv.CMD.CHEAT_USER_CARD = 7002;
 gv.CMD.CHEAT_USER_LOBBY_CHEST = 7003;
@@ -254,6 +256,19 @@ CMDCheatUserLobbyChest = fr.OutPacket.extend(
         }
     }
 )
+CMDSendGetBattleMap = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.SEND_GET_BATTLE_MAP);
+        },
+        pack: function () {
+            this.packHeader();
+            this.updateSize();
+        }
+    }
+)
 
 /**
  * InPacket
@@ -327,7 +342,7 @@ testnetwork.packetMap[gv.CMD.GET_USER_INVENTORY] = fr.InPacket.extend(
         ctor: function () {
             this._super();
             this.cardCollection = [];
-            this.battleDeckCard = []
+            this.battleDeckCard = [];
         },
         readData: function () {
             this.error = this.getShort();
@@ -381,10 +396,11 @@ testnetwork.packetMap[gv.CMD.SPEEDUP_LOBBY_CHEST] = fr.InPacket.extend(
     {
         ctor: function () {
             this._super();
-            this.itemType = [];
-            this.itemQuantity = [];
+
         },
         readData: function () {
+            this.itemType = [];
+            this.itemQuantity = [];
             this.error = this.getShort();
             this.lobbyChestid = this.getInt();
             this.state = this.getInt();
@@ -402,10 +418,11 @@ testnetwork.packetMap[gv.CMD.CLAIM_LOBBY_CHEST] = fr.InPacket.extend(
     {
         ctor: function () {
             this._super();
-            this.itemType = [];
-            this.itemQuantity = [];
+
         },
         readData: function () {
+            this.itemType = [];
+            this.itemQuantity = [];
             this.error = this.getShort();
             this.lobbyChestid = this.getInt();
             this.state = this.getInt();
@@ -471,6 +488,32 @@ testnetwork.packetMap[gv.CMD.CHEAT_USER_LOBBY_CHEST] = fr.InPacket.extend(
             this.chestId = this.getInt();
             this.chestState = this.getInt();
             this.chestClaimTime = this.getLong();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.SEND_GET_BATTLE_MAP] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.mapH = this.getInt();
+            this.mapW = this.getInt();
+            this.btmap = new Array(this.mapH);
+            for(i=this.mapH-1;i>=0;i--)
+                this.btmap[i]= new Array(this.mapW);
+            this.path= []
+            for (i = 0; i < this.mapH; i++)
+                for (j = 0; j < this.mapW; j++)
+                    this.btmap[i][j] = this.getInt();
+
+            this.pathSize = this.getInt();
+            for (i = 0; i < this.pathSize; i++) {
+                pathX = this.getInt();
+                pathY = this.getInt();
+                this.path.push({pathX, pathY})
+            }
         }
     }
 );
