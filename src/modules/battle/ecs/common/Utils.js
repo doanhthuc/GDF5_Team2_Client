@@ -10,9 +10,6 @@ const CARD_DECK_HEIGHT = BattleResource.DECK_CARD_HEIGHT;
 const RIVER_HEIGHT = BattleResource.RIVER_HEIGHT;
 Utils.tile2Pixel = function (x, y, mode) {
     // return center of tile pixel
-    if (!mode) {
-        mode = GameConfig.PLAYER;
-    }
 
     if (mode === GameConfig.PLAYER) {
         // ^ y
@@ -61,16 +58,14 @@ Utils.pixel2Tile = function (xx, yy, mode) {
     } else if (mode === GameConfig.OPPONENT) {
         let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
         let x = Math.floor(((cc.winSize.width - xx) - paddingX) / GameConfig.TILE_WIDTH);
-        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT - GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH) / 2;
+        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT - GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH * 2 - RIVER_HEIGHT) / 2;
         let y = Math.floor(((cc.winSize.height - yy) - paddingY) / GameConfig.TILE_HEIGH);
-        cc.log("PIXEL to tile opponent x= " + x + ", y = " + y);
 
         return {x, y};
     }
 }
 
 Utils.tileArray2PixelArray = function (positionArr, mode) {
-    mode = mode || GameConfig.PLAYER;
     let result = [];
     for (let pos of positionArr) {
         result.push(Utils.tile2Pixel(pos.x, pos.y, mode));

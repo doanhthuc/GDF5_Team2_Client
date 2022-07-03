@@ -125,7 +125,7 @@ EntityFactory.createCannonOwlTower = function (pos) {
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID);
 
-    let pixelPos = Utils.tile2Pixel(pos.x, pos.y);
+    let pixelPos = Utils.tile2Pixel(pos.x, pos.y, GameConfig.PLAYER);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createOwlNodeAnimation(attackRange);
 
@@ -153,7 +153,7 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     let typeID = GameConfig.ENTITY_ID.BEAR_TOWER;
     let entity = this._createEntity(typeID);
 
-    let pixelPos = Utils.tile2Pixel(pos.x, pos.y);
+    let pixelPos = Utils.tile2Pixel(pos.x, pos.y, GameConfig.PLAYER);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createBearNodeAnimation(attackRange);
 
@@ -178,7 +178,7 @@ EntityFactory.createBoomerangFrogTower = function (pos) {
     let entity = this._createEntity(typeID);
 
     let attackRange = 2 * GameConfig.TILE_WIDTH;
-    let pixelPos = Utils.tile2Pixel(pos.x, pos.y);
+    let pixelPos = Utils.tile2Pixel(pos.x, pos.y, GameConfig.PLAYER);
     let node = createFrogNodeAnimation(attackRange);
 
     let damageEffect = ComponentFactory.create(DamageEffect, 3);
