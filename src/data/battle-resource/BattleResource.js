@@ -24,5 +24,12 @@ const BattleResource = {
     SWORD_LOSE_ICON: "textures/battle_result/battle_result_icon_swords_lose.png",
     BLUE_BACK_BUTTON_NODE: "ui/battle/battle_result_layer/BackButtonNode.json",
 
-    DECK_CARD_HEIGH: 200,
+    ITEM_BUFF_ATTACK_SPEED_IMG: "textures/battle/battle_item_attack_speed.png",
+    ITEM_BUFF_RANGE_IMG: "textures/battle/battle_item_range.png",
+    ITEM_BUFF_DAMAGE_IMG: "textures/battle/battle_item_damage.png",
+    OBSTACLE_IMG_2: "textures/map/map_forest_obstacle_2.png",
+    HOLE_IMG: "textures/battle/UI/ui_hole.png",
+
+    DECK_CARD_HEIGHT: 200,
+    RIVER_HEIGHT: 100,
 }

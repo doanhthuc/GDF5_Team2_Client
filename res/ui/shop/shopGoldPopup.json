@@ -207,7 +207,7 @@
               "X": 95.0,
               "Y": 35.0
             },
-            "Name": "Text_15",
+            "Name": "quantity",
             "ctype": "TextObjectData"
           },
           {
@@ -377,7 +377,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_5",
+            "Name": "buy_btn",
             "ctype": "ProjectNodeObjectData"
           },
           {
@@ -412,17 +412,17 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -22.9999,
-            "RightMargin": -23.0001,
-            "TopMargin": -57.4809,
-            "BottomMargin": 11.4809,
+            "LeftMargin": -43.9999,
+            "RightMargin": -44.0001,
+            "TopMargin": -88.4809,
+            "BottomMargin": -19.5191,
             "Tag": 203,
             "ActionTag": -605898278,
             "Size": {
               "X": 88.0,
               "Y": 108.0
             },
-            "Name": "Sprite_15",
+            "Name": "image",
             "ctype": "SpriteObjectData"
           }
         ],

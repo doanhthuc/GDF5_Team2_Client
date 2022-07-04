@@ -15,6 +15,18 @@ CMDSendGetDailyShop = fr.OutPacket.extend({
     }
 })
 
+CMDSendGetGoldShop = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.GET_GOLD_SHOP);
+    },
+    pack: function () {
+        this.packHeader();
+        this.updateSize();
+    }
+})
+
 CMDBuyGoldShop = fr.OutPacket.extend({
     ctor: function () {
         this._super();
@@ -41,6 +53,18 @@ CMDBuyDailyShop = fr.OutPacket.extend({
     }
 })
 
+CMDSendGetBattleMap = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.SEND_GET_BATTLE_MAP);
+    },
+    pack: function () {
+        this.packHeader();
+        this.updateSize();
+    }
+})
+
 // In Package
 ShopNetwork.packetMap[gv.CMD.GET_USER_DAILY_SHOP] = fr.InPacket.extend({
     ctor: function () {
@@ -52,11 +76,32 @@ ShopNetwork.packetMap[gv.CMD.GET_USER_DAILY_SHOP] = fr.InPacket.extend({
         this.error = this.getShort();
         this.size = this.getInt();
         for (let i = 0; i < this.size; i++) {
+            let id = this.getInt();
             let itemType = this.getInt();
             let itemQuantity = this.getInt();
             let itemPrice = this.getInt();
             let itemState = this.getInt();
-            this.dailyShopItem.push(new ShopItem(itemType, itemQuantity, itemPrice, itemState));
+            this.dailyShopItem.push(new ShopItem(id, itemType, itemQuantity, itemPrice, itemState));
+        }
+    }
+});
+
+ShopNetwork.packetMap[gv.CMD.GET_GOLD_SHOP] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.goldShopItems = [];
+        this.error = this.getShort();
+        this.size = this.getInt();
+        for (let i = 0; i < this.size; i++) {
+            let id = this.getInt();
+            let itemType = this.getInt();
+            let itemQuantity = this.getInt();
+            let itemPrice = this.getInt();
+            let itemState = this.getInt();
+            this.goldShopItems.push(new ShopItem(id, itemType, itemQuantity, itemPrice, itemState));
         }
     }
 });
@@ -68,6 +113,7 @@ ShopNetwork.packetMap[gv.CMD.BUY_GOLD_SHOP] = fr.InPacket.extend({
 
     readData: function () {
         this.error = this.getShort();
+        this.id = this.getInt();
         this.goldChange = this.getInt();
         this.gemChange = this.getInt();
     }
@@ -76,12 +122,13 @@ ShopNetwork.packetMap[gv.CMD.BUY_GOLD_SHOP] = fr.InPacket.extend({
 ShopNetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend({
     ctor: function () {
         this._super();
+    },
+
+    readData: function () {
         this.itemType = [];
         this.itemQuantity = [];
-    },
-    
-    readData: function () {
         this.error = this.getShort();
+        this.id = this.getInt();
         this.goldChange = this.getInt();
         this.gemChange = this.getInt();
         this.itemAmount = this.getInt();
@@ -91,3 +138,29 @@ ShopNetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend({
         }
     }
 });
+
+ShopNetwork.packetMap[gv.CMD.SEND_GET_BATTLE_MAP] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.mapW = this.getInt();
+            this.mapH = this.getInt();
+            this.btmap = new Array(this.mapW);
+            for (let i = 0; i < this.mapW; i++)
+                this.btmap[i] = new Array(this.mapH);
+            this.path = []
+            for (let i = 0; i < this.mapW; i++)
+                for (let j = 0; j < this.mapH; j++)
+                    this.btmap[i][j] = this.getInt();
+
+            this.pathSize = this.getInt();
+            for (let i = 0; i < this.pathSize; i++) {
+                let pathX = this.getInt();
+                let pathY = this.getInt();
+                this.path.push({x: pathX, y: pathY})
+            }
+        }
+    }
+);

@@ -107,13 +107,13 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "textures/card/card_tower_wizard.png",
+              "Path": "textures/card/card_tower_boomerang.png",
               "Plist": ""
             },
-            "Scale9OriginX": 38,
-            "Scale9OriginY": 54,
-            "Scale9Width": 42,
-            "Scale9Height": 56,
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
@@ -123,8 +123,8 @@
               "Y": 0.0
             },
             "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
+              "ScaleX": 0.7247,
+              "ScaleY": 0.7247
             },
             "CColor": {},
             "IconVisible": false,
@@ -136,18 +136,18 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -42.5,
-            "RightMargin": -42.5,
-            "TopMargin": -56.5,
-            "BottomMargin": -56.5,
-            "Tag": 1819,
-            "ActionTag": -293438576,
+            "LeftMargin": -59.0,
+            "RightMargin": -59.0,
+            "TopMargin": -82.0,
+            "BottomMargin": -82.0,
+            "Tag": 677,
+            "ActionTag": 1393407174,
             "Size": {
-              "X": 85.0,
-              "Y": 113.0
+              "X": 118.0,
+              "Y": 164.0
             },
             "Name": "entity_image",
-            "ctype": "ImageViewObjectData"
+            "ctype": "SpriteObjectData"
           },
           {
             "FileData": {
@@ -245,7 +245,7 @@
         "../../../../textures/battle/battle_card_box.png",
         "../../../../textures/card/card_background_4.png",
         "../../../../textures/card/card_border_1.png",
-        "../../../../textures/card/card_tower_wizard.png",
+        "../../../../textures/card/card_tower_boomerang.png",
         "CardEnergyNode.json"
       ],
       "ctype": "GameFileData"

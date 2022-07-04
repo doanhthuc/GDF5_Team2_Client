@@ -87,17 +87,17 @@ var ScreenNetwork = cc.Layer.extend({
         //testnetwork.connector.sendUnlockLobbyChest(0);
         // testnetwork.connector.sendSpeedUpLobbyChest(1);
         // testnetwork.connector.sendClaimLobbyChest(2);
-        // testnetwork.connector.sendCheatUserInfo(new UserInfoCheat(10000,2000,1000));
-        // testnetwork.connector.sendCheatUserCard(new Card(2,5,200));
-        // testnetwork.connector.sendCheatUserLobbyChest(new ChestInfoCheat(0, 1, 30 * 60 * 1000));
-        //testnetwork.connector.sendBuyDailyShop(2);
-        //testnetwork.connector.sendGetBattleMap();
+        // let userContext = new UserContext();
+        // contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
+        // userContext.updateUserInfoUI();
+        ShopNetwork.connector.sendGetUserDailyShop();
+        ShopNetwork.connector.sendGetGoldShop();
         cc.log("Finished login");
     },
     checkSpecial: function (inputUID) {
         for (i = 0; i < inputUID.length; i++) {
             c = inputUID[i];
-            if ((c >= 'a' && c >= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+            if (c >= '0' && c <= '9') {
             } else return true;
         }
         return false;

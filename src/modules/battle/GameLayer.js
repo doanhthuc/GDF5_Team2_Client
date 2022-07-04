@@ -4,29 +4,16 @@ let GameLayer = cc.Layer.extend({
         this._super();
         GameConfig.gameLayer = this;
 
+        this.selectedTowerCard = null;
+
         // data game
-        this.dataInGame = {
-            currentWave: 0,
-            maxWave: 10,
-            timer: 5,
-            player: {
-                username: "HOVANVYDUT",
-                trophy: 30,
-                energyHouse: 10,
-            },
-            opponent: {
-                username: "OPPONENT",
-                trophy: 20,
-                energyHouse: 10,
-            }
-        }
+        this.battleData = GameConfig.battleData;
 
         // create UI
-        let maxTimerDuration = 3, maxWave = 10, playerHouseEnergy = 4, opponentHouseEnergy = 10;
-        this.uiLayer = new BattleUILayer(maxTimerDuration, maxWave, playerHouseEnergy, opponentHouseEnergy);
+        this.uiLayer = new BattleUILayer(this.battleData);
         this.addChild(this.uiLayer, 2);
 
-        this.mapLayer = new BattleMapLayer();
+        this.mapLayer = new BattleMapLayer(this.battleData);
         this.addChild(this.mapLayer, 1);
 
         // init entity manager
@@ -60,23 +47,48 @@ let GameLayer = cc.Layer.extend({
         this.pathSystem.run(dt);
     },
 
-    bornMonster: function (pos) {
+    bornMonster: function (pos, mode) {
         // pos is in tile coordinator
+        cc.log("position tile " + JSON.stringify(pos))
+
         if (!pos) {
-            pos = Utils.tile2Pixel(0, 4);
+            pos = Utils.tile2Pixel(0, 4, mode);
         } else {
-            pos = Utils.tile2Pixel(pos.x, pos.y);
+            pos = Utils.tile2Pixel(pos.x, pos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pos);
+        EntityFactory.createSwordsmanMonster(pos, mode);
     },
 
     putTowerAt: function (type, pos) {
         // pos is tile coordinator
-        if (type === GameConfig.ENTITY_ID.CANNON_TOWER) {
-            EntityFactory.createCannonOwlTower(pos);
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: pos});
+        if (pos.x < 0 || pos.x >= GameConfig.MAP_WIDTH || pos.y < 0 || pos.y >= GameConfig.MAP_HEIGH) {
+            return;
         }
+
+        // FIXME: map
+        let xMap = GameConfig.MAP_HEIGH-1-pos.y;
+        let yMap = pos.x;
+        let map = this.battleData.getMap(GameConfig.PLAYER);
+        if (map[xMap][yMap] === 6 || map[xMap][yMap] === 5) {
+            return;
+        }
+
+        switch (type) {
+            case GameConfig.ENTITY_ID.CANNON_TOWER:
+                EntityFactory.createCannonOwlTower(pos);
+                break;
+            case GameConfig.ENTITY_ID.FROG_TOWER:
+                EntityFactory.createBoomerangFrogTower(pos);
+                break;
+            case GameConfig.ENTITY_ID.BEAR_TOWER:
+                EntityFactory.createIceGunPolarBearTower(pos);
+                break;
+            default:
+                return;
+        }
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: pos});
+        GameConfig.gameLayer.selectedTowerCard = null;
     },
 
     _initTower: function () {
@@ -89,12 +101,19 @@ let GameLayer = cc.Layer.extend({
         cc.eventManager.addListener(cc.EventListener.create({
             event: cc.EventListener.TOUCH_ALL_AT_ONCE,
             onTouchesEnded: function (touches, event) {
+                cc.log("AAAAAAAAAAAAAAA")
+                cc.log(GameConfig.gameLayer.selectedTowerCard);
                 if (touches.length <= 0)
                     return;
-                let pixel = touches[0].getLocation();
-                let pos = Utils.pixel2Tile(pixel.x, pixel.y);
-                GameConfig.gameLayer.putTowerAt(GameConfig.ENTITY_ID.CANNON_TOWER, pos);
 
+                if (GameConfig.gameLayer.selectedTowerCard !== null) {
+                    let pixel = touches[0].getLocation();
+                    let pos = Utils.pixel2Tile(pixel.x, pixel.y);
+                    cc.log("here");
+                    GameConfig.gameLayer.putTowerAt(GameConfig.gameLayer.selectedTowerCard, pos);
+                } else {
+                    cc.log("NULLLLLLLLLLLLLLLLLLLLL")
+                }
             }
         }), this.uiLayer)
     },
@@ -103,8 +122,19 @@ let GameLayer = cc.Layer.extend({
         this.unscheduleUpdate();
         this.uiLayer.stopTimer();
 
-        this.addChild(new BattleResultLayer("lose"), 2);
+        let playerEnergyHouse = this.battleData.getEnergyHouse(GameConfig.PLAYER);
+        let opponentEnergyHouse = this.battleData.getEnergyHouse(GameConfig.OPPONENT);
+
+        // FIXME: hardcode result value
+        let result = "draw";
+        if (playerEnergyHouse > opponentEnergyHouse) {
+            result = "win";
+        } else if (playerEnergyHouse < opponentEnergyHouse) {
+            result = "lose";
+        }
+        this.addChild(new BattleResultLayer(result, this.battleData), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
+        GameConfig.gameLayer = null;
     },
 });

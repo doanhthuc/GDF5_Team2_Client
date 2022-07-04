@@ -86,21 +86,28 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
     return null;
 }
 
-EntityFactory.createSwordsmanMonster = function (initPos) {
+EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let typeID = GameConfig.ENTITY_ID.SWORD_MAN;
-    let entity = this._createEntity(typeID);
+    let entity = new EntityECS(typeID, mode);
+    this.pool.push(entity);
+    EntityManager.getInstance().addEntity(entity);
 
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 30, 1, 1, undefined);
-    let positionComponent = ComponentFactory.create(PositionComponent, initPos.x, initPos.y);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSwordmanNodeAnimation());
-    let pathComponent = ComponentFactory.create(PathComponent ,GameConfig.gameLayer.mapLayer.path);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 300);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 50);
 
     let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
     let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
+
+    let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
+    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let pathComponent = ComponentFactory.create(PathComponent, path);
+
+
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(velocityComponent)
@@ -118,7 +125,7 @@ EntityFactory.createCannonOwlTower = function (pos) {
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID);
 
-    let initPos = Utils.tile2Pixel(pos.x, pos.y);
+    let pixelPos = Utils.tile2Pixel(pos.x, pos.y, GameConfig.PLAYER);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createOwlNodeAnimation(attackRange);
 
@@ -129,9 +136,9 @@ EntityFactory.createCannonOwlTower = function (pos) {
 
     // TODO: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
-    let positionComponent = ComponentFactory.create(PositionComponent, initPos.x, initPos.y);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node);
-    let attackComponent = ComponentFactory.create(AttackComponent, 10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.4, 0, [])
+    let attackComponent = ComponentFactory.create(AttackComponent, 10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
@@ -146,7 +153,7 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     let typeID = GameConfig.ENTITY_ID.BEAR_TOWER;
     let entity = this._createEntity(typeID);
 
-    let initPos = Utils.tile2Pixel(pos.x, pos.y);
+    let pixelPos = Utils.tile2Pixel(pos.x, pos.y, GameConfig.PLAYER);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createBearNodeAnimation(attackRange);
 
@@ -154,9 +161,9 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     let damageEffect = ComponentFactory.create(DamageEffect, 8);
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "support", "monster", "bulletType");
-    let positionComponent = ComponentFactory.create(PositionComponent, initPos.x, initPos.y);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node);
-    let attackComponent = ComponentFactory.create(AttackComponent, 3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 3.4, 0, [frozenEffect])
+    let attackComponent = ComponentFactory.create(AttackComponent, 1, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 3.4, 0, [frozenEffect])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
@@ -171,13 +178,13 @@ EntityFactory.createBoomerangFrogTower = function (pos) {
     let entity = this._createEntity(typeID);
 
     let attackRange = 2 * GameConfig.TILE_WIDTH;
-    let initPos = Utils.tile2Pixel(pos.x, pos.y);
+    let pixelPos = Utils.tile2Pixel(pos.x, pos.y, GameConfig.PLAYER);
     let node = createFrogNodeAnimation(attackRange);
 
     let damageEffect = ComponentFactory.create(DamageEffect, 3);
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
-    let positionComponent = ComponentFactory.create(PositionComponent, initPos.x, initPos.y);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node);
     let attackComponent = ComponentFactory.create(AttackComponent, 3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [])
 

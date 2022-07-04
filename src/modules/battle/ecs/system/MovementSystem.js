@@ -13,12 +13,16 @@ let MovementSystem = System.extend({
             let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
             let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
 
+            // FIXME: move this function to another place
+            // side-effect
             // check if monster goes to the player house, then minus the player energy house
             if (Utils.isMonster(entity)) {
                 let monsterInfo = entity.getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
-                let posTile = Utils.pixel2Tile(positionComponent.x, positionComponent.y);
+                let posTile = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                 if (posTile.x === GameConfig.HOUSE_POSITION.x && posTile.y === GameConfig.HOUSE_POSITION.y) {
-                    BattleUILayer.minusPlayerEnergy(monsterInfo.damageEnergy);
+
+                    // FIXME: move this function to another place
+                    BattleUILayer.minusHouseEnergy(monsterInfo.damageEnergy, entity.mode);
 
                     // destroy
                     // IMPORTANT: duplicate code
@@ -31,6 +35,7 @@ let MovementSystem = System.extend({
                     for (let key of Object.keys(entity.components)) {
                         entity.components[key].setActive(false);
                     }
+
                 }
             }
 

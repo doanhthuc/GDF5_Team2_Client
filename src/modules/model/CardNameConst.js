@@ -17,8 +17,8 @@ const CARD_NAME_VI = {
     2: 'Ếch Đồ Tể',
     3: 'Thỏ Xả Nhớt',
     4: 'Gấu Bắc Cực',
-    5: 'Rắn Tóc Đỏ',
-    6: 'Dê Phát Động',
+    5: 'Dê Phát Động',
+    6: 'Rắn Tóc Đỏ',
     7: 'Cầu lửa',
     8: 'Cầu Băng',
     9: 'Bẫy'
