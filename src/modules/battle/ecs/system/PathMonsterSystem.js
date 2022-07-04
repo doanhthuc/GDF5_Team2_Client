@@ -31,10 +31,14 @@ let PathMonsterSystem = System.extend({
                     && signY * (Yb - Ya) <= 0
                     && !(signX === 0 && signY === 0)) {
                     pathComponent.currentPathIdx++;
+
+                    AnimationMap.changeMonsterDirectionAnimation(entity, nextPos, path[currentPathIdx+2]);
                 }
             } else {
                 EventDispatcher.getInstance().dispatchEvent(EventType.FINISH_PATH, {entity: entity});
             }
         }
-    }
+    },
+
+
 });

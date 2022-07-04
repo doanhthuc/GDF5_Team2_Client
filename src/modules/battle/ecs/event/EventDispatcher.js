@@ -24,10 +24,19 @@ let EventDispatcher = cc.Class.extend({
     }
 });
 
-EventDispatcher._instance = null;
-EventDispatcher.getInstance = function () {
-    if (EventDispatcher._instance === null) {
-        EventDispatcher._instance = new EventDispatcher();
+let _instanceBuilder = (function () {
+    let _instance = null;
+    return {
+        getInstance: function () {
+            if (_instance === null) {
+                _instance = new EventDispatcher();
+            }
+            return _instance;
+        },
+        resetInstance: function () {
+            _instance = null;
+        }
     }
-    return EventDispatcher._instance;
-}
+})();
+EventDispatcher.getInstance = _instanceBuilder.getInstance;
+EventDispatcher.resetInstance = _instanceBuilder.resetInstance;

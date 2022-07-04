@@ -148,3 +148,31 @@ Utils.isBullet = function (entity) {
     }
     return false;
 }
+
+Utils.radian2Degree = function (radian) {
+    return radian * 180 / Math.PI;
+}
+
+Utils.calcSlopeOfLine = function (pointA, pointB) {
+    let Xa = pointA.x, Ya = pointA.y;
+    let Xb = pointB.x, Yb = pointB.y;
+    let k = (Yb - Ya) / (Xb - Xa);
+
+    let alpha = 0;
+
+    if (k < 0) {
+        alpha = Math.PI - Math.atan(-k);
+    } else {
+        alpha = Math.atan(k);
+    }
+
+    alpha = Utils.radian2Degree(alpha);
+    if (Ya > Yb) {
+        alpha = alpha + 180;
+    }
+    if (alpha === 0 && Xa > Xb) {
+        alpha = alpha + 180;
+    }
+
+    return alpha;
+}
