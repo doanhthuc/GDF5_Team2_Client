@@ -8,6 +8,8 @@ const CheatPopup = cc.Node.extend({
     init: function () {
         this.popUpNode = ccs.load('ui/cheat/cheatPopup.json', '').node;
         this.addChild(this.popUpNode);
+        this.modal = this.popUpNode.getChildByName('modal');
+        UiUtil.setImageFullScreen(this.modal);
         this.goldCheatInput = this.popUpNode.getChildByName('goldCheatInput');
         this.gemCheatInput = this.popUpNode.getChildByName('gemCheatInput');
         this.trophyCheatInput = this.popUpNode.getChildByName('trophyCheatInput');

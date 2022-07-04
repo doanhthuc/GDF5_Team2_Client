@@ -25,6 +25,7 @@ const CardDetailPopup = cc.Node.extend({
         this.upgradeLevelTxt.ignoreContentAdaptWithSize(true);
         this.towerImg = this.backgroundImg.getChildByName('towerImg');
         this.modal = this.cardDetailPopupNode.getChildByName('modal');
+        UiUtil.setImageFullScreen(this.modal);
         this.modal.addTouchEventListener(this.onModalClick.bind(this), this);
         this.initCardStatHolders();
 
@@ -83,10 +84,10 @@ const CardDetailPopup = cc.Node.extend({
         this.setUpgradeBtnState(cardModel.accumulated);
         this.setUpgradeLevelTxt(cardModel.rank);
         // TODO: check condition card from where click
-        // cardModel.isBattleDeck
-        //     ? this.setBtnPosPopupFromBattleDeck()
-        //     : this.setBtnPosPopupFromCardCollection();
-        this.setBtnPosPopupFromBattleDeck()
+        cardModel.isBattleDeck
+            ? this.setBtnPosPopupFromBattleDeck()
+            : this.setBtnPosPopupFromCardCollection();
+        // this.setBtnPosPopupFromBattleDeck()
     },
 
     setCardNodeModel: function (cardModel) {
@@ -117,23 +118,6 @@ const CardDetailPopup = cc.Node.extend({
 
     onUpgradeBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            // cc.log('Card DetailPopup line 102 : onUpgradeBtnClick' + JSON.stringify(contextManager.getContext(ContextManagerConst.USER_CONTEXT)));
-            /*if (this.cardModel.accumulated < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
-
-                return;
-            }
-            if (contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold <
-                JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].gold
-            ) {
-
-                return;
-            }
-            if (this.cardModel.accumulated >= JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments &&
-                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold >=
-                JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].gold) {
-
-
-            }*/
             switch (this.upgradeBtnState) {
                 case InventoryResources.UPGRADE_BTN_STATE.DISABLE:
                     PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES).setType(InventoryResources.RESOURCE_TYPE.CARD)
@@ -167,20 +151,36 @@ const CardDetailPopup = cc.Node.extend({
     },
 
     setBtnPosPopupFromBattleDeck: function () {
-        this.selectBtnNode.setVisible(false);
-        this.upgradeBtnNode.setPosition(198.12, 105.55);
-        this.skillBtnNode.setPosition(435.80, 105.55);
-        this.skillBtnNode.setScaleX(1);
+        if (this.cardModel.id >= 7 && this.cardModel.id <= 9) {
+            this.selectBtnNode.setVisible(false);
+            this.skillBtnNode.setVisible(false);
+            this.upgradeBtnNode.setPosition(310, 105.55);
+        } else {
+            this.skillBtnNode.setVisible(true);
+            this.selectBtnNode.setVisible(false);
+            this.upgradeBtnNode.setPosition(198.12, 105.55);
+            this.skillBtnNode.setPosition(435.80, 105.55);
+            this.skillBtnNode.setScaleX(1);
+        }
     },
 
     setBtnPosPopupFromCardCollection: function () {
-        this.selectBtnNode.setVisible(true);
-        this.selectBtnNode.setPosition(133.68, 105.55);
-        this.upgradeBtnNode.setPosition(313.81, 105.55);
-        this.skillBtnNode.setPosition(495.02, 105.55);
+        if (this.cardModel.id >= 7 && this.cardModel.id <= 9) {
+            this.selectBtnNode.setVisible(true);
+            this.skillBtnNode.setVisible(false);
+            this.selectBtnNode.setPosition(198.12, 105.55);
+            this.upgradeBtnNode.setPosition(435.80, 105.55);
+            this.selectBtnNode.setScaleX(1);
+        } else {
+            this.skillBtnNode.setVisible(true);
+            this.selectBtnNode.setVisible(true);
+            this.selectBtnNode.setPosition(133.68, 105.55);
+            this.upgradeBtnNode.setPosition(313.81, 105.55);
+            this.skillBtnNode.setPosition(495.02, 105.55);
 
-        this.skillBtnNode.setScaleX(0.8);
-        this.selectBtnNode.setScaleX(0.8);
+            this.skillBtnNode.setScaleX(0.8);
+            this.selectBtnNode.setScaleX(0.8);
+        }
     },
 
     setUpgradeBtnState: function (accumulatedCard) {

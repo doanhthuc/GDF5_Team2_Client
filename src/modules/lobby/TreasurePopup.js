@@ -19,6 +19,7 @@ const TreasurePopup = cc.Node.extend({
         this.modal = this.treasurePopupNode.getChildByName('modal');
         this.modal.addTouchEventListener(this.onModalClick.bind(this), this);
         this.constrainTxt = this.treasurePopupNode.getChildByName('constrainTxt');
+        UiUtil.setImageFullScreen(this.modal);
     },
 
     setPopUpInfoFromTreasureType: function (slotId, action, treasureTypeId) {
@@ -65,4 +66,9 @@ const TreasurePopup = cc.Node.extend({
             this.setVisible(false);
         }
     },
+
+    setModalFullScreen: function () {
+        this.modal.width = cc.winSize.width;
+        this.modal.height = cc.winSize.height;
+    }
 });

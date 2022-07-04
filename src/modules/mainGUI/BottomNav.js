@@ -13,6 +13,7 @@ const bottomNav = cc.Node.extend({
         this.loadTabList();
         this.setPositionForTab();
         this.tabMap.get(this.activeTab).iconImg.runAction(cc.MoveBy.create(0.1, cc.p(0, 20)));
+        this._height = this.tabMap.get(this.activeTab).backgroundBtn.height;
     },
 
 

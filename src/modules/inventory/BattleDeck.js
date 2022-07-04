@@ -15,7 +15,8 @@ const BattleDeckNode = cc.Node.extend({
     },
 
     setNodeHeight: function () {
-        this.nodeHeight = this.battleDeckHolder.getContentSize().height;
+        this.heightNode = this.battleDeckHolder.height;
+        cc.log('BattleDeckNode line 21 heightNode: ' + this.heightNode);
     },
 
     updateBattleDeck: function (battleDeck) {
@@ -33,7 +34,8 @@ const BattleDeckNode = cc.Node.extend({
             let cardModel = new CardModel(
                 card.cardType,
                 card.cardLevel,
-                card.amount
+                card.amount,
+                card.isBattleDeck
             );
             // this.battleDeckHolder.addChild(card);
             this.addCardNode(cardModel);

@@ -15,6 +15,9 @@ const MainScreen = cc.Layer.extend({
         let rootNode = ccs.load(res.MAIN_SCREEN, '');
         this.addChild(rootNode.node);
         this.scene = rootNode.node;
+        this.background = this.scene.getChildByName('background');
+        this.background.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+        UiUtil.setImageFullScreen(this.background);
         this.clientUIManager = ClientUIManager.getInstance();
 
         this.mainPageView = this.scene.getChildByName('mainPageView');
@@ -30,7 +33,7 @@ const MainScreen = cc.Layer.extend({
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE);
         // let headerHeight = this.header.getNodeHeight();
 
-        this.homeLayer = new lobbyLayer();
+        this.homeLayer = new lobbyLayer(this.nav._height);
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE, this.homeLayer);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE);
@@ -51,7 +54,14 @@ const MainScreen = cc.Layer.extend({
         this.listView.setSwallowTouches(false);
         this.listViewPanel.setSwallowTouches(false);
 
-        // this.listViewPanel.setSizeHeight(this.inventoryLayer.heightNode);
+        if (this.inventoryLayer.heightNode > cc.winSize.height) {
+            this.listViewPanel.height = this.inventoryLayer.heightNode;
+        } else {
+            this.listViewPanel.height = cc.winSize.height;
+        }
+        this.listView.height = cc.winSize.height;
+        this.listView.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+        // this.listViewPanel.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
         // this.listViewPanel.addEventListener(this.onListViewEvent.bind(this), this)
 
         this.shopLayer = new ShopLayer();
@@ -78,6 +88,7 @@ const MainScreen = cc.Layer.extend({
         this.openTreasurePopupNode = new OpenTreasurePopup();
         this.fullTreasureSlotPopup = new FullTreasureSlotPopup();
         this.notEnoughUpgradeResPopup = new NotEnoughUpgradeResPopup();
+        this.upgradeSuccessPopup = new UpgradeSuccessPopup();
 
         this.addPopup(this.treasurePopupNode);
         this.addPopup(this.buyCardPopupNode);
@@ -87,6 +98,7 @@ const MainScreen = cc.Layer.extend({
         this.addPopup(this.openTreasurePopupNode);
         this.addPopup(this.fullTreasureSlotPopup);
         this.addPopup(this.notEnoughUpgradeResPopup);
+        this.addPopup(this.upgradeSuccessPopup);
     },
 
     addPopup: function (popupNode) {

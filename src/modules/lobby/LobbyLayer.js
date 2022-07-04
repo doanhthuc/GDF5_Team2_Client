@@ -1,5 +1,6 @@
 const lobbyLayer = cc.Node.extend({
-    ctor: function () {
+    ctor: function (bottomNavHeight) {
+        this.bottomNavHeight = bottomNavHeight
         this.treasureSlotNodeList = [];
         this.treasureSlotList = [];
         this._super();
@@ -51,8 +52,7 @@ const lobbyLayer = cc.Node.extend({
         let startX = -cc.winSize.width / 2 + Math.ceil(TreasureSlotResources.BACKGROUND_IMG_WIDTH / 2) + TreasureSlotResources.SLOT_START_MARGIN;
         for (let i = 0; i < TreasureSlotResources.SLOT_NUMBER; i++) {
             let treasureSlotNode = this.treasureSlotNodeList[i];
-            // treasure.setNodeByState(TreasureSlotResources.STATE.FINISHED);
-            treasureSlotNode.setPosition(startX, TreasureSlotResources.CENTER_SCENE_MARGIN_TOP);
+            treasureSlotNode.setPosition(startX, -cc.winSize.height / 2 + this.bottomNavHeight + treasureSlotNode.backgroundBtn.height / 2 + 20);
             // startX += treasureSlotNode.slotNodeMap.get(treasureSlotNode.state).backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
             startX += treasureSlotNode.backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
         }

@@ -17,6 +17,7 @@ const NotEnoughUpgradeResPopup = cc.Node.extend({
         this.titleTxt = this.node.getChildByName('titleTxt');
         this.contentTxt = this.node.getChildByName('contentTxt');
         this.type = InventoryResources.RESOURCE_TYPE.GOLD;
+        UiUtil.setImageFullScreen(this.modal);
     },
 
     setType: function (type) {

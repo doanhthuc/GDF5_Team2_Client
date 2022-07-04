@@ -39,8 +39,8 @@ let CardDeckNode = cc.Node.extend({
                 onTouchEnded: this.onTouchEnded,
             }, card);
         }
-        this.cardBattleNodeList = [];
-        this.initCardBattleList();
+        // this.cardBattleNodeList = [];
+        // this.initCardBattleList();
     },
 
     onTouchBegan: function (touch, event) {
@@ -72,15 +72,15 @@ let CardDeckNode = cc.Node.extend({
         card.runAction(cc.sequence(moveDown));
     },
 
-    initCardBattleList: function () {
-        let startX = -156.82;
-        let startY = 14.76;
-        for (let i = 0; i < 4; i++) {
-            let cardBattleNode = new CardBattleNode(0);
-            this.rootNode.addChild(cardBattleNode);
-            cardBattleNode.setPosition(startX, startY);
-            startX += cardBattleNode._width + 24.34;
-            this.cardBattleNodeList.push(cardBattleNode);
-        }
-    }
+    // initCardBattleList: function () {
+    //     let startX = -156.82;
+    //     let startY = 14.76;
+    //     for (let i = 0; i < 4; i++) {
+    //         let cardBattleNode = new CardBattleNode(0);
+    //         this.rootNode.addChild(cardBattleNode);
+    //         cardBattleNode.setPosition(startX, startY);
+    //         startX += cardBattleNode._width + 24.34;
+    //         this.cardBattleNodeList.push(cardBattleNode);
+    //     }
+    // }
 });

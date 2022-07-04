@@ -16,6 +16,7 @@
         "src/data/**/*.js",
         "src/framework/**/*.js",
         "src/gui/screen/**/*.js",
+        "src/util/UiUtil.js",
         "src/modules/uimanager/ClientUIConst.js",
         "src/modules/uimanager/ClientUIManager.js",
         "src/modules/battle/ecs/manager/ComponentManager.js",
@@ -30,7 +31,6 @@
         "src/**/*.js"
     ],
     "jsList": [
-        "src/modules/battle/BattleData.js",
         "src/data/battle-resource/BattleResource.js",
         "src/data/bottom-nav-resources/NavResources.js",
         "src/data/inventory-resources/InventoryResources.js",
@@ -53,6 +53,7 @@
         "src/framework/PoolObject.js",
         "src/framework/StringUtils.js",
         "src/framework/UserData.js",
+        "src/util/UiUtil.js",
         "src/modules/uimanager/ClientUIConst.js",
         "src/modules/uimanager/ClientUIManager.js",
         "src/modules/battle/ecs/manager/ComponentManager.js",
@@ -74,9 +75,10 @@
         "src/base/Resource.js",
         "src/base/UIFactory.js",
         "src/modules/animation/ScreenDragonbones.js",
+        "src/modules/battle/BattleData.js",
+        "src/modules/battle/BattleDeckLayer.js",
         "src/modules/battle/BattleMapLayer.js",
         "src/modules/battle/BattleUILayer.js",
-        "src/modules/battle/BattleDeckLayer.js",
         "src/modules/battle/ecs/common/Exception.js",
         "src/modules/battle/ecs/common/FindPathUtil.js",
         "src/modules/battle/ecs/common/Utils.js",
@@ -120,6 +122,7 @@
         "src/modules/inventory/CardStatHolder.js",
         "src/modules/inventory/InventoryLayer.js",
         "src/modules/inventory/NotEnoughUpgradeResPopup.js",
+        "src/modules/inventory/UpgradeSuccessPopup.js",
         "src/modules/lobby/CardWithQuantity.js",
         "src/modules/lobby/FullTreasureSlotPopup.js",
         "src/modules/lobby/LobbyChest.js",
@@ -162,7 +165,6 @@
         "src/modules/testnetwork/network/ShopPacket.js",
         "src/modules/testnetwork/ScreenNetwork.js",
         "src/modules/uimanager/PopupUIManager.js",
-        "src/util/JsonReader.js",
-        "src/util/UiUtil.js"
+        "src/util/JsonReader.js"
     ]
 }

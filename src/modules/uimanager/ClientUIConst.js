@@ -9,6 +9,7 @@ const CLIENT_UI_CONST = {
         GUI_OPEN_TREASURE: 'openTreasurePopup',
         GUI_FULL_TREASURE_SLOT: 'fullTreasureSlotPopup',
         GUI_NOT_ENOUGH_UPGRADE_RES: 'notEnoughUpgradeResPopup',
+        UPGRADE_SUCCESS_POPUP: 'upgradeSuccessPopup',
     },
 
     NODE_NAME: {

@@ -22,6 +22,11 @@ const UiUtil = {
 
     centerVerticalNodeInParent: function (node, parentHeight) {
         node.setPositionY(parentHeight / 2);
+    },
+
+    setImageFullScreen: (image) => {
+        image.width = cc.winSize.width;
+        image.height = cc.winSize.height;
     }
 }
 
@@ -69,3 +74,4 @@ const millisecondToTimeString = (distance) => {
         return (minutes + "m " + seconds + "s ");
     }
 }
+

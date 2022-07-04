@@ -14,6 +14,7 @@ const FullTreasureSlotPopup = cc.Node.extend({
         this.closeBtn.addTouchEventListener(this.onCloseBtnClick.bind(this), this);
         this.continueBtn = this.node.getChildByName('continueBtn');
         this.continueBtn.addTouchEventListener(this.onContinueBtnClick.bind(this), this);
+        UiUtil.setImageFullScreen(this.modal);
     },
 
     onCloseBtnClick: function (sender, type) {

@@ -13,6 +13,9 @@ const CardNode = cc.Node.extend({
     onUpgradeCard: function (cardLevel, accumulatedCard) {
         this.cardModel.upgradeCardModel(cardLevel, accumulatedCard);
         this.updateCardNodeUI(this.cardModel.accumulated);
+        cc.log('CardNode.js line 16 onUpgradeCard: ' + CLIENT_UI_CONST.POPUPS_NAME.UPGRADE_SUCCESS_POPUP)
+        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.UPGRADE_SUCCESS_POPUP).setCardModel(this.cardModel);
+        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.UPGRADE_SUCCESS_POPUP);
     },
 
     onUpdateCard: function (accumulatedCardChange) {

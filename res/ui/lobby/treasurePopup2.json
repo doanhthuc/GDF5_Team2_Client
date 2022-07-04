@@ -1,7 +1,7 @@
 {
   "ID": "64ee7d40-a579-428a-93f7-9c062cefc8d6",
   "Version": "2.3.4",
-  "Name": "treasurePopup",
+  "Name": "treasurePopup2",
   "Content": {
     "Content": {
       "Animation": {
@@ -21,8 +21,10 @@
               "Plist": ""
             },
             "Scale9Enable": true,
-            "Scale9Width": 46,
-            "Scale9Height": 46,
+            "Scale9OriginX": 10,
+            "Scale9OriginY": 10,
+            "Scale9Width": 26,
+            "Scale9Height": 26,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
@@ -61,7 +63,7 @@
               "Y": 1136.0
             },
             "Alpha": 204,
-            "Name": "blur",
+            "Name": "modal",
             "ctype": "ImageViewObjectData"
           },
           {
@@ -129,7 +131,7 @@
             },
             "Scale": {
               "ScaleX": 1.0,
-              "ScaleY": 0.5
+              "ScaleY": 0.452
             },
             "CColor": {},
             "IconVisible": false,
@@ -1168,6 +1170,65 @@
             },
             "Name": "Sprite_17_1",
             "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 14,
+            "LabelText": "Mỗi thời điểm chỉ mở một rương",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 77,
+              "G": 77,
+              "B": 77
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -96.0703
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "G": 165,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -159.5,
+            "RightMargin": -159.5,
+            "TopMargin": 85.5703,
+            "BottomMargin": -106.5703,
+            "Tag": 81,
+            "ActionTag": 2063942453,
+            "Size": {
+              "X": 319.0,
+              "Y": 21.0
+            },
+            "Name": "constrainTxt",
+            "ctype": "TextObjectData"
           }
         ],
         "Size": {
