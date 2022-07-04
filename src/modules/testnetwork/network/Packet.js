@@ -69,7 +69,7 @@ CmdSendLogin = fr.OutPacket.extend(
             this.packHeader();
             cc.log("[Packet.js] user id = " + userID);
             this.putString(sessionKey);
-            this.putInt(userID);
+            this.putString(userID);
             this.updateSize();
         }
     }

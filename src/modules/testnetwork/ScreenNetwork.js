@@ -15,7 +15,7 @@ var ScreenNetwork = cc.Layer.extend({
             x: cc.winSize.width / 2,
             y: cc.winSize.height / 2,
         });
-        this.loginNotice= ccs.load(res.LOGINNOTICE,"").node;
+        this.loginNotice = ccs.load(res.LOGINNOTICE, "").node;
         this.loginNotice.attr({
             anchorX: 0.5,
             anchorY: 0.5,
@@ -25,7 +25,7 @@ var ScreenNetwork = cc.Layer.extend({
         })
         this.loginNotice.setVisible(false);
         this.addChild(this.loginNotice);
-        this.loginNoticeField=this.loginNotice.getChildByName("TextField_2");
+        this.loginNoticeField = this.loginNotice.getChildByName("TextField_2");
         this.loginNode = loginscene;
         let background = this.loginNode.getChildByName("Image_1")
         background.setScale(Math.max(cc.winSize.height / background.height, cc.winSize.width / background.width));
@@ -35,15 +35,14 @@ var ScreenNetwork = cc.Layer.extend({
         this.btnLogin = this.loginNode.getChildByName("Button_1");
         this.btnLogin.addClickEventListener(this.onSelectLogin.bind(this));
         this.textFieldUID = this.loginNode.getChildByName("TextField_1");
-         this.lblLog = gv.commonText(fr.Localization.text(""), size.width * 0.8, size.height * 0.03);
-         this.lblLog.setString(res.version);
+        this.lblLog = gv.commonText(fr.Localization.text(""), size.width * 0.8, size.height * 0.03);
+        this.lblLog.setString(res.version);
         this.addChild(this.lblLog);
         this.scheduleUpdate();
     },
-    update:function(dt)
-    {
-        if (this.noticeTimer<=0) this.loginNotice.setVisible(false);
-        else this.noticeTimer-=dt;
+    update: function (dt) {
+        if (this.noticeTimer <= 0) this.loginNotice.setVisible(false);
+        else this.noticeTimer -= dt;
     },
     onSelectBack: function (sender) {
         fr.view(ScreenMenu);
@@ -52,9 +51,9 @@ var ScreenNetwork = cc.Layer.extend({
         let inputUID = this.textFieldUID.getString();
         if (inputUID == "") this.showNotice("Vui lòng nhập ID");
         else if (this.checkSpecial(inputUID) == true) this.showNotice("ID không chứa kí tự đặc biệt");
-        else if (inputUID.length > 15) this.showNotice("Vui lòng nhập UID dưới 15 kí tự");
+        else if (inputUID.length > 15) this.showNotice("Vui lòng nhập UID không vượt quá 15 kí tự");
         else {
-            this.showNotice("Đăng nhập thành công")
+            this.showNotice("Đăng nhập thành công");
             UID = this.textFieldUID.getString();
             cc.log(UID);
             gv.gameClient.connect();
@@ -97,14 +96,14 @@ var ScreenNetwork = cc.Layer.extend({
     checkSpecial: function (inputUID) {
         for (i = 0; i < inputUID.length; i++) {
             c = inputUID[i];
-            if (c >= '0' && c <= '9') {
+            if (c >= '0' && c <= '9' || c >= 'a' && c <= 'z' || c >= "A" && c <= "Z") {
             } else return true;
         }
         return false;
     },
-    showNotice:function(message){
-            this.loginNotice.setVisible(true);
-            this.loginNoticeField.setString(message);
-            this.noticeTimer=3;
+    showNotice: function (message) {
+        this.loginNotice.setVisible(true);
+        this.loginNoticeField.setString(message);
+        this.noticeTimer = 3;
     }
 });
