@@ -7,6 +7,8 @@ const CLIENT_UI_CONST = {
         GUI_CARD_DETAIL: 'cardDetailPopup',
         GUI_CHEAT: 'cheatPopup',
         GUI_OPEN_TREASURE: 'openTreasurePopup',
+        GUI_FULL_TREASURE_SLOT: 'fullTreasureSlotPopup',
+        GUI_NOT_ENOUGH_UPGRADE_RES: 'notEnoughUpgradeResPopup',
     },
 
     NODE_NAME: {

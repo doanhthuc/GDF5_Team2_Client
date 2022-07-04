@@ -28,7 +28,7 @@ const MainScreen = cc.Layer.extend({
         this.addChild(this.header);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE, this.header);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE);
-        let headerHeight = this.header.getNodeHeight();
+        // let headerHeight = this.header.getNodeHeight();
 
         this.homeLayer = new lobbyLayer();
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
@@ -76,6 +76,8 @@ const MainScreen = cc.Layer.extend({
         this.cardDetailPopupNode = new CardDetailPopup();
         this.cheatPopupNode = new CheatPopup();
         this.openTreasurePopupNode = new OpenTreasurePopup();
+        this.fullTreasureSlotPopup = new FullTreasureSlotPopup();
+        this.notEnoughUpgradeResPopup = new NotEnoughUpgradeResPopup();
 
         this.addPopup(this.treasurePopupNode);
         this.addPopup(this.buyCardPopupNode);
@@ -83,6 +85,8 @@ const MainScreen = cc.Layer.extend({
         this.addPopup(this.cardDetailPopupNode);
         this.addPopup(this.cheatPopupNode);
         this.addPopup(this.openTreasurePopupNode);
+        this.addPopup(this.fullTreasureSlotPopup);
+        this.addPopup(this.notEnoughUpgradeResPopup);
     },
 
     addPopup: function (popupNode) {
