@@ -56,7 +56,6 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.GET_USER_LOBBY:
                 let treasureContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT);
                 treasureContext.setTreasureList(packet);
-
                 userLobbyChest.getItemList(packet);
                 userLobbyChest.show();
                 break;
@@ -89,15 +88,14 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log(packet.gemChange);
                 break;
             case gv.CMD.BUY_GOLD_SHOP:
+                cc.log(JSON.stringify(packet));
                 userInfo.gold += packet.goldChange;
                 userInfo.gem += packet.gemChange;
                 userInfo.show();
                 break;
             case gv.CMD.BUY_DAILY_SHOP:
                 cc.log("BUY DAILY SHOP");
-                cc.log(packet.gemChange + " " + packet.goldChange);
-                for (i = 0; i < packet.itemAmount; i++)
-                    cc.log(packet.itemType[i] + " " + packet.itemQuantity[i]);
+                cc.log(JSON.stringify(packet));
                 break;
             //cheat
             case gv.CMD.CHEAT_USER_INFO:
@@ -114,6 +112,10 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("CHEAT LOBBY CHEST");
                 cc.log(packet.chestId + " " + packet.chestState + " " + packet.chestClaimTime);
                 contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).onChestCheatSuccess(packet);
+                break;
+            case gv.CMD.SEND_GET_BATTLE_MAP:
+                cc.log("asdasdas");
+                cc.log(JSON.stringify(packet));
                 break;
         }
     },
@@ -179,24 +181,7 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(chestid);
         this.gameClient.sendPacket(pk);
     },
-    sendBuyGoldShop: function (itemid) {
-        cc.log("SendBuyShopGold");
-        var pk = this.gameClient.getOutPacket(CMDBuyGoldShop);
-        pk.pack(itemid);
-        this.gameClient.sendPacket(pk);
-    },
-    sendGetUserDailyShop: function () {
-        cc.log("sendGetuserInventory");
-        var pk = this.gameClient.getOutPacket(CMDSendGetDailyShop);
-        pk.pack();
-        this.gameClient.sendPacket(pk);
-    },
-    sendBuyDailyShop: function (itemid) {
-        cc.log("SendBuyDailyShop");
-        var pk = this.gameClient.getOutPacket(CMDBuyDailyShop);
-        pk.pack(itemid);
-        this.gameClient.sendPacket(pk);
-    },
+
     // cheat:
     sendCheatUserInfo: function (userInfoCheat) {
         cc.log("CheatUserInfo");
@@ -214,6 +199,12 @@ testnetwork.Connector = cc.Class.extend({
         cc.log("CheatLobbyChest");
         var pk = this.gameClient.getOutPacket(CMDCheatUserLobbyChest);
         pk.pack(chestInfoCheat);
+        this.gameClient.sendPacket(pk);
+    },
+    sendGetBattleMap: function () {
+        cc.log("GetBattleMap");
+        var pk = this.gameClient.getOutPacket(CMDSendGetBattleMap);
+        pk.pack();
         this.gameClient.sendPacket(pk);
     }
 

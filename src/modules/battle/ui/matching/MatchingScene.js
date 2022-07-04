@@ -4,15 +4,23 @@ let MatchingScene = cc.Scene.extend({
         this._setupUI();
         this.count = 0;
         this.schedule(this._updateUI, 1);
-        this.scheduleOnce(this.onFinishMatching, 3);
+        // this.scheduleOnce(this.onFinishMatching, 3);
+
+        // call api
+        // get map data
+        GameConfig.matchingScene = this;
+        this.scheduleOnce(function () {
+            ShopNetwork.connector.sendGetBattleMap();
+        }, 3);
     },
 
     _setupUI: function () {
         let centerScreenX = cc.winSize.width / 2;
         let centerScreenY = cc.winSize.height / 2;
 
+        // FIXME: hardcode
         let backgroundImage = new cc.Sprite("textures/lobby/lobby_background.png");
-        backgroundImage.attr({x: centerScreenX, y: centerScreenY});
+        backgroundImage.attr({x: centerScreenX, y: centerScreenY, scaleX: 1.5, scaleY: 1.5});
         this.addChild(backgroundImage);
 
         let matchingTxtNode = ccs.load("ui/battle/matching/MatchingTextNode.json", "").node;
@@ -49,6 +57,8 @@ let MatchingScene = cc.Scene.extend({
         });
         cancelButtonNode.getChildByName("button").addTouchEventListener(this._backToLobby.bind(this));
         this.addChild(cancelButtonNode);
+
+
     },
 
     _updateUI: function (tick) {
@@ -63,16 +73,6 @@ let MatchingScene = cc.Scene.extend({
             str += ".";
         }
         return str;
-    },
-
-    onFinishMatching: function () {
-        let layer = new GameLayer();
-        layer.setName("Screen");
-
-        let scene = new cc.Scene();
-        scene.addChild(layer);
-
-        cc.director.runScene(new cc.TransitionFade(1, scene));
     },
 
     _backToLobby: function () {

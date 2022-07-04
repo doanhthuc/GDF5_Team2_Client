@@ -80,13 +80,14 @@ var res = {
     MAIN_SCREEN: 'ui/main/MainScene.json',
     // BOTTOM_NAV: 'ui/main/bottom/BottomNav.json',
     LOBBY_NODE: 'ui/lobby/lobbyHomeNode.json',
-    TREASURE_POPUP_NODE: 'ui/lobby/treasurePopup.json',
+    TREASURE_POPUP_NODE: 'ui/lobby/treasurePopup2.json',
 
 
     //popup
     ZCSD_POPUP_MINI_GAME: 'zcsd/game/mini_game/PopupMiniGame.json',
 
     LOGINSCENCE: "ui/login/Login.json",
+    LOGINNOTICE: "ui/login/LoginNoticeNode.json",
     //images
     Slot1_png: 'zcsd/slot1.png',
     ACTIVE_TAB_BG: '/textures/lobby/lobby_page_btn_selecting.png'

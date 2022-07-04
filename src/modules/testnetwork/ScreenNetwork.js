@@ -7,41 +7,53 @@ var ScreenNetwork = cc.Layer.extend({
     ctor: function () {
         this._super();
         var size = cc.director.getVisibleSize();
-        var loginscene = ccs.load(res.LOGINSCENCE, "");
-        this.addChild(loginscene.node);
-        this.loginNode = loginscene.node;
+        var loginscene = ccs.load(res.LOGINSCENCE, "").node;
+        this.addChild(loginscene);
+        loginscene.attr({
+            anchorX: 0.5,
+            anchorY: 0.5,
+            x: cc.winSize.width / 2,
+            y: cc.winSize.height / 2,
+        });
+        this.loginNotice= ccs.load(res.LOGINNOTICE,"").node;
+        this.loginNotice.attr({
+            anchorX: 0.5,
+            anchorY: 0.5,
+            x: cc.winSize.width / 2,
+            y: cc.winSize.height / 2,
+            //scale:cc.winSize.width/this.loginNotice.width,
+        })
+        this.loginNotice.setVisible(false);
+        this.addChild(this.loginNotice);
+        this.loginNoticeField=this.loginNotice.getChildByName("TextField_2");
+        this.loginNode = loginscene;
+        let background = this.loginNode.getChildByName("Image_1")
+        background.setScale(Math.max(cc.winSize.height / background.height, cc.winSize.width / background.width));
+        // for (i in this.loginNode.getChildren().length){
+        //     (this.loginNode.getChildren())[i].setScale(Math.max(cc.winSize.height/background.height,cc.winSize.width/background.width));
+        // }
         this.btnLogin = this.loginNode.getChildByName("Button_1");
         this.btnLogin.addClickEventListener(this.onSelectLogin.bind(this));
         this.textFieldUID = this.loginNode.getChildByName("TextField_1");
-        this.lblLog = gv.commonText(fr.Localization.text("..."), size.width * 0.5, size.height * 0.05);
+         this.lblLog = gv.commonText(fr.Localization.text(""), size.width * 0.5, size.height * 0.5);
         this.addChild(this.lblLog);
-
-        //this.initGame();
+        this.scheduleUpdate();
     },
-    reset: function () {
-        for (var i = 0; i < MAP_SIZE; i++) {
-            for (var j = 0; j < MAP_SIZE; j++) {
-                this.setTileAvailable(i, j);
-            }
-        }
-        this.character.setPosition(this.getPositionFromTilePos(0, 0));
-        this.setTileUnavailable(0, 0);
-        this.character.tileX = 0;
-        this.character.tileY = 0;
-    },
-    setTileAvailable: function (x, y) {
-        this.tileImgs[x][y].setColor(cc.color.WHITE);
+    update:function(dt)
+    {
+        if (this.noticeTimer<=0) this.loginNotice.setVisible(false);
+        else this.noticeTimer-=dt;
     },
     onSelectBack: function (sender) {
         fr.view(ScreenMenu);
     },
     onSelectLogin: function (sender) {
-        this.schedule(function () {
-            if (UID == userInfo.id) this.lblLog.setString("Đăng Nhập Thành Công");
-            else this.lblLog.setString("Bạn nhập sai ID")
-        });
-        if (this.textFieldUID.getString() == "") this.lblLog.setString("Bạn Chưa nhập ID");
+        let inputUID = this.textFieldUID.getString();
+        if (inputUID == "") this.showNotice("Vui lòng nhập ID");
+        else if (this.checkSpecial(inputUID) == true) this.showNotice("ID không chứa kí tự đặc biệt");
+        else if (inputUID.length > 15) this.showNotice("Vui lòng nhập UID dưới 15 kí tự");
         else {
+            this.showNotice("Đăng nhập thành công")
             UID = this.textFieldUID.getString();
             cc.log(UID);
             gv.gameClient.connect();
@@ -64,62 +76,34 @@ var ScreenNetwork = cc.Layer.extend({
         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
         testnetwork.connector.sendGetUserLobbyChest();
         testnetwork.connector.sendGetUserInventory();
+        //testnetwork.connector.sendGetUserGoldShop();
         //testnetwork.connector.sendUpgradeCard(2);
-        //testnetwork.connector.sendGetUserDailyShop();
+        //.connector.sendGetUserDailyShop();
         // testnetwork.connector.sendAddUserGem(100);
         // testnetwork.connector.sendAddUserGold(100);
-        //testnetwork.connector.sendBuyGoldShop(0);
-        //testnetwork.connector.sendBuyDailyShop(2);
+        // testnetwork.connector.sendBuyGoldShop(0);
+        // testnetwork.connector.sendBuyDailyShop(0);
         //testnetwork.connector.sendUnlockLobbyChest(0);
-        //testnetwork.connector.sendSpeedUpLobbyChest(1);
+        // testnetwork.connector.sendSpeedUpLobbyChest(1);
         // testnetwork.connector.sendClaimLobbyChest(2);
         // let userContext = new UserContext();
         // contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
         // userContext.updateUserInfoUI();
-        testnetwork.connector.sendGetUserDailyShop();
+        ShopNetwork.connector.sendGetUserDailyShop();
+        ShopNetwork.connector.sendGetGoldShop();
         cc.log("Finished login");
     },
-    updateMove: function (isCanMove, x, y) {
-        if (isCanMove) {
-            this.characterMoveTo(x, y);
-        } else {
-            this.lblLog.setString("Can't Move!");
+    checkSpecial: function (inputUID) {
+        for (i = 0; i < inputUID.length; i++) {
+            c = inputUID[i];
+            if (c >= '0' && c <= '9') {
+            } else return true;
         }
+        return false;
     },
-    characterMoveTo: function (x, y) {
-        cc.log("characterMoveTo", x, y);
-        this._isMoving = true;
-        var callback = cc.callFunc(this.characterMoveFinished, this);
-        var move = cc.moveTo(0.2, this.getPositionFromTilePos(x, y)).easing(cc.easeSineIn());
-        var sequence = cc.sequence(move, callback);
-        this.character.runAction(sequence);
-        this.character.tileX = x;
-        this.character.tileY = y;
-    },
-    characterMoveFinished: function () {
-        this._isMoving = false;
-        this.setTileUnavailable(this.character.tileX, this.character.tileY);
-    },
-    updateMap: function (mapInfo) {
-        for (var i = 0; i < MAP_SIZE; i++) {
-            for (var j = 0; j < MAP_SIZE; j++) {
-                if (mapInfo.mapState[i][j]) {
-                    this.setTileUnavailable(i, j);
-                } else {
-                    this.setTileAvailable(i, j);
-                }
-            }
-        }
-        this.character.setPosition(this.getPositionFromTilePos(mapInfo.x, mapInfo.y));
-        this.character.tileX = mapInfo.x;
-        this.character.tileY = mapInfo.y;
-    },
-    sendMove: function (x, y) {
-        if (this._isMoving) {
-            this.lblLog.setString("Moving!");
-            return;
-        }
-        testnetwork.connector.sendMove(x, y);
+    showNotice:function(message){
+            this.loginNotice.setVisible(true);
+            this.loginNoticeField.setString(message);
+            this.noticeTimer=3;
     }
-
 });

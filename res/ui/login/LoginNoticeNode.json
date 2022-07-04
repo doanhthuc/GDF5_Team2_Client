@@ -1,0 +1,125 @@
+{
+  "ID": "a7d3ae5f-8912-4a28-b202-bc6b2bb60305",
+  "Version": "2.3.4",
+  "Name": "LoginNoticeNode",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 17,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_notification_bar.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.9724,
+              "Y": 0.1697
+            },
+            "Scale": {
+              "ScaleX": 1.524,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -214.9724,
+            "RightMargin": -213.0276,
+            "TopMargin": -50.1697,
+            "BottomMargin": -49.8303,
+            "Tag": 20,
+            "ActionTag": 1402482350,
+            "Size": {
+              "X": 428.0,
+              "Y": 100.0
+            },
+            "Name": "common_notification_bar_2",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "FontSize": 18,
+            "IsCustomSize": true,
+            "LabelText": "",
+            "PlaceHolderText": "notice",
+            "MaxLengthText": 10,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -1.1054,
+              "Y": -3.2545
+            },
+            "Scale": {
+              "ScaleX": 1.3267,
+              "ScaleY": 1.3952
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -151.1054,
+            "RightMargin": -148.8946,
+            "TopMargin": -26.7455,
+            "BottomMargin": -33.2545,
+            "Tag": 21,
+            "ActionTag": -1412157016,
+            "Size": {
+              "X": 300.0,
+              "Y": 60.0
+            },
+            "Name": "TextField_2",
+            "ctype": "TextFieldObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../textures/common/common_notification_bar.png",
+        "../../textures/font/SVN-Supercell Magic.ttf"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

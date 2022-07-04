@@ -75,5 +75,15 @@ const InventoryContext = cc.Class.extend({
             }
         }
         return null;
+    },
+
+    updateCardAmount: function (cardId, amountChange) {
+        let card = this.getCardById(cardId);
+        if (card) {
+            card.amount += amountChange;
+            let inventoryLayer = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE);
+            inventoryLayer.cardNodeMap.get(cardId).onUpdateCard(amountChange);
+
+        }
     }
 });

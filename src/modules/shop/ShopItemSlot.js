@@ -1,5 +1,5 @@
 const ShopItemSlotNode = cc.Node.extend({
-    ctor: function (type, price, unit, quantity, state) {
+    ctor: function (type, price, unit, quantity, state, id) {
         this._super();
         this._setupUI();
 
@@ -8,6 +8,7 @@ const ShopItemSlotNode = cc.Node.extend({
         this.setQuantity(quantity);
         this.setUnit(unit);
         this.setState(state);
+        this.id = id;
     },
 
     _setupUI: function () {
@@ -27,42 +28,14 @@ const ShopItemSlotNode = cc.Node.extend({
             return;
         }
 
-        let texture = null;
-        switch (type) {
-            case ItemDefine.OWL:
-                texture = ShopResources.SHOP_CARD_CANNON_IMG;
-                break;
-            case ItemDefine.CROW:
-                texture = ShopResources.SHOP_CARD_CROW_IMG;
-                break;
-            case ItemDefine.FROG:
-                texture = ShopResources.SHOP_CARD_FROG_IMG;
-                break;
-            case ItemDefine.BUNNY:
-                texture = ShopResources.SHOP_CARD_BUNNY_IMG;
-                break;
-            case ItemDefine.POLAR:
-                texture = ShopResources.SHOP_CARD_POLAR_IMG;
-                break;
-            case ItemDefine.GOAT:
-                texture = ShopResources.SHOP_CARD_GOAT_IMG;
-                break;
-            case ItemDefine.SNAKE:
-                texture = ShopResources.SHOP_CARD_SNAKE_IMG;
-                break;
-            case ItemDefine.FIRE:
-                texture = ShopResources.SHOP_CARD_FIRE_IMG;
-                break;
-            case ItemDefine.SNOW:
-                texture = ShopResources.SHOP_CARD_SNOW_IMG;
-                break;
-        }
+        this.texture = CARD_CONST[type]["cardImage"];
+        this.slotName = CARD_NAME_VI[type];
 
         this.itemNode = ccs.load(ShopResources.SHOP_CARD_ITEM_NODE, "").node;
         this.itemNode.setName("item")
         this.itemNode.attr({x: 0, y: 25, scaleX: 0.7, scaleY: 0.7});
         this.addChild(this.itemNode);
-        this.itemNode.getChildByName("image").setTexture(texture);
+        this.itemNode.getChildByName("image").setTexture(this.texture);
     },
 
     setPrice: function (price) {
@@ -91,16 +64,24 @@ const ShopItemSlotNode = cc.Node.extend({
         if (state === CAN_BUY) {
             this.buyBtn.getChildByName("backgroundBtn").addTouchEventListener(this._onBuyBtnClick.bind(this), this);
         } else {
-            this.buyBtn.getChildByName("backgroundBtn").setTouchEnabled(false);
-            this.buyBtn.getChildByName("backgroundBtn").setBright(false);
-            this.buyBtn.getChildByName("backgroundBtn").setEnabled(false);
+            this.buyBtn.removeAllChildren();
+            // FIXME: hardcode
+            let label = new ccui.Text("Đã mua", "textures/font/SVN-Supercell Magic.ttf", 20);
+            this.buyBtn.addChild(label);
         }
     },
 
     _onBuyBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            let buyItemPopup = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
-            ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
+            cc.log("[ShopItemSlot] Click on buy btn")
+            let buyItemPopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
+            buyItemPopup.setId(this.id);
+            buyItemPopup.setTitle(this.slotName);
+            buyItemPopup.setPrice(this.price);
+            buyItemPopup.setImage(this.texture);
+            buyItemPopup.setQuantity(this.quantity);
+            buyItemPopup.setType(this.type);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
         }
     }
 });
