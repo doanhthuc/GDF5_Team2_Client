@@ -35,7 +35,8 @@ var ScreenNetwork = cc.Layer.extend({
         this.btnLogin = this.loginNode.getChildByName("Button_1");
         this.btnLogin.addClickEventListener(this.onSelectLogin.bind(this));
         this.textFieldUID = this.loginNode.getChildByName("TextField_1");
-         this.lblLog = gv.commonText(fr.Localization.text(""), size.width * 0.5, size.height * 0.5);
+         this.lblLog = gv.commonText(fr.Localization.text(""), size.width * 0.8, size.height * 0.03);
+         this.lblLog.setString(res.version);
         this.addChild(this.lblLog);
         this.scheduleUpdate();
     },
