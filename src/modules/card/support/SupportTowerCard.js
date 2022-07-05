@@ -3,8 +3,4 @@ const SupportTowerCard = TowerCard.extend({
         this._super(id, level, accumulated, energy, isBattleDeck);
         this.auraTowerBuffType = JsonReader.getTowerConfig()[this.id].auraTowerBuffType;
     },
-
-    getCardStat: function () {
-
-    }
 });

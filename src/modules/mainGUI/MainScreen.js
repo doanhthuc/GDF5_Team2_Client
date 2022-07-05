@@ -74,8 +74,12 @@ const MainScreen = cc.Layer.extend({
 
         this.initListViewEventListener();
 
-        cc.log('MainScreen.js line 77 new CanonOwlCard ' + JSON.stringify((new CanonOwlCard(0, 12, 9, 0, false)).getCardStat()));
-
+        let card = CardFactory.createCard(1, 3, 100, true);
+        let card1 = CardFactory.createCard(3, 4, 100, true);
+        let card2 = CardFactory.createCard(9, 8, 100, true);
+        cc.log('MainScreen.js line 79 card: ', JSON.stringify(card.getCardStat()));
+        cc.log('MainScreen.js line 80 card: ', JSON.stringify(card1.getCardStat()));
+        cc.log('MainScreen.js line 81 card: ', JSON.stringify(card2.getCardStat()));
     },
 
     scrollToDefaultPage: function () {
