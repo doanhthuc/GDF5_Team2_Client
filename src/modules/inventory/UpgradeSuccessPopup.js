@@ -76,7 +76,7 @@ const UpgradeSuccessPopup = cc.Node.extend({
         this.acctionArray = [];
         let showUp = cc.sequence(cc.show(), cc.moveBy(0.3, cc.p(0, 20)));
         this.setAllCardStatHoldersVisible(false);
-        for (let [key, value] of Object.entries(this.cardModel.stat)) {
+        for (let [key, value] of Object.entries(this.cardModel.getCardStat())) {
             let cardStat = {
                 icon: CARD_STAT_ICON[key],
                 name: CARD_STAT_NAME[key],

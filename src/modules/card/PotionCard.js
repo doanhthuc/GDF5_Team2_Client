@@ -6,5 +6,9 @@ const PotionCard = ICard.extend({
 
     getEnergyFromJson: function () {
         return JsonReader.getPotionConfig()[this.idConfig].energy;
+    },
+
+    upgradeCardModel: function (level, accumulated) {
+        this._super(level, accumulated);
     }
 })

@@ -33,7 +33,7 @@ const CardCollectionNode = cc.Node.extend({
 
     setCardNodeListByCardCollection: function (cardCollection) {
         cardCollection.forEach(card => {
-            let cardModel = new CardModel(
+            let cardModel = CardFactory.createCard(
                 card.cardType,
                 card.cardLevel,
                 card.amount

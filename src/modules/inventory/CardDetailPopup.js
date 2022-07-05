@@ -65,7 +65,7 @@ const CardDetailPopup = cc.Node.extend({
     setCardStat: function () {
         let index = 0;
         this.setAllCardStatHoldersVisible(false);
-        for (let [key, value] of Object.entries(this.cardModel.stat)) {
+        for (let [key, value] of Object.entries(this.cardModel.getCardStat())) {
             let cardStat = {
                 icon: CARD_STAT_ICON[key],
                 name: CARD_STAT_NAME[key],

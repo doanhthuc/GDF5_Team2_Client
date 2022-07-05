@@ -10,5 +10,9 @@ const TrapCard = PotionCard.extend({
 
     getEnergyFromJson: function () {
         return this.energy = CARD_TYPE.SPELL[9].energy;
+    },
+
+    upgradeCardModel: function (level, accumulated) {
+        this._super(level, accumulated);
     }
 });

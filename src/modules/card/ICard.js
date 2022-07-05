@@ -20,7 +20,7 @@ const ICard = cc.Class.extend({
         }
     },
 
-    upgradeCard: function (level, accumulated) {
+    upgradeCardModel: function (level, accumulated) {
         this.level = level;
         this.accumulated = accumulated;
         this.setCardRankByLevel(this.level);

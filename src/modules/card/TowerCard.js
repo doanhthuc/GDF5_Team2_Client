@@ -20,7 +20,7 @@ const TowerCard = ICard.extend({
         }
     },
 
-    upgradeCard: function (level, accumulated) {
+    upgradeCardModel: function (level, accumulated) {
         this._super(level, accumulated);
         this.range = this.getRangeFromJson();
     }
