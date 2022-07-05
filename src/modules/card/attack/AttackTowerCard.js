@@ -29,7 +29,7 @@ const AttackTowerCard = TowerCard.extend({
         }
     },
 
-    upgradeCard: function (level, accumulated) {
+    upgradeCardModel: function (level, accumulated) {
         this._super(level, accumulated);
         this.damage = this.getDamageFromJson();
         this.attackSpeed = this.getAttackSpeedFromJson();

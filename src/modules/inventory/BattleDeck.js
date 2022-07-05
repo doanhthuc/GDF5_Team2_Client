@@ -31,7 +31,7 @@ const BattleDeckNode = cc.Node.extend({
 
     setCardNodeListByBattleDeck: function (battleDeck) {
         battleDeck.forEach(card => {
-            let cardModel = new CardModel(
+            let cardModel = CardFactory.createCard(
                 card.cardType,
                 card.cardLevel,
                 card.amount,
