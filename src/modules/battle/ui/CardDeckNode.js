@@ -11,8 +11,11 @@ let CardDeckNode = cc.Node.extend({
 
         for (let i = 1; i <= 4; i++) {
             let card = this.rootNode.getChildByName("card_" + i);
-            card.name = "card"+i;
 
+            card.name = "card"+i;
+            card.isUp = false;
+
+            // FIXME: harcode
             switch (i) {
                 case 1:
                     card.getChildByName("entity_image").setTexture("textures/card/card_tower_cannon.png");
@@ -27,14 +30,14 @@ let CardDeckNode = cc.Node.extend({
                     card.type = GameConfig.ENTITY_ID.FROG_TOWER;
                     break;
                 case 4:
-                    card.getChildByName("entity_image").setTexture("textures/card/card_tower_cannon.png");
-                    card.type = GameConfig.ENTITY_ID.CANNON_TOWER;
+                    card.getChildByName("entity_image").setTexture("textures/card/skill_icon_burn.png");
+                    card.type = GameConfig.ENTITY_ID.FIRE_SPELL;
                     break;
             }
 
             cc.eventManager.addListener({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
-                onTouchBegan: this.onTouchBegan.bind(this),
+                onTouchBegan: this.onTouchBegan,
                 onTouchMoved: this.onTouchMoved,
                 onTouchEnded: this.onTouchEnded,
             }, card);
@@ -46,15 +49,18 @@ let CardDeckNode = cc.Node.extend({
         let card = event.getCurrentTarget();
 
         touchPos = card.convertToNodeSpace(touchPos);
+        // FIXME: hardcode
         const CARD_WIDTH = 108, CARD_HEIGHT = 143;
-
         let rect = cc.rect(-CARD_WIDTH/2, -CARD_HEIGHT/2, CARD_WIDTH, CARD_HEIGHT);
 
-        if (cc.rectContainsPoint(rect, touchPos)) {
+        if (card.isUp === false && cc.rectContainsPoint(rect, touchPos)) {
             let moveTop = cc.moveBy(1, cc.p(0, 30)).easing(cc.easeElasticOut());
             card.runAction(cc.sequence(moveTop));
-            GameConfig.gameLayer.selectedTowerCard = card.type;
+            card.isUp = true;
+            GameConfig.gameLayer.selectedCard = card.type;
             return true;
+        } else if (card.isUp === true) {
+
         }
 
         return false;
@@ -65,8 +71,23 @@ let CardDeckNode = cc.Node.extend({
     },
 
     onTouchEnded: function (touch, event) {
+        let touchPos = touch.getLocation();
         let card = event.getCurrentTarget();
-        let moveDown = cc.moveBy(1, cc.p(0, -30)).easing(cc.easeElasticOut());
-        card.runAction(cc.sequence(moveDown));
+        touchPos = card.convertToNodeSpace(touchPos);
+        // FIXME: hardcode
+        const CARD_WIDTH = 108, CARD_HEIGHT = 143;
+        let rect = cc.rect(-CARD_WIDTH/2, -CARD_HEIGHT/2, CARD_WIDTH, CARD_HEIGHT);
+        if (cc.rectContainsPoint(rect, touchPos)) {
+            // let moveTop = cc.moveBy(1, cc.p(0, 30)).easing(cc.easeElasticOut());
+            // card.runAction(cc.sequence(moveTop));
+            // GameConfig.gameLayer.selectedCard = card.type;
+            // return true;
+            cc.log("INNNNNNNNNNNNNNNN")
+        } else {
+            let card = event.getCurrentTarget();
+            let moveDown = cc.moveBy(1, cc.p(0, -30)).easing(cc.easeElasticOut());
+            card.runAction(cc.sequence(moveDown));
+            card.isUp = false;
+        }
     },
 });

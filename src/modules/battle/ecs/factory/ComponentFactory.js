@@ -9,6 +9,5 @@ ComponentFactory.create = function (cls, ...data) {
         component = new cls(...data);
         ComponentManager.getInstance().add(component);
     }
-
     return component;
 }

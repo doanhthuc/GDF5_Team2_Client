@@ -35,7 +35,7 @@ cc.game.onStart = function () {
         ShopNetwork.connector = new ShopNetwork.Connector(gv.gameClient);
 
         // fr.view(MainScreen);
-        fr.view(TestLayer);
+        fr.view(ScreenNetwork);
     }, this);
 };
 cc.game.run();

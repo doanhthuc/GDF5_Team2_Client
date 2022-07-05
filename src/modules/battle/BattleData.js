@@ -12,6 +12,7 @@ let BattleData = cc.Class.extend({
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
                 longestPath: null,
                 shortestPathForEachTile: null,
+                energy: 20
             },
             opponent: {
                 username: "OPPONENT333",
