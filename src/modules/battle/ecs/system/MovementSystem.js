@@ -21,7 +21,6 @@ let MovementSystem = System.extend({
                 let posTile = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                 if (posTile.x === GameConfig.HOUSE_POSITION.x && posTile.y === GameConfig.HOUSE_POSITION.y) {
 
-                    // FIXME: move this function to another place
                     BattleUILayer.minusHouseEnergy(monsterInfo.damageEnergy, entity.mode);
 
                     // destroy
@@ -43,8 +42,10 @@ let MovementSystem = System.extend({
             this._updateVelocityVector(entity, velocityComponent, positionComponent);
             // end side-effect
 
-            positionComponent.x += velocityComponent.speedX * tick;
-            positionComponent.y += velocityComponent.speedY * tick;
+            if (velocityComponent.getActive()) {
+                positionComponent.x += velocityComponent.speedX * tick;
+                positionComponent.y += velocityComponent.speedY * tick;
+            }
         }
     },
 
@@ -67,5 +68,10 @@ let MovementSystem = System.extend({
 
             }
         }
+        // if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive() === false) {
+        //     velocityComponent.dynamicPosition = null;
+        //     entity.setActive(false);
+        //     // set sprite false
+        // }
     }
 });

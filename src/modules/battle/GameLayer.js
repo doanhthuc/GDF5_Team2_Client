@@ -87,11 +87,14 @@ let GameLayer = cc.Layer.extend({
             case GameConfig.ENTITY_ID.FIRE_SPELL:
                 new FireSpell(this.mapLayer, Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER), 50, 1.2*GameConfig.TILE_WIDTH);
                 break;
+            case GameConfig.ENTITY_ID.FROZEN_SPELL:
+                new FrozenSpell(this.mapLayer, Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER), 50, 5, 1.2*GameConfig.TILE_WIDTH);
+                break;
             default:
                 return;
         }
-        // FIXME: harcode
-        if (GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FIRE_SPELL) {
+        // FIXME: hardcode
+        if (GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FIRE_SPELL && GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos});
         }

@@ -1,23 +1,27 @@
-// let FireSpell = cc.Sprite.extend({
+// let FrozenSpell = cc.Sprite.extend({
 //     ctor: function (parent, pos, damage, range) {
 //         this._super();
 //         this._s = 200;
 //         this._t = 0.1;
 //
+//         cc.log("A")
 //         parent.addChild(this, 4);
+//         cc.log("B")
+//
 //         this.pos = pos;
 //         this.damage = damage;
 //         this.range = range;
-//         this._fireSpell = new sp.SkeletonAnimation('textures/potion/effect_atk_fire.json', 'textures/potion/effect_atk_fire.atlas');
-//         this.addChild(this._fireSpell,2);
+//         this._iceSpell = new sp.SkeletonAnimation("textures/potion/effect_atk_ice.json", "textures/potion/effect_atk_ice.atlas");
+//         this.addChild(this._iceSpell,2);
 //
 //         this.exec();
 //     },
 //
 //     exec: function () {
+//         cc.log("Exec")
 //         this._countdown = this._t;
 //         this.setPosition(cc.p(this.pos.x, this.pos.y + this._s));
-//         this._fireSpell.setAnimation(0, 'animation_fireball', true);
+//         this._iceSpell.setAnimation(0, 'animation_ice_ball', true);
 //         this.scheduleUpdate();
 //     },
 //
@@ -34,10 +38,11 @@
 //     },
 //
 //     _explosionEffect: function () {
-//         this._fireSpell.setAnimation(1, 'animation_full', false);
-//         EventDispatcher.getInstance().dispatchEvent(EventType.EXPLOSION_FIRE_SPELL, {position: this.pos, damage: this.damage, range: this.range});
+//         this._iceSpell.setAnimation(0, 'animation_full', false);
+//         // EventDispatcher.getInstance().dispatchEvent(EventType.EXPLOSION_FIRE_SPELL, {position: this.pos, damage: this.damage, range: this.range});
 //     },
 // })
+//
 // let TestLayer = cc.Layer.extend({
 //     ctor: function () {
 //         this._super();
@@ -54,7 +59,12 @@
 //                     return;
 //
 //                 let pixel = touches[0].getLocation();
-//                 new FireSpell(this, pixel, 10, 1.2);
+//                 let spell = new FrozenSpell(this, pixel, 10, 1.2);
+//                 cc.log("Clicked")
+//                 // let spine = new sp.SkeletonAnimation("textures/potion/effect_atk_ice.json", "textures/potion/effect_atk_ice.atlas")
+//                 // spine.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+//                 // spine.setAnimation(0, 'animation_full', false);
+//                 // this.addChild(spine);
 //             }.bind(this)
 //         }), this)
 //     },

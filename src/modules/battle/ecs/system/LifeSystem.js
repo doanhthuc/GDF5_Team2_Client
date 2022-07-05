@@ -15,7 +15,8 @@ let LifeSystem = System.extend({
                 if (Utils.isMonster(entity)) {
                     let monsterInfo = entity.getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
 
-                    // destroy
+                    // FIXME: add destroy method into Entity, remove sprite of Apprearance Component, set Active = false for other Component
+                    // can delegate for each component destroy
                     let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
                     if (appearanceComponent) {
                         let sprite = appearanceComponent.sprite;
@@ -25,6 +26,7 @@ let LifeSystem = System.extend({
                     for (let key of Object.keys(entity.components)) {
                         entity.components[key].setActive(false);
                     }
+
                 }
             }
         }

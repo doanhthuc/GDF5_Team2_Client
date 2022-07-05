@@ -38,7 +38,8 @@ GameConfig.ENTITY_ID = {
     BULLET: 3,
     BEAR_TOWER: 4,
     FROG_TOWER: 5,
-    FIRE_SPELL: 6
+    FIRE_SPELL: 6,
+    FROZEN_SPELL: 7
 }
 
 GameConfig.GROUP_ID = {

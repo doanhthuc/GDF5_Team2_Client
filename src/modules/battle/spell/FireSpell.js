@@ -3,7 +3,7 @@ let FireSpell = cc.Sprite.extend({
         this._super();
         this._s = 200;
         this._t = 0.1;
-
+        cc.log("UUU")
         parent.addChild(this, 4);
         this.pos = pos;
         this.damage = damage;

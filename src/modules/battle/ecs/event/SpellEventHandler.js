@@ -13,3 +13,19 @@ EventDispatcher.getInstance()
             }
         }
     })
+    .addEventHandler(EventType.EXPLOSION_FROZEN_SPELL, function (data) {
+        let {damage, duration, range, position} = data;
+        let monsters = EntityManager.getInstance().getEntitiesByComponents(GameConfig.COMPONENT_ID.MONSTER_INFO);
+        for (let monster of monsters) {
+            if (monster.mode === GameConfig.PLAYER) {
+                let monsterPosition = monster.getComponent(GameConfig.COMPONENT_ID.POSITION)
+                let distance = Utils.euclidDistance(monsterPosition, position)
+                if (distance <= range) {
+                    let damageEffect = ComponentFactory.create(DamageEffect, damage);
+                    let frozenEffect = ComponentFactory.create(FrozenEffect, duration)
+                    monster.addComponent(damageEffect);
+                    monster.addComponent(frozenEffect);
+                }
+            }
+        }
+    })
