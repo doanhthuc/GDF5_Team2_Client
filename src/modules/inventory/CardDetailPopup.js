@@ -120,8 +120,10 @@ const CardDetailPopup = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             switch (this.upgradeBtnState) {
                 case InventoryResources.UPGRADE_BTN_STATE.DISABLE:
-                    PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES).setType(InventoryResources.RESOURCE_TYPE.CARD)
-                    PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES);
+                    if (this.cardModel.level < MAX_CARD_LEVEL) {
+                        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES).setType(InventoryResources.RESOURCE_TYPE.CARD)
+                        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES);
+                    }
                     break;
                 case InventoryResources.UPGRADE_BTN_STATE.NOT_ENOUGH_GOLD:
                     PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES).setType(InventoryResources.RESOURCE_TYPE.GOLD)

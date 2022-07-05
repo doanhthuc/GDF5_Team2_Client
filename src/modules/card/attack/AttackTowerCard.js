@@ -1,10 +1,11 @@
 const AttackTowerCard = TowerCard.extend({
-    ctor: function (id, level, accumulated, energy, bulletRadius, isBattleDeck = false) {
-        this._super(id, level, accumulated, energy, isBattleDeck);
+    ctor: function (id, level, accumulated, isBattleDeck = false) {
+        this._super(id, level, accumulated, isBattleDeck);
         this.skill = null;
         this.damage = this.getDamageFromJson();
         this.attackSpeed = this.getAttackSpeedFromJson();
-        this.bulletType = new BulletType(bulletRadius);
+        this.bulletRadius = this.getBulletRadiusFromJson();
+        this.bulletType = new BulletType(this.bulletRadius);
     },
 
     getDamageFromJson: function () {
@@ -15,12 +16,23 @@ const AttackTowerCard = TowerCard.extend({
         return JsonReader.getTowerConfig()[this.id].stat[this.rank].attackSpeed;
     },
 
+    getBulletRadiusFromJson: function () {
+        return JsonReader.getTowerConfig()[this.id].stat[this.rank].bulletRadius;
+    },
+
     getCardStat: function () {
         return {
             damage: this.damage,
             attackSpeed: this.attackSpeed,
             range: this.range,
-            bulletType: this.bulletType,
+            bulletType: this.bulletType.type,
         }
+    },
+
+    upgradeCard: function (level, accumulated) {
+        this._super(level, accumulated);
+        this.damage = this.getDamageFromJson();
+        this.attackSpeed = this.getAttackSpeedFromJson();
+        this.bulletRadius = this.getBulletRadiusFromJson();
     }
 });

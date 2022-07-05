@@ -1,9 +1,9 @@
 const BulletType = cc.Class.extend({
-    ctor: function(bulletRadius) {
+    ctor: function (bulletRadius) {
         if (bulletRadius > 0) {
-            this.bulletRadius = 'area';
+            this.type = 'area';
         } else {
-            this.bulletRadius = 'single';
+            this.type = 'single';
         }
     }
 });
