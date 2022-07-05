@@ -92,7 +92,7 @@ const UpgradeSuccessPopup = cc.Node.extend({
 
     setUpgradeProgressBar: function (accumulatedCard) {
         //TODO: exception when max level
-
+        cc.log('UpgradeSuccessPopup setUpgradeProgressBar line 95:  + ' + JSON.stringify(this.cardModel));
         this.progressBackgroundImg.setScaleX(accumulatedCard / (JsonReader.getCardUpgradeConfig()[this.cardModel.level].fragments + accumulatedCard));
         this.accumulateTxt.setString('');
 

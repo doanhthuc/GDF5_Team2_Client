@@ -73,6 +73,9 @@ const MainScreen = cc.Layer.extend({
         this.initPopups();
 
         this.initListViewEventListener();
+
+        cc.log('MainScreen.js line 77 new CanonOwlCard ' + JSON.stringify((new CanonOwlCard(0, 12, 9, 0, false)).getCardStat()));
+
     },
 
     scrollToDefaultPage: function () {

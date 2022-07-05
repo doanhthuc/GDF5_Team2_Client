@@ -17,6 +17,10 @@
         "src/framework/**/*.js",
         "src/gui/screen/**/*.js",
         "src/util/UiUtil.js",
+        "src/util/JsonReader.js",
+        "src/modules/card/ICard.js",
+        "src/modules/card/TowerCard.js",
+        "src/modules/card/AttackTowerCard.js",
         "src/modules/uimanager/ClientUIConst.js",
         "src/modules/uimanager/ClientUIManager.js",
         "src/modules/battle/ecs/manager/ComponentManager.js",
@@ -54,6 +58,10 @@
         "src/framework/StringUtils.js",
         "src/framework/UserData.js",
         "src/util/UiUtil.js",
+        "src/util/JsonReader.js",
+        "src/modules/card/ICard.js",
+        "src/modules/card/TowerCard.js",
+        "src/modules/card/AttackTowerCard.js",
         "src/modules/uimanager/ClientUIConst.js",
         "src/modules/uimanager/ClientUIManager.js",
         "src/modules/battle/ecs/manager/ComponentManager.js",
@@ -106,6 +114,8 @@
         "src/modules/battle/ui/result/BattleResultPlayerInfo.js",
         "src/modules/battle/ui/TwoPlayerInfo/TwoPlayerInfoLayer.js",
         "src/modules/battle/ui/WaveNode.js",
+        "src/modules/card/bullet/BulletType.js",
+        "src/modules/card/CanonOwlCard.js",
         "src/modules/cheat/CardInfoCheat.js",
         "src/modules/cheat/CheatContext.js",
         "src/modules/cheat/CheatPopup.js",
@@ -164,7 +174,6 @@
         "src/modules/testnetwork/network/ShopNetwork.js",
         "src/modules/testnetwork/network/ShopPacket.js",
         "src/modules/testnetwork/ScreenNetwork.js",
-        "src/modules/uimanager/PopupUIManager.js",
-        "src/util/JsonReader.js"
+        "src/modules/uimanager/PopupUIManager.js"
     ]
 }

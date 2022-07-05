@@ -2,7 +2,7 @@ const CardNode = cc.Node.extend({
     ctor: function (cardModel) {
         this._super();
         this.init();
-        if (cardModel) this.setModel(cardModel)
+        if (cardModel) this.setModel(cardModel);
     },
 
     setModel: function (cardModel) {
@@ -45,6 +45,14 @@ const CardNode = cc.Node.extend({
         this.accumulateTxt = this.progressBorderImg.getChildByName('accumulateTxt');
 
         this.cardBackgroundBtn.addTouchEventListener(this.onCardClick.bind(this), this);
+
+        this.upgradeReadyAnimation = new sp.SkeletonAnimation('textures/lobby/fx/card_upgrade_ready.json', 'textures/lobby/fx/card_upgrade_ready.atlas');
+        this.upgradeReadyAnimation.setPosition(0, -this.cardBorderImg.height / 2);
+        this.upgradeReadyAnimation.setAnimation(0, 'card_upgrade_ready', true);
+        this.addChild(this.upgradeReadyAnimation, 4);
+        this.upgradeReadyAnimationTxt = new cc.LabelTTF( "", "font/SVN-Supercell Magic.ttf" );
+        this.upgradeReadyAnimation.addChild(this.upgradeReadyAnimationTxt);
+        this.upgradeReadyAnimation.setVisible(false);
     },
 
     setCardEnergyTxt: function (energy) {
@@ -76,15 +84,22 @@ const CardNode = cc.Node.extend({
     setUpgradeProgressBar: function (accumulatedCard) {
         //TODO: exception when max level
         if (this.cardModel.level >= MAX_CARD_LEVEL) {
+            this.progressBorderImg.setVisible(true);
+            this.upgradeReadyAnimation.setVisible(false);
             this.accumulateTxt.setString('MAX');
             this.progressBackgroundImg.setScaleX(1);
         } else if (accumulatedCard < JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments) {
+            this.progressBorderImg.setVisible(true);
+            this.upgradeReadyAnimation.setVisible(false);
             this.progressBackgroundImg.setScaleX(accumulatedCard / JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
             this.accumulateTxt.setString(accumulatedCard + '/' + JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
         } else {
-            this.progressBackgroundImg.setScaleX(1);
-            this.accumulateTxt.setString(accumulatedCard + '/' + JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
+            this.progressBorderImg.setVisible(false);
+            this.upgradeReadyAnimation.setVisible(true);
+            this.upgradeReadyAnimationTxt.setString(accumulatedCard + '/' + JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
         }
+
+
     }
 });
 
