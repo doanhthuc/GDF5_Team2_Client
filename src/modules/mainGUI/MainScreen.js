@@ -75,7 +75,7 @@ const MainScreen = cc.Layer.extend({
         this.initListViewEventListener();
     },
 
-    onEnter: function() {
+    onEnter: function () {
         this._super();
         // this.initTouchEvent();
         PopupUIManager.getInstance().setAllPopupVisible(false);
@@ -95,6 +95,7 @@ const MainScreen = cc.Layer.extend({
         this.fullTreasureSlotPopup = new FullTreasureSlotPopup();
         this.notEnoughUpgradeResPopup = new NotEnoughUpgradeResPopup();
         this.upgradeSuccessPopup = new UpgradeSuccessPopup();
+        this.cardSkillPopupNode = new SkillPopup();
 
         this.addPopup(this.treasurePopupNode);
         this.addPopup(this.buyCardPopupNode);
@@ -105,6 +106,7 @@ const MainScreen = cc.Layer.extend({
         this.addPopup(this.fullTreasureSlotPopup);
         this.addPopup(this.notEnoughUpgradeResPopup);
         this.addPopup(this.upgradeSuccessPopup);
+        this.addPopup(this.cardSkillPopupNode);
     },
 
     addPopup: function (popupNode) {

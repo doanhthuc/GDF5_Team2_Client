@@ -7,7 +7,7 @@ const InventoryResources = {
     CARD_STAT_HOLDER_NODE: 'ui/inventory/cardStatHolder.json',
     NOT_ENOUGH_UPGRADE_RES_POPUP_NODE: 'ui/inventory/notEnoughResPopup.json',
     UPGRADE_SUCCESS_POPUP: 'ui/inventory/upgradeSuccessPopup.json',
-    SKILL_POPUP_NODE: '',
+    SKILL_POPUP_NODE: 'ui/inventory/skillPopup.json',
 
     UPGRADE_BTN_DISABLE_BACKGROUND: 'textures/common/common_btn_gray.png',
     UPGRADE_BTN_BACKGROUND: 'textures/common/common_btn_green.png',

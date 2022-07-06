@@ -9,7 +9,9 @@ const CARD_STAT_ICON = {
     radius: 'textures/card/stat_icon/stat_icon_range.png',
     frozenTime: 'textures/card/stat_icon/stat_icon_immobilize.png',
     slowPercent: 'textures/card/stat_icon/stat_icon_immobilize.png',
-    time: 'textures/card/stat_icon/stat_icon_time.png'
+    time: 'textures/card/stat_icon/stat_icon_time.png',
+    stunTime: 'textures/card/stat_icon/stat_icon_immobilize.png',
+    potion: 'textures/card/stat_icon/stat_icon_damage.png',
 }
 
 const CARD_STAT_NAME = {
@@ -22,5 +24,9 @@ const CARD_STAT_NAME = {
     frozenTime: 'Đóng băng trong',
     slowPercent: 'Làm chậm',
     immobilize: 'Khống chế',
-    radius: 'bán kính'
+    radius: 'bán kính',
+    stunTime: 'Làm choáng',
+    time: 'Thời gian',
+    potion: 'Sát thương',
+
 }

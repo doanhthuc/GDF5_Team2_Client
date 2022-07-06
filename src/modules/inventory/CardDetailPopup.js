@@ -146,7 +146,8 @@ const CardDetailPopup = cc.Node.extend({
 
     onSkillBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            cc.log('Card DetailPopup line 127 : onSkillbtnClick');
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_SKILL).setCardId(this.cardModel.id);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_SKILL);
         }
     },
 
@@ -231,4 +232,16 @@ const CardDetailPopup = cc.Node.extend({
             this.setVisible(false);
         }
     },
+
+    nextTowerImgBtn: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
+        }
+    },
+
+    prevTowerImgBtn: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
+        }
+    }
 });
