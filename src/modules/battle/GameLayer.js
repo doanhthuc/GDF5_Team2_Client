@@ -101,7 +101,8 @@ let GameLayer = cc.Layer.extend({
                 EntityFactory.createFireSpell(pixelPos, GameConfig.PLAYER);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
-                new FrozenSpell(this.mapLayer, pixelPos, 50, 5, 1.2*GameConfig.TILE_WIDTH);
+                // new FrozenSpell(this.mapLayer, pixelPos, 50, 5, 1.2*GameConfig.TILE_WIDTH);
+                SpellFactory.createFrozenSpell(pixelPos, GameConfig.PLAYER);
                 break;
             default:
                 return;

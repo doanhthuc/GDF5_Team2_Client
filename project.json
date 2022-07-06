@@ -89,6 +89,7 @@
         "src/modules/battle/ecs/entity/Entity.js",
         "src/modules/battle/ecs/factory/ComponentFactory.js",
         "src/modules/battle/ecs/factory/EntityFactory.js",
+        "src/modules/battle/ecs/factory/SpellFactory.js",
         "src/modules/battle/ecs/system/AttackSystem.js",
         "src/modules/battle/ecs/system/CollisionSystem.js",
         "src/modules/battle/ecs/system/EffectSystem.js",
