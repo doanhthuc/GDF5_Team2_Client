@@ -2,22 +2,23 @@ let EntityFactory = cc.Class.extend({});
 
 EntityFactory.pool = new EntityPool()
 
-EntityFactory._createEntity = function (typeID) {
+EntityFactory._createEntity = function (typeID, mode) {
     // TODO: create pool object for each type bullet
     // let entity = this.pool.getInActiveEntity(typeID);
+    // FIXME: add mode = GameConfig.PLAYER or GameConfig.OPPONENT
     let entity = null;
     if (entity === null) {
-        entity = new EntityECS(typeID);
+        entity = new EntityECS(typeID, mode);
         this.pool.push(entity);
         EntityManager.getInstance().addEntity(entity);
     }
     return entity;
 }
 
-EntityFactory.createBullet = function (towerType, startPosition, targetPosition, effects) {
+EntityFactory.createBullet = function (towerType, startPosition, targetPosition, effects, mode) {
     if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
-        let entity = this._createEntity(typeID);
+        let entity = this._createEntity(typeID, mode);
 
         // NOTE: get component from pool
         let bulletNode = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
@@ -38,7 +39,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         return entity;
     } else if (towerType === GameConfig.ENTITY_ID.BEAR_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
-        let entity = this._createEntity(typeID);
+        let entity = this._createEntity(typeID, mode);
 
         let bulletNode = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_bullet_0000.png");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects);
@@ -58,7 +59,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         return entity;
     } else if (towerType === GameConfig.ENTITY_ID.FROG_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
-        let entity = this._createEntity(typeID);
+        let entity = this._createEntity(typeID, mode);
 
         let bulletNode = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_bullet_1_0000.png");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "frog");
@@ -88,9 +89,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
 
 EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let typeID = GameConfig.ENTITY_ID.SWORD_MAN;
-    let entity = new EntityECS(typeID, mode);
-    this.pool.push(entity);
-    EntityManager.getInstance().addEntity(entity);
+    let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 30, 1, 1, undefined);
@@ -121,11 +120,11 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     return entity;
 };
 
-EntityFactory.createCannonOwlTower = function (pos) {
+EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
-    let entity = this._createEntity(typeID);
+    let entity = this._createEntity(typeID, mode);
 
-    let pixelPos = Utils.tile2Pixel(pos.x, pos.y, GameConfig.PLAYER);
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createOwlNodeAnimation(attackRange);
 
@@ -149,11 +148,11 @@ EntityFactory.createCannonOwlTower = function (pos) {
     return entity;
 };
 
-EntityFactory.createIceGunPolarBearTower = function (pos) {
+EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.BEAR_TOWER;
     let entity = this._createEntity(typeID);
 
-    let pixelPos = Utils.tile2Pixel(pos.x, pos.y, GameConfig.PLAYER);
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createBearNodeAnimation(attackRange);
 
@@ -173,12 +172,12 @@ EntityFactory.createIceGunPolarBearTower = function (pos) {
     return entity;
 }
 
-EntityFactory.createBoomerangFrogTower = function (pos) {
+EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.FROG_TOWER;
-    let entity = this._createEntity(typeID);
+    let entity = this._createEntity(typeID, mode);
 
     let attackRange = 2 * GameConfig.TILE_WIDTH;
-    let pixelPos = Utils.tile2Pixel(pos.x, pos.y, GameConfig.PLAYER);
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let node = createFrogNodeAnimation(attackRange);
 
     let damageEffect = ComponentFactory.create(DamageEffect, 3);
@@ -192,6 +191,28 @@ EntityFactory.createBoomerangFrogTower = function (pos) {
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
+
+    return entity;
+}
+
+EntityFactory.createFireSpell = function (pixelPos, mode) {
+    let typeID = GameConfig.ENTITY_ID.FIRE_SPELL;
+    let entity = this._createEntity(typeID, mode);
+
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y + 100);
+
+    let speed = Utils.calculateVelocityVector(cc.p(pixelPos.x, pixelPos.y + 100), pixelPos, 1000);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
+
+    let damageEffect = ComponentFactory.create(DamageEffect, 50);
+
+    let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent, "textures/potion/effect_atk_fire.json", "textures/potion/effect_atk_fire.atlas", [0, 0.1], ["animation_fireball", "animation_full"], [true, false], pixelPos);
+    let spellInfoComponent = ComponentFactory.create(SpellInfoComponent, pixelPos, [damageEffect], 1.2*GameConfig.TILE_WIDTH, 0.1);
+
+    entity.addComponent(positionComponent)
+        .addComponent(velocityComponent)
+        .addComponent(skeletonComponent)
+        .addComponent(spellInfoComponent);
 
     return entity;
 }

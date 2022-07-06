@@ -8,9 +8,6 @@ let EntityECS = cc.Class.extend({
         this.id = Utils.UUID.genInstanceID();
         this._active = true;
 
-        if (!mode) {
-            mode = GameConfig.PLAYER;
-        }
         this.mode = mode;
     },
 
@@ -30,8 +27,15 @@ let EntityECS = cc.Class.extend({
         delete this.components[component.typeID];
     },
 
-    getComponent: function (typeID) {
-        return this.components[typeID];
+    getComponent: function (typeIDOrComponentCls) {
+        if (typeof typeIDOrComponentCls === "number") {
+            return this.components[typeIDOrComponentCls];
+        } else {
+            if (typeIDOrComponentCls.typeID === null || typeIDOrComponentCls.typeID === undefined) {
+                throw new Error("Class doesn't have typeID property");
+            }
+            return this.components[typeIDOrComponentCls.typeID];
+        }
     },
 
     hasAllComponent: function (...componentTypeIDs) {
@@ -67,3 +71,17 @@ let EntityECS = cc.Class.extend({
         }
     }
 });
+
+EntityECS.destroy = function (entity) {
+    let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
+    if (appearanceComponent) {
+        let sprite = appearanceComponent.sprite;
+        sprite.setVisible(false);
+    }
+
+    entity.setActive(false);
+    for (let key of Object.keys(entity.components)) {
+        // FIXME: Pool invalid native object
+        // ComponentPool.getInstance().checkIn(entity.components[key]);
+    }
+}

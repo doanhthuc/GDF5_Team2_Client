@@ -7,18 +7,20 @@ let ComponentPool = cc.Class.extend({
     },
 
     validate: function (component) {
+        cc.log(JSON.stringify(component))
         return component.getActive() === false;
     },
 
     checkOut: function (typeID) {
         let unlockedMap = this.unlocked.get(typeID);
         if (unlockedMap && unlockedMap.size > 0) {
-            let component = unlockedMap.values().next();
+            let component = unlockedMap.values().next().value;
             if (this.validate(component)) {
                 unlockedMap.delete(component.id);
                 if (!this.locked.has(typeID)) {
-                    this.locked[typeID] = new Map();
+                    this.locked.set(typeID, new Map());
                 }
+                cc.log(">>>> " + typeID);
                 this.locked.get(typeID).set(component.id, component);
                 component.setActive(true);
                 return component;
@@ -52,4 +54,22 @@ let ComponentPool = cc.Class.extend({
     },
 
 });
+
+let _instanceBuilder = (function () {
+    let _instance = null;
+    return {
+        getInstance: function () {
+            if (_instance === null) {
+                _instance = new ComponentPool();
+            }
+            return _instance;
+        },
+        resetInstance: function () {
+            // FIXME: Should release all component
+            _instance = null;
+        }
+    }
+})();
+ComponentPool.getInstance = _instanceBuilder.getInstance;
+ComponentPool.resetInstance = _instanceBuilder.resetInstance;
 

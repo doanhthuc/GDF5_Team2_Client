@@ -38,6 +38,7 @@ let MonsterInfoComponent = InfoComponent.extend({
             this.ability, this.effects);
     }
 });
+MonsterInfoComponent.typeID = GameConfig.COMPONENT_ID.MONSTER_INFO;
 ComponentManager.getInstance().registerClass(MonsterInfoComponent);
 
 let TowerInfoComponent = InfoComponent.extend({
@@ -61,6 +62,7 @@ let TowerInfoComponent = InfoComponent.extend({
         return new TowerInfoComponent(this.energy, this.bulletTargetType, this.archType, this.targetType, this.bulletType);
     }
 });
+TowerInfoComponent.typeID = GameConfig.COMPONENT_ID.TOWER_INFO;
 ComponentManager.getInstance().registerClass(TowerInfoComponent);
 
 let BulletInfoComponent = InfoComponent.extend({
@@ -81,6 +83,7 @@ let BulletInfoComponent = InfoComponent.extend({
         return new BulletInfoComponent(this.effects, this.type);
     }
 });
+BulletInfoComponent.typeID = GameConfig.COMPONENT_ID.BULLET_INFO;
 ComponentManager.getInstance().registerClass(BulletInfoComponent);
 
 let LifeComponent = InfoComponent.extend({
@@ -109,4 +112,5 @@ let LifeComponent = InfoComponent.extend({
         return new LifeComponent(this.hp, this.maxHP);
     }
 });
+LifeComponent.typeID = GameConfig.COMPONENT_ID.LIFE;
 ComponentManager.getInstance().registerClass(LifeComponent);

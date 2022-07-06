@@ -1,5 +1,5 @@
 let ComponentFactory = ComponentFactory || {};
-ComponentFactory.pool = ComponentFactory.pool || new ComponentPool();
+ComponentFactory.pool = ComponentFactory.pool || ComponentPool.getInstance();
 
 ComponentFactory.create = function (cls, ...data) {
     let component = this.pool.checkOut(cls.typeID);

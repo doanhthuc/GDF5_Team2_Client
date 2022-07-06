@@ -34,7 +34,7 @@ let AttackSystem = System.extend({
                     let targetMonster = this._findTargetMonsterByStrategy(attackComponent.targetStrategy, monsterInAttackRange);
                     let monsterPos = targetMonster.getComponent(GameConfig.COMPONENT_ID.POSITION);
                     let towerPos = tower.getComponent(GameConfig.COMPONENT_ID.POSITION);
-                    EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects);
+                    EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, towerPos.mode);
                     // reset count down time
                     attackComponent.countdown = attackComponent.speed;
                 }

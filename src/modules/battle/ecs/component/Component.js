@@ -7,12 +7,12 @@ let Component = cc.Class.extend({
         this._active = true;
     },
 
-    // need override
+    // @Override
     clone: function () {
         return this;
     },
 
-    // need override
+    // @Override
     reset: function () {
         throw new NotImplementedError();
     },
@@ -29,6 +29,7 @@ let Component = cc.Class.extend({
         return this.id === anotherComponent.id;
     }
 });
+Component.typeID = 0;
 
 let PositionComponent = Component.extend({
     name: "PositionComponent",
@@ -48,6 +49,7 @@ let PositionComponent = Component.extend({
         return new PositionComponent(this.x, this.y);
     },
 });
+PositionComponent.typeID = GameConfig.COMPONENT_ID.POSITION;
 ComponentManager.getInstance().registerClass(PositionComponent);
 
 let VelocityComponent = Component.extend({
@@ -72,6 +74,8 @@ let VelocityComponent = Component.extend({
         return new VelocityComponent(this.speedX, this.speedY, this.dynamicPosition);
     },
 });
+VelocityComponent.typeID = GameConfig.COMPONENT_ID.VELOCITY;
+
 VelocityComponent.calculateSpeed = function (speedX, speedY) {
     return Math.sqrt(Math.pow(speedX, 2) + Math.pow(speedY, 2));
 }
@@ -97,6 +101,7 @@ let AppearanceComponent = Component.extend({
         return new AppearanceComponent(this.sprite);
     },
 });
+AppearanceComponent.typeID = GameConfig.COMPONENT_ID.APPEARANCE;
 ComponentManager.getInstance().registerClass(AppearanceComponent);
 
 let PathComponent = Component.extend({
@@ -117,6 +122,7 @@ let PathComponent = Component.extend({
         return new PathComponent(this.path);
     }
 });
+PathComponent.typeID = GameConfig.COMPONENT_ID.PATH;
 ComponentManager.getInstance().registerClass(PathComponent);
 
 let CollisionComponent = Component.extend({
@@ -137,6 +143,7 @@ let CollisionComponent = Component.extend({
         return new CollisionComponent(this.width, this.height);
     }
 });
+CollisionComponent.typeID = GameConfig.COMPONENT_ID.COLLISION;
 ComponentManager.getInstance().registerClass(CollisionComponent);
 
 let AttackComponent = Component.extend({
@@ -183,4 +190,60 @@ let AttackComponent = Component.extend({
             this.speed, this.countdown, this.effects);
     }
 });
+AttackComponent.typeID = GameConfig.COMPONENT_ID.ATTACK;
 ComponentManager.getInstance().registerClass(AttackComponent);
+
+let SpellInfoComponent = Component.extend({
+    name: "SpellInfoComponent",
+    typeID: GameConfig.COMPONENT_ID.SPELL,
+
+    ctor: function (position, effects, range, duration) {
+        this._super();
+        this.reset(position, effects, range, duration);
+    },
+
+    reset: function (position, effects, range, duration) {
+        this.position = position;
+        this.effects = effects;
+        this.range = range;
+        this.duration = duration;
+        this.countdown = this.duration;
+    },
+
+    clone: function () {
+        return new SpellInfoComponent(this.pos, this.effects);
+    }
+});
+SpellInfoComponent.typeID = GameConfig.COMPONENT_ID.SPELL;
+ComponentManager.getInstance().registerClass(SpellInfoComponent);
+
+let SkeletonAnimationComponent = Component.extend({
+    name: "SpellInfoComponent",
+    typeID: GameConfig.COMPONENT_ID.SKELETON,
+
+    ctor: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position) {
+        this._super();
+        this.reset(fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position);
+    },
+
+    reset: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position) {
+        this.fileJson = fileJson;
+        this.fileAtlas = fileAtlas;
+        this.timeLine = timeLine;
+        this.sequenceAnim = sequenceAnim;
+        this.sequenceAnimLoop = sequenceAnimLoop;
+        this.accTime = 0;
+        this.currentIdx = 0;
+        this.position = position;
+
+        this.spine = new sp.SkeletonAnimation(this.fileJson, this.fileAtlas);
+        GameConfig.gameLayer.mapLayer.addChild(this.spine, 4);
+    },
+
+    clone: function () {
+        return new SkeletonAnimationComponent(this.fileJson, this.fileAtlas, this.timeLine, this.sequenceAnim, this.sequenceAnimLoop);
+    }
+
+});
+SkeletonAnimationComponent.typeID = GameConfig.COMPONENT_ID.SKELETON;
+ComponentManager.getInstance().registerClass(SkeletonAnimationComponent);

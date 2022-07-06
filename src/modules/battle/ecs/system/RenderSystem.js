@@ -9,12 +9,23 @@ let RenderSystem = System.extend({
     run: function (tick) {
         let entityList = EntityManager.getInstance().getEntitiesByComponents(GameConfig.COMPONENT_ID.APPEARANCE, GameConfig.COMPONENT_ID.POSITION);
         for (let entity of entityList) {
-            let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE);
-            let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
+            let appearanceComponent = entity.getComponent(AppearanceComponent);
+            let positionComponent = entity.getComponent(PositionComponent);
             appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
 
             // side effect
             this._updateHpBarMonsterUI(entity);
+        }
+
+        this._updateSkeletonComponentPosition();
+    },
+
+    _updateSkeletonComponentPosition: function () {
+        let entityList = EntityManager.getInstance().getEntitiesByComponents(GameConfig.COMPONENT_ID.SKELETON, GameConfig.COMPONENT_ID.POSITION);
+        for (let entity of entityList) {
+            let skeletonComponent = entity.getComponent(SkeletonAnimationComponent);
+            let positionComponent = entity.getComponent(PositionComponent);
+            skeletonComponent.spine.setPosition(positionComponent.x, positionComponent.y);
         }
     },
 

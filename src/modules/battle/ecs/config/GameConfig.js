@@ -21,6 +21,8 @@ GameConfig.COMPONENT_ID = {
     ATTACK: 13,
     BUFF_ATTACK_SPEED: 14,
     BUFF_ATTACK_DAMAGE: 15,
+    SPELL: 16,
+    SKELETON: 17
 }
 
 GameConfig.SYSTEM_ID = {
@@ -29,7 +31,10 @@ GameConfig.SYSTEM_ID = {
     RENDER: 3,
     LIFE: 4,
     ATTACK: 5,
-    EFFECT: 6
+    EFFECT: 6,
+    SPRITE_SHEET: 7,
+    SPELL: 8,
+    SKELETON: 9,
 }
 
 GameConfig.ENTITY_ID = {

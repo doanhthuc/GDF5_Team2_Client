@@ -31,6 +31,8 @@ let GameLayer = cc.Layer.extend({
         this.collisionSystem = new CollisionSystem();
         this.effectSystem = new EffectSystem();
         this.pathSystem = new PathMonsterSystem();
+        this.spellSystem = new SpellSystem();
+        this.skeletonAnimationSystem = new SkeletonAnimationSystem();
 
         // this._initTower();
         this._handleEventKey();
@@ -46,6 +48,8 @@ let GameLayer = cc.Layer.extend({
         this.collisionSystem.run(dt);
         this.effectSystem.run(dt);
         this.pathSystem.run(dt);
+        this.spellSystem.run(dt);
+        this.skeletonAnimationSystem.run(dt);
     },
 
     bornMonster: function (pos, mode) {
@@ -84,16 +88,17 @@ let GameLayer = cc.Layer.extend({
 
         switch (type) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
-                EntityFactory.createCannonOwlTower(tilePos);
+                EntityFactory.createCannonOwlTower(tilePos, GameConfig.PLAYER);
                 break;
             case GameConfig.ENTITY_ID.FROG_TOWER:
-                EntityFactory.createBoomerangFrogTower(tilePos);
+                EntityFactory.createBoomerangFrogTower(tilePos, GameConfig.PLAYER);
                 break;
             case GameConfig.ENTITY_ID.BEAR_TOWER:
-                EntityFactory.createIceGunPolarBearTower(tilePos);
+                EntityFactory.createIceGunPolarBearTower(tilePos, GameConfig.PLAYER);
                 break;
             case GameConfig.ENTITY_ID.FIRE_SPELL:
-                new FireSpell(this.mapLayer, pixelPos, 50, 1.2*GameConfig.TILE_WIDTH);
+                // new FireSpell(this.mapLayer, pixelPos, 50, 1.2*GameConfig.TILE_WIDTH);
+                EntityFactory.createFireSpell(pixelPos, GameConfig.PLAYER);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
                 new FrozenSpell(this.mapLayer, pixelPos, 50, 5, 1.2*GameConfig.TILE_WIDTH);
@@ -111,9 +116,9 @@ let GameLayer = cc.Layer.extend({
     },
 
     _initTower: function () {
-        EntityFactory.createCannonOwlTower({x: 1, y: 3});
-        EntityFactory.createIceGunPolarBearTower({x: 1, y: 1});
-        EntityFactory.createBoomerangFrogTower({x: 3, y: 3});
+        EntityFactory.createCannonOwlTower({x: 1, y: 3}, GameConfig.PLAYER);
+        EntityFactory.createIceGunPolarBearTower({x: 1, y: 1}, GameConfig.PLAYER);
+        EntityFactory.createBoomerangFrogTower({x: 3, y: 3}, GameConfig.PLAYER);
     },
 
     _handleEventKey: function () {

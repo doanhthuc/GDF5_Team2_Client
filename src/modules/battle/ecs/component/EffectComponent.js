@@ -19,6 +19,7 @@ let DamageEffect = EffectComponent.extend({
         this.damage = damage;
     }
 });
+DamageEffect.typeID = GameConfig.COMPONENT_ID.DAMAGE_EFFECT;
 ComponentManager.getInstance().registerClass(DamageEffect);
 
 let SlowEffect = EffectComponent.extend({
@@ -40,6 +41,7 @@ let SlowEffect = EffectComponent.extend({
         this.percent = percent;
     }
 });
+SlowEffect.typeID = GameConfig.COMPONENT_ID.SLOW_EFFECT;
 ComponentManager.getInstance().registerClass(SlowEffect);
 
 let FrozenEffect = EffectComponent.extend({
@@ -60,6 +62,7 @@ let FrozenEffect = EffectComponent.extend({
         this.countdown = this.duration;
     }
 });
+FrozenEffect.typeID = GameConfig.COMPONENT_ID.FROZEN_EFFECT;
 ComponentManager.getInstance().registerClass(FrozenEffect);
 
 let BuffAttackSpeedEffect = EffectComponent.extend({
@@ -79,6 +82,7 @@ let BuffAttackSpeedEffect = EffectComponent.extend({
         this.percent = percent;
     }
 });
+BuffAttackSpeedEffect.typeID = GameConfig.COMPONENT_ID.BUFF_ATTACK_SPEED;
 ComponentManager.getInstance().registerClass(BuffAttackSpeedEffect);
 
 let BuffAttackDamageEffect = EffectComponent.extend({
@@ -98,4 +102,5 @@ let BuffAttackDamageEffect = EffectComponent.extend({
         this.percent = percent;
     }
 });
+BuffAttackDamageEffect.typeID = GameConfig.COMPONENT_ID.BUFF_ATTACK_DAMAGE;
 ComponentManager.getInstance().registerClass(BuffAttackDamageEffect);
