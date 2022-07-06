@@ -8,19 +8,19 @@ let MovementSystem = System.extend({
 
     run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.VELOCITY, GameConfig.COMPONENT_ID.POSITION);
+            .getEntitiesHasComponents(VelocityComponent, PositionComponent);
         for (let entity of entityList) {
-            let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
-            let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
+            let positionComponent = entity.getComponent(PositionComponent);
+            let velocityComponent = entity.getComponent(VelocityComponent);
 
             // side-effect
             if (Utils.isMonster(entity)) {
                 // check if monster goes to the player house, then minus the player energy house
                 let posTile = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                 if (posTile.x === GameConfig.HOUSE_POSITION.x && posTile.y === GameConfig.HOUSE_POSITION.y) {
-                    let monsterInfo = entity.getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
+                    let monsterInfo = entity.getComponent(MonsterInfoComponent);
                     BattleUILayer.minusHouseEnergy(monsterInfo.damageEnergy, entity.mode);
-                    EntityECS.destroy(entity);
+                    EntityManager.destroy(entity);
                 }
             }
             this._dynamicMovement(entity, velocityComponent, positionComponent);
@@ -39,7 +39,7 @@ let MovementSystem = System.extend({
             if (Math.abs(velocityComponent.dynamicPosition.x - positionComponent.x) <= 3
                 && Math.abs(velocityComponent.dynamicPosition.y - positionComponent.y) <= 3) {
                 // entity.removeComponent(velocityComponent);
-                let collisionComponent = entity.getComponent(GameConfig.COMPONENT_ID.COLLISION);
+                let collisionComponent = entity.getComponent(CollisionComponent);
                 if (collisionComponent) {
                     collisionComponent.width = 1;
                     collisionComponent.height = 1;

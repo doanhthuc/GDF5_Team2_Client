@@ -8,11 +8,11 @@ let LifeSystem = System.extend({
 
     run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.LIFE);
+            .getEntitiesHasComponents(LifeComponent);
         for (let entity of entityList) {
-            let lifeComponent = entity.getComponent(GameConfig.COMPONENT_ID.LIFE);
+            let lifeComponent = entity.getComponent(LifeComponent);
             if (lifeComponent.hp <= 0) {
-                EntityECS.destroy(entity);
+                EntityManager.destroy(entity);
             }
         }
     }

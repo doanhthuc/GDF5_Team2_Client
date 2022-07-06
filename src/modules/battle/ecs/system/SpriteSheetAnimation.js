@@ -8,7 +8,7 @@ let SpriteSheetAnimationSystem = System.extend({
 
     run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.COLLISION);
+            .getEntitiesHasComponents(CollisionComponent);
 
     },
 });

@@ -7,11 +7,11 @@ let PathMonsterSystem = System.extend({
     },
 
     run: function (tick) {
-        let entityList = EntityManager.getInstance().getEntitiesByComponents(GameConfig.COMPONENT_ID.PATH);
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
         for (let entity of entityList) {
-            let pathComponent = entity.getComponent(GameConfig.COMPONENT_ID.PATH);
-            let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
-            let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
+            let pathComponent = entity.getComponent(PathComponent);
+            let positionComponent = entity.getComponent(PositionComponent);
+            let velocityComponent = entity.getComponent(VelocityComponent);
             let path = pathComponent.path, currentPathIdx = pathComponent.currentPathIdx;
 
             if (currentPathIdx < path.length - 1) {

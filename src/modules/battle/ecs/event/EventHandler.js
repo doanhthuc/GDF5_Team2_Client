@@ -2,8 +2,8 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.BULLET_COLLIDE_MONSTER, function (data) {
             let monster = data.monster, bullet = data.bullet;
 
-            let bulletInfo = bullet.getComponent(GameConfig.COMPONENT_ID.BULLET_INFO);
-            let monsterInfo = monster.getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
+            let bulletInfo = bullet.getComponent(BulletInfoComponent);
+            let monsterInfo = monster.getComponent(MonsterInfoComponent);
 
             for (let effect of bulletInfo.effects) {
                 monster.addComponent(effect.clone());
@@ -12,7 +12,7 @@ EventDispatcher.getInstance()
             if (bulletInfo.type && bulletInfo.type === "frog") {
                 // handle here
             } else {
-                bullet.getComponent(GameConfig.COMPONENT_ID.APPEARANCE).sprite.setVisible(false);
+                bullet.getComponent(AppearanceComponent).sprite.setVisible(false);
                 bullet.setActive(false);
             }
         })
@@ -25,15 +25,15 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.FINISH_PATH, function (data) {
         let entity = data.entity;
 
-        if (entity.hasAllComponent(GameConfig.COMPONENT_ID.VELOCITY)) {
-            entity.removeComponent(entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY));
+        if (entity.hasAllComponent(VelocityComponent)) {
+            entity.removeComponent(entity.getComponent(VelocityComponent));
         }
 
         // FIXME: what is this?
-        if (entity.hasAllComponent(GameConfig.COMPONENT_ID.BULLET_INFO)) {
-            let bulletInfoComponent = entity.getComponent(GameConfig.COMPONENT_ID.BULLET_INFO);
+        if (entity.hasAllComponent(BulletInfoComponent)) {
+            let bulletInfoComponent = entity.getComponent(BulletInfoComponent);
             if (bulletInfoComponent.type === "frog") {
-                let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
+                let appearanceComponent = entity.getComponent(AppearanceComponent)
                 if (appearanceComponent) {
                     appearanceComponent.sprite.setVisible(false);
                 }
@@ -62,13 +62,13 @@ EventDispatcher.getInstance()
         map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 7;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.PATH);
+            .getEntitiesHasComponents(PathComponent);
 
         let currentMode = GameConfig.PLAYER;
         for (let entity of entityList) {
             if (entity.mode === currentMode) {
-                let pathComponent = entity.getComponent(GameConfig.COMPONENT_ID.PATH);
-                let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
+                let pathComponent = entity.getComponent(PathComponent);
+                let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {
                     let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];

@@ -8,7 +8,7 @@ let EntityState = {
 let AnimationMap = AnimationMap || {};
 
 AnimationMap[EntityState.MONSTER_TURN_BOTTOM] = function (entity) {
-    let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE);
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
     if (appearanceComponent) {
         let sp = appearanceComponent.sprite;
 
@@ -26,7 +26,7 @@ AnimationMap[EntityState.MONSTER_TURN_BOTTOM] = function (entity) {
 }
 
 AnimationMap[EntityState.MONSTER_TURN_RIGHT] = function (entity) {
-    let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE);
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
     if (appearanceComponent) {
         let sp = appearanceComponent.sprite;
 
@@ -44,7 +44,7 @@ AnimationMap[EntityState.MONSTER_TURN_RIGHT] = function (entity) {
 }
 
 AnimationMap[EntityState.MONSTER_TURN_LEFT] = function (entity) {
-    let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE);
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
     if (appearanceComponent) {
         let sp = appearanceComponent.sprite;
 
@@ -62,7 +62,7 @@ AnimationMap[EntityState.MONSTER_TURN_LEFT] = function (entity) {
 }
 
 AnimationMap[EntityState.MONSTER_TURN_UP] = function (entity) {
-    let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE);
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
     if (appearanceComponent) {
         let sp = appearanceComponent.sprite;
 
