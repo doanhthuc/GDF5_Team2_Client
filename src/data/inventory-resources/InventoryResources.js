@@ -36,5 +36,6 @@ const InventoryResources = {
     RESOURCE_TYPE: {
         GOLD: 0,
         CARD: 1,
+        GEM: 2
     }
 }

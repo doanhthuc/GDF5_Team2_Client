@@ -149,16 +149,17 @@ const TreasureSlot = cc.Node.extend({
         // let distance = claimTime - Date.now();
 
         let distance = this.claimTime - Date.now();
-        this.skipGemTxt.setString(Math.round(distance / (600 * 1000)));
+        this.skipGemTxt.setString(Math.ceil(distance / (600 * 1000)));
         this.openingCountDownTxt.setString(millisecondToTimeString(distance));
         if (distance < 0) {
             this.onFinishCountDown();
+            this.setStateOfSlot(TreasureSlotResources.STATE.FINISHED, 0);
         }
     },
 
     onFinishCountDown: function () {
         this.unschedule(this.setCountDownString);
         this.openingCountDownTxt.setString("0m 0s");
-        this.setStateOfSlot(TreasureSlotResources.STATE.FINISHED, 0);
+        // this.setStateOfSlot(TreasureSlotResources.STATE.FINISHED, 0);
     }
 })

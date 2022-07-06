@@ -40,6 +40,7 @@ const UpgradeSuccessPopup = cc.Node.extend({
         this.cardLevel.getChildByName('levelTxt').setString('Level ' + this.cardModel.level);
         this.cardImage.setTexture(CARD_CONST[this.cardModel.id].cardImage);
         this.cardBackgroundBtn.loadTextures(CARD_CONST[this.cardModel.id].background, CARD_CONST[this.cardModel.id].background);
+        this.acceptBtn.setVisible(false);
         this.setCardStat();
     },
 
@@ -87,6 +88,9 @@ const UpgradeSuccessPopup = cc.Node.extend({
             this.acctionArray.push(cc.targetedAction(this.cardStatHolders[index], showUp.clone()));
             index++;
         }
+        this.acctionArray.push(cc.callFunc(function (sender, acceptBtn) {
+            acceptBtn.setVisible(true);
+        }, this, this.acceptBtn));
         this.cardStatHolders[0].runAction(cc.sequence(this.acctionArray));
     },
 

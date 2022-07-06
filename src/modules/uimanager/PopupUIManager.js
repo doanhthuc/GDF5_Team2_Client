@@ -29,6 +29,21 @@ const PopupUIManager = ClientUIManager.extend({
             uiNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
         }
     },
+
+    setAllPopupVisible: function (visible) {
+        for (let [key, value] of Object.entries(CLIENT_UI_CONST.POPUPS_NAME)) {
+                this.getUI(value).setVisible(visible);
+        }
+    },
+
+    isHavingAnyPopupVisible: function() {
+        for (let [key, value] of Object.entries(CLIENT_UI_CONST.POPUPS_NAME)) {
+            if (this.getUI(value) && this.getUI(value).isVisible()) {
+                return true;
+            }
+        }
+        return false;
+    }
 });
 
 PopupUIManager._instance = null;

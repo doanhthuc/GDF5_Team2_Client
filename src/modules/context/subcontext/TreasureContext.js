@@ -39,7 +39,9 @@ const TreasureContext = cc.Class.extend({
         this.treasureList[packet.lobbyChestid].claimTime = 0;
         this.treasureList[packet.lobbyChestid].state = packet.state;
         contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).updateUserGem(packet.gemChange);
-
+        ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).treasureSlotNodeList[packet.lobbyChestid].onFinishCountDown();
+        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet);
+        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
         for (let i = 0; i < packet.rewardSize; i++) {
             let rewardType = +packet.itemType[i];
             if (rewardType === 11) {
@@ -56,8 +58,7 @@ const TreasureContext = cc.Class.extend({
                     .cardNodeMap.get(rewardType).onUpdateCard(packet.itemQuantity[i]);
             }
         }
-        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet);
-        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
+
     },
 
     onClaimChestSuccess: function (packet) {
@@ -65,6 +66,8 @@ const TreasureContext = cc.Class.extend({
         ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).onClaimChestSuccess(packet);
         this.treasureList[packet.lobbyChestid].claimTime = 0;
         this.treasureList[packet.lobbyChestid].state = packet.state;
+        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet)
+        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
         for (let i = 0; i < packet.rewardSize; i++) {
             let rewardType = +packet.itemType[i];
             if (rewardType === 11) {
@@ -81,8 +84,7 @@ const TreasureContext = cc.Class.extend({
                     .cardNodeMap.get(rewardType).onUpdateCard(packet.itemQuantity[i]);
             }
         }
-        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet)
-        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
+
     },
 
 

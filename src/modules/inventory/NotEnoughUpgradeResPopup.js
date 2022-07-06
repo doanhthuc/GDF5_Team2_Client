@@ -29,12 +29,15 @@ const NotEnoughUpgradeResPopup = cc.Node.extend({
         switch (type) {
             case InventoryResources.RESOURCE_TYPE.GOLD:
                 this.titleTxt.setString('Không đủ vàng');
-                this.contentTxt.setString('Bạn không đủ vàng để nâng cấp');
+                this.contentTxt.setString('Bạn không đủ vàng');
                 break;
             case InventoryResources.RESOURCE_TYPE.CARD:
                 this.titleTxt.setString('Không đủ thẻ');
                 this.contentTxt.setString('Bạn không đủ thẻ để nâng cấp');
                 break;
+            case InventoryResources.RESOURCE_TYPE.GEM:
+                this.titleTxt.setString('Không đủ gem');
+                this.contentTxt.setString('Bạn không đủ gem');
             default:
                 break;
         }

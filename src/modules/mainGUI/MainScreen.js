@@ -75,6 +75,12 @@ const MainScreen = cc.Layer.extend({
         this.initListViewEventListener();
     },
 
+    onEnter: function() {
+        this._super();
+        // this.initTouchEvent();
+        PopupUIManager.getInstance().setAllPopupVisible(false);
+    },
+
     scrollToDefaultPage: function () {
         this.mainPageView.scrollToPage(NavResources.TAB_LIST[this.DEFAULT_TAB].index);
     },

@@ -100,12 +100,14 @@
           },
           {
             "FontSize": 36,
-            "LabelText": "Pháo cú",
+            "LabelText": "Người Đưa Tin",
             "FontResource": {
               "Type": "Normal",
               "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
             "OutlineColor": {
               "G": 0,
               "B": 0
@@ -139,14 +141,14 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -102.0,
-            "RightMargin": -102.0,
+            "LeftMargin": -178.5,
+            "RightMargin": -178.5,
             "TopMargin": -524.5,
             "BottomMargin": 475.5,
             "Tag": 299,
             "ActionTag": -1679908933,
             "Size": {
-              "X": 204.0,
+              "X": 357.0,
               "Y": 49.0
             },
             "Name": "cardNameTxt",
