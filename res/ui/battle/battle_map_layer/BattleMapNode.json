@@ -447,51 +447,6 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "textures/map/map_decoration_0002.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 379.5681,
-              "Y": 0.0001
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 240.0681,
-            "RightMargin": -519.0681,
-            "TopMargin": -113.5001,
-            "BottomMargin": -113.4999,
-            "Tag": 1364,
-            "ActionTag": 662517503,
-            "Size": {
-              "X": 279.0,
-              "Y": 227.0
-            },
-            "Name": "decoration1",
-            "ctype": "SpriteObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
               "Path": "textures/map/map_decoration_0001.png",
               "Plist": ""
             },
@@ -532,6 +487,141 @@
               "Y": 281.0
             },
             "Name": "decoration2",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/map/map_decoration_0002.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 401.57,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 262.07,
+            "RightMargin": -541.07,
+            "TopMargin": -113.5,
+            "BottomMargin": -113.5,
+            "Tag": 1364,
+            "ActionTag": 662517503,
+            "Size": {
+              "X": 279.0,
+              "Y": 227.0
+            },
+            "Name": "decoration1",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/map/map_monster_gate_enemy.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 195.6367,
+              "Y": 4.5655
+            },
+            "Scale": {
+              "ScaleX": 0.8832,
+              "ScaleY": 0.8832
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 116.1367,
+            "RightMargin": -275.1367,
+            "TopMargin": -67.0655,
+            "BottomMargin": -57.9345,
+            "Tag": 58,
+            "ActionTag": 1355550480,
+            "Size": {
+              "X": 159.0,
+              "Y": 125.0
+            },
+            "Name": "opponent_monster_gateway",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/map/map_monster_gate_player.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -192.4854,
+              "Y": 13.0167
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -295.4854,
+            "RightMargin": 89.4854,
+            "TopMargin": -90.0167,
+            "BottomMargin": -63.9833,
+            "Tag": 57,
+            "ActionTag": 337272511,
+            "Size": {
+              "X": 206.0,
+              "Y": 154.0
+            },
+            "Name": "player_monster_gateway",
             "ctype": "SpriteObjectData"
           },
           {
@@ -1994,6 +2084,8 @@
         "../../../textures/map/map_decoration_tree_0002.png",
         "../../../textures/map/map_decoration_tree_0003.png",
         "../../../textures/map/map_house.png",
+        "../../../textures/map/map_monster_gate_enemy.png",
+        "../../../textures/map/map_monster_gate_player.png",
         "BattleMapOpponent.json",
         "BattleMapPlayer.json",
         "BattleRiver.json"

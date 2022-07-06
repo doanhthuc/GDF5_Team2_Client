@@ -32,4 +32,7 @@ const ShopResources = {
     SHOP_CARD_FIRE_IMG: "textures/card/card_potion_fireball.png",
     SHOP_CARD_SNOW_IMG: "textures/card/card_potion_frozen.png",
     SHOP_CARD_CHESTYPE_IMG: "textures/common/common_treasure.png",
+
+    // Common
+    FONT_SUPERCELL: "textures/font/SVN-Supercell Magic.ttf",
 }

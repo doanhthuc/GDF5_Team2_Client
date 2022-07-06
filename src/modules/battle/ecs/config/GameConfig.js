@@ -39,7 +39,10 @@ GameConfig.ENTITY_ID = {
     BEAR_TOWER: 4,
     FROG_TOWER: 5,
     FIRE_SPELL: 6,
-    FROZEN_SPELL: 7
+    FROZEN_SPELL: 7,
+    TRAP_SPELL: 8,
+    SNAKE_TOWER: 9,
+    GOAT_TOWER: 10
 }
 
 GameConfig.GROUP_ID = {
@@ -72,3 +75,9 @@ GameConfig.DIRECTION = {
     RIGHT_TOP: -3,
     RIGHT_BOTTOM: 3,
 };
+
+GameConfig.BATTLE_RESULT = {
+    WIN: 0,
+    LOSE: 1,
+    DRAW: 2
+}

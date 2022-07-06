@@ -66,7 +66,7 @@ const ShopItemSlotNode = cc.Node.extend({
         } else {
             this.buyBtn.removeAllChildren();
             // FIXME: hardcode
-            let label = new ccui.Text("Đã mua", "textures/font/SVN-Supercell Magic.ttf", 20);
+            let label = new ccui.Text("Đã mua", ShopResources.FONT_SUPERCELL, 20);
             this.buyBtn.addChild(label);
         }
     },

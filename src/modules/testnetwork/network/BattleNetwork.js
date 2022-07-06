@@ -20,6 +20,8 @@ BattleNetwork.Connector = cc.Class.extend({
         GameConfig.battleData = new BattleData();
         GameConfig.battleData.setMap(packet.btmap, GameConfig.PLAYER);
         GameConfig.battleData.setMap(JSON.parse(JSON.stringify(packet.btmap)), GameConfig.OPPONENT);
+        cc.log(JSON.stringify(packet.btmap));
+        cc.log(JSON.stringify(packet.path))
         GameConfig.battleData.setLongestPath(packet.path, GameConfig.PLAYER);
         GameConfig.battleData.setLongestPath(JSON.parse(JSON.stringify(packet.path)), GameConfig.OPPONENT);
 

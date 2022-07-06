@@ -67,6 +67,8 @@
               "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
             "OutlineSize": 2,
             "OutlineColor": {
               "R": 0,

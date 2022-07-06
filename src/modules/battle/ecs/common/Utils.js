@@ -42,6 +42,10 @@ Utils.tile2Pixel = function (x, y, mode) {
     }
 };
 
+Utils.validateTilePos = function (tilePos) {
+    return tilePos.x >= 0 && tilePos.x < GameConfig.MAP_WIDTH && tilePos.y >= 0 && tilePos.y < GameConfig.MAP_HEIGH;
+}
+
 Utils.pixel2Tile = function (xx, yy, mode) {
     if (!mode) {
         mode = GameConfig.PLAYER;

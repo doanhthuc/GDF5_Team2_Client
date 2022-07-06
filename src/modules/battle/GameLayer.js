@@ -7,6 +7,7 @@ let GameLayer = cc.Layer.extend({
         this.selectedCard = null;
 
         // data game
+        BattleData.fakeData();
         this.battleData = GameConfig.battleData;
 
         // create UI
@@ -61,17 +62,24 @@ let GameLayer = cc.Layer.extend({
 
     putCardAt: function (type, pixelPos) {
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y);
-        // pos is tile coordinator
-        if (tilePos.x < 0 || tilePos.x >= GameConfig.MAP_WIDTH || tilePos.y < 0 || tilePos.y >= GameConfig.MAP_HEIGH) {
-            return;
-        }
 
-        // FIXME: map
-        let xMap = GameConfig.MAP_HEIGH-1-tilePos.y;
-        let yMap = tilePos.x;
-        let map = this.battleData.getMap(GameConfig.PLAYER);
-        if (map[xMap][yMap] === 6 || map[xMap][yMap] === 5) {
-            return;
+        // FIXME: hardcode
+        // if spell, not check valid tile
+        if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
+            // put spell
+        } else {
+            // put tower
+            if (tilePos.x < 0 || tilePos.x >= GameConfig.MAP_WIDTH || tilePos.y < 0 || tilePos.y >= GameConfig.MAP_HEIGH) {
+                return;
+            }
+
+            // FIXME: map
+            let xMap = GameConfig.MAP_HEIGH-1-tilePos.y;
+            let yMap = tilePos.x;
+            let map = this.battleData.getMap(GameConfig.PLAYER);
+            if (map[xMap][yMap] === 6 || map[xMap][yMap] === 5) {
+                return;
+            }
         }
 
         switch (type) {
@@ -85,14 +93,15 @@ let GameLayer = cc.Layer.extend({
                 EntityFactory.createIceGunPolarBearTower(tilePos);
                 break;
             case GameConfig.ENTITY_ID.FIRE_SPELL:
-                new FireSpell(this.mapLayer, Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER), 50, 1.2*GameConfig.TILE_WIDTH);
+                new FireSpell(this.mapLayer, pixelPos, 50, 1.2*GameConfig.TILE_WIDTH);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
-                new FrozenSpell(this.mapLayer, Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER), 50, 5, 1.2*GameConfig.TILE_WIDTH);
+                new FrozenSpell(this.mapLayer, pixelPos, 50, 5, 1.2*GameConfig.TILE_WIDTH);
                 break;
             default:
                 return;
         }
+
         // FIXME: hardcode
         if (GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FIRE_SPELL && GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
             EventDispatcher.getInstance()
@@ -128,12 +137,11 @@ let GameLayer = cc.Layer.extend({
         let playerEnergyHouse = this.battleData.getEnergyHouse(GameConfig.PLAYER);
         let opponentEnergyHouse = this.battleData.getEnergyHouse(GameConfig.OPPONENT);
 
-        // FIXME: hardcode result value
-        let result = "draw";
+        let result = GameConfig.BATTLE_RESULT.DRAW;
         if (playerEnergyHouse > opponentEnergyHouse) {
-            result = "win";
+            result = GameConfig.BATTLE_RESULT.WIN;
         } else if (playerEnergyHouse < opponentEnergyHouse) {
-            result = "lose";
+            result = GameConfig.BATTLE_RESULT.LOSE;
         }
 
         this.addChild(new BattleResultLayer(result, this.battleData), 2);
