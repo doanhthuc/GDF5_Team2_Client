@@ -48,7 +48,7 @@ const CardNode = cc.Node.extend({
         this.upgradeReadyAnimation.setPosition(0, -this.cardBorderImg.height / 2);
         this.upgradeReadyAnimation.setAnimation(0, 'card_upgrade_ready', true);
         this.addChild(this.upgradeReadyAnimation, 4);
-        this.upgradeReadyAnimationTxt = new cc.LabelTTF( "", "font/SVN-Supercell Magic.ttf" );
+        this.upgradeReadyAnimationTxt = new cc.LabelTTF("", "font/SVN-Supercell Magic.ttf");
         this.upgradeReadyAnimation.addChild(this.upgradeReadyAnimationTxt);
         this.upgradeReadyAnimation.setVisible(false);
     },
@@ -58,12 +58,11 @@ const CardNode = cc.Node.extend({
     },
 
     setCardTexture: function () {
-        let cardType = CARD_TYPE.TOWER[this.cardModel.id];
-        if (!cardType) {
-            cardType = CARD_TYPE.SPELL[this.cardModel.id];
-        }
+        let cardType = CARD_CONST[this.cardModel.id];
+
         this.cardBackgroundBtn.loadTextures(cardType.background, cardType.background);
         this.cardImage.setTexture(cardType.cardImage);
+        this.cardBorderImg.setTexture(CARD_RANK[getRankCharacter(this.cardModel.level)].BORDER);
         this.setCardEnergyTxt(this.cardModel.energy);
         this.levelTxt.setString('Level.' + this.cardModel.level);
     },

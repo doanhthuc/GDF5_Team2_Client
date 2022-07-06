@@ -40,14 +40,16 @@ Object.entries = function (obj) {
     return resArray;
 };
 
-const getRankCharacter = (rankNumber) => {
-    // Because rankNumber is from 1 so we need to minus 1 to get the correct character
-    if (rankNumber <= 1) {
+const getRankCharacter = (cardLevel) => {
+    // Because cardLevel is from 1 so we need to minus 1 to get the correct character
+    if (cardLevel <= 1) {
         return "C";
-    } else if (rankNumber > 1 && rankNumber <= 3) {
+    } else if (cardLevel > 1 && cardLevel <= 3) {
         return "B";
-    } else if (rankNumber >= 4) {
+    } else if (cardLevel >= 4 && cardLevel <= 6) {
         return "A";
+    } else {
+        return "S";
     }
 }
 
@@ -67,7 +69,7 @@ const millisecondToTimeString = (distance) => {
     let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     if (days > 0) {
-       return (days + "d " + hours + "h ");
+        return (days + "d " + hours + "h ");
     } else if (hours > 0) {
         return (hours + "h " + minutes + "m ");
     } else {

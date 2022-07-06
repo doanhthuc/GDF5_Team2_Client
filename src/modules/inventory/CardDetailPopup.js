@@ -102,11 +102,9 @@ const CardDetailPopup = cc.Node.extend({
 
     setCardDetailPopupTexture: function () {
         this.cardNameTxt.setString(CARD_NAME_VI[this.cardModel.id]);
-        if (this.cardModel.id <= 6) {
-            this.towerImg.setTexture(CARD_TYPE.TOWER[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
-        } else {
-            this.towerImg.setTexture(CARD_TYPE.SPELL[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
-        }
+
+        this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
+
         this.setCardStat()
     },
 
