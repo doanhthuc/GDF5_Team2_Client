@@ -13,6 +13,9 @@ let CardDeckSlot = cc.Node.extend({
         let rootNode = ccs.load(BattleResource.BATTLE_CARD_NODE, "").node;
 
         this.backgroundSprite = rootNode.getChildByName("card_background");
+        this.cardSlotBackground = rootNode.getChildByName("card_slot_background");
+        this.width = this.cardSlotBackground.width;
+        this.height = this.cardSlotBackground.height;
         this.energyNode = rootNode.getChildByName("energy");
         this.cardImgSprite = rootNode.getChildByName("entity_image");
         this.addChild(rootNode);

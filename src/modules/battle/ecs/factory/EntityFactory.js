@@ -251,13 +251,13 @@ function createOwlNodeAnimation(range) {
     weaponSprite.runAction(cc.repeatForever(weaponAction));
     towerSprite.runAction(cc.repeatForever(towerAction));
 
-    node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    // node.addChild(rangeAttackSprite, 0, "rangeAttack");
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
     return node;
 }
 
-function createBearNodeAnimation(attackRange) {
+function createBearNodeAnimation(attackRange, isShowRange) {
     let node = new cc.Node();
     let towerSprite = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_0010.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_0010.png");
@@ -287,7 +287,9 @@ function createBearNodeAnimation(attackRange) {
     towerSprite.runAction(cc.repeatForever(towerAction));
     weaponSprite.runAction(cc.repeatForever(weaponAction));
 
-    node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    if (isShowRange) {
+        node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    }
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
     return node;
@@ -323,7 +325,7 @@ function createFrogNodeAnimation(attackRange) {
     towerSprite.runAction(cc.repeatForever(towerAction));
     weaponSprite.runAction(cc.repeatForever(weaponAction));
 
-    node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    // node.addChild(rangeAttackSprite, 0, "rangeAttack");
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
     return node;

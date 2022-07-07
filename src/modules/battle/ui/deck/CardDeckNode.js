@@ -65,9 +65,7 @@ let CardDeckNode = cc.Node.extend({
         let touchPos = touch.getLocation();
         let selectedCard = event.getCurrentTarget();
 
-        // FIXME: hardcode
-        const CARD_WIDTH = 108, CARD_HEIGHT = 143;
-        let selectedCardBoundingBox = cc.rect(-CARD_WIDTH/2, -CARD_HEIGHT/2, CARD_WIDTH, CARD_HEIGHT);
+        let selectedCardBoundingBox = cc.rect(-selectedCard.width/2, -selectedCard.height/2, selectedCard.width, selectedCard.height);
         let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos)) === true;
 
         if (touchInCard) {
@@ -125,10 +123,8 @@ let CardDeckNode = cc.Node.extend({
         let selectedCard = event.getCurrentTarget();
         let touchPos = touch.getLocation();
 
-        const CARD_WIDTH = 108, CARD_HEIGHT = 143;
-        let cardBoundingBox = cc.rect(-CARD_WIDTH/2, -CARD_HEIGHT/2, CARD_WIDTH, CARD_HEIGHT);
-        let touchInCard = cc.rectContainsPoint(cardBoundingBox, selectedCard.convertToNodeSpace(touchPos)) === true;
-
+        let selectedCardBoundingBox = cc.rect(-selectedCard.width/2, -selectedCard.height/2, selectedCard.width, selectedCard.height);
+        let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos)) === true;
 
         if (touchInCard && selectedCard.isUp) {
             if (selectedCard.isClicked) {
@@ -173,7 +169,7 @@ let CardDeckNode = cc.Node.extend({
                 this.spriteDragManager[touch.getID()] = sp;
                 GameConfig.gameLayer.addChild(this.spriteDragManager[touch.getID()], 5);
             } else {
-                this.spriteDragManager[touch.getID()] = createBearNodeAnimation(1.5 * GameConfig.TILE_WIDTH);
+                this.spriteDragManager[touch.getID()] = createBearNodeAnimation(1.5 * GameConfig.TILE_WIDTH, true);
                 GameConfig.gameLayer.addChild(this.spriteDragManager[touch.getID()], 5);
             }
         }
