@@ -74,11 +74,8 @@ let GameLayer = cc.Layer.extend({
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y);
 
         // FIXME: hardcode
-        // if spell, not check valid tile
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
-            let tile00 = Utils.tile2Pixel(0, 0, GameConfig.PLAYER);
-            let tile64 = Utils.tile2Pixel(6, 4, GameConfig.PLAYER);
-            if (Utils.isPixelPositionInMap(pixelPos, GameConfig.PLAYER) === false) {
+            if (!Utils.isPixelPositionInMap(pixelPos, GameConfig.PLAYER)) {
                 return;
             }
         } else {
@@ -91,12 +88,12 @@ let GameLayer = cc.Layer.extend({
             let xMap = GameConfig.MAP_HEIGH-1-tilePos.y;
             let yMap = tilePos.x;
             let map = this.battleData.getMap(GameConfig.PLAYER);
+            // FIXME: hardcode
             if (map[xMap][yMap] === 6 || map[xMap][yMap] === 5) {
                 return;
             }
         }
 
-        cc.log("XXXX Put tower at " + JSON.stringify(tilePos))
         switch (type) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
                 EntityFactory.createCannonOwlTower(tilePos, GameConfig.PLAYER);

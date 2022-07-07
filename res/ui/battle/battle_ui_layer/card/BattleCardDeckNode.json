@@ -159,47 +159,6 @@
             "ctype": "TextObjectData"
           },
           {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/battle/battle_ui_layer/card/BattleCardNode.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": -264.0949,
-              "Y": -41.1367
-            },
-            "Scale": {
-              "ScaleX": 0.6449,
-              "ScaleY": 0.6449
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -264.0949,
-            "RightMargin": 264.0949,
-            "TopMargin": 41.1367,
-            "BottomMargin": -41.1367,
-            "Tag": 1769,
-            "ActionTag": -6214343,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "card_5",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
             "AnchorPoint": {},
             "Position": {
               "X": 43.0,
@@ -363,6 +322,39 @@
             },
             "Name": "card_4",
             "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": -264.09,
+              "Y": -41.14
+            },
+            "Scale": {
+              "ScaleX": 0.6449,
+              "ScaleY": 0.6449
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -264.09,
+            "RightMargin": 264.09,
+            "TopMargin": 41.14,
+            "BottomMargin": -41.14,
+            "Tag": 276,
+            "ActionTag": 569889232,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "card_5",
+            "ctype": "SingleNodeObjectData"
           }
         ],
         "Size": {
@@ -375,8 +367,7 @@
       "UsedResources": [
         "../../../../textures/battle/battle_btn_chat.png",
         "../../../../textures/battle/battle_deck.png",
-        "../../../../textures/font/SVN-Supercell Magic.ttf",
-        "BattleCardNode.json"
+        "../../../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }
