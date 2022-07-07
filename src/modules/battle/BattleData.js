@@ -12,6 +12,30 @@ let BattleData = cc.Class.extend({
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
                 longestPath: null,
                 shortestPathForEachTile: null,
+                currentEnergy: 30,
+                maxEnergy: 30,
+                cards: [
+                    {
+                        id: 0,
+                        type: GameConfig.ENTITY_ID.CANNON_TOWER,
+                    },
+                    {
+                        id: 1,
+                        type: GameConfig.ENTITY_ID.BEAR_TOWER,
+                    },
+                    {
+                        id: 2,
+                        type: GameConfig.ENTITY_ID.FROG_TOWER,
+                    },
+                    {
+                        id: 3,
+                        type: GameConfig.ENTITY_ID.FIRE_SPELL,
+                    },
+                    {
+                        id: 4,
+                        type: GameConfig.ENTITY_ID.FROZEN_SPELL,
+                    }
+                ]
             },
             opponent: {
                 username: "OPPONENT333",
@@ -23,14 +47,6 @@ let BattleData = cc.Class.extend({
                 shortestPathForEachTile: null,
             }
         }
-
-        // this.dataInGame.player.map = [
-        //     [0, 5, 0, 0 ,0, 0, 0],
-        //     [0, 0, 0, 0 ,6, 0, 0],
-        //     [0, 0, 0, 0 ,0, 0, 0],
-        //     [0, 3, 0, 2 ,0, 1, 0],
-        //     [0, 0, 0, 0 ,0, 0, 0],
-        // ]
     },
 
     getTimer: function () {
@@ -74,16 +90,15 @@ let BattleData = cc.Class.extend({
         return this.dataInGame.currentWave;
     },
 
+    getMap: function (mode) {
+        return this.dataInGame[mode].map;
+    },
 
     setMap: function (map, mode) {
         if (GameConfig.MAP_HEIGH !== map.length && GameConfig.MAP_WIDTH !== map[0].length) {
             throw new Error("Map size is invalid")
         }
         return this.dataInGame[mode].map = map;
-    },
-
-    getMap: function (mode) {
-        return this.dataInGame[mode].map;
     },
 
     getShortestPathForEachTile: function (mode) {
@@ -94,7 +109,45 @@ let BattleData = cc.Class.extend({
         this.dataInGame[mode].shortestPathForEachTile = shortestPathForEachTile;
     },
 
+    getLongestPath: function (mode) {
+        return this.dataInGame[mode].longestPath;
+    },
+
     setLongestPath: function (longestPath, mode) {
         return this.dataInGame[mode].longestPath = Utils.tileArray2PixelArray(longestPath, mode);
     },
+
+    getCurrentEnergy: function (mode) {
+        return this.dataInGame[mode].currentEnergy;
+    },
+
+    setCurrentEnergy:function (currentEnergy, mode) {
+        if (currentEnergy > this.getMaxEnergy(mode))
+            return;
+        this.dataInGame[mode].currentEnergy = currentEnergy;
+    },
+
+    getMaxEnergy: function (mode) {
+        return this.dataInGame[mode].maxEnergy;
+    },
+
+    setMaxEnergy: function (maxEnergy, mode) {
+        this.dataInGame[mode].maxEnergy = maxEnergy;
+    }
 });
+
+BattleData.fakeData = function () {
+    let map = [[0,6,0,0,0,5,0],[0,0,0,0,0,0,0],[0,0,0,2,0,1,0],[0,3,0,0,0,0,0],[0,0,0,0,5,0,0]];
+    let path = [{"x":0,"y":4},{"x":0,"y":3},{"x":0,"y":2},{"x":0,"y":1},{"x":0,"y":0},{"x":1,"y":0},{"x":2,"y":0},{"x":2,"y":1},{"x":2,"y":2},{"x":2,"y":3},{"x":2,"y":4},{"x":3,"y":4},{"x":4,"y":4},{"x":4,"y":3},{"x":4,"y":2},{"x":4,"y":1},{"x":5,"y":1},{"x":6,"y":1},{"x":6,"y":0}];
+    GameConfig.battleData = new BattleData();
+    GameConfig.battleData.setMap(map, GameConfig.PLAYER);
+    GameConfig.battleData.setMap(JSON.parse(JSON.stringify(map)), GameConfig.OPPONENT);
+    GameConfig.battleData.setLongestPath(path, GameConfig.PLAYER);
+    GameConfig.battleData.setLongestPath(JSON.parse(JSON.stringify(path)), GameConfig.OPPONENT);
+
+    let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
+    let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
+
+    GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
+    GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
+}

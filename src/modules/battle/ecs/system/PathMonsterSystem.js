@@ -7,11 +7,11 @@ let PathMonsterSystem = System.extend({
     },
 
     run: function (tick) {
-        let entityList = EntityManager.getInstance().getEntitiesByComponents(GameConfig.COMPONENT_ID.PATH);
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
         for (let entity of entityList) {
-            let pathComponent = entity.getComponent(GameConfig.COMPONENT_ID.PATH);
-            let positionComponent = entity.getComponent(GameConfig.COMPONENT_ID.POSITION);
-            let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
+            let pathComponent = entity.getComponent(PathComponent);
+            let positionComponent = entity.getComponent(PositionComponent);
+            let velocityComponent = entity.getComponent(VelocityComponent);
             let path = pathComponent.path, currentPathIdx = pathComponent.currentPathIdx;
 
             if (currentPathIdx < path.length - 1) {
@@ -31,10 +31,16 @@ let PathMonsterSystem = System.extend({
                     && signY * (Yb - Ya) <= 0
                     && !(signX === 0 && signY === 0)) {
                     pathComponent.currentPathIdx++;
+
+                    if (path[currentPathIdx+2]) {
+                        AnimationMap.changeMonsterDirectionAnimation(entity, nextPos, path[currentPathIdx+2]);
+                    }
                 }
             } else {
                 EventDispatcher.getInstance().dispatchEvent(EventType.FINISH_PATH, {entity: entity});
             }
         }
-    }
+    },
+
+
 });

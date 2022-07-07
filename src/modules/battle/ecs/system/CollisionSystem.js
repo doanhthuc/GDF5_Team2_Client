@@ -8,7 +8,7 @@ let CollisionSystem = System.extend({
 
     run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.COLLISION);
+            .getEntitiesHasComponents(CollisionComponent);
 
         // TODO: Optimize
         for (let i = 0; i < entityList.length - 1; i++) {
@@ -29,10 +29,10 @@ let CollisionSystem = System.extend({
             throw new InvalidArgumentTypeError(entity1, EntityECS)
         }
 
-        let pos1 = entity1.getComponent(GameConfig.COMPONENT_ID.POSITION);
-        let pos2 = entity2.getComponent(GameConfig.COMPONENT_ID.POSITION);
-        let collision1 = entity1.getComponent(GameConfig.COMPONENT_ID.COLLISION);
-        let collision2 = entity2.getComponent(GameConfig.COMPONENT_ID.COLLISION);
+        let pos1 = entity1.getComponent(PositionComponent);
+        let pos2 = entity2.getComponent(PositionComponent);
+        let collision1 = entity1.getComponent(CollisionComponent);
+        let collision2 = entity2.getComponent(CollisionComponent);
         let w1 = collision1.width, h1 = collision1.height;
         let w2 = collision2.width, h2 = collision2.height;
 

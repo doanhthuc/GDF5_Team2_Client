@@ -99,7 +99,7 @@
               "Y": 24.0
             },
             "Alpha": 229,
-            "Name": "value",
+            "Name": "progress",
             "ctype": "LoadingBarObjectData"
           },
           {
@@ -140,7 +140,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "energy",
+            "Name": "current_energy",
             "ctype": "ProjectNodeObjectData"
           },
           {

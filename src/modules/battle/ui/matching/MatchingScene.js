@@ -18,12 +18,11 @@ let MatchingScene = cc.Scene.extend({
         let centerScreenX = cc.winSize.width / 2;
         let centerScreenY = cc.winSize.height / 2;
 
-        // FIXME: hardcode
-        let backgroundImage = new cc.Sprite("textures/lobby/lobby_background.png");
+        let backgroundImage = new cc.Sprite(BattleResource.LOBBY_BACKGROUND);
         backgroundImage.attr({x: centerScreenX, y: centerScreenY, scaleX: 1.5, scaleY: 1.5});
         this.addChild(backgroundImage);
 
-        let matchingTxtNode = ccs.load("ui/battle/matching/MatchingTextNode.json", "").node;
+        let matchingTxtNode = ccs.load(BattleResource.MATCHING_TEXT_NODE, "").node;
         this.dotTxt = matchingTxtNode.getChildByName("dot_txt");
         let lookupIcon = matchingTxtNode.getChildByName("lookup_icon");
         let marginTopScreen = 0.1 * cc.winSize.height;
@@ -41,7 +40,7 @@ let MatchingScene = cc.Scene.extend({
         lookupIcon.runAction(cc.repeatForever(cc.sequence(action1, action2, action3, action4)));
 
 
-        let mapIconNode = ccs.load("ui/battle/matching/MapIconNode.json", "").node;
+        let mapIconNode = ccs.load(BattleResource.MAP_ICON_NODE, "").node;
         let mapIconHeight = mapIconNode.getChildByName("background").height;
         mapIconNode.attr({
             x: centerScreenX,
@@ -49,7 +48,7 @@ let MatchingScene = cc.Scene.extend({
         });
         this.addChild(mapIconNode);
 
-        let cancelButtonNode = ccs.load("ui/battle/matching/CancelButtonNode.json", "").node;
+        let cancelButtonNode = ccs.load(BattleResource.MATCHING_CANCEL_BTN, "").node;
         let buttonHeight = 111;
         cancelButtonNode.attr({
             x: centerScreenX,

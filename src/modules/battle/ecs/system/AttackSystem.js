@@ -8,12 +8,12 @@ let AttackSystem = System.extend({
 
     run: function (tick) {
         let towerList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.ATTACK);
+            .getEntitiesHasComponents(AttackComponent);
         let monsterList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.MONSTER_INFO);
+            .getEntitiesHasComponents(MonsterInfoComponent);
 
         for (let tower of towerList) {
-            let attackComponent = tower.getComponent(GameConfig.COMPONENT_ID.ATTACK);
+            let attackComponent = tower.getComponent(AttackComponent);
 
             // update count down time
             if (attackComponent.countdown > 0) {
@@ -32,9 +32,9 @@ let AttackSystem = System.extend({
                 if (monsterInAttackRange.length > 0) {
                     // TODO: switch case target_strategy here
                     let targetMonster = this._findTargetMonsterByStrategy(attackComponent.targetStrategy, monsterInAttackRange);
-                    let monsterPos = targetMonster.getComponent(GameConfig.COMPONENT_ID.POSITION);
-                    let towerPos = tower.getComponent(GameConfig.COMPONENT_ID.POSITION);
-                    EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects);
+                    let monsterPos = targetMonster.getComponent(PositionComponent);
+                    let towerPos = tower.getComponent(PositionComponent);
+                    EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, towerPos.mode);
                     // reset count down time
                     attackComponent.countdown = attackComponent.speed;
                 }
@@ -43,8 +43,8 @@ let AttackSystem = System.extend({
     },
 
     _distanceFrom: function (tower, monster) {
-        let towerPos = tower.getComponent(GameConfig.COMPONENT_ID.POSITION);
-        let monsterPos = monster.getComponent(GameConfig.COMPONENT_ID.POSITION);
+        let towerPos = tower.getComponent(PositionComponent);
+        let monsterPos = monster.getComponent(PositionComponent);
         return Utils.euclidDistance(towerPos, monsterPos);
     },
 
@@ -56,7 +56,7 @@ let AttackSystem = System.extend({
                 let maxHP = -1;
                 let maxIdx = -1;
                 for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterInfo = monsterInAttackRange[i].getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
+                    let monsterInfo = monsterInAttackRange[i].getComponent(MonsterInfoComponent);
                     if (monsterInfo.hp > maxHP) {
                         maxHP = monsterInfo.hp;
                         maxIdx = i;

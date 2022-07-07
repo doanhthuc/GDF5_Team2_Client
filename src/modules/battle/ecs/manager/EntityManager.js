@@ -19,11 +19,11 @@ let EntityManager = cc.Class.extend({
         return this.entities[entityID];
     },
 
-    getEntitiesByComponents: function (...componentTypeIDs) {
+    getEntitiesHasComponents: function (...ComponentClss) {
         // only get active entity
         let entityList = [];
         for (let id of Object.keys(this.entities)) {
-            if (this.entities[id].getActive() && this.entities[id].hasAllComponent(...componentTypeIDs)) {
+            if (this.entities[id].getActive() && this.entities[id].hasAllComponent(...ComponentClss)) {
                 entityList.push(this.entities[id]);
             } else if (this.entities[id].getActive() === false) {
                 // remove entity
@@ -47,3 +47,15 @@ let EntityManager = cc.Class.extend({
     },
 });
 
+EntityManager.destroy = function (entity) {
+    let appearanceComponent = entity.getComponent(AppearanceComponent)
+    if (appearanceComponent) {
+        let sprite = appearanceComponent.sprite;
+        sprite.setVisible(false);
+    }
+
+    entity.setActive(false);
+    for (let key of Object.keys(entity.components)) {
+        entity.components[key].setActive(false);
+    }
+}

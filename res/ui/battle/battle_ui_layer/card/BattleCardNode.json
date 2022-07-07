@@ -65,10 +65,10 @@
               "Path": "textures/card/card_background_4.png",
               "Plist": ""
             },
-            "Scale9OriginX": 38,
-            "Scale9OriginY": 54,
-            "Scale9Width": 42,
-            "Scale9Height": 56,
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
@@ -78,8 +78,8 @@
               "Y": 0.0
             },
             "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
+              "ScaleX": 0.7372,
+              "ScaleY": 0.7012
             },
             "CColor": {},
             "IconVisible": false,
@@ -91,18 +91,18 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -43.5,
-            "RightMargin": -43.5,
-            "TopMargin": -57.5,
-            "BottomMargin": -57.5,
-            "Tag": 1731,
-            "ActionTag": 228484791,
+            "LeftMargin": -59.0,
+            "RightMargin": -59.0,
+            "TopMargin": -82.0,
+            "BottomMargin": -82.0,
+            "Tag": 134,
+            "ActionTag": 1076969103,
             "Size": {
-              "X": 87.0,
-              "Y": 115.0
+              "X": 118.0,
+              "Y": 164.0
             },
             "Name": "card_background",
-            "ctype": "ImageViewObjectData"
+            "ctype": "SpriteObjectData"
           },
           {
             "FileData": {
@@ -230,7 +230,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "energy_node",
+            "Name": "energy",
             "ctype": "ProjectNodeObjectData"
           }
         ],

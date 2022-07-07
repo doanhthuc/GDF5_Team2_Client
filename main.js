@@ -33,9 +33,10 @@ cc.game.onStart = function () {
         //modules
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
         ShopNetwork.connector = new ShopNetwork.Connector(gv.gameClient);
+        BattleNetwork.connector = new BattleNetwork.Connector(gv.gameClient);
 
         // fr.view(MainScreen);
-        fr.view(ScreenNetwork);
+        fr.view(GameLayer);
     }, this);
 };
 cc.game.run();

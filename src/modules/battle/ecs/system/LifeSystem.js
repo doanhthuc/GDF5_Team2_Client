@@ -8,24 +8,11 @@ let LifeSystem = System.extend({
 
     run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.LIFE);
+            .getEntitiesHasComponents(LifeComponent);
         for (let entity of entityList) {
-            let lifeComponent = entity.getComponent(GameConfig.COMPONENT_ID.LIFE);
+            let lifeComponent = entity.getComponent(LifeComponent);
             if (lifeComponent.hp <= 0) {
-                if (Utils.isMonster(entity)) {
-                    let monsterInfo = entity.getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
-
-                    // destroy
-                    let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
-                    if (appearanceComponent) {
-                        let sprite = appearanceComponent.sprite;
-                        sprite.setVisible(false);
-                    }
-                    entity.setActive(false);
-                    for (let key of Object.keys(entity.components)) {
-                        entity.components[key].setActive(false);
-                    }
-                }
+                EntityManager.destroy(entity);
             }
         }
     }

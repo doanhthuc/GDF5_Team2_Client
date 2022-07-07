@@ -21,6 +21,8 @@ GameConfig.COMPONENT_ID = {
     ATTACK: 13,
     BUFF_ATTACK_SPEED: 14,
     BUFF_ATTACK_DAMAGE: 15,
+    SPELL: 16,
+    SKELETON: 17
 }
 
 GameConfig.SYSTEM_ID = {
@@ -29,7 +31,10 @@ GameConfig.SYSTEM_ID = {
     RENDER: 3,
     LIFE: 4,
     ATTACK: 5,
-    EFFECT: 6
+    EFFECT: 6,
+    SPRITE_SHEET: 7,
+    SPELL: 8,
+    SKELETON: 9,
 }
 
 GameConfig.ENTITY_ID = {
@@ -38,6 +43,11 @@ GameConfig.ENTITY_ID = {
     BULLET: 3,
     BEAR_TOWER: 4,
     FROG_TOWER: 5,
+    FIRE_SPELL: 6,
+    FROZEN_SPELL: 7,
+    TRAP_SPELL: 8,
+    SNAKE_TOWER: 9,
+    GOAT_TOWER: 10
 }
 
 GameConfig.GROUP_ID = {
@@ -70,3 +80,9 @@ GameConfig.DIRECTION = {
     RIGHT_TOP: -3,
     RIGHT_BOTTOM: 3,
 };
+
+GameConfig.BATTLE_RESULT = {
+    WIN: 0,
+    LOSE: 1,
+    DRAW: 2
+}

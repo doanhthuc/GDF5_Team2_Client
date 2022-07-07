@@ -21,9 +21,6 @@ ShopNetwork.Connector = cc.Class.extend({
             case gv.CMD.BUY_DAILY_SHOP:
                 this._handleBuyDailyShop(cmd, packet);
                 break;
-            case gv.CMD.SEND_GET_BATTLE_MAP:
-                this._handleGetBattleMap(cmd, packet);
-                break;
         }
     },
 
@@ -75,23 +72,6 @@ ShopNetwork.Connector = cc.Class.extend({
         } else {
             cc.log("[ShopNetwork.js] error Buy Daily Shop");
         }
-    },
-
-    _handleGetBattleMap: function (cmd, packet) {
-        cc.log("[ShopNetwork.js] response get battle map");
-        GameConfig.battleData = new BattleData();
-        GameConfig.battleData.setMap(packet.btmap, GameConfig.PLAYER);
-        GameConfig.battleData.setMap(JSON.parse(JSON.stringify(packet.btmap)), GameConfig.OPPONENT);
-        GameConfig.battleData.setLongestPath(packet.path, GameConfig.PLAYER);
-        GameConfig.battleData.setLongestPath(JSON.parse(JSON.stringify(packet.path)), GameConfig.OPPONENT);
-
-        let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
-        let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
-
-        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
-        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
-        EventDispatcher.getInstance()
-            .dispatchEvent(EventType.FINISH_MATCHING);
     },
 
     sendBuyGoldShop: function (itemId) {

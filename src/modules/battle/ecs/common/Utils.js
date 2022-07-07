@@ -42,6 +42,10 @@ Utils.tile2Pixel = function (x, y, mode) {
     }
 };
 
+Utils.validateTilePos = function (tilePos) {
+    return tilePos.x >= 0 && tilePos.x < GameConfig.MAP_WIDTH && tilePos.y >= 0 && tilePos.y < GameConfig.MAP_HEIGH;
+}
+
 Utils.pixel2Tile = function (xx, yy, mode) {
     if (!mode) {
         mode = GameConfig.PLAYER;
@@ -73,6 +77,23 @@ Utils.tileArray2PixelArray = function (positionArr, mode) {
     return result;
 }
 
+Utils.isPixelPositionInMap = function (pixelPos, mode) {
+    let tile00 = Utils.tile2Pixel(0, 0, mode);
+    let tile64 = Utils.tile2Pixel(6, 4, mode);
+    if (mode === GameConfig.PLAYER) {
+        tile00.x = tile00.x - GameConfig.TILE_WIDTH / 2;
+        tile00.y = tile00.y - GameConfig.TILE_HEIGH / 2;
+        tile64.x = tile64.x + GameConfig.TILE_WIDTH / 2;
+        tile64.y = tile64.y + GameConfig.TILE_HEIGH / 2;
+    } else {
+        tile00.x = tile00.x + GameConfig.TILE_WIDTH / 2;
+        tile00.y = tile00.y + GameConfig.TILE_HEIGH / 2;
+        tile64.x = tile64.x - GameConfig.TILE_WIDTH / 2;
+        tile64.y = tile64.y - GameConfig.TILE_HEIGH / 2;
+    }
+
+    return pixelPos.x >= tile00.x && pixelPos.x <= tile64.x && pixelPos.y >= tile00.y && pixelPos.y <= tile64.y;
+}
 Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     let direction1 = 0;
     let direction2 = 0;
@@ -147,4 +168,32 @@ Utils.isBullet = function (entity) {
         }
     }
     return false;
+}
+
+Utils.radian2Degree = function (radian) {
+    return radian * 180 / Math.PI;
+}
+
+Utils.calcSlopeOfLine = function (pointA, pointB) {
+    let Xa = pointA.x, Ya = pointA.y;
+    let Xb = pointB.x, Yb = pointB.y;
+    let k = (Yb - Ya) / (Xb - Xa);
+
+    let alpha = 0;
+
+    if (k < 0) {
+        alpha = Math.PI - Math.atan(-k);
+    } else {
+        alpha = Math.atan(k);
+    }
+
+    alpha = Utils.radian2Degree(alpha);
+    if (Ya > Yb) {
+        alpha = alpha + 180;
+    }
+    if (alpha === 0 && Xa > Xb) {
+        alpha = alpha + 180;
+    }
+
+    return alpha;
 }

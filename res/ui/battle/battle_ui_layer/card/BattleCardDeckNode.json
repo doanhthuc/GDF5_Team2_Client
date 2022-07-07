@@ -62,170 +62,6 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/battle/battle_ui_layer/card/BattleCardNode.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": -156.8156,
-              "Y": 14.759
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -156.8156,
-            "RightMargin": 156.8156,
-            "TopMargin": -14.759,
-            "BottomMargin": 14.759,
-            "Tag": 1746,
-            "ActionTag": -1958696193,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "card_1",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/battle/battle_ui_layer/card/BattleCardNode.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": -24.4806,
-              "Y": 16.427
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -24.4806,
-            "RightMargin": 24.4806,
-            "TopMargin": -16.427,
-            "BottomMargin": 16.427,
-            "Tag": 1741,
-            "ActionTag": -1044283688,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "card_2",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/battle/battle_ui_layer/card/BattleCardNode.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 107.8543,
-              "Y": 19.1365
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 107.8543,
-            "RightMargin": -107.8543,
-            "TopMargin": -19.1365,
-            "BottomMargin": 19.1365,
-            "Tag": 1736,
-            "ActionTag": -250795850,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "card_3",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/battle/battle_ui_layer/card/BattleCardNode.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 240.1892,
-              "Y": 18.7215
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 240.1892,
-            "RightMargin": -240.1892,
-            "TopMargin": -18.7215,
-            "BottomMargin": 18.7215,
-            "Tag": 1727,
-            "ActionTag": 180636463,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "card_4",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
               "Path": "textures/battle/battle_btn_chat.png",
               "Plist": ""
             },
@@ -323,58 +159,9 @@
             "ctype": "TextObjectData"
           },
           {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/battle/battle_ui_layer/card/BattleCardNode.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
             "AnchorPoint": {},
             "Position": {
-              "X": -264.0949,
-              "Y": -41.1367
-            },
-            "Scale": {
-              "ScaleX": 0.6449,
-              "ScaleY": 0.6449
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -264.0949,
-            "RightMargin": 264.0949,
-            "TopMargin": 41.1367,
-            "BottomMargin": -41.1367,
-            "Tag": 1769,
-            "ActionTag": -6214343,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "card_5",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/battle/battle_ui_layer/card/EnergyProgressNode.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 42.9956,
+              "X": 43.0,
               "Y": -79.0
             },
             "Scale": {
@@ -391,18 +178,183 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 42.9956,
-            "RightMargin": -42.9956,
+            "LeftMargin": 43.0,
+            "RightMargin": -43.0,
             "TopMargin": 79.0,
             "BottomMargin": -79.0,
-            "Tag": 2235,
-            "ActionTag": 877414109,
+            "Tag": 219,
+            "ActionTag": -1776374175,
             "Size": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "FileNode_2",
-            "ctype": "ProjectNodeObjectData"
+            "Name": "progress",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": -156.82,
+              "Y": 14.76
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -156.82,
+            "RightMargin": 156.82,
+            "TopMargin": -14.76,
+            "BottomMargin": 14.76,
+            "Tag": 235,
+            "ActionTag": 1679590586,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "card_1",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": -24.48,
+              "Y": 16.43
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -24.48,
+            "RightMargin": 24.48,
+            "TopMargin": -16.43,
+            "BottomMargin": 16.43,
+            "Tag": 236,
+            "ActionTag": 629505223,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "card_2",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 107.85,
+              "Y": 19.14
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 107.85,
+            "RightMargin": -107.85,
+            "TopMargin": -19.14,
+            "BottomMargin": 19.14,
+            "Tag": 237,
+            "ActionTag": -1064900969,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "card_3",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 240.19,
+              "Y": 18.72
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 240.19,
+            "RightMargin": -240.19,
+            "TopMargin": -18.72,
+            "BottomMargin": 18.72,
+            "Tag": 238,
+            "ActionTag": 1788101207,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "card_4",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": -264.09,
+              "Y": -41.14
+            },
+            "Scale": {
+              "ScaleX": 0.6449,
+              "ScaleY": 0.6449
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -264.09,
+            "RightMargin": 264.09,
+            "TopMargin": 41.14,
+            "BottomMargin": -41.14,
+            "Tag": 276,
+            "ActionTag": 569889232,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "card_5",
+            "ctype": "SingleNodeObjectData"
           }
         ],
         "Size": {
@@ -415,9 +367,7 @@
       "UsedResources": [
         "../../../../textures/battle/battle_btn_chat.png",
         "../../../../textures/battle/battle_deck.png",
-        "../../../../textures/font/SVN-Supercell Magic.ttf",
-        "BattleCardNode.json",
-        "EnergyProgressNode.json"
+        "../../../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
     }

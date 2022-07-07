@@ -7,6 +7,9 @@ let ComponentManager = cc.Class.extend({
     },
 
     registerClass: function (cls) {
+        if (cls.typeID === null || cls.typeID === undefined) {
+            throw new Error("Class doesn't have typeID property");
+        }
         this._storeCls.set(cls.typeID, cls);
     },
 
