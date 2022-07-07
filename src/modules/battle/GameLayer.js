@@ -50,6 +50,12 @@ let GameLayer = cc.Layer.extend({
         this.pathSystem.run(dt);
         this.spellSystem.run(dt);
         this.skeletonAnimationSystem.run(dt);
+
+        cc.log("YYYYYYYYYY")
+        let pool = ComponentFactory.pool;
+        cc.log(("pool size = " + Object.keys(pool._store).length))
+        cc.log("key = " + JSON.stringify(Object.keys(pool._store)))
+        cc.log(JSON.stringify(pool._store))
     },
 
     bornMonster: function (pos, mode) {
@@ -98,7 +104,7 @@ let GameLayer = cc.Layer.extend({
                 break;
             case GameConfig.ENTITY_ID.FIRE_SPELL:
                 // new FireSpell(this.mapLayer, pixelPos, 50, 1.2*GameConfig.TILE_WIDTH);
-                EntityFactory.createFireSpell(pixelPos, GameConfig.PLAYER);
+                SpellFactory.createFireSpell(pixelPos, GameConfig.PLAYER);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
                 // new FrozenSpell(this.mapLayer, pixelPos, 50, 5, 1.2*GameConfig.TILE_WIDTH);

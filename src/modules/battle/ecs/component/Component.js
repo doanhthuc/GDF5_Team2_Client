@@ -89,7 +89,6 @@ let AppearanceComponent = Component.extend({
         this._super();
         this.reset(sprite);
         this.zOrder = 100;
-
         GameConfig.gameLayer.mapLayer.addChild(this.sprite, this.zOrder);
     },
 

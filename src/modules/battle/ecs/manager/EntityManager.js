@@ -56,7 +56,6 @@ EntityManager.destroy = function (entity) {
 
     entity.setActive(false);
     for (let key of Object.keys(entity.components)) {
-        // FIXME: Pool invalid native object
-        // ComponentPool.getInstance().checkIn(entity.components[key]);
+        entity.components[key].setActive(false);
     }
 }
