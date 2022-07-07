@@ -24,8 +24,9 @@ const PopupUIManager = ClientUIManager.extend({
 
     addUIToCurrentScene: function (uiName) {
         let uiNode = this.getUI(uiName);
+        let Z_ORDER = uiNode.Z_ORDER || CLIENT_UI_CONST.Z_ORDER.NORMAL_POPUP;
         if (uiNode) {
-            fr.getCurrentScreen().addChild(uiNode, CLIENT_UI_CONST.Z_ORDER.POP_UP);
+            fr.getCurrentScreen().addChild(uiNode, Z_ORDER);
             uiNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
         }
     },

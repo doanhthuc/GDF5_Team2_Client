@@ -24,7 +24,8 @@ const CLIENT_UI_CONST = {
 
     // Order Manager
     Z_ORDER: {
-        POP_UP: 100,
+        NORMAL_POPUP: 100,
+        NOTIFY_POPUP: 200,
     }
 
 }

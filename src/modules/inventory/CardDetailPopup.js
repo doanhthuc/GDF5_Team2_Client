@@ -25,6 +25,11 @@ const CardDetailPopup = cc.Node.extend({
         this.upgradeLevelTxt.ignoreContentAdaptWithSize(true);
         this.towerImg = this.backgroundImg.getChildByName('towerImg');
         this.modal = this.cardDetailPopupNode.getChildByName('modal');
+        this.nextTowerImgBtn = this.cardDetailPopupNode.getChildByName('nextTowerImgBtn');
+        this.nextTowerImgBtn.addTouchEventListener(this.onNextTowerImgBtnClick.bind(this), this);
+        this.prevTowerImgBtn = this.cardDetailPopupNode.getChildByName('prevTowerImgBtn');
+        this.prevTowerImgBtn.addTouchEventListener(this.onPrevTowerImgBtnClick.bind(this), this);
+        this.constraintTxt = this.cardDetailPopupNode.getChildByName('constraintTxt');
         UiUtil.setImageFullScreen(this.modal);
         this.modal.addTouchEventListener(this.onModalClick.bind(this), this);
         this.initCardStatHolders();
@@ -33,6 +38,10 @@ const CardDetailPopup = cc.Node.extend({
         this.upgradeBtnBackground.addTouchEventListener(this.onUpgradeBtnClick.bind(this), this);
         this.skillBtnBackground.addTouchEventListener(this.onSkillBtnClick.bind(this), this);
         this.selectBtnBackground.addTouchEventListener(this.onSelectBtnClick.bind(this), this);
+
+        this.DEFAULT_RANK_INDEX = 0;
+        this.currentRankIndex = this.DEFAULT_RANK_INDEX;
+        this.rankArr = ['C', 'B', 'A'];
     },
 
     initCardStatHolders: function () {
@@ -66,6 +75,13 @@ const CardDetailPopup = cc.Node.extend({
         let index = 0;
         this.setAllCardStatHoldersVisible(false);
         for (let [key, value] of Object.entries(this.cardModel.getCardStat())) {
+            if (key === 'attackSpeed') {
+                value = value / 1000 + 's';
+            } else if (key === 'slowPercent') {
+                value = value + '%';
+            } else if (key === 'frozenTime') {
+                value = value / 1000 + 's';
+            }
             let cardStat = {
                 icon: CARD_STAT_ICON[key],
                 name: CARD_STAT_NAME[key],
@@ -83,6 +99,10 @@ const CardDetailPopup = cc.Node.extend({
         this.setCardNodeModel(cardModel)
         this.setUpgradeBtnState(cardModel.accumulated);
         this.setUpgradeLevelTxt(cardModel.rank);
+        this.currentRankIndex = this.DEFAULT_RANK_INDEX;
+        this.constraintTxt.setVisible(this.shouldConstraintVisible());
+        this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[this.rankArr[this.DEFAULT_RANK_INDEX]]);
+        this.setNextAndPrevTowerImgBtnOpacity();
         // TODO: check condition card from where click
         cardModel.isBattleDeck
             ? this.setBtnPosPopupFromBattleDeck()
@@ -102,8 +122,7 @@ const CardDetailPopup = cc.Node.extend({
 
     setCardDetailPopupTexture: function () {
         this.cardNameTxt.setString(CARD_NAME_VI[this.cardModel.id]);
-
-        this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
+        // this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image['A']);
 
         this.setCardStat()
     },
@@ -133,7 +152,6 @@ const CardDetailPopup = cc.Node.extend({
                     break;
                 default:
                     break;
-
             }
         }
     },
@@ -223,7 +241,7 @@ const CardDetailPopup = cc.Node.extend({
         this.cardNode.updateCardNodeUI(this.cardModel.accumulated);
         // this.setCardStat();
         this.setCardDetailPopupTexture();
-        this.setUpgradeLevelTxt(this.cardModel.rank);
+        // this.setUpgradeLevelTxt(this.cardModel.rank);
         this.setUpgradeBtnState(accumulated)
     },
 
@@ -233,15 +251,44 @@ const CardDetailPopup = cc.Node.extend({
         }
     },
 
-    nextTowerImgBtn: function (sender, type) {
-        if (type === ccui.Widget.TOUCH_ENDED) {
-            this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
+    onNextTowerImgBtnClick: function (sender, type) {
+        if (this.currentRankIndex < 2 && type === ccui.Widget.TOUCH_ENDED) {
+            let rank = this.rankArr[this.currentRankIndex + 1];
+            this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[rank]);
+            this.currentRankIndex++;
+            this.constraintTxt.setString('Yêu càu tiến hoá ' + (this.currentRankIndex + 1));
+            this.upgradeLevelTxt.setString('Tiến hóa ' + (this.currentRankIndex + 1));
+            this.constraintTxt.setVisible(this.shouldConstraintVisible());
+            this.setNextAndPrevTowerImgBtnOpacity();
         }
     },
 
-    prevTowerImgBtn: function (sender, type) {
-        if (type === ccui.Widget.TOUCH_ENDED) {
-            this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
+    onPrevTowerImgBtnClick: function (sender, type) {
+        if (this.currentRankIndex > 0 && type === ccui.Widget.TOUCH_ENDED) {
+            let rank = this.rankArr[this.currentRankIndex - 1];
+            this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[rank]);
+            this.currentRankIndex--;
+            this.constraintTxt.setString('Yêu càu tiến hoá ' + (this.currentRankIndex + 1));
+            this.upgradeLevelTxt.setString('Tiến hóa ' + (this.currentRankIndex + 1));
+            this.constraintTxt.setVisible(this.shouldConstraintVisible());
+            this.setNextAndPrevTowerImgBtnOpacity();
+        }
+    },
+
+    shouldConstraintVisible: function () {
+        return this.cardModel.level < CARD_RANK[this.rankArr[this.currentRankIndex]].LEVEL;
+    },
+
+    setNextAndPrevTowerImgBtnOpacity: function () {
+        if (this.currentRankIndex === 0) {
+            this.prevTowerImgBtn.setOpacity(128);
+        } else {
+            this.prevTowerImgBtn.setOpacity(255);
+        }
+        if (this.currentRankIndex === 2) {
+            this.nextTowerImgBtn.setOpacity(128);
+        } else {
+            this.nextTowerImgBtn.setOpacity(255);
         }
     }
 });

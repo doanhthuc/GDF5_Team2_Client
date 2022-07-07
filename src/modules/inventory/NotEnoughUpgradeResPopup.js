@@ -1,6 +1,7 @@
 const NotEnoughUpgradeResPopup = cc.Node.extend({
     ctor: function () {
         this.name = CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES;
+        this.Z_ORDER = CLIENT_UI_CONST.Z_ORDER.NOTIFY_POPUP;
         this._super();
         this.init();
     },
@@ -15,6 +16,7 @@ const NotEnoughUpgradeResPopup = cc.Node.extend({
         this.goToShopBtn = this.node.getChildByName('goToShopBtn');
         this.goToShopBtn.addTouchEventListener(this.onGoToShopBtnClick.bind(this), this);
         this.titleTxt = this.node.getChildByName('titleTxt');
+        this.titleTxt.ignoreContentAdaptWithSize(true);
         this.contentTxt = this.node.getChildByName('contentTxt');
         this.type = InventoryResources.RESOURCE_TYPE.GOLD;
         UiUtil.setImageFullScreen(this.modal);
@@ -59,7 +61,8 @@ const NotEnoughUpgradeResPopup = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.setVisible(false);
             // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.)
-            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setVisible(false);
+            // PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setVisible(false);
+            PopupUIManager.getInstance().setAllPopupVisible(false);
             this.parent.mainPageView.scrollToPage(NavResources.TAB_LIST.SHOP_TAB.index)
             cc.log("NotEnoughUpgradeResPopup line onGoToShopBtnClick");
         }

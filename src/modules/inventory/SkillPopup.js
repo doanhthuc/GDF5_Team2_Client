@@ -49,6 +49,11 @@ const SkillPopup = cc.Node.extend({
         let index = 0;
         this.setAllCardStatHoldersVisible(false);
         for (let [key, value] of Object.entries(SKILL_CONST[cardId].stat)) {
+            if (key === 'damageUpPercent' || key === 'potionHealthPercent') {
+                value = value + '%';
+            } else if (key === 'stunTime' || key === 'time') {
+                value = value + 's';
+            }
             let cardStat = {
                 icon: CARD_STAT_ICON[key],
                 name: CARD_STAT_NAME[key],

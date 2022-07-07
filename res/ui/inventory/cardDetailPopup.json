@@ -481,7 +481,7 @@
                   "ScaleY": 0.5
                 },
                 "Position": {
-                  "X": 309.9998,
+                  "X": 310.0,
                   "Y": 894.78
                 },
                 "Scale": {
@@ -499,8 +499,8 @@
                   "X": 0.3242,
                   "Y": 0.3363
                 },
-                "LeftMargin": 209.4998,
-                "RightMargin": 209.5002,
+                "LeftMargin": 209.5,
+                "RightMargin": 209.5,
                 "TopMargin": -229.28,
                 "BottomMargin": 760.28,
                 "Tag": 620,
@@ -668,7 +668,7 @@
               "X": 23.0,
               "Y": 24.0
             },
-            "Name": "prevToweImgBtn",
+            "Name": "prevTowerImgBtn",
             "ctype": "ButtonObjectData"
           },
           {

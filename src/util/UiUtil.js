@@ -77,3 +77,7 @@ const millisecondToTimeString = (distance) => {
     }
 }
 
+const exchangeDurationToGem = (duration) => {
+    return Math.ceil(duration / (600 * 1000));
+}
+

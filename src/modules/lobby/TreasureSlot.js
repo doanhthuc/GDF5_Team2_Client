@@ -112,10 +112,8 @@ const TreasureSlot = cc.Node.extend({
         if (this.state !== TreasureSlotResources.STATE.EMPTY && type === ccui.Widget.TOUCH_ENDED) {
             let treasureSlotNodeList = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).treasureSlotNodeList;
             let openingSlot = treasureSlotNodeList.reduce((acc, curr) => {
-                cc.log('TreasureSlot line 84 onSlotClick: ' + curr.state);
                 return curr.state === TreasureSlotResources.STATE.OPENING ? acc + 1 : acc;
             }, 0);
-            cc.log('TreasureSlot,js line 99 onSlotClick: ' + openingSlot);
             let action = 0;
             switch (this.state) {
                 case TreasureSlotResources.STATE.OCCUPIED:
@@ -134,7 +132,7 @@ const TreasureSlot = cc.Node.extend({
                 default:
                     break;
             }
-            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE).setPopUpInfoFromTreasureType(this.id, action, 0);
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE).setPopUpInfoFromTreasureType(this.id, action, 0, this.state);
             PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
         }
     },
@@ -146,10 +144,8 @@ const TreasureSlot = cc.Node.extend({
     },
 
     setCountDownString: function () {
-        // let distance = claimTime - Date.now();
-
         let distance = this.claimTime - Date.now();
-        this.skipGemTxt.setString(Math.ceil(distance / (600 * 1000)));
+        this.skipGemTxt.setString(exchangeDurationToGem(distance));
         this.openingCountDownTxt.setString(millisecondToTimeString(distance));
         if (distance < 0) {
             this.onFinishCountDown();
@@ -160,6 +156,5 @@ const TreasureSlot = cc.Node.extend({
     onFinishCountDown: function () {
         this.unschedule(this.setCountDownString);
         this.openingCountDownTxt.setString("0m 0s");
-        // this.setStateOfSlot(TreasureSlotResources.STATE.FINISHED, 0);
     }
 })

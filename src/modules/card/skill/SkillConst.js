@@ -23,7 +23,7 @@ const SKILL_CONST = {
         icon: 'res/card/skill/skill_3.png',
         image: 'textures/skill/skill_icon_armor_break.png',
         stat: {
-            damageUp: 0.5,
+            damageUpPercent: 50,
         }
     },
     3: {
@@ -42,7 +42,7 @@ const SKILL_CONST = {
         icon: 'res/card/skill/skill_5.png',
         image: 'textures/skill/icon_skill_02.png',
         stat: {
-            damageUp: 0.5,
+            damageUpPercent: 50,
         }
     },
     5: {
@@ -51,7 +51,7 @@ const SKILL_CONST = {
         icon: 'res/card/skill/skill_6.png',
         image: 'textures/skill/skill_icon_burn.png',
         stat: {
-            potion: 0.01,
+            potionHealthPercent: 1,
         }
     },
     6: {

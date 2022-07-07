@@ -419,6 +419,7 @@
             "ctype": "TextObjectData"
           },
           {
+            "IsCustomSize": true,
             "FontSize": 24,
             "LabelText": "Đạn pháo sau khi bắn sẽ thiêu \nđốt quái trong 1 giây",
             "FontResource": {
@@ -443,8 +444,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 0.0,
-              "Y": -89.6484
+              "X": -0.0002,
+              "Y": -99.6484
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -460,15 +461,15 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -177.5,
-            "RightMargin": -177.5,
-            "TopMargin": 55.6484,
-            "BottomMargin": -123.6484,
+            "LeftMargin": -200.0002,
+            "RightMargin": -199.9998,
+            "TopMargin": 24.6484,
+            "BottomMargin": -174.6484,
             "Tag": 103,
             "ActionTag": -79550074,
             "Size": {
-              "X": 355.0,
-              "Y": 68.0
+              "X": 400.0,
+              "Y": 150.0
             },
             "Name": "skillDescTxt",
             "ctype": "TextObjectData"

@@ -1,6 +1,7 @@
 const CARD_STAT_ICON = {
     damage: 'textures/card/stat_icon/stat_icon_damage.png',
     damageUp: 'textures/card/stat_icon/stat_icon_damage_up.png',
+    damageUpPercent: 'textures/card/stat_icon/stat_icon_damage_up.png',
     attackSpeed: 'textures/card/stat_icon/stat_icon_attack_speed.png',
     attackSpeedUp: 'textures/card/stat_icon/stat_icon_attack_speed_up.png',
     range: 'textures/card/stat_icon/stat_icon_range.png',
@@ -11,12 +12,13 @@ const CARD_STAT_ICON = {
     slowPercent: 'textures/card/stat_icon/stat_icon_immobilize.png',
     time: 'textures/card/stat_icon/stat_icon_time.png',
     stunTime: 'textures/card/stat_icon/stat_icon_immobilize.png',
-    potion: 'textures/card/stat_icon/stat_icon_damage.png',
+    potionHealthPercent: 'textures/card/stat_icon/stat_icon_damage.png',
 }
 
 const CARD_STAT_NAME = {
     damage: 'Sát thương',
     damageUp: 'Sát thương tăng',
+    damageUpPercent: 'Sát thương tăng',
     attackSpeed: 'Tốc độ bắn',
     attackSpeedUp: 'Tốc độ đánh tăng',
     range: 'Tầm đánh',
@@ -27,6 +29,6 @@ const CARD_STAT_NAME = {
     radius: 'bán kính',
     stunTime: 'Làm choáng',
     time: 'Thời gian',
-    potion: 'Sát thương',
+    potionHealthPercent: 'Sát thương',
 
 }
