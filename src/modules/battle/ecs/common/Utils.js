@@ -77,6 +77,23 @@ Utils.tileArray2PixelArray = function (positionArr, mode) {
     return result;
 }
 
+Utils.isPixelPositionInMap = function (pixelPos, mode) {
+    let tile00 = Utils.tile2Pixel(0, 0, mode);
+    let tile64 = Utils.tile2Pixel(6, 4, mode);
+    if (mode === GameConfig.PLAYER) {
+        tile00.x = tile00.x - GameConfig.TILE_WIDTH / 2;
+        tile00.y = tile00.y - GameConfig.TILE_HEIGH / 2;
+        tile64.x = tile64.x + GameConfig.TILE_WIDTH / 2;
+        tile64.y = tile64.y + GameConfig.TILE_HEIGH / 2;
+    } else {
+        tile00.x = tile00.x + GameConfig.TILE_WIDTH / 2;
+        tile00.y = tile00.y + GameConfig.TILE_HEIGH / 2;
+        tile64.x = tile64.x - GameConfig.TILE_WIDTH / 2;
+        tile64.y = tile64.y - GameConfig.TILE_HEIGH / 2;
+    }
+
+    return pixelPos.x >= tile00.x && pixelPos.x <= tile64.x && pixelPos.y >= tile00.y && pixelPos.y <= tile64.y;
+}
 Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     let direction1 = 0;
     let direction2 = 0;

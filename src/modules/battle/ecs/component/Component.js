@@ -88,12 +88,12 @@ let AppearanceComponent = Component.extend({
     ctor: function (sprite) {
         this._super();
         this.reset(sprite);
-        this.zOrder = 100;
         GameConfig.gameLayer.mapLayer.addChild(this.sprite, this.zOrder);
     },
 
     reset: function (sprite) {
         this.sprite = sprite;
+        this.zOrder = 100;
     },
 
     clone: function () {

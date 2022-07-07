@@ -51,11 +51,11 @@ let GameLayer = cc.Layer.extend({
         this.spellSystem.run(dt);
         this.skeletonAnimationSystem.run(dt);
 
-        cc.log("YYYYYYYYYY")
-        let pool = ComponentFactory.pool;
-        cc.log(("pool size = " + Object.keys(pool._store).length))
-        cc.log("key = " + JSON.stringify(Object.keys(pool._store)))
-        cc.log(JSON.stringify(pool._store))
+        // cc.log("YYYYYYYYYY")
+        // let pool = ComponentFactory.pool;
+        // cc.log(("pool size = " + Object.keys(pool._store).length))
+        // cc.log("key = " + JSON.stringify(Object.keys(pool._store)))
+        // cc.log(JSON.stringify(pool._store))
     },
 
     bornMonster: function (pos, mode) {
@@ -76,7 +76,11 @@ let GameLayer = cc.Layer.extend({
         // FIXME: hardcode
         // if spell, not check valid tile
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
-            // put spell
+            let tile00 = Utils.tile2Pixel(0, 0, GameConfig.PLAYER);
+            let tile64 = Utils.tile2Pixel(6, 4, GameConfig.PLAYER);
+            if (Utils.isPixelPositionInMap(pixelPos, GameConfig.PLAYER) === false) {
+                return;
+            }
         } else {
             // put tower
             if (tilePos.x < 0 || tilePos.x >= GameConfig.MAP_WIDTH || tilePos.y < 0 || tilePos.y >= GameConfig.MAP_HEIGH) {
@@ -92,6 +96,7 @@ let GameLayer = cc.Layer.extend({
             }
         }
 
+        cc.log("XXXX Put tower at " + JSON.stringify(tilePos))
         switch (type) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
                 EntityFactory.createCannonOwlTower(tilePos, GameConfig.PLAYER);

@@ -5,11 +5,6 @@ let ComponentPool = cc.Class.extend({
         this._store = {};
     },
 
-    validate: function (component) {
-        cc.log(JSON.stringify(component))
-        return component.getActive() === false;
-    },
-
     checkOut: function (ComponentCls) {
         if (!this._store[ComponentCls.typeID]) {
             return null;

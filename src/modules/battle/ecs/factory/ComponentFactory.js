@@ -8,7 +8,8 @@ ComponentFactory.create = function (cls, ...data) {
     } else {
         component = new cls(...data);
         ComponentManager.getInstance().add(component);
-        ComponentFactory.pool.checkIn(component);
+        // FIXME: invalid native object
+        // ComponentFactory.pool.checkIn(component);
     }
     return component;
 }
