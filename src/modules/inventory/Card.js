@@ -95,8 +95,6 @@ const CardNode = cc.Node.extend({
             this.upgradeReadyAnimation.setVisible(true);
             this.upgradeReadyAnimationTxt.setString(accumulatedCard + '/' + JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
         }
-
-
     }
 });
 

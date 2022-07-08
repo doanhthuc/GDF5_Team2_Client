@@ -83,5 +83,5 @@ const ShopItemSlotNode = cc.Node.extend({
             buyItemPopup.setType(this.type);
             PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
         }
-    }
+    },
 });
