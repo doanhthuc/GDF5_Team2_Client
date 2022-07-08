@@ -8,6 +8,7 @@ gv.CMD.USER_LOGIN = 1;
 gv.CMD.GET_USER_INFO = 1001;
 gv.CMD.ADD_USER_GOLD = 1002;
 gv.CMD.ADD_USER_GEM = 1003;
+gv.CMD.SEND_LOGOUT = 1004;
 
 gv.CMD.GET_USER_INVENTORY = 3001;
 gv.CMD.UPGRADE_CARD = 3002;
@@ -73,6 +74,20 @@ CMDSendGetUserInfo = fr.OutPacket.extend(
             this._super();
             this.initData(100);
             this.setCmdId(gv.CMD.GET_USER_INFO);
+        },
+        pack: function () {
+            this.packHeader();
+            //this.putInt(userID);
+            this.updateSize();
+        }
+    }
+)
+CMDSendLogout = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.SEND_LOGOUT);
         },
         pack: function () {
             this.packHeader();
@@ -289,6 +304,16 @@ testnetwork.packetMap[gv.CMD.USER_LOGIN] = fr.InPacket.extend(
     }
 );
 
+testnetwork.packetMap[gv.CMD.SEND_LOGOUT] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+        }
+    }
+);
+
 testnetwork.packetMap[gv.CMD.ADD_USER_GOLD] = fr.InPacket.extend(
     {
         ctor: function () {
@@ -494,9 +519,9 @@ testnetwork.packetMap[gv.CMD.SEND_GET_BATTLE_MAP] = fr.InPacket.extend(
             this.mapH = this.getInt();
             this.mapW = this.getInt();
             this.btmap = new Array(this.mapH);
-            for(i=this.mapH-1;i>=0;i--)
-                this.btmap[i]= new Array(this.mapW);
-            this.path= []
+            for (i = this.mapH - 1; i >= 0; i--)
+                this.btmap[i] = new Array(this.mapW);
+            this.path = []
             for (i = 0; i < this.mapH; i++)
                 for (j = 0; j < this.mapW; j++)
                     this.btmap[i][j] = this.getInt();

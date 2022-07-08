@@ -7,7 +7,6 @@ let GameLayer = cc.Layer.extend({
         this.selectedCard = null;
 
         // data game
-        BattleData.fakeData();
         this.battleData = GameConfig.battleData;
 
         // create UI

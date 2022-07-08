@@ -117,6 +117,11 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("asdasdas");
                 cc.log(JSON.stringify(packet));
                 break;
+            case gv.CMD.SEND_LOGOUT:
+                cc.log("loggout");
+                gv.gameClient.getNetwork().disconnect();
+                fr.view(ScreenNetwork);
+                break;
         }
     },
     sendLoginRequest: function () {
@@ -204,6 +209,12 @@ testnetwork.Connector = cc.Class.extend({
     sendGetBattleMap: function () {
         cc.log("GetBattleMap");
         var pk = this.gameClient.getOutPacket(CMDSendGetBattleMap);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendLogout:function (){
+        cc.log("Send Logout");
+        var pk= this.gameClient.getOutPacket(CMDSendLogout);
         pk.pack();
         this.gameClient.sendPacket(pk);
     }

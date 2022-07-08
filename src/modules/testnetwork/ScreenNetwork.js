@@ -59,6 +59,10 @@ var ScreenNetwork = cc.Layer.extend({
             gv.gameClient.connect();
         }
     },
+    reset: function(){
+        this.loginNotice.setVisible(false);
+        this.noticeTimer=0;
+    },
     onSelectDisconnect: function (sender) {
         this.lblLog.setString("Coming soon!");
     },
@@ -72,10 +76,12 @@ var ScreenNetwork = cc.Layer.extend({
         this.lblLog.setString("Connect fail: " + text);
     },
     onFinishLogin: function () {
+        this.reset();
+        //this.setVisible(false);
         fr.view(MainScreen);
-        testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
+         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
         testnetwork.connector.sendGetUserLobbyChest();
-        testnetwork.connector.sendGetUserInventory();
+         testnetwork.connector.sendGetUserInventory();
         //testnetwork.connector.sendGetUserGoldShop();
         //testnetwork.connector.sendUpgradeCard(2);
         //.connector.sendGetUserDailyShop();
@@ -89,8 +95,8 @@ var ScreenNetwork = cc.Layer.extend({
         // let userContext = new UserContext();
         // contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
         // userContext.updateUserInfoUI();
-        ShopNetwork.connector.sendGetUserDailyShop();
-        ShopNetwork.connector.sendGetGoldShop();
+         ShopNetwork.connector.sendGetUserDailyShop();
+         ShopNetwork.connector.sendGetGoldShop();
         cc.log("Finished login");
     },
     checkSpecial: function (inputUID) {
