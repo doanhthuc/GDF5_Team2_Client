@@ -106,7 +106,6 @@ FindPathUtil.findShortestPathForEachTile = function (mode) {
             if (map[row][col] === 0) {
                 let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
                 if (path && path.length > 0) {
-                    path = Utils.tileArray2PixelArray(path, mode);
                     shortestPathForEachTiles[row][col] = path;
                 }
             }

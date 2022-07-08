@@ -2,16 +2,17 @@ let BattleMapLayer = cc.Layer.extend({
     ctor: function (battleData) {
         this._super();
         this.battleData = battleData;
-        let rootNode = ccs.load(BattleResource.MAP_NODE, "").node;
+        let rootNode = ccs.load(BattleResource.BATTLE_MAP_LAYER, "").node;
         this.addChild(rootNode);
+
+        this.playerMapNode = rootNode.getChildByName("player_map");
+        this.opponentMapNode = rootNode.getChildByName("opponent_map");
 
         rootNode.attr({
             x: cc.winSize.width / 2,
             y: (cc.winSize.height - BattleResource.DECK_CARD_HEIGHT) / 2 + BattleResource.DECK_CARD_HEIGHT
         });
 
-        this._genMap(GameConfig.PLAYER);
-        this._genMap(GameConfig.OPPONENT);
     },
 
     _genMap: function (mode) {

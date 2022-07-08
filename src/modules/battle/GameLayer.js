@@ -15,6 +15,8 @@ let GameLayer = cc.Layer.extend({
         this.addChild(this.uiLayer, 2);
 
         this.mapLayer = new BattleMapLayer(this.battleData);
+        this.mapLayer._genMap(GameConfig.PLAYER);
+        this.mapLayer._genMap(GameConfig.OPPONENT);
         this.addChild(this.mapLayer, 1);
 
         // init entity manager

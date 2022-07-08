@@ -107,13 +107,17 @@ let PathComponent = Component.extend({
     name: "PathComponent",
     typeID: GameConfig.COMPONENT_ID.PATH,
 
-    ctor: function (path) {
+    ctor: function (path, mode) {
         this._super();
-        this.reset(path);
+        this.reset(path, mode);
     },
 
-    reset: function (path) {
-        this.path = path;
+    reset: function (path, mode) {
+        let pathPixel = [];
+        for (let i = 0; i < path.length; i++) {
+            pathPixel = Utils.tile2Pixel(path[i].x, path[i].y, mode);
+        }
+        this.path = pathPixel;
         this.currentPathIdx = 0;
     },
 

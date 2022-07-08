@@ -39,7 +39,7 @@ EventDispatcher.getInstance()
                         if (path.length > 0) {
                             let newPath = [Utils.tile2Pixel(positionComponent.x, positionComponent.y, currentMode)]
                             for (let i = 0; i < path.length; i++) {
-                                newPath.push(path[i]);
+                                newPath.push(Utils.tile2Pixel(path[i].x, path[i].x, currentMode));
                             }
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;

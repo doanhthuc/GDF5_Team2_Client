@@ -110,11 +110,11 @@ let BattleData = cc.Class.extend({
     },
 
     getLongestPath: function (mode) {
-        return this.dataInGame[mode].longestPath;
+        return Utils.tileArray2PixelArray(this.dataInGame[mode].longestPath, mode);
     },
 
     setLongestPath: function (longestPath, mode) {
-        return this.dataInGame[mode].longestPath = Utils.tileArray2PixelArray(longestPath, mode);
+        return this.dataInGame[mode].longestPath = longestPath;
     },
 
     getCurrentEnergy: function (mode) {

@@ -8,37 +8,28 @@ Utils.getVariableName = function (variable) {
 // FIXME: hard code
 const CARD_DECK_HEIGHT = BattleResource.DECK_CARD_HEIGHT;
 const RIVER_HEIGHT = BattleResource.RIVER_HEIGHT;
+
 Utils.tile2Pixel = function (x, y, mode) {
+    // convert tile to pixel in node space
     // return center of tile pixel
 
     if (mode === GameConfig.PLAYER) {
-        // ^ y
-        // |
-        // |
-        // |-------->x
-        // center of tile y = 4
-        let centerY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT - (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH / 2);
-        let paddingX = (cc.winSize.width - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH) / 2;
-        let startX = paddingX + GameConfig.TILE_WIDTH / 2;
-
-        let yy = centerY - (GameConfig.MAP_HEIGH - 1 - y) * GameConfig.TILE_HEIGH;
-        let xx = startX + GameConfig.TILE_WIDTH * x;
-        return {x: xx, y: yy};
+        let mapNode = GameConfig.gameLayer.mapLayer.playerMapNode;
+        let xx = x*GameConfig.TILE_WIDTH - GameConfig.MAP_WIDTH*GameConfig.TILE_WIDTH/2;
+        let yy = y*GameConfig.TILE_HEIGH - GameConfig.MAP_HEIGH*GameConfig.TILE_HEIGH/2;
+        let worldPos = GameConfig.gameLayer.mapLayer.convertToNodeSpace(mapNode.convertToWorldSpace(cc.p(xx, yy)));
+        return worldPos;
     } else if (mode === GameConfig.OPPONENT) {
         // x <---------o
         //             |
         //             |
         //             V
         //             y
-
-        // center of  y = 4
-        let centerY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT + (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH / 2);
-        let paddingX = (cc.winSize.width - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH) / 2;
-        let startX = cc.winSize.width - paddingX - GameConfig.TILE_WIDTH / 2;
-
-        let yy = centerY + (GameConfig.MAP_HEIGH - 1 - y) * GameConfig.TILE_HEIGH;
-        let xx = startX - GameConfig.TILE_WIDTH * x;
-        return {x: xx, y: yy};
+        let mapNode = GameConfig.gameLayer.mapLayer.opponentMapNode;
+        let xx = GameConfig.MAP_WIDTH*GameConfig.TILE_WIDTH/2 - x*GameConfig.TILE_WIDTH;
+        let yy = GameConfig.MAP_HEIGH*GameConfig.TILE_HEIGH/2 - y*GameConfig.TILE_HEIGH;
+        let worldPos = GameConfig.gameLayer.mapLayer.convertToNodeSpace(mapNode.convertToWorldSpace(cc.p(xx, yy)));
+        return worldPos;
     }
 };
 
@@ -47,23 +38,29 @@ Utils.validateTilePos = function (tilePos) {
 }
 
 Utils.pixel2Tile = function (xx, yy, mode) {
+    // xx, yy is world space (layer or scene space), not map node space
     if (!mode) {
         mode = GameConfig.PLAYER;
     }
 
     if (mode === GameConfig.PLAYER) {
-        let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
-        let x = Math.floor((xx - paddingX) / GameConfig.TILE_WIDTH);
+        let mapNode = GameConfig.gameLayer.mapLayer.playerMapNode;
+        let pos = mapNode.convertToNodeSpace(cc.p(xx, yy));
+        xx = pos.x + GameConfig.MAP_WIDTH*GameConfig.TILE_WIDTH/2;
+        yy = pos.y + GameConfig.MAP_HEIGH*GameConfig.TILE_HEIGH/2;
 
-        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT - (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH);
-        let y = Math.floor((yy - paddingY) / GameConfig.TILE_HEIGH);
+        let x = Math.floor(xx / GameConfig.TILE_WIDTH);
+        let y = Math.floor(yy / GameConfig.TILE_HEIGH);
 
         return {x, y};
     } else if (mode === GameConfig.OPPONENT) {
-        let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
-        let x = Math.floor(((cc.winSize.width - xx) - paddingX) / GameConfig.TILE_WIDTH);
-        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT - GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH * 2 - RIVER_HEIGHT) / 2;
-        let y = Math.floor(((cc.winSize.height - yy) - paddingY) / GameConfig.TILE_HEIGH);
+        let mapNode = GameConfig.gameLayer.mapLayer.opponentMapNode;
+        let pos = mapNode.convertToNodeSpace(cc.p(xx, yy));
+        xx = GameConfig.MAP_WIDTH*GameConfig.TILE_WIDTH/2 - pos.x;
+        yy = GameConfig.MAP_HEIGH*GameConfig.TILE_HEIGH/2 - pos.y;
+
+        let x = Math.floor(xx / GameConfig.TILE_WIDTH);
+        let y = Math.floor(yy / GameConfig.TILE_HEIGH);
 
         return {x, y};
     }
