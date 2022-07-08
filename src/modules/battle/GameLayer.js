@@ -33,6 +33,8 @@ let GameLayer = cc.Layer.extend({
         this.pathSystem = new PathMonsterSystem();
         this.spellSystem = new SpellSystem();
         this.skeletonAnimationSystem = new SkeletonAnimationSystem();
+        this.monsterSystem = new MonsterSystem();
+        this.bulletSystem = new BulletSystem();
 
         // this._initTower();
         this._handleEventKey();
@@ -50,6 +52,8 @@ let GameLayer = cc.Layer.extend({
         this.pathSystem.run(dt);
         this.spellSystem.run(dt);
         this.skeletonAnimationSystem.run(dt);
+        this.monsterSystem.run(dt);
+        this.bulletSystem.run(dt);
 
         // cc.log("YYYYYYYYYY")
         // let pool = ComponentFactory.pool;
@@ -60,8 +64,6 @@ let GameLayer = cc.Layer.extend({
 
     bornMonster: function (pos, mode) {
         // pos is in tile coordinator
-        cc.log("position tile " + JSON.stringify(pos))
-
         if (!pos) {
             pos = Utils.tile2Pixel(0, 4, mode);
         } else {

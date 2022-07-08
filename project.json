@@ -98,6 +98,8 @@
         "src/modules/battle/ecs/system/RenderSystem.js",
         "src/modules/battle/ecs/system/SpellSystem.js",
         "src/modules/battle/ecs/system/SkeletonAnimationSystem.js",
+        "src/modules/battle/ecs/system/MonsterSystem.js",
+        "src/modules/battle/ecs/system/BulletSystem.js",
         "src/modules/battle/GameLayer.js",
         "src/modules/battle/ui/BattleTimerNode.js",
         "src/modules/battle/ui/deck/CardDeckNode.js",

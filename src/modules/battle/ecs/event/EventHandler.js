@@ -5,26 +5,6 @@ EventDispatcher.getInstance()
         GameConfig.gameLayer.bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
         GameConfig.gameLayer.bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
     })
-    .addEventHandler(EventType.FINISH_PATH, function (data) {
-        let entity = data.entity;
-
-        if (entity.hasAllComponent(VelocityComponent)) {
-            entity.removeComponent(entity.getComponent(VelocityComponent));
-        }
-
-        // FIXME: what is this?
-        if (entity.hasAllComponent(BulletInfoComponent)) {
-            let bulletInfoComponent = entity.getComponent(BulletInfoComponent);
-            if (bulletInfoComponent.type === "frog") {
-                let appearanceComponent = entity.getComponent(AppearanceComponent)
-                if (appearanceComponent) {
-                    appearanceComponent.sprite.setVisible(false);
-                }
-            }
-        }
-
-        entity.setActive(false);
-    })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
         GameConfig.gameLayer.stopGame();
     })
