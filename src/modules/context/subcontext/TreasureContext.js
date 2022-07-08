@@ -34,6 +34,11 @@ const TreasureContext = cc.Class.extend({
         this.treasureList[packet.lobbyChestid].state = packet.state;
     },
 
+    buyTreasureInShop: function (treasureShopId) {
+        cc.log("buyTreasureInShop: " + treasureShopId);
+        ShopNetwork.connector.sendBuyDailyShop(treasureShopId)
+    },
+
     onSpeedUpChestSuccess: function (packet) {
         ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).onSpeedUpChestSuccess(packet);
         this.treasureList[packet.lobbyChestid].claimTime = 0;
@@ -63,12 +68,15 @@ const TreasureContext = cc.Class.extend({
 
     onClaimChestSuccess: function (packet) {
         // TODO: define a cardCollection in 1 place (InventoryLayer or InventoryContext)
-        ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).onClaimChestSuccess(packet);
-        this.treasureList[packet.lobbyChestid].claimTime = 0;
-        this.treasureList[packet.lobbyChestid].state = packet.state;
+        if (packet.lobbyChestid) {
+            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).onClaimChestSuccess(packet);
+            this.treasureList[packet.lobbyChestid].claimTime = 0;
+            this.treasureList[packet.lobbyChestid].state = packet.state;
+        }
+
         PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet)
         PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
-        for (let i = 0; i < packet.rewardSize; i++) {
+        for (let i = 0; i < packet.itemType.length; i++) {
             let rewardType = +packet.itemType[i];
             if (rewardType === 11) {
                 contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).updateUserGold(packet.itemQuantity[i]);
@@ -87,12 +95,14 @@ const TreasureContext = cc.Class.extend({
 
     },
 
-
-
     getTreasureById: function (id) {
         if (id < this.treasureList.length) {
             return this.treasureList[i];
         }
         return null;
+    },
+
+    resetContextData : function(){
+        this.treasureList = [];
     }
 });

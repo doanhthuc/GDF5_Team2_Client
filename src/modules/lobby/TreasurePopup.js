@@ -36,9 +36,11 @@ const TreasurePopup = cc.Node.extend({
     setPopUpInfoFromTreasureType: function (slotId, action, treasureTypeId, slotState) {
         this.slotId = slotId;
         this.action = action;
-        this.claimTime = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).treasureList[this.slotId].claimTime;
+        if (this.slotId !== null) {
+            this.claimTime = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).treasureList[this.slotId].claimTime;
+        }
         let TreasureSlotNodeList = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).treasureSlotNodeList;
-        if (TreasureSlotNodeList[slotId].state === TreasureSlotResources.STATE.OCCUPIED && action === ChestConst.ACTION.SPEED_UP) {
+        if (slotId && TreasureSlotNodeList[slotId].state === TreasureSlotResources.STATE.OCCUPIED && action === ChestConst.ACTION.SPEED_UP) {
             this.constrainTxt.setString(TreasureSlotResources.CONSTRAINT_TXT);
         } else {
             this.constrainTxt.setString('');
@@ -56,7 +58,7 @@ const TreasurePopup = cc.Node.extend({
             this.speedUpGemTxt.setString(exchangeDurationToGem(10800000));
             this.openAfterTxt.setVisible(false);
             this.countdownTxt.setVisible(false);
-        } else if (action === ChestConst.ACTION.OPEN) {
+        } else if (this.slotId && action === ChestConst.ACTION.OPEN) {
             this.countdownTxt.setString(millisecondToTimeString(10800000));
             this.openAfterTxt.setVisible(true);
             this.countdownTxt.setVisible(true);
@@ -134,7 +136,12 @@ const TreasurePopup = cc.Node.extend({
                     contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).openChest(this.slotId);
                     break;
                 case ChestConst.ACTION.CLAIM:
-                    contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).claimChest(this.slotId);
+                    if (this.slotId) {
+                        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).claimChest(this.slotId);
+                    } else {
+                        cc.log('TreasurePopup.js line 132 onOpenBtnClick this.slotId = ' + this.slotId);
+                        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).buyTreasureInShop(0)
+                    }
                     break;
                 default:
                     break;
@@ -157,7 +164,6 @@ const TreasurePopup = cc.Node.extend({
         this.countdownTxt.setString(millisecondToTimeString(distance));
         if (distance < 0) {
             this.onFinishCountDown();
-            // this.setStateOfSlot(TreasureSlotResources.STATE.FINISHED, 0);
         }
     },
 

@@ -87,16 +87,6 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.ADD_USER_GEM:
                 cc.log(packet.gemChange);
                 break;
-            case gv.CMD.BUY_GOLD_SHOP:
-                cc.log(JSON.stringify(packet));
-                userInfo.gold += packet.goldChange;
-                userInfo.gem += packet.gemChange;
-                userInfo.show();
-                break;
-            case gv.CMD.BUY_DAILY_SHOP:
-                cc.log("BUY DAILY SHOP");
-                cc.log(JSON.stringify(packet));
-                break;
             //cheat
             case gv.CMD.CHEAT_USER_INFO:
                 cc.log("CHEAT USER INFO");

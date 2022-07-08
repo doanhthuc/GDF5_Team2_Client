@@ -6,5 +6,6 @@ const ChestConst = {
         OPEN: 0,
         SPEED_UP: 1,
         CLAIM: 2,
+        BUY: 3
     }
 }

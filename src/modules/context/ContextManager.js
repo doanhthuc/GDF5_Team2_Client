@@ -21,6 +21,12 @@ const ContextManager = cc.Class.extend({
     getContext: function (contextName) {
         return this.contextMap.get(contextName);
     },
+
+    resetContextData: function () {
+        this.contextMap.forEach((context) => {
+            context.resetContextData();
+        });
+    }
 })
 
 const contextManager = new ContextManager();

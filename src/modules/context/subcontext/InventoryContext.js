@@ -88,5 +88,11 @@ const InventoryContext = cc.Class.extend({
             inventoryLayer.cardNodeMap.get(cardId).onUpdateCard(amountChange);
 
         }
+    },
+
+    resetContextData: function () {
+        this.battleDeckIdList = [];
+        this.battleDeckList = [];
+        this.cardCollectionList = [];
     }
 });

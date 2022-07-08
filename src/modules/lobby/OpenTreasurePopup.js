@@ -37,7 +37,7 @@ const OpenTreasurePopup = cc.Node.extend({
     setItemListTexture: function (packet) {
         this.actionArray = [];
         this.receiveBtn.setVisible(false);
-        for (let i = 0; i < packet.rewardSize; i++) {
+        for (let i = 0; i < packet.itemType.length; i++) {
             let cardId = packet.itemType[i];
             if (cardId === 11) {
                 this.itemNodeList[i].cardImg.setTexture('textures/common/common_icon_gold.png');

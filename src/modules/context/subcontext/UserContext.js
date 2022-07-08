@@ -73,5 +73,12 @@ const UserContext = cc.Class.extend({
         this.user.gold = packet.gold;
         this.user.gem = packet.gem;
         this.user.trophy = packet.trophy;
+    },
+
+    resetContextData: function () {
+        this.user = {};
+        this.isAuthenticated = false;
+        this.isAuthenticating = false;
+        this.clientUIManager = ClientUIManager.getInstance();
     }
 })
