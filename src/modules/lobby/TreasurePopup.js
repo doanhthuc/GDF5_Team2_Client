@@ -69,7 +69,7 @@ const TreasurePopup = cc.Node.extend({
     onCloseClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.setVisible(false);
-            this.unschedule(this.setCountDownString);
+            this.onFinishCountDown();
         }
     },
 
@@ -115,13 +115,15 @@ const TreasurePopup = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             let user = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).getUser();
             cc.log('TreasurePopup onSpeedUpBtnClick user.gold: ' + (user.gem < exchangeDurationToGem(this.claimTime - Date.now())));
-            if (user.gem < exchangeDurationToGem(this.claimTime - Date.now())) {
-                PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES).setType(InventoryResources.RESOURCE_TYPE.GEM);
-                PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES);
+            if (user.gem < exchangeDurationToGem(this.claimTime - Date.now() + TimeUtil.getDeltaTime())) {
+                    let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
+                    notify.setNotifyTxt('Không Đủ Gem');
+                    notify.showNotify();
                 return;
             }
             contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).speedUpChest(this.slotId);
             this.setVisible(false);
+            this.onFinishCountDown();
         }
     },
 
@@ -144,13 +146,13 @@ const TreasurePopup = cc.Node.extend({
     onModalClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.setVisible(false);
-            this.unschedule(this.setCountDownString);
+            this.onFinishCountDown();
         }
     },
 
     setCountDownString: function () {
         // let distance = claimTime - Date.now();
-        let distance = this.claimTime - Date.now();
+        let distance = this.claimTime - Date.now() + TimeUtil.getDeltaTime();
         this.speedUpGemTxt.setString(exchangeDurationToGem(distance));
         this.countdownTxt.setString(millisecondToTimeString(distance));
         if (distance < 0) {

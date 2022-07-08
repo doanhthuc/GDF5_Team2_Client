@@ -27,7 +27,7 @@ testnetwork.Connector = cc.Class.extend({
                 // contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT, userContext);
                 // let inventoryContext = new InventoryContext();
                 // contextManager.registerContext(ContextManagerConst.INVENTORY_CONTEXT, inventoryContext);
-
+                TimeUtil.setDeltaTime(packet.serverTime);
                 userContext.setUserInfoFromPackage(userInfo);
 
                 userContext.updateUserInfoUI();

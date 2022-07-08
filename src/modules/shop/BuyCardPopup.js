@@ -84,6 +84,7 @@ const BuyCardPopup = cc.Node.extend({
     },
 
     setPrice: function (price) {
+        this.price = price;
         this.buyBtn.getChildByName("priceTxt").setString(price);
     },
 
@@ -100,6 +101,13 @@ const BuyCardPopup = cc.Node.extend({
     onBuyBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             cc.log("[BuyCardPopup.js] click on buy btn, card id = " + this.id);
+            let user = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user;
+            if (user.gold < this.price) {
+                let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
+                notify.setNotifyTxt('Không Đủ Vàng');
+                notify.showNotify();
+                return;
+            }
             ShopNetwork.connector.sendBuyDailyShop(this.id)
         }
     },

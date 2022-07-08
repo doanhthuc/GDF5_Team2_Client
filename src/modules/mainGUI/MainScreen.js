@@ -61,10 +61,8 @@ const MainScreen = cc.Layer.extend({
         }
         this.listView.height = cc.winSize.height;
         this.listView.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
-        // this.listViewPanel.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
-        // this.listViewPanel.addEventListener(this.onListViewEvent.bind(this), this)
 
-        this.shopLayer = new ShopLayer();
+        this.shopLayer = new ShopLayer(headerHeight);
         this.mainPageView.addWidgetToPage(this.shopLayer, NavResources.TAB_LIST.SHOP_TAB.index, true);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE, this.shopLayer);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE);
@@ -96,6 +94,7 @@ const MainScreen = cc.Layer.extend({
         this.notEnoughUpgradeResPopup = new NotEnoughUpgradeResPopup();
         this.upgradeSuccessPopup = new UpgradeSuccessPopup();
         this.cardSkillPopupNode = new SkillPopup();
+        this.notifyNode = new NotifyNode();
 
         this.addPopup(this.treasurePopupNode);
         this.addPopup(this.buyCardPopupNode);
@@ -107,6 +106,7 @@ const MainScreen = cc.Layer.extend({
         this.addPopup(this.notEnoughUpgradeResPopup);
         this.addPopup(this.upgradeSuccessPopup);
         this.addPopup(this.cardSkillPopupNode);
+        this.addPopup(this.notifyNode);
     },
 
     addPopup: function (popupNode) {

@@ -1,6 +1,7 @@
 const SkillPopup = cc.Node.extend({
     ctor: function (cardId) {
         this.name = CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_SKILL;
+        this.Z_ORDER = CLIENT_UI_CONST.Z_ORDER.NOTIFY_POPUP
         this._super();
         this.init();
         if (cardId) this.setCardId(cardId);

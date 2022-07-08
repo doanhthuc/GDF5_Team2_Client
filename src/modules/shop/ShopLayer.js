@@ -1,5 +1,6 @@
 const ShopLayer = cc.Node.extend({
-    ctor: function () {
+    ctor: function (headerHeight) {
+        this.headerHeight = headerHeight;
         this._super();
         this._setupUI();
     },
@@ -12,15 +13,16 @@ const ShopLayer = cc.Node.extend({
 
         // Daily section
         this.dailySection = new ShopSection("treasure");
-        this.dailySection.setPosition(startX, startY);
         this.addChild(this.dailySection);
+        this.dailySection.setPosition(cc.winSize.width / 2, cc.winSize.height - this.headerHeight - this.dailySection._height / 2);
         this.shopSectionList.push(this.dailySection);
 
         // Buy gold section
         this.goldSection = new ShopSection("gold");
-        this.goldSection.setPosition(startX, startY
-            - (ShopResources.SHOP_SECTION_NODE_HEIGHT + ShopResources.SHOP_SECTION_MARGIN_BOTTOM))
+        // this.goldSection.setPosition(startX, startY
+        //     - (ShopResources.SHOP_SECTION_NODE_HEIGHT + ShopResources.SHOP_SECTION_MARGIN_BOTTOM))
         this.addChild(this.goldSection);
+        this.goldSection.setPosition(cc.winSize.width / 2, cc.winSize.height - this.headerHeight - this.dailySection._height - this.goldSection._height / 2);
         this.shopSectionList.push(this.goldSection);
     },
 

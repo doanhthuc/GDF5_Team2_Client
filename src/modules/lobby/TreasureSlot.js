@@ -144,7 +144,7 @@ const TreasureSlot = cc.Node.extend({
     },
 
     setCountDownString: function () {
-        let distance = this.claimTime - Date.now();
+        let distance = this.claimTime - Date.now() + TimeUtil.getDeltaTime();
         this.skipGemTxt.setString(exchangeDurationToGem(distance));
         this.openingCountDownTxt.setString(millisecondToTimeString(distance));
         if (distance < 0) {

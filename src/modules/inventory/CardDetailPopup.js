@@ -1,6 +1,7 @@
 const CardDetailPopup = cc.Node.extend({
     ctor: function () {
         this.name = CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL;
+        this.Z_ORDER = CLIENT_UI_CONST.Z_ORDER.HIGHER_POPUP;
         this.cardModel = null;
         this.cardNode = null;
         this._super();

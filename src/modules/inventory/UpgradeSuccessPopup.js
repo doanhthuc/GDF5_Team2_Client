@@ -1,6 +1,7 @@
 const UpgradeSuccessPopup = cc.Node.extend({
     ctor: function () {
         this.name = CLIENT_UI_CONST.POPUPS_NAME.UPGRADE_SUCCESS_POPUP;
+        this.Z_ORDER = CLIENT_UI_CONST.Z_ORDER.HIGHER_POPUP;
         this.cardModel = null;
         this._super();
         this.init();

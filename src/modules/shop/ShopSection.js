@@ -11,7 +11,9 @@ const ShopSection = cc.Node.extend({
         this.addChild(this.shopSectionNode);
         this.backgroundImg = this.shopSectionNode.getChildByName('shopPanelBackgroundImg');
         this.categoryNode = this.shopSectionNode.getChildByName('ShopSectionTitleNode');
+        this.categoryBackgroundImg = this.categoryNode.getChildByName('categoryBackgroundImg');
         this.shopRefreshNode = this.shopSectionNode.getChildByName('shopRefreshNode');
+        this._height = this.backgroundImg.height + this.categoryBackgroundImg.height;
 
         if (this.type === "gold") {
             // change title of section to "Mua vang"
