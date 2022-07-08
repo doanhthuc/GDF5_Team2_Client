@@ -17,7 +17,20 @@ let CollisionSystem = System.extend({
                 if (this._isCollide(entity1, entity2)) {
                     let data = this._isMonsterAndBullet(entity1, entity2)
                     if (data) {
-                        EventDispatcher.getInstance().dispatchEvent(EventType.BULLET_COLLIDE_MONSTER, data);
+                        let monster = data.monster, bullet = data.bullet;
+                        let bulletInfo = bullet.getComponent(BulletInfoComponent);
+                        let monsterInfo = monster.getComponent(MonsterInfoComponent);
+
+                        if (bulletInfo.type && bulletInfo.type === "frog") {
+                            // handle here
+                        } else {
+                            for (let effect of bulletInfo.effects) {
+                                monster.addComponent(effect.clone());
+                            }
+
+                            bullet.getComponent(AppearanceComponent).sprite.setVisible(false);
+                            bullet.setActive(false);
+                        }
                     }
                 }
             }

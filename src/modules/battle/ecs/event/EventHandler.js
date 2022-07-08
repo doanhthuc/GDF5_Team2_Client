@@ -1,21 +1,4 @@
 EventDispatcher.getInstance()
-    .addEventHandler(EventType.BULLET_COLLIDE_MONSTER, function (data) {
-            let monster = data.monster, bullet = data.bullet;
-
-            let bulletInfo = bullet.getComponent(BulletInfoComponent);
-            let monsterInfo = monster.getComponent(MonsterInfoComponent);
-
-            for (let effect of bulletInfo.effects) {
-                monster.addComponent(effect.clone());
-            }
-
-            if (bulletInfo.type && bulletInfo.type === "frog") {
-                // handle here
-            } else {
-                bullet.getComponent(AppearanceComponent).sprite.setVisible(false);
-                bullet.setActive(false);
-            }
-        })
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = GameConfig.gameLayer.uiLayer;
         uiLayer.waveNode.increaseWave();

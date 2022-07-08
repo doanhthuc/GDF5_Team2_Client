@@ -23,6 +23,7 @@ let CardDeckNode = cc.Node.extend({
             let cardPos = this.rootNode.convertToNodeSpace(card.getPosition());
 
             // FIXME: harcode
+            // should save position of 5 card in array
             let cardDeckSlot = null;
             switch (i) {
                 case 1:
@@ -63,7 +64,6 @@ let CardDeckNode = cc.Node.extend({
 
         this._handleEventKey();
 
-        cc.log("@@@")
         this.genNextCardSlot();
     },
 
@@ -180,6 +180,8 @@ let CardDeckNode = cc.Node.extend({
             // FIXME: hardcode sprite, use map to cache
             if (selectedCard.type === GameConfig.ENTITY_ID.FIRE_SPELL || selectedCard.type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
                 let sp = new cc.Sprite("textures/battle/battle_potion_range.png");
+                cc.log("sp.width == " + sp.width)
+                sp.setScale(2*1.2*GameConfig.TILE_WIDTH/sp.width);
                 this.spriteDragManager[touch.getID()] = sp;
                 GameConfig.gameLayer.addChild(this.spriteDragManager[touch.getID()], 5);
             } else {
@@ -210,6 +212,7 @@ let CardDeckNode = cc.Node.extend({
             let currentCardSlot = this.cardSlotManager[i];
             if (currentCardSlot.id === replaceCardSlotID) {
                 currentCardSlot.setVisible(false);
+                // should save position of 5 card in array, and use it, not use the current slot card position
                 let cardPos = currentCardSlot.getPosition();
                 if (currentCardSlot.isUp) {
                     // FIXME: hardcode
