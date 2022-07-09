@@ -22,11 +22,11 @@ EventDispatcher.getInstance()
         cc.log("put new tower event: " + JSON.stringify(data));
 
         // put tower at x, y
+        // FIXME: hardcode 7 == tower
         map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 7;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(PathComponent);
 
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
         let currentMode = GameConfig.PLAYER;
         for (let entity of entityList) {
             if (entity.mode === currentMode) {
@@ -37,10 +37,12 @@ EventDispatcher.getInstance()
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
                     if (path) {
                         if (path.length > 0) {
-                            let newPath = [{x: positionComponent.x, y: positionComponent.y}]
-                            newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
+                            // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
+                            // newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
+                            let newPath = Utils.tileArray2PixelArray(path, currentMode);
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
+                            cc.log("new path, monster at tile = " + JSON.stringify(tilePos));
                         }
                     }
                 }
