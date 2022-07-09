@@ -12,11 +12,11 @@ const RIVER_HEIGHT = BattleResource.RIVER_HEIGHT;
 Utils.tile2Pixel = function (x, y, mode) {
     // convert tile to pixel in node space
     // return center of tile pixel
-
+    // FIXME: dup code
     if (mode === GameConfig.PLAYER) {
         let mapNode = GameConfig.gameLayer.mapLayer.playerMapNode;
-        let xx = x*GameConfig.TILE_WIDTH - GameConfig.MAP_WIDTH*GameConfig.TILE_WIDTH/2;
-        let yy = y*GameConfig.TILE_HEIGH - GameConfig.MAP_HEIGH*GameConfig.TILE_HEIGH/2;
+        let xx = x * GameConfig.TILE_WIDTH - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2 + GameConfig.TILE_WIDTH / 2;
+        let yy = y * GameConfig.TILE_HEIGH - GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2 + GameConfig.TILE_HEIGH / 2;
         let worldPos = GameConfig.gameLayer.mapLayer.convertToNodeSpace(mapNode.convertToWorldSpace(cc.p(xx, yy)));
         return worldPos;
     } else if (mode === GameConfig.OPPONENT) {
@@ -26,8 +26,8 @@ Utils.tile2Pixel = function (x, y, mode) {
         //             V
         //             y
         let mapNode = GameConfig.gameLayer.mapLayer.opponentMapNode;
-        let xx = GameConfig.MAP_WIDTH*GameConfig.TILE_WIDTH/2 - x*GameConfig.TILE_WIDTH;
-        let yy = GameConfig.MAP_HEIGH*GameConfig.TILE_HEIGH/2 - y*GameConfig.TILE_HEIGH;
+        let xx = GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2 - x * GameConfig.TILE_WIDTH - GameConfig.TILE_WIDTH / 2;
+        let yy = GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2 - y * GameConfig.TILE_HEIGH - GameConfig.TILE_HEIGH / 2;
         let worldPos = GameConfig.gameLayer.mapLayer.convertToNodeSpace(mapNode.convertToWorldSpace(cc.p(xx, yy)));
         return worldPos;
     }
@@ -46,8 +46,8 @@ Utils.pixel2Tile = function (xx, yy, mode) {
     if (mode === GameConfig.PLAYER) {
         let mapNode = GameConfig.gameLayer.mapLayer.playerMapNode;
         let pos = mapNode.convertToNodeSpace(cc.p(xx, yy));
-        xx = pos.x + GameConfig.MAP_WIDTH*GameConfig.TILE_WIDTH/2;
-        yy = pos.y + GameConfig.MAP_HEIGH*GameConfig.TILE_HEIGH/2;
+        xx = pos.x + GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2;
+        yy = pos.y + GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2;
 
         let x = Math.floor(xx / GameConfig.TILE_WIDTH);
         let y = Math.floor(yy / GameConfig.TILE_HEIGH);
@@ -56,8 +56,8 @@ Utils.pixel2Tile = function (xx, yy, mode) {
     } else if (mode === GameConfig.OPPONENT) {
         let mapNode = GameConfig.gameLayer.mapLayer.opponentMapNode;
         let pos = mapNode.convertToNodeSpace(cc.p(xx, yy));
-        xx = GameConfig.MAP_WIDTH*GameConfig.TILE_WIDTH/2 - pos.x;
-        yy = GameConfig.MAP_HEIGH*GameConfig.TILE_HEIGH/2 - pos.y;
+        xx = GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2 - pos.x;
+        yy = GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2 - pos.y;
 
         let x = Math.floor(xx / GameConfig.TILE_WIDTH);
         let y = Math.floor(yy / GameConfig.TILE_HEIGH);
@@ -67,6 +67,9 @@ Utils.pixel2Tile = function (xx, yy, mode) {
 }
 
 Utils.tileArray2PixelArray = function (positionArr, mode) {
+    if (mode !== GameConfig.PLAYER && mode !== GameConfig.OPPONENT) {
+        throw new Error("Mode is invalid")
+    }
     let result = [];
     for (let pos of positionArr) {
         result.push(Utils.tile2Pixel(pos.x, pos.y, mode));

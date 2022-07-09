@@ -37,10 +37,8 @@ EventDispatcher.getInstance()
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
                     if (path) {
                         if (path.length > 0) {
-                            let newPath = [Utils.tile2Pixel(positionComponent.x, positionComponent.y, currentMode)]
-                            for (let i = 0; i < path.length; i++) {
-                                newPath.push(Utils.tile2Pixel(path[i].x, path[i].x, currentMode));
-                            }
+                            let newPath = [{x: positionComponent.x, y: positionComponent.y}]
+                            newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
                         }

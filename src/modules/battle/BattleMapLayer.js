@@ -22,6 +22,10 @@ let BattleMapLayer = cc.Layer.extend({
                 let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r, mode);
                 let texture = null;
 
+                // let node = new cc.DrawNode();
+                // node.drawDot(pos, 10, cc.color.WHITE);
+                // this.addChild(node);
+
                 // FIXME define 1, 2, 3, 5, 6
                 switch (map[r][c]) {
                     case 1:
@@ -47,11 +51,10 @@ let BattleMapLayer = cc.Layer.extend({
                 sp.attr({
                     x: pos.x,
                     y: pos.y
-                })
+                });
+
                 this.addChild(sp);
             }
         }
     },
-
-
 });

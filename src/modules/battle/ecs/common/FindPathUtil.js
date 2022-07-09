@@ -69,7 +69,7 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
     }
 
     let path = bfs(start, dest)
-        if (!path[dest.y][dest.x]) {
+    if (path.length === 0 || !path[dest.y] || !path[dest.y][dest.x]) {
         return null;
     }
     let current = path[dest.y][dest.x];
