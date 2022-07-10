@@ -6,7 +6,12 @@ let AppearanceComponent = Component.extend({
         this._super();
         this.reset(sprite);
 
-        GameConfig.gameLayer.mapLayer.addChild(this.sprite, this.zOrder);
+        if (mode === GameConfig.PLAYER) {
+            GameConfig.gameLayer.mapLayer.playerMapNode.addChild(this.sprite, this.zOrder);
+        } else if (mode === GameConfig.OPPONENT) {
+            GameConfig.gameLayer.mapLayer.opponentMapNode.addChild(this.sprite, this.zOrder);
+        }
+        this.sprite.retain();
     },
 
     reset: function (sprite) {
@@ -15,7 +20,7 @@ let AppearanceComponent = Component.extend({
     },
 
     clone: function () {
-        return new AppearanceComponent(this.sprite);
+        return new AppearanceComponent(this.sprite, this.mode);
     },
 });
 AppearanceComponent.typeID = GameConfig.COMPONENT_ID.APPEARANCE;

@@ -18,7 +18,7 @@ let SkeletonAnimationComponent = Component.extend({
         this.position = position;
 
         this.spine = new sp.SkeletonAnimation(this.fileJson, this.fileAtlas);
-        GameConfig.gameLayer.mapLayer.addChild(this.spine, 4);
+        GameConfig.gameLayer.mapLayer.playerMapNode.addChild(this.spine, 4);
     },
 
     clone: function () {

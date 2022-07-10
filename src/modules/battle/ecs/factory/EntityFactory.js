@@ -5,6 +5,7 @@ let EntityFactory = cc.Class.extend({
 EntityFactory.pool = new EntityPool()
 
 EntityFactory._createEntity = function (typeID, mode) {
+    Utils.validateMode(mode);
     // TODO: create pool object for each type bullet
     // let entity = this.pool.getInActiveEntity(typeID);
     // FIXME: add mode = GameConfig.PLAYER or GameConfig.OPPONENT
@@ -18,6 +19,7 @@ EntityFactory._createEntity = function (typeID, mode) {
 }
 
 EntityFactory.createBullet = function (towerType, startPosition, targetPosition, effects, mode) {
+    Utils.validateMode(mode);
     if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
@@ -90,6 +92,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
 }
 
 EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
+    Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.SWORD_MAN;
     let entity = this._createEntity(typeID, mode);
 
@@ -123,6 +126,7 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
 };
 
 EntityFactory.createCannonOwlTower = function (tilePos, mode) {
+    Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID, mode);
 
@@ -151,8 +155,9 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
 };
 
 EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
+    Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.BEAR_TOWER;
-    let entity = this._createEntity(typeID);
+    let entity = this._createEntity(typeID, mode);
 
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
@@ -175,6 +180,7 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
 }
 
 EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
+    Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.FROG_TOWER;
     let entity = this._createEntity(typeID, mode);
 

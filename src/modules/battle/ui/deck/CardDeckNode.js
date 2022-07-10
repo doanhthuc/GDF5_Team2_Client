@@ -105,12 +105,13 @@ let CardDeckNode = cc.Node.extend({
     _onTouchMoved: function (touch, event) {
         let selectedCard = event.getCurrentTarget();
         let touchPos = touch.getLocation();
+        touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.PLAYER);
 
         let isSpellCard = selectedCard.type === GameConfig.ENTITY_ID.FIRE_SPELL || selectedCard.type === GameConfig.ENTITY_ID.FROZEN_SPELL;
         // FIXME: hardcode
         if (isSpellCard) {
             if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
-                this._createOrGetSprite(selectedCard, touch);
+                this._createOrGetSprite(selectedCard, touch, GameConfig.PLAYER);
                 this.spriteDragManager[touch.getID()].setVisible(true);
                 this.spriteDragManager[touch.getID()].setPosition(touchPos);
             } else {
@@ -120,7 +121,7 @@ let CardDeckNode = cc.Node.extend({
             }
         } else {
             if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
-                this._createOrGetSprite(selectedCard, touch);
+                this._createOrGetSprite(selectedCard, touch, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(touchPos.x, touchPos.y, GameConfig.PLAYER);
                 let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER);
                 this.spriteDragManager[touch.getID()].setVisible(true);
@@ -175,18 +176,19 @@ let CardDeckNode = cc.Node.extend({
         card.isUp = false;
     },
 
-    _createOrGetSprite: function (selectedCard, touch) {
+    _createOrGetSprite: function (selectedCard, touch, mode) {
+        Utils.validateMode(mode);
         if (!this.spriteDragManager[touch.getID()]) {
             // FIXME: hardcode sprite, use map to cache
+            let mapNode = mode === GameConfig.PLAYER ? GameConfig.gameLayer.mapLayer.playerMapNode : GameConfig.gameLayer.mapLayer.opponentMapNode;
             if (selectedCard.type === GameConfig.ENTITY_ID.FIRE_SPELL || selectedCard.type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
                 let sp = new cc.Sprite("textures/battle/battle_potion_range.png");
-                cc.log("sp.width == " + sp.width)
                 sp.setScale(2*1.2*GameConfig.TILE_WIDTH/sp.width);
                 this.spriteDragManager[touch.getID()] = sp;
-                GameConfig.gameLayer.addChild(this.spriteDragManager[touch.getID()], 5);
+                mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             } else {
                 this.spriteDragManager[touch.getID()] = createBearNodeAnimation(1.5 * GameConfig.TILE_WIDTH, true);
-                GameConfig.gameLayer.addChild(this.spriteDragManager[touch.getID()], 5);
+                mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             }
         }
     },

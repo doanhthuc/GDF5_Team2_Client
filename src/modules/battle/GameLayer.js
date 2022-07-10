@@ -75,11 +75,13 @@ let GameLayer = cc.Layer.extend({
     },
 
     putCardAt: function (type, pixelPos) {
-        let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y);
+        pixelPos = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
+        let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, GameConfig.PLAYER);
 
         // FIXME: hardcode
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
             if (!Utils.isPixelPositionInMap(pixelPos, GameConfig.PLAYER)) {
+                cc.warn("put spell at pixel pos = " + JSON.stringify(pixelPos) + " is invalid")
                 return;
             }
         } else {

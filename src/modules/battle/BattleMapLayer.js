@@ -16,6 +16,14 @@ let BattleMapLayer = cc.Layer.extend({
     },
 
     _genMap: function (mode) {
+        let drawNode = new cc.DrawNode();
+        drawNode.drawDot(cc.p(0, 0), 20, cc.color.WHITE)
+        if (mode === GameConfig.PLAYER) {
+            this.playerMapNode.addChild(drawNode);
+        } else if (mode === GameConfig.OPPONENT) {
+            this.opponentMapNode.addChild(drawNode);
+        }
+
         let map = this.battleData.getMap(mode);
         for (let r = 0; r < map.length; r++) {
             for (let c = 0; c < map[0].length; c++) {
@@ -52,8 +60,11 @@ let BattleMapLayer = cc.Layer.extend({
                     x: pos.x,
                     y: pos.y
                 });
-
-                this.addChild(sp);
+                if (mode === GameConfig.PLAYER) {
+                    this.playerMapNode.addChild(sp);
+                } else if (mode === GameConfig.OPPONENT) {
+                    this.opponentMapNode.addChild(sp);
+                }
             }
         }
     },
