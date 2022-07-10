@@ -10,6 +10,7 @@ const BuyCardPopup = cc.Node.extend({
         this.addChild(this.popupNode);
 
         this.blur = this.popupNode.getChildByName("blur");
+        this.blur.addTouchEventListener(this.onCloseClick.bind(this), this);
         UiUtil.setImageFullScreen(this.blur);
         this.closeBtn = this.popupNode.getChildByName('closeBtn');
         this.buyBtn = this.popupNode.getChildByName("buy_btn");
@@ -95,6 +96,7 @@ const BuyCardPopup = cc.Node.extend({
     onCloseClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.setVisible(false);
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY).hideNotification();
         }
     },
 
@@ -112,7 +114,7 @@ const BuyCardPopup = cc.Node.extend({
         }
     },
 
-    onCardClick: function(sender, type) {
+    onCardClick: function (sender, type) {
         if (this.card && type === ccui.Widget.TOUCH_ENDED) {
             cc.log("[BuyCardPopup.js] click on card, card id = " + this.type);
             let cardNode = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE)

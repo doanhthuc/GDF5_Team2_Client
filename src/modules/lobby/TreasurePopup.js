@@ -62,6 +62,9 @@ const TreasurePopup = cc.Node.extend({
             this.countdownTxt.setString(millisecondToTimeString(10800000));
             this.openAfterTxt.setVisible(true);
             this.countdownTxt.setVisible(true);
+        } else if (action === ChestConst.ACTION.BUY) {
+            this.openAfterTxt.setVisible(false);
+            this.countdownTxt.setVisible(false);
         } else {
             this.openAfterTxt.setVisible(false);
             this.countdownTxt.setVisible(false);
@@ -72,6 +75,7 @@ const TreasurePopup = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.setVisible(false);
             this.onFinishCountDown();
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY).hideNotification();
         }
     },
 
@@ -94,7 +98,7 @@ const TreasurePopup = cc.Node.extend({
         }
     },
 
-    setPopupBtn: function(action) {
+    setPopupBtn: function (action) {
         switch (action) {
             case ChestConst.ACTION.OPEN:
                 this.openTreasureBtnNode.setVisible(true);
@@ -103,10 +107,34 @@ const TreasurePopup = cc.Node.extend({
             case ChestConst.ACTION.SPEED_UP:
                 this.openTreasureBtnNode.setVisible(false);
                 this.speedUpBtnNode.setVisible(true);
+                this.setCostBtnTexture(action);
                 break;
             case ChestConst.ACTION.CLAIM:
                 this.openTreasureBtnNode.setVisible(true);
                 this.speedUpBtnNode.setVisible(false);
+                break;
+            case ChestConst.ACTION.BUY:
+                this.openTreasureBtnNode.setVisible(false);
+                this.speedUpBtnNode.setVisible(true);
+                this.setCostBtnTexture(action);
+                break;
+            default:
+                break;
+        }
+    },
+
+    setBuyPrice: function (price) {
+        this.buyPrice = price;
+        this.speedUpGemTxt.setString(this.buyPrice);
+    },
+
+    setCostBtnTexture: function (action) {
+        switch (action) {
+            case ChestConst.ACTION.SPEED_UP:
+                this.speedUpBtnNode.getChildByName('Sprite_1').setTexture(TreasureSlotResources.GEM_ICON_SMALL)
+                break;
+            case ChestConst.ACTION.BUY:
+                this.speedUpBtnNode.getChildByName('Sprite_1').setTexture(TreasureSlotResources.GOLD_ICON_SMALL)
                 break;
             default:
                 break;
@@ -117,15 +145,30 @@ const TreasurePopup = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             let user = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).getUser();
             cc.log('TreasurePopup onSpeedUpBtnClick user.gold: ' + (user.gem < exchangeDurationToGem(this.claimTime - Date.now())));
-            if (user.gem < exchangeDurationToGem(this.claimTime - Date.now() + TimeUtil.getDeltaTime())) {
-                    let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
-                    notify.setNotifyTxt('Không Đủ Gem');
-                    notify.showNotify();
-                return;
+            switch (this.action) {
+                case ChestConst.ACTION.SPEED_UP:
+                    if (user.gem < exchangeDurationToGem(this.claimTime - Date.now() + TimeUtil.getDeltaTime())) {
+                        let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
+                        notify.setNotifyTxt('Không Đủ Gem');
+                        notify.showNotify();
+                        return;
+                    }
+                    contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).speedUpChest(this.slotId);
+                    this.setVisible(false);
+                    this.onFinishCountDown();
+                    break;
+                case ChestConst.ACTION.BUY:
+                    if (user.gold < this.buyPrice) {
+                        let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
+                        notify.setNotifyTxt('Không Đủ Vàng');
+                        notify.showNotify();
+                        return;
+                    }
+                    contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).buyTreasureInShop(0);
+                    this.setVisible(false);
+                    break;
             }
-            contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).speedUpChest(this.slotId);
-            this.setVisible(false);
-            this.onFinishCountDown();
+
         }
     },
 
@@ -154,6 +197,7 @@ const TreasurePopup = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.setVisible(false);
             this.onFinishCountDown();
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY).hideNotification();
         }
     },
 

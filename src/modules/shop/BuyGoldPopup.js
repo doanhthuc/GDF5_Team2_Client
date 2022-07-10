@@ -17,6 +17,7 @@ const BuyGoldPopup = cc.Node.extend({
         this.buyBtn.addTouchEventListener(this._onBuyBtnClick.bind(this), this);
         this.closeBtn.addTouchEventListener(this._onCloseClick.bind(this), this);
         this.blur = this.popup.getChildByName("blur");
+        this.blur.addTouchEventListener(this._onCloseClick.bind(this), this);
         UiUtil.setImageFullScreen(this.blur);
     },
 
@@ -37,6 +38,7 @@ const BuyGoldPopup = cc.Node.extend({
     _onCloseClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.setVisible(false);
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY).hideNotification();
         }
     },
 
