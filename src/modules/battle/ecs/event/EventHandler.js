@@ -49,10 +49,10 @@ EventDispatcher.getInstance()
             }
         }
     })
-    .addEventHandler(EventType.FINISH_MATCHING, function (data) {
-        let layer = new GameLayer();
-        layer.setName("Screen");
-        let scene = new cc.Scene();
-        scene.addChild(layer);
-        cc.director.runScene(new cc.TransitionFade(1, scene));
-    })
+    // .addEventHandler(EventType.FINISH_MATCHING, function (data) {
+    //     let layer = new GameLayer();
+    //     layer.setName("Screen");
+    //     let scene = new cc.Scene();
+    //     scene.addChild(layer);
+    //     cc.director.runScene(new cc.TransitionFade(1, scene));
+    // })

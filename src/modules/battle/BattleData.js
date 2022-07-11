@@ -62,15 +62,23 @@ let BattleData = cc.Class.extend({
     },
 
     getUsername: function (mode) {
+        Utils.validateMode(mode);
         return this.dataInGame[mode].username;
     },
 
+    setUsername: function (username, mode) {
+        Utils.validateMode(mode);
+        this.dataInGame[mode].username = username;
+    },
+
     getClanName: function (mode) {
+        Utils.validateMode(mode);
         return this.dataInGame[mode].clanName;
     },
 
 
     setEnergyHouse: function (val, mode) {
+        Utils.validateMode(mode);
         if (val < 0) {
             val = 0;
         }
@@ -78,11 +86,19 @@ let BattleData = cc.Class.extend({
     },
 
     getEnergyHouse: function (mode) {
+        Utils.validateMode(mode);
         return this.dataInGame[mode].energyHouse;
     },
 
     getTrophy: function (mode) {
+        Utils.validateMode(mode);
         return this.dataInGame[mode].trophy;
+    },
+
+    setTrophy: function (trophy, mode) {
+        Utils.validateMode(mode);
+        if (trophy < 0) return;
+        this.dataInGame[mode].trophy = trophy;
     },
 
     setCurrentWave: function (currentWave) {
@@ -91,10 +107,12 @@ let BattleData = cc.Class.extend({
     },
 
     getMap: function (mode) {
+        Utils.validateMode(mode);
         return this.dataInGame[mode].map;
     },
 
     setMap: function (map, mode) {
+        Utils.validateMode(mode);
         if (GameConfig.MAP_HEIGH !== map.length && GameConfig.MAP_WIDTH !== map[0].length) {
             throw new Error("Map size is invalid")
         }
@@ -102,36 +120,44 @@ let BattleData = cc.Class.extend({
     },
 
     getShortestPathForEachTile: function (mode) {
+        Utils.validateMode(mode);
         return this.dataInGame[mode].shortestPathForEachTile;
     },
 
     setShortestPathForEachTile: function (shortestPathForEachTile, mode) {
+        Utils.validateMode(mode);
         this.dataInGame[mode].shortestPathForEachTile = shortestPathForEachTile;
     },
 
     getLongestPath: function (mode) {
+        Utils.validateMode(mode);
         return Utils.tileArray2PixelArray(this.dataInGame[mode].longestPath, mode);
     },
 
     setLongestPath: function (longestPath, mode) {
+        Utils.validateMode(mode);
         return this.dataInGame[mode].longestPath = longestPath;
     },
 
     getCurrentEnergy: function (mode) {
+        Utils.validateMode(mode);
         return this.dataInGame[mode].currentEnergy;
     },
 
     setCurrentEnergy:function (currentEnergy, mode) {
+        Utils.validateMode(mode);
         if (currentEnergy > this.getMaxEnergy(mode))
             return;
         this.dataInGame[mode].currentEnergy = currentEnergy;
     },
 
     getMaxEnergy: function (mode) {
+        Utils.validateMode(mode);
         return this.dataInGame[mode].maxEnergy;
     },
 
     setMaxEnergy: function (maxEnergy, mode) {
+        Utils.validateMode(mode);
         this.dataInGame[mode].maxEnergy = maxEnergy;
     }
 });

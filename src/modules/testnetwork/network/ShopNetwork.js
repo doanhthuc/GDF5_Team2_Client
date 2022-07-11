@@ -100,10 +100,4 @@ ShopNetwork.Connector = cc.Class.extend({
         pk.pack(itemId);
         this.gameClient.sendPacket(pk);
     },
-
-    sendGetBattleMap: function () {
-        let pk = this.gameClient.getOutPacket(CMDSendGetBattleMap);
-        pk.pack();
-        this.gameClient.sendPacket(pk);
-    }
 })

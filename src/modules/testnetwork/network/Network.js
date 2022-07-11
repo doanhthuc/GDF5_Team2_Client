@@ -201,12 +201,6 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(chestInfoCheat);
         this.gameClient.sendPacket(pk);
     },
-    sendGetBattleMap: function () {
-        cc.log("GetBattleMap");
-        var pk = this.gameClient.getOutPacket(CMDSendGetBattleMap);
-        pk.pack();
-        this.gameClient.sendPacket(pk);
-    }
 
 });
 
