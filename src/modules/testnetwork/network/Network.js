@@ -17,7 +17,10 @@ testnetwork.Connector = cc.Class.extend({
                 this.sendLoginRequest();
                 break;
             case gv.CMD.USER_LOGIN:
-                fr.getCurrentScreen().onFinishLogin();
+                fr.getCurrentScreen().showNotice("Đăng nhập thành công")
+                setTimeout(function () {
+                    fr.getCurrentScreen().onFinishLogin();
+                }, 300);
                 break;
             case gv.CMD.GET_USER_INFO:
                 userInfo.clone(packet);

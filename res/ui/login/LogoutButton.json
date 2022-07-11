@@ -29,7 +29,7 @@
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "textures/common/common_btn_gray.png",
+              "Path": "textures/common/common_btn_green.png",
               "Plist": ""
             },
             "NormalFileData": {
@@ -59,8 +59,8 @@
               "ScaleY": -0.1906
             },
             "Position": {
-              "X": 74.2334,
-              "Y": -39.9435
+              "X": 75.2334,
+              "Y": -37.9435
             },
             "Scale": {
               "ScaleX": 0.6548,
@@ -76,10 +76,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -138.1034,
-            "RightMargin": -55.8966,
-            "TopMargin": -92.2133,
-            "BottomMargin": -18.7867,
+            "LeftMargin": -137.0996,
+            "RightMargin": -56.9004,
+            "TopMargin": -94.2131,
+            "BottomMargin": -16.7869,
             "Tag": 15,
             "ActionTag": 458984227,
             "Size": {
@@ -150,7 +150,6 @@
       },
       "UsedResources": [
         "../../Default/Button_Disable.png",
-        "../../textures/common/common_btn_gray.png",
         "../../textures/common/common_btn_green.png",
         "../../textures/font/SVN-Supercell Magic.ttf"
       ],

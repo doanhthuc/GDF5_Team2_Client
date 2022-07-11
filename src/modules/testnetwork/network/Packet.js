@@ -320,7 +320,6 @@ testnetwork.packetMap[gv.CMD.ADD_USER_GOLD] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-            this.error = this.getShort();
             this.goldChange = this.getInt();
         }
     }
@@ -332,7 +331,6 @@ testnetwork.packetMap[gv.CMD.ADD_USER_GEM] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-            this.error = this.getShort();
             this.gemChange = this.getInt();
         }
     }
@@ -345,7 +343,6 @@ testnetwork.packetMap[gv.CMD.GET_USER_INFO] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-            this.error = this.getShort();
             this.id = this.getInt();
             this.username = this.getString();
             this.gold = this.getInt();
@@ -364,7 +361,6 @@ testnetwork.packetMap[gv.CMD.GET_USER_INVENTORY] = fr.InPacket.extend(
         readData: function () {
             this.cardCollection = [];
             this.battleDeckCard = [];
-            this.error = this.getShort();
             this.cardCollectionSize = this.getInt();
             for (i = 0; i < this.cardCollectionSize; i++) {
                 type = this.getInt();
@@ -385,7 +381,6 @@ testnetwork.packetMap[gv.CMD.GET_USER_LOBBY] = fr.InPacket.extend(
         },
         readData: function () {
             this.lobbyChest = [];
-            this.error = this.getShort();
             this.lobbyChestSize = this.getInt();
             for (i = 0; i < this.lobbyChestSize; i++) {
                 let state = this.getInt();
@@ -403,7 +398,6 @@ testnetwork.packetMap[gv.CMD.UNLOCK_LOBBY_CHEST] = fr.InPacket.extend(
         },
         readData: function () {
             this.lobbyChest = [];
-            this.error = this.getShort();
             this.lobbyChestid = this.getInt();
             this.state = this.getInt();
             this.claimTime = this.getLong();
@@ -420,7 +414,6 @@ testnetwork.packetMap[gv.CMD.SPEEDUP_LOBBY_CHEST] = fr.InPacket.extend(
         readData: function () {
             this.itemType = [];
             this.itemQuantity = [];
-            this.error = this.getShort();
             this.lobbyChestid = this.getInt();
             this.state = this.getInt();
             this.gemChange = this.getInt();
@@ -442,7 +435,6 @@ testnetwork.packetMap[gv.CMD.CLAIM_LOBBY_CHEST] = fr.InPacket.extend(
         readData: function () {
             this.itemType = [];
             this.itemQuantity = [];
-            this.error = this.getShort();
             this.lobbyChestid = this.getInt();
             this.state = this.getInt();
             this.gemChange = this.getInt();
@@ -462,7 +454,6 @@ testnetwork.packetMap[gv.CMD.UPGRADE_CARD] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-            this.error = this.getShort();
             this.goldChange = this.getInt();
             this.cardType = this.getInt();
             this.fragmentChange = this.getInt();
@@ -477,7 +468,6 @@ testnetwork.packetMap[gv.CMD.CHEAT_USER_INFO] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-            this.error = this.getShort();
             this.gold = this.getInt();
             this.gem = this.getInt();
             this.trophy = this.getInt();
@@ -490,7 +480,6 @@ testnetwork.packetMap[gv.CMD.CHEAT_USER_CARD] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-            this.error = this.getShort();
             this.cardType = this.getInt();
             this.cardLevel = this.getInt();
             this.amount = this.getInt();
@@ -503,7 +492,6 @@ testnetwork.packetMap[gv.CMD.CHEAT_USER_LOBBY_CHEST] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-            this.error = this.getShort();
             this.chestId = this.getInt();
             this.chestState = this.getInt();
             this.chestClaimTime = this.getLong();

@@ -1,8 +1,6 @@
 /**
  * Created by GSN on 7/9/2015.
  */
-MAP_SIZE = 8;
-TILE_SIZE = 64;
 var ScreenNetwork = cc.Layer.extend({
     ctor: function () {
         this._super();
@@ -29,9 +27,6 @@ var ScreenNetwork = cc.Layer.extend({
         this.loginNode = loginscene;
         let background = this.loginNode.getChildByName("Image_1")
         background.setScale(Math.max(cc.winSize.height / background.height, cc.winSize.width / background.width));
-        // for (i in this.loginNode.getChildren().length){
-        //     (this.loginNode.getChildren())[i].setScale(Math.max(cc.winSize.height/background.height,cc.winSize.width/background.width));
-        // }
         this.btnLogin = this.loginNode.getChildByName("Button_1");
         this.btnLogin.addClickEventListener(this.onSelectLogin.bind(this));
         this.textFieldUID = this.loginNode.getChildByName("TextField_1");
@@ -53,15 +48,14 @@ var ScreenNetwork = cc.Layer.extend({
         else if (this.checkSpecial(inputUID) == true) this.showNotice("ID không chứa kí tự đặc biệt");
         else if (inputUID.length > 15) this.showNotice("Vui lòng nhập UID không vượt quá 15 kí tự");
         else {
-            this.showNotice("Đăng nhập thành công");
             UID = this.textFieldUID.getString();
             cc.log(UID);
             gv.gameClient.connect();
         }
     },
-    reset: function(){
+    reset: function () {
         this.loginNotice.setVisible(false);
-        this.noticeTimer=0;
+        this.noticeTimer = 0;
     },
     onSelectDisconnect: function (sender) {
         this.lblLog.setString("Coming soon!");
@@ -76,12 +70,11 @@ var ScreenNetwork = cc.Layer.extend({
         this.lblLog.setString("Connect fail: " + text);
     },
     onFinishLogin: function () {
-        this.reset();
         //this.setVisible(false);
         fr.view(MainScreen);
-         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
+        testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
         testnetwork.connector.sendGetUserLobbyChest();
-         testnetwork.connector.sendGetUserInventory();
+        testnetwork.connector.sendGetUserInventory();
         //testnetwork.connector.sendGetUserGoldShop();
         //testnetwork.connector.sendUpgradeCard(2);
         //.connector.sendGetUserDailyShop();
@@ -95,8 +88,9 @@ var ScreenNetwork = cc.Layer.extend({
         // let userContext = new UserContext();
         // contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
         // userContext.updateUserInfoUI();
-         ShopNetwork.connector.sendGetUserDailyShop();
-         ShopNetwork.connector.sendGetGoldShop();
+        ShopNetwork.connector.sendGetUserDailyShop();
+        ShopNetwork.connector.sendGetGoldShop();
+        this.reset();
         cc.log("Finished login");
     },
     checkSpecial: function (inputUID) {
