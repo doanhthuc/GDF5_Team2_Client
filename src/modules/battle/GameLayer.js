@@ -64,14 +64,14 @@ let GameLayer = cc.Layer.extend({
         // cc.log(JSON.stringify(pool._store))
     },
 
-    bornMonster: function (pos, mode) {
-        // pos is in tile coordinator
-        if (!pos) {
-            pos = Utils.tile2Pixel(0, 4, mode);
+    bornMonster: function (tilePos, mode) {
+        let pixelPos;
+        if (!tilePos) {
+            pixelPos = Utils.tile2Pixel(0, 4, mode);
         } else {
-            pos = Utils.tile2Pixel(pos.x, pos.y, mode);
+            pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
     },
 
     putCardAt: function (type, pixelPos) {

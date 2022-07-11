@@ -13,6 +13,13 @@ let BulletSystem = System.extend({
         for (let bullet of bulletList) {
             let bulletPos = bullet.getComponent(PositionComponent);
             let bulletVelocity = bullet.getComponent(VelocityComponent);
+
+            if (bulletVelocity.dynamicPosition && bulletVelocity.dynamicPosition.getActive() === false) {
+                bulletVelocity.dynamicPosition = null;
+                EntityManager.destroy(bullet);
+                continue;
+            }
+
             if (Math.abs(bulletVelocity.dynamicPosition.x - bulletPos.x) <= 3
                 && Math.abs(bulletVelocity.dynamicPosition.y - bulletPos.y) <= 3) {
                 // entity.removeComponent(velocityComponent);

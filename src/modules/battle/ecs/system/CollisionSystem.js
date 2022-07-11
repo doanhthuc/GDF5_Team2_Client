@@ -27,9 +27,7 @@ let CollisionSystem = System.extend({
                             for (let effect of bulletInfo.effects) {
                                 monster.addComponent(effect.clone());
                             }
-
-                            bullet.getComponent(AppearanceComponent).sprite.setVisible(false);
-                            bullet.setActive(false);
+                            EntityManager.destroy(bullet);
                         }
                     }
                 }
