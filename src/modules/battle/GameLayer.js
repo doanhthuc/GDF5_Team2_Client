@@ -9,7 +9,7 @@ let GameLayer = cc.Layer.extend({
         // this.towerImage = cc.Sprite(CARD_CONST[0].image['C']);
         // this.towerImage.setVisible(false);
         // data game
-        // BattleData.fakeData();
+        BattleData.fakeData();
         this.battleData = GameConfig.battleData;
 
         // create UI
