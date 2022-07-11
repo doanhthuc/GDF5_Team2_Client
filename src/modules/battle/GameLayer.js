@@ -69,7 +69,7 @@ let GameLayer = cc.Layer.extend({
         } else {
             pos = Utils.tile2Pixel(pos.x, pos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pos, mode);
+        EntityFactory.createAssassinMonster(pos, mode);
     },
 
     putCardAt: function (type, pixelPos) {

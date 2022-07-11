@@ -1,6 +1,4 @@
-let EntityFactory = cc.Class.extend({
-
-});
+let EntityFactory = cc.Class.extend({});
 
 EntityFactory.pool = new EntityPool()
 
@@ -122,6 +120,39 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     return entity;
 };
 
+EntityFactory.createAssassinMonster = function (pixelPos, mode) {
+    let typeID = GameConfig.ENTITY_ID.ASSASSIN;
+    let entity = this._createEntity(typeID, mode);
+
+    // NOTE: get component from pool
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 30, 1, 1, undefined);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 1.4 * GameConfig.TILE_WIDTH, 0);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, creatAssassinNodeAnimation());
+    let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 120);
+
+    let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
+    let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
+
+    let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
+    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let pathComponent = ComponentFactory.create(PathComponent, path);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(velocityComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(pathComponent)
+        .addComponent(collisionComponent)
+        .addComponent(lifeComponent)
+    // .addComponent(slowEffect)
+    // .addComponent(frozenEffect)
+
+    AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    return entity;
+};
+
 EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID, mode);
@@ -197,7 +228,24 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     return entity;
 }
 
+function creatAssassinNodeAnimation() {
+    let node = new cc.Node();
+    let monsterSprite = new cc.Sprite("res/textures/monster/frame/assassin/monster_assassin_run_0020.png");
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
 
+    let monsterAnimation = new cc.Animation();
+    for (let i = 20; i <= 29; i++) {
+        let fileName = "res/textures/monster/frame/assassin/monster_assassin_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        monsterAnimation.addSpriteFrameWithFile(fileName);
+    }
+    monsterAnimation.setDelayPerUnit(1 / (29 - 20 + 1));
+    monsterAnimation.setRestoreOriginalFrame(true);
+    let monsterAction = cc.animate(monsterAnimation);
+    monsterSprite.runAction(cc.repeatForever(monsterAction));
+    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(hpBarNode.node, 0, "hp");
+    return node;
+}
 
 function createSwordmanNodeAnimation() {
     let node = new cc.Node();

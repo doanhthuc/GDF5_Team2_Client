@@ -47,7 +47,8 @@ GameConfig.ENTITY_ID = {
     FROZEN_SPELL: 7,
     TRAP_SPELL: 8,
     SNAKE_TOWER: 9,
-    GOAT_TOWER: 10
+    GOAT_TOWER: 10,
+    ASSASSIN:11,
 }
 
 GameConfig.GROUP_ID = {
