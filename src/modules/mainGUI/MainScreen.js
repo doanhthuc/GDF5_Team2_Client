@@ -15,6 +15,9 @@ const MainScreen = cc.Layer.extend({
         let rootNode = ccs.load(res.MAIN_SCREEN, '');
         this.addChild(rootNode.node);
         this.scene = rootNode.node;
+        this.background = this.scene.getChildByName('background');
+        this.background.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+        UiUtil.setImageFullScreen(this.background);
         this.clientUIManager = ClientUIManager.getInstance();
 
         this.mainPageView = this.scene.getChildByName('mainPageView');
@@ -28,9 +31,9 @@ const MainScreen = cc.Layer.extend({
         this.addChild(this.header);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE, this.header);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HEADER_NODE);
-        let headerHeight = this.header.getNodeHeight();
+        // let headerHeight = this.header.getNodeHeight();
 
-        this.homeLayer = new lobbyLayer();
+        this.homeLayer = new lobbyLayer(this.nav._height);
         this.mainPageView.addWidgetToPage(this.homeLayer, NavResources.TAB_LIST.HOME_TAB.index, true);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE, this.homeLayer);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE);
@@ -51,10 +54,15 @@ const MainScreen = cc.Layer.extend({
         this.listView.setSwallowTouches(false);
         this.listViewPanel.setSwallowTouches(false);
 
-        // this.listViewPanel.setSizeHeight(this.inventoryLayer.heightNode);
-        // this.listViewPanel.addEventListener(this.onListViewEvent.bind(this), this)
+        if (this.inventoryLayer.heightNode > cc.winSize.height) {
+            this.listViewPanel.height = this.inventoryLayer.heightNode;
+        } else {
+            this.listViewPanel.height = cc.winSize.height;
+        }
+        this.listView.height = cc.winSize.height;
+        this.listView.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
 
-        this.shopLayer = new ShopLayer();
+        this.shopLayer = new ShopLayer(headerHeight);
         this.mainPageView.addWidgetToPage(this.shopLayer, NavResources.TAB_LIST.SHOP_TAB.index, true);
         this.clientUIManager.registerUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE, this.shopLayer);
         this.clientUIManager.showUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE);
@@ -63,6 +71,12 @@ const MainScreen = cc.Layer.extend({
         this.initPopups();
 
         this.initListViewEventListener();
+    },
+
+    onEnter: function () {
+        this._super();
+        // this.initTouchEvent();
+        PopupUIManager.getInstance().setAllPopupVisible(false);
     },
 
     scrollToDefaultPage: function () {
@@ -76,6 +90,11 @@ const MainScreen = cc.Layer.extend({
         this.cardDetailPopupNode = new CardDetailPopup();
         this.cheatPopupNode = new CheatPopup();
         this.openTreasurePopupNode = new OpenTreasurePopup();
+        this.fullTreasureSlotPopup = new FullTreasureSlotPopup();
+        this.notEnoughUpgradeResPopup = new NotEnoughUpgradeResPopup();
+        this.upgradeSuccessPopup = new UpgradeSuccessPopup();
+        this.cardSkillPopupNode = new SkillPopup();
+        this.notifyNode = new NotifyNode();
 
         this.addPopup(this.treasurePopupNode);
         this.addPopup(this.buyCardPopupNode);
@@ -83,6 +102,11 @@ const MainScreen = cc.Layer.extend({
         this.addPopup(this.cardDetailPopupNode);
         this.addPopup(this.cheatPopupNode);
         this.addPopup(this.openTreasurePopupNode);
+        this.addPopup(this.fullTreasureSlotPopup);
+        this.addPopup(this.notEnoughUpgradeResPopup);
+        this.addPopup(this.upgradeSuccessPopup);
+        this.addPopup(this.cardSkillPopupNode);
+        this.addPopup(this.notifyNode);
     },
 
     addPopup: function (popupNode) {

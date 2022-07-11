@@ -21,8 +21,10 @@
               "Plist": ""
             },
             "Scale9Enable": true,
-            "Scale9Width": 46,
-            "Scale9Height": 46,
+            "Scale9OriginX": 10,
+            "Scale9OriginY": 10,
+            "Scale9Width": 26,
+            "Scale9Height": 26,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
@@ -245,46 +247,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/inventory/cardUpgradeProgress.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 0.0,
-              "Y": 123.2471
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "TopMargin": -123.2471,
-            "BottomMargin": 123.2471,
-            "Tag": 104,
-            "ActionTag": 1496685186,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "progress",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/inventory/cardImageNode.json",
+              "Path": "ui/shop/cardImageNode_0.json",
               "Plist": ""
             },
             "StretchWidthEnable": false,
@@ -309,8 +272,8 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Tag": 252,
-            "ActionTag": -2432156,
+            "Tag": 124,
+            "ActionTag": 1786761247,
             "Size": {
               "X": 0.0,
               "Y": 0.0
@@ -412,6 +375,45 @@
             },
             "Name": "buy_btn",
             "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/inventory/cardUpgradeProgress.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": 123.25
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": -123.25,
+            "BottomMargin": 123.25,
+            "Tag": 129,
+            "ActionTag": 359591508,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "progress",
+            "ctype": "ProjectNodeObjectData"
           }
         ],
         "Size": {
@@ -427,8 +429,8 @@
         "../../textures/common/common_panel_background.png",
         "../../textures/common/common_panel_btn_close.png",
         "../../textures/font/SVN-Supercell Magic.ttf",
-        "../inventory/cardImageNode.json",
         "../inventory/cardUpgradeProgress.json",
+        "cardImageNode_0.json",
         "costButton.json"
       ],
       "ctype": "GameFileData"

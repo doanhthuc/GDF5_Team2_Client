@@ -1,4 +1,4 @@
-const TowerCard = Card.extend({
+const TowerCard_old = Card.extend({
     ctor: function (id, name, description, level, energy) {
         this._super(id, name, description, level, energy);
         this.damge = 10;

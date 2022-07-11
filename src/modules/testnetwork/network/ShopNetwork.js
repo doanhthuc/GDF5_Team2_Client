@@ -62,10 +62,13 @@ ShopNetwork.Connector = cc.Class.extend({
 
             userContext.updateUserGold(packet.goldChange);
             userContext.updateUserGem(packet.gemChange);
-            for (let i = 0; i < packet.itemAmount; i++) {
-                inventoryContext.updateCardAmount(packet.itemType[i], packet.itemQuantity[i]);
+            if (packet.itemAmount > 1) {
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).onClaimChestSuccess(packet);
+            } else {
+                for (let i = 0; i < packet.itemAmount; i++) {
+                    inventoryContext.updateCardAmount(packet.itemType[i], packet.itemQuantity[i]);
+                }
             }
-
             let shopLayer = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE);
             shopLayer.disableCardItemInDailySection(packet.id);
             shopLayer.closePopup();
@@ -96,6 +99,7 @@ ShopNetwork.Connector = cc.Class.extend({
     },
 
     sendBuyDailyShop: function (itemId) {
+        cc.log('ShopNetwork.js sendBuyDailyShop itemId = ' + itemId);
         let pk = this.gameClient.getOutPacket(CMDBuyDailyShop);
         pk.pack(itemId);
         this.gameClient.sendPacket(pk);

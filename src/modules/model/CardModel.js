@@ -1,10 +1,11 @@
 const CardModel = cc.Class.extend({
-    ctor: function (id, level, accumulated) {
+    ctor: function (id, level, accumulated, isBattleDeck = false) {
         this.id = id;
         this.name = '';
         this.description = 'description';
         this.level = level;
         this.accumulated = accumulated;
+        this.isBattleDeck = isBattleDeck;
         this.stat = {};
 
         this.setCardRankByLevel(this.level);

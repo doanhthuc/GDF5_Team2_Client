@@ -34,12 +34,19 @@ const TreasureContext = cc.Class.extend({
         this.treasureList[packet.lobbyChestid].state = packet.state;
     },
 
+    buyTreasureInShop: function (treasureShopId) {
+        cc.log("buyTreasureInShop: " + treasureShopId);
+        ShopNetwork.connector.sendBuyDailyShop(treasureShopId)
+    },
+
     onSpeedUpChestSuccess: function (packet) {
         ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).onSpeedUpChestSuccess(packet);
         this.treasureList[packet.lobbyChestid].claimTime = 0;
         this.treasureList[packet.lobbyChestid].state = packet.state;
         contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).updateUserGem(packet.gemChange);
-
+        ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).treasureSlotNodeList[packet.lobbyChestid].onFinishCountDown();
+        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet);
+        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
         for (let i = 0; i < packet.rewardSize; i++) {
             let rewardType = +packet.itemType[i];
             if (rewardType === 11) {
@@ -56,16 +63,20 @@ const TreasureContext = cc.Class.extend({
                     .cardNodeMap.get(rewardType).onUpdateCard(packet.itemQuantity[i]);
             }
         }
-        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet);
-        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
+
     },
 
     onClaimChestSuccess: function (packet) {
         // TODO: define a cardCollection in 1 place (InventoryLayer or InventoryContext)
-        ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).onClaimChestSuccess(packet);
-        this.treasureList[packet.lobbyChestid].claimTime = 0;
-        this.treasureList[packet.lobbyChestid].state = packet.state;
-        for (let i = 0; i < packet.rewardSize; i++) {
+        if (packet.lobbyChestid) {
+            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).onClaimChestSuccess(packet);
+            this.treasureList[packet.lobbyChestid].claimTime = 0;
+            this.treasureList[packet.lobbyChestid].state = packet.state;
+        }
+
+        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet)
+        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
+        for (let i = 0; i < packet.itemType.length; i++) {
             let rewardType = +packet.itemType[i];
             if (rewardType === 11) {
                 contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).updateUserGold(packet.itemQuantity[i]);
@@ -81,16 +92,17 @@ const TreasureContext = cc.Class.extend({
                     .cardNodeMap.get(rewardType).onUpdateCard(packet.itemQuantity[i]);
             }
         }
-        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE).setItemListTexture(packet)
-        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_OPEN_TREASURE);
+
     },
-
-
 
     getTreasureById: function (id) {
         if (id < this.treasureList.length) {
             return this.treasureList[i];
         }
         return null;
+    },
+
+    resetContextData : function(){
+        this.treasureList = [];
     }
 });

@@ -31,7 +31,7 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 0.0,
+              "X": 1.4499,
               "Y": 0.0
             },
             "Scale": {
@@ -52,8 +52,8 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -320.0,
-            "RightMargin": -320.0,
+            "LeftMargin": -318.5501,
+            "RightMargin": -321.4499,
             "TopMargin": -568.0,
             "BottomMargin": -568.0,
             "Tag": 660,
@@ -63,7 +63,7 @@
               "Y": 1136.0
             },
             "Alpha": 202,
-            "Name": "blur",
+            "Name": "modal",
             "ctype": "ImageViewObjectData"
           },
           {
@@ -127,12 +127,12 @@
                 "ShadowOffsetX": 2.0,
                 "ShadowOffsetY": -2.0,
                 "AnchorPoint": {
-                  "ScaleX": 0.4887,
-                  "ScaleY": 0.4644
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
                 },
                 "Position": {
-                  "X": 332.8562,
-                  "Y": 739.5464
+                  "X": 310.0,
+                  "Y": 742.5787
                 },
                 "Scale": {
                   "ScaleX": 1.0,
@@ -140,18 +140,19 @@
                 },
                 "CColor": {},
                 "IconVisible": false,
+                "PositionPercentXEnabled": true,
                 "PrePosition": {
-                  "X": 0.5369,
-                  "Y": 0.9244
+                  "X": 0.5,
+                  "Y": 0.9282
                 },
                 "PreSize": {
                   "X": 0.1871,
                   "Y": 0.0362
                 },
-                "LeftMargin": 276.167,
-                "RightMargin": 227.833,
-                "TopMargin": 44.9212,
-                "BottomMargin": 726.0788,
+                "LeftMargin": 252.0,
+                "RightMargin": 252.0,
+                "TopMargin": 42.9213,
+                "BottomMargin": 728.0787,
                 "Tag": 235,
                 "ActionTag": -700111239,
                 "Size": {
@@ -261,8 +262,8 @@
                   "ScaleY": 0.5
                 },
                 "Position": {
-                  "X": 342.4916,
-                  "Y": 717.0029
+                  "X": 310.0,
+                  "Y": 716.0029
                 },
                 "Scale": {
                   "ScaleX": 1.0,
@@ -274,18 +275,19 @@
                   "B": 251
                 },
                 "IconVisible": false,
+                "PositionPercentXEnabled": true,
                 "PrePosition": {
-                  "X": 0.5524,
-                  "Y": 0.8963
+                  "X": 0.5,
+                  "Y": 0.895
                 },
                 "PreSize": {
                   "X": 0.1629,
                   "Y": 0.035
                 },
-                "LeftMargin": 291.9916,
-                "RightMargin": 227.0084,
-                "TopMargin": 68.9971,
-                "BottomMargin": 703.0029,
+                "LeftMargin": 259.5,
+                "RightMargin": 259.5,
+                "TopMargin": 69.9971,
+                "BottomMargin": 702.0029,
                 "Tag": 207,
                 "ActionTag": -276847914,
                 "Size": {
@@ -340,119 +342,6 @@
                 },
                 "Name": "Sprite_20",
                 "ctype": "SpriteObjectData"
-              },
-              {
-                "FontSize": 20,
-                "LabelText": "Nâng cấp thẻ nhận: ",
-                "FontResource": {
-                  "Type": "Normal",
-                  "Path": "textures/font/SVN-Avo bold.ttf",
-                  "Plist": ""
-                },
-                "OutlineColor": {
-                  "G": 0,
-                  "B": 0
-                },
-                "ShadowColor": {
-                  "R": 110,
-                  "G": 110,
-                  "B": 110
-                },
-                "ShadowOffsetX": 2.0,
-                "ShadowOffsetY": -2.0,
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 255.9529,
-                  "Y": 173.6718
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.4128,
-                  "Y": 0.2171
-                },
-                "PreSize": {
-                  "X": 0.3242,
-                  "Y": 0.035
-                },
-                "LeftMargin": 155.4529,
-                "RightMargin": 263.5471,
-                "TopMargin": 612.3282,
-                "BottomMargin": 159.6718,
-                "Tag": 344,
-                "ActionTag": 838816163,
-                "Size": {
-                  "X": 201.0,
-                  "Y": 28.0
-                },
-                "Name": "Text_17",
-                "ctype": "TextObjectData"
-              },
-              {
-                "FontSize": 20,
-                "LabelText": "1,650 EXP",
-                "FontResource": {
-                  "Type": "Normal",
-                  "Path": "textures/font/SVN-Avo bold.ttf",
-                  "Plist": ""
-                },
-                "HorizontalAlignmentType": "HT_Center",
-                "OutlineColor": {
-                  "G": 0,
-                  "B": 0
-                },
-                "ShadowColor": {
-                  "R": 110,
-                  "G": 110,
-                  "B": 110
-                },
-                "ShadowOffsetX": 2.0,
-                "ShadowOffsetY": -2.0,
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 416.7404,
-                  "Y": 173.6718
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {
-                  "R": 69,
-                  "G": 222,
-                  "B": 251
-                },
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.6722,
-                  "Y": 0.2171
-                },
-                "PreSize": {
-                  "X": 0.1581,
-                  "Y": 0.035
-                },
-                "LeftMargin": 367.7404,
-                "RightMargin": 154.2596,
-                "TopMargin": 612.3282,
-                "BottomMargin": 159.6718,
-                "Tag": 348,
-                "ActionTag": 783973954,
-                "Size": {
-                  "X": 98.0,
-                  "Y": 28.0
-                },
-                "Name": "revceivedExpTxt",
-                "ctype": "TextObjectData"
               },
               {
                 "FileData": {
@@ -580,7 +469,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "textures/card/miniature_tower_cannon_1.png",
+                  "Path": "textures/card/miniature_tower_ice_gun_3.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -588,12 +477,12 @@
                   "Dst": 771
                 },
                 "AnchorPoint": {
-                  "ScaleX": 0.6013,
-                  "ScaleY": 0.4413
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
                 },
                 "Position": {
-                  "X": 309.9998,
-                  "Y": 861.9827
+                  "X": 310.0,
+                  "Y": 894.78
                 },
                 "Scale": {
                   "ScaleX": 1.0,
@@ -604,21 +493,21 @@
                 "PositionPercentXEnabled": true,
                 "PrePosition": {
                   "X": 0.5,
-                  "Y": 1.0775
+                  "Y": 1.1185
                 },
                 "PreSize": {
-                  "X": 0.3032,
-                  "Y": 0.2725
+                  "X": 0.3242,
+                  "Y": 0.3363
                 },
-                "LeftMargin": 196.9554,
-                "RightMargin": 235.0446,
-                "TopMargin": -183.7798,
-                "BottomMargin": 765.7798,
+                "LeftMargin": 209.5,
+                "RightMargin": 209.5,
+                "TopMargin": -229.28,
+                "BottomMargin": 760.28,
                 "Tag": 620,
                 "ActionTag": 250663107,
                 "Size": {
-                  "X": 188.0,
-                  "Y": 218.0
+                  "X": 201.0,
+                  "Y": 269.0
                 },
                 "Name": "towerImg",
                 "ctype": "SpriteObjectData"
@@ -631,6 +520,216 @@
             },
             "Name": "backgroundImg",
             "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_panel_page.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_panel_page.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 7,
+            "Scale9OriginY": 11,
+            "Scale9Width": 9,
+            "Scale9Height": 2,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 130.0,
+              "Y": 388.0
+            },
+            "Scale": {
+              "ScaleX": 2.0,
+              "ScaleY": 2.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 118.5,
+            "RightMargin": -141.5,
+            "TopMargin": -400.0,
+            "BottomMargin": 376.0,
+            "Tag": 117,
+            "ActionTag": -1308527594,
+            "Size": {
+              "X": 23.0,
+              "Y": 24.0
+            },
+            "Name": "nextTowerImgBtn",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_panel_page.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_panel_page.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 7,
+            "Scale9OriginY": 11,
+            "Scale9Width": 9,
+            "Scale9Height": 2,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -130.0,
+              "Y": 388.0
+            },
+            "Scale": {
+              "ScaleX": 2.0,
+              "ScaleY": 2.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -141.5,
+            "RightMargin": 118.5,
+            "TopMargin": -400.0,
+            "BottomMargin": 376.0,
+            "Tag": 118,
+            "ActionTag": -1204506882,
+            "Size": {
+              "X": 23.0,
+              "Y": 24.0
+            },
+            "Name": "prevTowerImgBtn",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FontSize": 24,
+            "LabelText": "Yêu cầu tiến hóa 2",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Avo bold.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 77,
+              "G": 77,
+              "B": 77
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.0001,
+              "Y": 325.9487
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 196,
+              "G": 29,
+              "B": 29
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -110.0001,
+            "RightMargin": -109.9999,
+            "TopMargin": -343.9487,
+            "BottomMargin": 307.9487,
+            "Tag": 116,
+            "ActionTag": 1151510074,
+            "Size": {
+              "X": 220.0,
+              "Y": 36.0
+            },
+            "Name": "constraintTxt",
+            "ctype": "TextObjectData"
           }
         ],
         "Size": {
@@ -643,10 +742,11 @@
       "UsedResources": [
         "../../Default/Button_Disable.png",
         "../../Default/ImageFile.png",
-        "../../textures/card/miniature_tower_cannon_1.png",
+        "../../textures/card/miniature_tower_ice_gun_3.png",
         "../../textures/common/common_panel_background.png",
         "../../textures/common/common_panel_btn_close.png",
         "../../textures/common/common_panel_front.png",
+        "../../textures/common/common_panel_page.png",
         "../../textures/font/SVN-Avo bold.ttf",
         "../../textures/font/SVN-Supercell Magic.ttf",
         "button/selectBtn.json",

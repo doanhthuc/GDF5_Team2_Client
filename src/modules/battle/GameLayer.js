@@ -6,6 +6,8 @@ let GameLayer = cc.Layer.extend({
 
         this.selectedCard = null;
 
+        // this.towerImage = cc.Sprite(CARD_CONST[0].image['C']);
+        // this.towerImage.setVisible(false);
         // data game
         this.battleData = GameConfig.battleData;
 
@@ -17,7 +19,7 @@ let GameLayer = cc.Layer.extend({
         this.addChild(this.mapLayer, 1);
 
         // init entity manager
-        this._entityManager = new EntityManager();;
+        this._entityManager = new EntityManager();
         EntityManager.getInstance = function () {
             return this._entityManager;
         }.bind(this);
@@ -36,6 +38,7 @@ let GameLayer = cc.Layer.extend({
         // this._initTower();
         this._handleEventKey();
         this.scheduleUpdate();
+        // this.initDragDropEventListener();
     },
 
     update: function (dt) {
@@ -162,4 +165,37 @@ let GameLayer = cc.Layer.extend({
         delete ComponentManager.getInstance();
         GameConfig.gameLayer = null;
     },
+
+    // initDragDropEventListener: function () {
+    //     const listener = cc.EventListener.create({
+    //         event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    //         swallowTouches: false,
+    //         onTouchBegan: function (touch, event) {
+    //             this.uiLayer.cardDeckNode.cardBattleNodeList.forEach(function (cardBattleNode) {
+    //                 if (cardBattleNode.isSelecting) {
+    //                     this.towerImage.setVisible(true);
+    //                     return true;
+    //                 }
+    //             });
+    //             return false;
+    //         }.bind(this),
+    //         onTouchMoved: function (touch, event) {
+    //             this.towerImage.setPosition(touch.getLocation());
+    //         }.bind(this),
+    //         onTouchEnded: function (touch, event) {
+    //             this.towerImage.setVisible(false);
+    //             this.uiLayer.cardDeckNode.cardBattleNodeList.forEach(function (cardBattleNode) {
+    //                 if (cardBattleNode.isSelecting) {
+    //                     this.putTowerAt(cardBattleNode.cardId, cardBattleNode.pos);
+    //                     cardBattleNode.isSelecting = false;
+    //                 }
+    //             }.bind(this));
+    //             let pixel = touch.getLocation();
+    //             let pos = Utils.pixel2Tile(pixel.x, pixel.y);
+    //             GameConfig.gameLayer.putTowerAt(GameConfig.ENTITY_ID.CANNON_TOWER, pos);
+    //         }.bind(this)
+    //     });
+    //
+    //     cc.eventManager.addListener(listener, this);
+    // }
 });

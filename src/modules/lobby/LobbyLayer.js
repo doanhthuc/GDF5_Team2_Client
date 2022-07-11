@@ -1,5 +1,6 @@
 const lobbyLayer = cc.Node.extend({
-    ctor: function () {
+    ctor: function (bottomNavHeight) {
+        this.bottomNavHeight = bottomNavHeight
         this.treasureSlotNodeList = [];
         this.treasureSlotList = [];
         this._super();
@@ -20,7 +21,7 @@ const lobbyLayer = cc.Node.extend({
         this.lobbyNode.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
         this.playerInfoHolderBackgroundImg = this.playerInfoHolder.getChildByName('Image_1');
 
-
+        this.initTreasureSlotNodeList();
     },
 
     setPositionForPlayerInfo: function (headerHeight) {
@@ -29,16 +30,21 @@ const lobbyLayer = cc.Node.extend({
         this.playerInfoHolder.setPositionY(cc.winSize.height / 2 - playerInfoHolderHeight / 2 - headerHeight);
     },
 
-    setTreasureSlotNodeList: function (treasureSlotList) {
-        for (let i = 0; i < treasureSlotList.length; i++) {
-            let treasure = treasureSlotList[i];
+    initTreasureSlotNodeList: function () {
+        this.treasureSlotNodeList = [];
+        for (let i = 0; i < 4; i++) {
             let treasureSlotNode = new TreasureSlot(i);
-            // treasureSlotNode.setSlotVisibleByState(treasure.state);
-            treasureSlotNode.setStateOfSlot(treasure.state, treasure.claimTime);
             this.treasureSlotNodeList.push(treasureSlotNode);
             this.lobbyNode.addChild(treasureSlotNode);
         }
-        // cc.log(JSON.stringify(this.treasureSlotNodeList));
+    },
+
+    setTreasureSlotNodeList: function (treasureSlotList) {
+        for (let i = 0; i < treasureSlotList.length; i++) {
+            let treasure = treasureSlotList[i];
+            let treasureSlotNode = this.treasureSlotNodeList[i];
+            treasureSlotNode.setStateOfSlot(treasure.state, treasure.claimTime);
+        }
         this.setPositionForTreasureSlot();
     },
 
@@ -46,8 +52,7 @@ const lobbyLayer = cc.Node.extend({
         let startX = -cc.winSize.width / 2 + Math.ceil(TreasureSlotResources.BACKGROUND_IMG_WIDTH / 2) + TreasureSlotResources.SLOT_START_MARGIN;
         for (let i = 0; i < TreasureSlotResources.SLOT_NUMBER; i++) {
             let treasureSlotNode = this.treasureSlotNodeList[i];
-            // treasure.setNodeByState(TreasureSlotResources.STATE.FINISHED);
-            treasureSlotNode.setPosition(startX, TreasureSlotResources.CENTER_SCENE_MARGIN_TOP);
+            treasureSlotNode.setPosition(startX, -cc.winSize.height / 2 + this.bottomNavHeight + treasureSlotNode.backgroundBtn.height / 2 + 20);
             // startX += treasureSlotNode.slotNodeMap.get(treasureSlotNode.state).backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
             startX += treasureSlotNode.backgroundBtn.getSize().width + TreasureSlotResources.SLOT_BETWEEN_MARGIN;
         }
@@ -59,9 +64,15 @@ const lobbyLayer = cc.Node.extend({
 
     onBattleBtnClick: function (sender, type) {
         // cc.director.runScene(new cc.TransitionCrossFade(1.0, new GameLayer()));
-        let scene = new MatchingScene();
-        let transitionTime = 1.2;
-        cc.director.runScene(new cc.TransitionFade(transitionTime, scene));
+        let isFull = this.treasureSlotNodeList.every(
+            treasureSlotNode => treasureSlotNode.state !== TreasureSlotResources.STATE.EMPTY);
+        if (isFull) {
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_FULL_TREASURE_SLOT);
+        } else {
+            let scene = new MatchingScene();
+            let transitionTime = 1.2;
+            cc.director.runScene(new cc.TransitionFade(transitionTime, scene));
+        }
     },
 
     setUserTrophy: function (trophy) {

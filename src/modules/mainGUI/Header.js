@@ -37,14 +37,14 @@ const Header = cc.Node.extend({
 
     onGoldTopUpBtnClicked: function () {
         // this.userGoldTxt.setString((this.userGoldTxt.getString() - 0) + 100);
-        let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
-        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatUserInfo(userContext.user.gold + 1000, userContext.user.gem, userContext.user.trophy);
+        // let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
+        // contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatUserInfo(userContext.user.gold + 1000, userContext.user.gem, userContext.user.trophy);
         this.parent.mainPageView.scrollToPage(NavResources.TAB_LIST.SHOP_TAB.index)
     },
 
     onGemTopUpBtnClicked: function () {
-        let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
-        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatUserInfo(userContext.user.gold, userContext.user.gem + 1000, userContext.user.trophy);
+        // let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
+        // contextManager.getContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT).cheatUserInfo(userContext.user.gold, userContext.user.gem + 1000, userContext.user.trophy);
         this.parent.mainPageView.scrollToPage(NavResources.TAB_LIST.SHOP_TAB.index)
     },
 

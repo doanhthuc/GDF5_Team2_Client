@@ -12,7 +12,8 @@ const OpenTreasurePopup = cc.Node.extend({
         this.backgroundImg = this.node.getChildByName('backgroundImg');
         this.receiveBtn = this.node.getChildByName('receiveBtn');
         this.receiveBtn.addTouchEventListener(this.onReceiveBtnClick.bind(this), this);
-
+        let receiveBtnBottomOffset = 100;
+        this.receiveBtn.setPosition(0, -cc.winSize.height / 2 + receiveBtnBottomOffset);
         this._spineboy = new sp.SkeletonAnimation(TreasureSlotResources.OPEN_TREASURE_FX_JSON, TreasureSlotResources.OPEN_TREASURE_FX_ATLAS);
         this._spineboy.setPosition(0, -cc.winSize.height / 2);
         this.addChild(this._spineboy);
@@ -30,32 +31,13 @@ const OpenTreasurePopup = cc.Node.extend({
 
         }
         this.actionArray = [];
-
+        UiUtil.setImageFullScreen(this.backgroundImg);
     },
 
     setItemListTexture: function (packet) {
         this.actionArray = [];
         this.receiveBtn.setVisible(false);
-        // this._spineboy.setAnimation(0, 'init', false);
-        // this._spineboy.addAnimation(0, 'opening', false);
-        // this._spineboy.addAnimation(0, 'opening', false);
-        /*this._spineboy.runAction(
-            cc.sequence(
-                cc.callFunc(function (sender) {
-                    sender.setAnimation(1, 'init', false);
-                }),
-                cc.delayTime(1),
-                cc.callFunc(function (sender) {
-                    sender.addAnimation(1, 'opening', false)
-                }),
-                cc.delayTime(1),
-                cc.callFunc(function (sender) {
-                    sender.addAnimation(1, 'opening', false)
-                })
-            )
-        );
-        return;*/
-        for (let i = 0; i < packet.rewardSize; i++) {
+        for (let i = 0; i < packet.itemType.length; i++) {
             let cardId = packet.itemType[i];
             if (cardId === 11) {
                 this.itemNodeList[i].cardImg.setTexture('textures/common/common_icon_gold.png');

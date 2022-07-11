@@ -351,6 +351,7 @@ testnetwork.packetMap[gv.CMD.GET_USER_INFO] = fr.InPacket.extend(
             this.gold = this.getInt();
             this.gem = this.getInt();
             this.trophy = this.getInt();
+            this.serverTime = this.getLong();
         }
     }
 );
