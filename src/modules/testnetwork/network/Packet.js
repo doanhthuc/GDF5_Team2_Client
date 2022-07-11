@@ -28,8 +28,6 @@ gv.CMD.MOVE = 2005;
 gv.CMD.MAP_INFO = 2004;
 gv.CMD.RESET_MAP = 2006;
 
-gv.CMD.SEND_GET_BATTLE_MAP = 5001;
-
 testnetwork = testnetwork || {};
 testnetwork.packetMap = {};
 
@@ -247,19 +245,6 @@ CMDCheatUserLobbyChest = fr.OutPacket.extend(
             this.putInt(chestInfoCheat.chestId);
             this.putInt(chestInfoCheat.chestState);
             this.putInt(chestInfoCheat.chestRemainingTime);
-            this.updateSize();
-        }
-    }
-)
-CMDSendGetBattleMap = fr.OutPacket.extend(
-    {
-        ctor: function () {
-            this._super();
-            this.initData(100);
-            this.setCmdId(gv.CMD.SEND_GET_BATTLE_MAP);
-        },
-        pack: function () {
-            this.packHeader();
             this.updateSize();
         }
     }
@@ -503,31 +488,6 @@ testnetwork.packetMap[gv.CMD.CHEAT_USER_LOBBY_CHEST] = fr.InPacket.extend(
     }
 );
 
-testnetwork.packetMap[gv.CMD.SEND_GET_BATTLE_MAP] = fr.InPacket.extend(
-    {
-        ctor: function () {
-            this._super();
-        },
-        readData: function () {
-            this.mapH = this.getInt();
-            this.mapW = this.getInt();
-            this.btmap = new Array(this.mapH);
-            for(i=this.mapH-1;i>=0;i--)
-                this.btmap[i]= new Array(this.mapW);
-            this.path= []
-            for (i = 0; i < this.mapH; i++)
-                for (j = 0; j < this.mapW; j++)
-                    this.btmap[i][j] = this.getInt();
-
-            this.pathSize = this.getInt();
-            for (i = 0; i < this.pathSize; i++) {
-                pathX = this.getInt();
-                pathY = this.getInt();
-                this.path.push({pathX, pathY})
-            }
-        }
-    }
-);
 
 testnetwork.packetMap[gv.CMD.GET_ROOM_INFO] = fr.InPacket.extend(
     {

@@ -2,16 +2,17 @@ let BattleMapLayer = cc.Layer.extend({
     ctor: function (battleData) {
         this._super();
         this.battleData = battleData;
-        let rootNode = ccs.load(BattleResource.MAP_NODE, "").node;
+        let rootNode = ccs.load(BattleResource.BATTLE_MAP_LAYER, "").node;
         this.addChild(rootNode);
+
+        this.playerMapNode = rootNode.getChildByName("player_map");
+        this.opponentMapNode = rootNode.getChildByName("opponent_map");
 
         rootNode.attr({
             x: cc.winSize.width / 2,
             y: (cc.winSize.height - BattleResource.DECK_CARD_HEIGHT) / 2 + BattleResource.DECK_CARD_HEIGHT
         });
 
-        this._genMap(GameConfig.PLAYER);
-        this._genMap(GameConfig.OPPONENT);
     },
 
     _genMap: function (mode) {
@@ -20,6 +21,10 @@ let BattleMapLayer = cc.Layer.extend({
             for (let c = 0; c < map[0].length; c++) {
                 let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r, mode);
                 let texture = null;
+
+                // let node = new cc.DrawNode();
+                // node.drawDot(pos, 10, cc.color.WHITE);
+                // this.addChild(node);
 
                 // FIXME define 1, 2, 3, 5, 6
                 switch (map[r][c]) {
@@ -46,11 +51,13 @@ let BattleMapLayer = cc.Layer.extend({
                 sp.attr({
                     x: pos.x,
                     y: pos.y
-                })
-                this.addChild(sp);
+                });
+                if (mode === GameConfig.PLAYER) {
+                    this.playerMapNode.addChild(sp);
+                } else if (mode === GameConfig.OPPONENT) {
+                    this.opponentMapNode.addChild(sp);
+                }
             }
         }
     },
-
-
 });

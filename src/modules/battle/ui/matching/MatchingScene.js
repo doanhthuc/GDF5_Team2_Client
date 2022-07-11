@@ -9,9 +9,6 @@ let MatchingScene = cc.Scene.extend({
         // call api
         // get map data
         GameConfig.matchingScene = this;
-        this.scheduleOnce(function () {
-            ShopNetwork.connector.sendGetBattleMap();
-        }, 3);
     },
 
     _setupUI: function () {
@@ -57,7 +54,9 @@ let MatchingScene = cc.Scene.extend({
         cancelButtonNode.getChildByName("button").addTouchEventListener(this._backToLobby.bind(this));
         this.addChild(cancelButtonNode);
 
-
+        // call api
+        cc.warn("Send matching")
+        BattleNetwork.connector.sendMatching();
     },
 
     _updateUI: function (tick) {
@@ -75,6 +74,6 @@ let MatchingScene = cc.Scene.extend({
     },
 
     _backToLobby: function () {
-        fr.view(MainScreen);
+        BattleNetwork.connector.sendCancelMatching();
     }
 })

@@ -69,7 +69,7 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
     }
 
     let path = bfs(start, dest)
-        if (!path[dest.y][dest.x]) {
+    if (path.length === 0 || !path[dest.y] || !path[dest.y][dest.x]) {
         return null;
     }
     let current = path[dest.y][dest.x];
@@ -106,7 +106,6 @@ FindPathUtil.findShortestPathForEachTile = function (mode) {
             if (map[row][col] === 0) {
                 let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
                 if (path && path.length > 0) {
-                    path = Utils.tileArray2PixelArray(path, mode);
                     shortestPathForEachTiles[row][col] = path;
                 }
             }

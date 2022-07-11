@@ -14,6 +14,14 @@ const UserContext = cc.Class.extend({
         return this.user;
     },
 
+    getUsername: function () {
+        return this.user.username;
+    },
+
+    getTrophy: function () {
+        return this.user.trophy;
+    },
+
     setAuthenticated: function (isAuthenticated) {
         this.isAuthenticated = isAuthenticated;
     },

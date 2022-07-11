@@ -6,9 +6,8 @@ let GameLayer = cc.Layer.extend({
 
         this.selectedCard = null;
 
-        // this.towerImage = cc.Sprite(CARD_CONST[0].image['C']);
-        // this.towerImage.setVisible(false);
         // data game
+        // BattleData.fakeData();
         this.battleData = GameConfig.battleData;
 
         // create UI
@@ -16,10 +15,12 @@ let GameLayer = cc.Layer.extend({
         this.addChild(this.uiLayer, 2);
 
         this.mapLayer = new BattleMapLayer(this.battleData);
+        this.mapLayer._genMap(GameConfig.PLAYER);
+        this.mapLayer._genMap(GameConfig.OPPONENT);
         this.addChild(this.mapLayer, 1);
 
         // init entity manager
-        this._entityManager = new EntityManager();
+        this._entityManager = new EntityManager();;
         EntityManager.getInstance = function () {
             return this._entityManager;
         }.bind(this);
@@ -34,11 +35,12 @@ let GameLayer = cc.Layer.extend({
         this.pathSystem = new PathMonsterSystem();
         this.spellSystem = new SpellSystem();
         this.skeletonAnimationSystem = new SkeletonAnimationSystem();
+        this.monsterSystem = new MonsterSystem();
+        this.bulletSystem = new BulletSystem();
 
         // this._initTower();
         this._handleEventKey();
         this.scheduleUpdate();
-        // this.initDragDropEventListener();
     },
 
     update: function (dt) {
@@ -52,6 +54,8 @@ let GameLayer = cc.Layer.extend({
         this.pathSystem.run(dt);
         this.spellSystem.run(dt);
         this.skeletonAnimationSystem.run(dt);
+        this.monsterSystem.run(dt);
+        this.bulletSystem.run(dt);
 
         // cc.log("YYYYYYYYYY")
         // let pool = ComponentFactory.pool;
@@ -60,24 +64,24 @@ let GameLayer = cc.Layer.extend({
         // cc.log(JSON.stringify(pool._store))
     },
 
-    bornMonster: function (pos, mode) {
-        // pos is in tile coordinator
-        cc.log("position tile " + JSON.stringify(pos))
-
-        if (!pos) {
-            pos = Utils.tile2Pixel(0, 4, mode);
+    bornMonster: function (tilePos, mode) {
+        let pixelPos;
+        if (!tilePos) {
+            pixelPos = Utils.tile2Pixel(0, 4, mode);
         } else {
-            pos = Utils.tile2Pixel(pos.x, pos.y, mode);
+            pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
     },
 
     putCardAt: function (type, pixelPos) {
-        let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y);
+        pixelPos = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
+        let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, GameConfig.PLAYER);
 
         // FIXME: hardcode
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
             if (!Utils.isPixelPositionInMap(pixelPos, GameConfig.PLAYER)) {
+                cc.warn("put spell at pixel pos = " + JSON.stringify(pixelPos) + " is invalid")
                 return;
             }
         } else {
@@ -165,37 +169,4 @@ let GameLayer = cc.Layer.extend({
         delete ComponentManager.getInstance();
         GameConfig.gameLayer = null;
     },
-
-    // initDragDropEventListener: function () {
-    //     const listener = cc.EventListener.create({
-    //         event: cc.EventListener.TOUCH_ONE_BY_ONE,
-    //         swallowTouches: false,
-    //         onTouchBegan: function (touch, event) {
-    //             this.uiLayer.cardDeckNode.cardBattleNodeList.forEach(function (cardBattleNode) {
-    //                 if (cardBattleNode.isSelecting) {
-    //                     this.towerImage.setVisible(true);
-    //                     return true;
-    //                 }
-    //             });
-    //             return false;
-    //         }.bind(this),
-    //         onTouchMoved: function (touch, event) {
-    //             this.towerImage.setPosition(touch.getLocation());
-    //         }.bind(this),
-    //         onTouchEnded: function (touch, event) {
-    //             this.towerImage.setVisible(false);
-    //             this.uiLayer.cardDeckNode.cardBattleNodeList.forEach(function (cardBattleNode) {
-    //                 if (cardBattleNode.isSelecting) {
-    //                     this.putTowerAt(cardBattleNode.cardId, cardBattleNode.pos);
-    //                     cardBattleNode.isSelecting = false;
-    //                 }
-    //             }.bind(this));
-    //             let pixel = touch.getLocation();
-    //             let pos = Utils.pixel2Tile(pixel.x, pixel.y);
-    //             GameConfig.gameLayer.putTowerAt(GameConfig.ENTITY_ID.CANNON_TOWER, pos);
-    //         }.bind(this)
-    //     });
-    //
-    //     cc.eventManager.addListener(listener, this);
-    // }
 });

@@ -7,13 +7,6 @@ const ContextManager = cc.Class.extend({
         this.registerContext(ContextManagerConst.CONTEXT_NAME.CHEAT_CONTEXT, new CheatContext());
     },
 
-    getInstance: function () {
-        if (!this.instance) {
-            this.instance = new ContextManager();
-        }
-        return this.instance;
-    },
-
     registerContext: function (contextName, context) {
         this.contextMap.set(contextName, context);
     },
