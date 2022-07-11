@@ -68,9 +68,9 @@ Utils.convertWorldSpace2MapNodeSpace = function (worldPos, mode) {
     Utils.validateMode(mode);
 
     if (mode === GameConfig.PLAYER) {
-        return GameConfig.gameLayer.mapLayer.playerMapNode.convertToNodeSpace(worldPos);
+        return GameConfig.gameLayer.getPlayerMapNode().convertToNodeSpace(worldPos);
     } else {
-        return GameConfig.gameLayer.mapLayer.opponentMapNode.convertToNodeSpace(worldPos);
+        return GameConfig.gameLayer.getOpponentMapNode().convertToNodeSpace(worldPos);
     }
 }
 

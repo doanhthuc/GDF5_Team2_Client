@@ -7,9 +7,9 @@ let AppearanceComponent = Component.extend({
         this.reset(sprite);
 
         if (mode === GameConfig.PLAYER) {
-            GameConfig.gameLayer.mapLayer.playerMapNode.addChild(this.sprite, this.zOrder);
+            GameConfig.gameLayer.getPlayerMapNode().addChild(this.sprite, this.zOrder);
         } else if (mode === GameConfig.OPPONENT) {
-            GameConfig.gameLayer.mapLayer.opponentMapNode.addChild(this.sprite, this.zOrder);
+            GameConfig.gameLayer.getOpponentMapNode().addChild(this.sprite, this.zOrder);
         }
         this.sprite.retain();
     },

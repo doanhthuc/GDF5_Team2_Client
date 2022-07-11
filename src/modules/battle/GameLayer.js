@@ -169,4 +169,12 @@ let GameLayer = cc.Layer.extend({
         delete ComponentManager.getInstance();
         GameConfig.gameLayer = null;
     },
+
+    getPlayerMapNode: function () {
+        return this.mapLayer.playerMapNode;
+    },
+
+    getOpponentMapNode: function () {
+        return this.mapLayer.opponentMapNode;
+    },
 });
