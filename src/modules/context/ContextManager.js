@@ -23,9 +23,13 @@ const ContextManager = cc.Class.extend({
     },
 
     resetContextData: function () {
-        this.contextMap.forEach((context) => {
-            context.resetContextData();
-        });
+        // this.contextMap.forEach((context) => {
+        //     context.resetContextData();
+        // });
+        for (let [key, value] of  this.contextMap.entries()) {
+            cc.log('Context manager line 30: ' + key + " = " + value)
+            value.resetContextData()
+        }
     }
 })
 

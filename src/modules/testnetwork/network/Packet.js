@@ -360,10 +360,10 @@ testnetwork.packetMap[gv.CMD.GET_USER_INVENTORY] = fr.InPacket.extend(
     {
         ctor: function () {
             this._super();
-            this.cardCollection = [];
-            this.battleDeckCard = [];
         },
         readData: function () {
+            this.cardCollection = [];
+            this.battleDeckCard = [];
             this.error = this.getShort();
             this.cardCollectionSize = this.getInt();
             for (i = 0; i < this.cardCollectionSize; i++) {
@@ -382,9 +382,9 @@ testnetwork.packetMap[gv.CMD.GET_USER_LOBBY] = fr.InPacket.extend(
     {
         ctor: function () {
             this._super();
-            this.lobbyChest = [];
         },
         readData: function () {
+            this.lobbyChest = [];
             this.error = this.getShort();
             this.lobbyChestSize = this.getInt();
             for (i = 0; i < this.lobbyChestSize; i++) {
@@ -400,9 +400,9 @@ testnetwork.packetMap[gv.CMD.UNLOCK_LOBBY_CHEST] = fr.InPacket.extend(
     {
         ctor: function () {
             this._super();
-            this.lobbyChest = [];
         },
         readData: function () {
+            this.lobbyChest = [];
             this.error = this.getShort();
             this.lobbyChestid = this.getInt();
             this.state = this.getInt();

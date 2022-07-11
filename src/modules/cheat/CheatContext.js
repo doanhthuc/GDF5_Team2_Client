@@ -83,7 +83,10 @@ const CheatContext = cc.Class.extend({
                     .treasureSlotNodeList[i].setStateOfSlot(data.chestState, data.chestClaimTime);
             }
         }
-    }
+    },
 
+    resetContextData: function () {
+
+    }
 
 })

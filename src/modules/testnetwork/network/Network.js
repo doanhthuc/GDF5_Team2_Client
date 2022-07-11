@@ -108,7 +108,8 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log(JSON.stringify(packet));
                 break;
             case gv.CMD.SEND_LOGOUT:
-                cc.log("loggout");
+                cc.log("logout");
+                contextManager.resetContextData();
                 gv.gameClient.getNetwork().disconnect();
                 fr.view(ScreenNetwork);
                 break;

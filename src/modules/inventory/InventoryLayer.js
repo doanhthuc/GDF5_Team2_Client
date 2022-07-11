@@ -1,6 +1,6 @@
 const InventoryLayer = cc.Node.extend({
     ctor: function (headerHeight) {
-        this.headerHeight = headerHeight
+        this.headerHeight = headerHeight;
         this.cardNodeMap = new Map();
         this.cardNodeList = [];
         this._super();
@@ -12,7 +12,6 @@ const InventoryLayer = cc.Node.extend({
         this.addChild(this.battleDeckNode);
         ClientUIManager.getInstance().registerUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE, this.battleDeckNode);
         ClientUIManager.getInstance().showUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE);
-
         this.cardCollectionNode = new CardCollectionNode();
         this.addChild(this.cardCollectionNode);
         ClientUIManager.getInstance().registerUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE, this.cardCollectionNode);

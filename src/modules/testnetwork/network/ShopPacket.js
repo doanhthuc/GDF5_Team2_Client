@@ -65,10 +65,11 @@ CMDBuyDailyShop = fr.OutPacket.extend({
 ShopNetwork.packetMap[gv.CMD.GET_USER_DAILY_SHOP] = fr.InPacket.extend({
     ctor: function () {
         this._super();
-        this.dailyShopItem = [];
+
     },
 
     readData: function () {
+        this.dailyShopItem = [];
         this.error = this.getShort();
         this.size = this.getInt();
         for (let i = 0; i < this.size; i++) {
