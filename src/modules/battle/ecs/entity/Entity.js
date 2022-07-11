@@ -23,7 +23,6 @@ let EntityECS = cc.Class.extend({
     },
 
     removeComponent: function (component) {
-        // this._isComponent();
         delete this.components[component.typeID];
     },
 

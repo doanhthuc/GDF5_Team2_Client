@@ -18,14 +18,12 @@ gv.CMD.UNLOCK_LOBBY_CHEST = 4002;
 gv.CMD.SPEEDUP_LOBBY_CHEST = 4003;
 gv.CMD.CLAIM_LOBBY_CHEST = 4004;
 
+gv.CMD.GET_ROOM_INFO = 6001;
+
 gv.CMD.CHEAT_USER_INFO = 7001;
 gv.CMD.CHEAT_USER_CARD = 7002;
 gv.CMD.CHEAT_USER_LOBBY_CHEST = 7003;
 
-
-gv.CMD.MOVE = 2005;
-gv.CMD.MAP_INFO = 2004;
-gv.CMD.RESET_MAP = 2006;
 
 gv.CMD.SEND_GET_BATTLE_MAP = 5001;
 
@@ -264,6 +262,22 @@ CMDCheatUserLobbyChest = fr.OutPacket.extend(
         }
     }
 )
+
+CMDSendGetRoomInfo = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.GET_ROOM_INFO);
+        },
+        pack: function (roomId) {
+            this.packHeader();
+            this.putInt(roomId);
+            this.updateSize();
+        }
+    }
+)
+
 CMDSendGetBattleMap = fr.OutPacket.extend(
     {
         ctor: function () {
@@ -277,6 +291,7 @@ CMDSendGetBattleMap = fr.OutPacket.extend(
         }
     }
 )
+
 
 /**
  * InPacket
@@ -499,6 +514,28 @@ testnetwork.packetMap[gv.CMD.CHEAT_USER_LOBBY_CHEST] = fr.InPacket.extend(
     }
 );
 
+
+testnetwork.packetMap[gv.CMD.GET_ROOM_INFO] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.opponentUsername = this.getString();
+            this.opponentTrophy = this.getInt();
+            this.battleDeckSize = this.getInt();
+            this.battleDeck = [];
+            for (let i = 0; i < this.battleDeckSize; i++) {
+                this.battleDeck.push({
+                    cardType: this.getInt(),
+                    cardLevel: this.getInt(),
+                });
+            }
+        }
+    }
+);
+
+
 testnetwork.packetMap[gv.CMD.SEND_GET_BATTLE_MAP] = fr.InPacket.extend(
     {
         ctor: function () {
@@ -524,5 +561,4 @@ testnetwork.packetMap[gv.CMD.SEND_GET_BATTLE_MAP] = fr.InPacket.extend(
         }
     }
 );
-
 

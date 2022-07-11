@@ -35,6 +35,8 @@ GameConfig.SYSTEM_ID = {
     SPRITE_SHEET: 7,
     SPELL: 8,
     SKELETON: 9,
+    BULLET: 10,
+    MONSTER: 11
 }
 
 GameConfig.ENTITY_ID = {

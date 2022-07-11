@@ -52,6 +52,7 @@ EntityManager.destroy = function (entity) {
     if (appearanceComponent) {
         let sprite = appearanceComponent.sprite;
         sprite.setVisible(false);
+        appearanceComponent.setActive(false);
     }
 
     entity.setActive(false);

@@ -76,19 +76,21 @@ const ShopItemSlotNode = cc.Node.extend({
             cc.log("[ShopItemSlot] Click on buy btn")
             if (this.type === ItemDefine.CHESTYPE) {
                 // PopupUIManager.getInstance()
-                let user = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).getUser();
-                if (user.gold < this.price) {
-                    let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
-                    notify.setNotifyTxt('Không Đủ Vàng');
-                    notify.showNotify();
-                    return;
-                }
+                // let user = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).getUser();
+                // if (user.gold < this.price) {
+                //     let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
+                //     notify.setNotifyTxt('Không Đủ Vàng');
+                //     notify.showNotify();
+                //     return;
+                // }
                 let TreasurePopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
 
-                TreasurePopup.setPopUpInfoFromTreasureType(null, ChestConst.ACTION.CLAIM, 0, TreasureSlotResources.STATE.OCCUPIED)
+                // TreasurePopup.setPopUpInfoFromTreasureType(null, ChestConst.ACTION.CLAIM, 0, TreasureSlotResources.STATE.OCCUPIED)
+                TreasurePopup.setBuyPrice(this.price);
+                TreasurePopup.setPopUpInfoFromTreasureType(null, ChestConst.ACTION.BUY, 0, TreasureSlotResources.STATE.OCCUPIED)
                 PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
 
-            } else  {
+            } else {
                 let buyItemPopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
                 buyItemPopup.setId(this.id);
                 buyItemPopup.setTitle(this.slotName);

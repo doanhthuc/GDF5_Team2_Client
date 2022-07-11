@@ -23,7 +23,12 @@ const NotifyNode = cc.Node.extend({
             fr.getCurrentScreen().addChild(this, this.Z_ORDER);
             this.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
         }
-        let showThenHide = cc.sequence(cc.targetedAction(this, cc.show()), cc.delayTime(3), cc.targetedAction(this,cc.hide()));
+        let showThenHide = cc.sequence(cc.targetedAction(this, cc.show()), cc.delayTime(3), cc.targetedAction(this, cc.hide()));
         this.runAction(showThenHide);
     },
+
+    hideNotification: function () {
+        this.stopAllActions();
+        this.setVisible(false);
+    }
 })

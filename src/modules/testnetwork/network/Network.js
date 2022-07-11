@@ -8,7 +8,7 @@ testnetwork.Connector = cc.Class.extend({
     ctor: function (gameClient) {
         this.gameClient = gameClient;
         gameClient.packetFactory.addPacketMap(testnetwork.packetMap);
-            gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
+        gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
     },
     onReceivedPacket: function (cmd, packet) {
         cc.log("onReceivedPacket:", cmd);
@@ -116,6 +116,9 @@ testnetwork.Connector = cc.Class.extend({
                 gv.gameClient.getNetwork().disconnect();
                 fr.view(ScreenNetwork);
                 break;
+            case gv.CMD.GET_ROOM_INFO:
+                cc.log("RECEIVE ROOM INFO in Network.js line 111: " + JSON.stringify(packet));
+                break;    
         }
     },
     sendLoginRequest: function () {
@@ -204,6 +207,13 @@ testnetwork.Connector = cc.Class.extend({
         cc.log("GetBattleMap");
         var pk = this.gameClient.getOutPacket(CMDSendGetBattleMap);
         pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendGetRoomInfo: function (roomId) {
+        cc.log("GetRoomId");
+        var pk = this.gameClient.getOutPacket(CMDSendGetRoomInfo);
+        pk.pack(roomId);
         this.gameClient.sendPacket(pk);
     },
     sendLogout:function (){

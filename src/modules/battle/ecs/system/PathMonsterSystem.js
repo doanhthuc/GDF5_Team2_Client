@@ -36,8 +36,6 @@ let PathMonsterSystem = System.extend({
                         AnimationMap.changeMonsterDirectionAnimation(entity, nextPos, path[currentPathIdx+2]);
                     }
                 }
-            } else {
-                EventDispatcher.getInstance().dispatchEvent(EventType.FINISH_PATH, {entity: entity});
             }
         }
     },

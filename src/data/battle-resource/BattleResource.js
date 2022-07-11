@@ -7,7 +7,7 @@ const BattleResource = {
     WAVE_NODE: "ui/battle/battle_ui_layer/wave/WaveNode.json",
     TIMER_NODE: "ui/battle/battle_ui_layer/timer/BattleTimerNode.json",
     MAP_LAYER: "ui/battle/battle_map_layer/BattleMapLayer.json",
-    MAP_NODE: "ui/battle/battle_map_layer/BattleMapNode.json",
+    BATTLE_MAP_LAYER: "ui/battle/battle_map_layer/BattleMapNode.json",
     TIMER_BACKGROUND: "res/textures/battle/battle_timer_background.png",
     HP_BAR_NODE: "ui/battle/HpBarNode.json",
 

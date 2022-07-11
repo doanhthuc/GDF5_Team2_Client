@@ -1,46 +1,9 @@
 EventDispatcher.getInstance()
-    .addEventHandler(EventType.BULLET_COLLIDE_MONSTER, function (data) {
-            let monster = data.monster, bullet = data.bullet;
-
-            let bulletInfo = bullet.getComponent(BulletInfoComponent);
-            let monsterInfo = monster.getComponent(MonsterInfoComponent);
-
-            for (let effect of bulletInfo.effects) {
-                monster.addComponent(effect.clone());
-            }
-
-            if (bulletInfo.type && bulletInfo.type === "frog") {
-                // handle here
-            } else {
-                bullet.getComponent(AppearanceComponent).sprite.setVisible(false);
-                bullet.setActive(false);
-            }
-        })
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = GameConfig.gameLayer.uiLayer;
         uiLayer.waveNode.increaseWave();
         GameConfig.gameLayer.bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
         GameConfig.gameLayer.bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
-    })
-    .addEventHandler(EventType.FINISH_PATH, function (data) {
-        let entity = data.entity;
-
-        if (entity.hasAllComponent(VelocityComponent)) {
-            entity.removeComponent(entity.getComponent(VelocityComponent));
-        }
-
-        // FIXME: what is this?
-        if (entity.hasAllComponent(BulletInfoComponent)) {
-            let bulletInfoComponent = entity.getComponent(BulletInfoComponent);
-            if (bulletInfoComponent.type === "frog") {
-                let appearanceComponent = entity.getComponent(AppearanceComponent)
-                if (appearanceComponent) {
-                    appearanceComponent.sprite.setVisible(false);
-                }
-            }
-        }
-
-        entity.setActive(false);
     })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
         GameConfig.gameLayer.stopGame();
@@ -59,11 +22,11 @@ EventDispatcher.getInstance()
         cc.log("put new tower event: " + JSON.stringify(data));
 
         // put tower at x, y
+        // FIXME: hardcode 7 == tower
         map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 7;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(PathComponent);
 
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
         let currentMode = GameConfig.PLAYER;
         for (let entity of entityList) {
             if (entity.mode === currentMode) {
@@ -74,22 +37,22 @@ EventDispatcher.getInstance()
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
                     if (path) {
                         if (path.length > 0) {
-                            let newPath = [Utils.tile2Pixel(positionComponent.x, positionComponent.y, currentMode)]
-                            for (let i = 0; i < path.length; i++) {
-                                newPath.push(path[i]);
-                            }
+                            // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
+                            // newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
+                            let newPath = Utils.tileArray2PixelArray(path, currentMode);
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
+                            cc.log("new path, monster at tile = " + JSON.stringify(tilePos));
                         }
                     }
                 }
             }
         }
     })
-    .addEventHandler(EventType.FINISH_MATCHING, function (data) {
-        let layer = new GameLayer();
-        layer.setName("Screen");
-        let scene = new cc.Scene();
-        scene.addChild(layer);
-        cc.director.runScene(new cc.TransitionFade(1, scene));
-    })
+    // .addEventHandler(EventType.FINISH_MATCHING, function (data) {
+    //     let layer = new GameLayer();
+    //     layer.setName("Screen");
+    //     let scene = new cc.Scene();
+    //     scene.addChild(layer);
+    //     cc.director.runScene(new cc.TransitionFade(1, scene));
+    // })
