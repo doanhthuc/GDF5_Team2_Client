@@ -1,8 +1,9 @@
 let LifeSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.LIFE,
+    typeID: GameConfig.SYSTEM_ID.LIFE,
     name: "LifeSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -17,3 +18,5 @@ let LifeSystem = System.extend({
         }
     }
 });
+LifeSystem.typeID = GameConfig.SYSTEM_ID.LIFE;
+SystemManager.getInstance().registerClass(LifeSystem);

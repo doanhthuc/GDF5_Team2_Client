@@ -1,4 +1,4 @@
-let EntityManager = cc.Class.extend({
+let EntityManager = ManagerECS.extend({
     name: "EntityManager",
     /*
     * {
@@ -8,6 +8,7 @@ let EntityManager = cc.Class.extend({
     * */
 
     ctor: function () {
+        this._super();
         this.entities = {}
     },
 

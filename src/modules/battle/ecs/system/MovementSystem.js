@@ -1,8 +1,9 @@
 let MovementSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.MOVEMENT,
+    typeID: GameConfig.SYSTEM_ID.MOVEMENT,
     name: "MovementSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -27,3 +28,5 @@ let MovementSystem = System.extend({
         }
     },
 });
+MovementSystem.typeID = GameConfig.SYSTEM_ID.MOVEMENT;
+SystemManager.getInstance().registerClass(MovementSystem);

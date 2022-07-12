@@ -1,8 +1,9 @@
 let SpellSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.SPELL,
+    typeID: GameConfig.SYSTEM_ID.SPELL,
     name: "SpellSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -34,3 +35,5 @@ let SpellSystem = System.extend({
         }
     },
 });
+SpellSystem.typeID = GameConfig.SYSTEM_ID.SPELL;
+SystemManager.getInstance().registerClass(SpellSystem);

@@ -1,8 +1,9 @@
 let CollisionSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.LIFE,
+    typeID: GameConfig.SYSTEM_ID.COLLISION,
     name: "CollisionSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -75,3 +76,6 @@ let CollisionSystem = System.extend({
         return null
     }
 });
+CollisionSystem.typeID = GameConfig.SYSTEM_ID.COLLISION;
+cc.warn(GameConfig.SYSTEM_ID.COLLISION)
+SystemManager.getInstance().registerClass(CollisionSystem);

@@ -1,8 +1,9 @@
 let SkeletonAnimationSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.SKELETON,
+    typeID: GameConfig.SYSTEM_ID.SKELETON,
     name: "SkeletonAnimationSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -20,3 +21,5 @@ let SkeletonAnimationSystem = System.extend({
         }
     },
 });
+SkeletonAnimationSystem.typeID = GameConfig.SYSTEM_ID.SKELETON;
+SystemManager.getInstance().registerClass(SkeletonAnimationSystem);

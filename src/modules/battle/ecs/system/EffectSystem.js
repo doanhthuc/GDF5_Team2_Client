@@ -1,8 +1,9 @@
 let EffectSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.EFFECT,
+    typeID: GameConfig.SYSTEM_ID.EFFECT,
     name: "EffectSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -94,3 +95,5 @@ let EffectSystem = System.extend({
         velocityComponent.speedY = velocityComponent.originSpeedY;
     }
 });
+EffectSystem.typeID = GameConfig.SYSTEM_ID.EFFECT;
+SystemManager.getInstance().registerClass(EffectSystem);

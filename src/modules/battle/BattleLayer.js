@@ -1,23 +1,14 @@
-let GameLayer = cc.Layer.extend({
+let BattleLayer = cc.Layer.extend({
 
     ctor: function () {
         this._super();
         GameConfig.gameLayer = this;
-
         this.selectedCard = null;
 
-        // data game
-        // BattleData.fakeData();
+        BattleData.fakeData();
         this.battleData = GameConfig.battleData;
 
-        // create UI
-        this.uiLayer = new BattleUILayer(this.battleData);
-        this.addChild(this.uiLayer, 2);
-
-        this.mapLayer = new BattleMapLayer(this.battleData);
-        this.mapLayer._genMap(GameConfig.PLAYER);
-        this.mapLayer._genMap(GameConfig.OPPONENT);
-        this.addChild(this.mapLayer, 1);
+        this._setupUI();
 
         // init entity manager
         this._entityManager = new EntityManager();;
@@ -25,7 +16,24 @@ let GameLayer = cc.Layer.extend({
             return this._entityManager;
         }.bind(this);
 
-        // create system
+        this._initSystem();
+
+        // this._initTower();
+        this._handleEventKey();
+        this.scheduleUpdate();
+    },
+
+    _setupUI: function () {
+        this.uiLayer = new BattleUILayer(this.battleData);
+        this.addChild(this.uiLayer, 2);
+
+        this.mapLayer = new BattleMapLayer(this.battleData);
+        this.mapLayer._genMap(GameConfig.PLAYER);
+        this.mapLayer._genMap(GameConfig.OPPONENT);
+        this.addChild(this.mapLayer, 1);
+    },
+
+    _initSystem: function () {
         this.movementSystem = new MovementSystem();
         this.renderSystem = new RenderSystem();
         this.lifeSystem = new LifeSystem();
@@ -37,10 +45,6 @@ let GameLayer = cc.Layer.extend({
         this.skeletonAnimationSystem = new SkeletonAnimationSystem();
         this.monsterSystem = new MonsterSystem();
         this.bulletSystem = new BulletSystem();
-
-        // this._initTower();
-        this._handleEventKey();
-        this.scheduleUpdate();
     },
 
     update: function (dt) {
@@ -57,7 +61,6 @@ let GameLayer = cc.Layer.extend({
         this.monsterSystem.run(dt);
         this.bulletSystem.run(dt);
 
-        // cc.log("YYYYYYYYYY")
         // let pool = ComponentFactory.pool;
         // cc.log(("pool size = " + Object.keys(pool._store).length))
         // cc.log("key = " + JSON.stringify(Object.keys(pool._store)))
@@ -111,18 +114,15 @@ let GameLayer = cc.Layer.extend({
                 EntityFactory.createIceGunPolarBearTower(tilePos, GameConfig.PLAYER);
                 break;
             case GameConfig.ENTITY_ID.FIRE_SPELL:
-                // new FireSpell(this.mapLayer, pixelPos, 50, 1.2*GameConfig.TILE_WIDTH);
                 SpellFactory.createFireSpell(pixelPos, GameConfig.PLAYER);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
-                // new FrozenSpell(this.mapLayer, pixelPos, 50, 5, 1.2*GameConfig.TILE_WIDTH);
                 SpellFactory.createFrozenSpell(pixelPos, GameConfig.PLAYER);
                 break;
             default:
                 return;
         }
 
-        // FIXME: hardcode
         if (GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FIRE_SPELL && GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos});

@@ -36,7 +36,8 @@ GameConfig.SYSTEM_ID = {
     SPELL: 8,
     SKELETON: 9,
     BULLET: 10,
-    MONSTER: 11
+    MONSTER: 11,
+    COLLISION: 12
 }
 
 GameConfig.ENTITY_ID = {
