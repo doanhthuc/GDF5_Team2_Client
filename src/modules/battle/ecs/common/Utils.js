@@ -5,10 +5,6 @@ Utils.getVariableName = function (variable) {
     return name;
 };
 
-// FIXME: hard code
-const CARD_DECK_HEIGHT = BattleResource.DECK_CARD_HEIGHT;
-const RIVER_HEIGHT = BattleResource.RIVER_HEIGHT;
-
 /**
  *  Convert tile map coordination to pixel map node coordination (center of a cell)
  * @param x {Number}
@@ -68,9 +64,9 @@ Utils.convertWorldSpace2MapNodeSpace = function (worldPos, mode) {
     Utils.validateMode(mode);
 
     if (mode === GameConfig.PLAYER) {
-        return GameConfig.gameLayer.getPlayerMapNode().convertToNodeSpace(worldPos);
+        return BattleManager.getInstance().getBattleLayer().getPlayerMapNode().convertToNodeSpace(worldPos);
     } else {
-        return GameConfig.gameLayer.getOpponentMapNode().convertToNodeSpace(worldPos);
+        return BattleManager.getInstance().getBattleLayer().getOpponentMapNode().convertToNodeSpace(worldPos);
     }
 }
 
@@ -96,6 +92,8 @@ Utils.tileArray2PixelArray = function (positionArr, mode) {
  * @returns {boolean}
  */
 Utils.isPixelPositionInMap = function (pixelPos, mode) {
+    Utils.validateMode(mode);
+
     let tile00 = Utils.tile2Pixel(0, 0, mode);
     let tile64 = Utils.tile2Pixel(6, 4, mode);
     if (mode === GameConfig.PLAYER) {
@@ -109,8 +107,11 @@ Utils.isPixelPositionInMap = function (pixelPos, mode) {
         tile64.x = tile64.x - GameConfig.TILE_WIDTH / 2;
         tile64.y = tile64.y - GameConfig.TILE_HEIGH / 2;
     }
-
-    return pixelPos.x >= tile00.x && pixelPos.x <= tile64.x && pixelPos.y >= tile00.y && pixelPos.y <= tile64.y;
+    if (mode === GameConfig.PLAYER) {
+        return pixelPos.x >= tile00.x && pixelPos.x <= tile64.x && pixelPos.y >= tile00.y && pixelPos.y <= tile64.y;
+    } else if (mode === GameConfig.OPPONENT) {
+        return pixelPos.x <= tile00.x && pixelPos.x >= tile64.x && pixelPos.y <= tile00.y && pixelPos.y >= tile64.y;
+    }
 }
 Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     let direction1 = 0;

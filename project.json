@@ -150,6 +150,7 @@
         "src/modules/battle/ecs/factory/ComponentFactory.js",
         "src/modules/battle/ecs/factory/EntityFactory.js",
         "src/modules/battle/ecs/factory/SpellFactory.js",
+        "src/modules/battle/ecs/factory/SystemFactory.js",
         "src/modules/battle/TestLayer.js",
         "src/modules/battle/ui/battle_map_layer/BattleMapLayer.js",
         "src/modules/battle/ui/battle_ui_layer/BattleUILayer.js",

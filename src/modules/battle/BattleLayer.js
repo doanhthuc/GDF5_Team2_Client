@@ -2,7 +2,7 @@ let BattleLayer = cc.Layer.extend({
 
     ctor: function () {
         this._super();
-        GameConfig.gameLayer = this;
+        BattleManager.getInstance().setBattleLayer(this);
         this.selectedCard = null;
 
         BattleData.fakeData();
@@ -20,7 +20,7 @@ let BattleLayer = cc.Layer.extend({
 
         // this._initTower();
         this._handleEventKey();
-        this.scheduleUpdate();
+        this.startGame();
     },
 
     _setupUI: function () {
@@ -34,17 +34,17 @@ let BattleLayer = cc.Layer.extend({
     },
 
     _initSystem: function () {
-        this.movementSystem = new MovementSystem();
-        this.renderSystem = new RenderSystem();
-        this.lifeSystem = new LifeSystem();
-        this.attackSystem = new AttackSystem();
-        this.collisionSystem = new CollisionSystem();
-        this.effectSystem = new EffectSystem();
-        this.pathSystem = new PathMonsterSystem();
-        this.spellSystem = new SpellSystem();
-        this.skeletonAnimationSystem = new SkeletonAnimationSystem();
-        this.monsterSystem = new MonsterSystem();
-        this.bulletSystem = new BulletSystem();
+        this.movementSystem = SystemFactory.create(MovementSystem);
+        this.renderSystem = SystemFactory.create(RenderSystem);
+        this.lifeSystem = SystemFactory.create(LifeSystem);
+        this.attackSystem = SystemFactory.create(AttackSystem);
+        this.collisionSystem = SystemFactory.create(CollisionSystem);
+        this.effectSystem = SystemFactory.create(EffectSystem);
+        this.pathSystem = SystemFactory.create(PathMonsterSystem);
+        this.spellSystem = SystemFactory.create(SpellSystem);
+        this.skeletonAnimationSystem = SystemFactory.create(SkeletonAnimationSystem);
+        this.monsterSystem = SystemFactory.create(MonsterSystem);
+        this.bulletSystem = SystemFactory.create(BulletSystem);
     },
 
     update: function (dt) {
@@ -77,26 +77,30 @@ let BattleLayer = cc.Layer.extend({
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
     },
 
-    putCardAt: function (type, pixelPos) {
-        pixelPos = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
-        let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, GameConfig.PLAYER);
+    /**
+     *
+     * @param type
+     * @param pixelPos in map node space
+     * @param mode
+     */
+    putCardAt: function (type, pixelPos, mode) {
+        let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
 
         // FIXME: hardcode
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
-            if (!Utils.isPixelPositionInMap(pixelPos, GameConfig.PLAYER)) {
+            if (!Utils.isPixelPositionInMap(pixelPos, mode)) {
                 cc.warn("put spell at pixel pos = " + JSON.stringify(pixelPos) + " is invalid")
                 return;
             }
         } else {
-            // put tower
-            if (tilePos.x < 0 || tilePos.x >= GameConfig.MAP_WIDTH || tilePos.y < 0 || tilePos.y >= GameConfig.MAP_HEIGH) {
+            if (!Utils.validateTilePos(tilePos)) {
                 return;
             }
 
             // FIXME: map
             let xMap = GameConfig.MAP_HEIGH-1-tilePos.y;
             let yMap = tilePos.x;
-            let map = this.battleData.getMap(GameConfig.PLAYER);
+            let map = this.battleData.getMap(mode);
             // FIXME: hardcode
             if (map[xMap][yMap] === 6 || map[xMap][yMap] === 5) {
                 return;
@@ -105,29 +109,30 @@ let BattleLayer = cc.Layer.extend({
 
         switch (type) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
-                EntityFactory.createCannonOwlTower(tilePos, GameConfig.PLAYER);
+                EntityFactory.createCannonOwlTower(tilePos, mode);
                 break;
             case GameConfig.ENTITY_ID.FROG_TOWER:
-                EntityFactory.createBoomerangFrogTower(tilePos, GameConfig.PLAYER);
+                EntityFactory.createBoomerangFrogTower(tilePos, mode);
                 break;
             case GameConfig.ENTITY_ID.BEAR_TOWER:
-                EntityFactory.createIceGunPolarBearTower(tilePos, GameConfig.PLAYER);
+                EntityFactory.createIceGunPolarBearTower(tilePos, mode);
                 break;
             case GameConfig.ENTITY_ID.FIRE_SPELL:
-                SpellFactory.createFireSpell(pixelPos, GameConfig.PLAYER);
+                SpellFactory.createFireSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
-                SpellFactory.createFrozenSpell(pixelPos, GameConfig.PLAYER);
+                SpellFactory.createFrozenSpell(pixelPos, mode);
                 break;
             default:
                 return;
         }
 
-        if (GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FIRE_SPELL && GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
+        if (type !== GameConfig.ENTITY_ID.FIRE_SPELL
+            && type !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
             EventDispatcher.getInstance()
-                .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos});
+                .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos, mode: mode});
         }
-        GameConfig.gameLayer.selectedCard = null;
+        BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
     _initTower: function () {
@@ -142,12 +147,18 @@ let BattleLayer = cc.Layer.extend({
             onTouchesEnded: function (touches, event) {
                 if (touches.length <= 0)
                     return;
-                if (GameConfig.gameLayer.selectedCard !== null) {
+                if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
                     let pixelPos = touches[0].getLocation();
-                    GameConfig.gameLayer.putCardAt(GameConfig.gameLayer.selectedCard, pixelPos);
+                    let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
+                    BattleManager.getInstance().getBattleLayer()
+                        .putCardAt(BattleManager.getInstance().getBattleLayer().selectedCard, pixelInMap, GameConfig.PLAYER);
                 }
             }
         }), this.uiLayer)
+    },
+
+    startGame: function () {
+        this.scheduleUpdate();
     },
 
     stopGame: function () {
@@ -167,7 +178,6 @@ let BattleLayer = cc.Layer.extend({
         this.addChild(new BattleResultLayer(result, this.battleData), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
-        GameConfig.gameLayer = null;
     },
 
     getPlayerMapNode: function () {

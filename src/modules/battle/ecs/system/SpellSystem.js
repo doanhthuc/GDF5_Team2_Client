@@ -18,7 +18,7 @@ let SpellSystem = System.extend({
                 let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
                 for (let monster of monsters) {
                     // FIXME: hardcode mode === GameConfig.PLAYER
-                    if (monster.mode === GameConfig.PLAYER) {
+                    if (monster.mode === spellEntity.mode) {
                         let monsterPosition = monster.getComponent(PositionComponent)
                         let distance = Utils.euclidDistance(monsterPosition, spellComponent.position)
                         if (distance <= spellComponent.range) {

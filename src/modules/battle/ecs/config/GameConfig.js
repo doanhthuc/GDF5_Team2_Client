@@ -1,7 +1,5 @@
 let GameConfig = GameConfig || {};
 
-GameConfig.gameLayer = GameConfig.gameLayer || null;
-
 GameConfig.PLAYER = "player";
 GameConfig.OPPONENT = "opponent";
 
