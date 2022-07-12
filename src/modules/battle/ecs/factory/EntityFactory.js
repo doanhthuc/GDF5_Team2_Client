@@ -100,9 +100,9 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 30, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSwordmanNodeAnimation(), mode);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSwordmanNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 140);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 1400);
 
     let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
     let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
@@ -224,6 +224,8 @@ function createSwordmanNodeAnimation() {
 
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 

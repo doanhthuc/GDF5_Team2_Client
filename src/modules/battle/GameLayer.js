@@ -41,6 +41,11 @@ let GameLayer = cc.Layer.extend({
         // this._initTower();
         this._handleEventKey();
         this.scheduleUpdate();
+
+        const cellPath = Utils.tileArray2PixelCellArray([cc.p(0, 4), cc.p(0, 3), cc.p(1, 3), cc.p(2, 3)], GameConfig.PLAYER)
+        cc.warn("==>")
+        cc.log(JSON.stringify(cellPath));
+        cc.warn("<==")
     },
 
     update: function (dt) {

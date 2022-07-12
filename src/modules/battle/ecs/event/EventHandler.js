@@ -34,12 +34,13 @@ EventDispatcher.getInstance()
                 let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {
                     let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
+                    cc.log(JSON.stringify(tilePos))
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
                     if (path) {
                         if (path.length > 0) {
                             // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
                             // newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
-                            let newPath = Utils.tileArray2PixelArray(path, currentMode);
+                            let newPath = Utils.tileArray2PixelCellArray(path, currentMode);
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
                             cc.log("new path, monster at tile = " + JSON.stringify(tilePos));
