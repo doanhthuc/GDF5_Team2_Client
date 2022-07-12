@@ -15,6 +15,9 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.SEND_CANCEL_MATCHING:
                 this._handleCancelMatching(cmd, packet);
                 break;
+            case gv.CMD.PUT_TOWER:
+                this._handlePutTower(cmd, packet);
+                break;
         }
     },
 
@@ -33,6 +36,7 @@ BattleNetwork.Connector = cc.Class.extend({
     _handleMatching: function (cmd, packet) {
         cc.log("[ShopNetwork.js] received matching packet: " + JSON.stringify(packet));
         GameConfig.battleData = new BattleData();
+        GameConfig.battleData.setRoomId(packet.roomId)
         GameConfig.battleData.setMap(packet.playerMap, GameConfig.PLAYER);
         GameConfig.battleData.setMap(packet.opponentMap, GameConfig.OPPONENT);
         GameConfig.battleData.setLongestPath(packet.playerLongestPath, GameConfig.PLAYER);
@@ -60,5 +64,15 @@ BattleNetwork.Connector = cc.Class.extend({
     _handleCancelMatching: function (cmd, packet) {
         cc.warn("Canceled matching")
         fr.view(MainScreen);
+    },
+
+    sendPutTower: function (roomId, towerId, tilePos, pixelPos) {
+        let pk = this.gameClient.getOutPacket(CMDPutTower);
+        pk.pack(roomId, towerId, tilePos, pixelPos);
+        this.gameClient.sendPacket(pk);
+    },
+
+    _handlePutTower: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 76] received put tower packet: ' + JSON.stringify(packet));
     }
 })

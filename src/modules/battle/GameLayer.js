@@ -78,6 +78,9 @@ let GameLayer = cc.Layer.extend({
         pixelPos = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, GameConfig.PLAYER);
 
+
+
+
         // FIXME: hardcode
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
             if (!Utils.isPixelPositionInMap(pixelPos, GameConfig.PLAYER)) {
@@ -126,6 +129,10 @@ let GameLayer = cc.Layer.extend({
         if (GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FIRE_SPELL && GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos});
+
+            // FIXME: test will delete later
+            cc.log("[GameLayer.js line 134] tilePos: " + JSON.stringify(pixelPos));
+            BattleNetwork.connector.sendPutTower(GameConfig.battleData.getRoomId(), type, tilePos, pixelPos);
         }
         GameConfig.gameLayer.selectedCard = null;
     },
