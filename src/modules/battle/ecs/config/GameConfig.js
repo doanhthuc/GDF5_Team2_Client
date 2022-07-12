@@ -75,12 +75,14 @@ GameConfig.MAP_HEIGH = 5;
 GameConfig.RIVER_MAP_HEIGH = 100;
 
 GameConfig.DIRECTION = {
-    BOTTOM: 2,
-    TOP: -2,
     RIGHT: 1,
     LEFT: -1,
-    RIGHT_TOP: -3,
-    RIGHT_BOTTOM: 3,
+    TOP: 3,
+    BOTTOM: -3,
+    RIGHT_TOP: 4,
+    RIGHT_BOTTOM: -2,
+    LEFT_TOP: 2,
+    LEFT_BOTTOM: -4,
 };
 
 GameConfig.BATTLE_RESULT = {

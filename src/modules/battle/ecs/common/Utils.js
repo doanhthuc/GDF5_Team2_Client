@@ -120,7 +120,7 @@ Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     }
 
     if (currentPos.y !== nextPost.y) {
-        direction2 = (currentPos.y - nextPost.y) / Math.abs(nextPost.y - currentPos.y) * 2;
+        direction2 = (nextPost.y - currentPos.y) / Math.abs(nextPost.y - currentPos.y) * 3;
     }
 
     return direction1 + direction2;
@@ -287,4 +287,84 @@ Utils.pixel2Cell = function (x, y, mode) {
         cellY = cellsY - 1 - Math.floor((y - paddingBottomY) / cellHeight);
     }
     return cc.p(cellX, cellY);
+}
+
+Utils.tileArray2PixelCellArray = function (tileArr, mode) {
+    if (tileArr.length < 2) {
+        return;
+    }
+
+    let cellArr = [];
+    for (let i = 0; i < tileArr.length; i++) {
+        let direction;
+        if (i === 0) {
+            direction = Utils.getDirectionOf2Tile(tileArr[0], tileArr[1]);
+        } else if (i === tileArr.length - 1) {
+            direction = Utils.getDirectionOf2Tile(tileArr[tileArr.length - 2], tileArr[tileArr.length - 1]);
+        } else {
+            direction = Utils.getDirectionOf2Tile(tileArr[i - 1], tileArr[i + 1]);
+        }
+        let cellX, cellY, tmp;
+        switch (direction) {
+            case GameConfig.DIRECTION.LEFT:
+                cellY = tileArr[i].y * cellsEachTile + Math.floor(Math.random()*cellsEachTile);
+                for (let c = (tileArr[i].x+1)*cellsEachTile - 1; c >= (tileArr[i].x)*cellsEachTile; c--) {
+                    cellArr.push(Utils.cell2Pixel(c, cellY, mode))
+                }
+                break;
+            case GameConfig.DIRECTION.RIGHT:
+                cellY = tileArr[i].y * cellsEachTile + Math.floor(Math.random()*cellsEachTile);
+                for (let c = tileArr[i].x*cellsEachTile; c < (tileArr[i].x+1)*cellsEachTile; c++) {
+                    cellArr.push(Utils.cell2Pixel(c, cellY, mode))
+                }
+                break;
+            case GameConfig.DIRECTION.BOTTOM:
+                cellX = tileArr[i].x * cellsEachTile + Math.floor(Math.random()*cellsEachTile);
+                for (let r = (tileArr[i].y+1)*cellsEachTile - 1; r >= (tileArr[i].y)*cellsEachTile; r--) {
+                    cellArr.push(Utils.cell2Pixel(cellX, r, mode))
+                }
+                break;
+            case GameConfig.DIRECTION.TOP:
+                cellX = tileArr[i].x * cellsEachTile + Math.floor(Math.random()*cellsEachTile);
+                for (let r = (tileArr[i].y)*cellsEachTile; r < (tileArr[i].y+1)*cellsEachTile; r++) {
+                    cellArr.push(Utils.cell2Pixel(cellX, r, mode))
+                }
+                break;
+            case GameConfig.DIRECTION.RIGHT_BOTTOM:
+                tmp = Math.min(Math.floor(Math.random()*cellsEachTile), 5);
+                cellX = tileArr[i].x * cellsEachTile;
+                cellY = tileArr[i].y * cellsEachTile;
+                for (let c = 0; c <= tmp; c++) {
+                    cellArr.push(Utils.cell2Pixel(cellX + c, cellY + (tmp - c), mode))
+                }
+                break;
+            case GameConfig.DIRECTION.LEFT_BOTTOM:
+                tmp = Math.min(Math.floor(Math.random()*cellsEachTile), 5);
+                cellX = tileArr[i].x * cellsEachTile;
+                cellY = tileArr[i].y * cellsEachTile;
+                for (let c = 0; c <= tmp; c++) {
+                    cellArr.push(Utils.cell2Pixel(cellX + (cellsEachTile-1-c), cellY +  (tmp-c), mode))
+                }
+                break;
+            case GameConfig.DIRECTION.RIGHT_TOP:
+                tmp = Math.min(Math.floor(Math.random()*cellsEachTile), 5);
+                cellX = tileArr[i].x * cellsEachTile;
+                cellY = tileArr[i].y * cellsEachTile;
+                for (let c = 0; c <= tmp; c++) {
+                    cellArr.push(Utils.cell2Pixel(cellX + c, cellY +  (cellsEachTile-1-c), mode))
+                }
+                break;
+            case GameConfig.DIRECTION.LEFT_TOP:
+                tmp = Math.min(Math.floor(Math.random()*cellsEachTile), 5);
+                cellX = tileArr[i].x * cellsEachTile;
+                cellY = tileArr[i].y * cellsEachTile;
+                for (let c = 0; c <= tmp; c++) {
+                    cellArr.push(Utils.cell2Pixel(cellX + (cellsEachTile-1-c), cellY +  (cellsEachTile-1-c), mode))
+                }
+                break;
+        }
+    }
+    cc.warn("Path nek")
+    cc.log(JSON.stringify(cellArr))
+    return cellArr;
 }

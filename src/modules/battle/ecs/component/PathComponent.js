@@ -8,7 +8,7 @@ let PathComponent = Component.extend({
     },
 
     reset: function (pathTile, mode) {
-        this.path = Utils.tileArray2PixelArray(pathTile, mode);
+        this.path = Utils.tileArray2PixelCellArray(pathTile, mode);
         this.currentPathIdx = 0;
     },
 
