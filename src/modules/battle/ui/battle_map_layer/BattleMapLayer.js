@@ -59,5 +59,39 @@ let BattleMapLayer = cc.Layer.extend({
                 }
             }
         }
+
+        // if (mode !== GameConfig.PLAYER) {
+        //     return;
+        // }
+        // cc.warn("==>");
+        // const drawNode = new cc.DrawNode();
+        // let count = 0;
+        // let pixelPos;
+        // let pixelContainer = [];
+        // for (let col = 0; col < GameConfig.MAP_WIDTH * 11; col++) {
+        //     for (let row = 0; row < GameConfig.MAP_HEIGH * 11; row++) {
+        //         pixelPos = Utils.cell2Pixel(col, row, mode);
+        //         pixelContainer.push({x: pixelPos.x, y: pixelPos.y});
+        //         count++;
+        //         drawNode.drawDot(cc.p(pixelPos.x, pixelPos.y), 1, cc.color.BLACK);
+        //     }
+        // }
+        // if (mode === GameConfig.PLAYER) {
+        //     this.playerMapNode.addChild(drawNode);
+        // } else if (mode === GameConfig.OPPONENT) {
+        //     this.opponentMapNode.addChild(drawNode);
+        // }
+        // cc.log("count = " + count);
+        // cc.log("Position = " + JSON.stringify(Utils.cell2Pixel(0, 0, GameConfig.PLAYER)))
+        // pixelContainer.push({x: -266, y: -189})
+        // let dup = [];
+        // for (let i = 0; i < pixelContainer.length - 1; i++) {
+        //     for (let j = i + 1; j < pixelContainer.length; j++) {
+        //         if (pixelContainer[i].x === pixelContainer[j].x && pixelContainer[i].y === pixelContainer[j].y) {
+        //             dup.push(pixelContainer[i]);
+        //         }
+        //     }
+        // }
+        // cc.log("dup length = " + dup.length);
     },
 });
