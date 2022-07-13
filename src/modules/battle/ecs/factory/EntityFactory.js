@@ -259,12 +259,12 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "boss", "land", 500, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "boss", "land", 400, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createDemonTreeNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 800);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 400);
     let spawnMinionComponent = ComponentFactory.create(SpawnMinionComponent, 2);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
@@ -278,7 +278,101 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
-        .add(spawnMinionComponent)
+        .addComponent(spawnMinionComponent)
+    // .addComponent(slowEffect)
+    // .addComponent(frozenEffect)
+
+    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    return entity;
+}
+
+EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
+    Utils.validateMode(mode);
+    let typeID = GameConfig.ENTITY_ID.DEMON_TREE_MINION;
+    let entity = this._createEntity(typeID, mode);
+
+    // NOTE: get component from pool
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 50, 1, 1, undefined);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createDemonTreeMinionNodeAnimation(), mode);
+    let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 30);
+
+    let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
+    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let pathComponent = ComponentFactory.create(PathComponent, path, mode);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(velocityComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(pathComponent)
+        .addComponent(collisionComponent)
+        .addComponent(lifeComponent)
+    // .addComponent(slowEffect)
+    // .addComponent(frozenEffect)
+
+    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    return entity;
+}
+
+EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
+    Utils.validateMode(mode);
+    let typeID = GameConfig.ENTITY_ID.DARK_GIANT;
+    let entity = this._createEntity(typeID, mode);
+
+    // NOTE: get component from pool
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "boss", "land", 500, 1, 1, undefined);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createDarkGiantNodeAnimation(), mode);
+    let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 800);
+
+    let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
+    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let pathComponent = ComponentFactory.create(PathComponent, path, mode);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(velocityComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(pathComponent)
+        .addComponent(collisionComponent)
+        .addComponent(lifeComponent)
+    // .addComponent(slowEffect)
+    // .addComponent(frozenEffect)
+
+    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    return entity;
+}
+
+EntityFactory.createSatyrBoss = function (pixelPos, mode) {
+    Utils.validateMode(mode);
+    let typeID = GameConfig.ENTITY_ID.SATYR;
+    let entity = this._createEntity(typeID, mode);
+
+    // NOTE: get component from pool
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "boss", "land", 300, 1, 1, undefined);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSatyrNodeAnimation(), mode);
+    let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 400);
+    let healingAbilityComponent = ComponentFactory.create(HealingAbility, 2 * GameConfig.TILE_WIDTH, 0.03);
+    let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
+    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let pathComponent = ComponentFactory.create(PathComponent, path, mode);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(velocityComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(pathComponent)
+        .addComponent(collisionComponent)
+        .addComponent(lifeComponent)
+        .addComponent(healingAbilityComponent);
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
@@ -485,6 +579,62 @@ function createDemonTreeNodeAnimation() {
     return node;
 }
 
+function createDemonTreeMinionNodeAnimation() {
+    let node = new cc.Node();
+    let monsterSprite = new cc.Sprite("res/textures/monster/frame/demon_tree_minion/monster_demon_tree_minion_run_0020.png");
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
+
+    let monsterAnimation = new cc.Animation();
+    for (let i = 25; i <= 32; i++) {
+        let fileName = "res/textures/monster/frame/demon_tree_minion/monster_demon_tree_minion_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        monsterAnimation.addSpriteFrameWithFile(fileName);
+    }
+    monsterAnimation.setDelayPerUnit(1 / (32 - 25 + 1));
+    monsterAnimation.setRestoreOriginalFrame(true);
+    let monsterAction = cc.animate(monsterAnimation);
+    monsterSprite.runAction(cc.repeatForever(monsterAction));
+    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(hpBarNode.node, 0, "hp");
+    return node;
+}
+
+function createDarkGiantNodeAnimation() {
+    let node = new cc.Node();
+    let monsterSprite = new cc.Sprite("res/textures/monster/frame/dark_giant/monster_dark_giant_run_0020.png");
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
+
+    let monsterAnimation = new cc.Animation();
+    for (let i = 28; i <= 41; i++) {
+        let fileName = "res/textures/monster/frame/dark_giant/monster_dark_giant_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        monsterAnimation.addSpriteFrameWithFile(fileName);
+    }
+    monsterAnimation.setDelayPerUnit(1 / (41 - 28 + 1));
+    monsterAnimation.setRestoreOriginalFrame(true);
+    let monsterAction = cc.animate(monsterAnimation);
+    monsterSprite.runAction(cc.repeatForever(monsterAction));
+    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(hpBarNode.node, 0, "hp");
+    return node;
+}
+
+function createSatyrNodeAnimation() {
+    let node = new cc.Node();
+    let monsterSprite = new cc.Sprite("res/textures/monster/frame/satyr/monster_satyr_run_0020.png");
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
+
+    let monsterAnimation = new cc.Animation();
+    for (let i = 13; i <= 25; i++) {
+        let fileName = "res/textures/monster/frame/satyr/monster_satyr_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        monsterAnimation.addSpriteFrameWithFile(fileName);
+    }
+    monsterAnimation.setDelayPerUnit(1 / (25 - 13 + 1));
+    monsterAnimation.setRestoreOriginalFrame(true);
+    let monsterAction = cc.animate(monsterAnimation);
+    monsterSprite.runAction(cc.repeatForever(monsterAction));
+    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(hpBarNode.node, 0, "hp");
+    return node;
+}
 
 function createOwlNodeAnimation(range) {
     let node = new cc.Node();

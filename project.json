@@ -93,6 +93,7 @@
         "src/modules/battle/ecs/pool/EntityPool.js",
         "src/modules/battle/ecs/component/Component.js",
         "src/modules/battle/ecs/component/SpawnMinionComponent.js",
+        "src/modules/battle/ecs/component/HealingAbilityComponent.js",
         "src/modules/battle/ecs/component/InfoComponent.js",
         "src/modules/battle/ecs/component/EffectComponent.js",
         "src/modules/battle/ecs/component/AppearanceComponent.js",
