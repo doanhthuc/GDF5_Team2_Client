@@ -45,6 +45,7 @@ CMDPutTower = fr.OutPacket.extend({
         this.packHeader();
         this.putInt(roomId);
         this.putInt(towerId);
+        // this.putInt(towerLevel);
         this.putInt(tilePos.x);
         this.putInt(tilePos.y);
         this.putDouble(pixelPos.x);
@@ -116,6 +117,7 @@ BattleNetwork.packetMap[gv.CMD.PUT_TOWER] = fr.InPacket.extend({
     readData: function () {
         this.error = this.getShort();
         this.towerId = this.getInt();
+        this.towerLevel = this.getInt();
         this.x = this.getInt();
         this.y = this.getInt();
         this.pixelX = this.getDouble();

@@ -132,6 +132,10 @@ let BattleLayer = cc.Layer.extend({
             && type !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos, mode: mode});
+
+            // FIXME: test will delete later
+            cc.log("[GameLayer.js line 134] tilePos: " + JSON.stringify(pixelPos));
+            BattleNetwork.connector.sendPutTower(GameConfig.battleData.getRoomId(), type, tilePos, pixelPos);
         }
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
