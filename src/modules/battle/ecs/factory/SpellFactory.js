@@ -14,7 +14,7 @@ SpellFactory.createFrozenSpell = function (pixelPos, mode) {
 
     let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent,
         "textures/potion/effect_atk_ice.json", "textures/potion/effect_atk_ice.atlas", [0, 0.1],
-        ["animation_ice_ball", "animation_full"], [true, false], pixelPos);
+        ["animation_ice_ball", "animation_full"], [true, false], pixelPos, mode);
     let spellInfoComponent = ComponentFactory.create(SpellInfoComponent, pixelPos, [damageEffect, frozenEffect], 1.2 * GameConfig.TILE_WIDTH, 0.1);
 
     entity.addComponent(positionComponent)
@@ -36,7 +36,7 @@ SpellFactory.createFireSpell = function (pixelPos, mode) {
 
     let damageEffect = ComponentFactory.create(DamageEffect, 50);
 
-    let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent, "textures/potion/effect_atk_fire.json", "textures/potion/effect_atk_fire.atlas", [0, 0.1], ["animation_fireball", "animation_full"], [true, false], pixelPos);
+    let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent, "textures/potion/effect_atk_fire.json", "textures/potion/effect_atk_fire.atlas", [0, 0.1], ["animation_fireball", "animation_full"], [true, false], pixelPos, mode);
     let spellInfoComponent = ComponentFactory.create(SpellInfoComponent, pixelPos, [damageEffect], 1.2*GameConfig.TILE_WIDTH, 0.1);
 
     entity.addComponent(positionComponent)

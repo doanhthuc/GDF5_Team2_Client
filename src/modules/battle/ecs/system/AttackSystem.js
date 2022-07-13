@@ -1,8 +1,9 @@
 let AttackSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.ATTACK,
+    typeID: GameConfig.SYSTEM_ID.ATTACK,
     name: "AttackSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -83,3 +84,5 @@ let AttackSystem = System.extend({
         return targetMonster;
     }
 });
+AttackSystem.typeID = GameConfig.SYSTEM_ID.ATTACK;
+SystemManager.getInstance().registerClass(AttackSystem);

@@ -1,6 +1,4 @@
-let ComponentManager = ManagerECS.extend({
-    name: "ComponentManager",
-
+let SystemManager = ManagerECS.extend({
     ctor: function () {
         this._super();
         this._storeInstance = new Map();
@@ -9,31 +7,31 @@ let ComponentManager = ManagerECS.extend({
 
     registerClass: function (cls) {
         if (cls.typeID === null || cls.typeID === undefined) {
-            throw new Error("Class doesn't have typeID property");
+            throw new Error("System class doesn't have typeID property");
         }
         this._storeCls.set(cls.typeID, cls);
     },
 
     getClass: function (typeID) {
         if (this._storeCls.has(typeID)) {
-            throw new Error("Component Class with typeID = " + typeID + " doesn't exist");
+            throw new Error("System class with typeID = " + typeID + " doesn't exist");
         }
     },
 
-    add: function (component) {
-        if (this._storeInstance.has(component.id)) {
-            throw new Error("Component with typeID = " + component.typeID + ", id = " + component.id + " exists.");
+    add: function (system) {
+        if (this._storeInstance.has(system.id)) {
+            throw new Error("System with typeID = " + system.typeID + ", id = " + system.id + " exists.");
         }
 
-        this._storeInstance.set(component.id, component);
+        this._storeInstance.set(system.id, system);
     },
 
     findByInstanceId: function (instanceId) {
         this._storeInstance.get(instanceId);
     },
 
-    remove: function (component) {
-        this._storeInstance.delete(component.id);
+    remove: function (system) {
+        this._storeInstance.delete(system.id);
     },
 });
 
@@ -42,7 +40,7 @@ let _instanceBuilder = (function () {
     return {
         getInstance: function () {
             if (_instance === null) {
-                _instance = new ComponentManager();
+                _instance = new SystemManager();
             }
             return _instance;
         },
@@ -51,5 +49,5 @@ let _instanceBuilder = (function () {
         }
     }
 })();
-ComponentManager.getInstance = _instanceBuilder.getInstance;
-ComponentManager.resetInstance = _instanceBuilder.resetInstance;
+SystemManager.getInstance = _instanceBuilder.getInstance;
+SystemManager.resetInstance = _instanceBuilder.resetInstance;

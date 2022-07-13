@@ -1,8 +1,9 @@
 let CollisionSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.LIFE,
+    typeID: GameConfig.SYSTEM_ID.COLLISION,
     name: "CollisionSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -55,9 +56,9 @@ let CollisionSystem = System.extend({
             let rect1 = cc.DrawNode.create();
             let rect2 = cc.DrawNode.create();
             rect1.drawRect(cc.p(pos1.x - (w1 / 2), pos1.y - (h1 / 2)), cc.p(pos1.x + w1/2, pos1.y + h1/2), cc.color(255,255,255,255));
-            GameConfig.gameLayer.addChild(rect1);
+            BattleManager.getInstance().getBattleLayer().addChild(rect1);
             rect2.drawRect(cc.p(pos2.x - (w2 / 2), pos2.y - (h2 / 2)), cc.p(pos2.x + w2/2, pos2.y + h2/2), cc.color(255,0,255,255));
-            GameConfig.gameLayer.addChild(rect2);
+            BattleManager.getInstance().getBattleLayer().addChild(rect2);
         }
         // END DEBUG
 
@@ -75,3 +76,6 @@ let CollisionSystem = System.extend({
         return null
     }
 });
+CollisionSystem.typeID = GameConfig.SYSTEM_ID.COLLISION;
+cc.warn(GameConfig.SYSTEM_ID.COLLISION)
+SystemManager.getInstance().registerClass(CollisionSystem);

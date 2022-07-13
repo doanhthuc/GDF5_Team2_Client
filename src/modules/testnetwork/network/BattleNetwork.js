@@ -52,7 +52,7 @@ BattleNetwork.Connector = cc.Class.extend({
         GameConfig.battleData.setTrophy(packet.opponentInfo.trophy, GameConfig.OPPONENT);
 
         setTimeout(function () {
-            fr.view(GameLayer, 0.5, true)
+            fr.view(BattleLayer, 0.5, true)
             cc.log("===> Switch to Game Layer Scene !!!")
         }, 2000);
     },

@@ -78,5 +78,5 @@ let BattleUILayer = cc.Layer.extend({
 });
 
 BattleUILayer.minusHouseEnergy = function (energy, mode) {
-    GameConfig.gameLayer.uiLayer.houseEnergyNode.minusEnergyHouse(energy, mode);
+    BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.minusEnergyHouse(energy, mode);
 }

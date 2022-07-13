@@ -1,7 +1,5 @@
 let GameConfig = GameConfig || {};
 
-GameConfig.gameLayer = GameConfig.gameLayer || null;
-
 GameConfig.PLAYER = "player";
 GameConfig.OPPONENT = "opponent";
 
@@ -39,6 +37,7 @@ GameConfig.SYSTEM_ID = {
     BULLET: 10,
     MONSTER: 11,
     ABILITY:12,
+    COLLISION: 13,
 }
 
 GameConfig.ENTITY_ID = {

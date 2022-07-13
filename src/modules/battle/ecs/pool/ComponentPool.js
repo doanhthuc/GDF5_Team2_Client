@@ -1,7 +1,8 @@
-let ComponentPool = cc.Class.extend({
+let ComponentPool = ObjectPoolECS.extend({
     name: "ComponentObjectPool",
 
     ctor: function () {
+        this._super();
         this._store = {};
     },
 

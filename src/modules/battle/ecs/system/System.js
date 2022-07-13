@@ -1,6 +1,10 @@
 let System = cc.Class.extend({
-    id: 0,
+    typeID: 0,
     name: "SystemECS",
+
+    ctor: function () {
+        this.id = Utils.UUID.genInstanceID();
+    },
 
     run: function (tick) {
         throw new NotImplementedError();

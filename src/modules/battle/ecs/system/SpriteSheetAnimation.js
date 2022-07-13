@@ -1,8 +1,9 @@
 let SpriteSheetAnimationSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.SPRITE_SHEET,
+    typeID: GameConfig.SYSTEM_ID.SPRITE_SHEET,
     name: "SpriteSheetAnimationSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -12,3 +13,5 @@ let SpriteSheetAnimationSystem = System.extend({
 
     },
 });
+SpriteSheetAnimationSystem.typeID = GameConfig.SYSTEM_ID.SPRITE_SHEET;
+SystemManager.getInstance().registerClass(SpriteSheetAnimationSystem);

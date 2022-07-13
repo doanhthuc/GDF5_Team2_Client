@@ -1,8 +1,9 @@
 let BulletSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.BULLET,
+    typeID: GameConfig.SYSTEM_ID.BULLET,
     name: "BulletSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -32,6 +33,8 @@ let BulletSystem = System.extend({
         }
     }
 })
+BulletSystem.typeID = GameConfig.SYSTEM_ID.BULLET;
+SystemManager.getInstance().registerClass(BulletSystem);
 
 // FIXME: when dynamic position is not active ==> remove velocity and destroy entity???
 // if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive() === false) {

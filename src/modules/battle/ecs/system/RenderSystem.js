@@ -1,8 +1,9 @@
 let RenderSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.RENDER,
+    typeID: GameConfig.SYSTEM_ID.RENDER,
     name: "RenderSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -46,3 +47,5 @@ let RenderSystem = System.extend({
         }
     },
 });
+RenderSystem.typeID = GameConfig.SYSTEM_ID.RENDER;
+SystemManager.getInstance().registerClass(RenderSystem);

@@ -56,3 +56,5 @@ let AbilitySystem = System.extend({
         velocityComponent.speedY = velocityComponent.originSpeedY;
     }
 });
+AbilitySystem.typeID = GameConfig.SYSTEM_ID.ABILITY;
+SystemManager.getInstance().registerClass(AbilitySystem);

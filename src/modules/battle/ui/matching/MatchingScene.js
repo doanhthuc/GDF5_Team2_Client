@@ -6,8 +6,6 @@ let MatchingScene = cc.Scene.extend({
         this.schedule(this._updateUI, 1);
         // this.scheduleOnce(this.onFinishMatching, 3);
 
-        // call api
-        // get map data
         GameConfig.matchingScene = this;
     },
 

@@ -1,8 +1,12 @@
-let EntityPool = cc.Class.extend({
+let EntityPool = ObjectPoolECS.extend({
     /*
     * pool {typeID: [entity1, entity2, ...]}
     * */
-    pool: {},
+
+    ctor: function () {
+        this._super();
+        this.pool = {};
+    },
 
     getInActiveEntity: function (entityTypeID) {
         let invisibleEntity = null;
