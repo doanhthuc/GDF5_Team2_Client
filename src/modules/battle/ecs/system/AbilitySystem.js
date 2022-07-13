@@ -17,14 +17,14 @@ let AbilitySystem = System.extend({
             let lifeComponent = entity.getComponent(LifeComponent);
             let underGroundComponent = entity.getComponent(UnderGroundComponent);
             let pathComponent = entity.getComponent(PathComponent);
-            if (underGroundComponent.isInGround == false) {
+            if (underGroundComponent.isInGround === false) {
                 if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
                     underGroundComponent.trigger += 1;
                     underGroundComponent.disablePathIdx = pathComponent.currentPathIdx + 2;
                     underGroundComponent.isInGround = true;
                 }
             } else {
-                if (underGroundComponent.disablePathIdx == pathComponent.currentPathIdx) {
+                if (underGroundComponent.disablePathIdx === pathComponent.currentPathIdx) {
                     underGroundComponent.isInGround = false;
                 }
             }

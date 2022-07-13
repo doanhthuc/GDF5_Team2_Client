@@ -95,3 +95,13 @@ GameConfig.BATTLE_RESULT = {
     LOSE: 1,
     DRAW: 2
 }
+
+GameConfig.MAP = {
+    TOWER: 7,
+    ATTACK_SPEED: 1,
+    ATTACK_RANGE: 2,
+    ATTACK_DAMAGE: 3,
+    TREE: 5,
+    HOLE: 6,
+    NONE: 0
+}

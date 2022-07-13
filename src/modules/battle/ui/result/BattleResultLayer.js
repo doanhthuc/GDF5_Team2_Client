@@ -80,9 +80,8 @@ let BattleResultLayer = cc.Layer.extend({
     },
 
     _showResult: function () {
-        // FIXME: harcode here
         let playerInfoNode = new BattleResultPlayerInfo(this.battleData.getUsername(GameConfig.PLAYER), this.battleData.getTrophy(GameConfig.PLAYER),
-            "textures/common/common_avatar.png", this.battleData.getEnergyHouse(GameConfig.PLAYER));
+            BattleResource.AVATAR_IMAGE, this.battleData.getEnergyHouse(GameConfig.PLAYER));
         playerInfoNode.attr({
             y: cc.winSize.height / 2,
             x: cc.winSize.width / 4
@@ -90,7 +89,7 @@ let BattleResultLayer = cc.Layer.extend({
         this.addChild(playerInfoNode);
 
         let opponentInfoNode = new BattleResultPlayerInfo(this.battleData.getUsername(GameConfig.OPPONENT), this.battleData.getTrophy(GameConfig.OPPONENT),
-            "textures/common/common_avatar.png", this.battleData.getEnergyHouse(GameConfig.OPPONENT));
+            BattleResource.AVATAR_IMAGE, this.battleData.getEnergyHouse(GameConfig.OPPONENT));
         opponentInfoNode.attr({
             y: cc.winSize.height / 2,
             x: 3 * cc.winSize.width / 4
