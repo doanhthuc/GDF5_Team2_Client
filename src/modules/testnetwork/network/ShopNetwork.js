@@ -39,7 +39,7 @@ ShopNetwork.Connector = cc.Class.extend({
     },
 
     _handleBuyGoldShop: function (cmd, packet) {
-        if (packet.error === 0) {
+        if (packet.getError() === 0) {
             cc.log("[ShopNetwork.js] response buy gold shop goldChange = " + packet.goldChange + ", gemChange = " + packet.gemChange);
             let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
             userContext.updateUserGem(packet.gemChange);
@@ -52,7 +52,7 @@ ShopNetwork.Connector = cc.Class.extend({
     },
 
     _handleBuyDailyShop: function (cmd, packet) {
-        if (packet.error === 0) {
+        if (packet.getError() === 0) {
             cc.log("[ShopNetwork.js] Response Buy Daily Shop");
             cc.log(JSON.stringify(packet));
             cc.log(packet.gemChange + " " + packet.goldChange);
