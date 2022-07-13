@@ -1,8 +1,9 @@
 let MonsterSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.MONSTER,
+    typeID: GameConfig.SYSTEM_ID.MONSTER,
     name: "MonsterSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -20,4 +21,6 @@ let MonsterSystem = System.extend({
             }
         }
     }
-})
+});
+MonsterSystem.typeID = GameConfig.SYSTEM_ID.MONSTER;
+SystemManager.getInstance().registerClass(MonsterSystem);

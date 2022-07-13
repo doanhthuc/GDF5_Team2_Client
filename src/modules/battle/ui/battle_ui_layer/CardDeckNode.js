@@ -86,7 +86,7 @@ let CardDeckNode = cc.Node.extend({
             if (selectedCard.isUp === false) {
                 this._moveCardUp(selectedCard);
                 // Select card
-                GameConfig.gameLayer.selectedCard = selectedCard.type;
+                BattleManager.getInstance().getBattleLayer().selectedCard = selectedCard.type;
 
                 // move another card down if it is up
                 for (let cardDeckSlot of this.cardSlotManager) {
@@ -159,7 +159,7 @@ let CardDeckNode = cc.Node.extend({
 
         if (this.spriteDragManager[touch.getID()]) {
             this.spriteDragManager[touch.getID()].setVisible(false);
-            GameConfig.gameLayer.removeChild(this.spriteDragManager[touch.getID()]);
+            BattleManager.getInstance().getBattleLayer().removeChild(this.spriteDragManager[touch.getID()]);
             this.spriteDragManager[touch.getID()] = null;
         }
     },
@@ -180,7 +180,7 @@ let CardDeckNode = cc.Node.extend({
         Utils.validateMode(mode);
         if (!this.spriteDragManager[touch.getID()]) {
             // FIXME: hardcode sprite, use map to cache
-            let mapNode = mode === GameConfig.PLAYER ? GameConfig.gameLayer.mapLayer.playerMapNode : GameConfig.gameLayer.mapLayer.opponentMapNode;
+            let mapNode = mode === GameConfig.PLAYER ? BattleManager.getInstance().getBattleLayer().getPlayerMapNode() : BattleManager.getInstance().getBattleLayer().getOpponentMapNode();
             if (selectedCard.type === GameConfig.ENTITY_ID.FIRE_SPELL || selectedCard.type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
                 let sp = new cc.Sprite("textures/battle/battle_potion_range.png");
                 sp.setScale(2*1.2*GameConfig.TILE_WIDTH/sp.width);

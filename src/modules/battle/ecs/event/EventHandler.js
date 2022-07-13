@@ -1,40 +1,39 @@
 EventDispatcher.getInstance()
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
-        let uiLayer = GameConfig.gameLayer.uiLayer;
+        let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
         uiLayer.waveNode.increaseWave();
-        GameConfig.gameLayer.bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
-        GameConfig.gameLayer.bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
+        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
     })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
-        GameConfig.gameLayer.stopGame();
+        BattleManager.getInstance().getBattleLayer().stopGame();
     })
     .addEventHandler(EventType.END_ALL_WAVE, function (data) {
-        GameConfig.gameLayer.stopGame();
+        BattleManager.getInstance().getBattleLayer().stopGame();
     })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
-        let map = GameConfig.battleData.getMap(GameConfig.PLAYER);
+        let tilePos = data.pos;
+        let currentMode = data.mode;
+        let map = GameConfig.battleData.getMap(currentMode);
 
-        // FIXME: map
-        if (GameConfig.MAP_HEIGH-1-data.pos.y < 0 || GameConfig.MAP_HEIGH-1-data.pos.y >= GameConfig.MAP_HEIGH
-            || data.pos.x < 0 || data.pos.x >= GameConfig.MAP_WIDTH) {
+        if (!Utils.validateTilePos(tilePos)) {
             return;
         }
+
         cc.log("put new tower event: " + JSON.stringify(data));
 
-        // put tower at x, y
         // FIXME: hardcode 7 == tower
-        map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 7;
-        let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
+        map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = 7;
+        let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
 
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
-        let currentMode = GameConfig.PLAYER;
         for (let entity of entityList) {
             if (entity.mode === currentMode) {
                 let pathComponent = entity.getComponent(PathComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {
                     let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
-                    let path = shortestPathForEachTile[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
+                    let path = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
                     if (path) {
                         if (path.length > 0) {
                             // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
@@ -49,10 +48,3 @@ EventDispatcher.getInstance()
             }
         }
     })
-    // .addEventHandler(EventType.FINISH_MATCHING, function (data) {
-    //     let layer = new GameLayer();
-    //     layer.setName("Screen");
-    //     let scene = new cc.Scene();
-    //     scene.addChild(layer);
-    //     cc.director.runScene(new cc.TransitionFade(1, scene));
-    // })

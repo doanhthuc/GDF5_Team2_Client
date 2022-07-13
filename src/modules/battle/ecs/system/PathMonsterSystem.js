@@ -1,8 +1,9 @@
 let PathMonsterSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.PATH_MONSTER,
+    typeID: GameConfig.SYSTEM_ID.PATH_MONSTER,
     name: "PathMonsterSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -39,6 +40,6 @@ let PathMonsterSystem = System.extend({
             }
         }
     },
-
-
 });
+PathMonsterSystem.typeID = GameConfig.SYSTEM_ID.PATH_MONSTER;
+SystemManager.getInstance().registerClass(PathMonsterSystem);

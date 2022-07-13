@@ -2,12 +2,13 @@ let SkeletonAnimationComponent = Component.extend({
     name: "SpellInfoComponent",
     typeID: GameConfig.COMPONENT_ID.SKELETON,
 
-    ctor: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position) {
+    ctor: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position, mode) {
         this._super();
-        this.reset(fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position);
+        this.reset(fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position, mode);
     },
 
-    reset: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position) {
+    reset: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position, mode) {
+        Utils.validateMode(mode);
         this.fileJson = fileJson;
         this.fileAtlas = fileAtlas;
         this.timeLine = timeLine;
@@ -18,13 +19,16 @@ let SkeletonAnimationComponent = Component.extend({
         this.position = position;
 
         this.spine = new sp.SkeletonAnimation(this.fileJson, this.fileAtlas);
-        GameConfig.gameLayer.mapLayer.playerMapNode.addChild(this.spine, 4);
+        if (mode === GameConfig.PLAYER) {
+            BattleManager.getInstance().getBattleLayer().getPlayerMapNode().addChild(this.spine, 4);
+        } else if (mode === GameConfig.OPPONENT) {
+            BattleManager.getInstance().getBattleLayer().getOpponentMapNode().addChild(this.spine, 4);
+        }
     },
 
     clone: function () {
         return new SkeletonAnimationComponent(this.fileJson, this.fileAtlas, this.timeLine, this.sequenceAnim, this.sequenceAnimLoop);
     }
-
 });
 SkeletonAnimationComponent.typeID = GameConfig.COMPONENT_ID.SKELETON;
 ComponentManager.getInstance().registerClass(SkeletonAnimationComponent);

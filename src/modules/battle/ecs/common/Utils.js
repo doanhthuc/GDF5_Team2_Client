@@ -5,10 +5,6 @@ Utils.getVariableName = function (variable) {
     return name;
 };
 
-// FIXME: hard code
-const CARD_DECK_HEIGHT = BattleResource.DECK_CARD_HEIGHT;
-const RIVER_HEIGHT = BattleResource.RIVER_HEIGHT;
-
 /**
  *  Convert tile map coordination to pixel map node coordination (center of a cell)
  * @param x {Number}
@@ -68,9 +64,9 @@ Utils.convertWorldSpace2MapNodeSpace = function (worldPos, mode) {
     Utils.validateMode(mode);
 
     if (mode === GameConfig.PLAYER) {
-        return GameConfig.gameLayer.mapLayer.playerMapNode.convertToNodeSpace(worldPos);
+        return BattleManager.getInstance().getBattleLayer().getPlayerMapNode().convertToNodeSpace(worldPos);
     } else {
-        return GameConfig.gameLayer.mapLayer.opponentMapNode.convertToNodeSpace(worldPos);
+        return BattleManager.getInstance().getBattleLayer().getOpponentMapNode().convertToNodeSpace(worldPos);
     }
 }
 
@@ -96,6 +92,8 @@ Utils.tileArray2PixelArray = function (positionArr, mode) {
  * @returns {boolean}
  */
 Utils.isPixelPositionInMap = function (pixelPos, mode) {
+    Utils.validateMode(mode);
+
     let tile00 = Utils.tile2Pixel(0, 0, mode);
     let tile64 = Utils.tile2Pixel(6, 4, mode);
     if (mode === GameConfig.PLAYER) {
@@ -109,8 +107,11 @@ Utils.isPixelPositionInMap = function (pixelPos, mode) {
         tile64.x = tile64.x - GameConfig.TILE_WIDTH / 2;
         tile64.y = tile64.y - GameConfig.TILE_HEIGH / 2;
     }
-
-    return pixelPos.x >= tile00.x && pixelPos.x <= tile64.x && pixelPos.y >= tile00.y && pixelPos.y <= tile64.y;
+    if (mode === GameConfig.PLAYER) {
+        return pixelPos.x >= tile00.x && pixelPos.x <= tile64.x && pixelPos.y >= tile00.y && pixelPos.y <= tile64.y;
+    } else if (mode === GameConfig.OPPONENT) {
+        return pixelPos.x <= tile00.x && pixelPos.x >= tile64.x && pixelPos.y <= tile00.y && pixelPos.y >= tile64.y;
+    }
 }
 Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     let direction1 = 0;
@@ -214,4 +215,77 @@ Utils.calcSlopeOfLine = function (pointA, pointB) {
     }
 
     return alpha;
+}
+
+/**
+ * Convert cell coordination to pixel map node coordination (anchor 0.5, 0.5)
+ * @param cellX
+ * @param cellY
+ * @param mode
+ * @returns {cc.Point}
+ */
+const cellsEachTile = 11;
+const cellWidth = GameConfig.TILE_WIDTH / cellsEachTile;
+const cellHeight = GameConfig.TILE_HEIGH / cellsEachTile;
+const cellsX = GameConfig.MAP_WIDTH * cellsEachTile;
+const cellsY = GameConfig.MAP_HEIGH * cellsEachTile;
+const mapWidthPixel = GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH;
+const mapHeightPixel = GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH;
+
+Utils.cell2Pixel = function (cellX, cellY, mode) {
+    Utils.validateMode(mode);
+    if (cellX < 0 || cellX >= cellsX || cellY < 0 || cellY >= cellsY) {
+        throw new Error("Cell position is invalid (cellX = " + cellX + ", cellY = " + cellY + ")");
+    }
+    let x, y;
+    if (mode === GameConfig.PLAYER) {
+        x = (cellX+1) * cellWidth - mapWidthPixel / 2 - cellWidth / 2;
+        y = (cellY+1) * cellHeight - mapHeightPixel / 2 - cellHeight / 2;
+    } else if (mode === GameConfig.OPPONENT) {
+        x =  mapWidthPixel / 2 - (cellX+1) * cellWidth + cellWidth / 2;
+        y = mapHeightPixel / 2 - (cellY+1) * cellHeight + cellHeight / 2;
+    }
+    return cc.p(x, y);
+}
+
+/**
+ * Convert cell coordination to tile coordination (1 tile = 11 cells)
+ * @param cellX
+ * @param cellY
+ * @returns {cc.Point}
+ */
+Utils.cell2Tile = function (cellX, cellY) {
+    if (cellX < 0 || cellX >= cellsX || cellY < 0 || cellY >= cellsY) {
+        throw new Error("Cell position is invalid (cellX = " + cellX + ", cellY = " + cellY + ")");
+    }
+    const tileX = cellX % cellsEachTile;
+    const tileY = cellY % cellsEachTile;
+    return cc.p(tileX, tileY);
+}
+
+/**
+ * Convert pixel map node coordination to cell coordination
+ * @param x
+ * @param y
+ * @param mode
+ * @returns {cc.Point}
+ */
+Utils.pixel2Cell = function (x, y, mode) {
+    Utils.validateMode(mode);
+    const tilePos = Utils.pixel2Tile(x, y, GameConfig.PLAYER);
+    if (Utils.validateTilePos(tilePos) === false) {
+        throw new Error("Pixel (x = " + x + ", y = " + y + ") is invalid");
+    }
+    let cellX, cellY;
+    const paddingLeftX = Utils.cell2Pixel(0, 0).x - cellWidth/2;
+    const paddingBottomY = Utils.cell2Pixel(0, 0).y - cellHeight/2;
+
+    if (mode === GameConfig.PLAYER) {
+        cellX = Math.floor((x - paddingLeftX) / cellWidth);
+        cellY = Math.floor((y - paddingBottomY) / cellHeight);
+    } else if (mode === GameConfig.OPPONENT) {
+        cellX = cellsX - 1 - Math.floor((x - paddingLeftX) / cellWidth);
+        cellY = cellsY - 1 - Math.floor((y - paddingBottomY) / cellHeight);
+    }
+    return cc.p(cellX, cellY);
 }

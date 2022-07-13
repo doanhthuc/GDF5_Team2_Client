@@ -1,8 +1,9 @@
 let SpellSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.SPELL,
+    typeID: GameConfig.SYSTEM_ID.SPELL,
     name: "SpellSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
@@ -17,7 +18,7 @@ let SpellSystem = System.extend({
                 let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
                 for (let monster of monsters) {
                     // FIXME: hardcode mode === GameConfig.PLAYER
-                    if (monster.mode === GameConfig.PLAYER) {
+                    if (monster.mode === spellEntity.mode) {
                         let monsterPosition = monster.getComponent(PositionComponent)
                         let distance = Utils.euclidDistance(monsterPosition, spellComponent.position)
                         if (distance <= spellComponent.range) {
@@ -34,3 +35,5 @@ let SpellSystem = System.extend({
         }
     },
 });
+SpellSystem.typeID = GameConfig.SYSTEM_ID.SPELL;
+SystemManager.getInstance().registerClass(SpellSystem);
