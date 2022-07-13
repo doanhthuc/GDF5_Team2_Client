@@ -6,13 +6,13 @@ let UnderGroundComponent = Component.extend({
         this._super();
         this.currentPathIdx = 0;
         this.trigger = 0;
-        this.isRunning = false;
+        this.isInGround = false;
     },
 
     reset: function () {
         this.currentPathIdx = 0;
         this.trigger = 0;
-        this.isRunning = false;
+        this.isInGround = false;
     },
 
     clone: function () {

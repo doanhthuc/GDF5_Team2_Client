@@ -55,7 +55,7 @@ let AttackSystem = System.extend({
     _findTargetMonsterByStrategy: function (strategy, monsterInAttackRange) {
         for (let monster of monsterInAttackRange) {
             let underGroundComponent = monster.getComponent(UnderGroundComponent);
-            if ((!(underGroundComponent) || underGroundComponent.isRunning == false)) return monster;
+            if ((!(underGroundComponent) || underGroundComponent.isInGround === false)) return monster;
         }
         let targetMonster = null;
         switch (strategy) {
