@@ -11,7 +11,6 @@ let AppearanceComponent = Component.extend({
         } else if (mode === GameConfig.OPPONENT) {
             BattleManager.getInstance().getBattleLayer().getOpponentMapNode().addChild(this.sprite, this.zOrder);
         }
-        this.sprite.retain();
     },
 
     reset: function (sprite) {

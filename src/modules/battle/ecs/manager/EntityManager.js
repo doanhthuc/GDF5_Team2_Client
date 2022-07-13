@@ -42,9 +42,8 @@ let EntityManager = ManagerECS.extend({
         this.entities[entity.id] = entity;
     },
 
-    destroyEntity: function (id) {
-        this.getEntity(id).setActive(false);
-        delete this.entities[id];
+    remove: function (entity) {
+        delete this.entities[entity.id];
     },
 });
 
@@ -59,5 +58,7 @@ EntityManager.destroy = function (entity) {
     entity.setActive(false);
     for (let key of Object.keys(entity.components)) {
         entity.components[key].setActive(false);
+        ComponentManager.getInstance().remove(entity.components[key]);
     }
+    EntityManager.getInstance().remove(entity);
 }

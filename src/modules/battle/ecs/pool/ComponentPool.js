@@ -25,6 +25,8 @@ let ComponentPool = ObjectPoolECS.extend({
         if (!this._store[component.typeID]) {
             this._store[component.typeID] = [];
         }
+
+        if (component.typeID === AppearanceComponent.typeID) return;
         this._store[component.typeID].push(component);
     }
 

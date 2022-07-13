@@ -5,7 +5,7 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().setBattleLayer(this);
         this.selectedCard = null;
 
-        // BattleData.fakeData();
+        BattleData.fakeData();
         this.battleData = GameConfig.battleData;
 
         this._setupUI();
@@ -76,8 +76,15 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
+
         EntityFactory.createNinjaMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
     },
 
     /**
