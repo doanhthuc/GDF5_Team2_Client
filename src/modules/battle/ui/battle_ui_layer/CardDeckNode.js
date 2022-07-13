@@ -177,12 +177,14 @@ let CardDeckNode = cc.Node.extend({
     },
 
     _createOrGetSprite: function (selectedCard, touch, mode) {
+        const battleLayer = BattleManager.getInstance().getBattleLayer();
         Utils.validateMode(mode);
         if (!this.spriteDragManager[touch.getID()]) {
             // FIXME: hardcode sprite, use map to cache
-            let mapNode = mode === GameConfig.PLAYER ? BattleManager.getInstance().getBattleLayer().getPlayerMapNode() : BattleManager.getInstance().getBattleLayer().getOpponentMapNode();
+            let mapNode = mode === GameConfig.PLAYER ? battleLayer.getPlayerMapNode()
+                : battleLayer.getOpponentMapNode();
             if (selectedCard.type === GameConfig.ENTITY_ID.FIRE_SPELL || selectedCard.type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
-                let sp = new cc.Sprite("textures/battle/battle_potion_range.png");
+                let sp = new cc.Sprite(BattleResource.POTION_RANGE_IMG);
                 sp.setScale(2*1.2*GameConfig.TILE_WIDTH/sp.width);
                 this.spriteDragManager[touch.getID()] = sp;
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);

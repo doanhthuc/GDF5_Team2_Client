@@ -65,7 +65,6 @@ const ShopItemSlotNode = cc.Node.extend({
             this.buyBtn.getChildByName("backgroundBtn").addTouchEventListener(this._onBuyBtnClick.bind(this), this);
         } else {
             this.buyBtn.removeAllChildren();
-            // FIXME: hardcode
             let label = new ccui.Text("Đã mua", ShopResources.FONT_SUPERCELL, 20);
             this.buyBtn.addChild(label);
         }

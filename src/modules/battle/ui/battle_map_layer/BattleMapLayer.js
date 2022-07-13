@@ -26,21 +26,20 @@ let BattleMapLayer = cc.Layer.extend({
                 // node.drawDot(pos, 10, cc.color.WHITE);
                 // this.addChild(node);
 
-                // FIXME define 1, 2, 3, 5, 6
                 switch (map[r][c]) {
-                    case 1:
+                    case GameConfig.MAP.ATTACK_SPEED:
                         texture = BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG;
                         break;
-                    case 2:
+                    case GameConfig.MAP.ATTACK_RANGE:
                         texture = BattleResource.ITEM_BUFF_RANGE_IMG;
                         break;
-                    case 3:
+                    case GameConfig.MAP.ATTACK_DAMAGE:
                         texture = BattleResource.ITEM_BUFF_DAMAGE_IMG;
                         break;
-                    case 5:
+                    case GameConfig.MAP.TREE:
                         texture = BattleResource.OBSTACLE_IMG_2;
                         break;
-                    case 6:
+                    case GameConfig.MAP.HOLE:
                         texture = BattleResource.HOLE_IMG;
                         break;
                     default:

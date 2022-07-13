@@ -6,7 +6,6 @@ EntityFactory._createEntity = function (typeID, mode) {
     Utils.validateMode(mode);
     // TODO: create pool object for each type bullet
     // let entity = this.pool.getInActiveEntity(typeID);
-    // FIXME: add mode = GameConfig.PLAYER or GameConfig.OPPONENT
     let entity = null;
     if (entity === null) {
         entity = new EntityECS(typeID, mode);
