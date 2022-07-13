@@ -11,7 +11,7 @@ let BattleLayer = cc.Layer.extend({
         this._setupUI();
 
         // init entity manager
-        this._entityManager = new EntityManager();;
+        this._entityManager = new EntityManager();
         EntityManager.getInstance = function () {
             return this._entityManager;
         }.bind(this);
@@ -85,6 +85,18 @@ let BattleLayer = cc.Layer.extend({
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createBatMonster(pixelPos, mode);
+
+    },
+
+    oneTimeBornMonster: function (tilePos, mode) {
+        let pixelPos;
+        if (!tilePos) {
+            pixelPos = Utils.tile2Pixel(0, 4, mode);
+        } else {
+            pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+        }
+        EntityFactory.createSatyrBoss(pixelPos, mode);
     },
 
     /**
@@ -107,7 +119,7 @@ let BattleLayer = cc.Layer.extend({
                 return;
             }
 
-            let xMap = GameConfig.MAP_HEIGH-1-tilePos.y;
+            let xMap = GameConfig.MAP_HEIGH - 1 - tilePos.y;
             let yMap = tilePos.x;
             let map = this.battleData.getMap(mode);
             if (map[xMap][yMap] === GameConfig.MAP.TREE || map[xMap][yMap] === GameConfig.MAP.HOLE) {
@@ -167,6 +179,7 @@ let BattleLayer = cc.Layer.extend({
 
     startGame: function () {
         this.scheduleUpdate();
+        BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
     stopGame: function () {
