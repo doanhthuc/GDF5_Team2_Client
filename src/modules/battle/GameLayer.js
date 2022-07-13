@@ -39,7 +39,7 @@ let GameLayer = cc.Layer.extend({
         this.skeletonAnimationSystem = new SkeletonAnimationSystem();
         this.monsterSystem = new MonsterSystem();
         this.bulletSystem = new BulletSystem();
-
+        this.abilitySystem= new AbilitySystem();
         // this._initTower();
         this._handleEventKey();
         this.scheduleUpdate();
@@ -59,7 +59,7 @@ let GameLayer = cc.Layer.extend({
         this.skeletonAnimationSystem.run(dt);
         this.monsterSystem.run(dt);
         this.bulletSystem.run(dt);
-
+        this.abilitySystem.run(dt);
         // cc.log("YYYYYYYYYY")
         // let pool = ComponentFactory.pool;
         // cc.log(("pool size = " + Object.keys(pool._store).length))
@@ -74,7 +74,7 @@ let GameLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createNinjaMonster(pixelPos, mode);
     },
 
     putCardAt: function (type, pixelPos) {

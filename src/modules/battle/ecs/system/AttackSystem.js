@@ -32,12 +32,14 @@ let AttackSystem = System.extend({
                 if (monsterInAttackRange.length > 0) {
                     // TODO: switch case target_strategy here
                     let targetMonster = this._findTargetMonsterByStrategy(attackComponent.targetStrategy, monsterInAttackRange);
-                    let monsterPos = targetMonster.getComponent(PositionComponent);
-                    let towerPos = tower.getComponent(PositionComponent);
+                    if (targetMonster != null) {
+                        let monsterPos = targetMonster.getComponent(PositionComponent);
+                        let towerPos = tower.getComponent(PositionComponent);
 
-                    EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode);
-                    // reset count down time
-                    attackComponent.countdown = attackComponent.speed;
+                        EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode);
+                        // reset count down time
+                        attackComponent.countdown = attackComponent.speed
+                    }
                 }
             }
         }
@@ -50,7 +52,10 @@ let AttackSystem = System.extend({
     },
 
     _findTargetMonsterByStrategy: function (strategy, monsterInAttackRange) {
-        return monsterInAttackRange[0];
+        for (let monster of monsterInAttackRange) {
+            let underGroundComponent = monster.getComponent(UnderGroundComponent);
+            if ((!(underGroundComponent) || underGroundComponent.isRunning == false)) return monster;
+        }
         let targetMonster = null;
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP:

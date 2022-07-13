@@ -100,7 +100,7 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSwordmanNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 140);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 180);
 
     let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
     let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
@@ -119,28 +119,26 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
-    AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
     return entity;
 };
 
 EntityFactory.createAssassinMonster = function (pixelPos, mode) {
+    Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.ASSASSIN;
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 30, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 15, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 1.4 * GameConfig.TILE_WIDTH, 0);
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, creatAssassinNodeAnimation());
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createAssassinNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 120);
 
-    let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
-    let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
-
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
-    let pathComponent = ComponentFactory.create(PathComponent, path);
+    let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
@@ -152,9 +150,106 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
-    AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
     return entity;
 };
+
+EntityFactory.createBatMonster= function (pixelPos,mode){
+    Utils.validateMode(mode);
+    let typeID= GameConfig.ENTITY_ID.BAT;
+    let entity = this._createEntity(typeID, mode);
+
+    // NOTE: get component from pool
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "air", 25, 1, 1, undefined);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 1 * GameConfig.TILE_WIDTH, 0);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createBatNodeAnimation(), mode);
+    let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 140);
+
+
+    let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
+    let path = [{x:0,y:4},{x:4,y:0},{x:6,y:0}];
+    let pathComponent = ComponentFactory.create(PathComponent, path, mode);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(velocityComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(pathComponent)
+        .addComponent(collisionComponent)
+        .addComponent(lifeComponent)
+    // .addComponent(slowEffect)
+    // .addComponent(frozenEffect)
+
+    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    return entity;
+}
+
+EntityFactory.createGiantMonster= function (pixelPos,mode){
+    Utils.validateMode(mode);
+    let typeID= GameConfig.ENTITY_ID.GIANT;
+    let entity = this._createEntity(typeID, mode);
+
+    // NOTE: get component from pool
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 200, 1, 1, undefined);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.5 * GameConfig.TILE_WIDTH, 0);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createGiantNodeAnimation(), mode);
+    let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 820);
+
+
+    let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
+    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let pathComponent = ComponentFactory.create(PathComponent, path, mode);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(velocityComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(pathComponent)
+        .addComponent(collisionComponent)
+        .addComponent(lifeComponent)
+    // .addComponent(slowEffect)
+    // .addComponent(frozenEffect)
+
+    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    return entity;
+}
+
+EntityFactory.createNinjaMonster= function (pixelPos,mode){
+    Utils.validateMode(mode);
+    let typeID= GameConfig.ENTITY_ID.NINJA;
+    let entity = this._createEntity(typeID, mode);
+
+    // NOTE: get component from pool
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 30, 1, 1, undefined);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createNinjaNodeAnimation(), mode);
+    let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 60);
+    let underGroundComponent= ComponentFactory.create(UnderGroundComponent);
+
+    let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
+    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let pathComponent = ComponentFactory.create(PathComponent, path, mode);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(velocityComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(pathComponent)
+        .addComponent(collisionComponent)
+        .addComponent(lifeComponent)
+        .addComponent(underGroundComponent)
+    // .addComponent(slowEffect)
+    // .addComponent(frozenEffect)
+
+    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    return entity;
+}
 
 EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     Utils.validateMode(mode);
@@ -234,24 +329,7 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     return entity;
 }
 
-function creatAssassinNodeAnimation() {
-    let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/assassin/monster_assassin_run_0020.png");
-    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
 
-    let monsterAnimation = new cc.Animation();
-    for (let i = 20; i <= 29; i++) {
-        let fileName = "res/textures/monster/frame/assassin/monster_assassin_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
-        monsterAnimation.addSpriteFrameWithFile(fileName);
-    }
-    monsterAnimation.setDelayPerUnit(1 / (29 - 20 + 1));
-    monsterAnimation.setRestoreOriginalFrame(true);
-    let monsterAction = cc.animate(monsterAnimation);
-    monsterSprite.runAction(cc.repeatForever(monsterAction));
-    node.addChild(monsterSprite, 0, "monster");
-    node.addChild(hpBarNode.node, 0, "hp");
-    return node;
-}
 
 function createSwordmanNodeAnimation() {
     let node = new cc.Node();
@@ -274,6 +352,84 @@ function createSwordmanNodeAnimation() {
     node.addChild(hpBarNode.node, 0, "hp");
     return node;
 }
+
+function createAssassinNodeAnimation() {
+    let node = new cc.Node();
+    let monsterSprite = new cc.Sprite("res/textures/monster/frame/assassin/monster_assassin_run_0020.png");
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
+
+    let monsterAnimation = new cc.Animation();
+    for (let i = 20; i <= 29; i++) {
+        let fileName = "res/textures/monster/frame/assassin/monster_assassin_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        monsterAnimation.addSpriteFrameWithFile(fileName);
+    }
+    monsterAnimation.setDelayPerUnit(1 / (29 - 20 + 1));
+    monsterAnimation.setRestoreOriginalFrame(true);
+    let monsterAction = cc.animate(monsterAnimation);
+    monsterSprite.runAction(cc.repeatForever(monsterAction));
+    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(hpBarNode.node, 0, "hp");
+    return node;
+}
+
+function createBatNodeAnimation() {
+    let node = new cc.Node();
+    let monsterSprite = new cc.Sprite("res/textures/monster/frame/bat/monster_bat_run_0020.png");
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
+
+    let monsterAnimation = new cc.Animation();
+    for (let i = 16; i <= 22; i++) {
+        let fileName = "res/textures/monster/frame/bat/monster_bat_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        monsterAnimation.addSpriteFrameWithFile(fileName);
+    }
+    monsterAnimation.setDelayPerUnit(1 / (22 - 16 + 1));
+    monsterAnimation.setRestoreOriginalFrame(true);
+    let monsterAction = cc.animate(monsterAnimation);
+    monsterSprite.runAction(cc.repeatForever(monsterAction));
+    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(hpBarNode.node, 0, "hp");
+    return node;
+}
+
+function createGiantNodeAnimation() {
+    let node = new cc.Node();
+    let monsterSprite = new cc.Sprite("res/textures/monster/frame/giant/monster_giant_run_0036.png");
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
+
+    let monsterAnimation = new cc.Animation();
+    for (let i = 36; i <= 47; i++) {
+        let fileName = "res/textures/monster/frame/giant/monster_giant_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        monsterAnimation.addSpriteFrameWithFile(fileName);
+    }
+    monsterAnimation.setDelayPerUnit(1 / (47 - 36 + 1));
+    monsterAnimation.setRestoreOriginalFrame(true);
+    let monsterAction = cc.animate(monsterAnimation);
+    monsterSprite.runAction(cc.repeatForever(monsterAction));
+    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(hpBarNode.node, 0, "hp");
+    return node;
+}
+
+function createNinjaNodeAnimation() {
+    let node = new cc.Node();
+    let monsterSprite = new cc.Sprite("res/textures/monster/frame/ninja/monster_ninja_run_0020.png");
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
+
+    let monsterAnimation = new cc.Animation();
+    for (let i = 20; i <= 28; i++) {
+        let fileName = "res/textures/monster/frame/ninja/monster_ninja_run_00" + ((i < 10) ? ("0" + i) : i) + ".png";
+        monsterAnimation.addSpriteFrameWithFile(fileName);
+    }
+    monsterAnimation.setDelayPerUnit(1/ (28 - 20 + 1));
+    monsterAnimation.setRestoreOriginalFrame(true);
+    let monsterAction = cc.animate(monsterAnimation);
+    monsterSprite.runAction(cc.repeatForever(monsterAction));
+    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(hpBarNode.node, 0, "hp");
+    return node;
+}
+
+
 
 function createOwlNodeAnimation(range) {
     let node = new cc.Node();

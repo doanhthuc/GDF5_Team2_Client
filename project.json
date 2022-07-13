@@ -108,6 +108,7 @@
         "src/modules/battle/ecs/component/SpellInfoComponent.js",
         "src/modules/battle/ecs/component/TowerInfoComponent.js",
         "src/modules/battle/ecs/component/VelocityComponent.js",
+        "src/modules/battle/ecs/component/UnderGroundComponent.js",
         "src/modules/context/ShopContext.js",
         "src/modules/battle/ecs/event/EventECS.js",
         "src/modules/battle/ecs/event/EventDispatcher.js",
@@ -146,6 +147,8 @@
         "src/modules/battle/ecs/system/SkeletonAnimationSystem.js",
         "src/modules/battle/ecs/system/SpellSystem.js",
         "src/modules/battle/ecs/system/SpriteSheetAnimation.js",
+        "src/modules/battle/ecs/system/AbilitySystem.js",
+
         "src/modules/battle/GameLayer.js",
         "src/modules/battle/TestLayer.js",
         "src/modules/battle/ui/BattleTimerNode.js",
