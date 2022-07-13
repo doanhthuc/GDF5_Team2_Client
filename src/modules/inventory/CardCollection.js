@@ -23,6 +23,8 @@ const CardCollectionNode = cc.Node.extend({
     },
 
     setCardCollection: function (cardCollectionList) {
+        this.cardCollection = [];
+        this.cardNodeList = [];
         cardCollectionList.forEach(card => {
             if (!card.isBattleDeck) {
                 this.cardCollection.push(card);

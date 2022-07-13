@@ -20,6 +20,7 @@ const Header = cc.Node.extend({
         this.setPosition(cc.winSize.width / 2, cc.winSize.height - this.headerBackgroundImg.getSize().height / 2);
 
         this.addCheatButton();
+        this.addLogoutButton();
     },
 
     getNodeHeight: function () {
@@ -54,12 +55,23 @@ const Header = cc.Node.extend({
         this.cheatBtn.addTouchEventListener(this.onCheatBtnClicked.bind(this), this);
         this.cheatBtnNode.setPosition(cc.winSize.width / 2 - (this.cheatBtn.getSize().width * 0.8) / 2 + 3, this.cheatBtn.getSize().height * 0.2 / 2);
     },
+    addLogoutButton:function(){
+        this.logoutButtonNode=ccs.load('ui/login/LogoutButton.json',"").node;
+        this.addChild(this.logoutButtonNode);
+        this.logoutButton=this.logoutButtonNode.getChildByName("LogoutButton");
+        this.logoutButton.addTouchEventListener(this.onLogoutButtonClicked.bind(this),this);
+        this.logoutButtonNode.setPosition(-(cc.winSize.width / 2 - (this.logoutButton.getSize().width * 0.8) / 2 + 15 ), this.cheatBtn.getSize().height * 0.2 / 2);
+    },
 
     onCheatBtnClicked: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT);
             PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT).resetCheatForm();
         }
+    },
+    onLogoutButtonClicked: function (){
+       // this.logoutButton.setEnable();
+        testnetwork.connector.sendLogout();
     }
 
 });

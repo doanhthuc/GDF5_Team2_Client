@@ -45,6 +45,7 @@ let BattleLayer = cc.Layer.extend({
         this.skeletonAnimationSystem = SystemFactory.create(SkeletonAnimationSystem);
         this.monsterSystem = SystemFactory.create(MonsterSystem);
         this.bulletSystem = SystemFactory.create(BulletSystem);
+        this.abilitySystem = SystemFactory.create(AbilitySystem);
     },
 
     update: function (dt) {
@@ -60,7 +61,8 @@ let BattleLayer = cc.Layer.extend({
         this.skeletonAnimationSystem.run(dt);
         this.monsterSystem.run(dt);
         this.bulletSystem.run(dt);
-
+        this.abilitySystem.run(dt);
+        // cc.log("YYYYYYYYYY")
         // let pool = ComponentFactory.pool;
         // cc.log(("pool size = " + Object.keys(pool._store).length))
         // cc.log("key = " + JSON.stringify(Object.keys(pool._store)))
@@ -74,7 +76,8 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createNinjaMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
     },
 
     /**
@@ -86,7 +89,7 @@ let BattleLayer = cc.Layer.extend({
     putCardAt: function (type, pixelPos, mode) {
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
 
-        // FIXME: hardcode
+        // FIXME: reduce if statement
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
             if (!Utils.isPixelPositionInMap(pixelPos, mode)) {
                 cc.warn("put spell at pixel pos = " + JSON.stringify(pixelPos) + " is invalid")
@@ -97,12 +100,10 @@ let BattleLayer = cc.Layer.extend({
                 return;
             }
 
-            // FIXME: map
             let xMap = GameConfig.MAP_HEIGH-1-tilePos.y;
             let yMap = tilePos.x;
             let map = this.battleData.getMap(mode);
-            // FIXME: hardcode
-            if (map[xMap][yMap] === 6 || map[xMap][yMap] === 5) {
+            if (map[xMap][yMap] === GameConfig.MAP.TREE || map[xMap][yMap] === GameConfig.MAP.HOLE) {
                 return;
             }
         }

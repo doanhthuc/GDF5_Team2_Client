@@ -17,7 +17,10 @@ testnetwork.Connector = cc.Class.extend({
                 this.sendLoginRequest();
                 break;
             case gv.CMD.USER_LOGIN:
-                fr.getCurrentScreen().onFinishLogin();
+                fr.getCurrentScreen().showNotice("Đăng nhập thành công")
+                setTimeout(function () {
+                    fr.getCurrentScreen().onFinishLogin();
+                }, 300);
                 break;
             case gv.CMD.GET_USER_INFO:
                 userInfo.clone(packet);
@@ -107,9 +110,15 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("asdasdas");
                 cc.log(JSON.stringify(packet));
                 break;
+            case gv.CMD.SEND_LOGOUT:
+                cc.log("logout");
+                contextManager.resetContextData();
+                gv.gameClient.getNetwork().disconnect();
+                fr.view(ScreenNetwork);
+                break;
             case gv.CMD.GET_ROOM_INFO:
                 cc.log("RECEIVE ROOM INFO in Network.js line 111: " + JSON.stringify(packet));
-                break;
+                break;    
         }
     },
     sendLoginRequest: function () {
@@ -205,6 +214,12 @@ testnetwork.Connector = cc.Class.extend({
         cc.log("GetRoomId");
         var pk = this.gameClient.getOutPacket(CMDSendGetRoomInfo);
         pk.pack(roomId);
+        this.gameClient.sendPacket(pk);
+    },
+    sendLogout:function (){
+        cc.log("Send Logout");
+        var pk= this.gameClient.getOutPacket(CMDSendLogout);
+        pk.pack();
         this.gameClient.sendPacket(pk);
     }
 

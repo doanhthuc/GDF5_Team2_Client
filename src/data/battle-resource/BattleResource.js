@@ -10,6 +10,7 @@ const BattleResource = {
     BATTLE_MAP_LAYER: "ui/battle/battle_map_layer/BattleMapNode.json",
     TIMER_BACKGROUND: "res/textures/battle/battle_timer_background.png",
     HP_BAR_NODE: "ui/battle/HpBarNode.json",
+    POTION_RANGE_IMG: "textures/battle/battle_potion_range.png",
 
     CARD_DECK_NODE: "ui/battle/battle_ui_layer/card/BattleCardDeckNode.json",
     BATTLE_CARD_NODE: "ui/battle/battle_ui_layer/card/BattleCardNode.json",

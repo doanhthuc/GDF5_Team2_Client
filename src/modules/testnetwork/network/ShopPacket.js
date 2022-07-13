@@ -65,11 +65,11 @@ CMDBuyDailyShop = fr.OutPacket.extend({
 ShopNetwork.packetMap[gv.CMD.GET_USER_DAILY_SHOP] = fr.InPacket.extend({
     ctor: function () {
         this._super();
-        this.dailyShopItem = [];
+
     },
 
     readData: function () {
-        this.error = this.getShort();
+        this.dailyShopItem = [];
         this.size = this.getInt();
         for (let i = 0; i < this.size; i++) {
             let id = this.getInt();
@@ -89,7 +89,6 @@ ShopNetwork.packetMap[gv.CMD.GET_GOLD_SHOP] = fr.InPacket.extend({
 
     readData: function () {
         this.goldShopItems = [];
-        this.error = this.getShort();
         this.size = this.getInt();
         for (let i = 0; i < this.size; i++) {
             let id = this.getInt();
@@ -108,7 +107,6 @@ ShopNetwork.packetMap[gv.CMD.BUY_GOLD_SHOP] = fr.InPacket.extend({
     },
 
     readData: function () {
-        this.error = this.getShort();
         this.id = this.getInt();
         this.goldChange = this.getInt();
         this.gemChange = this.getInt();
@@ -123,7 +121,6 @@ ShopNetwork.packetMap[gv.CMD.BUY_DAILY_SHOP] = fr.InPacket.extend({
     readData: function () {
         this.itemType = [];
         this.itemQuantity = [];
-        this.error = this.getShort();
         this.id = this.getInt();
         this.goldChange = this.getInt();
         this.gemChange = this.getInt();

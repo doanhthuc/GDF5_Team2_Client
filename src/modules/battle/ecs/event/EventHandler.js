@@ -22,8 +22,7 @@ EventDispatcher.getInstance()
 
         cc.log("put new tower event: " + JSON.stringify(data));
 
-        // FIXME: hardcode 7 == tower
-        map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = 7;
+        map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP_HEIGH.TOWER;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
 
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);

@@ -30,6 +30,7 @@ const BattleDeckNode = cc.Node.extend({
     },
 
     setCardNodeListByBattleDeck: function (battleDeck) {
+        this.cardNodeList = []
         battleDeck.forEach(card => {
             let cardModel = CardFactory.createCard(
                 card.cardType,

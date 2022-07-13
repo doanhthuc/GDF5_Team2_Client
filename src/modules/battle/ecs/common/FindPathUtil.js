@@ -39,8 +39,12 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
             if (nextX < 0 || nextY < 0 || nextX >= map[0].length
                 || nextY >= map.length) continue;
             if (visited[nextY][nextX]) continue;
-            // FIXME: map const 1, 2, 3
-            if (map[nextY][nextX] !== 0 && map[nextY][nextX] !== 1 && map[nextY][nextX] !== 2 && map[nextY][nextX] !== 3) continue;
+
+            if (map[nextY][nextX] !== GameConfig.MAP.NONE
+                && map[nextY][nextX] !== GameConfig.MAP.ATTACK_SPEED
+                && map[nextY][nextX] !== GameConfig.MAP.ATTACK_DAMAGE
+                && map[nextY][nextX] !== GameConfig.MAP.ATTACK_RANGE) continue;
+
             neighbors.push({x: nextX, y: nextY});
             visited[nextY][nextX] = true;
         }
