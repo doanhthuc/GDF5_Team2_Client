@@ -7,7 +7,8 @@ let AbilitySystem = System.extend({
     },
 
     run: function (tick) {
-       this._handleUnderGroundComponent();
+        this._handleUnderGroundComponent();
+        this._handleSpawnMinionComponent()
     },
 
     _handleUnderGroundComponent: function (tick) {
@@ -16,45 +17,34 @@ let AbilitySystem = System.extend({
             let lifeComponent = entity.getComponent(LifeComponent);
             let underGroundComponent = entity.getComponent(UnderGroundComponent);
             let pathComponent = entity.getComponent(PathComponent);
-            if (underGroundComponent.isRunning == false) {
+            if (underGroundComponent.isInGround == false) {
                 if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
                     underGroundComponent.trigger += 1;
                     underGroundComponent.disablePathIdx = pathComponent.currentPathIdx + 2;
-                    underGroundComponent.isRunning = true;
+                    underGroundComponent.isInGround = true;
                 }
             } else {
                 if (underGroundComponent.disablePathIdx == pathComponent.currentPathIdx) {
-                    underGroundComponent.isRunning = false;
+                    underGroundComponent.isInGround = false;
                 }
             }
         }
     },
 
-
-    _handleSlowEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SlowEffect);
+    _handleSpawnMinionComponent: function (tick) {
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(SpawnMinionComponent);
         for (let entity of entityList) {
-            let velocityComponent = entity.getComponent(VelocityComponent);
-            let slowComponent = entity.getComponent(SlowEffect);
-
-            slowComponent.countdown = slowComponent.countdown - tick;
-            if (slowComponent.countdown <= 0) {
-                // EventDispatcher.getInstance()
-                //     .dispatchEvent(EventType.RESET_INIT_VELOCITY, {velocityComponent: velocityComponent})
-                this._updateOriginVelocity(velocityComponent);
-                entity.removeComponent(slowComponent);
+            let spawnMinionComponent = entity.getComponent(SpawnMinionComponent);
+            if (spawnMinionComponent.period > 0) {
+                spawnMinionComponent.period -= tick;
             } else {
-                velocityComponent.speedX = slowComponent.percent * velocityComponent.originSpeedX;
-                velocityComponent.speedY = slowComponent.percent * velocityComponent.originSpeedY;
+                spawnMinionComponent.period = 2;
+                let positionComponent = entity.getComponent(PositionComponent);
+                EntityFactory.createSwordsmanMonster({x:positionComponent.x,y:positionComponent.y},GameConfig.PLAYER);
             }
         }
     },
 
-    _updateOriginVelocity: function (velocityComponent) {
-        velocityComponent.speedX = velocityComponent.originSpeedX;
-        velocityComponent.speedY = velocityComponent.originSpeedY;
-    }
 });
 AbilitySystem.typeID = GameConfig.SYSTEM_ID.ABILITY;
 SystemManager.getInstance().registerClass(AbilitySystem);

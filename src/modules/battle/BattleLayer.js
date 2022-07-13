@@ -76,7 +76,7 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createNinjaMonster(pixelPos, mode);
+        EntityFactory.createDemonTreeBoss(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
     },
 
