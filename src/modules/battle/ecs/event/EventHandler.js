@@ -22,7 +22,7 @@ EventDispatcher.getInstance()
 
         cc.log("put new tower event: " + JSON.stringify(data));
 
-        map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP_HEIGH.TOWER;
+        map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
 
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
