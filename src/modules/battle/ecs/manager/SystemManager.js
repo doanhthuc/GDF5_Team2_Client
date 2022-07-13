@@ -20,7 +20,7 @@ let SystemManager = ManagerECS.extend({
 
     add: function (system) {
         if (this._storeInstance.has(system.id)) {
-            throw new Error("System with typeID = " + system.typeID + ", id = " + system.id + " exists.");
+            throw new Error("System with typeID = " + system.typeID + ", id = " + system.id + ", name = " + system.name + " exists.");
         }
 
         this._storeInstance.set(system.id, system);

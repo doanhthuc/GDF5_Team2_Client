@@ -3,6 +3,7 @@ let AbilitySystem = System.extend({
     name: "AbilitySystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
