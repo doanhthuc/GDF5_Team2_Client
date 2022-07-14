@@ -174,15 +174,17 @@ let BattleData = cc.Class.extend({
 BattleData.fakeData = function () {
     let map = [[0,6,0,0,0,5,0],[0,0,0,0,0,0,0],[0,0,0,2,0,1,0],[0,3,0,0,0,0,0],[0,0,0,0,5,0,0]];
     let path = [{"x":0,"y":4},{"x":0,"y":3},{"x":0,"y":2},{"x":0,"y":1},{"x":0,"y":0},{"x":1,"y":0},{"x":2,"y":0},{"x":2,"y":1},{"x":2,"y":2},{"x":2,"y":3},{"x":2,"y":4},{"x":3,"y":4},{"x":4,"y":4},{"x":4,"y":3},{"x":4,"y":2},{"x":4,"y":1},{"x":5,"y":1},{"x":6,"y":1},{"x":6,"y":0}];
-    GameConfig.battleData = new BattleData();
-    GameConfig.battleData.setMap(map, GameConfig.PLAYER);
-    GameConfig.battleData.setMap(JSON.parse(JSON.stringify(map)), GameConfig.OPPONENT);
-    GameConfig.battleData.setLongestPath(path, GameConfig.PLAYER);
-    GameConfig.battleData.setLongestPath(JSON.parse(JSON.stringify(path)), GameConfig.OPPONENT);
+
+    let battleData = new BattleData();
+    BattleManager.getInstance().registerBattleData(battleData);
+    battleData.setMap(map, GameConfig.PLAYER);
+    battleData.setMap(JSON.parse(JSON.stringify(map)), GameConfig.OPPONENT);
+    battleData.setLongestPath(path, GameConfig.PLAYER);
+    battleData.setLongestPath(JSON.parse(JSON.stringify(path)), GameConfig.OPPONENT);
 
     let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
     let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
 
-    GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
-    GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
+    battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
+    battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
 }

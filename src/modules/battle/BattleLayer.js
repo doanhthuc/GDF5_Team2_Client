@@ -2,11 +2,14 @@ let BattleLayer = cc.Layer.extend({
 
     ctor: function () {
         this._super();
-        BattleManager.getInstance().setBattleLayer(this);
+        BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
+
+
         // BattleData.fakeData();
-        this.battleData = GameConfig.battleData;
+        this.battleData = BattleManager.getInstance().getBattleData();
+
 
         this._setupUI();
 
@@ -184,7 +187,7 @@ let BattleLayer = cc.Layer.extend({
 
             // FIXME: test will delete later
             cc.log("[GameLayer.js line 134] tilePos: " + JSON.stringify(pixelPos));
-            BattleNetwork.connector.sendPutTower(GameConfig.battleData.getRoomId(), type, tilePos, pixelPos);
+            BattleNetwork.connector.sendPutTower(BattleManager.getInstance().getBattleData().getRoomId(), type, tilePos, pixelPos);
         }
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
@@ -212,6 +215,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
+        // this.battleLoop.start();
         this.scheduleUpdate();
         BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },

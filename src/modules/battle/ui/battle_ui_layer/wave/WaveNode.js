@@ -18,7 +18,7 @@ let WaveNode = cc.Node.extend({
     increaseWave: function () {
         this.currentWave++;
         if (this.currentWave <= this.maxWave) {
-            GameConfig.battleData.setCurrentWave(this.currentWave);
+            BattleManager.getInstance().getBattleData().setCurrentWave(this.currentWave);
             this._updateWaveUI();
         }
 
