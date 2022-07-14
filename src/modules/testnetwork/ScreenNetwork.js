@@ -75,7 +75,7 @@ var ScreenNetwork = cc.Layer.extend({
         testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
         testnetwork.connector.sendGetUserLobbyChest();
         testnetwork.connector.sendGetUserInventory();
-        testnetwork.connector.sendGetRoomInfo(1);
+        // testnetwork.connector.sendGetRoomInfo(1);
         //testnetwork.connector.sendGetUserGoldShop();
         //testnetwork.connector.sendUpgradeCard(2);
         //.connector.sendGetUserDailyShop();

@@ -1,5 +1,6 @@
 let BattleData = cc.Class.extend({
     ctor: function () {
+        this.roomId = 0;
         this.dataInGame = {
             currentWave: 0,
             maxWave: 10000,
@@ -47,6 +48,14 @@ let BattleData = cc.Class.extend({
                 shortestPathForEachTile: null,
             }
         }
+    },
+
+    getRoomId: function () {
+        return this.roomId;
+    },
+
+    setRoomId: function (roomId) {
+        this.roomId = roomId;
     },
 
     getTimer: function () {

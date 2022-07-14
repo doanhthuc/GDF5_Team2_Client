@@ -145,9 +145,9 @@ CMDSendClaimLobbyChest = fr.OutPacket.extend(
             this.initData(100);
             this.setCmdId(gv.CMD.CLAIM_LOBBY_CHEST);
         },
-        pack: function (chestid) {
+        pack: function (chestId) {
             this.packHeader();
-            this.putInt(chestid);
+            this.putInt(chestId);
             this.updateSize();
         }
     }
