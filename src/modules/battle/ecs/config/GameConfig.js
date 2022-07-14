@@ -1,5 +1,7 @@
 let GameConfig = GameConfig || {};
 
+GameConfig.DEBUG = 0;
+
 GameConfig.PLAYER = "player";
 GameConfig.OPPONENT = "opponent";
 

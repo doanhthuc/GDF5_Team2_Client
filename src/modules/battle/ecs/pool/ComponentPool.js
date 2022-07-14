@@ -13,7 +13,6 @@ let ComponentPool = ObjectPoolECS.extend({
 
         for (let component of this._store[ComponentCls.typeID]) {
             if (component.getActive() === false) {
-                component.setActive(true);
                 return component;
             }
         }
@@ -27,6 +26,7 @@ let ComponentPool = ObjectPoolECS.extend({
         }
 
         if (component.typeID === AppearanceComponent.typeID) return;
+
         this._store[component.typeID].push(component);
     }
 

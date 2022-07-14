@@ -4,7 +4,7 @@ let AppearanceComponent = Component.extend({
 
     ctor: function (sprite, mode) {
         this._super();
-        this.reset(sprite);
+        this.reset(sprite, mode);
 
         if (mode === GameConfig.PLAYER) {
             BattleManager.getInstance().getBattleLayer().getPlayerMapNode().addChild(this.sprite, this.zOrder);
@@ -13,9 +13,12 @@ let AppearanceComponent = Component.extend({
         }
     },
 
-    reset: function (sprite) {
+    reset: function (sprite, mode) {
         this.sprite = sprite;
+        // this.sprite.setVisible(true);
+        // this.sprite.retain();
         this.zOrder = 100;
+        this.mode = mode;
     },
 
     clone: function () {

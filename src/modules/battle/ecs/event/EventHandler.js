@@ -40,7 +40,6 @@ EventDispatcher.getInstance()
                             let newPath = Utils.tileArray2PixelArray(path, currentMode);
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
-                            cc.log("new path, monster at tile = " + JSON.stringify(tilePos));
                         }
                     }
                 }

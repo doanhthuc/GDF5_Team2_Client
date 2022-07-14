@@ -17,12 +17,13 @@ let EntityECS = cc.Class.extend({
         if (this.components[component.typeID]) {
             // TODO: check override or not
         }
-
+        component.setActive(true);
         this.components[component.typeID] = component;
         return this;
     },
 
     removeComponent: function (component) {
+        ComponentManager.getInstance().remove(component);
         delete this.components[component.typeID];
     },
 

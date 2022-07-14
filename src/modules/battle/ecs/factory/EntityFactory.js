@@ -392,10 +392,10 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createOwlNodeAnimation(attackRange);
 
-    let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
-    let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
-    let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 10);
-    let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 1.3);
+    // let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
+    // let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
+    // let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 10);
+    // let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 1.3);
 
     // TODO: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
