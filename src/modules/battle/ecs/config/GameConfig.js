@@ -1,7 +1,7 @@
 let GameConfig = GameConfig || {};
 
 // 0: disable, 1: enable
-GameConfig.DEBUG = 1;
+GameConfig.DEBUG = 0;
 
 GameConfig.PLAYER = "player";
 GameConfig.OPPONENT = "opponent";
