@@ -16,7 +16,7 @@ let SpellInfoComponent = Component.extend({
     },
 
     clone: function () {
-        return new SpellInfoComponent(this.pos, this.effects);
+        return new SpellInfoComponent(this.pos, this.effects, this.range, this.duration);
     }
 });
 SpellInfoComponent.typeID = GameConfig.COMPONENT_ID.SPELL;

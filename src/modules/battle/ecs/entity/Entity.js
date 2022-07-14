@@ -22,9 +22,9 @@ let EntityECS = cc.Class.extend({
         return this;
     },
 
-    removeComponent: function (component) {
-        ComponentManager.getInstance().remove(component);
-        delete this.components[component.typeID];
+    removeComponent: function (componentOrCls) {
+        ComponentManager.getInstance().remove(this.components[componentOrCls.typeID]);
+        delete this.components[componentOrCls.typeID];
     },
 
     getComponent: function (ComponentCls) {

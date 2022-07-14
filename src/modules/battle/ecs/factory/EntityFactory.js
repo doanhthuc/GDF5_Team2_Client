@@ -102,8 +102,8 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 180);
 
-    let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
-    let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
+    // let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
+    // let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
@@ -168,7 +168,6 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
     let lifeComponent = ComponentFactory.create(LifeComponent, 140);
 
 
-    let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = [{x: 0, y: 4}, {x: 4, y: 0}, {x: 6, y: 0}];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
@@ -179,8 +178,6 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
-    // .addComponent(slowEffect)
-    // .addComponent(frozenEffect)
 
     //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
     return entity;
@@ -462,6 +459,8 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
 }
 
 
+// Animation
+// TODO: replace this function to another place, and cache it (can prefetch when begin the match)
 function createSwordmanNodeAnimation() {
     let node = new cc.Node();
     let monsterSprite = new cc.Sprite("res/textures/monster/frame/swordsman/monster_swordsman_run_0012.png");

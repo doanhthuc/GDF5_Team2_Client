@@ -1,5 +1,6 @@
 let GameConfig = GameConfig || {};
 
+// 0: disable, 1: enable
 GameConfig.DEBUG = 0;
 
 GameConfig.PLAYER = "player";

@@ -61,8 +61,8 @@ let EffectSystem = System.extend({
 
             frozenComponent.countdown = frozenComponent.countdown - tick;
             if (frozenComponent.countdown <= 0) {
-                this._updateOriginVelocity(velocityComponent);
                 entity.removeComponent(frozenComponent);
+                this._updateOriginVelocity(velocityComponent);
             } else {
                 velocityComponent.speedX = 0;
                 velocityComponent.speedY = 0;
@@ -79,8 +79,6 @@ let EffectSystem = System.extend({
 
             slowComponent.countdown = slowComponent.countdown - tick;
             if (slowComponent.countdown <= 0) {
-                // EventDispatcher.getInstance()
-                //     .dispatchEvent(EventType.RESET_INIT_VELOCITY, {velocityComponent: velocityComponent})
                 this._updateOriginVelocity(velocityComponent);
                 entity.removeComponent(slowComponent);
             } else {

@@ -11,7 +11,10 @@ let CollisionSystem = System.extend({
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(CollisionComponent)
 
-        cc.error("Collision entity size = " + entityList.length);
+        if (GameConfig.DEBUG) {
+            cc.error("Collision entity size = " + entityList.length);
+        }
+
         // TODO: Optimize
         for (let i = 0; i < entityList.length - 1; i++) {
             for (let j = i + 1; j < entityList.length; j++) {

@@ -15,10 +15,10 @@ let AppearanceComponent = Component.extend({
 
     reset: function (sprite, mode) {
         this.sprite = sprite;
-        // this.sprite.setVisible(true);
-        // this.sprite.retain();
         this.zOrder = 100;
         this.mode = mode;
+        // this.sprite.setVisible(true);
+        // this.sprite.retain();
     },
 
     clone: function () {

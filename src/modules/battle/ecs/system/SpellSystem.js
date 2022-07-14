@@ -14,6 +14,7 @@ let SpellSystem = System.extend({
         for (let spellEntity of spellList) {
             let spellComponent = spellEntity.getComponent(SpellInfoComponent);
             spellComponent.countdown = spellComponent.countdown - tick;
+
             if (spellComponent.countdown <= 0) {
                 let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
                 for (let monster of monsters) {
@@ -22,7 +23,7 @@ let SpellSystem = System.extend({
                         let distance = Utils.euclidDistance(monsterPosition, spellComponent.position)
                         if (distance <= spellComponent.range) {
                             for (let effect of spellComponent.effects) {
-                                monster.addComponent(effect);
+                                monster.addComponent(effect.clone());
                             }
                         }
                     }
