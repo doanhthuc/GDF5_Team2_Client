@@ -19,7 +19,7 @@ let PathComponent = Component.extend({
     },
 
     clone: function () {
-        return new PathComponent(this.path, this.mode, false);
+        return ComponentFactory.create(PathComponent, this.path, this.mode, false);
     }
 });
 PathComponent.typeID = GameConfig.COMPONENT_ID.PATH;

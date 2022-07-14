@@ -16,7 +16,7 @@ let TowerInfoComponent = InfoComponent.extend({
     },
 
     clone: function () {
-        return new TowerInfoComponent(this.energy, this.bulletTargetType, this.archType, this.targetType, this.bulletType);
+        return ComponentFactory.create(TowerInfoComponent, this.energy, this.bulletTargetType, this.archType, this.targetType, this.bulletType);
     }
 });
 TowerInfoComponent.typeID = GameConfig.COMPONENT_ID.TOWER_INFO;

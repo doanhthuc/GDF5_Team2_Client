@@ -38,7 +38,7 @@ let AttackComponent = Component.extend({
     },
 
     clone: function () {
-        new AttackComponent(this.damage, this.targetStrategy, this.range,
+        return ComponentFactory.create(AttackComponent, this.damage, this.targetStrategy, this.range,
             this.speed, this.countdown, this.effects);
     }
 });

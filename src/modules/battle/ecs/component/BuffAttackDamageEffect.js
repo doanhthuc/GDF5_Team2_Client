@@ -8,7 +8,7 @@ let BuffAttackDamageEffect = EffectComponent.extend({
     },
 
     clone: function () {
-        return new BuffAttackDamageEffect(this.percent);
+        return ComponentFactory.create(BuffAttackDamageEffect, this.percent)
     },
 
     reset: function (percent) {

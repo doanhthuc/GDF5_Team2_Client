@@ -14,7 +14,7 @@ let HealingAbility = Component.extend({
     },
 
     clone: function () {
-        return new HealingAbility(this.range, this.healingRate);
+        return ComponentFactory.create(HealingAbility, this.range, this.healingRate);
     },
 });
 HealingAbility.typeID = GameConfig.COMPONENT_ID.HEALING_ABILITY;

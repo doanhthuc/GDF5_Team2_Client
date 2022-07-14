@@ -8,7 +8,7 @@ let DamageEffect = EffectComponent.extend({
     },
 
     clone: function () {
-        return new DamageEffect(this.damage);
+        return ComponentFactory.create(DamageEffect, this.damage);
     },
 
     reset: function (damage) {

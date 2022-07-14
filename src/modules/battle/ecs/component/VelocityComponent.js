@@ -17,7 +17,7 @@ let VelocityComponent = Component.extend({
     },
 
     clone: function () {
-        return new VelocityComponent(this.speedX, this.speedY, this.dynamicPosition);
+        return ComponentFactory.create(VelocityComponent, this.speedX, this.speedY, this.dynamicPosition);
     },
 });
 VelocityComponent.typeID = GameConfig.COMPONENT_ID.VELOCITY;
