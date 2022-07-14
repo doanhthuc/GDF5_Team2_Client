@@ -14,14 +14,14 @@ let HouseEnergyNode = cc.Node.extend({
 
         this.width = background.width;
         this.height = background.height;
-        this.battleData = GameConfig.battleData;
+        this.battleData = BattleManager.getInstance().getBattleData();
 
         this.playerEnergy = rootNode.getChildByName("player_energy");
         this.opponentEnergy = rootNode.getChildByName("opponent_energy");
     },
 
     minusEnergyHouse: function (energy, mode) {
-        GameConfig.battleData.setEnergyHouse(this.battleData.getEnergyHouse(mode) - energy, mode);
+        this.battleData.setEnergyHouse(this.battleData.getEnergyHouse(mode) - energy, mode);
         this.setEnergyString(this.battleData.getEnergyHouse(mode), mode);
         if (this.battleData.getEnergyHouse(mode) <= 0) {
             EventDispatcher.getInstance()

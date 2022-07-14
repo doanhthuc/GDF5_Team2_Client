@@ -1,32 +1,22 @@
 let LifeSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.LIFE,
+    typeID: GameConfig.SYSTEM_ID.LIFE,
     name: "LifeSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.LIFE);
+            .getEntitiesHasComponents(LifeComponent);
         for (let entity of entityList) {
-            let lifeComponent = entity.getComponent(GameConfig.COMPONENT_ID.LIFE);
+            let lifeComponent = entity.getComponent(LifeComponent);
             if (lifeComponent.hp <= 0) {
-                if (Utils.isMonster(entity)) {
-                    let monsterInfo = entity.getComponent(GameConfig.COMPONENT_ID.MONSTER_INFO);
-
-                    // destroy
-                    let appearanceComponent = entity.getComponent(GameConfig.COMPONENT_ID.APPEARANCE)
-                    if (appearanceComponent) {
-                        let sprite = appearanceComponent.sprite;
-                        sprite.setVisible(false);
-                    }
-                    entity.setActive(false);
-                    for (let key of Object.keys(entity.components)) {
-                        entity.components[key].setActive(false);
-                    }
-                }
+                EntityManager.destroy(entity);
             }
         }
     }
 });
+LifeSystem.typeID = GameConfig.SYSTEM_ID.LIFE;
+SystemManager.getInstance().registerClass(LifeSystem);

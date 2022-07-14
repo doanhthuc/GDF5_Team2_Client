@@ -4,7 +4,7 @@ const CardCollectionNode = cc.Node.extend({
         this.init();
     },
 
-    heightNode: 0,
+
     init: function () {
         this.node = ccs.load(InventoryResources.CARD_COLLECTION_NODE, '').node;
         this.addChild(this.node);
@@ -23,6 +23,8 @@ const CardCollectionNode = cc.Node.extend({
     },
 
     setCardCollection: function (cardCollectionList) {
+        this.cardCollection = [];
+        this.cardNodeList = [];
         cardCollectionList.forEach(card => {
             if (!card.isBattleDeck) {
                 this.cardCollection.push(card);
@@ -33,7 +35,7 @@ const CardCollectionNode = cc.Node.extend({
 
     setCardNodeListByCardCollection: function (cardCollection) {
         cardCollection.forEach(card => {
-            let cardModel = new CardModel(
+            let cardModel = CardFactory.createCard(
                 card.cardType,
                 card.cardLevel,
                 card.amount
@@ -65,8 +67,10 @@ const CardCollectionNode = cc.Node.extend({
     },
 
     setNodeHeight: function () {
+        this.heightNode = 0;
         this.heightNode += this.backgroundImg.getContentSize().height;
-        this.heightNode += (InventoryResources.CARD_HEIGHT + 15) * Math.ceil(16 / InventoryResources.NUM_CARD_ONE_LINE);
+        this.heightNode += (InventoryResources.CARD_HEIGHT + 15) * Math.ceil(4 / InventoryResources.NUM_CARD_ONE_LINE);
+        cc.log('CardCollectionNode line 60 heightNode: ' + this.heightNode);
     },
 
     onSortByEnergyBtnClick: function (sender, type) {

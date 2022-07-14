@@ -1,55 +1,52 @@
-let ComponentPool = cc.Class.extend({
+let ComponentPool = ObjectPoolECS.extend({
     name: "ComponentObjectPool",
 
     ctor: function () {
-        this.locked = new Map();
-        this.unlocked = new Map();
+        this._super();
+        this._store = {};
     },
 
-    validate: function (component) {
-        return component.getActive() === false;
-    },
+    checkOut: function (ComponentCls) {
+        if (!this._store[ComponentCls.typeID]) {
+            return null;
+        }
 
-    checkOut: function (typeID) {
-        let unlockedMap = this.unlocked.get(typeID);
-        if (unlockedMap && unlockedMap.size > 0) {
-            let component = unlockedMap.values().next();
-            if (this.validate(component)) {
-                unlockedMap.delete(component.id);
-                if (!this.locked.has(typeID)) {
-                    this.locked[typeID] = new Map();
-                }
-                this.locked.get(typeID).set(component.id, component);
-                component.setActive(true);
+        for (let component of this._store[ComponentCls.typeID]) {
+            if (component.getActive() === false) {
                 return component;
-            } else {
-                unlockedMap.delete(component.typeID);
-                // set expire for invalid component
             }
         }
 
-        // create new component
-        // let component = this.create(typeID);
-        // if (!this.locked.has(typeID)) {
-        //     this.locked[typeID] = new Map();
-        // }
-        // this.locked.get(typeID).set(component.id, component);
-        // return component;
         return null;
     },
 
     checkIn: function (component) {
-        if (this.locked.has(component.typeID) && this.get(component.typeID).has(component.id)) {
-            this.locked.get(component.typeID).delete(component.id);
+        if (!this._store[component.typeID]) {
+            this._store[component.typeID] = [];
         }
 
-        if (this.unlocked.has(component.typeID) === false) {
-            this.unlocked.set(component.typeID, new Map());
-        }
+        if (component.typeID === AppearanceComponent.typeID) return;
 
-        this.unlocked.get(component.typeID).set(component.id, component);
-        component.setActive(false);
-    },
+        this._store[component.typeID].push(component);
+    }
 
 });
+
+let _instanceBuilder = (function () {
+    let _instance = null;
+    return {
+        getInstance: function () {
+            if (_instance === null) {
+                _instance = new ComponentPool();
+            }
+            return _instance;
+        },
+        resetInstance: function () {
+            // FIXME: Should release all component
+            _instance = null;
+        }
+    }
+})();
+ComponentPool.getInstance = _instanceBuilder.getInstance;
+ComponentPool.resetInstance = _instanceBuilder.resetInstance;
 

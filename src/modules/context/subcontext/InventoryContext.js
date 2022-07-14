@@ -55,9 +55,12 @@ const InventoryContext = cc.Class.extend({
             card.amount += data.fragmentChange;
 
             this.cardCollectionList[index] = card;
-            ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE)
-                .cardNodeMap.get(data.cardType)
-                .onUpgradeCard(card.cardLevel, card.amount);
+            let cardNode = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE)
+                .cardNodeMap.get(data.cardType);
+            cardNode.onUpgradeCard(card.cardLevel, card.amount);
+            
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.UPGRADE_SUCCESS_POPUP).setCardModel(cardNode.cardModel);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.UPGRADE_SUCCESS_POPUP);
 
             contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).updateUserGold(data.goldChange);
 
@@ -85,5 +88,11 @@ const InventoryContext = cc.Class.extend({
             inventoryLayer.cardNodeMap.get(cardId).onUpdateCard(amountChange);
 
         }
+    },
+
+    resetContextData: function () {
+        this.battleDeckIdList = [];
+        this.battleDeckList = [];
+        this.cardCollectionList = [];
     }
 });

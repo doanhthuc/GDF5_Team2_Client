@@ -14,6 +14,14 @@ const UserContext = cc.Class.extend({
         return this.user;
     },
 
+    getUsername: function () {
+        return this.user.username;
+    },
+
+    getTrophy: function () {
+        return this.user.trophy;
+    },
+
     setAuthenticated: function (isAuthenticated) {
         this.isAuthenticated = isAuthenticated;
     },
@@ -67,11 +75,18 @@ const UserContext = cc.Class.extend({
         cc.log(JSON.stringify(this.user));
     },
 
-    setUserInfoFromPackage: function (package) {
-        this.user.id = package.id;
-        this.user.username = package.username;
-        this.user.gold = package.gold;
-        this.user.gem = package.gem;
-        this.user.trophy = package.trophy;
+    setUserInfoFromPackage: function (packet) {
+        this.user.id = packet.id;
+        this.user.username = packet.username;
+        this.user.gold = packet.gold;
+        this.user.gem = packet.gem;
+        this.user.trophy = packet.trophy;
+    },
+
+    resetContextData: function () {
+        this.user = {};
+        this.isAuthenticated = false;
+        this.isAuthenticating = false;
+        this.clientUIManager = ClientUIManager.getInstance();
     }
 })

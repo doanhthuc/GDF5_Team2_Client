@@ -16,9 +16,13 @@ let ShopContext = Context.extend({
 
     setGoldItemList: function (itemList) {
         this._goldItemList = itemList;
-        cc.log("TTTTT")
         cc.log(JSON.stringify(this._goldItemList))
         ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE)
             .renderGoldSection(this._goldItemList);
+    },
+
+    resetContextData: function () {
+        this._dailyShopItemList = [];
+        this._goldItemList = [];
     }
 });

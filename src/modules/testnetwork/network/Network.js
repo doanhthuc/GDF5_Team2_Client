@@ -8,7 +8,7 @@ testnetwork.Connector = cc.Class.extend({
     ctor: function (gameClient) {
         this.gameClient = gameClient;
         gameClient.packetFactory.addPacketMap(testnetwork.packetMap);
-            gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
+        gameClient.receivePacketSignal.add(this.onReceivedPacket, this);
     },
     onReceivedPacket: function (cmd, packet) {
         cc.log("onReceivedPacket:", cmd);
@@ -17,7 +17,10 @@ testnetwork.Connector = cc.Class.extend({
                 this.sendLoginRequest();
                 break;
             case gv.CMD.USER_LOGIN:
-                fr.getCurrentScreen().onFinishLogin();
+                fr.getCurrentScreen().showNotice("Đăng nhập thành công")
+                setTimeout(function () {
+                    fr.getCurrentScreen().onFinishLogin();
+                }, 300);
                 break;
             case gv.CMD.GET_USER_INFO:
                 userInfo.clone(packet);
@@ -27,7 +30,7 @@ testnetwork.Connector = cc.Class.extend({
                 // contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT, userContext);
                 // let inventoryContext = new InventoryContext();
                 // contextManager.registerContext(ContextManagerConst.INVENTORY_CONTEXT, inventoryContext);
-
+                TimeUtil.setDeltaTime(packet.serverTime);
                 userContext.setUserInfoFromPackage(userInfo);
 
                 userContext.updateUserInfoUI();
@@ -87,16 +90,6 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.ADD_USER_GEM:
                 cc.log(packet.gemChange);
                 break;
-            case gv.CMD.BUY_GOLD_SHOP:
-                cc.log(JSON.stringify(packet));
-                userInfo.gold += packet.goldChange;
-                userInfo.gem += packet.gemChange;
-                userInfo.show();
-                break;
-            case gv.CMD.BUY_DAILY_SHOP:
-                cc.log("BUY DAILY SHOP");
-                cc.log(JSON.stringify(packet));
-                break;
             //cheat
             case gv.CMD.CHEAT_USER_INFO:
                 cc.log("CHEAT USER INFO");
@@ -117,6 +110,15 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("asdasdas");
                 cc.log(JSON.stringify(packet));
                 break;
+            case gv.CMD.SEND_LOGOUT:
+                cc.log("logout");
+                contextManager.resetContextData();
+                gv.gameClient.getNetwork().disconnect();
+                fr.view(ScreenNetwork);
+                break;
+            case gv.CMD.GET_ROOM_INFO:
+                cc.log("RECEIVE ROOM INFO in Network.js line 111: " + JSON.stringify(packet));
+                break;    
         }
     },
     sendLoginRequest: function () {
@@ -204,6 +206,19 @@ testnetwork.Connector = cc.Class.extend({
     sendGetBattleMap: function () {
         cc.log("GetBattleMap");
         var pk = this.gameClient.getOutPacket(CMDSendGetBattleMap);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendGetRoomInfo: function (roomId) {
+        cc.log("GetRoomId");
+        var pk = this.gameClient.getOutPacket(CMDSendGetRoomInfo);
+        pk.pack(roomId);
+        this.gameClient.sendPacket(pk);
+    },
+    sendLogout:function (){
+        cc.log("Send Logout");
+        var pk= this.gameClient.getOutPacket(CMDSendLogout);
         pk.pack();
         this.gameClient.sendPacket(pk);
     }

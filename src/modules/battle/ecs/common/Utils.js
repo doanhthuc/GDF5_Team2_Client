@@ -5,67 +5,79 @@ Utils.getVariableName = function (variable) {
     return name;
 };
 
-// FIXME: hard code
-const CARD_DECK_HEIGHT = BattleResource.DECK_CARD_HEIGHT;
-const RIVER_HEIGHT = BattleResource.RIVER_HEIGHT;
+/**
+ *  Convert tile map coordination to pixel map node coordination (center of a cell)
+ * @param x {Number}
+ * @param y {Number}
+ * @param mode {GameConfig.PLAYER | GameConfig.OPPONENT}
+ * @returns {cc.Point}
+ */
 Utils.tile2Pixel = function (x, y, mode) {
-    // return center of tile pixel
+    Utils.validateMode(mode);
 
+    let xx, yy;
     if (mode === GameConfig.PLAYER) {
-        // ^ y
-        // |
-        // |
-        // |-------->x
-        // center of tile y = 4
-        let centerY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT - (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH / 2);
-        let paddingX = (cc.winSize.width - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH) / 2;
-        let startX = paddingX + GameConfig.TILE_WIDTH / 2;
-
-        let yy = centerY - (GameConfig.MAP_HEIGH - 1 - y) * GameConfig.TILE_HEIGH;
-        let xx = startX + GameConfig.TILE_WIDTH * x;
-        return {x: xx, y: yy};
+        xx = x * GameConfig.TILE_WIDTH - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2 + GameConfig.TILE_WIDTH / 2;
+        yy = y * GameConfig.TILE_HEIGH - GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2 + GameConfig.TILE_HEIGH / 2;
     } else if (mode === GameConfig.OPPONENT) {
         // x <---------o
         //             |
         //             |
         //             V
         //             y
-
-        // center of  y = 4
-        let centerY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT + (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH / 2);
-        let paddingX = (cc.winSize.width - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH) / 2;
-        let startX = cc.winSize.width - paddingX - GameConfig.TILE_WIDTH / 2;
-
-        let yy = centerY + (GameConfig.MAP_HEIGH - 1 - y) * GameConfig.TILE_HEIGH;
-        let xx = startX - GameConfig.TILE_WIDTH * x;
-        return {x: xx, y: yy};
+        xx = GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2 - x * GameConfig.TILE_WIDTH - GameConfig.TILE_WIDTH / 2;
+        yy = GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2 - y * GameConfig.TILE_HEIGH - GameConfig.TILE_HEIGH / 2;
     }
+    return cc.p(xx, yy);
 };
 
+/**
+ * Convert pixel map node coordination to tile coordination
+ * @param xx {Number}
+ * @param yy {Number}
+ * @param mode {GameConfig.PLAYER | GameConfig.OPPONENT}
+ * @returns {cc.Point}
+ */
 Utils.pixel2Tile = function (xx, yy, mode) {
-    if (!mode) {
-        mode = GameConfig.PLAYER;
-    }
+    Utils.validateMode(mode);
 
     if (mode === GameConfig.PLAYER) {
-        let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
-        let x = Math.floor((xx - paddingX) / GameConfig.TILE_WIDTH);
-
-        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT) / 2 + CARD_DECK_HEIGHT - (RIVER_HEIGHT / 2 + GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH);
-        let y = Math.floor((yy - paddingY) / GameConfig.TILE_HEIGH);
-
-        return {x, y};
+        xx = xx + GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2;
+        yy = yy + GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2;
     } else if (mode === GameConfig.OPPONENT) {
-        let paddingX = (cc.winSize.width - 7 * GameConfig.TILE_WIDTH) / 2;
-        let x = Math.floor(((cc.winSize.width - xx) - paddingX) / GameConfig.TILE_WIDTH);
-        let paddingY = (cc.winSize.height - CARD_DECK_HEIGHT - GameConfig.TILE_HEIGH * GameConfig.MAP_HEIGH * 2 - RIVER_HEIGHT) / 2;
-        let y = Math.floor(((cc.winSize.height - yy) - paddingY) / GameConfig.TILE_HEIGH);
+        xx = GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2 - xx;
+        yy = GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2 - yy;
+    }
+    let x = Math.floor(xx / GameConfig.TILE_WIDTH);
+    let y = Math.floor(yy / GameConfig.TILE_HEIGH);
 
-        return {x, y};
+    return cc.p(x, y);
+}
+
+Utils.validateMode = function (mode) {
+    if (mode !== GameConfig.PLAYER && mode !== GameConfig.OPPONENT) {
+        throw new Error("mode is invalid");
     }
 }
 
+Utils.convertWorldSpace2MapNodeSpace = function (worldPos, mode) {
+    Utils.validateMode(mode);
+
+    if (mode === GameConfig.PLAYER) {
+        return BattleManager.getInstance().getBattleLayer().getPlayerMapNode().convertToNodeSpace(worldPos);
+    } else {
+        return BattleManager.getInstance().getBattleLayer().getOpponentMapNode().convertToNodeSpace(worldPos);
+    }
+}
+
+Utils.validateTilePos = function (tilePos) {
+    return tilePos.x >= 0 && tilePos.x < GameConfig.MAP_WIDTH && tilePos.y >= 0 && tilePos.y < GameConfig.MAP_HEIGH;
+}
+
 Utils.tileArray2PixelArray = function (positionArr, mode) {
+    if (mode !== GameConfig.PLAYER && mode !== GameConfig.OPPONENT) {
+        throw new Error("Mode is invalid")
+    }
     let result = [];
     for (let pos of positionArr) {
         result.push(Utils.tile2Pixel(pos.x, pos.y, mode));
@@ -73,6 +85,34 @@ Utils.tileArray2PixelArray = function (positionArr, mode) {
     return result;
 }
 
+/**
+ *
+ * @param pixelPos {cc.Point} position via map node coordination (can use {Utils.convertWorldSpace2MapNodeSpace})
+ * @param mode
+ * @returns {boolean}
+ */
+Utils.isPixelPositionInMap = function (pixelPos, mode) {
+    Utils.validateMode(mode);
+
+    let tile00 = Utils.tile2Pixel(0, 0, mode);
+    let tile64 = Utils.tile2Pixel(6, 4, mode);
+    if (mode === GameConfig.PLAYER) {
+        tile00.x = tile00.x - GameConfig.TILE_WIDTH / 2;
+        tile00.y = tile00.y - GameConfig.TILE_HEIGH / 2;
+        tile64.x = tile64.x + GameConfig.TILE_WIDTH / 2;
+        tile64.y = tile64.y + GameConfig.TILE_HEIGH / 2;
+    } else {
+        tile00.x = tile00.x + GameConfig.TILE_WIDTH / 2;
+        tile00.y = tile00.y + GameConfig.TILE_HEIGH / 2;
+        tile64.x = tile64.x - GameConfig.TILE_WIDTH / 2;
+        tile64.y = tile64.y - GameConfig.TILE_HEIGH / 2;
+    }
+    if (mode === GameConfig.PLAYER) {
+        return pixelPos.x >= tile00.x && pixelPos.x <= tile64.x && pixelPos.y >= tile00.y && pixelPos.y <= tile64.y;
+    } else if (mode === GameConfig.OPPONENT) {
+        return pixelPos.x <= tile00.x && pixelPos.x >= tile64.x && pixelPos.y <= tile00.y && pixelPos.y >= tile64.y;
+    }
+}
 Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     let direction1 = 0;
     let direction2 = 0;
@@ -147,4 +187,105 @@ Utils.isBullet = function (entity) {
         }
     }
     return false;
+}
+
+Utils.radian2Degree = function (radian) {
+    return radian * 180 / Math.PI;
+}
+
+Utils.calcSlopeOfLine = function (pointA, pointB) {
+    let Xa = pointA.x, Ya = pointA.y;
+    let Xb = pointB.x, Yb = pointB.y;
+    let k = (Yb - Ya) / (Xb - Xa);
+
+    let alpha = 0;
+
+    if (k < 0) {
+        alpha = Math.PI - Math.atan(-k);
+    } else {
+        alpha = Math.atan(k);
+    }
+
+    alpha = Utils.radian2Degree(alpha);
+    if (Ya > Yb) {
+        alpha = alpha + 180;
+    }
+    if (alpha === 0 && Xa > Xb) {
+        alpha = alpha + 180;
+    }
+
+    return alpha;
+}
+
+/**
+ * Convert cell coordination to pixel map node coordination (anchor 0.5, 0.5)
+ * @param cellX
+ * @param cellY
+ * @param mode
+ * @returns {cc.Point}
+ */
+const cellsEachTile = 11;
+const cellWidth = GameConfig.TILE_WIDTH / cellsEachTile;
+const cellHeight = GameConfig.TILE_HEIGH / cellsEachTile;
+const cellsX = GameConfig.MAP_WIDTH * cellsEachTile;
+const cellsY = GameConfig.MAP_HEIGH * cellsEachTile;
+const mapWidthPixel = GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH;
+const mapHeightPixel = GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH;
+
+Utils.cell2Pixel = function (cellX, cellY, mode) {
+    Utils.validateMode(mode);
+    if (cellX < 0 || cellX >= cellsX || cellY < 0 || cellY >= cellsY) {
+        throw new Error("Cell position is invalid (cellX = " + cellX + ", cellY = " + cellY + ")");
+    }
+    let x, y;
+    if (mode === GameConfig.PLAYER) {
+        x = (cellX+1) * cellWidth - mapWidthPixel / 2 - cellWidth / 2;
+        y = (cellY+1) * cellHeight - mapHeightPixel / 2 - cellHeight / 2;
+    } else if (mode === GameConfig.OPPONENT) {
+        x =  mapWidthPixel / 2 - (cellX+1) * cellWidth + cellWidth / 2;
+        y = mapHeightPixel / 2 - (cellY+1) * cellHeight + cellHeight / 2;
+    }
+    return cc.p(x, y);
+}
+
+/**
+ * Convert cell coordination to tile coordination (1 tile = 11 cells)
+ * @param cellX
+ * @param cellY
+ * @returns {cc.Point}
+ */
+Utils.cell2Tile = function (cellX, cellY) {
+    if (cellX < 0 || cellX >= cellsX || cellY < 0 || cellY >= cellsY) {
+        throw new Error("Cell position is invalid (cellX = " + cellX + ", cellY = " + cellY + ")");
+    }
+    const tileX = cellX % cellsEachTile;
+    const tileY = cellY % cellsEachTile;
+    return cc.p(tileX, tileY);
+}
+
+/**
+ * Convert pixel map node coordination to cell coordination
+ * @param x
+ * @param y
+ * @param mode
+ * @returns {cc.Point}
+ */
+Utils.pixel2Cell = function (x, y, mode) {
+    Utils.validateMode(mode);
+    const tilePos = Utils.pixel2Tile(x, y, GameConfig.PLAYER);
+    if (Utils.validateTilePos(tilePos) === false) {
+        throw new Error("Pixel (x = " + x + ", y = " + y + ") is invalid");
+    }
+    let cellX, cellY;
+    const paddingLeftX = Utils.cell2Pixel(0, 0).x - cellWidth/2;
+    const paddingBottomY = Utils.cell2Pixel(0, 0).y - cellHeight/2;
+
+    if (mode === GameConfig.PLAYER) {
+        cellX = Math.floor((x - paddingLeftX) / cellWidth);
+        cellY = Math.floor((y - paddingBottomY) / cellHeight);
+    } else if (mode === GameConfig.OPPONENT) {
+        cellX = cellsX - 1 - Math.floor((x - paddingLeftX) / cellWidth);
+        cellY = cellsY - 1 - Math.floor((y - paddingBottomY) / cellHeight);
+    }
+    return cc.p(cellX, cellY);
 }

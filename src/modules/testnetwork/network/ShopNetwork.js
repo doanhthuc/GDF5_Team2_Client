@@ -21,9 +21,6 @@ ShopNetwork.Connector = cc.Class.extend({
             case gv.CMD.BUY_DAILY_SHOP:
                 this._handleBuyDailyShop(cmd, packet);
                 break;
-            case gv.CMD.SEND_GET_BATTLE_MAP:
-                this._handleGetBattleMap(cmd, packet);
-                break;
         }
     },
 
@@ -42,7 +39,7 @@ ShopNetwork.Connector = cc.Class.extend({
     },
 
     _handleBuyGoldShop: function (cmd, packet) {
-        if (packet.error === 0) {
+        if (packet.getError() === 0) {
             cc.log("[ShopNetwork.js] response buy gold shop goldChange = " + packet.goldChange + ", gemChange = " + packet.gemChange);
             let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
             userContext.updateUserGem(packet.gemChange);
@@ -55,7 +52,7 @@ ShopNetwork.Connector = cc.Class.extend({
     },
 
     _handleBuyDailyShop: function (cmd, packet) {
-        if (packet.error === 0) {
+        if (packet.getError() === 0) {
             cc.log("[ShopNetwork.js] Response Buy Daily Shop");
             cc.log(JSON.stringify(packet));
             cc.log(packet.gemChange + " " + packet.goldChange);
@@ -65,33 +62,19 @@ ShopNetwork.Connector = cc.Class.extend({
 
             userContext.updateUserGold(packet.goldChange);
             userContext.updateUserGem(packet.gemChange);
-            for (let i = 0; i < packet.itemAmount; i++) {
-                inventoryContext.updateCardAmount(packet.itemType[i], packet.itemQuantity[i]);
+            if (packet.itemAmount > 1) {
+                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).onClaimChestSuccess(packet);
+            } else {
+                for (let i = 0; i < packet.itemAmount; i++) {
+                    inventoryContext.updateCardAmount(packet.itemType[i], packet.itemQuantity[i]);
+                }
             }
-
             let shopLayer = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE);
             shopLayer.disableCardItemInDailySection(packet.id);
             shopLayer.closePopup();
         } else {
             cc.log("[ShopNetwork.js] error Buy Daily Shop");
         }
-    },
-
-    _handleGetBattleMap: function (cmd, packet) {
-        cc.log("[ShopNetwork.js] response get battle map");
-        GameConfig.battleData = new BattleData();
-        GameConfig.battleData.setMap(packet.btmap, GameConfig.PLAYER);
-        GameConfig.battleData.setMap(JSON.parse(JSON.stringify(packet.btmap)), GameConfig.OPPONENT);
-        GameConfig.battleData.setLongestPath(packet.path, GameConfig.PLAYER);
-        GameConfig.battleData.setLongestPath(JSON.parse(JSON.stringify(packet.path)), GameConfig.OPPONENT);
-
-        let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
-        let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
-
-        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
-        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
-        EventDispatcher.getInstance()
-            .dispatchEvent(EventType.FINISH_MATCHING);
     },
 
     sendBuyGoldShop: function (itemId) {
@@ -116,14 +99,9 @@ ShopNetwork.Connector = cc.Class.extend({
     },
 
     sendBuyDailyShop: function (itemId) {
+        cc.log('ShopNetwork.js sendBuyDailyShop itemId = ' + itemId);
         let pk = this.gameClient.getOutPacket(CMDBuyDailyShop);
         pk.pack(itemId);
         this.gameClient.sendPacket(pk);
     },
-
-    sendGetBattleMap: function () {
-        let pk = this.gameClient.getOutPacket(CMDSendGetBattleMap);
-        pk.pack();
-        this.gameClient.sendPacket(pk);
-    }
 })

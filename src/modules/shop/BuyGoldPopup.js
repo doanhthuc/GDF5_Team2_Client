@@ -16,11 +16,21 @@ const BuyGoldPopup = cc.Node.extend({
         this.popup.getChildByName("buy_btn").getChildByName("unitIconImg").setTexture(ShopResources.GEM_ICON_SMALL);
         this.buyBtn.addTouchEventListener(this._onBuyBtnClick.bind(this), this);
         this.closeBtn.addTouchEventListener(this._onCloseClick.bind(this), this);
+        this.blur = this.popup.getChildByName("blur");
+        this.blur.addTouchEventListener(this._onCloseClick.bind(this), this);
+        UiUtil.setImageFullScreen(this.blur);
     },
 
     _onBuyBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             cc.log("[BuyGoldPopup.js] buy btn clicked");
+            let user = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user;
+            if (user.gem < this.price) {
+                let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
+                notify.setNotifyTxt('Không Đủ Gem');
+                notify.showNotify();
+                return;
+            }
             ShopNetwork.connector.sendBuyGoldShop(this.id);
         }
     },
@@ -28,6 +38,7 @@ const BuyGoldPopup = cc.Node.extend({
     _onCloseClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.setVisible(false);
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY).hideNotification();
         }
     },
 

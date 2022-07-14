@@ -1,12 +1,13 @@
 let EffectSystem = System.extend({
-    id: GameConfig.SYSTEM_ID.EFFECT,
+    typeID: GameConfig.SYSTEM_ID.EFFECT,
     name: "EffectSystem",
 
     ctor: function () {
+        this._super();
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         this._handleBuffAttackSpeedEffect(tick);
         this._handleBuffAttackDamageEffect(tick);
         this._handleDamageEffect(tick);
@@ -17,10 +18,10 @@ let EffectSystem = System.extend({
 
     _handleBuffAttackSpeedEffect: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.BUFF_ATTACK_SPEED, GameConfig.COMPONENT_ID.ATTACK);
+            .getEntitiesHasComponents(BuffAttackSpeedEffect, AttackComponent);
         for (let entity of entityList) {
-            let attackComponent = entity.getComponent(GameConfig.COMPONENT_ID.ATTACK);
-            let buffAttackSpeedComponent = entity.getComponent(GameConfig.COMPONENT_ID.BUFF_ATTACK_SPEED);
+            let attackComponent = entity.getComponent(AttackComponent);
+            let buffAttackSpeedComponent = entity.getComponent(BuffAttackSpeedEffect);
 
             attackComponent.speed = attackComponent.originSpeed * (1 - (buffAttackSpeedComponent.percent-1));
         }
@@ -28,10 +29,10 @@ let EffectSystem = System.extend({
 
     _handleBuffAttackDamageEffect: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.BUFF_ATTACK_DAMAGE, GameConfig.COMPONENT_ID.ATTACK);
+            .getEntitiesHasComponents(BuffAttackDamageEffect, AttackComponent);
         for (let entity of entityList) {
-            let attackComponent = entity.getComponent(GameConfig.COMPONENT_ID.ATTACK);
-            let buffAttackDamageComponent = entity.getComponent(GameConfig.COMPONENT_ID.BUFF_ATTACK_DAMAGE);
+            let attackComponent = entity.getComponent(AttackComponent);
+            let buffAttackDamageComponent = entity.getComponent(BuffAttackDamageEffect);
 
             attackComponent.setDamage(attackComponent.originDamage * buffAttackDamageComponent.percent);
         }
@@ -40,11 +41,11 @@ let EffectSystem = System.extend({
     _handleDamageEffect: function (tick) {
         // damage effects
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.DAMAGE_EFFECT);
+            .getEntitiesHasComponents(DamageEffect);
         for (let entity of entityList) {
-            let lifeComponent = entity.getComponent(GameConfig.COMPONENT_ID.LIFE);
+            let lifeComponent = entity.getComponent(LifeComponent);
             if (lifeComponent) {
-                let damageComponent = entity.getComponent(GameConfig.COMPONENT_ID.DAMAGE_EFFECT);
+                let damageComponent = entity.getComponent(DamageEffect);
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
             }
@@ -53,15 +54,15 @@ let EffectSystem = System.extend({
 
     _handleFrozenEffect: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.FROZEN_EFFECT)
+            .getEntitiesHasComponents(FrozenEffect)
         for (let entity of entityList) {
-            let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
-            let frozenComponent = entity.getComponent(GameConfig.COMPONENT_ID.FROZEN_EFFECT);
+            let velocityComponent = entity.getComponent(VelocityComponent);
+            let frozenComponent = entity.getComponent(FrozenEffect);
 
             frozenComponent.countdown = frozenComponent.countdown - tick;
             if (frozenComponent.countdown <= 0) {
-                this._updateOriginVelocity(velocityComponent);
                 entity.removeComponent(frozenComponent);
+                this._updateOriginVelocity(velocityComponent);
             } else {
                 velocityComponent.speedX = 0;
                 velocityComponent.speedY = 0;
@@ -71,15 +72,13 @@ let EffectSystem = System.extend({
 
     _handleSlowEffect: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesByComponents(GameConfig.COMPONENT_ID.SLOW_EFFECT)
+            .getEntitiesHasComponents(SlowEffect);
         for (let entity of entityList) {
-            let velocityComponent = entity.getComponent(GameConfig.COMPONENT_ID.VELOCITY);
-            let slowComponent = entity.getComponent(GameConfig.COMPONENT_ID.SLOW_EFFECT);
+            let velocityComponent = entity.getComponent(VelocityComponent);
+            let slowComponent = entity.getComponent(SlowEffect);
 
             slowComponent.countdown = slowComponent.countdown - tick;
             if (slowComponent.countdown <= 0) {
-                // EventDispatcher.getInstance()
-                //     .dispatchEvent(EventType.RESET_INIT_VELOCITY, {velocityComponent: velocityComponent})
                 this._updateOriginVelocity(velocityComponent);
                 entity.removeComponent(slowComponent);
             } else {
@@ -94,3 +93,5 @@ let EffectSystem = System.extend({
         velocityComponent.speedY = velocityComponent.originSpeedY;
     }
 });
+EffectSystem.typeID = GameConfig.SYSTEM_ID.EFFECT;
+SystemManager.getInstance().registerClass(EffectSystem);

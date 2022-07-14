@@ -39,8 +39,12 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
             if (nextX < 0 || nextY < 0 || nextX >= map[0].length
                 || nextY >= map.length) continue;
             if (visited[nextY][nextX]) continue;
-            // FIXME: map const 1, 2, 3
-            if (map[nextY][nextX] !== 0 && map[nextY][nextX] !== 1 && map[nextY][nextX] !== 2 && map[nextY][nextX] !== 3) continue;
+
+            if (map[nextY][nextX] !== GameConfig.MAP.NONE
+                && map[nextY][nextX] !== GameConfig.MAP.ATTACK_SPEED
+                && map[nextY][nextX] !== GameConfig.MAP.ATTACK_DAMAGE
+                && map[nextY][nextX] !== GameConfig.MAP.ATTACK_RANGE) continue;
+
             neighbors.push({x: nextX, y: nextY});
             visited[nextY][nextX] = true;
         }
@@ -69,7 +73,7 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
     }
 
     let path = bfs(start, dest)
-        if (!path[dest.y][dest.x]) {
+    if (path.length === 0 || !path[dest.y] || !path[dest.y][dest.x]) {
         return null;
     }
     let current = path[dest.y][dest.x];
@@ -89,7 +93,7 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
 }
 
 FindPathUtil.findShortestPathForEachTile = function (mode) {
-    let map = GameConfig.battleData.getMap(mode);
+    let map = BattleManager.getInstance().getBattleData().getMap(mode);
     let shortestPathForEachTiles = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
 
     cc.log("^^^^^^^^^")
@@ -106,7 +110,6 @@ FindPathUtil.findShortestPathForEachTile = function (mode) {
             if (map[row][col] === 0) {
                 let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
                 if (path && path.length > 0) {
-                    path = Utils.tileArray2PixelArray(path, mode);
                     shortestPathForEachTiles[row][col] = path;
                 }
             }
@@ -114,7 +117,7 @@ FindPathUtil.findShortestPathForEachTile = function (mode) {
     }
 
     if (shortestPathForEachTiles && shortestPathForEachTiles[0][0]) {
-        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTiles, mode);
+        BattleManager.getInstance().getBattleData().setShortestPathForEachTile(shortestPathForEachTiles, mode);
     }
-    return GameConfig.battleData.getShortestPathForEachTile(mode);
+    return BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode);
 }

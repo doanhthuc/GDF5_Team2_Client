@@ -1,4 +1,4 @@
-let EntityManager = cc.Class.extend({
+let EntityManager = ManagerECS.extend({
     name: "EntityManager",
     /*
     * {
@@ -8,6 +8,7 @@ let EntityManager = cc.Class.extend({
     * */
 
     ctor: function () {
+        this._super();
         this.entities = {}
     },
 
@@ -19,11 +20,11 @@ let EntityManager = cc.Class.extend({
         return this.entities[entityID];
     },
 
-    getEntitiesByComponents: function (...componentTypeIDs) {
+    getEntitiesHasComponents: function (...ComponentClss) {
         // only get active entity
         let entityList = [];
         for (let id of Object.keys(this.entities)) {
-            if (this.entities[id].getActive() && this.entities[id].hasAllComponent(...componentTypeIDs)) {
+            if (this.entities[id].getActive() && this.entities[id].hasAllComponent(...ComponentClss)) {
                 entityList.push(this.entities[id]);
             } else if (this.entities[id].getActive() === false) {
                 // remove entity
@@ -41,9 +42,22 @@ let EntityManager = cc.Class.extend({
         this.entities[entity.id] = entity;
     },
 
-    destroyEntity: function (id) {
-        this.getEntity(id).setActive(false);
-        delete this.entities[id];
+    remove: function (entity) {
+        entity.setActive(false);
+        delete this.entities[entity.id];
     },
 });
 
+EntityManager.destroy = function (entity) {
+    let appearanceComponent = entity.getComponent(AppearanceComponent)
+    if (appearanceComponent) {
+        let sprite = appearanceComponent.sprite;
+        sprite.setVisible(false);
+        ComponentManager.getInstance().remove(appearanceComponent);
+    }
+
+    for (let key of Object.keys(entity.components)) {
+        ComponentManager.getInstance().remove(entity.components[key]);
+    }
+    EntityManager.getInstance().remove(entity);
+}

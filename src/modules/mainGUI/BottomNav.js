@@ -13,6 +13,7 @@ const bottomNav = cc.Node.extend({
         this.loadTabList();
         this.setPositionForTab();
         this.tabMap.get(this.activeTab).iconImg.runAction(cc.MoveBy.create(0.1, cc.p(0, 20)));
+        this._height = this.tabMap.get(this.activeTab).backgroundBtn.height;
     },
 
 
@@ -55,7 +56,8 @@ const bottomNav = cc.Node.extend({
                 let moveIcon = cc.MoveBy.create(0.1, cc.p(0, 20));
                 tab.iconImg.runAction(moveIcon);
             } else {
-                tab.backgroundBtn.loadTextureNormal(
+                tab.backgroundBtn.loadTextures(
+                    NavResources.TAB_LIST[key].backgroundImg,
                     NavResources.TAB_LIST[key].backgroundImg
                 );
                 tab.setPosition(
@@ -73,7 +75,9 @@ const bottomNav = cc.Node.extend({
             this.addChild(node);
             this.extendTabProperties(tab, node);
             this.tabMap.set(tab, node);
-            node.backgroundBtn.addTouchEventListener(this.onTabClick.bind(this), this);
+            if (NavResources.TAB_LIST[tab].icon !== undefined) {
+                node.backgroundBtn.addTouchEventListener(this.onTabClick.bind(this), this);
+            }
             this.setResourceForTab(tab, node);
         }
     },
@@ -81,6 +85,9 @@ const bottomNav = cc.Node.extend({
         if (NavResources.TAB_LIST[tabName].icon !== undefined) {
             tabNode.iconImg.loadTexture(NavResources.TAB_LIST[tabName].icon);
             tabNode.getChildByName('nameTxt').setString(NavResources.TAB_LIST[tabName].text);
+            tabNode.getChildByName('nameTxt').setVisible(false);
+        } else  {
+            tabNode.iconImg.setVisible(false);
             tabNode.getChildByName('nameTxt').setVisible(false);
         }
     },

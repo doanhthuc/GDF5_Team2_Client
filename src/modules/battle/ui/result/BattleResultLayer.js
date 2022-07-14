@@ -23,19 +23,19 @@ let BattleResultLayer = cc.Layer.extend({
         let resource = {skeleton: null, alias: null};
         this.animationName = {init: null, idle: null};
         switch (this.result) {
-            case "win":
+            case GameConfig.BATTLE_RESULT.WIN:
                 resource.skeleton = BattleResource.WIN_SKELETON_ANIMATION;
                 resource.alias = BattleResource.WIN_SKELETON_ALIAS;
                 this.animationName.init = "fx_result_win_init";
                 this.animationName.idle = "fx_result_win_idle";
                 break;
-            case "lose":
+            case GameConfig.BATTLE_RESULT.LOSE:
                 resource.skeleton = BattleResource.LOSE_SKELETON_ANIMATION;
                 resource.alias = BattleResource.LOSE_SKELETON_ALIAS;
                 this.animationName.init = "fx_result_lose_init";
                 this.animationName.idle = "fx_result_lose_idle";
                 break;
-            case "draw":
+            case GameConfig.BATTLE_RESULT.DRAW:
                 resource.skeleton = BattleResource.DRAW_SKELETON_ANIMATION;
                 resource.alias = BattleResource.DRAW_SKELETON_ALIAS;
                 this.animationName.init = "fx_result_draw_init";
@@ -58,7 +58,6 @@ let BattleResultLayer = cc.Layer.extend({
 
     animationStateEvent: function (obj, trackIndex, type, event, loopCount) {
         let animationName = (trackIndex && trackIndex.animation) ? trackIndex.animation.name : 0;
-        cc.log("event")
         switch (type) {
             case this.ANIMATION_TYPE.ANIMATION_START:
                 cc.log(trackIndex + " start: " + animationName);
@@ -81,9 +80,8 @@ let BattleResultLayer = cc.Layer.extend({
     },
 
     _showResult: function () {
-        // FIXME: harcode here
         let playerInfoNode = new BattleResultPlayerInfo(this.battleData.getUsername(GameConfig.PLAYER), this.battleData.getTrophy(GameConfig.PLAYER),
-            "textures/common/common_avatar.png", this.battleData.getEnergyHouse(GameConfig.PLAYER));
+            BattleResource.AVATAR_IMAGE, this.battleData.getEnergyHouse(GameConfig.PLAYER));
         playerInfoNode.attr({
             y: cc.winSize.height / 2,
             x: cc.winSize.width / 4
@@ -91,7 +89,7 @@ let BattleResultLayer = cc.Layer.extend({
         this.addChild(playerInfoNode);
 
         let opponentInfoNode = new BattleResultPlayerInfo(this.battleData.getUsername(GameConfig.OPPONENT), this.battleData.getTrophy(GameConfig.OPPONENT),
-            "textures/common/common_avatar.png", this.battleData.getEnergyHouse(GameConfig.OPPONENT));
+            BattleResource.AVATAR_IMAGE, this.battleData.getEnergyHouse(GameConfig.OPPONENT));
         opponentInfoNode.attr({
             y: cc.winSize.height / 2,
             x: 3 * cc.winSize.width / 4

@@ -13,19 +13,19 @@ let TwoPlayerInfoLayer = cc.Layer.extend({
         });
         this.addChild(this.rootNode);
 
-        this.setAvatar(playerAvatar, "player");
-        this.setAvatar(opponentAvatar, "opponent");
-        this.setUsername(playerName, "player");
-        this.setUsername(opponentName, "player");
+        this.setAvatar(playerAvatar, GameConfig.PLAYER);
+        this.setAvatar(opponentAvatar, GameConfig.OPPONENT);
+        this.setUsername(playerName, GameConfig.PLAYER);
+        this.setUsername(opponentName, GameConfig.OPPONENT);
     },
 
     setAvatar: function (avatarPath, type) {
         let avatarNode = null;
         switch (type) {
-            case "player":
+            case GameConfig.PLAYER:
                 avatarNode = this.rootNode.getChildByName("player_avatar");
                 break;
-            case "opponent":
+            case GameConfig.OPPONENT:
                 avatarNode = this.rootNode.getChildByName("opponent_avatar");
                 break;
             default:
@@ -37,10 +37,10 @@ let TwoPlayerInfoLayer = cc.Layer.extend({
     setUsername: function (username, type) {
         let usernameNode = null;
         switch (type) {
-            case "player":
+            case GameConfig.PLAYER:
                 usernameNode = this.rootNode.getChildByName("player_name");
                 break;
-            case "opponent":
+            case GameConfig.OPPONENT:
                 usernameNode = this.rootNode.getChildByName("opponent_name");
                 break;
             default:

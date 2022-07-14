@@ -1,7 +1,7 @@
 {
   "ID": "64ee7d40-a579-428a-93f7-9c062cefc8d6",
   "Version": "2.3.4",
-  "Name": "treasurePopup",
+  "Name": "treasurePopup2",
   "Content": {
     "Content": {
       "Animation": {
@@ -21,8 +21,10 @@
               "Plist": ""
             },
             "Scale9Enable": true,
-            "Scale9Width": 46,
-            "Scale9Height": 46,
+            "Scale9OriginX": 10,
+            "Scale9OriginY": 10,
+            "Scale9Width": 26,
+            "Scale9Height": 26,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
@@ -61,7 +63,7 @@
               "Y": 1136.0
             },
             "Alpha": 204,
-            "Name": "blur",
+            "Name": "modal",
             "ctype": "ImageViewObjectData"
           },
           {
@@ -129,7 +131,7 @@
             },
             "Scale": {
               "ScaleX": 1.0,
-              "ScaleY": 0.5
+              "ScaleY": 0.452
             },
             "CColor": {},
             "IconVisible": false,
@@ -433,143 +435,6 @@
             },
             "Name": "treasureMapTxt",
             "ctype": "TextObjectData"
-          },
-          {
-            "FontSize": 14,
-            "ButtonText": "",
-            "TextColor": {
-              "R": 65,
-              "G": 65,
-              "B": 70
-            },
-            "DisabledFileData": {
-              "Type": "Default",
-              "Path": "Default/Button_Disable.png",
-              "Plist": ""
-            },
-            "PressedFileData": {
-              "Type": "Normal",
-              "Path": "textures/common/common_btn_green.png",
-              "Plist": ""
-            },
-            "NormalFileData": {
-              "Type": "Normal",
-              "Path": "textures/common/common_btn_green.png",
-              "Plist": ""
-            },
-            "Scale9Enable": true,
-            "Scale9OriginX": 15,
-            "Scale9OriginY": 11,
-            "Scale9Width": 164,
-            "Scale9Height": 89,
-            "OutlineColor": {
-              "G": 0,
-              "B": 0
-            },
-            "ShadowColor": {
-              "R": 110,
-              "G": 110,
-              "B": 110
-            },
-            "ShadowOffsetX": 2.0,
-            "ShadowOffsetY": -2.0,
-            "TouchEnable": true,
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 0.0,
-              "Y": -140.0
-            },
-            "Scale": {
-              "ScaleX": 0.6,
-              "ScaleY": 0.6
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -97.0,
-            "RightMargin": -97.0,
-            "TopMargin": 84.5,
-            "BottomMargin": -195.5,
-            "Tag": 171,
-            "Children": [
-              {
-                "FontSize": 20,
-                "LabelText": "Mở Rương",
-                "FontResource": {
-                  "Type": "Normal",
-                  "Path": "textures/font/SVN-Supercell Magic.ttf",
-                  "Plist": ""
-                },
-                "HorizontalAlignmentType": "HT_Center",
-                "VerticalAlignmentType": "VT_Center",
-                "OutlineColor": {
-                  "R": 0,
-                  "G": 0,
-                  "B": 0
-                },
-                "OutlineEnabled": true,
-                "ShadowColor": {
-                  "R": 110,
-                  "G": 110,
-                  "B": 110
-                },
-                "ShadowOffsetX": 2.0,
-                "ShadowOffsetY": -2.0,
-                "ShadowEnabled": true,
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 97.0,
-                  "Y": 70.0
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PositionPercentXEnabled": true,
-                "PrePosition": {
-                  "X": 0.5,
-                  "Y": 0.6306
-                },
-                "PreSize": {
-                  "X": 0.7526,
-                  "Y": 0.2613
-                },
-                "LeftMargin": 24.0,
-                "RightMargin": 24.0,
-                "TopMargin": 26.5,
-                "BottomMargin": 55.5,
-                "Tag": 173,
-                "ActionTag": -60569993,
-                "Size": {
-                  "X": 146.0,
-                  "Y": 29.0
-                },
-                "Name": "primaryActionTxt",
-                "ctype": "TextObjectData"
-              }
-            ],
-            "ActionTag": 118331801,
-            "Size": {
-              "X": 194.0,
-              "Y": 111.0
-            },
-            "Name": "primaryBtn",
-            "ctype": "ButtonObjectData"
           },
           {
             "FileData": {
@@ -1168,6 +1033,263 @@
             },
             "Name": "Sprite_17_1",
             "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 14,
+            "LabelText": "Mỗi thời điểm chỉ mở một rương",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "R": 77,
+              "G": 77,
+              "B": 77
+            },
+            "OutlineEnabled": true,
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -96.0703
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "G": 165,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -159.5,
+            "RightMargin": -159.5,
+            "TopMargin": 85.5703,
+            "BottomMargin": -106.5703,
+            "Tag": 81,
+            "ActionTag": 2063942453,
+            "Size": {
+              "X": 319.0,
+              "Y": 21.0
+            },
+            "Name": "constrainTxt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/lobby/openTreasureButton.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": -140.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": 140.0,
+            "BottomMargin": -140.0,
+            "Tag": 93,
+            "ActionTag": 781658654,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "openTreasureBtn",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/lobby/speedUpTreasureBtn.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": -140.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": 140.0,
+            "BottomMargin": -140.0,
+            "Tag": 97,
+            "ActionTag": 2084328874,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "speedUpTreasureBtn",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FontSize": 16,
+            "LabelText": "Mở sau: ",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -45.7354,
+              "Y": -94.765
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 57,
+              "G": 57,
+              "B": 57
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -89.7354,
+            "RightMargin": 1.7354,
+            "TopMargin": 83.765,
+            "BottomMargin": -105.765,
+            "Tag": 159,
+            "ActionTag": -1074285916,
+            "Size": {
+              "X": 88.0,
+              "Y": 22.0
+            },
+            "Name": "openAfterTxt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FontSize": 16,
+            "LabelText": "55h 43m",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 52.2422,
+              "Y": -95.7032
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 54,
+              "G": 199,
+              "B": 54
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 4.7422,
+            "RightMargin": -99.7422,
+            "TopMargin": 84.7032,
+            "BottomMargin": -106.7032,
+            "Tag": 160,
+            "ActionTag": -1483685205,
+            "Size": {
+              "X": 95.0,
+              "Y": 22.0
+            },
+            "Name": "countdownTxt",
+            "ctype": "TextObjectData"
           }
         ],
         "Size": {
@@ -1180,7 +1302,6 @@
       "UsedResources": [
         "../../Default/Button_Disable.png",
         "../../Default/ImageFile.png",
-        "../../textures/common/common_btn_green.png",
         "../../textures/common/common_icon_gold_small.png",
         "../../textures/common/common_panel_background.png",
         "../../textures/common/common_panel_btn_close.png",
@@ -1192,7 +1313,9 @@
         "../../textures/lobby/treasure/common_icon_card_multiple_2.png",
         "../../textures/lobby/treasure/common_icon_card_multiple_4.png",
         "../../textures/lobby/treasure/common_treasure_pedestal.png",
-        "../../textures/lobby/treasure/common_treasure_tutorial.png"
+        "../../textures/lobby/treasure/common_treasure_tutorial.png",
+        "openTreasureButton.json",
+        "speedUpTreasureBtn.json"
       ],
       "ctype": "GameFileData"
     }

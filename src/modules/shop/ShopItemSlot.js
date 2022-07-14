@@ -65,8 +65,7 @@ const ShopItemSlotNode = cc.Node.extend({
             this.buyBtn.getChildByName("backgroundBtn").addTouchEventListener(this._onBuyBtnClick.bind(this), this);
         } else {
             this.buyBtn.removeAllChildren();
-            // FIXME: hardcode
-            let label = new ccui.Text("Đã mua", "textures/font/SVN-Supercell Magic.ttf", 20);
+            let label = new ccui.Text("Đã mua", ShopResources.FONT_SUPERCELL, 20);
             this.buyBtn.addChild(label);
         }
     },
@@ -74,14 +73,32 @@ const ShopItemSlotNode = cc.Node.extend({
     _onBuyBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             cc.log("[ShopItemSlot] Click on buy btn")
-            let buyItemPopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
-            buyItemPopup.setId(this.id);
-            buyItemPopup.setTitle(this.slotName);
-            buyItemPopup.setPrice(this.price);
-            buyItemPopup.setImage(this.texture);
-            buyItemPopup.setQuantity(this.quantity);
-            buyItemPopup.setType(this.type);
-            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
+            if (this.type === ItemDefine.CHESTYPE) {
+                // PopupUIManager.getInstance()
+                // let user = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).getUser();
+                // if (user.gold < this.price) {
+                //     let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
+                //     notify.setNotifyTxt('Không Đủ Vàng');
+                //     notify.showNotify();
+                //     return;
+                // }
+                let TreasurePopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
+
+                // TreasurePopup.setPopUpInfoFromTreasureType(null, ChestConst.ACTION.CLAIM, 0, TreasureSlotResources.STATE.OCCUPIED)
+                TreasurePopup.setBuyPrice(this.price);
+                TreasurePopup.setPopUpInfoFromTreasureType(null, ChestConst.ACTION.BUY, 0, TreasureSlotResources.STATE.OCCUPIED)
+                PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
+
+            } else {
+                let buyItemPopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
+                buyItemPopup.setId(this.id);
+                buyItemPopup.setTitle(this.slotName);
+                buyItemPopup.setPrice(this.price);
+                buyItemPopup.setImage(this.texture);
+                buyItemPopup.setQuantity(this.quantity);
+                buyItemPopup.setType(this.type);
+                PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD);
+            }
         }
-    }
+    },
 });

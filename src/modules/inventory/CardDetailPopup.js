@@ -1,6 +1,7 @@
 const CardDetailPopup = cc.Node.extend({
     ctor: function () {
         this.name = CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL;
+        this.Z_ORDER = CLIENT_UI_CONST.Z_ORDER.HIGHER_POPUP;
         this.cardModel = null;
         this.cardNode = null;
         this._super();
@@ -24,12 +25,24 @@ const CardDetailPopup = cc.Node.extend({
         this.upgradeLevelTxt = this.backgroundImg.getChildByName('upgradeLevelTxt');
         this.upgradeLevelTxt.ignoreContentAdaptWithSize(true);
         this.towerImg = this.backgroundImg.getChildByName('towerImg');
+        this.modal = this.cardDetailPopupNode.getChildByName('modal');
+        this.nextTowerImgBtn = this.cardDetailPopupNode.getChildByName('nextTowerImgBtn');
+        this.nextTowerImgBtn.addTouchEventListener(this.onNextTowerImgBtnClick.bind(this), this);
+        this.prevTowerImgBtn = this.cardDetailPopupNode.getChildByName('prevTowerImgBtn');
+        this.prevTowerImgBtn.addTouchEventListener(this.onPrevTowerImgBtnClick.bind(this), this);
+        this.constraintTxt = this.cardDetailPopupNode.getChildByName('constraintTxt');
+        UiUtil.setImageFullScreen(this.modal);
+        this.modal.addTouchEventListener(this.onModalClick.bind(this), this);
         this.initCardStatHolders();
 
         this.upgradeBtnState = InventoryResources.UPGRADE_BTN_STATE.NORMAL;
         this.upgradeBtnBackground.addTouchEventListener(this.onUpgradeBtnClick.bind(this), this);
         this.skillBtnBackground.addTouchEventListener(this.onSkillBtnClick.bind(this), this);
         this.selectBtnBackground.addTouchEventListener(this.onSelectBtnClick.bind(this), this);
+
+        this.DEFAULT_RANK_INDEX = 0;
+        this.currentRankIndex = this.DEFAULT_RANK_INDEX;
+        this.rankArr = ['C', 'B', 'A'];
     },
 
     initCardStatHolders: function () {
@@ -62,7 +75,14 @@ const CardDetailPopup = cc.Node.extend({
     setCardStat: function () {
         let index = 0;
         this.setAllCardStatHoldersVisible(false);
-        for (let [key, value] of Object.entries(this.cardModel.stat)) {
+        for (let [key, value] of Object.entries(this.cardModel.getCardStat())) {
+            if (key === 'attackSpeed') {
+                value = value / 1000 + 's';
+            } else if (key === 'slowPercent') {
+                value = value + '%';
+            } else if (key === 'frozenTime') {
+                value = value / 1000 + 's';
+            }
             let cardStat = {
                 icon: CARD_STAT_ICON[key],
                 name: CARD_STAT_NAME[key],
@@ -80,11 +100,15 @@ const CardDetailPopup = cc.Node.extend({
         this.setCardNodeModel(cardModel)
         this.setUpgradeBtnState(cardModel.accumulated);
         this.setUpgradeLevelTxt(cardModel.rank);
+        this.currentRankIndex = this.DEFAULT_RANK_INDEX;
+        this.constraintTxt.setVisible(this.shouldConstraintVisible());
+        this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[this.rankArr[this.DEFAULT_RANK_INDEX]]);
+        this.setNextAndPrevTowerImgBtnOpacity();
         // TODO: check condition card from where click
-        // cardModel.isBattleDeck
-        //     ? this.setBtnPosPopupFromBattleDeck()
-        //     : this.setBtnPosPopupFromCardCollection();
-        this.setBtnPosPopupFromBattleDeck()
+        cardModel.isBattleDeck
+            ? this.setBtnPosPopupFromBattleDeck()
+            : this.setBtnPosPopupFromCardCollection();
+        // this.setBtnPosPopupFromBattleDeck()
     },
 
     setCardNodeModel: function (cardModel) {
@@ -99,11 +123,8 @@ const CardDetailPopup = cc.Node.extend({
 
     setCardDetailPopupTexture: function () {
         this.cardNameTxt.setString(CARD_NAME_VI[this.cardModel.id]);
-        if (this.cardModel.id <= 6) {
-            this.towerImg.setTexture(CARD_TYPE.TOWER[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
-        } else {
-            this.towerImg.setTexture(CARD_TYPE.SPELL[this.cardModel.id].image[getRankCharacter(this.cardModel.level)]);
-        }
+        // this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image['A']);
+
         this.setCardStat()
     },
 
@@ -114,14 +135,24 @@ const CardDetailPopup = cc.Node.extend({
     },
 
     onUpgradeBtnClick: function (sender, type) {
-        if (this.upgradeBtnState === InventoryResources.UPGRADE_BTN_STATE.NORMAL && type === ccui.Widget.TOUCH_ENDED) {
-            // cc.log('Card DetailPopup line 102 : onUpgradeBtnClick' + JSON.stringify(contextManager.getContext(ContextManagerConst.USER_CONTEXT)));
-            if (this.cardModel.accumulated >= JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments &&
-                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold >=
-                JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].gold) {
-                //TODO: upgrade card
-                contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).upgradeCard(this.cardModel.id);
-
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            switch (this.upgradeBtnState) {
+                case InventoryResources.UPGRADE_BTN_STATE.DISABLE:
+                    if (this.cardModel.level < MAX_CARD_LEVEL) {
+                        PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES).setType(InventoryResources.RESOURCE_TYPE.CARD)
+                        PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES);
+                    }
+                    break;
+                case InventoryResources.UPGRADE_BTN_STATE.NOT_ENOUGH_GOLD:
+                    PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES).setType(InventoryResources.RESOURCE_TYPE.GOLD)
+                    PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES);
+                    break;
+                case InventoryResources.UPGRADE_BTN_STATE.NORMAL:
+                    //TODO: upgrade card
+                    contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).upgradeCard(this.cardModel.id);
+                    break;
+                default:
+                    break;
             }
         }
     },
@@ -134,25 +165,42 @@ const CardDetailPopup = cc.Node.extend({
 
     onSkillBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            cc.log('Card DetailPopup line 127 : onSkillbtnClick');
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_SKILL).setCardId(this.cardModel.id);
+            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_SKILL);
         }
     },
 
     setBtnPosPopupFromBattleDeck: function () {
-        this.selectBtnNode.setVisible(false);
-        this.upgradeBtnNode.setPosition(198.12, 105.55);
-        this.skillBtnNode.setPosition(435.80, 105.55);
-        this.skillBtnNode.setScaleX(1);
+        if (this.cardModel.id >= 7 && this.cardModel.id <= 9) {
+            this.selectBtnNode.setVisible(false);
+            this.skillBtnNode.setVisible(false);
+            this.upgradeBtnNode.setPosition(310, 105.55);
+        } else {
+            this.skillBtnNode.setVisible(true);
+            this.selectBtnNode.setVisible(false);
+            this.upgradeBtnNode.setPosition(198.12, 105.55);
+            this.skillBtnNode.setPosition(435.80, 105.55);
+            this.skillBtnNode.setScaleX(1);
+        }
     },
 
     setBtnPosPopupFromCardCollection: function () {
-        this.selectBtnNode.setVisible(true);
-        this.selectBtnNode.setPosition(133.68, 105.55);
-        this.upgradeBtnNode.setPosition(313.81, 105.55);
-        this.skillBtnNode.setPosition(495.02, 105.55);
+        if (this.cardModel.id >= 7 && this.cardModel.id <= 9) {
+            this.selectBtnNode.setVisible(true);
+            this.skillBtnNode.setVisible(false);
+            this.selectBtnNode.setPosition(198.12, 105.55);
+            this.upgradeBtnNode.setPosition(435.80, 105.55);
+            this.selectBtnNode.setScaleX(1);
+        } else {
+            this.skillBtnNode.setVisible(true);
+            this.selectBtnNode.setVisible(true);
+            this.selectBtnNode.setPosition(133.68, 105.55);
+            this.upgradeBtnNode.setPosition(313.81, 105.55);
+            this.skillBtnNode.setPosition(495.02, 105.55);
 
-        this.skillBtnNode.setScaleX(0.8);
-        this.selectBtnNode.setScaleX(0.8);
+            this.skillBtnNode.setScaleX(0.8);
+            this.selectBtnNode.setScaleX(0.8);
+        }
     },
 
     setUpgradeBtnState: function (accumulatedCard) {
@@ -194,7 +242,54 @@ const CardDetailPopup = cc.Node.extend({
         this.cardNode.updateCardNodeUI(this.cardModel.accumulated);
         // this.setCardStat();
         this.setCardDetailPopupTexture();
-        this.setUpgradeLevelTxt(this.cardModel.rank);
+        // this.setUpgradeLevelTxt(this.cardModel.rank);
         this.setUpgradeBtnState(accumulated)
+    },
+
+    onModalClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            this.setVisible(false);
+        }
+    },
+
+    onNextTowerImgBtnClick: function (sender, type) {
+        if (this.currentRankIndex < 2 && type === ccui.Widget.TOUCH_ENDED) {
+            let rank = this.rankArr[this.currentRankIndex + 1];
+            this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[rank]);
+            this.currentRankIndex++;
+            this.constraintTxt.setString('Yêu càu tiến hoá ' + (this.currentRankIndex + 1));
+            this.upgradeLevelTxt.setString('Tiến hóa ' + (this.currentRankIndex + 1));
+            this.constraintTxt.setVisible(this.shouldConstraintVisible());
+            this.setNextAndPrevTowerImgBtnOpacity();
+        }
+    },
+
+    onPrevTowerImgBtnClick: function (sender, type) {
+        if (this.currentRankIndex > 0 && type === ccui.Widget.TOUCH_ENDED) {
+            let rank = this.rankArr[this.currentRankIndex - 1];
+            this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[rank]);
+            this.currentRankIndex--;
+            this.constraintTxt.setString('Yêu càu tiến hoá ' + (this.currentRankIndex + 1));
+            this.upgradeLevelTxt.setString('Tiến hóa ' + (this.currentRankIndex + 1));
+            this.constraintTxt.setVisible(this.shouldConstraintVisible());
+            this.setNextAndPrevTowerImgBtnOpacity();
+        }
+    },
+
+    shouldConstraintVisible: function () {
+        return this.cardModel.level < CARD_RANK[this.rankArr[this.currentRankIndex]].LEVEL;
+    },
+
+    setNextAndPrevTowerImgBtnOpacity: function () {
+        if (this.currentRankIndex === 0) {
+            this.prevTowerImgBtn.setOpacity(128);
+        } else {
+            this.prevTowerImgBtn.setOpacity(255);
+        }
+        if (this.currentRankIndex === 2) {
+            this.nextTowerImgBtn.setOpacity(128);
+        } else {
+            this.nextTowerImgBtn.setOpacity(255);
+        }
     }
 });

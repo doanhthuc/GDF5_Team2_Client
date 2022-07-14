@@ -1,6 +1,4 @@
 const TreasureSlot = cc.Node.extend({
-    id: null,
-
     ctor: function (id) {
         this.id = id;
         this.DEFAULT_STATE = TreasureSlotResources.STATE.EMPTY;
@@ -33,7 +31,7 @@ const TreasureSlot = cc.Node.extend({
     setStateOfSlot: function (state, claimTime = 0) {
         this.state = state;
         cc.log('TreasureSlot line 35 setStateOfSlot: ' + this.state);
-        if (state === TreasureSlotResources.STATE.OPENING &&  claimTime > 0) {
+        if (state === TreasureSlotResources.STATE.OPENING && claimTime > 0) {
             this.setClaimTime(claimTime);
         }
         this.onStateOfSlotUpdated();
@@ -110,11 +108,20 @@ const TreasureSlot = cc.Node.extend({
     },
 
     onSlotClick: function (sender, type) {
+
         if (this.state !== TreasureSlotResources.STATE.EMPTY && type === ccui.Widget.TOUCH_ENDED) {
+            let treasureSlotNodeList = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).treasureSlotNodeList;
+            let openingSlot = treasureSlotNodeList.reduce((acc, curr) => {
+                return curr.state === TreasureSlotResources.STATE.OPENING ? acc + 1 : acc;
+            }, 0);
             let action = 0;
             switch (this.state) {
                 case TreasureSlotResources.STATE.OCCUPIED:
-                    action = ChestConst.ACTION.OPEN;
+                    if (openingSlot > 0) {
+                        action = ChestConst.ACTION.SPEED_UP;
+                    } else {
+                        action = ChestConst.ACTION.OPEN;
+                    }
                     break;
                 case TreasureSlotResources.STATE.OPENING:
                     action = ChestConst.ACTION.SPEED_UP;
@@ -125,31 +132,29 @@ const TreasureSlot = cc.Node.extend({
                 default:
                     break;
             }
-            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE).setPopUpInfoFromTreasureType(this.id, action, 0);
+            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE).setPopUpInfoFromTreasureType(this.id, action, 0, this.state);
             PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_TREASURE);
         }
     },
 
-    setClaimTime : function(claimTime){
+    setClaimTime: function (claimTime) {
         this.claimTime = claimTime;
         this.setCountDownString();
         this.schedule(this.setCountDownString, 1);
     },
 
     setCountDownString: function () {
-        // let distance = claimTime - Date.now();
-
-        let distance = this.claimTime - Date.now();
-        this.skipGemTxt.setString(Math.round(distance / (600 * 1000)));
+        let distance = this.claimTime - Date.now() + TimeUtil.getDeltaTime();
+        this.skipGemTxt.setString(exchangeDurationToGem(distance));
         this.openingCountDownTxt.setString(millisecondToTimeString(distance));
         if (distance < 0) {
             this.onFinishCountDown();
+            this.setStateOfSlot(TreasureSlotResources.STATE.FINISHED, 0);
         }
     },
 
     onFinishCountDown: function () {
         this.unschedule(this.setCountDownString);
         this.openingCountDownTxt.setString("0m 0s");
-        this.setStateOfSlot(TreasureSlotResources.STATE.FINISHED, 0);
     }
 })

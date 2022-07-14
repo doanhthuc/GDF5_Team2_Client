@@ -11,3 +11,7 @@ res.base.img_btn_disable =  "Default/Button_Disable.png";
 res.base.img_btn_press = "Default/Button_Disable.png";
 res.base.img_btn_normal = "Default/Button_Normal.png";
 
+// {
+//     "server": "120.138.65.108",
+//     "port": 10072
+// }

@@ -1,12 +1,16 @@
-let ComponentManager = cc.Class.extend({
+let ComponentManager = ManagerECS.extend({
     name: "ComponentManager",
 
     ctor: function () {
+        this._super();
         this._storeInstance = new Map();
         this._storeCls = new Map();
     },
 
     registerClass: function (cls) {
+        if (cls.typeID === null || cls.typeID === undefined) {
+            throw new Error("Class doesn't have typeID property");
+        }
         this._storeCls.set(cls.typeID, cls);
     },
 
@@ -29,16 +33,24 @@ let ComponentManager = cc.Class.extend({
     },
 
     remove: function (component) {
+        component.setActive(false);
         this._storeInstance.delete(component.id);
     },
 });
 
-ComponentManager.getInstance = (function () {
+let _instanceBuilder = (function () {
     let _instance = null;
-    return function () {
-        if (_instance === null) {
-            _instance = new ComponentManager();
+    return {
+        getInstance: function () {
+            if (_instance === null) {
+                _instance = new ComponentManager();
+            }
+            return _instance;
+        },
+        resetInstance: function () {
+            _instance = null;
         }
-        return _instance;
     }
 })();
+ComponentManager.getInstance = _instanceBuilder.getInstance;
+ComponentManager.resetInstance = _instanceBuilder.resetInstance;

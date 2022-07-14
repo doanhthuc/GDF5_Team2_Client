@@ -1,0 +1,459 @@
+{
+  "ID": "8429b0ce-d93f-40e0-8b36-926d42698659",
+  "Version": "2.3.4",
+  "Name": "upgradeSuccessPopup",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 194,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/lobby/lobby_background.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 281,
+            "Scale9OriginY": 435,
+            "Scale9Width": 290,
+            "Scale9Height": 451,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -320.0,
+            "RightMargin": -320.0,
+            "TopMargin": -568.0,
+            "BottomMargin": -568.0,
+            "Tag": 195,
+            "ActionTag": 2053131837,
+            "Size": {
+              "X": 640.0,
+              "Y": 1136.0
+            },
+            "Name": "backgroundImg",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/inventory/cardImageNode.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": 262.9107
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": -262.9107,
+            "BottomMargin": 262.9107,
+            "Tag": 294,
+            "ActionTag": 1167972143,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "cardImageNode",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FontSize": 36,
+            "LabelText": "Người Đưa Tin",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 500.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -178.5,
+            "RightMargin": -178.5,
+            "TopMargin": -524.5,
+            "BottomMargin": 475.5,
+            "Tag": 299,
+            "ActionTag": -1679908933,
+            "Size": {
+              "X": 357.0,
+              "Y": 49.0
+            },
+            "Name": "cardNameTxt",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/card/card_level.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.0001,
+              "Y": 192.6017
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -58.5001,
+            "RightMargin": -58.4999,
+            "TopMargin": -203.6017,
+            "BottomMargin": 181.6017,
+            "Tag": 319,
+            "Children": [
+              {
+                "FontSize": 14,
+                "LabelText": "Lv.20",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
+                  "Plist": ""
+                },
+                "HorizontalAlignmentType": "HT_Center",
+                "OutlineColor": {
+                  "R": 0,
+                  "G": 0,
+                  "B": 0
+                },
+                "OutlineEnabled": true,
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 58.5,
+                  "Y": 11.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.4872,
+                  "Y": 0.9545
+                },
+                "LeftMargin": 30.0,
+                "RightMargin": 30.0,
+                "TopMargin": 0.5,
+                "BottomMargin": 0.5,
+                "Tag": 318,
+                "ActionTag": -1671187166,
+                "Size": {
+                  "X": 57.0,
+                  "Y": 21.0
+                },
+                "Name": "levelTxt",
+                "ctype": "TextObjectData"
+              }
+            ],
+            "ActionTag": -2128609892,
+            "Size": {
+              "X": 117.0,
+              "Y": 22.0
+            },
+            "Name": "cardLevel",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/inventory/cardUpgradeProgress.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": -0.0001,
+              "Y": 404.9659
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -0.0001,
+            "RightMargin": 0.0001,
+            "TopMargin": -404.9659,
+            "BottomMargin": 404.9659,
+            "Tag": 340,
+            "ActionTag": 1770243941,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "upgradeProgressNode",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_btn_green.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "textures/common/common_btn_green.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 164,
+            "Scale9Height": 89,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -401.2909
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PositionPercentXEnabled": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -97.0,
+            "RightMargin": -97.0,
+            "TopMargin": 345.7909,
+            "BottomMargin": -456.7909,
+            "Tag": 406,
+            "Children": [
+              {
+                "FontSize": 22,
+                "LabelText": "Đồng ý",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
+                  "Plist": ""
+                },
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 97.0,
+                  "Y": 55.5
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.5773,
+                  "Y": 0.2703
+                },
+                "LeftMargin": 41.0,
+                "RightMargin": 41.0,
+                "TopMargin": 40.5,
+                "BottomMargin": 40.5,
+                "Tag": 407,
+                "ActionTag": -1252440163,
+                "Size": {
+                  "X": 112.0,
+                  "Y": 30.0
+                },
+                "Name": "Text_43",
+                "ctype": "TextObjectData"
+              }
+            ],
+            "ActionTag": 771894501,
+            "Size": {
+              "X": 194.0,
+              "Y": 111.0
+            },
+            "Name": "acceptBtn",
+            "ctype": "ButtonObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../Default/Button_Disable.png",
+        "../../textures/card/card_level.png",
+        "../../textures/common/common_btn_green.png",
+        "../../textures/font/SVN-Supercell Magic.ttf",
+        "../../textures/lobby/lobby_background.png",
+        "cardImageNode.json",
+        "cardUpgradeProgress.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

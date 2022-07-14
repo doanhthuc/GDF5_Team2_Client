@@ -8,9 +8,6 @@ let EntityECS = cc.Class.extend({
         this.id = Utils.UUID.genInstanceID();
         this._active = true;
 
-        if (!mode) {
-            mode = GameConfig.PLAYER;
-        }
         this.mode = mode;
     },
 
@@ -20,33 +17,36 @@ let EntityECS = cc.Class.extend({
         if (this.components[component.typeID]) {
             // TODO: check override or not
         }
-
+        component.setActive(true);
         this.components[component.typeID] = component;
         return this;
     },
 
-    removeComponent: function (component) {
-        // this._isComponent();
-        delete this.components[component.typeID];
+    removeComponent: function (componentOrCls) {
+        ComponentManager.getInstance().remove(this.components[componentOrCls.typeID]);
+        delete this.components[componentOrCls.typeID];
     },
 
-    getComponent: function (typeID) {
-        return this.components[typeID];
+    getComponent: function (ComponentCls) {
+        if (ComponentCls.typeID === null || ComponentCls.typeID === undefined) {
+            throw new Error("Class doesn't have typeID property");
+        }
+        return this.components[ComponentCls.typeID];
     },
 
-    hasAllComponent: function (...componentTypeIDs) {
+    hasAllComponent: function (...ComponentClss) {
         let c = 0;
-        for (let typeID of componentTypeIDs) {
-            if (this.getComponent(typeID)) {
+        for (let ComponentCls of ComponentClss) {
+            if (this.getComponent(ComponentCls)) {
                 c++;
             }
         }
-        return c === componentTypeIDs.length;
+        return c === ComponentClss.length;
     },
 
-    hasAnyComponent: function (...componentTypeIDs) {
-        for (let typeID of componentTypeIDs) {
-            if (this.getComponent(typeID)) {
+    hasAnyComponent: function (...componentClss) {
+        for (let componentClass of componentClss) {
+            if (this.getComponent(componentClass)) {
                 return true;
             }
         }
