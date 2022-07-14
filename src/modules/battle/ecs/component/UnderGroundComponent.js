@@ -16,7 +16,7 @@ let UnderGroundComponent = Component.extend({
     },
 
     clone: function () {
-        return new UnderGroundComponent();
+        return ComponentFactory.create(UnderGroundComponent);
     },
 });
 UnderGroundComponent.typeID = GameConfig.COMPONENT_ID.UNDER_GROUND;

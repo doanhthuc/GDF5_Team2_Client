@@ -7,7 +7,7 @@ let PathMonsterSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
         for (let entity of entityList) {
             let pathComponent = entity.getComponent(PathComponent);

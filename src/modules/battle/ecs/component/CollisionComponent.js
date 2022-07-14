@@ -13,7 +13,7 @@ let CollisionComponent = Component.extend({
     },
 
     clone: function () {
-        return new CollisionComponent(this.width, this.height);
+        return ComponentFactory.create(CollisionComponent, this.width, this.height);
     }
 });
 CollisionComponent.typeID = GameConfig.COMPONENT_ID.COLLISION;

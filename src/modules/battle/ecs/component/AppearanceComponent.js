@@ -4,19 +4,21 @@ let AppearanceComponent = Component.extend({
 
     ctor: function (sprite, mode) {
         this._super();
-        this.reset(sprite);
+        this.reset(sprite, mode);
 
         if (mode === GameConfig.PLAYER) {
             BattleManager.getInstance().getBattleLayer().getPlayerMapNode().addChild(this.sprite, this.zOrder);
         } else if (mode === GameConfig.OPPONENT) {
             BattleManager.getInstance().getBattleLayer().getOpponentMapNode().addChild(this.sprite, this.zOrder);
         }
-        this.sprite.retain();
     },
 
-    reset: function (sprite) {
+    reset: function (sprite, mode) {
         this.sprite = sprite;
         this.zOrder = 100;
+        this.mode = mode;
+        // this.sprite.setVisible(true);
+        // this.sprite.retain();
     },
 
     clone: function () {

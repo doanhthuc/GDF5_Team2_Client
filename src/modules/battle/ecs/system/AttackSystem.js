@@ -7,7 +7,7 @@ let AttackSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let towerList = EntityManager.getInstance()
             .getEntitiesHasComponents(AttackComponent);
         let monsterList = EntityManager.getInstance()
@@ -39,7 +39,7 @@ let AttackSystem = System.extend({
 
                         EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode);
                         // reset count down time
-                        attackComponent.countdown = attackComponent.speed
+                        attackComponent.countdown = attackComponent.speed;
                     }
                 }
             }
@@ -53,6 +53,10 @@ let AttackSystem = System.extend({
     },
 
     _findTargetMonsterByStrategy: function (strategy, monsterInAttackRange) {
+        //check DarkGiantBoss
+        for (let monster of monsterInAttackRange) {
+            if (monster.typeID == GameConfig.ENTITY_ID.DARK_GIANT) return monster;
+        }
         for (let monster of monsterInAttackRange) {
             let underGroundComponent = monster.getComponent(UnderGroundComponent);
             if ((!(underGroundComponent) || underGroundComponent.isInGround === false)) return monster;

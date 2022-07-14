@@ -27,7 +27,7 @@ let SkeletonAnimationComponent = Component.extend({
     },
 
     clone: function () {
-        return new SkeletonAnimationComponent(this.fileJson, this.fileAtlas, this.timeLine, this.sequenceAnim, this.sequenceAnimLoop);
+        return ComponentFactory.create(SkeletonAnimationComponent, this.fileJson, this.fileAtlas, this.timeLine, this.sequenceAnim, this.sequenceAnimLoop);
     }
 });
 SkeletonAnimationComponent.typeID = GameConfig.COMPONENT_ID.SKELETON;

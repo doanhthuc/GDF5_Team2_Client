@@ -42,9 +42,9 @@ let EntityManager = ManagerECS.extend({
         this.entities[entity.id] = entity;
     },
 
-    destroyEntity: function (id) {
-        this.getEntity(id).setActive(false);
-        delete this.entities[id];
+    remove: function (entity) {
+        entity.setActive(false);
+        delete this.entities[entity.id];
     },
 });
 
@@ -53,11 +53,11 @@ EntityManager.destroy = function (entity) {
     if (appearanceComponent) {
         let sprite = appearanceComponent.sprite;
         sprite.setVisible(false);
-        appearanceComponent.setActive(false);
+        ComponentManager.getInstance().remove(appearanceComponent);
     }
 
-    entity.setActive(false);
     for (let key of Object.keys(entity.components)) {
-        entity.components[key].setActive(false);
+        ComponentManager.getInstance().remove(entity.components[key]);
     }
+    EntityManager.getInstance().remove(entity);
 }

@@ -3,7 +3,7 @@ let BattleData = cc.Class.extend({
         this.roomId = 0;
         this.dataInGame = {
             currentWave: 0,
-            maxWave: 100,
+            maxWave: 10000,
             timer: 2,
             player: {
                 username: "HOVANVYDUT",
