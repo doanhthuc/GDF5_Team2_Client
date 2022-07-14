@@ -50,6 +50,7 @@
     ],
     "jsList": [
         "src/data/battle-resource/BattleResource.js",
+        "src/modules/battle/loop/BattleLoop.js",
         "src/data/bottom-nav-resources/NavResources.js",
         "src/data/inventory-resources/InventoryResources.js",
         "src/data/main-scene-resources/MainSceneResources.js",

@@ -2,11 +2,12 @@ let BattleLayer = cc.Layer.extend({
 
     ctor: function () {
         this._super();
-        BattleManager.getInstance().setBattleLayer(this);
+        BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
         BattleData.fakeData();
-        this.battleData = GameConfig.battleData;
+        this.battleData = BattleManager.getInstance().getBattleData();
+        // this.battleLoop = new BattleLoop();
 
         this._setupUI();
 
@@ -208,6 +209,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
+        // this.battleLoop.start();
         this.scheduleUpdate();
         BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },

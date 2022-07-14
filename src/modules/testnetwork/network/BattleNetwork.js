@@ -32,23 +32,24 @@ BattleNetwork.Connector = cc.Class.extend({
 
     _handleMatching: function (cmd, packet) {
         cc.log("[ShopNetwork.js] received matching packet: " + JSON.stringify(packet));
-        GameConfig.battleData = new BattleData();
-        GameConfig.battleData.setMap(packet.playerMap, GameConfig.PLAYER);
-        GameConfig.battleData.setMap(packet.opponentMap, GameConfig.OPPONENT);
-        GameConfig.battleData.setLongestPath(packet.playerLongestPath, GameConfig.PLAYER);
-        GameConfig.battleData.setLongestPath(packet.opponentLongestPath, GameConfig.OPPONENT);
+        let battleData = new BattleData();
+        BattleManager.getInstance().registerBattleData(battleData);
+        battleData.setMap(packet.playerMap, GameConfig.PLAYER);
+        battleData.setMap(packet.opponentMap, GameConfig.OPPONENT);
+        battleData.setLongestPath(packet.playerLongestPath, GameConfig.PLAYER);
+        battleData.setLongestPath(packet.opponentLongestPath, GameConfig.OPPONENT);
 
         let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
         let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
-        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
-        GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
+        battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
+        battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
 
 
         let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
-        GameConfig.battleData.setUsername(userContext.getUsername(), GameConfig.PLAYER);
-        GameConfig.battleData.setTrophy(userContext.getTrophy(), GameConfig.PLAYER);
-        GameConfig.battleData.setUsername(packet.opponentInfo.username, GameConfig.OPPONENT);
-        GameConfig.battleData.setTrophy(packet.opponentInfo.trophy, GameConfig.OPPONENT);
+        battleData.setUsername(userContext.getUsername(), GameConfig.PLAYER);
+        battleData.setTrophy(userContext.getTrophy(), GameConfig.PLAYER);
+        battleData.setUsername(packet.opponentInfo.username, GameConfig.OPPONENT);
+        battleData.setTrophy(packet.opponentInfo.trophy, GameConfig.OPPONENT);
 
         setTimeout(function () {
             fr.view(BattleLayer, 0.5, true)
