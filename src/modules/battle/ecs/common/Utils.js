@@ -457,46 +457,47 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
         switch (direction) {
             case GameConfig.DIRECTION.BOTTOM:
                 // check If the first Tile
-                if (beforeCellX != 0 && beforeCellX != cellsEachTile -1) {
+                if (beforeCellX != 0 && beforeCellX != cellsEachTile - 1) {
                     cellX = tileArr[i].x * cellsEachTile + beforeCellX;
                     cellY = (tileArr[i].y - 1) * cellsEachTile + beforeCellY;
                 } else {
-                    beforeCellX = (beforeCellY + magicNumber) % cellsEachTile;
-                    cellX = tileArr[i].x * cellsEachTile + beforeCellX;
+                    cellX = tileArr[i].x * cellsEachTile + (beforeCellY + magicNumber) % cellsEachTile;
                     cellY = tileArr[i].y * cellsEachTile;
+                    beforeCellX = (beforeCellY + magicNumber) % cellsEachTile;
                 }
+
                 if (cellArr.length === 0) cellArr.push(Utils.cell2Pixel(cellX, (tileArr[i].y + 1) * cellsEachTile - 1, mode));
                 cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
 
                 beforeCellY = cellsEachTile - 1;
+
                 break;
             case GameConfig.DIRECTION.RIGHT:
-                if (beforeCellY != cellsEachTile - 1) {
+                if (beforeCellY != cellsEachTile - 1 && beforeCellY != 0) {
                     cellX = (tileArr[i].x + 1) * cellsEachTile;
                     cellY = (tileArr[i].y) * cellsEachTile + beforeCellY;
                     cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
                 } else {
                     cellX = (tileArr[i].x + 1) * cellsEachTile;
                     cellY = tileArr[i].y * cellsEachTile + (beforeCellX + magicNumber) % cellsEachTile;
+
                     beforeCellY = (beforeCellX + magicNumber) % cellsEachTile;
                     cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
                 }
                 beforeCellX = 0;
                 break;
             case GameConfig.DIRECTION.LEFT:
-                if (beforeCellY != cellsEachTile - 1) {
+                if (beforeCellY != cellsEachTile - 1 && beforeCellY != 0) {
                     cellX = (tileArr[i].x - 1) * cellsEachTile + cellsEachTile - 1;
                     cellY = (tileArr[i].y) * cellsEachTile + beforeCellY;
                     cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
-                    beforeCellX = cellsEachTile - 1;
-                    beforeCellY = beforeCellY;
                 } else {
-                    cellX = (tileArr[i].x - 1) * cellsEachTile;
+                    cellX = (tileArr[i].x - 1) * cellsEachTile + cellsEachTile - 1;
                     cellY = tileArr[i].y * cellsEachTile + (beforeCellX + magicNumber) % cellsEachTile;
                     beforeCellY = (beforeCellX + magicNumber) % cellsEachTile;
                     cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
                 }
-
+                beforeCellX = cellsEachTile - 1;
                 break;
 
 
