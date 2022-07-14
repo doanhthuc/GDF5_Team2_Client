@@ -115,8 +115,8 @@ let BattleLayer = cc.Layer.extend({
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
         EntityFactory.createBatMonster(pixelPos, mode);
-
     },
 
     oneTimeBornMonster: function (tilePos, mode) {
