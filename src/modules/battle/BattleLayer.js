@@ -5,7 +5,7 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().setBattleLayer(this);
         this.selectedCard = null;
 
-        BattleData.fakeData();
+        // BattleData.fakeData();
         this.battleData = GameConfig.battleData;
 
         this._setupUI();
