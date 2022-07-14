@@ -112,14 +112,7 @@ let BattleLayer = cc.Layer.extend({
 
         EntityFactory.createNinjaMonster(pixelPos, mode);
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
         EntityFactory.createBatMonster(pixelPos, mode);
-
     },
 
     oneTimeBornMonster: function (tilePos, mode) {
@@ -129,7 +122,9 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSatyrBoss(pixelPos, mode);
+        // EntityFactory.createSatyrBoss(pixelPos, mode);
+        // EntityFactory.createDarkGiantBoss(pixelPos,mode);
+        EntityFactory.createDemonTreeBoss(pixelPos,mode);
     },
 
     /**
