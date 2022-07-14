@@ -7,7 +7,7 @@ let EffectSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         this._handleBuffAttackSpeedEffect(tick);
         this._handleBuffAttackDamageEffect(tick);
         this._handleDamageEffect(tick);

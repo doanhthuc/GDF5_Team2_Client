@@ -7,7 +7,7 @@ let MonsterSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let monsterList = EntityManager.getInstance()
             .getEntitiesHasComponents(MonsterInfoComponent);
 

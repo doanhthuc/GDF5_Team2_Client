@@ -7,7 +7,7 @@ let BulletSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let bulletList = EntityManager.getInstance()
             .getEntitiesHasComponents(VelocityComponent, PositionComponent, BulletInfoComponent);
 

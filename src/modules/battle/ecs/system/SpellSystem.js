@@ -7,7 +7,7 @@ let SpellSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let spellList = EntityManager.getInstance()
             .getEntitiesHasComponents(SpellInfoComponent);
 

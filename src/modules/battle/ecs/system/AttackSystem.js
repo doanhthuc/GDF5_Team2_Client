@@ -7,7 +7,7 @@ let AttackSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let towerList = EntityManager.getInstance()
             .getEntitiesHasComponents(AttackComponent);
         let monsterList = EntityManager.getInstance()

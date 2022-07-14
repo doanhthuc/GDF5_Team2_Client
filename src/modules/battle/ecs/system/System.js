@@ -11,17 +11,17 @@ let System = cc.Class.extend({
             cc.warn(this.name);
             let startTime = (new Date()).getMilliseconds();
 
-            this.run(dt);
+            this._run(dt);
 
             let endTime = (new Date()).getMilliseconds();
             cc.warn("==> Execution time = " + (endTime - startTime));
             cc.warn("---------------------------------------")
         } else {
-            this.run(dt);
+            this._run(dt);
         }
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         throw new NotImplementedError();
     },
 });
