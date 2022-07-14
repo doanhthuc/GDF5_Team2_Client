@@ -82,7 +82,7 @@ var res = {
     LOBBY_NODE: 'ui/lobby/lobbyHomeNode.json',
     TREASURE_POPUP_NODE: 'ui/lobby/treasurePopup2.json',
 
-    version:"Version 1.0",
+    version:"Version 1.1",
     //popup
     ZCSD_POPUP_MINI_GAME: 'zcsd/game/mini_game/PopupMiniGame.json',
 
