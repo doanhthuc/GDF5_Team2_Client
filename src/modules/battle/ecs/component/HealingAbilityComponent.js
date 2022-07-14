@@ -4,17 +4,17 @@ let HealingAbility = Component.extend({
 
     ctor: function (range, healingRate) {
         this._super();
-        this.reset(range,healingRate);
+        this.reset(range, healingRate);
     },
 
-    reset: function (range,healingRate) {
+    reset: function (range, healingRate) {
         this.range = range;
         this.healingRate = healingRate;
         this.countdown = 1;
     },
 
     clone: function () {
-        return new HealingAbility(this.range,this.healingRate);
+        return ComponentFactory.create(HealingAbility, this.range, this.healingRate);
     },
 });
 HealingAbility.typeID = GameConfig.COMPONENT_ID.HEALING_ABILITY;

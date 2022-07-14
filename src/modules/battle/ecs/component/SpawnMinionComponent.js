@@ -13,7 +13,7 @@ let SpawnMinionComponent = Component.extend({
     },
 
     clone: function () {
-        return new SpawnMinionComponent(this.period);
+        return ComponentFactory.create(SpawnMinionComponent, this.period);
     }
 });
 SpawnMinionComponent.typeID = GameConfig.COMPONENT_ID.SPAWN_MINION;

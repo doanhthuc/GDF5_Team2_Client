@@ -40,8 +40,6 @@ BattleNetwork.Connector = cc.Class.extend({
 
         let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
         let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
-        cc.warn(shortestPathForEachTilePlayer)
-        cc.warn(shortestPathForEachTileOpponent)
         GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
         GameConfig.battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
 

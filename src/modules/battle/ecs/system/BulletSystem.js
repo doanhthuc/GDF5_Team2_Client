@@ -7,7 +7,7 @@ let BulletSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let bulletList = EntityManager.getInstance()
             .getEntitiesHasComponents(VelocityComponent, PositionComponent, BulletInfoComponent);
 
@@ -15,7 +15,9 @@ let BulletSystem = System.extend({
             let bulletPos = bullet.getComponent(PositionComponent);
             let bulletVelocity = bullet.getComponent(VelocityComponent);
 
-            if (bulletVelocity.dynamicPosition && bulletVelocity.dynamicPosition.getActive() === false) {
+            if (!bulletVelocity.dynamicPosition) continue;
+
+            if (bulletVelocity.dynamicPosition.getActive() === false) {
                 bulletVelocity.dynamicPosition = null;
                 EntityManager.destroy(bullet);
                 continue;

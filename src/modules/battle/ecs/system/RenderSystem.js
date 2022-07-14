@@ -7,7 +7,7 @@ let RenderSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(AppearanceComponent, PositionComponent);
         for (let entity of entityList) {
             let appearanceComponent = entity.getComponent(AppearanceComponent);

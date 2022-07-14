@@ -20,7 +20,7 @@ EventDispatcher.getInstance()
             return;
         }
 
-        cc.log("put new tower event: " + JSON.stringify(data));
+        cc.log("Put new tower event data: " + JSON.stringify(data));
 
         map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
@@ -40,7 +40,6 @@ EventDispatcher.getInstance()
                             let newPath = Utils.tileArray2PixelArray(path, currentMode);
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
-                            cc.log("new path, monster at tile = " + JSON.stringify(tilePos));
                         }
                     }
                 }

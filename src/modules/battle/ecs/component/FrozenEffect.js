@@ -7,14 +7,14 @@ let FrozenEffect = EffectComponent.extend({
         this.reset(duration);
     },
 
-    clone: function () {
-        return new FrozenEffect(this.duration);
+    reset: function (duration) {
+        this._duration = duration;
+        this.countdown = this._duration;
     },
 
-    reset: function (duration) {
-        this.duration = duration;
-        this.countdown = this.duration;
-    }
+    clone: function () {
+        return ComponentFactory.create(FrozenEffect, this._duration);
+    },
 });
 FrozenEffect.typeID = GameConfig.COMPONENT_ID.FROZEN_EFFECT;
 ComponentManager.getInstance().registerClass(FrozenEffect);

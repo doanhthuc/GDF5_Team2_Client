@@ -7,15 +7,15 @@ let SlowEffect = EffectComponent.extend({
         this.reset(duration, percent);
     },
 
-    clone: function () {
-        return new SlowEffect(this.duration, this.percent);
-    },
-
     reset: function (duration, percent) {
         this.duration = duration;
         this.countdown = this.duration;
         this.percent = percent;
-    }
+    },
+
+    clone: function () {
+        return ComponentFactory.create(SlowEffect, this.duration, this.percent);
+    },
 });
 SlowEffect.typeID = GameConfig.COMPONENT_ID.SLOW_EFFECT;
 ComponentManager.getInstance().registerClass(SlowEffect);

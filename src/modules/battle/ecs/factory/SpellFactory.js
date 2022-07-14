@@ -9,7 +9,7 @@ SpellFactory.createFrozenSpell = function (pixelPos, mode) {
     let speed = Utils.calculateVelocityVector(cc.p(pixelPos.x, pixelPos.y + 100), pixelPos, 1000);
     let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
 
-    let damageEffect = ComponentFactory.create(DamageEffect, 10);
+    let damageEffect = ComponentFactory.create(DamageEffect, 50);
     let frozenEffect = ComponentFactory.create(FrozenEffect, 5);
 
     let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent,

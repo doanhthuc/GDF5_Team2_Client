@@ -50,23 +50,53 @@ let BattleLayer = cc.Layer.extend({
 
     update: function (dt) {
         // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
-        this.movementSystem.run(dt);
-        this.attackSystem.run(dt);
-        this.renderSystem.run(dt);
-        this.lifeSystem.run(dt);
-        this.collisionSystem.run(dt);
-        this.effectSystem.run(dt);
-        this.pathSystem.run(dt);
-        this.spellSystem.run(dt);
-        this.skeletonAnimationSystem.run(dt);
-        this.monsterSystem.run(dt);
-        this.bulletSystem.run(dt);
-        this.abilitySystem.run(dt);
-        // cc.log("YYYYYYYYYY")
-        // let pool = ComponentFactory.pool;
-        // cc.log(("pool size = " + Object.keys(pool._store).length))
-        // cc.log("key = " + JSON.stringify(Object.keys(pool._store)))
-        // cc.log(JSON.stringify(pool._store))
+        this.movementSystem.start(dt);
+        this.attackSystem.start(dt);
+        this.renderSystem.start(dt);
+        this.lifeSystem.start(dt);
+        this.collisionSystem.start(dt);
+        this.effectSystem.start(dt);
+        this.pathSystem.start(dt);
+        this.spellSystem.start(dt);
+        this.skeletonAnimationSystem.start(dt);
+        this.monsterSystem.start(dt);
+        this.bulletSystem.start(dt);
+        this.abilitySystem.start(dt);
+
+        if (GameConfig.DEBUG) {
+            cc.warn("---------------------------------------")
+            cc.warn("* Entity Manager size = " + Object.keys(EntityManager.getInstance().entities).length);
+            // let entityActive = 0, entityInActive = 0;
+            // for (let key of Object.keys(EntityManager.getInstance().entities)) {
+            //     if (EntityManager.getInstance().entities[key].getActive()) {
+            //         entityActive++;
+            //     } else {
+            //         entityInActive++;
+            //     }
+            // }
+            // cc.warn("   + Active size = " + entityActive);
+            // cc.warn("   + Inactive size = "+ entityInActive);
+
+            cc.warn("* Component Manager size = " + ComponentManager.getInstance()._storeInstance.size);
+
+            let poolSize = 0;
+            let componentActive = 0;
+            let componentInactive = 0;
+            for (let key of Object.keys(ComponentFactory.pool._store)) {
+                poolSize += ComponentFactory.pool._store[key].length;
+                for (let component of ComponentFactory.pool._store[key]) {
+                    if (component.getActive()) {
+                        componentActive++;
+                    } else {
+                        componentInactive++;
+                    }
+                }
+            }
+            cc.warn("* ComponentPool size = " + JSON.stringify(poolSize));
+            cc.warn("   + Active size = " + JSON.stringify(componentActive));
+            cc.warn("   + Inactive size = " + JSON.stringify(componentInactive));
+        }
+
     },
 
     bornMonster: function (tilePos, mode) {
@@ -76,6 +106,15 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
+
+        EntityFactory.createNinjaMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
         EntityFactory.createBatMonster(pixelPos, mode);
 
     },

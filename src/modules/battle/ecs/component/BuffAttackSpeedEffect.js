@@ -8,7 +8,7 @@ let BuffAttackSpeedEffect = EffectComponent.extend({
     },
 
     clone: function () {
-        return new BuffAttackSpeedEffect(this.percent);
+        return ComponentFactory.create(BuffAttackSpeedEffect, this.percent)
     },
 
     reset: function (percent) {

@@ -7,7 +7,7 @@ let SpriteSheetAnimationSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    run: function (tick) {
+    _run: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(CollisionComponent);
 

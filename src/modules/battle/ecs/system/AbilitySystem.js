@@ -7,7 +7,7 @@ let AbilitySystem = System.extend({
             cc.log("new " + this.name);
         },
 
-        run: function (tick) {
+        _run: function (tick) {
             this._handleUnderGroundComponent();
             this._handleSpawnMinionComponent(tick);
             this._handleHealingAbility(tick);

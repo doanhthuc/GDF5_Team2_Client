@@ -2,18 +2,24 @@ let PathComponent = Component.extend({
     name: "PathComponent",
     typeID: GameConfig.COMPONENT_ID.PATH,
 
-    ctor: function (pathTile, mode) {
+    ctor: function (pathTile, mode, isConvert=true) {
         this._super();
-        this.reset(pathTile, mode);
+        this.reset(pathTile, mode, isConvert);
     },
 
-    reset: function (pathTile, mode) {
-        this.path = Utils.tileArray2PixelArray(pathTile, mode);
+    reset: function (pathTile, mode, isConvert=true) {
+        if (isConvert) {
+            let pathTile2 = Utils.tileArray2PixelArray(pathTile, mode);
+            this.path = pathTile2;
+        } else {
+            this.path = pathTile;
+        }
+        this.mode = mode;
         this.currentPathIdx = 0;
     },
 
     clone: function () {
-        return new PathComponent(this.path);
+        return ComponentFactory.create(PathComponent, this.path, this.mode, false);
     }
 });
 PathComponent.typeID = GameConfig.COMPONENT_ID.PATH;
