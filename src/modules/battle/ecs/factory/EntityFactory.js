@@ -106,7 +106,7 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     // let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
-    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
     entity.addComponent(infoComponent)
@@ -137,7 +137,7 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
     let lifeComponent = ComponentFactory.create(LifeComponent, 120);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
-    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
     entity.addComponent(infoComponent)
@@ -198,7 +198,7 @@ EntityFactory.createGiantMonster = function (pixelPos, mode) {
 
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
-    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
     entity.addComponent(infoComponent)
@@ -230,7 +230,7 @@ EntityFactory.createNinjaMonster = function (pixelPos, mode) {
     let underGroundComponent = ComponentFactory.create(UnderGroundComponent);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
-    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
     entity.addComponent(infoComponent)
@@ -265,7 +265,7 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
     let spawnMinionComponent = ComponentFactory.create(SpawnMinionComponent, 2);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
-    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
     entity.addComponent(infoComponent)
@@ -297,7 +297,7 @@ EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
     let lifeComponent = ComponentFactory.create(LifeComponent, 30);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
-    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
     entity.addComponent(infoComponent)
@@ -328,7 +328,7 @@ EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
     let lifeComponent = ComponentFactory.create(LifeComponent, 800);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
-    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
     entity.addComponent(infoComponent)
@@ -359,7 +359,7 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
     let lifeComponent = ComponentFactory.create(LifeComponent, 400);
     let healingAbilityComponent = ComponentFactory.create(HealingAbility, 2 * GameConfig.TILE_WIDTH, 0.03);
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
-    let path = GameConfig.battleData.getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+    let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
 
     entity.addComponent(infoComponent)

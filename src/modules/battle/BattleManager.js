@@ -1,9 +1,24 @@
 let BattleManager = cc.Class.extend({
     ctor: function () {
-
+        this.battleData = null;
+        this.battleLayer = null;
     },
 
-    setBattleLayer: function (layer) {
+    registerBattleData: function (battleData, override=false) {
+        if (override === false && this.battleData) {
+            throw new Error("Battle Data exists. Can't re-register")
+        }
+        this.battleData = battleData;
+    },
+
+    getBattleData: function () {
+        if (!this.battleData) {
+            throw new Error("Battle Data doesn't exist");
+        }
+        return this.battleData;
+    },
+
+    registerBattleLayer: function (layer) {
         this.battleLayer = layer;
     },
 

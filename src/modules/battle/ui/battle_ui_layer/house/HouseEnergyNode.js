@@ -14,7 +14,7 @@ let HouseEnergyNode = cc.Node.extend({
 
         this.width = background.width;
         this.height = background.height;
-        this.battleData = GameConfig.battleData;
+        this.battleData = BattleManager.getInstance().getBattleData();
 
         this.playerEnergy = rootNode.getChildByName("player_energy");
         this.opponentEnergy = rootNode.getChildByName("opponent_energy");

@@ -14,7 +14,7 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let tilePos = data.pos;
         let currentMode = data.mode;
-        let map = GameConfig.battleData.getMap(currentMode);
+        let map = BattleManager.getInstance().getBattleData().getMap(currentMode);
 
         if (!Utils.validateTilePos(tilePos)) {
             return;
