@@ -8,6 +8,7 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     onReceivedPacket: function (cmd, packet) {
+        cc.warn('[BattleNetwork.js] onReceivedPacket: ' + cmd + "   " + JSON.stringify(packet));
         switch (cmd) {
             case gv.CMD.SEND_MATCHING:
                 this._handleMatching(cmd, packet);
@@ -17,6 +18,10 @@ BattleNetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.PUT_TOWER:
                 this._handlePutTower(cmd, packet);
+                break;
+            case gv.CMD.OPPONENT_PUT_TOWER:
+                cc.log('[BattleNetwork.js] line 23 Opponent Put Tower');
+                this._handleOpponentPutTower(cmd, packet);
                 break;
         }
     },
@@ -73,5 +78,15 @@ BattleNetwork.Connector = cc.Class.extend({
 
     _handlePutTower: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 76] received put tower packet: ' + JSON.stringify(packet));
+
+    },
+
+    _handleOpponentPutTower: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 80] received put tower packet: ' + JSON.stringify(packet));
+        GameConfig.battleData.getMap(GameConfig.OPPONENT)[packet.tileX][packet.tileY] = 7;
+        let pixelPos = Utils.tile2Pixel(packet.tileX, packet.tileY, GameConfig.OPPONENT);
+        cc.log('[BattleNetwork.js line 88] pixelPos: ' + JSON.stringify(pixelPos));
+        OpponentAction.getInstance().putCardAt(pixelPos, packet.towerId);
+        // GameConfig.battleData.getMap(GameConfig.OPPONENT).show();
     }
 })

@@ -1,10 +1,10 @@
 let OpponentAction = cc.Class.extend({
     ctor: function () {
-        this._super();
         this.opponentMapNode = BattleManager.getInstance().getBattleLayer().getOpponentMapNode();
     },
 
     putCardAt: function (pixelPos, towerType) {
+        cc.log('[OpponentAction line 8] putCardAt: '  + JSON.stringify(pixelPos) + '  towerId: ' + towerType);
         BattleManager.getInstance().getBattleLayer().putCardAt(towerType, pixelPos, GameConfig.OPPONENT);
     },
 });

@@ -2,6 +2,7 @@ gv.CMD = gv.CMD || {};
 gv.CMD.SEND_MATCHING = 8001;
 gv.CMD.SEND_CANCEL_MATCHING = 8002;
 gv.CMD.PUT_TOWER = 5002;
+gv.CMD.OPPONENT_PUT_TOWER = 5003;
 
 let BattleNetwork = BattleNetwork || {};
 
@@ -124,3 +125,16 @@ BattleNetwork.packetMap[gv.CMD.PUT_TOWER] = fr.InPacket.extend({
         this.pixelY = this.getDouble();
     }
 })
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.towerId = this.getInt();
+        this.towerLevel = this.getInt();
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+});
