@@ -100,7 +100,7 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSwordmanNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 180);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 30);
 
     // let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
     // let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
@@ -356,7 +356,7 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSatyrNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 400);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 50);
     let healingAbilityComponent = ComponentFactory.create(HealingAbility, 2 * GameConfig.TILE_WIDTH, 0.03);
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
