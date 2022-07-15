@@ -3,6 +3,8 @@ gv.CMD.SEND_MATCHING = 8001;
 gv.CMD.SEND_CANCEL_MATCHING = 8002;
 gv.CMD.PUT_TOWER = 5002;
 gv.CMD.OPPONENT_PUT_TOWER = 5003;
+gv.CMD.GET_BATTLE_MAP_OBJECT = 5004;
+gv.CMD.GET_CELL_OBJECT = 5005;
 
 let BattleNetwork = BattleNetwork || {};
 
@@ -138,3 +140,89 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
         this.tileY = this.getInt();
     }
 });
+
+BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.mapHeight = this.getInt();
+        this.mapWidth = this.getInt();
+        this.battleMapObject = this._unpackMapObject();
+    },
+
+    _unpackMapObject: function () {
+        let mapObject = new Array(this.mapHeight);
+        for (let i = 0; i < this.mapHeight; i++) {
+            mapObject[i] = new Array(this.mapWidth);
+            for (let j = 0; j < this.mapWidth; j++) {
+                // let cellObject = {
+                //     tilePos: {
+                //         x: this.getInt(),
+                //         y: this.getInt()
+                //     },
+                //     buffCellType: this.getInt(),
+                //     objectInCellType: this.getInt(),
+                // };
+                // switch (cellObject.objectInCellType) {
+                //     case 1:
+                //         cellObject.tre = {
+                //             hp: this.getInt()
+                //         }
+                //         break;
+                //     case 2:
+                //         cellObject.tower = {
+                //             towerId: this.getInt(),
+                //             towerLevel: this.getInt(),
+                //         }
+                //         break;
+                //     case 3:
+                //         cellObject.pit = this.getInt();
+                //         break;
+                //     default:
+                //         break;
+                // }
+                mapObject[i][j] = this._unpackCellObject();
+                // cellObject.tilePos.x = this.getInt();
+                // cellObject.tilePos.y = this.getInt();
+
+            }
+        }
+        return mapObject;
+    },
+
+    _unpackCellObject: function () {
+        let cellObject = {
+            tilePos: {
+                x: this.getInt(),
+                y: this.getInt()
+            },
+            buffCellType: this.getInt(),
+            objectInCellType: this.getInt(),
+        };
+        this._unpackObjectInCell(cellObject);
+        return cellObject;
+    },
+
+    _unpackObjectInCell: function (cellObject) {
+        switch (cellObject.objectInCellType) {
+            case 1:
+                cellObject.tre = {
+                    hp: this.getInt()
+                }
+                break;
+            case 2:
+                cellObject.tower = {
+                    towerId: this.getInt(),
+                    towerLevel: this.getInt(),
+                }
+                break;
+            case 3:
+                cellObject.pit = this.getInt();
+                break;
+            default:
+                break;
+        }
+    }
+})

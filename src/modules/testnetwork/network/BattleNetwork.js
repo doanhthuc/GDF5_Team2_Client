@@ -23,6 +23,9 @@ BattleNetwork.Connector = cc.Class.extend({
                 cc.log('[BattleNetwork.js] line 23 Opponent Put Tower');
                 this._handleOpponentPutTower(cmd, packet);
                 break;
+            case gv.CMD.GET_BATTLE_MAP_OBJECT:
+                this._handleGetBattleMapObject(cmd, packet);
+                break;
         }
     },
 
@@ -89,5 +92,15 @@ BattleNetwork.Connector = cc.Class.extend({
         cc.log('[BattleNetwork.js line 88] pixelPos: ' + JSON.stringify(pixelPos));
         OpponentAction.getInstance().putCardAt(pixelPos, packet.towerId);
         // BattleManager.getInstance().getBattleData().getMap(GameConfig.OPPONENT).show();
+    },
+
+    _handleGetBattleMapObject: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 95] received get battle map object packet: ' + JSON.stringify(packet));
+        let battleMapObject = packet.battleMapObject;
+        for (let i = 0; i < battleMapObject.length; i++) {
+            for (let j = 0; j < battleMapObject[i].length; j++) {
+                cc.log('[BattleNetwork.js line 102] battleMapObject: ' + JSON.stringify(battleMapObject[i][j]));
+            }
+        }
     }
 })
