@@ -8,36 +8,52 @@ let CollisionSystem = System.extend({
     },
 
     _run: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(CollisionComponent)
+        // let entityList = EntityManager.getInstance()
+        //     .getEntitiesHasComponents(CollisionComponent)
+        //
+        // if (GameConfig.DEBUG) {
+        //     cc.error("Collision entity size = " + entityList.length);
+        // }
+        //
+        // // TODO: Optimize
+        // for (let i = 0; i < entityList.length - 1; i++) {
+        //     for (let j = i + 1; j < entityList.length; j++) {
+        //         let entity1 = entityList[i], entity2 = entityList[j];
+        //         if (entity1.mode === entity2.mode && this._isCollide(entity1, entity2)) {
+        //             let data = this._isMonsterAndBullet(entity1, entity2)
+        //             if (data) {
+        //                 let monster = data.monster, bullet = data.bullet;
+        //                 let bulletInfo = bullet.getComponent(BulletInfoComponent);
+        //                 let monsterInfo = monster.getComponent(MonsterInfoComponent);
+        //
+        //                 if (bulletInfo.type && bulletInfo.type === "frog") {
+        //                     // handle here
+        //                 } else {
+        //                     for (let effect of bulletInfo.effects) {
+        //                         monster.addComponent(effect.clone());
+        //                     }
+        //                     EntityManager.destroy(bullet);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        if (GameConfig.DEBUG) {
-            cc.error("Collision entity size = " + entityList.length);
-        }
-
-        // TODO: Optimize
-        for (let i = 0; i < entityList.length - 1; i++) {
-            for (let j = i + 1; j < entityList.length; j++) {
-                let entity1 = entityList[i], entity2 = entityList[j];
-                if (entity1.mode === entity2.mode && this._isCollide(entity1, entity2)) {
-                    let data = this._isMonsterAndBullet(entity1, entity2)
-                    if (data) {
-                        let monster = data.monster, bullet = data.bullet;
-                        let bulletInfo = bullet.getComponent(BulletInfoComponent);
-                        let monsterInfo = monster.getComponent(MonsterInfoComponent);
-
-                        if (bulletInfo.type && bulletInfo.type === "frog") {
-                            // handle here
-                        } else {
-                            for (let effect of bulletInfo.effects) {
-                                monster.addComponent(effect.clone());
-                            }
-                            EntityManager.destroy(bullet);
-                        }
+        // Optimize:
+        let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
+        let bulletList = EntityManager.getInstance().getEntitiesHasComponents(BulletInfoComponent);
+        for (let monster of monsterList) {
+            for (let bullet of bulletList) {
+                if (bullet.mode === monster.mode && this._isCollide(monster, bullet)) {
+                    let bulletInfo = bullet.getComponent(BulletInfoComponent);
+                    for (let effect of bulletInfo.effects) {
+                        monster.addComponent(effect.clone());
                     }
+                    EntityManager.destroy(bullet);
                 }
             }
         }
+
     },
 
     _isCollide: function (entity1, entity2) {
