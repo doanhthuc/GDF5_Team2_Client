@@ -36,7 +36,7 @@ cc.game.onStart = function () {
         BattleNetwork.connector = new BattleNetwork.Connector(gv.gameClient);
 
         // fr.view(MainScreen);
-        fr.view(BattleLayer);
+        fr.view(GameLayer);
     }, this);
 };
 cc.game.run();

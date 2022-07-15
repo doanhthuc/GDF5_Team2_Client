@@ -36,7 +36,7 @@ EventDispatcher.getInstance()
                     let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
                     //cc.log(JSON.stringify(tilePos) + " " + positionComponent.x + " " + positionComponent.y);
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
-                    cc.log("new Path "+JSON.stringify(path));
+                    cc.log("new Path " + tilePos.x + " " + tilePos.y +" "+ JSON.stringify(path)+" " );
                     if (path) {
                         if (path.length > 0) {
                             // let newPath = [{x: positionComponent.x, y: positionComponent.y}]

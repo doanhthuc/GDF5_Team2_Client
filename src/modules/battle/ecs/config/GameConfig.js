@@ -24,7 +24,12 @@ GameConfig.COMPONENT_ID = {
     SPELL: 16,
     SKELETON: 17
 }
-
+GameConfig.MAP ={
+    NONE:0,
+    ATTACK_SPEED:1,
+    ATTACK_DAMAGE:2,
+    ATTACK_RANGE:3,
+}
 GameConfig.SYSTEM_ID = {
     MOVEMENT: 1,
     PATH_MONSTER: 2,
