@@ -40,7 +40,7 @@ let AbilitySystem = System.extend({
                 let spawnMinionComponent = entity.getComponent(SpawnMinionComponent);
                 if (spawnMinionComponent.period >= 0) {
                     spawnMinionComponent.period = spawnMinionComponent.period - tick;
-                    cc.log("handlerSpawnMinion Component" + spawnMinionComponent.period + " " + tick)
+                    // cc.log("handlerSpawnMinion Component" + spawnMinionComponent.period + " " + tick)
                 } else {
                     spawnMinionComponent.period = 2;
                     let positionComponent = entity.getComponent(PositionComponent);

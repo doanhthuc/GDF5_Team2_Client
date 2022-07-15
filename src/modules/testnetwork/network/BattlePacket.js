@@ -157,35 +157,7 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
         for (let i = 0; i < this.mapHeight; i++) {
             mapObject[i] = new Array(this.mapWidth);
             for (let j = 0; j < this.mapWidth; j++) {
-                // let cellObject = {
-                //     tilePos: {
-                //         x: this.getInt(),
-                //         y: this.getInt()
-                //     },
-                //     buffCellType: this.getInt(),
-                //     objectInCellType: this.getInt(),
-                // };
-                // switch (cellObject.objectInCellType) {
-                //     case 1:
-                //         cellObject.tre = {
-                //             hp: this.getInt()
-                //         }
-                //         break;
-                //     case 2:
-                //         cellObject.tower = {
-                //             towerId: this.getInt(),
-                //             towerLevel: this.getInt(),
-                //         }
-                //         break;
-                //     case 3:
-                //         cellObject.pit = this.getInt();
-                //         break;
-                //     default:
-                //         break;
-                // }
                 mapObject[i][j] = this._unpackCellObject();
-                // cellObject.tilePos.x = this.getInt();
-                // cellObject.tilePos.y = this.getInt();
 
             }
         }
@@ -208,8 +180,8 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
     _unpackObjectInCell: function (cellObject) {
         switch (cellObject.objectInCellType) {
             case 1:
-                cellObject.tre = {
-                    hp: this.getInt()
+                cellObject.tree = {
+                    hp: this.getDouble()
                 }
                 break;
             case 2:
