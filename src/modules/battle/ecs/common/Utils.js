@@ -14,7 +14,7 @@ const RIVER_HEIGHT = BattleResource.RIVER_HEIGHT;
  * @param x {Number}
  * @param y {Number}
  * @param mode {GameConfig.PLAYER | GameConfig.OPPONENT}
- * @returns {cc.Point}
+ * @returns {{x: number, y: number}|{x: *, y: *}|{x: *, y: *}}
  */
 Utils.tile2Pixel = function (x, y, mode) {
     Utils.validateMode(mode);
@@ -251,7 +251,7 @@ Utils.cell2Pixel = function (cellX, cellY, mode) {
  * Convert cell coordination to tile coordination (1 tile = 11 cells)
  * @param cellX
  * @param cellY
- * @returns {cc.Point}
+ * @returns {{x: number, y: number}|{x: *, y: *}|{x: *, y: *}}
  */
 Utils.cell2Tile = function (cellX, cellY) {
     if (cellX < 0 || cellX >= cellsX || cellY < 0 || cellY >= cellsY) {
@@ -473,7 +473,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                 if (cellArr.length === 0) cellArr.push(Utils.cell2Pixel(cellX, (tileArr[i].y) * cellsEachTile, mode));
                 cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
 
-                beforeCellY = cellsEachTile - 1;
+                beforeCellY = moduleCellRange + cellBound - 1;
 
                 break;
             case GameConfig.DIRECTION.RIGHT:
@@ -488,7 +488,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                     beforeCellY = (beforeCellX + magicNumber) % moduleCellRange + cellBound;
                 }
                 cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
-                beforeCellX = 0;
+                beforeCellX = cellBound;
                 break;
             case GameConfig.DIRECTION.LEFT:
                 if (beforeCellY >= cellBound && beforeCellY < cellBound + moduleCellRange) {
@@ -501,7 +501,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                     beforeCellY = (beforeCellX + magicNumber) % moduleCellRange + cellBound;
                     cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
                 }
-                beforeCellX = cellsEachTile - 1;
+                beforeCellX = moduleCellRange + cellBound - 1;
                 break;
             case GameConfig.DIRECTION.TOP:
                 if (beforeCellX >= cellBound && beforeCellX < cellBound + moduleCellRange) {
@@ -514,7 +514,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                 }
                 cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
 
-                beforeCellY = 0;
+                beforeCellY = cellBound;
 
                 break;
 

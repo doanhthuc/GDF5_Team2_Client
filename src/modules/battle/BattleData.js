@@ -3,7 +3,7 @@ let BattleData = cc.Class.extend({
         this.dataInGame = {
             currentWave: 0,
             maxWave: 10000,
-            timer: 3,
+            timer: 4,
             player: {
                 username: "HOVANVYDUT",
                 clanName: "GDF5_DN_TEAM_2",

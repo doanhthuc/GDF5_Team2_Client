@@ -20,7 +20,8 @@ let GameLayer = cc.Layer.extend({
         this.addChild(this.mapLayer, 1);
 
         // init entity manager
-        this._entityManager = new EntityManager();;
+        this._entityManager = new EntityManager();
+        ;
         EntityManager.getInstance = function () {
             return this._entityManager;
         }.bind(this);
@@ -96,7 +97,7 @@ let GameLayer = cc.Layer.extend({
             }
 
             // FIXME: map
-            let xMap = GameConfig.MAP_HEIGH-1-tilePos.y;
+            let xMap = GameConfig.MAP_HEIGH - 1 - tilePos.y;
             let yMap = tilePos.x;
             let map = this.battleData.getMap(GameConfig.PLAYER);
             // FIXME: hardcode
@@ -104,7 +105,19 @@ let GameLayer = cc.Layer.extend({
                 return;
             }
         }
+        // Check MonsterPosition at Tower;
+        let checkMonster = false;
+        let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
+        for (let monster of monsterList) {
+            let positionComponent = monster.getComponent(PositionComponent);
+            let monsterTilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, GameConfig.PLAYER);
 
+            if (monsterTilePos.x === tilePos.x && monsterTilePos.y === tilePos.y) {
+                checkMonster = true;
+                break;
+            }
+        }
+        if (checkMonster == true) return;
         switch (type) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
                 EntityFactory.createCannonOwlTower(tilePos, GameConfig.PLAYER);
@@ -129,8 +142,7 @@ let GameLayer = cc.Layer.extend({
 
         // FIXME: hardcode
         if (GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FIRE_SPELL && GameConfig.gameLayer.selectedCard !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos});
+            EventDispatcher.getInstance().dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos})
         }
         GameConfig.gameLayer.selectedCard = null;
     },
