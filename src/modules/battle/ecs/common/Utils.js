@@ -40,7 +40,7 @@ Utils.tile2Pixel = function (x, y, mode) {
  * @param xx {Number}
  * @param yy {Number}
  * @param mode {GameConfig.PLAYER | GameConfig.OPPONENT}
- * @returns {cc.Point}
+ * @returns {{x: number, y: number}|{x: *, y: *}|{x: *, y: *}}
  */
 Utils.pixel2Tile = function (xx, yy, mode) {
     Utils.validateMode(mode);

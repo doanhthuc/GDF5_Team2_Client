@@ -2,13 +2,13 @@ let BattleData = cc.Class.extend({
     ctor: function () {
         this.dataInGame = {
             currentWave: 0,
-            maxWave: 10,
+            maxWave: 10000,
             timer: 2,
             player: {
                 username: "HOVANVYDUT",
                 clanName: "GDF5_DN_TEAM_2",
                 trophy: 30,
-                energyHouse: 10,
+                energyHouse: 1000,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
                 longestPath: null,
                 shortestPathForEachTile: null,
@@ -41,7 +41,7 @@ let BattleData = cc.Class.extend({
                 username: "OPPONENT333",
                 clanName: "HIHI",
                 trophy: 5,
-                energyHouse: 10,
+                energyHouse: 1000,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
                 longestPath: null,
                 shortestPathForEachTile: null,

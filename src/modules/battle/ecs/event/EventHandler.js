@@ -15,7 +15,7 @@ EventDispatcher.getInstance()
         let map = GameConfig.battleData.getMap(GameConfig.PLAYER);
 
         // FIXME: map
-        if (GameConfig.MAP_HEIGH-1-data.pos.y < 0 || GameConfig.MAP_HEIGH-1-data.pos.y >= GameConfig.MAP_HEIGH
+        if (GameConfig.MAP_HEIGH - 1 - data.pos.y < 0 || GameConfig.MAP_HEIGH - 1 - data.pos.y >= GameConfig.MAP_HEIGH
             || data.pos.x < 0 || data.pos.x >= GameConfig.MAP_WIDTH) {
             return;
         }
@@ -23,7 +23,7 @@ EventDispatcher.getInstance()
 
         // put tower at x, y
         // FIXME: hardcode 7 == tower
-        map[GameConfig.MAP_HEIGH-1-data.pos.y][data.pos.x] = 7;
+        map[GameConfig.MAP_HEIGH - 1 - data.pos.y][data.pos.x] = 7;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
 
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
@@ -35,7 +35,7 @@ EventDispatcher.getInstance()
                 if (positionComponent) {
                     let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
                     cc.log(JSON.stringify(tilePos))
-                    let path = shortestPathForEachTile[GameConfig.MAP_HEIGH-1-tilePos.y][tilePos.x];
+                    let path = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
                     if (path) {
                         if (path.length > 0) {
                             // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
@@ -50,10 +50,10 @@ EventDispatcher.getInstance()
             }
         }
     })
-    // .addEventHandler(EventType.FINISH_MATCHING, function (data) {
-    //     let layer = new GameLayer();
-    //     layer.setName("Screen");
-    //     let scene = new cc.Scene();
-    //     scene.addChild(layer);
-    //     cc.director.runScene(new cc.TransitionFade(1, scene));
-    // })
+// .addEventHandler(EventType.FINISH_MATCHING, function (data) {
+//     let layer = new GameLayer();
+//     layer.setName("Screen");
+//     let scene = new cc.Scene();
+//     scene.addChild(layer);
+//     cc.director.runScene(new cc.TransitionFade(1, scene));
+// })
