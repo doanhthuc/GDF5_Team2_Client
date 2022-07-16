@@ -27,6 +27,7 @@ GameConfig.COMPONENT_ID = {
     UNDER_GROUND:18,
     SPAWN_MINION:19,
     HEALING_ABILITY:20,
+    SPRITE_SHEET: 21
 }
 GameConfig.MAP ={
     NONE:0,

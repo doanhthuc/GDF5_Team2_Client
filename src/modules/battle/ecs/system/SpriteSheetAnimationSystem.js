@@ -9,8 +9,12 @@ let SpriteSheetAnimationSystem = System.extend({
 
     _run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(CollisionComponent);
+            .getEntitiesHasComponents(SpriteSheetAnimationSystem);
 
+        for (let entity of entityList) {
+            let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
+
+        }
     },
 });
 SpriteSheetAnimationSystem.typeID = GameConfig.SYSTEM_ID.SPRITE_SHEET;
