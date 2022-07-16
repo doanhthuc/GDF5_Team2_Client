@@ -105,5 +105,5 @@ AnimationMap.changeMonsterDirectionAnimation = function (entity, currentPos, nex
             state = EntityState.MONSTER_TURN_BOTTOM;
             break;
     }
-    EventDispatcher.getInstance().dispatchEvent(EventType.CHANGE_STATE_ENTITY, {entity: entity, state: state});
+     EventDispatcher.getInstance().dispatchEvent(EventType.CHANGE_STATE_ENTITY, {entity: entity, state: state});
 }

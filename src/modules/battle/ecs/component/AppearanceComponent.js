@@ -2,7 +2,7 @@ let AppearanceComponent = Component.extend({
     name: "AppearanceComponent",
     typeID: GameConfig.COMPONENT_ID.APPEARANCE,
 
-    ctor: function (sprite, mode) {
+    ctor: function (sprite, mode, initPos) {
         this._super();
         this.reset(sprite, mode);
 
@@ -11,6 +11,10 @@ let AppearanceComponent = Component.extend({
         } else if (mode === GameConfig.OPPONENT) {
             BattleManager.getInstance().getBattleLayer().getOpponentMapNode().addChild(this.sprite, this.zOrder);
         }
+        if (initPos) {
+            this.sprite.setPosition(initPos);
+        }
+        this.sprite.retain();
     },
 
     reset: function (sprite, mode) {

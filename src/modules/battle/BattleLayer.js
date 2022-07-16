@@ -108,15 +108,15 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
 
-        // EntityFactory.createNinjaMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createBatMonster(pixelPos, mode);
+        EntityFactory.createNinjaMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createBatMonster(pixelPos, mode);
 
     },
 
