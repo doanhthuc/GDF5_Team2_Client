@@ -107,7 +107,8 @@ FindPathUtil.findShortestPathForEachTile = function (mode) {
 
     for (let row = 0; row < map.length; row++) {
         for (let col = 0; col < map[0].length; col++) {
-            if (map[row][col] === 0) {
+            if (map[row][col] === GameConfig.MAP.NONE || map[row][col] === GameConfig.MAP.ATTACK_SPEED
+            || map[row][col] === GameConfig.MAP.ATTACK_RANGE || map[row][col] === GameConfig.MAP.ATTACK_DAMAGE) {
                 let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
                 if (path && path.length > 0) {
                     shortestPathForEachTiles[row][col] = path;
