@@ -51,7 +51,6 @@ let BattleLayer = cc.Layer.extend({
 
     update: function (dt) {
         // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
-        this.movementSystem.start(dt);
         this.attackSystem.start(dt);
         this.renderSystem.start(dt);
         this.lifeSystem.start(dt);
@@ -63,6 +62,7 @@ let BattleLayer = cc.Layer.extend({
         this.monsterSystem.start(dt);
         this.bulletSystem.start(dt);
         this.abilitySystem.start(dt);
+        this.movementSystem.start(dt);
 
         if (GameConfig.DEBUG) {
             cc.warn("---------------------------------------")
@@ -108,15 +108,15 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
 
-        EntityFactory.createNinjaMonster(pixelPos, mode);
+        // EntityFactory.createNinjaMonster(pixelPos, mode);
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createBatMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createBatMonster(pixelPos, mode);
 
     },
 
