@@ -420,11 +420,12 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
 
     let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
     let damageEffect = ComponentFactory.create(DamageEffect, 8);
+
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "support", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, 1, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 3.4, 0, [frozenEffect])
+    let attackComponent = ComponentFactory.create(AttackComponent, 1, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 3.4, 0, [frozenEffect, damageEffect])
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)

@@ -118,7 +118,7 @@
         "src/modules/battle/ecs/system/AbilitySystem.js",
         "src/modules/battle/ecs/system/AttackSystem.js",
         "src/modules/battle/ecs/system/BulletSystem.js",
-        "src/modules/battle/ecs/system/QuadTree.js",
+        "src/modules/battle/ecs/common/QuadTree.js",
         "src/modules/battle/ecs/system/CollisionSystem.js",
         "src/modules/battle/ecs/system/EffectSystem.js",
         "src/modules/battle/ecs/system/LifeSystem.js",
