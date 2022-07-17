@@ -127,21 +127,6 @@ Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     return direction1 + direction2;
 };
 
-Utils.UUID = (function () {
-    let _instanceID = 0;
-    let _componentTypeID = 0;
-
-    return {
-        genComponentTypeID: function () {
-            return ++_componentTypeID;
-        },
-
-        genInstanceID: function () {
-            return ++_instanceID;
-        }
-    }
-})();
-
 Utils.calculateVelocityVector = function (startPos, targetPos, speed) {
     let Xa = startPos.x, Ya = startPos.y, Xb = targetPos.x, Yb = targetPos.y;
     if (Xa - Xb === 0)
@@ -160,33 +145,6 @@ Utils.calculateVelocityVector = function (startPos, targetPos, speed) {
 
 Utils.euclidDistance = function (pointA, pointB) {
     return Math.sqrt(Math.pow(pointA.x - pointB.x, 2) + Math.pow(pointA.y - pointB.y, 2));
-}
-
-Utils.isMonster = function (entity) {
-    for (let id of GameConfig.GROUP_ID.MONSTER_ENTITY) {
-        if (id === entity.typeID) {
-            return true;
-        }
-    }
-    return false;
-}
-
-Utils.isTower = function (entity) {
-    for (let id of GameConfig.GROUP_ID.TOWER_ENTITY) {
-        if (id === entity.typeID) {
-            return true;
-        }
-    }
-    return false;
-}
-
-Utils.isBullet = function (entity) {
-    for (let id of GameConfig.GROUP_ID.BULLET_ENTITY) {
-        if (id === entity.typeID) {
-            return true;
-        }
-    }
-    return false;
 }
 
 Utils.radian2Degree = function (radian) {

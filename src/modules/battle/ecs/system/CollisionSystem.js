@@ -64,7 +64,7 @@ let CollisionSystem = System.extend({
         }
 
         for (let i = 0; i < entityList.length; i++) {
-            if (Utils.isBullet(entityList[i]) === false) continue;
+            if (ValidatorECS.isBullet(entityList[i]) === false) continue;
 
             let pos = entityList[i].getComponent(PositionComponent);
             let collisionComponent = entityList[i].getComponent(CollisionComponent);
@@ -131,10 +131,10 @@ let CollisionSystem = System.extend({
 
     _isMonsterAndBullet: function (entity1, entity2) {
         // TODO: check entity2 is monster, not only sword man
-        if ((Utils.isBullet(entity1) && Utils.isMonster(entity2))
-            || (Utils.isBullet(entity2) && Utils.isMonster(entity1))) {
-            let bullet = Utils.isBullet(entity1) ? entity1 : entity2;
-            let monster = Utils.isMonster(entity1) ? entity1 : entity2;
+        if ((ValidatorECS.isBullet(entity1) && ValidatorECS.isMonster(entity2))
+            || (ValidatorECS.isBullet(entity2) && ValidatorECS.isMonster(entity1))) {
+            let bullet = ValidatorECS.isBullet(entity1) ? entity1 : entity2;
+            let monster = ValidatorECS.isMonster(entity1) ? entity1 : entity2;
             return {bullet, monster}
         }
         return null

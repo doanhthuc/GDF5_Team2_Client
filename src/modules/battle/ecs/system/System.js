@@ -3,7 +3,7 @@ let System = cc.Class.extend({
     name: "SystemECS",
 
     ctor: function () {
-        this.id = Utils.UUID.genInstanceID();
+        this.id = UUIDGeneratorECS.genInstanceID();
     },
 
     start: function (dt) {
