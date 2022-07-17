@@ -100,7 +100,7 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSwordmanNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 1400);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 50);
 
     // let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
     // let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
@@ -394,16 +394,18 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     // let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 10);
     // let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 1.3);
 
-    // TODO: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
     let attackComponent = ComponentFactory.create(AttackComponent, 10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [])
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.cannon.level.A);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
+        .addComponent(spriteComponent);
+
     // .addComponent(buffAttackDamageEffect)
     // .addComponent(buffAttackSpeedEffect)
     return entity;

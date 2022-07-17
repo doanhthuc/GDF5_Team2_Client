@@ -73,10 +73,8 @@ let CollisionSystem = System.extend({
             let returnObjects = null;
             if (entityList[i].mode === GameConfig.PLAYER) {
                 returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
-                cc.log(" -> Player Return object collision length = " + returnObjects.length);
             } else {
                 returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
-                cc.log(" -> Opponent Return object collision length = " + returnObjects.length);
             }
 
             for (let j = 0; j < returnObjects.length; j++) {

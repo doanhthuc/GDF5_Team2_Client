@@ -9,11 +9,28 @@ let SpriteSheetAnimationSystem = System.extend({
 
     _run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SpriteSheetAnimationSystem);
+            .getEntitiesHasComponents(SpriteSheetAnimationComponent);
 
         for (let entity of entityList) {
             let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
 
+            if (spriteComponent.currentStateIsRendered === false) {
+                let appearanceComponent = entity.getComponent(AppearanceComponent);
+                let stateAnim = spriteComponent.animationMap[spriteComponent.currentState];
+
+                for (let spriteName of Object.keys(stateAnim)) {
+                    let sprite = appearanceComponent.sprite.getChildByName(spriteName);
+                    if (sprite) {
+                        sprite.stopAllActions();
+                        sprite.runAction(cc.repeatForever(cc.animate(stateAnim[spriteName].animation)));
+                        if (stateAnim[spriteName].flipX) {
+                            sprite.setFlippedX(true);
+                        }
+                    }
+                }
+
+                spriteComponent.currentStateIsRendered = true;
+            }
         }
     },
 });

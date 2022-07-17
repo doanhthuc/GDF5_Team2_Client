@@ -13,15 +13,12 @@ let EntityECS = cc.Class.extend({
     },
 
     addComponent: function (component) {
-        // this._isComponent();
-
         if (this.components[component.typeID]) {
             // TODO: check override or not
         }
         component.setActive(true);
         this.components[component.typeID] = component;
         this.bitmask = this.bitmask | (1 << component.typeID);
-        cc.log("bitmask = " + this.bitmask);
         return this;
     },
 

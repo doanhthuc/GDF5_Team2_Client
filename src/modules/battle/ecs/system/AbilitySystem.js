@@ -15,7 +15,6 @@ let AbilitySystem = System.extend({
 
         _handleUnderGroundComponent: function (tick) {
             let entityList = EntityManager.getInstance().getEntitiesHasComponents(UnderGroundComponent);
-            cc.log("under ground size = " + entityList.length);
             for (let entity of entityList) {
                 let lifeComponent = entity.getComponent(LifeComponent);
                 let underGroundComponent = entity.getComponent(UnderGroundComponent);
@@ -36,14 +35,12 @@ let AbilitySystem = System.extend({
 
         _handleSpawnMinionComponent: function (tick) {
             let entityList = EntityManager.getInstance().getEntitiesHasComponents(SpawnMinionComponent);
-            cc.log("SpawnMinionComponent ground size = " + entityList.length);
 
             for (let entity of entityList) {
 
                 let spawnMinionComponent = entity.getComponent(SpawnMinionComponent);
                 if (spawnMinionComponent.period >= 0) {
                     spawnMinionComponent.period = spawnMinionComponent.period - tick;
-                    cc.log("handlerSpawnMinion Component" + spawnMinionComponent.period + " " + tick)
                 } else {
                     spawnMinionComponent.period = 2;
                     let positionComponent = entity.getComponent(PositionComponent);
@@ -59,7 +56,6 @@ let AbilitySystem = System.extend({
 
         _handleHealingAbility: function (tick) {
             let entityList = EntityManager.getInstance().getEntitiesHasComponents(HealingAbility);
-            cc.log("HealingAbility ground size = " + entityList.length);
 
             let monsterList = null;
             if (entityList) {
