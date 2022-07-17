@@ -1,10 +1,10 @@
 EventDispatcher.getInstance()
-    .addEventHandler(EventType.END_ONE_TIMER, function (data) {
-        let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
-        uiLayer.waveNode.increaseWave();
-        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
-        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
-    })
+    // .addEventHandler(EventType.END_ONE_TIMER, function (data) {
+    //     let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
+    //     uiLayer.waveNode.increaseWave();
+    //     BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+    //     BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
+    // })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
         BattleManager.getInstance().getBattleLayer().stopGame();
     })
@@ -14,6 +14,7 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let tilePos = data.pos;
         let currentMode = data.mode;
+        let cardId = data.cardId;
         let map = BattleManager.getInstance().getBattleData().getMap(currentMode);
 
         if (!Utils.validateTilePos(tilePos)) {
@@ -45,4 +46,11 @@ EventDispatcher.getInstance()
                 }
             }
         }
+        BattleNetwork.connector.sendPutTower(cardId, tilePos);
+    })
+    .addEventHandler(EventType.UPGRADE_TOWER, function (data) {
+        let towerId = data.towerId;
+        let tilePos = data.pos;
+        BattleNetwork.connector.sendUpgradeTower(towerId, tilePos);
+        cc.log('[EventHandler.js line 52 ]Upgrade tower event data: ' + JSON.stringify(data));
     })

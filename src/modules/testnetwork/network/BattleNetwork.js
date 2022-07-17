@@ -26,6 +26,9 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.GET_BATTLE_MAP_OBJECT:
                 this._handleGetBattleMapObject(cmd, packet);
                 break;
+            case gv.CMD.GET_CELL_OBJECT:
+                this._handleGetCellObject(cmd, packet);
+                break;
         }
     },
 
@@ -48,6 +51,8 @@ BattleNetwork.Connector = cc.Class.extend({
         battleData.setRoomId(packet.roomId)
         battleData.setMap(packet.playerMap, GameConfig.PLAYER);
         battleData.setMap(packet.opponentMap, GameConfig.OPPONENT);
+        // battleData.setMapObject(packet.playerMap, GameConfig.PLAYER);
+        // battleData.setMapObject(packet.playerMap, GameConfig.OPPONENT);
         battleData.setLongestPath(packet.playerLongestPath, GameConfig.PLAYER);
         battleData.setLongestPath(packet.opponentLongestPath, GameConfig.OPPONENT);
 
@@ -74,33 +79,64 @@ BattleNetwork.Connector = cc.Class.extend({
         fr.view(MainScreen);
     },
 
-    sendPutTower: function (roomId, towerId, tilePos, pixelPos) {
+    sendPutTower: function (towerId, tilePos) {
+        let roomId = BattleManager.getInstance().getBattleData().getRoomId()
         let pk = this.gameClient.getOutPacket(CMDPutTower);
-        pk.pack(roomId, towerId, tilePos, pixelPos);
+        pk.pack(roomId, towerId, tilePos);
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendUpgradeTower: function (towerId, tilePos) {
+        let pk = this.gameClient.getOutPacket(CMDUpgradeTower);
+        pk.pack(towerId, tilePos);
         this.gameClient.sendPacket(pk);
     },
 
     _handlePutTower: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 76] received put tower packet: ' + JSON.stringify(packet));
-
+        let battleData = BattleManager.getInstance().getBattleData();
+        let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
+        let cellObject = playerObjectMap[packet.x][packet.y];
+        cellObject.objectInCellType = ObjectInCellType.TOWER;
+        cellObject.tower = {
+            id: packet.towerId,
+            level: packet.towerLevel,
+        };
+        for (let i = 0; i < playerObjectMap.length; i++) {
+            for (let j = 0; j < playerObjectMap[i].length; j++) {
+                cc.log('[BattleNetwork.js line 98] _handlePutTower: ' + JSON.stringify(playerObjectMap[i][j]));
+            }
+        }
     },
 
     _handleOpponentPutTower: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 80] received put tower packet: ' + JSON.stringify(packet));
-        BattleManager.getInstance().getBattleData().getMap(GameConfig.OPPONENT)[packet.tileX][packet.tileY] = 7;
         let pixelPos = Utils.tile2Pixel(packet.tileX, packet.tileY, GameConfig.OPPONENT);
-        cc.log('[BattleNetwork.js line 88] pixelPos: ' + JSON.stringify(pixelPos));
         OpponentAction.getInstance().putCardAt(pixelPos, packet.towerId);
-        // BattleManager.getInstance().getBattleData().getMap(GameConfig.OPPONENT).show();
+        let battleData = BattleManager.getInstance().getBattleData();
+        let opponentMap = battleData.getMapObject(GameConfig.OPPONENT);
+        let cellObject = opponentMap[packet.tileX][packet.tileY];
+        cellObject.objectInCellType = ObjectInCellType.TOWER;
+        cellObject.tower = {
+            id: packet.towerId,
+            level: packet.towerLevel,
+        };
     },
 
     _handleGetBattleMapObject: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 95] received get battle map object packet: ' + JSON.stringify(packet));
-        let battleMapObject = packet.battleMapObject;
+        let battleData = BattleManager.getInstance().getBattleData();
+        battleData.setMapObject(packet.playerBattleMapObject, GameConfig.PLAYER);
+        battleData.setMapObject(packet.opponentBattleMapObject, GameConfig.OPPONENT);
+        let battleMapObject = battleData.getMapObject(GameConfig.PLAYER);
         for (let i = 0; i < battleMapObject.length; i++) {
             for (let j = 0; j < battleMapObject[i].length; j++) {
                 cc.log('[BattleNetwork.js line 102] battleMapObject: ' + JSON.stringify(battleMapObject[i][j]));
             }
         }
+    },
+
+    _handleGetCellObject: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 113] received get cell object packet: ' + JSON.stringify(packet));
     }
 })

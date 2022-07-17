@@ -6,7 +6,6 @@ let BattleLayer = cc.Layer.extend({
         this.selectedCard = null;
 
 
-
         // BattleData.fakeData();
         this.battleData = BattleManager.getInstance().getBattleData();
 
@@ -124,7 +123,7 @@ let BattleLayer = cc.Layer.extend({
         }
         // EntityFactory.createSatyrBoss(pixelPos, mode);
         // EntityFactory.createDarkGiantBoss(pixelPos,mode);
-        EntityFactory.createDemonTreeBoss(pixelPos,mode);
+        EntityFactory.createDemonTreeBoss(pixelPos, mode);
     },
 
     /**
@@ -177,14 +176,36 @@ let BattleLayer = cc.Layer.extend({
 
         if (type !== GameConfig.ENTITY_ID.FIRE_SPELL
             && type !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos, mode: mode});
-
-            // FIXME: test will delete later
-            cc.log("[GameLayer.js line 134] tilePos: " + JSON.stringify(pixelPos));
-            BattleNetwork.connector.sendPutTower(BattleManager.getInstance().getBattleData().getRoomId(), type, tilePos, pixelPos);
+            // EventDispatcher.getInstance()
+            //     .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
+            // if (this.shouldUpgradeTower(type, tilePos)) {
+            //     EventDispatcher.getInstance()
+            //         .dispatchEvent(EventType.UPGRADE_TOWER, {cardId: type, pos: tilePos});
+            // } else if (this.shouldPutNewTower(tilePos)) {
+            //     EventDispatcher.getInstance()
+            //         .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
+            // }
         }
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
+    },
+
+    shouldUpgradeTower: function (towerId, tilePos) {
+        let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
+        if (cellObject.type === ObjectInCellType.TOWER && cellObject.tower !== null) {
+            let tower = cellObject.tower;
+            // let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
+            // let card = inventoryContext.getCardById(towerId);
+            // if (card && card.cardLevel > tower.level) {
+            //         return true;
+            // }
+            return true;
+        }
+        return false;
+    },
+
+    shouldPutNewTower: function (tilePos) {
+        let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
+        return cellObject.type === ObjectInCellType.NONE;
     },
 
     _initTower: function () {
@@ -202,8 +223,13 @@ let BattleLayer = cc.Layer.extend({
                 if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
                     let pixelPos = touches[0].getLocation();
                     let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
+                    let tilePos = Utils.pixel2Tile(pixelInMap.x, pixelInMap.y, GameConfig.PLAYER);
+                    let cardId = BattleManager.getInstance().getBattleLayer().selectedCard;
                     BattleManager.getInstance().getBattleLayer()
                         .putCardAt(BattleManager.getInstance().getBattleLayer().selectedCard, pixelInMap, GameConfig.PLAYER);
+                    // FIXME: test will delete later
+                    cc.log("[GameLayer.js line 134] tilePos: " + JSON.stringify(tilePos));
+                    BattleNetwork.connector.sendPutTower(cardId, tilePos);
                 }
             }
         }), this.uiLayer)
@@ -212,7 +238,7 @@ let BattleLayer = cc.Layer.extend({
     startGame: function () {
         // this.battleLoop.start();
         this.scheduleUpdate();
-        BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        // BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
     stopGame: function () {

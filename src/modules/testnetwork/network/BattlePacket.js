@@ -5,6 +5,7 @@ gv.CMD.PUT_TOWER = 5002;
 gv.CMD.OPPONENT_PUT_TOWER = 5003;
 gv.CMD.GET_BATTLE_MAP_OBJECT = 5004;
 gv.CMD.GET_CELL_OBJECT = 5005;
+gv.CMD.UPGRADE_TOWER = 5006;
 
 let BattleNetwork = BattleNetwork || {};
 
@@ -44,18 +45,32 @@ CMDPutTower = fr.OutPacket.extend({
         this.setCmdId(gv.CMD.PUT_TOWER);
     },
 
-    pack: function (roomId, towerId, tilePos, pixelPos) {
+    pack: function (roomId, towerId, tilePos) {
         this.packHeader();
         this.putInt(roomId);
         this.putInt(towerId);
-        // this.putInt(towerLevel);
         this.putInt(tilePos.x);
         this.putInt(tilePos.y);
-        this.putDouble(pixelPos.x);
-        this.putDouble(pixelPos.y);
         this.updateSize();
     }
 });
+
+CMDUpgradeTower = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.UPGRADE_TOWER);
+    },
+
+    pack: function (towerId, tilePos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(towerId);
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.updateSize();
+    }
+})
 
 BattleNetwork.packetMap[gv.CMD.SEND_MATCHING] = fr.InPacket.extend({
     ctor: function () {
@@ -123,8 +138,6 @@ BattleNetwork.packetMap[gv.CMD.PUT_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.x = this.getInt();
         this.y = this.getInt();
-        this.pixelX = this.getDouble();
-        this.pixelY = this.getDouble();
     }
 })
 
@@ -141,22 +154,36 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
     }
 });
 
+BattleNetwork.packetMap[gv.CMD.UPGRADE_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.towerId = this.getInt();
+        this.towerLevel = this.getInt();
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+})
+
 BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
     ctor: function () {
         this._super();
     },
 
     readData: function () {
-        this.mapHeight = this.getInt();
-        this.mapWidth = this.getInt();
-        this.battleMapObject = this._unpackMapObject();
+        this.playerBattleMapObject = this._unpackMapObject();
+        this.opponentBattleMapObject = this._unpackMapObject();
     },
 
     _unpackMapObject: function () {
-        let mapObject = new Array(this.mapHeight);
-        for (let i = 0; i < this.mapHeight; i++) {
-            mapObject[i] = new Array(this.mapWidth);
-            for (let j = 0; j < this.mapWidth; j++) {
+        let mapHeight = this.getInt();
+        let mapWidth = this.getInt();
+        let mapObject = new Array(mapHeight);
+        for (let i = 0; i < mapHeight; i++) {
+            mapObject[i] = new Array(mapWidth);
+            for (let j = 0; j < mapWidth; j++) {
                 mapObject[i][j] = this._unpackCellObject();
 
             }
@@ -179,18 +206,18 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
 
     _unpackObjectInCell: function (cellObject) {
         switch (cellObject.objectInCellType) {
-            case 1:
+            case ObjectInCellType.TREE:
                 cellObject.tree = {
                     hp: this.getDouble()
                 }
                 break;
-            case 2:
+            case ObjectInCellType.TOWER:
                 cellObject.tower = {
-                    towerId: this.getInt(),
-                    towerLevel: this.getInt(),
+                    id: this.getInt(),
+                    level: this.getInt(),
                 }
                 break;
-            case 3:
+            case ObjectInCellType.PIT:
                 cellObject.pit = this.getInt();
                 break;
             default:
