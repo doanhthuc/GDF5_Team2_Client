@@ -4,7 +4,7 @@ let UUIDGeneratorECS = (function () {
     let _entityID = 0;
 
     return {
-        getComponentID: function () {
+        genComponentID: function () {
             return ++_componentID;
         },
 
