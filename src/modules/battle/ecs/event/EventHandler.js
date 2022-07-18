@@ -14,6 +14,7 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let tilePos = data.pos;
         let currentMode = data.mode;
+        let cardId = data.cardId;
         let map = BattleManager.getInstance().getBattleData().getMap(currentMode);
 
         if (!Utils.validateTilePos(tilePos)) {
@@ -48,4 +49,10 @@ EventDispatcher.getInstance()
                 }
             }
         }
+    })
+    .addEventHandler(EventType.UPGRADE_TOWER, function (data) {
+        let towerId = data.towerId;
+        let tilePos = data.pos;
+        BattleNetwork.connector.sendUpgradeTower(towerId, tilePos);
+        cc.log('[EventHandler.js line 52 ]Upgrade tower event data: ' + JSON.stringify(data));
     })

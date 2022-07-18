@@ -5,7 +5,8 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-        BattleData.fakeData();
+
+        // BattleData.fakeData();
         this.battleData = BattleManager.getInstance().getBattleData();
         // this.battleLoop = new BattleLoop();
 
@@ -113,7 +114,7 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
 
-        //EntityFactory.createNinjaMonster(pixelPos, mode);
+        // EntityFactory.createNinjaMonster(pixelPos, mode);
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
         //EntityFactory.createBatMonster(pixelPos, mode);
     },
@@ -125,9 +126,9 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-         EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSatyrBoss(pixelPos, mode);
         // EntityFactory.createDarkGiantBoss(pixelPos,mode);
-        //EntityFactory.createDemonTreeBoss(pixelPos,mode);
+        EntityFactory.createDemonTreeBoss(pixelPos, mode);
     },
 
     /**
@@ -158,7 +159,37 @@ let BattleLayer = cc.Layer.extend({
             }
         }
 
-        switch (type) {
+        if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
+            this.dropSpell(type, pixelPos, mode)
+            BattleNetwork.connector.sendDropSell(type, pixelPos);
+        } else {
+            // if (this.shouldUpgradeTower(type, tilePos)) {
+            //     EventDispatcher.getInstance()
+            //         .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+            // } else if (this.shouldPutNewTower(tilePos)) {
+            //     this.buildTower(type, tilePos, mode);
+            //     EventDispatcher.getInstance()
+            //         .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
+            // }
+            this.putTowerCardIntoMap(type, tilePos, mode);
+        }
+        BattleManager.getInstance().getBattleLayer().selectedCard = null;
+    },
+
+    putTowerCardIntoMap: function(type, tilePos, mode) {
+        if (this.shouldUpgradeTower(type, tilePos)) {
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+            return;
+        }
+        if (this.shouldPutNewTower(tilePos)) {
+            this.buildTower(type, tilePos, mode);
+            BattleNetwork.connector.sendPutTower(type, tilePos);
+        }
+    },
+
+    buildTower: function(towerId, tilePos, mode) {
+        switch (towerId) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
                 EntityFactory.createCannonOwlTower(tilePos, mode);
                 break;
@@ -168,22 +199,41 @@ let BattleLayer = cc.Layer.extend({
             case GameConfig.ENTITY_ID.BEAR_TOWER:
                 EntityFactory.createIceGunPolarBearTower(tilePos, mode);
                 break;
+            default:
+                return;
+        }
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
+    },
+
+    dropSpell: function(spellId, pixelPos, mode) {
+        switch (spellId) {
             case GameConfig.ENTITY_ID.FIRE_SPELL:
                 SpellFactory.createFireSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
                 SpellFactory.createFrozenSpell(pixelPos, mode);
                 break;
-            default:
-                return;
         }
+    },
 
-        if (type !== GameConfig.ENTITY_ID.FIRE_SPELL
-            && type !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos, mode: mode});
+    shouldUpgradeTower: function (towerId, tilePos) {
+        let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
+        if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null) {
+            let tower = cellObject.tower;
+            let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
+            let card = inventoryContext.getCardById(towerId);
+            if (card && card.cardLevel > tower.level) {
+                return true;
+            }
+            // return true;
         }
-        BattleManager.getInstance().getBattleLayer().selectedCard = null;
+        return false;
+    },
+
+    shouldPutNewTower: function (tilePos) {
+        let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
+        return cellObject.objectInCellType === ObjectInCellType.NONE;
     },
 
     _initTower: function () {
@@ -201,6 +251,8 @@ let BattleLayer = cc.Layer.extend({
                 if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
                     let pixelPos = touches[0].getLocation();
                     let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
+                    let tilePos = Utils.pixel2Tile(pixelInMap.x, pixelInMap.y, GameConfig.PLAYER);
+                    let cardId = BattleManager.getInstance().getBattleLayer().selectedCard;
                     BattleManager.getInstance().getBattleLayer()
                         .putCardAt(BattleManager.getInstance().getBattleLayer().selectedCard, pixelInMap, GameConfig.PLAYER);
                 }
@@ -211,7 +263,7 @@ let BattleLayer = cc.Layer.extend({
     startGame: function () {
         // this.battleLoop.start();
         this.scheduleUpdate();
-        BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        // BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
     stopGame: function () {

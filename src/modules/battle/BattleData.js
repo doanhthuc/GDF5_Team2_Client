@@ -1,5 +1,6 @@
 let BattleData = cc.Class.extend({
     ctor: function () {
+        this.roomId = 0;
         this.dataInGame = {
             currentWave: 0,
             maxWave: 10000,
@@ -10,6 +11,7 @@ let BattleData = cc.Class.extend({
                 trophy: 30,
                 energyHouse: 1000,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
+                mapObject: null,
                 longestPath: null,
                 shortestPathForEachTile: null,
                 currentEnergy: 30,
@@ -43,10 +45,19 @@ let BattleData = cc.Class.extend({
                 trophy: 5,
                 energyHouse: 1000,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
+                mapObject: null,
                 longestPath: null,
                 shortestPathForEachTile: null,
             }
         }
+    },
+
+    getRoomId: function () {
+        return this.roomId;
+    },
+
+    setRoomId: function (roomId) {
+        this.roomId = roomId;
     },
 
     getTimer: function () {
@@ -119,6 +130,16 @@ let BattleData = cc.Class.extend({
         return this.dataInGame[mode].map = map;
     },
 
+    getMapObject: function (mode) {
+        Utils.validateMode(mode);
+        return this.dataInGame[mode].mapObject;
+    },
+
+    setMapObject: function (mapObject, mode) {
+        Utils.validateMode(mode);
+        return this.dataInGame[mode].mapObject = mapObject;
+    },
+
     getShortestPathForEachTile: function (mode) {
         Utils.validateMode(mode);
         return this.dataInGame[mode].shortestPathForEachTile;
@@ -144,7 +165,7 @@ let BattleData = cc.Class.extend({
         return this.dataInGame[mode].currentEnergy;
     },
 
-    setCurrentEnergy:function (currentEnergy, mode) {
+    setCurrentEnergy: function (currentEnergy, mode) {
         Utils.validateMode(mode);
         if (currentEnergy > this.getMaxEnergy(mode))
             return;

@@ -31,6 +31,10 @@ Utils.tile2Pixel = function (x, y, mode) {
     return cc.p(xx, yy);
 };
 
+Utils.playerPixel2OpponentPixel = function (x, y) {
+    return cc.p(-x, -y);
+}
+
 /**
  * Convert pixel map node coordination to tile coordination
  * @param xx {Number}
