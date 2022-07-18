@@ -35,6 +35,12 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.OPPONENT_UPGRADE_TOWER:
                 this._handleOpponentUpgradeTower(cmd, packet);
                 break;
+            case gv.CMD.DROP_SPELL:
+                this._handleDropSpell(cmd, packet);
+                break;
+            case gv.CMD.OPPONENT_DROP_SPELL:
+                this._handleOpponentDropSpell(cmd, packet);
+                break;
         }
     },
 
@@ -95,6 +101,12 @@ BattleNetwork.Connector = cc.Class.extend({
     sendUpgradeTower: function (towerId, tilePos) {
         let pk = this.gameClient.getOutPacket(CMDUpgradeTower);
         pk.pack(towerId, tilePos);
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendDropSell: function (towerId, pixelPos) {
+        let pk = this.gameClient.getOutPacket(CMDDropSpell);
+        pk.pack(towerId, pixelPos);
         this.gameClient.sendPacket(pk);
     },
 
@@ -163,5 +175,16 @@ BattleNetwork.Connector = cc.Class.extend({
         let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
         cellObject.tower.level = packet.towerLevel;
         cc.log('[BattleNetwork.js line 165] cellObject: ' + JSON.stringify(opponentObjectMap[packet.tileX][packet.tileY]));
+    },
+
+    _handleDropSpell: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 123] received drop spell packet: ' + JSON.stringify(packet));
+    },
+
+    _handleOpponentDropSpell: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 125] received drop spell packet: ' + JSON.stringify(packet));
+        let pixelPos = cc.p(packet.pixelX, packet.pixelY);
+        pixelPos = Utils.playerPixel2OpponentPixel(pixelPos.x, pixelPos.y);
+        OpponentAction.getInstance().dropSpell(packet.spellId, pixelPos);
     }
 })
