@@ -32,7 +32,7 @@ let RenderSystem = System.extend({
     },
 
     _updateHpBarMonsterUI: function (entity) {
-        if (Utils.isMonster(entity)) {
+        if (ValidatorECS.isMonster(entity)) {
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let lifeComponent = entity.getComponent(LifeComponent);
             if (appearanceComponent) {

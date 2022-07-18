@@ -8,9 +8,11 @@ let BattleLayer = cc.Layer.extend({
 
         // BattleData.fakeData();
         this.battleData = BattleManager.getInstance().getBattleData();
-
+        // this.battleLoop = new BattleLoop();
 
         this._setupUI();
+
+        this._prefetchAssetGame();
 
         // init entity manager
         this._entityManager = new EntityManager();
@@ -48,11 +50,11 @@ let BattleLayer = cc.Layer.extend({
         this.monsterSystem = SystemFactory.create(MonsterSystem);
         this.bulletSystem = SystemFactory.create(BulletSystem);
         this.abilitySystem = SystemFactory.create(AbilitySystem);
+        this.spriteSheetAnimationSystem = SystemFactory.create(SpriteSheetAnimationSystem);
     },
 
     update: function (dt) {
         // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
-        this.movementSystem.start(dt);
         this.attackSystem.start(dt);
         this.renderSystem.start(dt);
         this.lifeSystem.start(dt);
@@ -64,6 +66,8 @@ let BattleLayer = cc.Layer.extend({
         this.monsterSystem.start(dt);
         this.bulletSystem.start(dt);
         this.abilitySystem.start(dt);
+        this.movementSystem.start(dt);
+        this.spriteSheetAnimationSystem.start(dt);
 
         if (GameConfig.DEBUG) {
             cc.warn("---------------------------------------")
@@ -109,9 +113,16 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
 
-        EntityFactory.createNinjaMonster(pixelPos, mode);
+        // EntityFactory.createNinjaMonster(pixelPos, mode);
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createBatMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createBatMonster(pixelPos, mode);
+
     },
 
     oneTimeBornMonster: function (tilePos, mode) {
@@ -283,6 +294,7 @@ let BattleLayer = cc.Layer.extend({
         this.addChild(new BattleResultLayer(result, this.battleData), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
+        // TODO: remove file from sprite frame cache
     },
 
     getPlayerMapNode: function () {
@@ -292,4 +304,13 @@ let BattleLayer = cc.Layer.extend({
     getOpponentMapNode: function () {
         return this.mapLayer.opponentMapNode;
     },
+
+    _prefetchAssetGame: function () {
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-0.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-1.plist");
+    },
+
+    _clearAsset: function () {
+        cc.spriteFrameCache.removeUnusedSpriteFrames();
+    }
 });

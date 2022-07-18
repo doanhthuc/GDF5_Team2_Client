@@ -35,12 +35,12 @@ let AbilitySystem = System.extend({
 
         _handleSpawnMinionComponent: function (tick) {
             let entityList = EntityManager.getInstance().getEntitiesHasComponents(SpawnMinionComponent);
+
             for (let entity of entityList) {
 
                 let spawnMinionComponent = entity.getComponent(SpawnMinionComponent);
                 if (spawnMinionComponent.period >= 0) {
                     spawnMinionComponent.period = spawnMinionComponent.period - tick;
-                    // cc.log("handlerSpawnMinion Component" + spawnMinionComponent.period + " " + tick)
                 } else {
                     spawnMinionComponent.period = 2;
                     let positionComponent = entity.getComponent(PositionComponent);
@@ -56,6 +56,7 @@ let AbilitySystem = System.extend({
 
         _handleHealingAbility: function (tick) {
             let entityList = EntityManager.getInstance().getEntitiesHasComponents(HealingAbility);
+
             let monsterList = null;
             if (entityList) {
                 monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);

@@ -27,8 +27,14 @@ GameConfig.COMPONENT_ID = {
     UNDER_GROUND:18,
     SPAWN_MINION:19,
     HEALING_ABILITY:20,
+    SPRITE_SHEET: 21
 }
-
+GameConfig.MAP ={
+    NONE:0,
+    ATTACK_SPEED:1,
+    ATTACK_DAMAGE:2,
+    ATTACK_RANGE:3,
+}
 GameConfig.SYSTEM_ID = {
     MOVEMENT: 1,
     PATH_MONSTER: 2,
@@ -90,12 +96,14 @@ GameConfig.MAP_HEIGH = 5;
 GameConfig.RIVER_MAP_HEIGH = 100;
 
 GameConfig.DIRECTION = {
-    BOTTOM: 2,
-    TOP: -2,
     RIGHT: 1,
     LEFT: -1,
-    RIGHT_TOP: -3,
-    RIGHT_BOTTOM: 3,
+    TOP: 3,
+    BOTTOM: -3,
+    RIGHT_TOP: 4,
+    RIGHT_BOTTOM: -2,
+    LEFT_TOP: 2,
+    LEFT_BOTTOM: -4,
 };
 
 GameConfig.BATTLE_RESULT = {
