@@ -32,6 +32,7 @@ let SpriteSheetAnimationComponent = Component.extend({
         for (let state of config.states) {
             if (!config.animation[state]) continue;
             for (let spriteName of Object.keys(config.animation[state])) {
+                if (spriteName === "sequence") continue;
                 let animFrames = [];
                 let flipX = config.animation[state][spriteName].flipX;
                 let start = config.animation[state][spriteName].start;
@@ -58,7 +59,6 @@ let SpriteSheetAnimationComponent = Component.extend({
                 }
 
                 let animation = new cc.Animation(animFrames);
-                // animation.setRestoreOriginalFrame(true);
                 let delay = time || 1000;
                 animation.setDelayPerUnit(delay / 1000 / animFrames.length);
                 animation.retain();
@@ -69,6 +69,7 @@ let SpriteSheetAnimationComponent = Component.extend({
             }
         }
     },
+
 
 });
 SpriteSheetAnimationComponent.typeID = GameConfig.COMPONENT_ID.SPRITE_SHEET;

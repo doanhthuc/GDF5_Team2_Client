@@ -105,7 +105,7 @@ let AttackSystem = System.extend({
 
         let spriteComponent = tower.getComponent(SpriteSheetAnimationComponent);
         if (spriteComponent) {
-            spriteComponent.changeCurrentState("IDLE_" + directionDegree[minIdx]);
+            spriteComponent.changeCurrentState("ATTACK_" + directionDegree[minIdx]);
         }
     }
 });

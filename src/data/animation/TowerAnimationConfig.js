@@ -5,7 +5,8 @@ let TowerAnimationConfig = {
         level: {
             A: {
                 // "ATTACK_270", "ATTACK_0", "ATTACK_90", "ATTACK_180",
-                states: ["IDLE_0", "IDLE_25", "IDLE_50", "IDLE_75", "IDLE_90", "IDLE_115", "IDLE_140", "IDLE_165", "IDLE_180", "IDLE_205", "IDLE_230", "IDLE_255", "IDLE_270", "IDLE_295", "IDLE_320", "IDLE_345"],
+                states: ["IDLE_0", "IDLE_25", "IDLE_50", "IDLE_75", "IDLE_90", "IDLE_115", "IDLE_140", "IDLE_165", "IDLE_180", "IDLE_205", "IDLE_230", "IDLE_255", "IDLE_270", "IDLE_295", "IDLE_320", "IDLE_345",
+                    "ATTACK_0", "ATTACK_25", "ATTACK_50", "ATTACK_75", "ATTACK_90", "ATTACK_115", "ATTACK_140", "ATTACK_165", "ATTACK_180", "ATTACK_205", "ATTACK_230", "ATTACK_255", "ATTACK_270", "ATTACK_295", "ATTACK_320", "ATTACK_345"],
                 initState: "IDLE_0",
                 attackAnimationTime: 594,
                 shootAnimationTime: 33,
@@ -229,15 +230,15 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_cannon_attack_0_",
                             suffix: ".png",
-                            start: 60,
-                            end: 74,
+                            start: 36,
+                            end: 44,
                             time: 596,
                         },
                         weapon: {
                             prefix: "tower_cannon_attack_1_",
                             suffix: ".png",
-                            start: 60,
-                            end: 74,
+                            start: 36,
+                            end: 44,
                             time: 596,
                         },
                         sequence: ["IDLE_0"]
@@ -246,15 +247,15 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_cannon_attack_0_",
                             suffix: ".png",
-                            start: 75,
-                            end: 89,
+                            start: 45,
+                            end: 53,
                             time: 596,
                         },
                         weapon: {
                             prefix: "tower_cannon_attack_1_",
                             suffix: ".png",
-                            start: 75,
-                            end: 89,
+                            start: 45,
+                            end: 53,
                             time: 596,
                         },
                         sequence: ["IDLE_25"]
@@ -263,15 +264,15 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_cannon_attack_0_",
                             suffix: ".png",
-                            start: 90,
-                            end: 104,
+                            start: 54,
+                            end: 62,
                             time: 596,
                         },
                         weapon: {
                             prefix: "tower_cannon_attack_1_",
                             suffix: ".png",
-                            start: 90,
-                            end: 104,
+                            start: 54,
+                            end: 62,
                             time: 596,
                         },
                         sequence: ["IDLE_50"]
@@ -280,15 +281,15 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_cannon_attack_0_",
                             suffix: ".png",
-                            start: 91,
-                            end: 119,
+                            start: 63,
+                            end: 71,
                             time: 596,
                         },
                         weapon: {
                             prefix: "tower_cannon_attack_1_",
                             suffix: ".png",
-                            start: 91,
-                            end: 119,
+                            start: 63,
+                            end: 71,
                             time: 596,
                         },
                         sequence: ["IDLE_75"]
@@ -297,15 +298,15 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_cannon_attack_0_",
                             suffix: ".png",
-                            start: 120,
-                            end: 134,
+                            start: 72,
+                            end: 80,
                             time: 596,
                         },
                         weapon: {
                             prefix: "tower_cannon_attack_1_",
                             suffix: ".png",
-                            start: 120,
-                            end: 134,
+                            start: 72,
+                            end: 80,
                             time: 596,
                         },
                         sequence: ["IDLE_90"]
@@ -393,14 +394,14 @@ let TowerAnimationConfig = {
                             prefix: "tower_cannon_attack_0_",
                             suffix: ".png",
                             start: 0,
-                            end: 14,
+                            end: 8,
                             time: 596,
                         },
                         weapon: {
                             prefix: "tower_cannon_attack_1_",
                             suffix: ".png",
                             start: 0,
-                            end: 14,
+                            end: 8,
                             time: 596,
                         },
                         sequence: ["IDLE_270"]
@@ -409,15 +410,15 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_cannon_attack_0_",
                             suffix: ".png",
-                            start: 15,
-                            end: 29,
+                            start: 9,
+                            end: 17,
                             time: 596,
                         },
                         weapon: {
                             prefix: "tower_cannon_attack_1_",
                             suffix: ".png",
-                            start: 15,
-                            end: 29,
+                            start: 9,
+                            end: 17,
                             time: 596,
                         },
                         sequence: ["IDLE_295"]
@@ -426,15 +427,15 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_cannon_attack_0_",
                             suffix: ".png",
-                            start: 30,
-                            end: 44,
+                            start: 18,
+                            end: 26,
                             time: 596,
                         },
                         weapon: {
                             prefix: "tower_cannon_attack_1_",
                             suffix: ".png",
-                            start: 30,
-                            end: 44,
+                            start: 18,
+                            end: 26,
                             time: 596,
                         },
                         sequence: ["IDLE_320"]
@@ -443,15 +444,15 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_cannon_attack_0_",
                             suffix: ".png",
-                            start: 45,
-                            end: 59,
+                            start: 27,
+                            end: 35,
                             time: 596,
                         },
                         weapon: {
                             prefix: "tower_cannon_attack_1_",
                             suffix: ".png",
-                            start: 45,
-                            end: 59,
+                            start: 27,
+                            end: 35,
                             time: 596,
                         },
                         sequence: ["IDLE_345"]
