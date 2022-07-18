@@ -29,6 +29,12 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.GET_CELL_OBJECT:
                 this._handleGetCellObject(cmd, packet);
                 break;
+            case gv.CMD.UPGRADE_TOWER:
+                this._handleUpgradeTower(cmd, packet);
+                break;
+            case gv.CMD.OPPONENT_UPGRADE_TOWER:
+                this._handleOpponentUpgradeTower(cmd, packet);
+                break;
         }
     },
 
@@ -111,8 +117,9 @@ BattleNetwork.Connector = cc.Class.extend({
 
     _handleOpponentPutTower: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 80] received put tower packet: ' + JSON.stringify(packet));
-        let pixelPos = Utils.tile2Pixel(packet.tileX, packet.tileY, GameConfig.OPPONENT);
-        OpponentAction.getInstance().putCardAt(pixelPos, packet.towerId);
+        // let pixelPos = Utils.tile2Pixel(packet.tileX, packet.tileY, GameConfig.OPPONENT);
+        let tilePos = cc.p(packet.tileX, packet.tileY);
+        OpponentAction.getInstance().buildTower(packet.towerId, tilePos);
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentMap = battleData.getMapObject(GameConfig.OPPONENT);
         let cellObject = opponentMap[packet.tileX][packet.tileY];
@@ -138,5 +145,23 @@ BattleNetwork.Connector = cc.Class.extend({
 
     _handleGetCellObject: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 113] received get cell object packet: ' + JSON.stringify(packet));
+    },
+
+    _handleUpgradeTower: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 118] received upgrade tower packet: ' + JSON.stringify(packet));
+        let battleData = BattleManager.getInstance().getBattleData();
+        let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
+        let cellObject = playerObjectMap[packet.tileX][packet.tileY];
+        cellObject.tower.level = packet.towerLevel;
+        cc.log('[BattleNetwork.js line 153] cellObject: ' + JSON.stringify(playerObjectMap[packet.tileX][packet.tileY]));
+    },
+
+    _handleOpponentUpgradeTower: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 120] received upgrade tower packet: ' + JSON.stringify(packet));
+        let battleData = BattleManager.getInstance().getBattleData();
+        let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
+        let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
+        cellObject.tower.level = packet.towerLevel;
+        cc.log('[BattleNetwork.js line 165] cellObject: ' + JSON.stringify(opponentObjectMap[packet.tileX][packet.tileY]));
     }
 })

@@ -154,30 +154,27 @@ let BattleLayer = cc.Layer.extend({
             }
         }
 
-        switch (type) {
-            case GameConfig.ENTITY_ID.CANNON_TOWER:
-                EntityFactory.createCannonOwlTower(tilePos, mode);
-                break;
-            case GameConfig.ENTITY_ID.FROG_TOWER:
-                EntityFactory.createBoomerangFrogTower(tilePos, mode);
-                break;
-            case GameConfig.ENTITY_ID.BEAR_TOWER:
-                EntityFactory.createIceGunPolarBearTower(tilePos, mode);
-                break;
-            case GameConfig.ENTITY_ID.FIRE_SPELL:
-                SpellFactory.createFireSpell(pixelPos, mode);
-                break;
-            case GameConfig.ENTITY_ID.FROZEN_SPELL:
-                SpellFactory.createFrozenSpell(pixelPos, mode);
-                break;
-            default:
-                return;
+        if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
+            this.dropSpell(type, pixelPos, mode)
+        } else {
+
+            // EventDispatcher.getInstance()
+            //     .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
+            cc.log("should put upgrade tower: " + this.shouldUpgradeTower(type, tilePos));
+            if (this.shouldUpgradeTower(type, tilePos)) {
+                EventDispatcher.getInstance()
+                    .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+            } else if (this.shouldPutNewTower(tilePos)) {
+                this.buildTower(type, tilePos, mode);
+                EventDispatcher.getInstance()
+                    .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
+            }
+
         }
 
         if (type !== GameConfig.ENTITY_ID.FIRE_SPELL
             && type !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
-            // EventDispatcher.getInstance()
-            //     .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
+
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()
             //         .dispatchEvent(EventType.UPGRADE_TOWER, {cardId: type, pos: tilePos});
@@ -189,9 +186,37 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
+    buildTower: function(towerId, tilePos, mode) {
+        switch (towerId) {
+            case GameConfig.ENTITY_ID.CANNON_TOWER:
+                EntityFactory.createCannonOwlTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.FROG_TOWER:
+                EntityFactory.createBoomerangFrogTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.BEAR_TOWER:
+                EntityFactory.createIceGunPolarBearTower(tilePos, mode);
+                break;
+
+            default:
+                return;
+        }
+    },
+
+    dropSpell: function(spellId, pixelPos, mode) {
+        switch (spellId) {
+            case GameConfig.ENTITY_ID.FIRE_SPELL:
+                SpellFactory.createFireSpell(pixelPos, mode);
+                break;
+            case GameConfig.ENTITY_ID.FROZEN_SPELL:
+                SpellFactory.createFrozenSpell(pixelPos, mode);
+                break;
+        }
+    },
+
     shouldUpgradeTower: function (towerId, tilePos) {
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
-        if (cellObject.type === ObjectInCellType.TOWER && cellObject.tower !== null) {
+        if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null) {
             let tower = cellObject.tower;
             // let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
             // let card = inventoryContext.getCardById(towerId);
@@ -205,7 +230,7 @@ let BattleLayer = cc.Layer.extend({
 
     shouldPutNewTower: function (tilePos) {
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
-        return cellObject.type === ObjectInCellType.NONE;
+        return cellObject.objectInCellType === ObjectInCellType.NONE;
     },
 
     _initTower: function () {
@@ -227,9 +252,9 @@ let BattleLayer = cc.Layer.extend({
                     let cardId = BattleManager.getInstance().getBattleLayer().selectedCard;
                     BattleManager.getInstance().getBattleLayer()
                         .putCardAt(BattleManager.getInstance().getBattleLayer().selectedCard, pixelInMap, GameConfig.PLAYER);
-                    // FIXME: test will delete later
-                    cc.log("[GameLayer.js line 134] tilePos: " + JSON.stringify(tilePos));
-                    BattleNetwork.connector.sendPutTower(cardId, tilePos);
+                    // // FIXME: test will delete later
+                    // cc.log("[GameLayer.js line 134] tilePos: " + JSON.stringify(tilePos));
+                    // BattleNetwork.connector.sendPutTower(cardId, tilePos);
                 }
             }
         }), this.uiLayer)

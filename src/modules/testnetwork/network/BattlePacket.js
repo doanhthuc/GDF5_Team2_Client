@@ -6,6 +6,7 @@ gv.CMD.OPPONENT_PUT_TOWER = 5003;
 gv.CMD.GET_BATTLE_MAP_OBJECT = 5004;
 gv.CMD.GET_CELL_OBJECT = 5005;
 gv.CMD.UPGRADE_TOWER = 5006;
+gv.CMD.OPPONENT_UPGRADE_TOWER = 5007;
 
 let BattleNetwork = BattleNetwork || {};
 
@@ -155,6 +156,19 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
 });
 
 BattleNetwork.packetMap[gv.CMD.UPGRADE_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.towerId = this.getInt();
+        this.towerLevel = this.getInt();
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+})
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_UPGRADE_TOWER] = fr.InPacket.extend({
     ctor: function () {
         this._super();
     },

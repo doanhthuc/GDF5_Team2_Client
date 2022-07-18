@@ -7,6 +7,11 @@ let OpponentAction = cc.Class.extend({
         cc.log('[OpponentAction line 8] putCardAt: '  + JSON.stringify(pixelPos) + '  towerId: ' + towerType);
         BattleManager.getInstance().getBattleLayer().putCardAt(towerType, pixelPos, GameConfig.OPPONENT);
     },
+
+    buildTower: function (towerId, tilePos) {
+        cc.log('[OpponentAction line 12] buildTower: '  + JSON.stringify(tilePos) + '  towerId: ' + towerId);
+        BattleManager.getInstance().getBattleLayer().buildTower(towerId, tilePos, GameConfig.OPPONENT);
+    }
 });
 
 let _instanceBuilder = (function () {
