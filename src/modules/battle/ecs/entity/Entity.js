@@ -23,9 +23,13 @@ let EntityECS = cc.Class.extend({
     },
 
     removeComponent: function (componentOrCls) {
-        ComponentManager.getInstance().remove(this.components[componentOrCls.typeID]);
-        delete this.components[componentOrCls.typeID];
-        this.bitmask = this.bitmask & (~(1 << componentOrCls.typeID));
+        let component = this.components[componentOrCls.typeID];
+        if (component) {
+            ComponentManager.getInstance().remove(component);
+            delete this.components[componentOrCls.typeID];
+            this.bitmask = this.bitmask & (~(1 << componentOrCls.typeID));
+        }
+
     },
 
     getComponent: function (ComponentCls) {

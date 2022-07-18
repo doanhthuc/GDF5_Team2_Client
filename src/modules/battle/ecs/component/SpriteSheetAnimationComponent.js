@@ -3,6 +3,7 @@ let SpriteSheetAnimationComponent = Component.extend({
     typeID: GameConfig.COMPONENT_ID.SPRITE_SHEET,
 
     ctor: function (config) {
+        this._super();
         this.currentState = config.initState;
         this.currentStateIsRendered = false;
         this.animationMap = {

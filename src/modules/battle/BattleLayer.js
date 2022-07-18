@@ -144,22 +144,26 @@ let BattleLayer = cc.Layer.extend({
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
 
         // FIXME: reduce if statement
-        if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
+        if (ValidatorECS.isSpell(type)) {
             if (!Utils.isPixelPositionInMap(pixelPos, mode)) {
                 cc.warn("put spell at pixel pos = " + JSON.stringify(pixelPos) + " is invalid")
                 return;
             }
-        } else {
+        } else if (ValidatorECS.isTower(type)) {
             if (!Utils.validateTilePos(tilePos)) {
                 return;
             }
 
-            let xMap = GameConfig.MAP_HEIGH - 1 - tilePos.y;
-            let yMap = tilePos.x;
+            let row = GameConfig.MAP_HEIGH - 1 - tilePos.y;
+            let col = tilePos.x;
             let map = this.battleData.getMap(mode);
-            if (map[xMap][yMap] === GameConfig.MAP.TREE || map[xMap][yMap] === GameConfig.MAP.HOLE) {
+            if (map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
+            || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
+            || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
                 return;
             }
+        } else {
+            throw new Error("Type is invalid");
         }
 
         switch (type) {
@@ -178,12 +182,14 @@ let BattleLayer = cc.Layer.extend({
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
                 SpellFactory.createFrozenSpell(pixelPos, mode);
                 break;
+            case GameConfig.ENTITY_ID.TRAP:
+                SpellFactory.createTrap(tilePos, mode);
+                break;
             default:
                 return;
         }
 
-        if (type !== GameConfig.ENTITY_ID.FIRE_SPELL
-            && type !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
+        if (ValidatorECS.isTower(type)) {
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.PUT_NEW_TOWER, {pos: tilePos, mode: mode});
         }
@@ -247,8 +253,10 @@ let BattleLayer = cc.Layer.extend({
     },
 
     _prefetchAssetGame: function () {
+        // FIXME: hardcode, remove string to constant
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-0.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-1.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
     },
 
     _clearAsset: function () {
