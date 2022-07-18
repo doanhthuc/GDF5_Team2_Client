@@ -60,13 +60,14 @@ let BattleLayer = cc.Layer.extend({
         this.collisionSystem.start(dt);
         this.effectSystem.start(dt);
         this.pathSystem.start(dt);
+        this.spriteSheetAnimationSystem.start(dt);
         this.spellSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
         this.monsterSystem.start(dt);
         this.bulletSystem.start(dt);
         this.abilitySystem.start(dt);
         this.movementSystem.start(dt);
-        this.spriteSheetAnimationSystem.start(dt);
+
 
         if (GameConfig.DEBUG) {
             cc.warn("---------------------------------------")
@@ -112,9 +113,9 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
 
-        // EntityFactory.createNinjaMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createBatMonster(pixelPos, mode);
+        //EntityFactory.createNinjaMonster(pixelPos, mode);
+        //EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        //EntityFactory.createBatMonster(pixelPos, mode);
     },
 
     oneTimeBornMonster: function (tilePos, mode) {
@@ -124,9 +125,9 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        // EntityFactory.createSatyrBoss(pixelPos, mode);
+         EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createDarkGiantBoss(pixelPos,mode);
-        EntityFactory.createDemonTreeBoss(pixelPos,mode);
+        //EntityFactory.createDemonTreeBoss(pixelPos,mode);
     },
 
     /**
@@ -244,6 +245,7 @@ let BattleLayer = cc.Layer.extend({
     _prefetchAssetGame: function () {
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-0.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-1.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/swordsman.plist");
     },
 
     _clearAsset: function () {

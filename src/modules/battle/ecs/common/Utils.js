@@ -267,8 +267,8 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
     //     }
     // }
     let magicNumber = 23;
-    let moduleCellRange = 4;
-    let cellBound = 4;
+    let moduleCellRange = 5;
+    let cellBound = 3;
     for (let i = 0; i < tileArr.length - 1; i++) {
         let direction;
         if (i === 0) {

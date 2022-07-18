@@ -3,8 +3,9 @@ let SpriteSheetAnimationComponent = Component.extend({
     typeID: GameConfig.COMPONENT_ID.SPRITE_SHEET,
 
     ctor: function (config) {
-        this.currentState = config.initState;
-        this.currentStateIsRendered = false;
+        this._super();
+        this._currentState = config.initState;
+        this._currentStateIsRendered = false;
         this.animationMap = {
             state: {
                 spriteName1: {action: null, flipX: true},
@@ -13,7 +14,9 @@ let SpriteSheetAnimationComponent = Component.extend({
         };
         this._constructAnimation(config);
     },
-
+    getCurrentState: function () {
+        return this._currentState;
+    },
     reset: function () {
 
     },
@@ -22,7 +25,13 @@ let SpriteSheetAnimationComponent = Component.extend({
 
     },
 
+    changeState: function (newState) {
+        this._currentState = newState;
+        this._currentStateIsRendered = false;
+    },
+
     _constructAnimation: function (config) {
+
         for (let state of config.states) {
             for (let spriteName of Object.keys(config.animation[state])) {
                 let animFrames = [];
@@ -39,6 +48,7 @@ let SpriteSheetAnimationComponent = Component.extend({
                     prefix = config.animation[flipState][spriteName].prefix;
                     suffix = config.animation[flipState][spriteName].suffix;
                 }
+                //cc.log(JSON.stringify(config.animation))
 
                 for (let i = start; i <= end; i++) {
                     let fileName = prefix + (i < 10 ? '0' + i : i) + suffix;
@@ -56,6 +66,7 @@ let SpriteSheetAnimationComponent = Component.extend({
                 this.animationMap[state][spriteName] = {animation: animation, flipX: flipX};
             }
         }
+
     },
 
 });
