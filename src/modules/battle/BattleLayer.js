@@ -168,10 +168,6 @@ let BattleLayer = cc.Layer.extend({
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
             this.dropSpell(type, pixelPos, mode)
         } else {
-
-            // EventDispatcher.getInstance()
-            //     .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
-            cc.log("should put upgrade tower: " + this.shouldUpgradeTower(type, tilePos));
             if (this.shouldUpgradeTower(type, tilePos)) {
                 EventDispatcher.getInstance()
                     .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
@@ -181,18 +177,6 @@ let BattleLayer = cc.Layer.extend({
                     .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
             }
 
-        }
-
-        if (type !== GameConfig.ENTITY_ID.FIRE_SPELL
-            && type !== GameConfig.ENTITY_ID.FROZEN_SPELL) {
-
-            // if (this.shouldUpgradeTower(type, tilePos)) {
-            //     EventDispatcher.getInstance()
-            //         .dispatchEvent(EventType.UPGRADE_TOWER, {cardId: type, pos: tilePos});
-            // } else if (this.shouldPutNewTower(tilePos)) {
-            //     EventDispatcher.getInstance()
-            //         .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
-            // }
         }
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
@@ -229,12 +213,12 @@ let BattleLayer = cc.Layer.extend({
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
         if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null) {
             let tower = cellObject.tower;
-            // let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
-            // let card = inventoryContext.getCardById(towerId);
-            // if (card && card.cardLevel > tower.level) {
-            //         return true;
-            // }
-            return true;
+            let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
+            let card = inventoryContext.getCardById(towerId);
+            if (card && card.cardLevel > tower.level) {
+                    return true;
+            }
+            // return true;
         }
         return false;
     },
@@ -263,9 +247,6 @@ let BattleLayer = cc.Layer.extend({
                     let cardId = BattleManager.getInstance().getBattleLayer().selectedCard;
                     BattleManager.getInstance().getBattleLayer()
                         .putCardAt(BattleManager.getInstance().getBattleLayer().selectedCard, pixelInMap, GameConfig.PLAYER);
-                    // // FIXME: test will delete later
-                    // cc.log("[GameLayer.js line 134] tilePos: " + JSON.stringify(tilePos));
-                    // BattleNetwork.connector.sendPutTower(cardId, tilePos);
                 }
             }
         }), this.uiLayer)
