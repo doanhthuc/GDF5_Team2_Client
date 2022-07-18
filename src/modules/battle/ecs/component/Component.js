@@ -3,7 +3,7 @@ let Component = cc.Class.extend({
     typeID: 0,
 
     ctor: function () {
-        this.id = Utils.UUID.genInstanceID();
+        this.id = UUIDGeneratorECS.getComponentID();
         this._active = true;
     },
 

@@ -37,7 +37,10 @@ EventDispatcher.getInstance()
                         if (path.length > 0) {
                             // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
                             // newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
-                            let newPath = Utils.tileArray2PixelArray(path, currentMode);
+                            let newPath = Utils.tileArray2PixelCellArray(path, currentMode);
+                            newPath = newPath.slice(1, newPath.length);
+                            newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
+                            //cc.log(JSON.stringify(newPath))
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
                         }
