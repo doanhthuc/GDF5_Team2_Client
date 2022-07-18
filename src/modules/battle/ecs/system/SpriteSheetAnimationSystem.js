@@ -22,7 +22,11 @@ let SpriteSheetAnimationSystem = System.extend({
                     let sprite = appearanceComponent.sprite.getChildByName(spriteName);
                     if (sprite) {
                         sprite.stopAllActions();
-                        sprite.runAction(cc.repeatForever(cc.animate(stateAnim[spriteName].animation)));
+                        let actionArr = [];
+                        for (let animation of stateAnim[spriteName].animations) {
+                            actionArr.push(cc.animate(animation));
+                        }
+                        sprite.runAction(cc.sequence(...actionArr));
                         if (stateAnim[spriteName].flipX) {
                             sprite.setFlippedX(true);
                         } else {
