@@ -14,7 +14,6 @@ let SpriteSheetAnimationSystem = System.extend({
         for (let entity of entityList) {
             let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
             if (spriteComponent._currentStateIsRendered === false) {
-                cc.log("SpriteSheet ChangeAnimation")
                 let appearanceComponent = entity.getComponent(AppearanceComponent);
                 let stateAnim = spriteComponent.animationMap[spriteComponent._currentState];
                 for (let spriteName of Object.keys(stateAnim)) {

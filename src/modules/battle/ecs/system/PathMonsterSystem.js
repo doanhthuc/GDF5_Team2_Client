@@ -40,7 +40,7 @@ let PathMonsterSystem = System.extend({
             //             }
             //         }
             //     }
-            if (currentPathIdx < path.length - 1) {
+            if (currentPathIdx <= path.length - 1) {
                 let currentPos = {x: positionComponent.x, y: positionComponent.y};
                 let nextPos = path[currentPathIdx];
                 let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
@@ -51,17 +51,17 @@ let PathMonsterSystem = System.extend({
                 let Xa = positionComponent.x, Ya = positionComponent.y;
                 let signX = Math.sign(velocityComponent.speedX), signY = Math.sign(velocityComponent.speedY);
                 //cc.log(currentPos.x + " " + currentPos.y + " " + nextPos.x + " " + nextPos.y);
-                if (this._checkNextPath(currentPos, nextPos)) {
-                    pathComponent.currentPathIdx++;
-                    if (entity._hasComponent(SpriteSheetAnimationComponent)) {
-                        let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
-                        let state = this._getMovingDirection(entity);
-                        if (state != spriteComponent.getCurrentState()) {
-                            spriteComponent.changeState(state);
-                            cc.log(spriteComponent.getCurrentState())
-                        }
+                if (entity._hasComponent(SpriteSheetAnimationComponent)) {
+                    let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
+                    let state = this._getMovingDirection(entity);
+                    if (state != spriteComponent.getCurrentState()) {
+                        spriteComponent.changeState(state);
                     }
                 }
+                if (this._checkNextPath(currentPos, nextPos) && pathComponent.currentPathIdx != path.length - 1) {
+                    pathComponent.currentPathIdx++;
+                }
+
             }
         }
     },
@@ -76,7 +76,7 @@ let PathMonsterSystem = System.extend({
             x: path[currentPathIdx].x,
             y: path[currentPathIdx].y
         });
-        cc.log(positionComponent.x + " " + positionComponent.y + " " + path[currentPathIdx].x + " " + path[currentPathIdx].y + " "+ movingDeg);
+        //cc.log(positionComponent.x + " " + positionComponent.y + " " + path[currentPathIdx].x + " " + path[currentPathIdx].y + " "+ movingDeg);
         let directionDegree = new Map([[0, "MOVE_RIGHT"], [45, "MOVE_RIGHT_UP"],
             [90, "MOVE_UP"], [135, "MOVE_LEFT_UP"],
             [180, "MOVE_LEFT"], [225, "MOVE_LEFT_DOWN"],
@@ -89,6 +89,8 @@ let PathMonsterSystem = System.extend({
                 minDeg = key;
             }
         }
+        //cc.log(JSON.stringify(Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode)));
+        //cc.log(movingDeg + " " + directionDegree.get(minDeg));
         return directionDegree.get(minDeg);
     },
     _checkNextPath: function (currentPos, nextPos) {

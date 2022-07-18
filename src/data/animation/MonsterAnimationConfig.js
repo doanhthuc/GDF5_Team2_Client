@@ -52,7 +52,7 @@ let MonsterAnimationConfig = {
             MOVE_LEFT_DOWN: {
                 monster: {
                     flipX: true,
-                    flipState: "MOVE_RIGHT_UP"
+                    flipState: "MOVE_RIGHT_DOWN"
                 }
             },
             MOVE_LEFT_UP: {
