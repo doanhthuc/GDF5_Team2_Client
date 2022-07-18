@@ -23,8 +23,14 @@ let SpriteSheetAnimationComponent = Component.extend({
 
     },
 
+    changeCurrentState: function (newState) {
+        this.currentState = newState;
+        this.currentStateIsRendered = false;
+    },
+
     _constructAnimation: function (config) {
         for (let state of config.states) {
+            if (!config.animation[state]) continue;
             for (let spriteName of Object.keys(config.animation[state])) {
                 let animFrames = [];
                 let flipX = config.animation[state][spriteName].flipX;
@@ -32,6 +38,7 @@ let SpriteSheetAnimationComponent = Component.extend({
                 let end = config.animation[state][spriteName].end;
                 let prefix = config.animation[state][spriteName].prefix;
                 let suffix = config.animation[state][spriteName].suffix;
+                let time = config.animation[state][spriteName].time
 
                 if (flipX) {
                     let flipState = config.animation[state][spriteName].flipState;
@@ -39,17 +46,21 @@ let SpriteSheetAnimationComponent = Component.extend({
                     end = config.animation[flipState][spriteName].end;
                     prefix = config.animation[flipState][spriteName].prefix;
                     suffix = config.animation[flipState][spriteName].suffix;
+                    time = config.animation[flipState][spriteName].time
                 }
 
                 for (let i = start; i <= end; i++) {
-                    let fileName = prefix + (i < 10 ? '0' + i : i) + suffix;
+                    let numberDigits = i.toString().length;
+                    let fileName = prefix + ("0".repeat(4 - numberDigits) + i) + suffix;
+                    cc.log(fileName);
                     let sprite = cc.spriteFrameCache.getSpriteFrame(fileName);
                     animFrames.push(sprite);
                 }
 
                 let animation = new cc.Animation(animFrames);
                 // animation.setRestoreOriginalFrame(true);
-                animation.setDelayPerUnit(1 / animFrames.length);
+                let delay = time || 1000;
+                animation.setDelayPerUnit(delay / 1000 / animFrames.length);
                 animation.retain();
                 if (!this.animationMap[state]) {
                     this.animationMap[state] = {};

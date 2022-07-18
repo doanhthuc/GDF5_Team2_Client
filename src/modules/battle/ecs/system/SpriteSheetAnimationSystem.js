@@ -25,6 +25,8 @@ let SpriteSheetAnimationSystem = System.extend({
                         sprite.runAction(cc.repeatForever(cc.animate(stateAnim[spriteName].animation)));
                         if (stateAnim[spriteName].flipX) {
                             sprite.setFlippedX(true);
+                        } else {
+                            sprite.setFlippedX(false);
                         }
                     }
                 }
