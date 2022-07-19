@@ -13,7 +13,6 @@ let MovementSystem = System.extend({
         for (let entity of entityList) {
             let positionComponent = entity.getComponent(PositionComponent);
             let velocityComponent = entity.getComponent(VelocityComponent);
-
             if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive()) {
                 let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
                     velocityComponent.originSpeed);

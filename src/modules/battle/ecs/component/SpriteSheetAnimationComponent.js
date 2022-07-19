@@ -67,6 +67,7 @@ let SpriteSheetAnimationComponent = Component.extend({
         for (let i = start; i <= end; i++) {
             let numberDigits = i.toString().length;
             let fileName = prefix + ("0".repeat(4 - numberDigits) + i) + suffix;
+            //cc.log(fileName)
             let sprite = cc.spriteFrameCache.getSpriteFrame(fileName);
             animFrames.push(sprite);
         }
