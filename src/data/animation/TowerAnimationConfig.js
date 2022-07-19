@@ -18,6 +18,7 @@ let TowerAnimationConfig = {
                             start: 60,
                             end: 74,
                             time: 1000,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
@@ -25,6 +26,7 @@ let TowerAnimationConfig = {
                             start: 60,
                             end: 74,
                             time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_25: {
@@ -34,6 +36,7 @@ let TowerAnimationConfig = {
                             start: 75,
                             end: 89,
                             time: 1000,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
@@ -41,6 +44,7 @@ let TowerAnimationConfig = {
                             start: 75,
                             end: 89,
                             time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_50: {
@@ -50,6 +54,7 @@ let TowerAnimationConfig = {
                             start: 90,
                             end: 104,
                             time: 1000,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
@@ -57,6 +62,7 @@ let TowerAnimationConfig = {
                             start: 90,
                             end: 104,
                             time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_75: {
@@ -66,6 +72,7 @@ let TowerAnimationConfig = {
                             start: 91,
                             end: 119,
                             time: 1000,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
@@ -73,6 +80,7 @@ let TowerAnimationConfig = {
                             start: 91,
                             end: 119,
                             time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_90: {
@@ -82,6 +90,7 @@ let TowerAnimationConfig = {
                             start: 120,
                             end: 134,
                             time: 1000,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
@@ -89,76 +98,91 @@ let TowerAnimationConfig = {
                             start: 120,
                             end: 134,
                             time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_115: {
                         tower: {
                             flipX: true,
-                            flipState: "IDLE_75"
+                            flipState: "IDLE_75",
+                            repeat: true,
                         },
                         weapon: {
                             flipX: true,
-                            flipState: "IDLE_75"
+                            flipState: "IDLE_75",
+                            repeat: true,
                         }
                     },
                     IDLE_140: {
                         tower: {
                             flipX: true,
-                            flipState: "IDLE_50"
+                            flipState: "IDLE_50",
+                            repeat: true,
                         },
                         weapon: {
                             flipX: true,
-                            flipState: "IDLE_50"
+                            flipState: "IDLE_50",
+                            repeat: true,
                         }
                     },
                     IDLE_165: {
                         tower: {
                             flipX: true,
-                            flipState: "IDLE_25"
+                            flipState: "IDLE_25",
+                            repeat: true,
                         },
                         weapon: {
                             flipX: true,
-                            flipState: "IDLE_25"
+                            flipState: "IDLE_25",
+                            repeat: true,
                         }
                     },
                     IDLE_180: {
                         tower: {
                             flipX: true,
-                            flipState: "IDLE_0"
+                            flipState: "IDLE_0",
+                            repeat: true,
                         },
                         weapon: {
                             flipX: true,
-                            flipState: "IDLE_0"
+                            flipState: "IDLE_0",
+                            repeat: true,
                         }
                     },
                     IDLE_205: {
                         tower: {
                             flipX: true,
-                            flipState: "IDLE_345"
+                            flipState: "IDLE_345",
+                            repeat: true,
                         },
                         weapon: {
                             flipX: true,
-                            flipState: "IDLE_345"
+                            flipState: "IDLE_345",
+                            repeat: true,
                         }
                     },
                     IDLE_230: {
                         tower: {
                             flipX: true,
-                            flipState: "IDLE_320"
+                            flipState: "IDLE_320",
+                            repeat: true,
                         },
                         weapon: {
                             flipX: true,
-                            flipState: "IDLE_320"
+                            flipState: "IDLE_320",
+                            repeat: true,
                         }
                     },
                     IDLE_255: {
                         tower: {
                             flipX: true,
-                            flipState: "IDLE_295"
+                            flipState: "IDLE_295",
+                            repeat: true,
                         },
                         weapon: {
                             flipX: true,
-                            flipState: "IDLE_295"
+                            flipState: "IDLE_295",
+                            repeat: true,
                         }
                     },
                     IDLE_270: {
@@ -168,6 +192,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 14,
                             time: 1000,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
@@ -175,6 +200,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 14,
                             time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_295: {
@@ -184,6 +210,7 @@ let TowerAnimationConfig = {
                             start: 15,
                             end: 29,
                             time: 1000,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
@@ -191,6 +218,7 @@ let TowerAnimationConfig = {
                             start: 15,
                             end: 29,
                             time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_320: {
@@ -200,6 +228,7 @@ let TowerAnimationConfig = {
                             start: 30,
                             end: 44,
                             time: 1000,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
@@ -207,6 +236,7 @@ let TowerAnimationConfig = {
                             start: 30,
                             end: 44,
                             time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_345: {
@@ -216,6 +246,7 @@ let TowerAnimationConfig = {
                             start: 45,
                             end: 59,
                             time: 1000,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
@@ -223,6 +254,7 @@ let TowerAnimationConfig = {
                             start: 45,
                             end: 59,
                             time: 1000,
+                            repeat: true,
                         }
                     },
 

@@ -8,8 +8,8 @@ let SpriteSheetAnimationComponent = Component.extend({
         this.currentStateIsRendered = false;
         this.animationMap = {
             state: {
-                spriteName1: {animations: null, flipX: true},
-                spriteName2: {animations: null, flipX: true}
+                spriteName1: {animation: null, flipX: true},
+                spriteName2: {animation: null, flipX: true}
             }
         };
         this._constructAnimation(config);
@@ -52,6 +52,7 @@ let SpriteSheetAnimationComponent = Component.extend({
         let suffix = config.animation[state][spriteName].suffix;
         let time = config.animation[state][spriteName].time
         let sequenceAnimName = config.animation[state].sequence;
+        let repeat = config.animation[state][spriteName].repeat;
 
         if (flipX) {
             let flipState = config.animation[state][spriteName].flipState;
@@ -75,12 +76,12 @@ let SpriteSheetAnimationComponent = Component.extend({
         animation.setDelayPerUnit(delay / 1000 / animFrames.length);
         animation.retain();
 
-        let animArr = [animation];
+        let animArr = [];
         if (sequenceAnimName) {
-            animArr.push(...this._buildConfig(config, sequenceAnimName[0], spriteName).animations);
+            animArr.push(this._buildConfig(config, sequenceAnimName[0], spriteName));
         }
 
-        return {animations: animArr, flipX: flipX};
+        return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat};
     }
 });
 SpriteSheetAnimationComponent.typeID = GameConfig.COMPONENT_ID.SPRITE_SHEET;
