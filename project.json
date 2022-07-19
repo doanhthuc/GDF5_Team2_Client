@@ -50,6 +50,7 @@
         "src/**/*.js"
     ],
     "jsList": [
+        "src/data/animation/BulletAnimationConfig.js",
         "src/data/animation/MonsterAnimationConfig.js",
         "src/data/animation/PotionAnimationConfig.js",
         "src/data/animation/TowerAnimationConfig.js",
@@ -240,6 +241,7 @@
         "src/modules/model/User.js",
         "src/modules/notify/Notify.js",
         "src/modules/shop/BuyCardPopup.js",
+        "src/modules/shop/BuyGoldAnimationNode.js",
         "src/modules/shop/BuyGoldPopup.js",
         "src/modules/shop/CardUpgradeProgress.js",
         "src/modules/shop/ItemDefine.js",

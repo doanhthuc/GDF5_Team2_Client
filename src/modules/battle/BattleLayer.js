@@ -249,11 +249,11 @@ let BattleLayer = cc.Layer.extend({
     },
 
     putTowerCardIntoMap: function (type, tilePos, mode) {
-        // if (this.shouldUpgradeTower(type, tilePos)) {
-        //     EventDispatcher.getInstance()
-        //         .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
-        //     return;
-        // }
+        if (this.shouldUpgradeTower(type, tilePos)) {
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+            return;
+        }
         if (this.shouldPutNewTower(tilePos)) {
             this.buildTower(type, tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
@@ -271,6 +271,9 @@ let BattleLayer = cc.Layer.extend({
             case GameConfig.ENTITY_ID.BEAR_TOWER:
                 EntityFactory.createIceGunPolarBearTower(tilePos, mode);
                 break;
+            case GameConfig.ENTITY_ID.BUNNY_TOWER:
+                EntityFactory.createBunnyOilGunTower(tilePos, mode);
+                break;
             default:
                 return;
         }
@@ -287,7 +290,7 @@ let BattleLayer = cc.Layer.extend({
                 SpellFactory.createFrozenSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.TRAP:
-                SpellFactory.createTrap(pixelPos, mode);
+                SpellFactory.createTrap(tilePos, mode);
                 break;
             default:
                 return;
@@ -373,6 +376,8 @@ let BattleLayer = cc.Layer.extend({
     _prefetchAssetGame: function () {
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/ice_gun.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/oil_gun.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/boomerang.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/swordsman.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/ninja.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/assassin.plist");
