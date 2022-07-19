@@ -3,6 +3,12 @@ gv.CMD.SEND_MATCHING = 8001;
 gv.CMD.SEND_CANCEL_MATCHING = 8002;
 gv.CMD.PUT_TOWER = 5002;
 gv.CMD.OPPONENT_PUT_TOWER = 5003;
+gv.CMD.GET_BATTLE_MAP_OBJECT = 5004;
+gv.CMD.GET_CELL_OBJECT = 5005;
+gv.CMD.UPGRADE_TOWER = 5006;
+gv.CMD.OPPONENT_UPGRADE_TOWER = 5007;
+gv.CMD.DROP_SPELL = 5008;
+gv.CMD.OPPONENT_DROP_SPELL = 5009;
 
 let BattleNetwork = BattleNetwork || {};
 
@@ -42,18 +48,49 @@ CMDPutTower = fr.OutPacket.extend({
         this.setCmdId(gv.CMD.PUT_TOWER);
     },
 
-    pack: function (roomId, towerId, tilePos, pixelPos) {
+    pack: function (roomId, towerId, tilePos) {
         this.packHeader();
         this.putInt(roomId);
         this.putInt(towerId);
-        // this.putInt(towerLevel);
         this.putInt(tilePos.x);
         this.putInt(tilePos.y);
+        this.updateSize();
+    }
+});
+
+CMDUpgradeTower = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.UPGRADE_TOWER);
+    },
+
+    pack: function (towerId, tilePos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(towerId);
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.updateSize();
+    }
+})
+
+CMDDropSpell = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.DROP_SPELL);
+    },
+
+    pack: function (spellId, pixelPos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(spellId);
         this.putDouble(pixelPos.x);
         this.putDouble(pixelPos.y);
         this.updateSize();
     }
-});
+})
 
 BattleNetwork.packetMap[gv.CMD.SEND_MATCHING] = fr.InPacket.extend({
     ctor: function () {
@@ -121,8 +158,6 @@ BattleNetwork.packetMap[gv.CMD.PUT_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.x = this.getInt();
         this.y = this.getInt();
-        this.pixelX = this.getDouble();
-        this.pixelY = this.getDouble();
     }
 })
 
@@ -136,5 +171,116 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.UPGRADE_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.towerId = this.getInt();
+        this.towerLevel = this.getInt();
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+})
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_UPGRADE_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.towerId = this.getInt();
+        this.towerLevel = this.getInt();
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+})
+
+BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.playerBattleMapObject = this._unpackMapObject();
+        this.opponentBattleMapObject = this._unpackMapObject();
+    },
+
+    _unpackMapObject: function () {
+        let mapHeight = this.getInt();
+        let mapWidth = this.getInt();
+        let mapObject = new Array(mapHeight);
+        for (let i = 0; i < mapHeight; i++) {
+            mapObject[i] = new Array(mapWidth);
+            for (let j = 0; j < mapWidth; j++) {
+                mapObject[i][j] = this._unpackCellObject();
+
+            }
+        }
+        return mapObject;
+    },
+
+    _unpackCellObject: function () {
+        let cellObject = {
+            tilePos: {
+                x: this.getInt(),
+                y: this.getInt()
+            },
+            buffCellType: this.getInt(),
+            objectInCellType: this.getInt(),
+        };
+        this._unpackObjectInCell(cellObject);
+        return cellObject;
+    },
+
+    _unpackObjectInCell: function (cellObject) {
+        switch (cellObject.objectInCellType) {
+            case ObjectInCellType.TREE:
+                cellObject.tree = {
+                    hp: this.getDouble()
+                }
+                break;
+            case ObjectInCellType.TOWER:
+                cellObject.tower = {
+                    id: this.getInt(),
+                    level: this.getInt(),
+                }
+                break;
+            case ObjectInCellType.PIT:
+                cellObject.pit = this.getInt();
+                break;
+            default:
+                break;
+        }
+    }
+})
+
+BattleNetwork.packetMap[gv.CMD.DROP_SPELL] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.spellId = this.getInt();
+        this.spellLevel = this.getInt();
+        this.pixelX = this.getDouble();
+        this.pixelY = this.getDouble();
+    }
+})
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_DROP_SPELL] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.spellId = this.getInt();
+        this.spellLevel = this.getInt();
+        this.pixelX = this.getDouble();
+        this.pixelY = this.getDouble();
     }
 });

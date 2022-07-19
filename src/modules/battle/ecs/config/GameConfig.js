@@ -2,7 +2,7 @@ let GameConfig = GameConfig || {};
 
 // 0: disable, 1: enable
 GameConfig.DEBUG = 0;
-
+GameConfig.NETWORK = 1;
 GameConfig.PLAYER = "player";
 GameConfig.OPPONENT = "opponent";
 
@@ -27,8 +27,14 @@ GameConfig.COMPONENT_ID = {
     UNDER_GROUND:18,
     SPAWN_MINION:19,
     HEALING_ABILITY:20,
+    SPRITE_SHEET: 21
 }
-
+GameConfig.MAP ={
+    NONE:0,
+    ATTACK_SPEED:1,
+    ATTACK_DAMAGE:2,
+    ATTACK_RANGE:3,
+}
 GameConfig.SYSTEM_ID = {
     MOVEMENT: 1,
     PATH_MONSTER: 2,
@@ -46,16 +52,15 @@ GameConfig.SYSTEM_ID = {
 }
 
 GameConfig.ENTITY_ID = {
-    SWORD_MAN: 1,
-    CANNON_TOWER: 2,
-    BULLET: 3,
+    CANNON_TOWER: 0,
+    FROG_TOWER: 2,
     BEAR_TOWER: 4,
-    FROG_TOWER: 5,
-    FIRE_SPELL: 6,
-    FROZEN_SPELL: 7,
-    TRAP_SPELL: 8,
-    SNAKE_TOWER: 9,
-    GOAT_TOWER: 10,
+    GOAT_TOWER: 5,
+    SNAKE_TOWER: 6,
+    FIRE_SPELL: 7,
+    FROZEN_SPELL: 8,
+    TRAP_SPELL: 9,
+
     ASSASSIN:11,
     BAT:12,
     GIANT:13,
@@ -64,6 +69,9 @@ GameConfig.ENTITY_ID = {
     DEMON_TREE_MINION:16,
     DARK_GIANT:17,
     SATYR:18,
+    SWORD_MAN: 19,
+
+    BULLET: 20,
 }
 
 GameConfig.GROUP_ID = {
@@ -73,6 +81,7 @@ GameConfig.GROUP_ID = {
     BULLET_ENTITY: [GameConfig.ENTITY_ID.BULLET],
     EFFECT_COMPONENT: [GameConfig.COMPONENT_ID.DAMAGE_EFFECT, GameConfig.COMPONENT_ID.SLOW_EFFECT, GameConfig.COMPONENT_ID.FROZEN_EFFECT],
     INFO_COMPONENT: [GameConfig.COMPONENT_ID.TOWER_INFO, GameConfig.COMPONENT_ID.MONSTER_INFO, GameConfig.COMPONENT_ID.BULLET_INFO],
+    SPELL_ENTITY: [GameConfig.ENTITY_ID.FIRE_SPELL, GameConfig.ENTITY_ID.FROZEN_SPELL, GameConfig.ENTITY_ID.TRAP]
 }
 
 GameConfig.TOWER_TARGET_STRATEGY = {
@@ -83,6 +92,7 @@ GameConfig.TOWER_TARGET_STRATEGY = {
 }
 
 GameConfig.HOUSE_POSITION = {x: 6, y: 0};
+GameConfig.MONSTER_BORN_POSITION = {x: 0, y: 4};
 GameConfig.TILE_WIDTH = 77;
 GameConfig.TILE_HEIGH = 77;
 GameConfig.MAP_WIDTH = 7;
@@ -90,12 +100,14 @@ GameConfig.MAP_HEIGH = 5;
 GameConfig.RIVER_MAP_HEIGH = 100;
 
 GameConfig.DIRECTION = {
-    BOTTOM: 2,
-    TOP: -2,
     RIGHT: 1,
     LEFT: -1,
-    RIGHT_TOP: -3,
-    RIGHT_BOTTOM: 3,
+    TOP: 3,
+    BOTTOM: -3,
+    RIGHT_TOP: 4,
+    RIGHT_BOTTOM: -2,
+    LEFT_TOP: 2,
+    LEFT_BOTTOM: -4,
 };
 
 GameConfig.BATTLE_RESULT = {

@@ -98,9 +98,10 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 30, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSwordmanNodeAnimation(), mode);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSwordmanNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 180);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 200);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.sword_man);
 
     // let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
     // let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
@@ -116,6 +117,7 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
+        .addComponent(spriteComponent)
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
@@ -132,9 +134,10 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 15, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 1.4 * GameConfig.TILE_WIDTH, 0);
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createAssassinNodeAnimation(), mode);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createAssassinNodeAnimation(), mode,pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 120);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.assasin);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
@@ -147,6 +150,7 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
+        .addComponent(spriteComponent)
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
@@ -162,15 +166,19 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "air", 25, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let velocityComponent = ComponentFactory.create(VelocityComponent, 1 * GameConfig.TILE_WIDTH, 0);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.7* GameConfig.TILE_WIDTH, 0.7*GameConfig.TILE_WIDTH);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createBatNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 140);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.bat);
+    let path=[]
 
-
-    let path = [{x: 0, y: 4}, {x: 4, y: 0}, {x: 6, y: 0}];
-    let pathComponent = ComponentFactory.create(PathComponent, path, mode);
-
+    // FIXME: PathMonsterSystem check currentPos and NextPos is same => velocity.SpeedX = 0
+    // path.push(Utils.tile2Pixel(0,4,mode));
+    path.push(Utils.tile2Pixel(2,2,mode));
+    path.push(Utils.tile2Pixel(4,0,mode));
+    path.push(Utils.tile2Pixel(6,0,mode));
+    let pathComponent = ComponentFactory.create(PathComponent, path, mode, false);
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(velocityComponent)
@@ -178,7 +186,7 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
-
+        .addComponent(spriteComponent)
     //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
     return entity;
 }
@@ -195,6 +203,7 @@ EntityFactory.createGiantMonster = function (pixelPos, mode) {
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createGiantNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 820);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.giant);
 
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
@@ -208,6 +217,7 @@ EntityFactory.createGiantMonster = function (pixelPos, mode) {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
+        .addComponent(spriteComponent)
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
@@ -228,6 +238,7 @@ EntityFactory.createNinjaMonster = function (pixelPos, mode) {
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 60);
     let underGroundComponent = ComponentFactory.create(UnderGroundComponent);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.ninja)
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
@@ -241,6 +252,7 @@ EntityFactory.createNinjaMonster = function (pixelPos, mode) {
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
         .addComponent(underGroundComponent)
+        .addComponent(spriteComponent)
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
@@ -263,6 +275,7 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 400);
     let spawnMinionComponent = ComponentFactory.create(SpawnMinionComponent, 2);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.demon_tree)
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
@@ -276,6 +289,7 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
         .addComponent(spawnMinionComponent)
+        .addComponent(spriteComponent)
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
@@ -295,6 +309,7 @@ EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createDemonTreeMinionNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 30);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.demon_tree_minion)
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
@@ -307,6 +322,7 @@ EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
+        .addComponent(spriteComponent)
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
@@ -326,6 +342,7 @@ EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createDarkGiantNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 800);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.dark_giant)
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
@@ -338,6 +355,7 @@ EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
+        .addComponent(spriteComponent)
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
@@ -357,6 +375,8 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createSatyrNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 400);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.satyr)
+
     let healingAbilityComponent = ComponentFactory.create(HealingAbility, 2 * GameConfig.TILE_WIDTH, 0.03);
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
@@ -369,7 +389,8 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
         .addComponent(pathComponent)
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
-        .addComponent(healingAbilityComponent);
+        .addComponent(healingAbilityComponent)
+        .addComponent(spriteComponent)
     // .addComponent(slowEffect)
     // .addComponent(frozenEffect)
 
@@ -394,16 +415,18 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     // let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 10);
     // let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 1.3);
 
-    // TODO: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
     let attackComponent = ComponentFactory.create(AttackComponent, 10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [])
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.cannon.level.A);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
+        .addComponent(spriteComponent);
+
     // .addComponent(buffAttackDamageEffect)
     // .addComponent(buffAttackSpeedEffect)
     return entity;
@@ -420,16 +443,19 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
 
     let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
     let damageEffect = ComponentFactory.create(DamageEffect, 8);
+
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "support", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, 1, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 3.4, 0, [frozenEffect])
+    let attackComponent = ComponentFactory.create(AttackComponent, 1, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 3.4, 0, [frozenEffect, damageEffect])
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bear.level.A);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
+        .addComponent(spriteComponent);
 
     return entity;
 }
@@ -480,6 +506,8 @@ function createSwordmanNodeAnimation() {
 
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 
@@ -499,6 +527,8 @@ function createAssassinNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 
@@ -518,6 +548,8 @@ function createBatNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 
@@ -537,6 +569,8 @@ function createGiantNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 
@@ -556,6 +590,8 @@ function createNinjaNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 
@@ -575,6 +611,8 @@ function createDemonTreeNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 
@@ -594,6 +632,8 @@ function createDemonTreeMinionNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 
@@ -613,6 +653,8 @@ function createDarkGiantNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 
@@ -632,6 +674,8 @@ function createSatyrNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
+    hpBarNode.node.x  = 0;
+    hpBarNode.node.y = 50;
     return node;
 }
 

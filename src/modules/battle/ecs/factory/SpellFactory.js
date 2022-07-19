@@ -9,7 +9,7 @@ SpellFactory.createFrozenSpell = function (pixelPos, mode) {
     let speed = Utils.calculateVelocityVector(cc.p(pixelPos.x, pixelPos.y + 100), pixelPos, 1000);
     let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
 
-    let damageEffect = ComponentFactory.create(DamageEffect, 50);
+    let damageEffect = ComponentFactory.create(DamageEffect, 10);
     let frozenEffect = ComponentFactory.create(FrozenEffect, 5);
 
     let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent,
@@ -45,4 +45,29 @@ SpellFactory.createFireSpell = function (pixelPos, mode) {
         .addComponent(spellInfoComponent);
 
     return entity;
+}
+
+SpellFactory.createTrap = function (tilePos, mode) {
+    let typeID = GameConfig.ENTITY_ID.TRAP;
+    let entity = EntityFactory._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createTrapNode(), mode, pixelPos);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, PotionAnimationConfig.trap);
+    let collisionComponent = ComponentFactory.create(CollisionComponent, GameConfig.TILE_WIDTH / 2, GameConfig.TILE_HEIGH / 2);
+
+    entity.addComponent(positionComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(spriteComponent)
+        .addComponent(collisionComponent);
+}
+
+function createTrapNode () {
+    let node = new cc.Node();
+    let trapSprite = new cc.Sprite();
+
+    node.addChild(trapSprite, 0, "trap");
+    return node;
 }
