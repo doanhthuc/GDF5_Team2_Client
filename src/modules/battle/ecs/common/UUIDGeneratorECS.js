@@ -8,7 +8,7 @@ let UUIDGeneratorECS = (function () {
             return ++_componentID;
         },
 
-        genInstanceID: function () {
+        genSystemID: function () {
             return ++_instanceID;
         },
 

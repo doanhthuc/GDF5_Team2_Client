@@ -23,8 +23,14 @@ let SpriteSheetAnimationSystem = System.extend({
                     if (sprite) {
                         sprite.stopAllActions();
                         let actionArr = [];
+                        let idx = 0;
                         for (let animation of stateAnim[spriteName].animations) {
-                            actionArr.push(cc.animate(animation));
+                            if (idx === 1) {
+                                actionArr.push(cc.repeatForever(cc.animate(animation)));
+                            } else {
+                                actionArr.push(cc.animate(animation));
+                            }
+                            idx++;
                         }
                         sprite.runAction(cc.sequence(...actionArr));
                         if (stateAnim[spriteName].flipX) {
