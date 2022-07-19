@@ -37,6 +37,7 @@ let AttackSystem = System.extend({
                         let monsterPos = targetMonster.getComponent(PositionComponent);
                         let towerPos = tower.getComponent(PositionComponent);
 
+                        this._changeTowerAnimation(tower, targetMonster);
                         EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode);
                         // reset count down time
                         attackComponent.countdown = attackComponent.speed;
@@ -55,7 +56,7 @@ let AttackSystem = System.extend({
     _findTargetMonsterByStrategy: function (strategy, monsterInAttackRange) {
         //check DarkGiantBoss
         for (let monster of monsterInAttackRange) {
-            if (monster.typeID == GameConfig.ENTITY_ID.DARK_GIANT) return monster;
+            if (monster.typeID === GameConfig.ENTITY_ID.DARK_GIANT) return monster;
         }
         for (let monster of monsterInAttackRange) {
             let underGroundComponent = monster.getComponent(UnderGroundComponent);
@@ -86,6 +87,26 @@ let AttackSystem = System.extend({
                 throw new Error("Invalid strategy");
         }
         return targetMonster;
+    },
+
+    _changeTowerAnimation: function (tower, monster) {
+        let monsterPos = monster.getComponent(PositionComponent);
+        let towerPos = tower.getComponent(PositionComponent)
+
+        let deg = Utils.calcSlopeOfLine({x: towerPos.x, y: towerPos.y}, {x: monsterPos.x, y: monsterPos.y});
+        let directionDegree = [0, 25, 50, 75, 90, 115, 140, 165, 180, 205, 230, 255, 270, 295, 320, 345];
+        let minValue = Math.abs(deg-directionDegree[0]), minIdx = 0;
+        for (let i = 1; i < directionDegree.length; i++) {
+            if (Math.abs(deg - directionDegree[i]) < minValue) {
+                minIdx = i;
+                minValue = Math.abs(deg - directionDegree[i]);
+            }
+        }
+
+        let spriteComponent = tower.getComponent(SpriteSheetAnimationComponent);
+        if (spriteComponent) {
+            spriteComponent.changeCurrentState("ATTACK_" + directionDegree[minIdx]);
+        }
     }
 });
 AttackSystem.typeID = GameConfig.SYSTEM_ID.ATTACK;

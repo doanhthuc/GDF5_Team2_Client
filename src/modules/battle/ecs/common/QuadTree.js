@@ -33,10 +33,10 @@ let QuadTree = cc.Class.extend({
         let x = this.boundingBox.x;
         let y = this.boundingBox.y;
 
-        this.nodes[QuadTree.BOTTOM_LEFT] = new QuadTree(this.level + 1, cc.rect(x, y, halfW, halfH));
-        this.nodes[QuadTree.BOTTOM_RIGHT]  = new QuadTree(this.level + 1, cc.rect(x + halfW, y, halfW, halfH));
-        this.nodes[QuadTree.TOP_LEFT] = new QuadTree(this.level + 1, cc.rect(x, y + halfH, halfW, halfH));
-        this.nodes[QuadTree.TOP_RIGHT] = new QuadTree(this.level + 1, cc.rect(x + halfW, y + halfH, halfW, halfH));
+        this.nodes[QuadTree.BOTTOM_LEFT] = new QuadTree(this.currentLevel + 1, cc.rect(x, y, halfW, halfH));
+        this.nodes[QuadTree.BOTTOM_RIGHT]  = new QuadTree(this.currentLevel + 1, cc.rect(x + halfW, y, halfW, halfH));
+        this.nodes[QuadTree.TOP_LEFT] = new QuadTree(this.currentLevel + 1, cc.rect(x, y + halfH, halfW, halfH));
+        this.nodes[QuadTree.TOP_RIGHT] = new QuadTree(this.currentLevel + 1, cc.rect(x + halfW, y + halfH, halfW, halfH));
     },
 
     getIndex: function (pRect) {

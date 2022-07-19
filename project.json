@@ -51,6 +51,7 @@
     ],
     "jsList": [
         "src/data/animation/MonsterAnimationConfig.js",
+        "src/data/animation/PotionAnimationConfig.js",
         "src/data/animation/TowerAnimationConfig.js",
         "src/data/battle-resource/BattleResource.js",
         "src/data/bottom-nav-resources/NavResources.js",

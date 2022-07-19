@@ -5,8 +5,7 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-
-        // BattleData.fakeData();
+        BattleData.fakeData();
         this.battleData = BattleManager.getInstance().getBattleData();
         // this.battleLoop = new BattleLoop();
 
@@ -114,9 +113,17 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
 
-        // EntityFactory.createNinjaMonster(pixelPos, mode);
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        //EntityFactory.createBatMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createBatMonster(pixelPos, mode);
+        // EntityFactory.createNinjaMonster(pixelPos, mode);
     },
 
     oneTimeBornMonster: function (tilePos, mode) {
@@ -141,22 +148,26 @@ let BattleLayer = cc.Layer.extend({
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
 
         // FIXME: reduce if statement
-        if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
+        if (ValidatorECS.isSpell(type)) {
             if (!Utils.isPixelPositionInMap(pixelPos, mode)) {
                 cc.warn("put spell at pixel pos = " + JSON.stringify(pixelPos) + " is invalid")
                 return;
             }
-        } else {
+        } else if (ValidatorECS.isTower(type)) {
             if (!Utils.validateTilePos(tilePos)) {
                 return;
             }
 
-            let xMap = GameConfig.MAP_HEIGH - 1 - tilePos.y;
-            let yMap = tilePos.x;
+            let row = GameConfig.MAP_HEIGH - 1 - tilePos.y;
+            let col = tilePos.x;
             let map = this.battleData.getMap(mode);
-            if (map[xMap][yMap] === GameConfig.MAP.TREE || map[xMap][yMap] === GameConfig.MAP.HOLE) {
+            if (map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
+            || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
+            || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
                 return;
             }
+        } else {
+            throw new Error("Type is invalid");
         }
 
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
@@ -214,6 +225,11 @@ let BattleLayer = cc.Layer.extend({
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
                 SpellFactory.createFrozenSpell(pixelPos, mode);
                 break;
+            case GameConfig.ENTITY_ID.TRAP:
+                SpellFactory.createTrap(tilePos, mode);
+                break;
+            default:
+                return;
         }
     },
 
@@ -251,8 +267,6 @@ let BattleLayer = cc.Layer.extend({
                 if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
                     let pixelPos = touches[0].getLocation();
                     let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
-                    let tilePos = Utils.pixel2Tile(pixelInMap.x, pixelInMap.y, GameConfig.PLAYER);
-                    let cardId = BattleManager.getInstance().getBattleLayer().selectedCard;
                     BattleManager.getInstance().getBattleLayer()
                         .putCardAt(BattleManager.getInstance().getBattleLayer().selectedCard, pixelInMap, GameConfig.PLAYER);
                 }
@@ -298,6 +312,7 @@ let BattleLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-0.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-1.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/swordsman.plist");
+		cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
     },
 
     _clearAsset: function () {

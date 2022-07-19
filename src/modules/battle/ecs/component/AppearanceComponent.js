@@ -4,29 +4,30 @@ let AppearanceComponent = Component.extend({
 
     ctor: function (sprite, mode, initPos) {
         this._super();
-        this.reset(sprite, mode);
+        this.reset(sprite, mode, initPos);
+        this.sprite.retain();
+    },
+
+    reset: function (sprite, mode, initPos) {
+        this.sprite = sprite;
+        this.zOrder = 100;
+        this.mode = mode;
+        this.sprite.setVisible(true);
 
         if (mode === GameConfig.PLAYER) {
             BattleManager.getInstance().getBattleLayer().getPlayerMapNode().addChild(this.sprite, this.zOrder);
         } else if (mode === GameConfig.OPPONENT) {
             BattleManager.getInstance().getBattleLayer().getOpponentMapNode().addChild(this.sprite, this.zOrder);
         }
+
         if (initPos) {
+            this.iniPos = initPos;
             this.sprite.setPosition(initPos);
         }
-        this.sprite.retain();
-    },
-
-    reset: function (sprite, mode) {
-        this.sprite = sprite;
-        this.zOrder = 100;
-        this.mode = mode;
-        // this.sprite.setVisible(true);
-        // this.sprite.retain();
     },
 
     clone: function () {
-        return new AppearanceComponent(this.sprite, this.mode);
+        return new AppearanceComponent(this.sprite, this.mode, this.iniPos);
     },
 });
 AppearanceComponent.typeID = GameConfig.COMPONENT_ID.APPEARANCE;

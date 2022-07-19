@@ -17,36 +17,11 @@ let CollisionSystem = System.extend({
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(CollisionComponent)
 
-        // cc.log("- Collision components = " + entityList.length);
         if (GameConfig.DEBUG) {
             cc.error("Collision entity size = " + entityList.length);
         }
 
-        // TODO: Optimize
-        // for (let i = 0; i < entityList.length - 1; i++) {
-        //     for (let j = i + 1; j < entityList.length; j++) {
-        //         let entity1 = entityList[i], entity2 = entityList[j];
-        //         if (entity1.mode === entity2.mode && this._isCollide(entity1, entity2)) {
-        //             let data = this._isMonsterAndBullet(entity1, entity2)
-        //             if (data) {
-        //                 let monster = data.monster, bullet = data.bullet;
-        //                 let bulletInfo = bullet.getComponent(BulletInfoComponent);
-        //                 let monsterInfo = monster.getComponent(MonsterInfoComponent);
-        //
-        //                 if (bulletInfo.type && bulletInfo.type === "frog") {
-        //                     // handle here
-        //                 } else {
-        //                     for (let effect of bulletInfo.effects) {
-        //                         monster.addComponent(effect.clone());
-        //                     }
-        //                     EntityManager.destroy(bullet);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
-
+        // construct quad tree
         quadTreePlayer.clear();
         quadTreeOpponent.clear();
         for (let i = 0; i < entityList.length - 1; i++) {
@@ -64,40 +39,119 @@ let CollisionSystem = System.extend({
         }
 
         for (let i = 0; i < entityList.length; i++) {
-            if (ValidatorECS.isBullet(entityList[i]) === false) continue;
-
-            let pos = entityList[i].getComponent(PositionComponent);
-            let collisionComponent = entityList[i].getComponent(CollisionComponent);
-            let w = collisionComponent.width, h = collisionComponent.height;
-
-            let returnObjects = null;
-            if (entityList[i].mode === GameConfig.PLAYER) {
-                returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
-            } else {
-                returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+            if (ValidatorECS.isBullet(entityList[i])) {
+                this._handleCollisionBullet(entityList[i]);
+            } else if (ValidatorECS.isTrap(entityList[i])) {
+                this._handleCollisionTrap(entityList[i], tick);
             }
+        }
+    },
 
-            for (let j = 0; j < returnObjects.length; j++) {
-                let entity1 = entityList[i], entity2 = returnObjects[j].entity;
-                if (entity1 !== entity2 && entity1.mode === entity2.mode && this._isCollide(entity1, entity2)) {
-                    let data = this._isMonsterAndBullet(entity1, entity2)
-                    if (data) {
-                        let monster = data.monster, bullet = data.bullet;
-                        let bulletInfo = bullet.getComponent(BulletInfoComponent);
-                        // let monsterInfo = monster.getComponent(MonsterInfoComponent);
-                        if (bulletInfo.type && bulletInfo.type === "frog") {
-                            // handle here
-                        } else {
-                            for (let effect of bulletInfo.effects) {
-                                monster.addComponent(effect.clone());
-                            }
-                            EntityManager.destroy(bullet);
-                            // IMPORTANT: 1 bullet can affect only 1 monster
-                            break;
+    _handleCollisionBullet: function (bulletEntity) {
+        let pos = bulletEntity.getComponent(PositionComponent);
+        let collisionComponent = bulletEntity.getComponent(CollisionComponent);
+        let w = collisionComponent.width, h = collisionComponent.height;
+
+        let returnObjects = null;
+        if (bulletEntity.mode === GameConfig.PLAYER) {
+            returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+        } else {
+            returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+        }
+
+        for (let j = 0; j < returnObjects.length; j++) {
+            let entity1 = bulletEntity, entity2 = returnObjects[j].entity;
+            if (entity1 !== entity2 && entity1.mode === entity2.mode && this._isCollide(entity1, entity2)) {
+                let data = this._isMonsterAndBullet(entity1, entity2)
+                if (data) {
+                    let monster = data.monster, bullet = data.bullet;
+                    let bulletInfo = bullet.getComponent(BulletInfoComponent);
+                    // let monsterInfo = monster.getComponent(MonsterInfoComponent);
+                    if (bulletInfo.type && bulletInfo.type === "frog") {
+                        // handle here
+                    } else {
+                        for (let effect of bulletInfo.effects) {
+                            monster.addComponent(effect.clone());
                         }
+                        EntityManager.destroy(bullet);
+                        // IMPORTANT: 1 bullet can affect only 1 monster
+                        break;
                     }
                 }
             }
+        }
+    },
+
+    _handleCollisionTrap: function (trapEntity, dt) {
+        if (trapEntity.isTriggered) {
+            if (trapEntity.isTriggered > 0) {
+                trapEntity.isTriggered -= dt;
+            } else {
+                let pos = trapEntity.getComponent(PositionComponent);
+                let collisionComponent = trapEntity.getComponent(CollisionComponent);
+                let w = collisionComponent.width, h = collisionComponent.height;
+
+                let returnObjects = null;
+                if (trapEntity.mode === GameConfig.PLAYER) {
+                    returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+                } else {
+                    returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+                }
+
+                let monsterList = [];
+                for (let j = 0; j < returnObjects.length; j++) {
+                    let entity1 = trapEntity, entity2 = returnObjects[j].entity;
+                    if (entity1 !== entity2 && entity1.mode === entity2.mode && ValidatorECS.isMonster(entity2) && this._isCollide(entity1, entity2)) {
+                        monsterList.push(entity2);
+                    }
+                }
+
+                for (let entity of monsterList) {
+                    let pos = entity.getComponent(PositionComponent);
+                    let pathComponent = entity.getComponent(PathComponent);
+                    let appearanceComponent = entity.getComponent(AppearanceComponent);
+                    pathComponent.path.unshift({x: pos.x, y: pos.y});
+                    pathComponent.currentPathIdx = 0;
+                    // pathComponent.reset(pathComponent.path, pathComponent.mode, false);
+                    // let origin = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(entity.mode)[GameConfig.MAP_HEIGH - 1 - 4][0];
+                    // entity.removeComponent(VelocityComponent);
+                    // entity.removeComponent(PathComponent);
+                    // pos.x = pathComponent.path[0].x;
+                    // pos.y = pathComponent.path[0].y;
+
+                    // cc.log("origin position = " + JSON.stringify(origin));
+                    let action = cc.spawn(
+                        cc.jumpTo(4, pathComponent.path[1], 100, 4),
+                        cc.rotateBy(4, 720));
+
+                    appearanceComponent.sprite.runAction(action);
+                    delete trapEntity.isTriggered;
+                }
+            }
+        } else {
+            if (!trapEntity.countTrigger || trapEntity.countTrigger < 1) {
+                let pos = trapEntity.getComponent(PositionComponent);
+                let collisionComponent = trapEntity.getComponent(CollisionComponent);
+                let w = collisionComponent.width, h = collisionComponent.height;
+
+                let returnObjects = null;
+                if (trapEntity.mode === GameConfig.PLAYER) {
+                    returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+                } else {
+                    returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+                }
+
+                for (let j = 0; j < returnObjects.length; j++) {
+                    let entity1 = trapEntity, entity2 = returnObjects[j].entity;
+                    if (entity1 !== entity2 && entity1.mode === entity2.mode && this._isCollide(entity1, entity2)) {
+                        // The first monster will trigger the trap
+                        trapEntity.isTriggered = 0.3;
+                        trapEntity.countTrigger = 2;
+                        break;
+                    }
+                }
+            }
+
         }
     },
 
