@@ -37,7 +37,7 @@ let CardDeckNode = cc.Node.extend({
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 3:
-                    cardDeckSlot = new CardDeckSlot("textures/card/card_potion_frozen.png", "textures/card/card_background_2.png", 3, GameConfig.ENTITY_ID.BUNNY_TOWER);
+                    cardDeckSlot = new CardDeckSlot("textures/card/card_potion_frozen.png", "textures/card/card_background_2.png", 3, GameConfig.ENTITY_ID.GOAT_TOWER);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
@@ -185,7 +185,7 @@ let CardDeckNode = cc.Node.extend({
                 : battleLayer.getOpponentMapNode();
             if (selectedCard.type === GameConfig.ENTITY_ID.FIRE_SPELL || selectedCard.type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
                 let sp = new cc.Sprite(BattleResource.POTION_RANGE_IMG);
-                sp.setScale(2*1.2*GameConfig.TILE_WIDTH/sp.width);
+                sp.setScale(2 * 1.2 * GameConfig.TILE_WIDTH / sp.width);
                 this.spriteDragManager[touch.getID()] = sp;
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             } else {

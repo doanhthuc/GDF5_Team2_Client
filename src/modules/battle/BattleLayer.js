@@ -174,8 +174,8 @@ let BattleLayer = cc.Layer.extend({
     //     // //    // setTimeout(this.createMonster(pixelPos,mode,entityID),time);
     //     // // )
     // },
-    createMonster: function (pixelPos,mode,entityID){
-        switch (entityID){
+    createMonster: function (pixelPos, mode, entityID) {
+        switch (entityID) {
             case GameConfig.ENTITY_ID.SWORD_MAN:
                 EntityFactory.createSwordsmanMonster(pixelPos, mode);
                 break;
@@ -273,6 +273,15 @@ let BattleLayer = cc.Layer.extend({
                 break;
             case GameConfig.ENTITY_ID.BUNNY_TOWER:
                 EntityFactory.createBunnyOilGunTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.WIZARD_TOWER:
+                EntityFactory.createWizardTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.SNAKE_TOWER:
+                EntityFactory.createSnakeAttackSpeedTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.GOAT_TOWER:
+                EntityFactory.createGoatDamageTower(tilePos, mode);
                 break;
             default:
                 return;
@@ -378,6 +387,9 @@ let BattleLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/ice_gun.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/oil_gun.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/boomerang.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/wizard.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/attack_speed.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/tower_damage.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/swordsman.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/ninja.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/assassin.plist");
