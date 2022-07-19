@@ -1,8 +1,8 @@
-let mapWidth = GameConfig.MAP_WIDTH*GameConfig.TILE_WIDTH;
-let mapHeight = GameConfig.MAP_HEIGH*GameConfig.TILE_HEIGH;
+let mapWidth = GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH;
+let mapHeight = GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH;
 
-let quadTreePlayer = new QuadTree(0, cc.rect(-mapWidth/2, -mapHeight/2, mapWidth, mapHeight));
-let quadTreeOpponent = new QuadTree(0, cc.rect(-mapWidth/2, -mapHeight/2, mapWidth, mapHeight));
+let quadTreePlayer = new QuadTree(0, cc.rect(-mapWidth / 2, -mapHeight / 2, mapWidth, mapHeight));
+let quadTreeOpponent = new QuadTree(0, cc.rect(-mapWidth / 2, -mapHeight / 2, mapWidth, mapHeight));
 
 let CollisionSystem = System.extend({
     typeID: GameConfig.SYSTEM_ID.COLLISION,
@@ -29,7 +29,7 @@ let CollisionSystem = System.extend({
             let collisionComponent = entityList[i].getComponent(CollisionComponent);
             let w = collisionComponent.width, h = collisionComponent.height;
 
-            let rect = cc.rect(pos.x - w/2, pos.y - h/2, w, h);
+            let rect = cc.rect(pos.x - w / 2, pos.y - h / 2, w, h);
 
             if (entityList[i].mode === GameConfig.PLAYER) {
                 quadTreePlayer.insert(new QuadTreeData(rect, entityList[i]));
@@ -54,9 +54,9 @@ let CollisionSystem = System.extend({
 
         let returnObjects = null;
         if (bulletEntity.mode === GameConfig.PLAYER) {
-            returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+            returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
         } else {
-            returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+            returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
         }
 
         for (let j = 0; j < returnObjects.length; j++) {
@@ -66,7 +66,6 @@ let CollisionSystem = System.extend({
                 if (data) {
                     let monster = data.monster, bullet = data.bullet;
                     let bulletInfo = bullet.getComponent(BulletInfoComponent);
-                    // let monsterInfo = monster.getComponent(MonsterInfoComponent);
                     if (bulletInfo.type && bulletInfo.type === "frog") {
                         // handle here
                     } else {
@@ -93,9 +92,9 @@ let CollisionSystem = System.extend({
 
                 let returnObjects = null;
                 if (trapEntity.mode === GameConfig.PLAYER) {
-                    returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+                    returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
                 } else {
-                    returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+                    returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
                 }
 
                 let monsterList = [];
@@ -136,9 +135,9 @@ let CollisionSystem = System.extend({
 
                 let returnObjects = null;
                 if (trapEntity.mode === GameConfig.PLAYER) {
-                    returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+                    returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
                 } else {
-                    returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w/2, pos.y - h/2, w, h));
+                    returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
                 }
 
                 for (let j = 0; j < returnObjects.length; j++) {

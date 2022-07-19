@@ -42,7 +42,10 @@ let RenderSystem = System.extend({
                 if (hpNode) {
                     let hpProgressBar = hpNode.getChildByName("progress_bar");
                     hpProgressBar.setPercent(lifeComponent.hp / lifeComponent.maxHP * 100);
+                    if (hpProgressBar.getPercent() == 100) hpNode.setVisible(false);
+                    else hpNode.setVisible(true);
                 }
+
             }
         }
     },

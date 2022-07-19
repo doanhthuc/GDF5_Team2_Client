@@ -5,8 +5,7 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-
-        // BattleData.fakeData();
+        if (GameConfig.NETWORK == 0) BattleData.fakeData();
         this.battleData = BattleManager.getInstance().getBattleData();
         // this.battleLoop = new BattleLoop();
 
@@ -25,12 +24,13 @@ let BattleLayer = cc.Layer.extend({
         // this._initTower();
         this._handleEventKey();
         this.startGame();
+        this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
     },
 
     _setupUI: function () {
         this.uiLayer = new BattleUILayer(this.battleData);
         this.addChild(this.uiLayer, 2);
-
         this.mapLayer = new BattleMapLayer(this.battleData);
         this.mapLayer._genMap(GameConfig.PLAYER);
         this.mapLayer._genMap(GameConfig.OPPONENT);
@@ -61,13 +61,14 @@ let BattleLayer = cc.Layer.extend({
         this.collisionSystem.start(dt);
         this.effectSystem.start(dt);
         this.pathSystem.start(dt);
+        this.spriteSheetAnimationSystem.start(dt);
         this.spellSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
         this.monsterSystem.start(dt);
         this.bulletSystem.start(dt);
         this.abilitySystem.start(dt);
         this.movementSystem.start(dt);
-        this.spriteSheetAnimationSystem.start(dt);
+
 
         if (GameConfig.DEBUG) {
             cc.warn("---------------------------------------")
@@ -112,18 +113,27 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        setTimeout(function () {
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        }, 1000);
+        setTimeout(function () {
+            EntityFactory.createAssassinMonster(pixelPos, mode);
+        }, 2000);
+        setTimeout(function () {
+            EntityFactory.createNinjaMonster(pixelPos, mode);
+        }, 3000);
+        setTimeout(function () {
+            EntityFactory.createGiantMonster(pixelPos, mode);
+        }, 5000);
+        //EntityFactory.createAssassinMonster(pixelPos, mode);
+        // EntityFactory.createGiantMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createBatMonster(pixelPos, mode);
         // EntityFactory.createNinjaMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        //EntityFactory.createBatMonster(pixelPos, mode);
+        // EntityFactory.createSatyrBoss(pixelPos, mode);
     },
 
     oneTimeBornMonster: function (tilePos, mode) {
@@ -133,9 +143,62 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSatyrBoss(pixelPos, mode);
-    },
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        setTimeout(function () {
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        }, 1000);
+        setTimeout(function () {
+            EntityFactory.createAssassinMonster(pixelPos, mode);
+        }, 2000);
+        setTimeout(function () {
+            EntityFactory.createNinjaMonster(pixelPos, mode);
+        }, 3000);
+        setTimeout(function () {
+            EntityFactory.createGiantMonster(pixelPos, mode);
+        }, 5000);
+        setTimeout(function () {
+            EntityFactory.createSatyrBoss(pixelPos, mode);
+        }, 20000);
+        setTimeout(function () {
+            EntityFactory.createDarkGiantBoss(pixelPos, mode);
+        }, 40000);
+        setTimeout(function () {
+            EntityFactory.createDemonTreeBoss(pixelPos, mode);
+        }, 60000);
 
+    },
+    // bornMonsterInWave: function (monsterWave, mode) {
+    //     // let pixelPos = Utils.tile2Pixel(0, 4, mode);
+    //     // // for(let entityID of monsterWave)
+    //     // // {
+    //     // //    // setTimeout(this.createMonster(pixelPos,mode,entityID),time);
+    //     // // )
+    // },
+    createMonster: function (pixelPos,mode,entityID){
+        switch (entityID){
+            case GameConfig.ENTITY_ID.SWORD_MAN:
+                EntityFactory.createSwordsmanMonster(pixelPos, mode);
+                break;
+            case GameConfig.ENTITY_ID.NINJA:
+                EntityFactory.createNinjaMonster(pixelPos, mode);
+                break;
+            case GameConfig.ENTITY_ID.BAT:
+                EntityFactory.createBatMonster(pixelPos, mode);
+                break;
+            case GameConfig.ENTITY_ID.ASSASSIN:
+                EntityFactory.createAssassinMonster(pixelPos, mode);
+                break;
+            case GameConfig.ENTITY_ID.DEMON_TREE:
+                EntityFactory.createDemonTreeBoss(pixelPos, mode);
+                break;
+            case GameConfig.ENTITY_ID.DARK_GIANT:
+                EntityFactory.createDarkGiantBoss(pixelPos, mode);
+                break;
+            case GameConfig.ENTITY_ID.SATYR:
+                EntityFactory.createSatyrBoss(pixelPos, mode);
+                break;
+        }
+    },
     /**
      *
      * @param type
@@ -170,7 +233,7 @@ let BattleLayer = cc.Layer.extend({
 
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
             this.dropSpell(type, pixelPos, mode)
-            BattleNetwork.connector.sendDropSell(type, pixelPos);
+            if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
         } else {
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()
@@ -193,7 +256,7 @@ let BattleLayer = cc.Layer.extend({
         }
         if (this.shouldPutNewTower(tilePos)) {
             this.buildTower(type, tilePos, mode);
-            BattleNetwork.connector.sendPutTower(type, tilePos);
+            if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
         }
     },
 
@@ -249,6 +312,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     shouldPutNewTower: function (tilePos) {
+        if (GameConfig.NETWORK === 0) return true;
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
         return cellObject.objectInCellType === ObjectInCellType.NONE;
     },
@@ -268,8 +332,6 @@ let BattleLayer = cc.Layer.extend({
                 if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
                     let pixelPos = touches[0].getLocation();
                     let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
-                    let tilePos = Utils.pixel2Tile(pixelInMap.x, pixelInMap.y, GameConfig.PLAYER);
-                    let cardId = BattleManager.getInstance().getBattleLayer().selectedCard;
                     BattleManager.getInstance().getBattleLayer()
                         .putCardAt(BattleManager.getInstance().getBattleLayer().selectedCard, pixelInMap, GameConfig.PLAYER);
                 }
@@ -312,11 +374,19 @@ let BattleLayer = cc.Layer.extend({
     },
 
     _prefetchAssetGame: function () {
-        // FIXME: hardcode, remove string to constant
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/ice_gun.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/oil_gun.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/boomerang.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/swordsman.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/ninja.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/assassin.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/giant.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/bat.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/demon_tree.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/demon_tree_minion.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/dark_giant.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/satyr.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
     },
 

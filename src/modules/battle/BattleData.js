@@ -3,8 +3,9 @@ let BattleData = cc.Class.extend({
         this.roomId = 0;
         this.dataInGame = {
             currentWave: 0,
+            battleWave: null,
             maxWave: 10000,
-            timer: 2,
+            timer: 20,
             player: {
                 username: "HOVANVYDUT",
                 clanName: "GDF5_DN_TEAM_2",
@@ -71,7 +72,9 @@ let BattleData = cc.Class.extend({
     getCurrentWave: function () {
         return this.dataInGame.currentWave;
     },
-
+    setBattleWave: function (battleWave) {
+        this.dataInGame.battleWave = battleWave;
+    },
     getUsername: function (mode) {
         Utils.validateMode(mode);
         return this.dataInGame[mode].username;
@@ -115,6 +118,9 @@ let BattleData = cc.Class.extend({
     setCurrentWave: function (currentWave) {
         this.dataInGame.currentWave = currentWave;
         return this.dataInGame.currentWave;
+    },
+    getCurrentMonsterWave: function (){
+        return this.dataInGame.battleWave[this.dataInGame.currentWave];
     },
 
     getMap: function (mode) {
@@ -180,21 +186,69 @@ let BattleData = cc.Class.extend({
     setMaxEnergy: function (maxEnergy, mode) {
         Utils.validateMode(mode);
         this.dataInGame[mode].maxEnergy = maxEnergy;
+    },
+    increaseWave: function () {
+        this.dataInGame.currentWave++;
     }
 });
 
 BattleData.fakeData = function () {
-    let map = [[0,6,0,0,0,5,0],[0,0,0,0,0,0,0],[0,0,0,2,0,1,0],[0,3,0,0,0,0,0],[0,0,0,0,5,0,0]];
+    let map = [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 1, 0], [0, 3, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]];
     //let map = [[1,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]];
-
-    let path = [{"x":0,"y":4},{"x":0,"y":3},{"x":0,"y":2},{"x":0,"y":1},{"x":0,"y":0},{"x":1,"y":0},{"x":2,"y":0},{"x":2,"y":1},{"x":2,"y":2},{"x":2,"y":3},{"x":2,"y":4},{"x":3,"y":4},{"x":4,"y":4},{"x":4,"y":3},{"x":4,"y":2},{"x":4,"y":1},{"x":5,"y":1},{"x":6,"y":1},{"x":6,"y":0}];
+    let battleWave = [[]];
+    let wave = [];
+    battleWave.push(wave);
+    for (let waveIdx = 1; waveIdx <= 20; waveIdx++) {
+        wave = []
+        let a, b, c, d;
+        a = Math.floor(Math.random() * 10);
+        b = Math.floor(Math.random() * (10 - a));
+        c = Math.floor(Math.random() * (10 - a - b));
+        d = Math.floor(Math.random() * (10 - a - b - c));
+        if (waveIdx == 5) {
+            wave.push(GameConfig.ENTITY_ID.SATYR)
+        }
+        if (waveIdx == 10) {
+            wave.push(GameConfig.ENTITY_ID.DARK_GIANT)
+        }
+        if (waveIdx == 15) {
+            wave.push(GameConfig.ENTITY_ID.DEMON_TREE)
+        }
+        if (waveIdx == 20) {
+            wave.push(GameConfig.ENTITY_ID.DEMON_TREE)
+            wave.push(GameConfig.ENTITY_ID.DARK_GIANT)
+        }
+        for (let i = 1; i <= a; i++) {
+            wave.push(GameConfig.ENTITY_ID.SWORD_MAN);
+        }
+        for (let i = 1; i <= b; i++) {
+            wave.push(GameConfig.ENTITY_ID.BAT);
+        }
+        for (let i = 1; i <= c; i++) {
+            wave.push(GameConfig.ENTITY_ID.NINJA);
+        }
+        for (let i = 1; i <= d; i++) {
+            wave.push(GameConfig.ENTITY_ID.ASSASSIN);
+        }
+        battleWave.push(wave);
+    }
+    let path = [{"x": 0, "y": 4}, {"x": 0, "y": 3}, {"x": 0, "y": 2}, {"x": 0, "y": 1}, {"x": 0, "y": 0}, {
+        "x": 1,
+        "y": 0
+    }, {"x": 2, "y": 0}, {"x": 2, "y": 1}, {"x": 2, "y": 2}, {"x": 2, "y": 3}, {"x": 2, "y": 4}, {
+        "x": 3,
+        "y": 4
+    }, {"x": 4, "y": 4}, {"x": 4, "y": 3}, {"x": 4, "y": 2}, {"x": 4, "y": 1}, {"x": 5, "y": 1}, {
+        "x": 6,
+        "y": 1
+    }, {"x": 6, "y": 0}];
     let battleData = new BattleData();
     BattleManager.getInstance().registerBattleData(battleData);
     battleData.setMap(map, GameConfig.PLAYER);
     battleData.setMap(JSON.parse(JSON.stringify(map)), GameConfig.OPPONENT);
     battleData.setLongestPath(path, GameConfig.PLAYER);
     battleData.setLongestPath(JSON.parse(JSON.stringify(path)), GameConfig.OPPONENT);
-
+    battleData.setBattleWave(battleWave);
     let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
     let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
 

@@ -2,8 +2,11 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
         uiLayer.waveNode.increaseWave();
-        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        BattleManager.getInstance().getBattleData().increaseWave();
+        // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.PLAYER);
+        // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.OPPONENT);
         BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
+        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
         BattleManager.getInstance().getBattleLayer().stopGame();
@@ -39,8 +42,8 @@ EventDispatcher.getInstance()
                             // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
                             // newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
                             let newPath = Utils.tileArray2PixelCellArray(path, currentMode);
-                            newPath = newPath.slice(1, newPath.length);
-                            newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
+                            //newPath = newPath.slice(1, newPath.length);
+                            //newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
                             //cc.log(JSON.stringify(newPath))
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;

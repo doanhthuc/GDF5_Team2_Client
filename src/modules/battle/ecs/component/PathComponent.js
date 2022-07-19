@@ -2,13 +2,13 @@ let PathComponent = Component.extend({
     name: "PathComponent",
     typeID: GameConfig.COMPONENT_ID.PATH,
 
-    ctor: function (pathTile, mode, isConvert=true) {
+    ctor: function (pathTile, mode, isConvert = true) {
         this._super();
         this.reset(pathTile, mode, isConvert);
     },
 
-    reset: function (pathTile, mode, isConvert=true) {
-        if (isConvert) {
+    reset: function (pathTile, mode, isConvert = true) {
+        if (isConvert === true) {
             let pathTile2 = Utils.tileArray2PixelCellArray(pathTile, mode);
             this.path = pathTile2;
         } else {

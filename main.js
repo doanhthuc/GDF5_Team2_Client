@@ -36,7 +36,8 @@ cc.game.onStart = function () {
         BattleNetwork.connector = new BattleNetwork.Connector(gv.gameClient);
 
         // fr.view(MainScreen);
-        fr.view(ScreenNetwork);
+        if (GameConfig.NETWORK == 1) fr.view(ScreenNetwork);
+        else fr.view(BattleLayer);
     }, this);
 };
 cc.game.run();
