@@ -62,10 +62,12 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
 
+        let node = new cc.Node();
         let bulletNode = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_bullet_1_0000.png");
+        node.addChild(bulletNode, 0, "weapon");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "frog");
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
-        let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
+        let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 20);
         let pathComponent = ComponentFactory.create(PathComponent, [
             {x: startPosition.x, y: startPosition.y},
@@ -76,13 +78,39 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
+        let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, BulletAnimationConfig.boomerang.level.A);
 
         entity.addComponent(infoComponent)
             .addComponent(positionComponent)
             .addComponent(appearanceComponent)
             .addComponent(velocityComponent)
             .addComponent(collisionComponent)
-            .addComponent(pathComponent);
+            .addComponent(pathComponent)
+            .addComponent(spriteComponent);
+        return entity;
+    } else if (towerType === GameConfig.ENTITY_ID.BUNNY_TOWER) {
+        let typeID = GameConfig.ENTITY_ID.BULLET;
+        let entity = this._createEntity(typeID, mode);
+
+        let node = new cc.Node();
+        let bulletNode = new cc.Sprite("textures/tower/frame/oil_gun_1_2/tower_oil_gun_bullet_0000.png");
+        node.addChild(bulletNode, 0, "bullet");
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects);
+        let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
+        let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 20);
+
+        let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
+        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
+        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
+        let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, BulletAnimationConfig.oil.level.A);
+
+        entity.addComponent(infoComponent)
+            .addComponent(positionComponent)
+            .addComponent(appearanceComponent)
+            .addComponent(velocityComponent)
+            .addComponent(collisionComponent)
+            .addComponent(spriteComponent);
         return entity;
     }
     return null;
@@ -454,11 +482,39 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
     let attackComponent = ComponentFactory.create(AttackComponent, 3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [])
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.boomerang.level.A);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
+        .addComponent(spriteComponent);
+
+    return entity;
+}
+
+EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
+    Utils.validateMode(mode);
+    let typeID = GameConfig.ENTITY_ID.BUNNY_TOWER;
+    let entity = this._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+    let attackRange = 1.5 * GameConfig.TILE_WIDTH;
+    let node = createBunnyNodeAnimation(attackRange);
+
+    let damageEffect = ComponentFactory.create(DamageEffect, 1000);
+    // NOTE: get component from pool
+    let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
+    let attackComponent = ComponentFactory.create(AttackComponent, 3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [damageEffect])
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bunnyOil.level.A);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(attackComponent)
+        .addComponent(spriteComponent);
 
     return entity;
 }
@@ -745,6 +801,17 @@ function createFrogNodeAnimation(attackRange) {
 
     towerSprite.runAction(cc.repeatForever(towerAction));
     weaponSprite.runAction(cc.repeatForever(weaponAction));
+
+    // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(towerSprite, 0, "tower");
+    node.addChild(weaponSprite, 0, "weapon");
+    return node;
+}
+
+function createBunnyNodeAnimation(attackRange) {
+    let node = new cc.Node();
+    let towerSprite = new cc.Sprite("res/textures/tower/frame/oil_gun_1_2/tower_oil_gun_attack_0_0011.png");
+    let weaponSprite = new cc.Sprite("res/textures/tower/frame/oil_gun_1_2/tower_oil_gun_attack_0_0011.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
     node.addChild(towerSprite, 0, "tower");

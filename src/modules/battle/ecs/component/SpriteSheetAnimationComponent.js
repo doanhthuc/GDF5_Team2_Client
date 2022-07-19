@@ -4,6 +4,10 @@ let SpriteSheetAnimationComponent = Component.extend({
 
     ctor: function (config) {
         this._super();
+        this.reset(config);
+    },
+
+    reset: function (config) {
         this.currentState = config.initState;
         this.currentStateIsRendered = false;
         this.animationMap = {
@@ -13,10 +17,6 @@ let SpriteSheetAnimationComponent = Component.extend({
             }
         };
         this._constructAnimation(config);
-    },
-
-    reset: function () {
-
     },
 
     clone: function () {

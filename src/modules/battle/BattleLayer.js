@@ -160,8 +160,8 @@ let BattleLayer = cc.Layer.extend({
             let col = tilePos.x;
             let map = this.battleData.getMap(mode);
             if (map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
-            || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
-            || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
+                || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
+                || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
                 return;
             }
         } else {
@@ -185,7 +185,7 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
-    putTowerCardIntoMap: function(type, tilePos, mode) {
+    putTowerCardIntoMap: function (type, tilePos, mode) {
         if (this.shouldUpgradeTower(type, tilePos)) {
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
@@ -197,7 +197,7 @@ let BattleLayer = cc.Layer.extend({
         }
     },
 
-    buildTower: function(towerId, tilePos, mode) {
+    buildTower: function (towerId, tilePos, mode) {
         switch (towerId) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
                 EntityFactory.createCannonOwlTower(tilePos, mode);
@@ -208,6 +208,9 @@ let BattleLayer = cc.Layer.extend({
             case GameConfig.ENTITY_ID.BEAR_TOWER:
                 EntityFactory.createIceGunPolarBearTower(tilePos, mode);
                 break;
+            case GameConfig.ENTITY_ID.BUNNY_TOWER:
+                EntityFactory.createBunnyOilGunTower(tilePos, mode);
+                break;
             default:
                 return;
         }
@@ -215,7 +218,7 @@ let BattleLayer = cc.Layer.extend({
             .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
     },
 
-    dropSpell: function(spellId, pixelPos, mode) {
+    dropSpell: function (spellId, pixelPos, mode) {
         switch (spellId) {
             case GameConfig.ENTITY_ID.FIRE_SPELL:
                 SpellFactory.createFireSpell(pixelPos, mode);
@@ -312,6 +315,8 @@ let BattleLayer = cc.Layer.extend({
         // FIXME: hardcode, remove string to constant
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/ice_gun.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/oil_gun.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/boomerang.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
     },
 
