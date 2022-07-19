@@ -4,18 +4,16 @@ let SpriteSheetAnimationComponent = Component.extend({
 
     ctor: function (config) {
         this._super();
-        this.reset(config)
+        this.reset(config);
     },
-    getCurrentState: function () {
-        return this._currentState;
-    },
+
     reset: function (config) {
         this.currentState = config.initState;
         this.currentStateIsRendered = false;
         this.animationMap = {
             state: {
-                spriteName1: {action: null, flipX: true},
-                spriteName2: {action: null, flipX: true}
+                spriteName1: {animation: null, flipX: true},
+                spriteName2: {animation: null, flipX: true}
             }
         };
         this._constructAnimation(config);
@@ -84,6 +82,9 @@ let SpriteSheetAnimationComponent = Component.extend({
         }
 
         return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat};
+    },
+    getCurrentState:function (){
+        return this.currentState;
     }
 });
 SpriteSheetAnimationComponent.typeID = GameConfig.COMPONENT_ID.SPRITE_SHEET;

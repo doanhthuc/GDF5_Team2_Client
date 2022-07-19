@@ -6,59 +6,75 @@ let MonsterAnimationConfig = {
             MOVE_LEFT: {
                 monster: {
                     flipX: true,
-                    flipState: "MOVE_RIGHT"
+                    flipState: "MOVE_RIGHT",
+                    repeat: true,
+                    time: 1000,
                 }
             },
             MOVE_DOWN: {
                 monster: {
-                    prefix: "monster_swordsman_run_00",
+                    prefix: "monster_swordsman_run_",
                     suffix: ".png",
                     start: 0,
                     end: 11,
+                    repeat: true,
+                    time: 1000,
                 }
             },
             MOVE_RIGHT: {
                 monster: {
-                    prefix: "monster_swordsman_run_00",
+                    prefix: "monster_swordsman_run_",
                     suffix: ".png",
                     start: 24,
                     end: 35,
+                    repeat: true,
+                    time: 1000,
                 }
             },
             MOVE_UP: {
                 monster: {
-                    prefix: "monster_swordsman_run_00",
+                    prefix: "monster_swordsman_run_",
                     suffix: ".png",
                     start: 48,
                     end: 59,
+                    repeat: true,
+                    time: 1000,
                 }
             },
             MOVE_RIGHT_DOWN: {
                 monster: {
-                    prefix: "monster_swordsman_run_00",
+                    prefix: "monster_swordsman_run_",
                     suffix: ".png",
                     start: 12,
                     end: 23,
+                    repeat: true,
+                    time: 1000,
                 }
             },
             MOVE_RIGHT_UP: {
                 monster: {
-                    prefix: "monster_swordsman_run_00",
+                    prefix: "monster_swordsman_run_",
                     suffix: ".png",
                     start: 36,
                     end: 47,
+                    repeat: true,
+                    time: 1000,
                 }
             },
             MOVE_LEFT_DOWN: {
                 monster: {
                     flipX: true,
-                    flipState: "MOVE_RIGHT_DOWN"
+                    flipState: "MOVE_RIGHT_DOWN",
+                    repeat: true,
+                    time: 1000,
                 }
             },
             MOVE_LEFT_UP: {
                 monster: {
                     flipX: true,
-                    flipState: "MOVE_RIGHT_UP"
+                    flipState: "MOVE_RIGHT_UP",
+                    repeat: true,
+                    time: 1000,
                 }
             }
         }

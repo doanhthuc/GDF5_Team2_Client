@@ -5,7 +5,7 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-        BattleData.fakeData();
+        if (GameConfig.NETWORK == 0) BattleData.fakeData();
         this.battleData = BattleManager.getInstance().getBattleData();
         // this.battleLoop = new BattleLoop();
 
@@ -24,6 +24,8 @@ let BattleLayer = cc.Layer.extend({
         // this._initTower();
         this._handleEventKey();
         this.startGame();
+        this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
     },
 
     _setupUI: function () {
@@ -112,10 +114,22 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        setTimeout(function () {
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        }, 1000);
+        setTimeout(function () {
+            EntityFactory.createAssassinMonster(pixelPos, mode);
+        }, 2000);
+        setTimeout(function () {
+            EntityFactory.createNinjaMonster(pixelPos, mode);
+        }, 3000);
+        setTimeout(function () {
+            EntityFactory.createGiantMonster(pixelPos, mode);
+        }, 4000);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
@@ -134,8 +148,16 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
         // EntityFactory.createSatyrBoss(pixelPos, mode);
-        // EntityFactory.createDarkGiantBoss(pixelPos,mode);
-        EntityFactory.createDemonTreeBoss(pixelPos, mode);
+        setTimeout(function () {
+            EntityFactory.createSatyrBoss(pixelPos, mode);
+        }, 20000);
+        setTimeout(function () {
+            EntityFactory.createDarkGiantBoss(pixelPos, mode);
+        }, 40000);
+        setTimeout(function () {
+            EntityFactory.createDemonTreeBoss(pixelPos, mode);
+        }, 60000);
+
     },
 
     /**
@@ -162,8 +184,8 @@ let BattleLayer = cc.Layer.extend({
             let col = tilePos.x;
             let map = this.battleData.getMap(mode);
             if (map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
-            || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
-            || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
+                || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
+                || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
                 return;
             }
         } else {
@@ -172,7 +194,7 @@ let BattleLayer = cc.Layer.extend({
 
         if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
             this.dropSpell(type, pixelPos, mode)
-            BattleNetwork.connector.sendDropSell(type, pixelPos);
+            if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
         } else {
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()
@@ -187,19 +209,19 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
-    putTowerCardIntoMap: function(type, tilePos, mode) {
-        if (this.shouldUpgradeTower(type, tilePos)) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
-            return;
-        }
+    putTowerCardIntoMap: function (type, tilePos, mode) {
+        // if (this.shouldUpgradeTower(type, tilePos)) {
+        //     EventDispatcher.getInstance()
+        //         .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+        //     return;
+        // }
         if (this.shouldPutNewTower(tilePos)) {
             this.buildTower(type, tilePos, mode);
-            BattleNetwork.connector.sendPutTower(type, tilePos);
+            if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
         }
     },
 
-    buildTower: function(towerId, tilePos, mode) {
+    buildTower: function (towerId, tilePos, mode) {
         switch (towerId) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
                 EntityFactory.createCannonOwlTower(tilePos, mode);
@@ -217,7 +239,7 @@ let BattleLayer = cc.Layer.extend({
             .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
     },
 
-    dropSpell: function(spellId, pixelPos, mode) {
+    dropSpell: function (spellId, pixelPos, mode) {
         switch (spellId) {
             case GameConfig.ENTITY_ID.FIRE_SPELL:
                 SpellFactory.createFireSpell(pixelPos, mode);
@@ -226,7 +248,7 @@ let BattleLayer = cc.Layer.extend({
                 SpellFactory.createFrozenSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.TRAP:
-                SpellFactory.createTrap(tilePos, mode);
+                SpellFactory.createTrap(pixelPos, mode);
                 break;
             default:
                 return;
@@ -248,6 +270,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     shouldPutNewTower: function (tilePos) {
+        if (GameConfig.NETWORK === 0) return true;
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
         return cellObject.objectInCellType === ObjectInCellType.NONE;
     },
@@ -309,10 +332,10 @@ let BattleLayer = cc.Layer.extend({
     },
 
     _prefetchAssetGame: function () {
-        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-0.plist");
-        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon-1.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/ice_gun.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/swordsman.plist");
-		cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
     },
 
     _clearAsset: function () {

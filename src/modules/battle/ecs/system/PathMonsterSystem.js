@@ -55,7 +55,8 @@ let PathMonsterSystem = System.extend({
                     let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
                     let state = this._getMovingDirection(entity);
                     if (state != spriteComponent.getCurrentState()) {
-                        spriteComponent.changeState(state);
+                        cc.log("New state: " + state);
+                        spriteComponent.changeCurrentState(state);
                     }
                 }
                 if (this._checkNextPath(currentPos, nextPos) && pathComponent.currentPathIdx != path.length - 1) {
