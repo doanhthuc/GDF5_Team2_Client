@@ -428,11 +428,13 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
     let attackComponent = ComponentFactory.create(AttackComponent, 1, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 3.4, 0, [frozenEffect, damageEffect])
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bear.level.A);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
+        .addComponent(spriteComponent);
 
     return entity;
 }

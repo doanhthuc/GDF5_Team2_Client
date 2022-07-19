@@ -256,6 +256,7 @@ let BattleLayer = cc.Layer.extend({
     _prefetchAssetGame: function () {
         // FIXME: hardcode, remove string to constant
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/ice_gun.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
     },
 

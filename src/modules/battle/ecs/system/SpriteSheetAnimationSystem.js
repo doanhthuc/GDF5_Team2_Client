@@ -23,13 +23,13 @@ let SpriteSheetAnimationSystem = System.extend({
                     if (sprite) {
                         sprite.stopAllActions();
                         let actionArr = [];
-                        cc.log(spriteName);
+
                         if (stateAnim[spriteName].repeat) {
                             let tmpSprite = sprite;
-                            let tmpName = spriteName;
+                            let tmpSpriteAnimation = stateAnim[spriteName].animation;
                             let actionFuncCall = cc.callFunc(() => {
                                 tmpSprite.stopAllActions();
-                                tmpSprite.runAction(cc.animate(stateAnim[tmpName].animation));
+                                tmpSprite.runAction(cc.repeatForever(cc.animate(tmpSpriteAnimation)));
                             });
                             actionArr.push(actionFuncCall);
                         } else {
