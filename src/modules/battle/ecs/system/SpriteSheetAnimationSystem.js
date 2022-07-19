@@ -22,9 +22,40 @@ let SpriteSheetAnimationSystem = System.extend({
                     let sprite = appearanceComponent.sprite.getChildByName(spriteName);
                     if (sprite) {
                         sprite.stopAllActions();
-                        sprite.runAction(cc.repeatForever(cc.animate(stateAnim[spriteName].animation)));
+                        let actionArr = [];
+
+                        if (stateAnim[spriteName].repeat) {
+                            let tmpSprite = sprite;
+                            let tmpSpriteAnimation = stateAnim[spriteName].animation;
+                            let actionFuncCall = cc.callFunc(() => {
+                                tmpSprite.stopAllActions();
+                                tmpSprite.runAction(cc.repeatForever(cc.animate(tmpSpriteAnimation)));
+                            });
+                            actionArr.push(actionFuncCall);
+                        } else {
+                            actionArr.push(cc.animate(stateAnim[spriteName].animation));
+                        }
+
+                        for (let stateAnimI of stateAnim[spriteName].sequenceAnimations) {
+                            if (stateAnimI.repeat) {
+                                let actionFuncCall = cc.callFunc(() => {
+                                    sprite.stopAllActions();
+                                    sprite.runAction(cc.repeatForever(cc.animate(stateAnimI.animation)));
+                                })
+                                actionArr.push(actionFuncCall);
+                            } else {
+                                actionArr.push(cc.animate(stateAnimI.animation));
+                            }
+                        }
+
+                        if (actionArr.length > 0) {
+                            sprite.runAction(cc.sequence(...actionArr));
+                        }
+
                         if (stateAnim[spriteName].flipX) {
                             sprite.setFlippedX(true);
+                        } else {
+                            sprite.setFlippedX(false);
                         }
                     }
                 }

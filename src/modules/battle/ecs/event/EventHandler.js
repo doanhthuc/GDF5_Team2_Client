@@ -2,8 +2,8 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
         uiLayer.waveNode.increaseWave();
-        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
-        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
+        // BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        // BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
     })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
         BattleManager.getInstance().getBattleLayer().stopGame();
