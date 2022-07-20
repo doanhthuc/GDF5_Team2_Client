@@ -5,7 +5,7 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-        if (GameConfig.NETWORK == 0) BattleData.fakeData();
+        if (GameConfig.NETWORK === 0) BattleData.fakeData();
         this.battleData = BattleManager.getInstance().getBattleData();
         // this.battleLoop = new BattleLoop();
 
@@ -249,11 +249,14 @@ let BattleLayer = cc.Layer.extend({
     },
 
     putTowerCardIntoMap: function (type, tilePos, mode) {
-        if (this.shouldUpgradeTower(type, tilePos)) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
-            return;
+        if (GameConfig.NETWORK) {
+            if (this.shouldUpgradeTower(type, tilePos)) {
+                EventDispatcher.getInstance()
+                    .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+                return;
+            }
         }
+
         if (this.shouldPutNewTower(tilePos)) {
             this.buildTower(type, tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
