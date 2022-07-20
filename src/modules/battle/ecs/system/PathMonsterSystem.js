@@ -44,13 +44,9 @@ let PathMonsterSystem = System.extend({
                 let currentPos = {x: positionComponent.x, y: positionComponent.y};
                 let nextPos = path[currentPathIdx];
                 let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
-
                 let newVelocity = Utils.calculateVelocityVector(currentPos, nextPos, speed);
                 velocityComponent.speedX = newVelocity.speedX;
                 velocityComponent.speedY = newVelocity.speedY;
-                // let Xb = nextPos.x, Yb = nextPos.y;
-                // let Xa = positionComponent.x, Ya = positionComponent.y;
-                // let signX = Math.sign(velocityComponent.speedX), signY = Math.sign(velocityComponent.speedY);
                 if (entity._hasComponent(SpriteSheetAnimationComponent)) {
                     let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
                     let state = this._getMovingDirection(entity);
@@ -58,6 +54,17 @@ let PathMonsterSystem = System.extend({
                         spriteComponent.changeCurrentState(state);
                     }
                 }
+                // let Xa = positionComponent.x, Ya = positionComponent.y;
+                // let Xb = nextPos.x, Yb = nextPos.y;
+                // let signX = Math.sign(velocityComponent.speedX), signY = Math.sign(velocityComponent.speedY);
+                // cc.log("PathMonsterSystem " + signX + " " + (Xb - Xa) + " " + signY + " " + (Yb - Ya));
+                // cc.log("PathMonsterSystem NextPos=" + Xb + " " + Yb + " CurrentPos" + Xa + " " + Ya);
+                // if (signX * (Xb - Xa) <= 0
+                //     && signY * (Yb - Ya) <= 0
+                //     && !(signX === 0 && signY === 0)) {
+                //     cc.log("nextPath");
+                //     pathComponent.currentPathIdx++;
+                // }
                 if (this._checkNextPath(currentPos, nextPos) && pathComponent.currentPathIdx != path.length - 1) {
                     pathComponent.currentPathIdx++;
                 }

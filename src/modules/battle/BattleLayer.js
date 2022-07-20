@@ -249,11 +249,11 @@ let BattleLayer = cc.Layer.extend({
     },
 
     putTowerCardIntoMap: function (type, tilePos, mode) {
-        // if (this.shouldUpgradeTower(type, tilePos)) {
-        //     EventDispatcher.getInstance()
-        //         .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
-        //     return;
-        // }
+        if (this.shouldUpgradeTower(type, tilePos)) {
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+            return;
+        }
         if (this.shouldPutNewTower(tilePos)) {
             this.buildTower(type, tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
@@ -295,6 +295,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     shouldUpgradeTower: function (towerId, tilePos) {
+        if (GameConfig.NETWORK==0) return false;
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
         if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null) {
             let tower = cellObject.tower;
@@ -337,8 +338,9 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
+       // this.scheduleUpdate();
         // this.battleLoop.start();
-        this.scheduleUpdate();
+        this.schedule(this.update,0.5,10000);
         // BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
