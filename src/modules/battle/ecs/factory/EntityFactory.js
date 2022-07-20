@@ -455,6 +455,7 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID, mode);
     let towerConfig = TowerConfig.getTowerConfigFromJson(typeID, 1);
+    cc.log("[EntityFactory line 458] create cannon tower: " + JSON.stringify(towerConfig));
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createOwlNodeAnimation(attackRange);
@@ -464,7 +465,7 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     // let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 10);
     // let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 1.3);
 
-    let infoComponent = ComponentFactory.create(TowerInfoComponent, towerConfig.energy, "bulletTargetType", "attack", "monster", "bulletType");
+    let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
     let attackComponent = ComponentFactory.create(AttackComponent, 10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [])
@@ -550,6 +551,7 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
+    let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, 0.3);
     let attackComponent = ComponentFactory.create(AttackComponent, 3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [damageEffect, slowEffect])
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bunnyOil.level.A);
 
@@ -599,7 +601,8 @@ EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode) {
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 0.5);
+    let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 0.2);
+    let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, 1.5 * GameConfig.TILE_WIDTH, buffAttackSpeedEffect);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
 
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.snake.level.A);
@@ -607,7 +610,7 @@ EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode) {
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
-        .addComponent(buffAttackSpeedEffect)
+        .addComponent(towerAbilityComponent)
         .addComponent(spriteComponent);
 
     return entity;
@@ -615,7 +618,7 @@ EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode) {
 
 EntityFactory.createGoatDamageTower = function (tilePos, mode) {
     Utils.validateMode(mode);
-    let typeID = GameConfig.ENTITY_ID.SNAKE_TOWER;
+    let typeID = GameConfig.ENTITY_ID.GOAT_TOWER;
     let entity = this._createEntity(typeID, mode);
 
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
@@ -624,7 +627,8 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 0.5);
+    let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 1000);
+    let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, 1.5 * GameConfig.TILE_WIDTH, buffAttackDamageEffect);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
 
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.goat.level.A);
@@ -632,7 +636,7 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
-        .addComponent(buffAttackDamageEffect)
+        .addComponent(towerAbilityComponent)
         .addComponent(spriteComponent);
 
     return entity;

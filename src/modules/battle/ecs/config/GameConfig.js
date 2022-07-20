@@ -2,7 +2,7 @@ let GameConfig = GameConfig || {};
 
 // 0: disable, 1: enable
 GameConfig.DEBUG = 0;
-GameConfig.NETWORK = 1;
+GameConfig.NETWORK = 0;
 GameConfig.PLAYER = "player";
 GameConfig.OPPONENT = "opponent";
 
@@ -27,7 +27,8 @@ GameConfig.COMPONENT_ID = {
     UNDER_GROUND: 18,
     SPAWN_MINION: 19,
     HEALING_ABILITY: 20,
-    SPRITE_SHEET: 21
+    SPRITE_SHEET: 21,
+    TOWER_ABILITY: 22,
 }
 GameConfig.MAP = {
     NONE: 0,
@@ -49,6 +50,7 @@ GameConfig.SYSTEM_ID = {
     MONSTER: 11,
     ABILITY: 12,
     COLLISION: 13,
+    RESET_SYSTEM: 14,
 }
 
 GameConfig.ENTITY_ID = {

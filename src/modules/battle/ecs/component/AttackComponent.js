@@ -21,6 +21,10 @@ let AttackComponent = Component.extend({
         // this.effects.push(new DamageEffect(this._damage));
     },
 
+    setSpeed: function (speed) {
+        this.speed = speed;
+    },
+
     getDamage: function () {
         return this._damage;
     },

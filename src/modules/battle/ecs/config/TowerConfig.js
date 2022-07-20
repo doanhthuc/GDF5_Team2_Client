@@ -1,10 +1,11 @@
 let TowerConfig = TowerConfig || {};
 
-TowerConfig.getTowerConfigFromJson = (towerId, level) => {
+TowerConfig.getTowerConfigFromJson = function (towerId, level) {
     let towerRank = ReadConfigUtils.getTowerRankByLevel(level);
     let towerConfig = JsonReader.getTowerConfig()[towerId];
-    towerConfig.stat = towerConfig.stat[towerRank];
-    return towerConfig;
+    let cloneConfig = _.clone(towerConfig);
+    cloneConfig.stat = towerConfig.stat[towerRank];
+    return cloneConfig;
 }
 
 TowerConfig.getBunnyOilGunTowerConfigFromJson = (towerId, level) => {

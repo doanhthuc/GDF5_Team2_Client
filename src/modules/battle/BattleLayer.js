@@ -38,6 +38,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     _initSystem: function () {
+        this.resetSystem = SystemFactory.create(ResetSystem);
         this.movementSystem = SystemFactory.create(MovementSystem);
         this.renderSystem = SystemFactory.create(RenderSystem);
         this.lifeSystem = SystemFactory.create(LifeSystem);
@@ -55,18 +56,19 @@ let BattleLayer = cc.Layer.extend({
 
     update: function (dt) {
         // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
+        this.resetSystem.start(dt);
+        this.abilitySystem.start(dt);
+        this.effectSystem.start(dt);
         this.attackSystem.start(dt);
         this.renderSystem.start(dt);
         this.lifeSystem.start(dt);
         this.collisionSystem.start(dt);
-        this.effectSystem.start(dt);
         this.pathSystem.start(dt);
         this.spriteSheetAnimationSystem.start(dt);
         this.spellSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
         this.monsterSystem.start(dt);
         this.bulletSystem.start(dt);
-        this.abilitySystem.start(dt);
         this.movementSystem.start(dt);
 
 
@@ -307,6 +309,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     shouldUpgradeTower: function (towerId, tilePos) {
+        if (GameConfig.NETWORK === 0) return false;
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
         if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null) {
             let tower = cellObject.tower;

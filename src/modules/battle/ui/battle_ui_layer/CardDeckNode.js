@@ -37,7 +37,7 @@ let CardDeckNode = cc.Node.extend({
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 3:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.GOAT_TOWER);
+                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.SNAKE_TOWER);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;

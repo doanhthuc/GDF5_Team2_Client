@@ -31,10 +31,10 @@ let EffectSystem = System.extend({
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackDamageEffect, AttackComponent);
         for (let entity of entityList) {
+            cc.log("_handleBuffAttackDamageEffect line 34");
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackDamageComponent = entity.getComponent(BuffAttackDamageEffect);
-
-            attackComponent.setDamage(attackComponent.originDamage * buffAttackDamageComponent.percent);
+            attackComponent.setDamage(attackComponent.damage + attackComponent.originDamage * buffAttackDamageComponent.percent);
         }
     },
 
