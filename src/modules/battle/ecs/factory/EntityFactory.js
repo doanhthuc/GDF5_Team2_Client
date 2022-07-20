@@ -454,7 +454,7 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID, mode);
-
+    let towerConfig = TowerConfig.getTowerConfigFromJson(typeID, 1);
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createOwlNodeAnimation(attackRange);
@@ -464,7 +464,7 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     // let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 10);
     // let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 1.3);
 
-    let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
+    let infoComponent = ComponentFactory.create(TowerInfoComponent, towerConfig.energy, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
     let attackComponent = ComponentFactory.create(AttackComponent, 10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [])
@@ -545,11 +545,12 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
     let node = createBunnyNodeAnimation(attackRange);
 
     let damageEffect = ComponentFactory.create(DamageEffect, 1000);
+    let slowEffect = ComponentFactory.create(SlowEffect, 1000, 0.3);
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, 3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [damageEffect])
+    let attackComponent = ComponentFactory.create(AttackComponent, 3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [damageEffect, slowEffect])
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bunnyOil.level.A);
 
     entity.addComponent(infoComponent)
@@ -570,10 +571,12 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createWizardNodeAnimation(attackRange);
 
+    let damageEffect = ComponentFactory.create(DamageEffect, 3);
+
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, 10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [])
+    let attackComponent = ComponentFactory.create(AttackComponent, 10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [damageEffect])
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.wizard.level.A);
 
     entity.addComponent(infoComponent)
