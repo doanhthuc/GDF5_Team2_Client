@@ -19,15 +19,16 @@ let AbilitySystem = System.extend({
             for (let entity of entityList) {
                 let lifeComponent = entity.getComponent(LifeComponent);
                 let underGroundComponent = entity.getComponent(UnderGroundComponent);
-                let pathComponent = entity.getComponent(PathComponent);
+                let positionComponent = entity.getComponent(PositionComponent);
                 if (underGroundComponent.isInGround === false) {
                     if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
                         underGroundComponent.trigger += 1;
-                        underGroundComponent.disablePathIdx = pathComponent.currentPathIdx + 2;
+                        underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 3;
+                        cc.log(positionComponent.moveDistance+ " "+underGroundComponent.disableMoveDistance);
                         underGroundComponent.isInGround = true;
                     }
                 } else {
-                    if (underGroundComponent.disablePathIdx === pathComponent.currentPathIdx) {
+                    if (underGroundComponent.disableMoveDistance <= positionComponent.moveDistance) {
                         underGroundComponent.isInGround = false;
                     }
                 }
