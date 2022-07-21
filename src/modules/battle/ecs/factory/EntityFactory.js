@@ -70,7 +70,6 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 20);
         let pathComponent = ComponentFactory.create(PathComponent, [
-            {x: startPosition.x, y: startPosition.y},
             {x: targetPosition.x, y: targetPosition.y},
             {x: startPosition.x, y: startPosition.y}
         ]);
@@ -98,11 +97,11 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-        let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 20);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0);
 
         let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
-        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
+        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetPosition);
         let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, BulletAnimationConfig.oil.level.A);
 
         entity.addComponent(infoComponent)
@@ -118,7 +117,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
 
         // NOTE: get component from pool
         let bulletNode = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_bullet_0000.png");
-        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, 0.6);
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0);
@@ -545,14 +544,12 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createBunnyNodeAnimation(attackRange);
 
-    let damageEffect = ComponentFactory.create(DamageEffect, 1000);
-    let slowEffect = ComponentFactory.create(SlowEffect, 1000, 0.3);
+    let slowEffect = ComponentFactory.create(SlowEffect, 5, 0.3);
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, 0.3);
-    let attackComponent = ComponentFactory.create(AttackComponent, 3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [damageEffect, slowEffect])
+    let attackComponent = ComponentFactory.create(AttackComponent, 25, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [slowEffect])
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bunnyOil.level.A);
 
     entity.addComponent(infoComponent)

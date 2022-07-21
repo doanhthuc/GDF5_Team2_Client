@@ -32,7 +32,7 @@ let CardDeckNode = cc.Node.extend({
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 2:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.BEAR_TOWER);
+                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.FROG_TOWER);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
@@ -42,7 +42,7 @@ let CardDeckNode = cc.Node.extend({
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 4:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.FIRE_SPELL);
+                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.WIZARD_TOWER);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
