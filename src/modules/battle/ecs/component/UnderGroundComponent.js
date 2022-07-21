@@ -4,7 +4,7 @@ let UnderGroundComponent = Component.extend({
 
     ctor: function () {
         this._super();
-        this.currentPathIdx = 0;
+        this.currentMoveDistance = 0;
         this.trigger = 0;
         this.isInGround = false;
     },

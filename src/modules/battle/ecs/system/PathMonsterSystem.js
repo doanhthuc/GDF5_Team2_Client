@@ -10,43 +10,21 @@ let PathMonsterSystem = System.extend({
     _run: function (tick) {
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
         for (let entity of entityList) {
-            let pathComponent = entity.getComponent(PathComponent);
-            let positionComponent = entity.getComponent(PositionComponent);
-            let velocityComponent = entity.getComponent(VelocityComponent);
-            let path = pathComponent.path, currentPathIdx = pathComponent.currentPathIdx;
+           {
+                let pathComponent = entity.getComponent(PathComponent);
+                let positionComponent = entity.getComponent(PositionComponent);
+                let velocityComponent = entity.getComponent(VelocityComponent);
+                let path = pathComponent.path, currentPathIdx = pathComponent.currentPathIdx;
 
-            // if (currentPathIdx < path.length - 1) {
-            //     let currentPos = path[currentPathIdx];
-            //     let nextPos = path[currentPathIdx + 1];
-            //     let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
-            //
-            //     let newVelocity = Utils.calculateVelocityVector(currentPos, nextPos, speed);
-            //     velocityComponent.speedX = newVelocity.speedX;
-            //     velocityComponent.speedY = newVelocity.speedY;
-            //
-            //     let Xb = nextPos.x, Yb = nextPos.y;
-            //     let Xa = positionComponent.x, Ya = positionComponent.y;
-            //     let signX = Math.sign(velocityComponent.speedX), signY = Math.sign(velocityComponent.speedY);
-            //
-            //     if (signX * (Xb - Xa) <= 0
-            //         && signY * (Yb - Ya) <= 0
-            //         && !(signX === 0 && signY === 0)) {
-            //         pathComponent.currentPathIdx++;
-            //         if (entity._hasComponent(SpriteSheetAnimationComponent)) {
-            //             let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
-            //             let state = this._getMovingDirection(entity);
-            //             if (state != spriteComponent.getCurrentState()) {
-            //                 spriteComponent.changeState(state);
-            //             }
-            //         }
-            //     }
-            if (currentPathIdx <= path.length - 1) {
-                let currentPos = {x: positionComponent.x, y: positionComponent.y};
-                let nextPos = path[currentPathIdx];
+                let nextPosIdx = this._findNextPath(path, positionComponent, currentPathIdx);
+                if (nextPosIdx>1) pathComponent.currentPathIdx = nextPosIdx - 1;
+
+                let nextPos = path[nextPosIdx];
                 let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
-                let newVelocity = Utils.calculateVelocityVector(currentPos, nextPos, speed);
+                let newVelocity = Utils.calculateVelocityVector(positionComponent, nextPos, speed)
                 velocityComponent.speedX = newVelocity.speedX;
                 velocityComponent.speedY = newVelocity.speedY;
+
                 if (entity._hasComponent(SpriteSheetAnimationComponent)) {
                     let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
                     let state = this._getMovingDirection(entity);
@@ -54,21 +32,6 @@ let PathMonsterSystem = System.extend({
                         spriteComponent.changeCurrentState(state);
                     }
                 }
-                // let Xa = positionComponent.x, Ya = positionComponent.y;
-                // let Xb = nextPos.x, Yb = nextPos.y;
-                // let signX = Math.sign(velocityComponent.speedX), signY = Math.sign(velocityComponent.speedY);
-                // cc.log("PathMonsterSystem " + signX + " " + (Xb - Xa) + " " + signY + " " + (Yb - Ya));
-                // cc.log("PathMonsterSystem NextPos=" + Xb + " " + Yb + " CurrentPos" + Xa + " " + Ya);
-                // if (signX * (Xb - Xa) <= 0
-                //     && signY * (Yb - Ya) <= 0
-                //     && !(signX === 0 && signY === 0)) {
-                //     cc.log("nextPath");
-                //     pathComponent.currentPathIdx++;
-                // }
-                if (this._checkNextPath(currentPos, nextPos) && pathComponent.currentPathIdx != path.length - 1) {
-                    pathComponent.currentPathIdx++;
-                }
-
             }
         }
     },
@@ -80,8 +43,8 @@ let PathMonsterSystem = System.extend({
             x: positionComponent.x,
             y: positionComponent.y
         }, {
-            x: path[currentPathIdx].x,
-            y: path[currentPathIdx].y
+            x: path[currentPathIdx + 1].x,
+            y: path[currentPathIdx + 1].y
         });
         //cc.log(positionComponent.x + " " + positionComponent.y + " " + path[currentPathIdx].x + " " + path[currentPathIdx].y + " "+ movingDeg);
         let directionDegree = new Map([[0, "MOVE_RIGHT"], [45, "MOVE_RIGHT_UP"],
@@ -100,10 +63,35 @@ let PathMonsterSystem = System.extend({
         //cc.log(movingDeg + " " + directionDegree.get(minDeg));
         return directionDegree.get(minDeg);
     },
-    _checkNextPath: function (currentPos, nextPos) {
-        let distance = Math.sqrt(Math.pow(currentPos.x - nextPos.x, 2) + Math.pow(currentPos.y - nextPos.y, 2));
-        return (distance < 10)
-    }
+    _checkNextPath: function (positionComponent, nextPos, velocityComponent) {
+        let Xa = positionComponent.x, Ya = positionComponent.y;
+        let Xb = nextPos.x, Yb = nextPos.y;
+        let signX = Math.sign(velocityComponent.speedX), signY = Math.sign(velocityComponent.speedY);
+        if (signX * (Xb - Xa) <= 0 && signY * (Yb - Ya) <= 0) {
+            cc.log("nextPath" + " signX " + signX + " " + (Xb - Xa) + " signY " + signY + " " + (Yb - Ya));
+            cc.log("CurrentPos: " + Xa + " " + Ya);
+            cc.log("NextPos: " + Xb + " " + Yb);
+            cc.log("---------------")
+            return true;
+        }
+        // let distance = Math.sqrt(Math.pow(currentPos.x - nextPos.x, 2) + Math.pow(currentPos.y - nextPos.y, 2));
+        // return (distance < 10)
+    },
+    _findNextPath: function (path, position, currentPathIdx) {
+        let minDisIdx = null;
+        let minDistance = 99999999;
+        for (let i = currentPathIdx; i < path.length - 1; i++) {
+            let distance = this._distanceFrom(path[i], position);
+            if (distance < minDistance) {
+                minDistance = distance;
+                minDisIdx = i;
+            }
+        }
+        return minDisIdx + 1;
+    },
+    _distanceFrom: function (pointA, pointB) {
+        return Math.sqrt(Math.pow(pointA.x - pointB.x, 2) + Math.pow(pointA.y - pointB.y, 2));
+    },
 });
 
 

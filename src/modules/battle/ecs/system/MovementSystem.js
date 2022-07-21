@@ -21,8 +21,13 @@ let MovementSystem = System.extend({
             }
 
             if (velocityComponent.getActive()) {
-                positionComponent.x += velocityComponent.speedX * tick;
-                positionComponent.y += velocityComponent.speedY * tick;
+                let moveDistanceX = velocityComponent.speedX * tick;
+                let moveDistanceY = velocityComponent.speedY * tick;
+                positionComponent.x += moveDistanceX;
+                positionComponent.y += moveDistanceY;
+                let moveDistance=Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
+                positionComponent.moveDistance += moveDistance;
+                // cc.log(positionComponent.moveDistance+" "+moveDistance);
             }
         }
     },
