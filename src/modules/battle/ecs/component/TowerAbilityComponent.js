@@ -12,10 +12,8 @@ let TowerAbilityComponent = Component.extend({
     },
 
     reset: function (range, effect) {
-        cc.log("TowerAbilityComponent line 39");
         this.range = range;
         this.effect = effect;
-        cc.log(effect.percent);
     }
 });
 TowerAbilityComponent.typeID = GameConfig.COMPONENT_ID.TOWER_ABILITY;
