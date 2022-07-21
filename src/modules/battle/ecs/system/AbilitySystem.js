@@ -22,7 +22,7 @@ let AbilitySystem = System.extend({
                 if (underGroundComponent.isInGround === false) {
                     if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
                         underGroundComponent.trigger += 1;
-                        underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 3;
+                        underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 2;
                         cc.log(positionComponent.moveDistance+ " "+underGroundComponent.disableMoveDistance);
                         underGroundComponent.isInGround = true;
                     }
