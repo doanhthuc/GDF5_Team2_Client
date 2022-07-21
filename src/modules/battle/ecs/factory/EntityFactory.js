@@ -117,7 +117,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
 
         // NOTE: get component from pool
         let bulletNode = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_bullet_0000.png");
-        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects);
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "wizard", GameConfig.TILE_WIDTH);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0);
@@ -575,7 +575,7 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, 10, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [damageEffect])
+    let attackComponent = ComponentFactory.create(AttackComponent, 50, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [])
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.wizard.level.A);
 
     entity.addComponent(infoComponent)

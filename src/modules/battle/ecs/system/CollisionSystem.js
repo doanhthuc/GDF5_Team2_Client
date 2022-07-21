@@ -69,11 +69,22 @@ let CollisionSystem = System.extend({
                     if (bulletInfo.type && bulletInfo.type === "frog") {
                         // handle here
                     } else {
-                        for (let effect of bulletInfo.effects) {
-                            monster.addComponent(effect.clone());
+                        // IMPORTANT: 1 bullet can affect only 1 monster
+                        if (bulletInfo.radius) {
+                            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
+                            for (let monster of monsterList) {
+                                if (Utils.euclidDistance(monster.getComponent(PositionComponent), pos) <= bulletInfo.radius) {
+                                    for (let effect of bulletInfo.effects) {
+                                        monster.addComponent(effect.clone());
+                                    }
+                                }
+                            }
+                        } else {
+                            for (let effect of bulletInfo.effects) {
+                                monster.addComponent(effect.clone());
+                            }
                         }
                         EntityManager.destroy(bullet);
-                        // IMPORTANT: 1 bullet can affect only 1 monster
                         break;
                     }
                 }
