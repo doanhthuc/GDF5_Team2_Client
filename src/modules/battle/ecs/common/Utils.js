@@ -273,6 +273,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
     let magicNumber = 27;
     let moduleCellRange = 4;
     let cellBound = 4;
+    let divideAmount = 3;
     for (let i = 0; i < tileArr.length - 1; i++) {
         let direction;
         if (i === 0) {
@@ -284,7 +285,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
         }
         if (i === 0) {
             beforeCellX = Math.floor(Math.random() * moduleCellRange) + cellBound;
-            beforeCellY = cellsEachTile - 1;
+            beforeCellY = Math.floor(Math.random() * moduleCellRange) + cellBound;
         }
         // switch (direction) {
         //     case GameConfig.DIRECTION.LEFT:
@@ -419,6 +420,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
         //         }
         //         break;
         // }
+        if (cellArr.length === 0) cellArr.push(Utils.cell2Pixel(tileArr[i].x * cellsEachTile + beforeCellX, (tileArr[i].y) * cellsEachTile + beforeCellY, mode));
         switch (direction) {
             case GameConfig.DIRECTION.BOTTOM:
                 //Hình minh họa: https://drive.google.com/file/d/1Dj7JGcYk96uMo2GFs2ZjFHR0hJNmrQTk/view?usp=sharing
@@ -431,9 +433,16 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                     cellX = tileArr[i].x * cellsEachTile + (beforeCellY + magicNumber) % moduleCellRange + cellBound;
                     cellY = (tileArr[i].y - 1) * cellsEachTile + moduleCellRange + cellBound;
                     beforeCellX = (beforeCellY + magicNumber) % moduleCellRange + cellBound;
+
+                    if (cellArr.length != 0) {
+                        let lastCell = cellArr[cellArr.length - 1];
+                        let nextCell = Utils.cell2Pixel(cellX, cellY, mode);
+                        let divideGapCellPath = Utils.divideCellPath(lastCell, nextCell, divideAmount);
+                        for (let cell of divideGapCellPath) cellArr.push(cell);
+                    }
                 }
 
-                if (cellArr.length === 0) cellArr.push(Utils.cell2Pixel(cellX, (tileArr[i].y) * cellsEachTile, mode));
+
                 cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
 
                 beforeCellY = cellsEachTile - 1;
@@ -444,11 +453,16 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                 if (beforeCellY >= cellBound && beforeCellY < cellBound + moduleCellRange) {
                     cellX = (tileArr[i].x + 1) * cellsEachTile;
                     cellY = (tileArr[i].y) * cellsEachTile + beforeCellY;
-                } //
-                else {
+                } else {
                     cellX = (tileArr[i].x + 1) * cellsEachTile;
                     cellY = tileArr[i].y * cellsEachTile + (beforeCellX + magicNumber) % moduleCellRange + cellBound;
                     beforeCellY = (beforeCellX + magicNumber) % moduleCellRange + cellBound;
+
+                    let lastCell = cellArr[cellArr.length - 1];
+                    let nextCell = Utils.cell2Pixel(cellX, cellY, mode);
+
+                    let divideGapCellPath = Utils.divideCellPath(lastCell, nextCell, divideAmount);
+                    for (let cell of divideGapCellPath) cellArr.push(cell);
                 }
                 cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
                 beforeCellX = 0;
@@ -457,13 +471,19 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                 if (beforeCellY >= cellBound && beforeCellY < cellBound + moduleCellRange) {
                     cellX = (tileArr[i].x - 1) * cellsEachTile + cellsEachTile - 1;
                     cellY = (tileArr[i].y) * cellsEachTile + beforeCellY;
-                    cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
                 } else {
                     cellX = (tileArr[i].x - 1) * cellsEachTile + cellsEachTile - 1;
                     cellY = tileArr[i].y * cellsEachTile + (beforeCellX + magicNumber) % moduleCellRange + cellBound;
                     beforeCellY = (beforeCellX + magicNumber) % moduleCellRange + cellBound;
-                    cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
+
+                    let lastCell = cellArr[cellArr.length - 1];
+                    let nextCell = Utils.cell2Pixel(cellX, cellY, mode);
+
+                    let divideGapCellPath = Utils.divideCellPath(lastCell, nextCell, divideAmount);
+                    for (let cell of divideGapCellPath) cellArr.push(cell);
+
                 }
+                cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
                 beforeCellX = cellsEachTile - 1;
                 break;
             case GameConfig.DIRECTION.TOP:
@@ -474,6 +494,12 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                     cellX = tileArr[i].x * cellsEachTile + (beforeCellY + magicNumber) % moduleCellRange + cellBound;
                     cellY = (tileArr[i].y + 1) * cellsEachTile;
                     beforeCellX = (beforeCellY + magicNumber) % moduleCellRange + cellBound;
+
+                    let lastCell = cellArr[cellArr.length - 1];
+                    let nextCell = Utils.cell2Pixel(cellX, cellY, mode);
+
+                    let divideGapCellPath = Utils.divideCellPath(lastCell, nextCell, divideAmount);
+                    for (let cell of divideGapCellPath) cellArr.push(cell);
                 }
                 cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
 
@@ -483,6 +509,16 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
 
 
         }
+    }
+    return cellArr;
+}
+Utils.divideCellPath = function (pointA, pointB, divideAmount) {
+    let cellArr = [];
+    //cc.log(pointA.x + " "+ pointA.y +" " + pointB.x);
+    for (let i = 1; i <= divideAmount - 1; i++) {
+        let cellX = pointA.x + (pointB.x - pointA.x) * i / divideAmount;
+        let cellY = pointA.y + (pointB.y - pointA.y) * i / divideAmount;
+        cellArr.push({x: cellX, y: cellY});
     }
     return cellArr;
 }

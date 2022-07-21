@@ -70,6 +70,7 @@ let BattleLayer = cc.Layer.extend({
         this.movementSystem.start(dt);
 
 
+
         if (GameConfig.DEBUG) {
             cc.warn("---------------------------------------")
             cc.warn("* Entity Manager size = " + Object.keys(EntityManager.getInstance().entities).length);
@@ -113,26 +114,26 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        setTimeout(function () {
-            EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        }, 1000);
-        setTimeout(function () {
-            EntityFactory.createAssassinMonster(pixelPos, mode);
-        }, 2000);
-        setTimeout(function () {
-            EntityFactory.createNinjaMonster(pixelPos, mode);
-        }, 3000);
-        setTimeout(function () {
-            EntityFactory.createGiantMonster(pixelPos, mode);
-        }, 5000);
-        //EntityFactory.createAssassinMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // setTimeout(function () {
+        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // }, 1000);
+        // setTimeout(function () {
+        //     EntityFactory.createAssassinMonster(pixelPos, mode);
+        // }, 2000);
+        // setTimeout(function () {
+        //     EntityFactory.createNinjaMonster(pixelPos, mode);
+        // }, 3000);
+        // setTimeout(function () {
+        //     EntityFactory.createGiantMonster(pixelPos, mode);
+        // }, 5000);
+        // EntityFactory.createAssassinMonster(pixelPos, mode);
         // EntityFactory.createGiantMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createNinjaMonster(pixelPos, mode);
+         EntityFactory.createNinjaMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        //EntityFactory.createBatMonster(pixelPos, mode);
+        // EntityFactory.createBatMonster(pixelPos, mode);
         // EntityFactory.createSatyrBoss(pixelPos, mode);
     },
 
@@ -143,28 +144,28 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        setTimeout(function () {
-            EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        }, 1000);
-        setTimeout(function () {
-            EntityFactory.createAssassinMonster(pixelPos, mode);
-        }, 2000);
-        setTimeout(function () {
-            EntityFactory.createNinjaMonster(pixelPos, mode);
-        }, 3000);
-        setTimeout(function () {
-            EntityFactory.createGiantMonster(pixelPos, mode);
-        }, 5000);
-        setTimeout(function () {
-            EntityFactory.createSatyrBoss(pixelPos, mode);
-        }, 20000);
-        setTimeout(function () {
-            EntityFactory.createDarkGiantBoss(pixelPos, mode);
-        }, 40000);
-        setTimeout(function () {
-            EntityFactory.createDemonTreeBoss(pixelPos, mode);
-        }, 60000);
+        //EntityFactory.createBatMonster(pixelPos, mode);
+        // setTimeout(function () {
+        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // }, 1000);
+        // setTimeout(function () {
+        //     EntityFactory.createAssassinMonster(pixelPos, mode);
+        // }, 2000);
+        // setTimeout(function () {
+        //     EntityFactory.createNinjaMonster(pixelPos, mode);
+        // }, 3000);
+        // setTimeout(function () {
+        //     EntityFactory.createGiantMonster(pixelPos, mode);
+        // }, 5000);
+        // setTimeout(function () {
+        //     EntityFactory.createSatyrBoss(pixelPos, mode);
+        // }, 20000);
+        // setTimeout(function () {
+        //     EntityFactory.createDarkGiantBoss(pixelPos, mode);
+        // }, 40000);
+        // setTimeout(function () {
+        //     EntityFactory.createDemonTreeBoss(pixelPos, mode);
+        // }, 60000);
 
     },
     // bornMonsterInWave: function (monsterWave, mode) {
@@ -338,9 +339,9 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
-       // this.scheduleUpdate();
+       this.scheduleUpdate();
         // this.battleLoop.start();
-        this.schedule(this.update,0.5,10000);
+        // this.schedule(this.update,0.5,10000);
         // BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
