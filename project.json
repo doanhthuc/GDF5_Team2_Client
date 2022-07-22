@@ -103,6 +103,7 @@
         "src/modules/battle/ecs/component/AppearanceComponent.js",
         "src/modules/battle/ecs/component/AttackComponent.js",
         "src/modules/battle/ecs/component/BuffAttackDamageEffect.js",
+        "src/modules/battle/ecs/component/BuffAttackRangeEffect.js",
         "src/modules/battle/ecs/component/BuffAttackSpeedEffect.js",
         "src/modules/battle/ecs/component/BulletInfoComponent.js",
         "src/modules/battle/ecs/component/CollisionComponent.js",
