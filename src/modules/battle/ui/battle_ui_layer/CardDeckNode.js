@@ -18,9 +18,11 @@ let CardDeckNode = cc.Node.extend({
 
         this.cardSlotManager = [];
         this.spriteDragManager = {};
+        this.fixedCardPosition = [null, ];
         for (let i = 1; i <= 4; i++) {
             let card = this.rootNode.getChildByName("card_" + i);
             let cardPos = this.rootNode.convertToNodeSpace(card.getPosition());
+            this.fixedCardPosition.push(cardPos);
 
             // FIXME: harcode
             // should save position of 5 card in array
@@ -50,6 +52,7 @@ let CardDeckNode = cc.Node.extend({
 
             cardDeckSlot.name = "card" + i;
             cardDeckSlot.isUp = false;
+            cardDeckSlot.number = i;
             cardDeckSlot.isClicked = false;
             this.cardSlotManager.push(cardDeckSlot);
             cardDeckSlot.id = i;
@@ -189,7 +192,8 @@ let CardDeckNode = cc.Node.extend({
                 this.spriteDragManager[touch.getID()] = sp;
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             } else {
-                this.spriteDragManager[touch.getID()] = createBearNodeAnimation(1.5 * GameConfig.TILE_WIDTH, true);
+                // this.spriteDragManager[touch.getID()] = createBearNodeAnimation(1.5 * GameConfig.TILE_WIDTH, true);
+                this.spriteDragManager[touch.getID()] = createDragTowerNode(selectedCard.type);
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             }
         }
@@ -225,7 +229,7 @@ let CardDeckNode = cc.Node.extend({
 
                 this.nextCardSlot.id = currentCardSlot.id;
                 this.cardSlotManager[i] = this.nextCardSlot;
-                this.cardSlotManager[i].runAction(cc.spawn(cc.moveTo(0.3, cardPos), cc.scaleTo(0.3, 1)).easing(cc.easeElasticIn()));
+                this.cardSlotManager[i].runAction(cc.spawn(cc.moveTo(0.3, this.fixedCardPosition[currentCardSlot.number]), cc.scaleTo(0.3, 1)).easing(cc.easeElasticIn()));
                 cc.eventManager.addListener({
                     event: cc.EventListener.TOUCH_ONE_BY_ONE,
                     onTouchBegan: this._onTouchBegan.bind(this),
@@ -237,6 +241,7 @@ let CardDeckNode = cc.Node.extend({
                 this.cardSlotManager[i].name = "card" + currentCardSlot.id;
                 this.cardSlotManager[i].isUp = false;
                 this.cardSlotManager[i].isClicked = false;
+                this.cardSlotManager[i].number = currentCardSlot.number;
 
                 this.genNextCardSlot();
                 break;

@@ -990,3 +990,18 @@ function createGoatDamageNodeAnimation(attackRange) {
     node.addChild(weaponSprite, 0, "weapon");
     return node;
 }
+
+function createDragTowerNode(towerId) {
+    let node = new cc.Node();
+    let towerName = TOWER_NAME[towerId];
+    let config = TowerAnimationConfig[towerName].level.A.animation.IDLE_270;
+    let numberDigits = config.tower.start.toString().length;
+    let towerSprite = new cc.Sprite("#" + config.tower.prefix + "0".repeat(4 - numberDigits) + config.tower.start + ".png");
+    let weaponSprite = new cc.Sprite("#" + config.weapon.prefix + "0".repeat(4 - numberDigits) + config.weapon.start + ".png");
+    let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
+    rangeAttackSprite.setScale(2 * 1.5 * GameConfig.TILE_WIDTH / 687)
+    node.addChild(towerSprite, 0, "tower");
+    node.addChild(weaponSprite, 0, "weapon");
+    node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    return node;
+}
