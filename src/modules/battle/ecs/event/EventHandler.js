@@ -29,7 +29,7 @@ EventDispatcher.getInstance()
         map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
 
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
         for (let entity of entityList) {
             if (entity.mode === currentMode) {
                 let pathComponent = entity.getComponent(PathComponent);

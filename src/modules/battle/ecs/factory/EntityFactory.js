@@ -69,13 +69,23 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 20);
+
         let path = []
 
         // FIXME: PathMonsterSystem check currentPos and NextPos is same => velocity.SpeedX = 0
         // path.push(Utils.tile2Pixel(0,4,mode));
-        path.push(Utils.tile2Pixel(startPosition.x, startPosition.x, mode));
-        path.push(Utils.tile2Pixel(targetPosition.x, targetPosition.y, mode));
-        path.push(Utils.tile2Pixel(startPosition.x, startPosition.y, mode));
+        let dividePath = Utils.divideCellPath(startPosition, targetPosition, 5);
+        path.push({x: startPosition.x, y: startPosition.y});
+        for (let i = 0; i < dividePath.length; i++) {
+            path.push(dividePath[i]);
+        }
+        path.push({x: targetPosition.x, y: targetPosition.y});
+        for (let i = dividePath.length - 1; i >= 0; i--) {
+            path.push(dividePath[i]);
+        }
+        path.push({x: startPosition.x, y: startPosition.y});
+
+
         let pathComponent = ComponentFactory.create(PathComponent, path, mode, false);
 
         let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
@@ -124,7 +134,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "wizard", GameConfig.TILE_WIDTH);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
-        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 20, 20);
 
         let bulletSpeed = 5 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);

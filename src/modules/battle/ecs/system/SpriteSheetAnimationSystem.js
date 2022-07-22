@@ -13,12 +13,13 @@ let SpriteSheetAnimationSystem = System.extend({
 
         for (let entity of entityList) {
             let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
-
             if (spriteComponent.currentStateIsRendered === false) {
                 let appearanceComponent = entity.getComponent(AppearanceComponent);
                 let stateAnim = spriteComponent.animationMap[spriteComponent.currentState];
-                //cc.log(spriteComponent.currentState);
-                //cc.log(JSON.stringify(spriteComponent.animationMap))
+                // if (entity.getComponent(TowerInfoComponent) != null) {
+                //     cc.log(spriteComponent.currentState);
+                //     cc.log(JSON.stringify(spriteComponent.animationMap))
+                // }
                 for (let spriteName of Object.keys(stateAnim)) {
                     let sprite = appearanceComponent.sprite.getChildByName(spriteName);
                     if (sprite) {

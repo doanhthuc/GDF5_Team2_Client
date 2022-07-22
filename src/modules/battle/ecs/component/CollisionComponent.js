@@ -7,9 +7,11 @@ let CollisionComponent = Component.extend({
         this.reset(width, height);
     },
 
-    reset: function (width, height) {
+    reset: function (width, height, originWidth, originHeight) {
         this.width = width;
         this.height = height;
+        this.originWidth = originWidth;
+        this.originHeight = originHeight;
     },
 
     clone: function () {
