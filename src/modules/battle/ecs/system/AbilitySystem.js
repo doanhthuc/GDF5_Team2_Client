@@ -11,6 +11,7 @@ let AbilitySystem = System.extend({
             this._handleUnderGroundComponent();
             this._handleSpawnMinionComponent(tick);
             this._handleHealingAbility(tick);
+            this._handleBuffAbility(tick);
         },
 
         _handleUnderGroundComponent: function (tick) {
@@ -81,6 +82,31 @@ let AbilitySystem = System.extend({
                 }
             }
 
+        },
+        _handleBuffAbility: function (tick) {
+            let buffTowerList = EntityManager.getInstance().getEntitiesHasComponents(TowerAbilityComponent);
+            let damageTowerList = null;
+            if (buffTowerList) {
+                damageTowerList = EntityManager.getInstance().getEntitiesHasComponents(AttackComponent);
+            }
+            for (let buffTower of buffTowerList) {
+                let towerAbilityComponent = buffTower.getComponent(TowerAbilityComponent);
+                for (let damageTower of damageTowerList) {
+                    if (this._distanceFrom(buffTower, damageTower) < towerAbilityComponent.range) {
+                        switch (towerAbilityComponent.effect.typeID) {
+                            case BuffAttackDamageEffect.typeID:
+                                let attackComponent = damageTower.getComponent(AttackComponent);
+                                cc.log('AbilitySystem.js line 99 ' + (attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent));
+                                attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
+                                break;
+                            case BuffAttackSpeedEffect.typeID:
+                                let attackSpeedComponent = damageTower.getComponent(AttackComponent);
+                                attackSpeedComponent.setSpeed(attackSpeedComponent.speed - (attackSpeedComponent.originSpeed * towerAbilityComponent.effect.percent));
+                                break;
+                        }
+                    }
+                }
+            }
         },
         _distanceFrom: function (tower, monster) {
             let towerPos = tower.getComponent(PositionComponent);

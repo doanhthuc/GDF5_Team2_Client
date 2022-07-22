@@ -27,22 +27,22 @@ let CardDeckNode = cc.Node.extend({
             let cardDeckSlot = null;
             switch (i) {
                 case 1:
-                    cardDeckSlot = new CardDeckSlot("textures/card/card_tower_cannon.png", "textures/card/card_background_1.png", 1, GameConfig.ENTITY_ID.CANNON_TOWER);
+                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.CANNON_TOWER);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 2:
-                    cardDeckSlot = new CardDeckSlot("textures/card/card_tower_ice_gun.png", "textures/card/card_background_2.png", 2, GameConfig.ENTITY_ID.BEAR_TOWER);
+                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.FROG_TOWER);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 3:
-                    cardDeckSlot = new CardDeckSlot("textures/card/card_potion_frozen.png", "textures/card/card_background_2.png", 3, GameConfig.ENTITY_ID.FROZEN_SPELL);
+                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.SNAKE_TOWER);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 4:
-                    cardDeckSlot = new CardDeckSlot("textures/card/card_potion_fireball.png", "textures/card/card_background_2.png", 4, GameConfig.ENTITY_ID.FIRE_SPELL);
+                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.WIZARD_TOWER);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
@@ -69,7 +69,7 @@ let CardDeckNode = cc.Node.extend({
 
     genNextCardSlot: function () {
         let card = this.rootNode.getChildByName("card_5");
-        this.nextCardSlot = new CardDeckSlot("textures/card/card_tower_boomerang.png", "textures/card/card_background_2.png", 4, GameConfig.ENTITY_ID.FIRE_SPELL);
+        this.nextCardSlot = new CardDeckSlot(GameConfig.ENTITY_ID.FIRE_SPELL);
         this.nextCardSlot.setPosition(card.getPosition());
         this.nextCardSlot.setScale(0.6449, 0.6449);
         this.rootNode.addChild(this.nextCardSlot, 1);
@@ -185,7 +185,7 @@ let CardDeckNode = cc.Node.extend({
                 : battleLayer.getOpponentMapNode();
             if (selectedCard.type === GameConfig.ENTITY_ID.FIRE_SPELL || selectedCard.type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
                 let sp = new cc.Sprite(BattleResource.POTION_RANGE_IMG);
-                sp.setScale(2*1.2*GameConfig.TILE_WIDTH/sp.width);
+                sp.setScale(2 * 1.2 * GameConfig.TILE_WIDTH / sp.width);
                 this.spriteDragManager[touch.getID()] = sp;
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             } else {

@@ -62,27 +62,79 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
 
+        let node = new cc.Node();
         let bulletNode = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_bullet_1_0000.png");
+        node.addChild(bulletNode, 0, "weapon");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "frog");
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
-        let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
+        let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 20);
-        let pathComponent = ComponentFactory.create(PathComponent, [
-            {x: startPosition.x, y: startPosition.y},
-            {x: targetPosition.x, y: targetPosition.y},
-            {x: startPosition.x, y: startPosition.y}
-        ]);
+        let path = []
+
+        // FIXME: PathMonsterSystem check currentPos and NextPos is same => velocity.SpeedX = 0
+        // path.push(Utils.tile2Pixel(0,4,mode));
+        path.push(Utils.tile2Pixel(startPosition.x, startPosition.x, mode));
+        path.push(Utils.tile2Pixel(targetPosition.x, targetPosition.y, mode));
+        path.push(Utils.tile2Pixel(startPosition.x, startPosition.y, mode));
+        let pathComponent = ComponentFactory.create(PathComponent, path, mode, false);
 
         let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
+        let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, BulletAnimationConfig.boomerang.level.A);
 
         entity.addComponent(infoComponent)
             .addComponent(positionComponent)
             .addComponent(appearanceComponent)
             .addComponent(velocityComponent)
             .addComponent(collisionComponent)
-            .addComponent(pathComponent);
+            .addComponent(pathComponent)
+            .addComponent(spriteComponent);
+        return entity;
+    } else if (towerType === GameConfig.ENTITY_ID.BUNNY_TOWER) {
+        let typeID = GameConfig.ENTITY_ID.BULLET;
+        let entity = this._createEntity(typeID, mode);
+
+        let node = new cc.Node();
+        let bulletNode = new cc.Sprite("textures/tower/frame/oil_gun_1_2/tower_oil_gun_bullet_0000.png");
+        node.addChild(bulletNode, 0, "bullet");
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects);
+        let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
+        let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0);
+
+        let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
+        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
+        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetPosition);
+        let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, BulletAnimationConfig.oil.level.A);
+
+        entity.addComponent(infoComponent)
+            .addComponent(positionComponent)
+            .addComponent(appearanceComponent)
+            .addComponent(velocityComponent)
+            .addComponent(collisionComponent)
+            .addComponent(spriteComponent);
+        return entity;
+    } else if (towerType === GameConfig.ENTITY_ID.WIZARD_TOWER) {
+        let typeID = GameConfig.ENTITY_ID.BULLET;
+        let entity = this._createEntity(typeID, mode);
+
+        // NOTE: get component from pool
+        let bulletNode = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_bullet_0000.png");
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "wizard", GameConfig.TILE_WIDTH);
+        let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
+        let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0);
+
+        let bulletSpeed = 5 * GameConfig.TILE_WIDTH;
+        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
+        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetPosition);
+
+        entity.addComponent(infoComponent)
+            .addComponent(positionComponent)
+            .addComponent(appearanceComponent)
+            .addComponent(velocityComponent)
+            .addComponent(collisionComponent);
         return entity;
     }
     return null;
@@ -134,7 +186,7 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 15, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 1.4 * GameConfig.TILE_WIDTH, 0);
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createAssassinNodeAnimation(), mode,pixelPos);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, createAssassinNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 120);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.assasin);
@@ -166,18 +218,18 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "air", 25, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.7* GameConfig.TILE_WIDTH, 0.7*GameConfig.TILE_WIDTH);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.7 * GameConfig.TILE_WIDTH, 0.7 * GameConfig.TILE_WIDTH);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createBatNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 140);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.bat);
-    let path=[]
+    let path = []
 
     // FIXME: PathMonsterSystem check currentPos and NextPos is same => velocity.SpeedX = 0
     // path.push(Utils.tile2Pixel(0,4,mode));
-    path.push(Utils.tile2Pixel(2,2,mode));
-    path.push(Utils.tile2Pixel(4,0,mode));
-    path.push(Utils.tile2Pixel(6,0,mode));
+    path.push(Utils.tile2Pixel(2, 2, mode));
+    path.push(Utils.tile2Pixel(4, 0, mode));
+    path.push(Utils.tile2Pixel(6, 0, mode));
     let pathComponent = ComponentFactory.create(PathComponent, path, mode, false);
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
@@ -405,7 +457,8 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID, mode);
-
+    let towerConfig = TowerConfig.getTowerConfigFromJson(typeID, 1);
+    cc.log("[EntityFactory line 458] create cannon tower: " + JSON.stringify(towerConfig));
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = createOwlNodeAnimation(attackRange);
@@ -475,15 +528,120 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
     let attackComponent = ComponentFactory.create(AttackComponent, 3, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [])
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.boomerang.level.A);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
+        .addComponent(spriteComponent);
 
     return entity;
 }
 
+EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
+    Utils.validateMode(mode);
+    let typeID = GameConfig.ENTITY_ID.BUNNY_TOWER;
+    let entity = this._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+    let attackRange = 1.5 * GameConfig.TILE_WIDTH;
+    let node = createBunnyNodeAnimation(attackRange);
+
+    let slowEffect = ComponentFactory.create(SlowEffect, 5, 0.3);
+    // NOTE: get component from pool
+    let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
+    let attackComponent = ComponentFactory.create(AttackComponent, 25, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [slowEffect])
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bunnyOil.level.A);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(attackComponent)
+        .addComponent(spriteComponent);
+
+    return entity;
+}
+
+EntityFactory.createWizardTower = function (tilePos, mode) {
+    Utils.validateMode(mode);
+    let typeID = GameConfig.ENTITY_ID.WIZARD_TOWER;
+    let entity = this._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+    let attackRange = 1.5 * GameConfig.TILE_WIDTH;
+    let node = createWizardNodeAnimation(attackRange);
+
+    let damageEffect = ComponentFactory.create(DamageEffect, 3);
+
+    let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
+    let attackComponent = ComponentFactory.create(AttackComponent, 50, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [])
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.wizard.level.A);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(attackComponent)
+        .addComponent(spriteComponent);
+
+    return entity;
+}
+
+EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode) {
+    Utils.validateMode(mode);
+    let typeID = GameConfig.ENTITY_ID.SNAKE_TOWER;
+    let entity = this._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+    let attackRange = 1.5 * GameConfig.TILE_WIDTH;
+    let node = createSnakeAttackSpeedNodeAnimation(attackRange);
+
+    let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "", "support", "aura", "");
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 0.2);
+    let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, 1.5 * GameConfig.TILE_WIDTH, buffAttackSpeedEffect);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
+
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.snake.level.A);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(towerAbilityComponent)
+        .addComponent(spriteComponent);
+
+    return entity;
+}
+
+EntityFactory.createGoatDamageTower = function (tilePos, mode) {
+    Utils.validateMode(mode);
+    let typeID = GameConfig.ENTITY_ID.GOAT_TOWER;
+    let entity = this._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+    let attackRange = 1.5 * GameConfig.TILE_WIDTH;
+    let node = createGoatDamageNodeAnimation(attackRange);
+
+    let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "", "support", "aura", "");
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 1000);
+    let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, 1.5 * GameConfig.TILE_WIDTH, buffAttackDamageEffect);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
+
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.goat.level.A);
+
+    entity.addComponent(infoComponent)
+        .addComponent(positionComponent)
+        .addComponent(appearanceComponent)
+        .addComponent(towerAbilityComponent)
+        .addComponent(spriteComponent);
+
+    return entity;
+}
 
 // Animation
 // TODO: replace this function to another place, and cache it (can prefetch when begin the match)
@@ -506,7 +664,7 @@ function createSwordmanNodeAnimation() {
 
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
-    hpBarNode.node.x  = 0;
+    hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
     return node;
 }
@@ -527,7 +685,7 @@ function createAssassinNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
-    hpBarNode.node.x  = 0;
+    hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
     return node;
 }
@@ -548,7 +706,7 @@ function createBatNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
-    hpBarNode.node.x  = 0;
+    hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
     return node;
 }
@@ -569,7 +727,7 @@ function createGiantNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
-    hpBarNode.node.x  = 0;
+    hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
     return node;
 }
@@ -590,7 +748,7 @@ function createNinjaNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
-    hpBarNode.node.x  = 0;
+    hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
     return node;
 }
@@ -611,7 +769,7 @@ function createDemonTreeNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
-    hpBarNode.node.x  = 0;
+    hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
     return node;
 }
@@ -632,7 +790,7 @@ function createDemonTreeMinionNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
-    hpBarNode.node.x  = 0;
+    hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
     return node;
 }
@@ -653,7 +811,7 @@ function createDarkGiantNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
-    hpBarNode.node.x  = 0;
+    hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
     return node;
 }
@@ -674,7 +832,7 @@ function createSatyrNodeAnimation() {
     monsterSprite.runAction(cc.repeatForever(monsterAction));
     node.addChild(monsterSprite, 0, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
-    hpBarNode.node.x  = 0;
+    hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
     return node;
 }
@@ -782,6 +940,50 @@ function createFrogNodeAnimation(attackRange) {
 
     towerSprite.runAction(cc.repeatForever(towerAction));
     weaponSprite.runAction(cc.repeatForever(weaponAction));
+
+    // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(towerSprite, 0, "tower");
+    node.addChild(weaponSprite, 0, "weapon");
+    return node;
+}
+
+function createBunnyNodeAnimation(attackRange) {
+    let node = new cc.Node();
+    let towerSprite = new cc.Sprite("res/textures/tower/frame/oil_gun_1_2/tower_oil_gun_attack_0_0011.png");
+    let weaponSprite = new cc.Sprite("res/textures/tower/frame/oil_gun_1_2/tower_oil_gun_attack_1_0011.png");
+
+    // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(towerSprite, 0, "tower");
+    node.addChild(weaponSprite, 0, "weapon");
+    return node;
+}
+
+function createWizardNodeAnimation(attackRange) {
+    let node = new cc.Node();
+    let towerSprite = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_attack_0_0000.png");
+    let weaponSprite = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_attack_1_0000.png");
+
+    // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(towerSprite, 0, "tower");
+    node.addChild(weaponSprite, 0, "weapon");
+    return node;
+}
+
+function createSnakeAttackSpeedNodeAnimation(attackRange) {
+    let node = new cc.Node();
+    let towerSprite = new cc.Sprite("res/textures/tower/frame/attack_speed_1_2/tower_attack_speed_attack_0_0000.png");
+    let weaponSprite = new cc.Sprite("res/textures/tower/frame/attack_speed_1_2/tower_attack_speed_attack_1_0000.png");
+
+    // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(towerSprite, 0, "tower");
+    node.addChild(weaponSprite, 0, "weapon");
+    return node;
+}
+
+function createGoatDamageNodeAnimation(attackRange) {
+    let node = new cc.Node();
+    let towerSprite = new cc.Sprite("res/textures/tower/frame/damage_1_2/tower_damage_attack_0_0000.png");
+    let weaponSprite = new cc.Sprite("res/textures/tower/frame/damage_1_2/tower_damage_attack_1_0000.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
     node.addChild(towerSprite, 0, "tower");
