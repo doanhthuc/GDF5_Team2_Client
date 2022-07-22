@@ -1,11 +1,12 @@
 let CardDeckSlot = cc.Node.extend({
-    ctor: function (cardImg, cardBackground, energy, cardType) {
+    ctor: function (cardType) {
         this._super();
         this._setupUI();
 
-        this.setCardImg(cardImg);
-        this.setBackground(cardBackground);
-        this.setEnergy(energy);
+        // this.setCardImg(cardImg);
+        // this.setBackground(cardBackground);
+        // this.setEnergy(energy);
+        this.setCardTexture(cardType);
         this.type = cardType;
     },
 
@@ -19,6 +20,19 @@ let CardDeckSlot = cc.Node.extend({
         this.energyNode = rootNode.getChildByName("energy");
         this.cardImgSprite = rootNode.getChildByName("entity_image");
         this.addChild(rootNode);
+    },
+
+    setCardType : function(cardType){
+        this.type = cardType;
+        this.setCardTexture(cardType);
+    },
+
+    setCardTexture: function (cardId) {
+        let cardAsset = CARD_CONST[cardId];
+
+        this.setBackground(cardAsset.background);
+        this.setCardImg(cardAsset.cardImage);
+        this.setEnergy(cardAsset.energy);
     },
 
     setCardImg: function (cardImg) {

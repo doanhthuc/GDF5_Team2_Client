@@ -10,14 +10,14 @@ let PathMonsterSystem = System.extend({
     _run: function (tick) {
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
         for (let entity of entityList) {
-           {
+            {
                 let pathComponent = entity.getComponent(PathComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
                 let velocityComponent = entity.getComponent(VelocityComponent);
                 let path = pathComponent.path, currentPathIdx = pathComponent.currentPathIdx;
 
                 let nextPosIdx = this._findNextPath(path, positionComponent, currentPathIdx);
-                if (nextPosIdx>1) pathComponent.currentPathIdx = nextPosIdx - 1;
+                if (nextPosIdx > 1) pathComponent.currentPathIdx = nextPosIdx - 1;
 
                 let nextPos = path[nextPosIdx];
                 let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
@@ -25,7 +25,7 @@ let PathMonsterSystem = System.extend({
                 velocityComponent.speedX = newVelocity.speedX;
                 velocityComponent.speedY = newVelocity.speedY;
 
-                if (entity._hasComponent(SpriteSheetAnimationComponent)) {
+                if (entity._hasComponent(SpriteSheetAnimationComponent) && entity.hasAnyComponent(MonsterInfoComponent)) {
                     let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
                     let state = this._getMovingDirection(entity);
                     if (state != spriteComponent.getCurrentState()) {
@@ -35,6 +35,12 @@ let PathMonsterSystem = System.extend({
             }
         }
     },
+
+    /**
+     *
+     * @returns {string}
+     * @private
+     */
     _getMovingDirection: function (entity) {
         let pathComponent = entity.getComponent(PathComponent);
         let positionComponent = entity.getComponent(PositionComponent);
