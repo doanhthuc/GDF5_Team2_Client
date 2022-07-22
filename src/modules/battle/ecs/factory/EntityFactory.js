@@ -69,10 +69,14 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 20);
-        let pathComponent = ComponentFactory.create(PathComponent, [
-            {x: targetPosition.x, y: targetPosition.y},
-            {x: startPosition.x, y: startPosition.y}
-        ]);
+        let path = []
+
+        // FIXME: PathMonsterSystem check currentPos and NextPos is same => velocity.SpeedX = 0
+        // path.push(Utils.tile2Pixel(0,4,mode));
+        path.push(Utils.tile2Pixel(startPosition.x, startPosition.x, mode));
+        path.push(Utils.tile2Pixel(targetPosition.x, targetPosition.y, mode));
+        path.push(Utils.tile2Pixel(startPosition.x, startPosition.y, mode));
+        let pathComponent = ComponentFactory.create(PathComponent, path, mode, false);
 
         let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
