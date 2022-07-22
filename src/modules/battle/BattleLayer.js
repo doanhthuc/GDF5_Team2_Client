@@ -38,6 +38,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     _initSystem: function () {
+        this.resetSystem = SystemFactory.create(ResetSystem);
         this.movementSystem = SystemFactory.create(MovementSystem);
         this.renderSystem = SystemFactory.create(RenderSystem);
         this.lifeSystem = SystemFactory.create(LifeSystem);
@@ -55,18 +56,19 @@ let BattleLayer = cc.Layer.extend({
 
     update: function (dt) {
         // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
+        this.resetSystem.start(dt);
+        this.abilitySystem.start(dt);
+        this.effectSystem.start(dt);
         this.attackSystem.start(dt);
         this.renderSystem.start(dt);
         this.lifeSystem.start(dt);
         this.collisionSystem.start(dt);
-        this.effectSystem.start(dt);
         this.pathSystem.start(dt);
         this.spriteSheetAnimationSystem.start(dt);
         this.spellSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
         this.monsterSystem.start(dt);
         this.bulletSystem.start(dt);
-        this.abilitySystem.start(dt);
         this.movementSystem.start(dt);
 
 
@@ -115,18 +117,18 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
         EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        setTimeout(function () {
-            EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        }, 1000);
-        setTimeout(function () {
-            EntityFactory.createAssassinMonster(pixelPos, mode);
-        }, 2000);
-        setTimeout(function () {
-            EntityFactory.createNinjaMonster(pixelPos, mode);
-        }, 3000);
-        setTimeout(function () {
-            EntityFactory.createGiantMonster(pixelPos, mode);
-        }, 5000);
+        // setTimeout(function () {
+        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // }, 1000);
+        // setTimeout(function () {
+        //     EntityFactory.createAssassinMonster(pixelPos, mode);
+        // }, 2000);
+        // setTimeout(function () {
+        //     EntityFactory.createNinjaMonster(pixelPos, mode);
+        // }, 3000);
+        // setTimeout(function () {
+        //     EntityFactory.createGiantMonster(pixelPos, mode);
+        // }, 5000);
         // EntityFactory.createAssassinMonster(pixelPos, mode);
         // EntityFactory.createGiantMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
@@ -175,8 +177,8 @@ let BattleLayer = cc.Layer.extend({
     //     // //    // setTimeout(this.createMonster(pixelPos,mode,entityID),time);
     //     // // )
     // },
-    createMonster: function (pixelPos,mode,entityID){
-        switch (entityID){
+    createMonster: function (pixelPos, mode, entityID) {
+        switch (entityID) {
             case GameConfig.ENTITY_ID.SWORD_MAN:
                 EntityFactory.createSwordsmanMonster(pixelPos, mode);
                 break;
@@ -272,6 +274,18 @@ let BattleLayer = cc.Layer.extend({
             case GameConfig.ENTITY_ID.BEAR_TOWER:
                 EntityFactory.createIceGunPolarBearTower(tilePos, mode);
                 break;
+            case GameConfig.ENTITY_ID.BUNNY_TOWER:
+                EntityFactory.createBunnyOilGunTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.WIZARD_TOWER:
+                EntityFactory.createWizardTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.SNAKE_TOWER:
+                EntityFactory.createSnakeAttackSpeedTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.GOAT_TOWER:
+                EntityFactory.createGoatDamageTower(tilePos, mode);
+                break;
             default:
                 return;
         }
@@ -288,7 +302,7 @@ let BattleLayer = cc.Layer.extend({
                 SpellFactory.createFrozenSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.TRAP:
-                SpellFactory.createTrap(pixelPos, mode);
+                SpellFactory.createTrap(tilePos, mode);
                 break;
             default:
                 return;
@@ -296,7 +310,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     shouldUpgradeTower: function (towerId, tilePos) {
-        if (GameConfig.NETWORK==0) return false;
+        if (GameConfig.NETWORK === 0) return false;
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
         if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null) {
             let tower = cellObject.tower;
@@ -376,6 +390,11 @@ let BattleLayer = cc.Layer.extend({
     _prefetchAssetGame: function () {
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/ice_gun.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/oil_gun.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/boomerang.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/wizard.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/attack_speed.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/tower_damage.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/swordsman.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/ninja.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/assassin.plist");

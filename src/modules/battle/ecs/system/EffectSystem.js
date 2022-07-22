@@ -8,6 +8,7 @@ let EffectSystem = System.extend({
     },
 
     _run: function (tick) {
+        this._handleBuffAttackRangeEffect(tick);
         this._handleBuffAttackSpeedEffect(tick);
         this._handleBuffAttackDamageEffect(tick);
         this._handleDamageEffect(tick);
@@ -31,10 +32,10 @@ let EffectSystem = System.extend({
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackDamageEffect, AttackComponent);
         for (let entity of entityList) {
+            cc.log("_handleBuffAttackDamageEffect line 34");
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackDamageComponent = entity.getComponent(BuffAttackDamageEffect);
-
-            attackComponent.setDamage(attackComponent.originDamage * buffAttackDamageComponent.percent);
+            attackComponent.setDamage(attackComponent.damage + attackComponent.originDamage * buffAttackDamageComponent.percent);
         }
     },
 
@@ -85,6 +86,17 @@ let EffectSystem = System.extend({
                 velocityComponent.speedX = slowComponent.percent * velocityComponent.originSpeedX;
                 velocityComponent.speedY = slowComponent.percent * velocityComponent.originSpeedY;
             }
+        }
+    },
+
+    _handleBuffAttackRangeEffect: function () {
+        let entityList = EntityManager.getInstance()
+            .getEntitiesHasComponents(BuffAttackRangeEffect, AttackComponent);
+        for (let entity of entityList) {
+            let attackComponent = entity.getComponent(AttackComponent);
+            let buffAttackRangeComponent = entity.getComponent(BuffAttackRangeEffect);
+
+            attackComponent.range = attackComponent.originRange + attackComponent.originRange * buffAttackRangeComponent.percent;
         }
     },
 

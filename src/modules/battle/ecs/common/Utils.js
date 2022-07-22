@@ -514,7 +514,6 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
 }
 Utils.divideCellPath = function (pointA, pointB, divideAmount) {
     let cellArr = [];
-    //cc.log(pointA.x + " "+ pointA.y +" " + pointB.x);
     for (let i = 1; i <= divideAmount - 1; i++) {
         let cellX = pointA.x + (pointB.x - pointA.x) * i / divideAmount;
         let cellY = pointA.y + (pointB.y - pointA.y) * i / divideAmount;
