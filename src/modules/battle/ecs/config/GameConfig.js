@@ -29,6 +29,7 @@ GameConfig.COMPONENT_ID = {
     HEALING_ABILITY: 20,
     SPRITE_SHEET: 21,
     TOWER_ABILITY: 22,
+    BUFF_ATTACK_RANGE: 23,
 }
 GameConfig.MAP = {
     NONE: 0,
