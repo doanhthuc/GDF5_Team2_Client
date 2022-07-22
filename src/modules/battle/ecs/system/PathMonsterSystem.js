@@ -63,34 +63,31 @@ let PathMonsterSystem = System.extend({
         //cc.log(movingDeg + " " + directionDegree.get(minDeg));
         return directionDegree.get(minDeg);
     },
-    _checkNextPath: function (positionComponent, nextPos, velocityComponent) {
-        let Xa = positionComponent.x, Ya = positionComponent.y;
-        let Xb = nextPos.x, Yb = nextPos.y;
-        let signX = Math.sign(velocityComponent.speedX), signY = Math.sign(velocityComponent.speedY);
-        if (signX * (Xb - Xa) <= 0 && signY * (Yb - Ya) <= 0) {
-            cc.log("nextPath" + " signX " + signX + " " + (Xb - Xa) + " signY " + signY + " " + (Yb - Ya));
-            cc.log("CurrentPos: " + Xa + " " + Ya);
-            cc.log("NextPos: " + Xb + " " + Yb);
-            cc.log("---------------")
-            return true;
-        }
-        // let distance = Math.sqrt(Math.pow(currentPos.x - nextPos.x, 2) + Math.pow(currentPos.y - nextPos.y, 2));
-        // return (distance < 10)
-    },
+    // _checkNextPath: function (positionComponent, nextPos, velocityComponent) {
+    //     let Xa = positionComponent.x, Ya = positionComponent.y;
+    //     let Xb = nextPos.x, Yb = nextPos.y;
+    //     let signX = Math.sign(velocityComponent.speedX), signY = Math.sign(velocityComponent.speedY);
+    //     if (signX * (Xb - Xa) <= 0 && signY * (Yb - Ya) <= 0) {
+    //         cc.log("nextPath" + " signX " + signX + " " + (Xb - Xa) + " signY " + signY + " " + (Yb - Ya));
+    //         cc.log("CurrentPos: " + Xa + " " + Ya);
+    //         cc.log("NextPos: " + Xb + " " + Yb);
+    //         cc.log("---------------")
+    //         return true;
+    //     }
+    //     // let distance = Math.sqrt(Math.pow(currentPos.x - nextPos.x, 2) + Math.pow(currentPos.y - nextPos.y, 2));
+    //     // return (distance < 10)
+    // },
     _findNextPath: function (path, position, currentPathIdx) {
         let minDisIdx = null;
         let minDistance = 99999999;
         for (let i = currentPathIdx; i < path.length - 1; i++) {
-            let distance = this._distanceFrom(path[i], position);
+            let distance = Utils.euclidDistance(path[i], position);
             if (distance < minDistance) {
                 minDistance = distance;
                 minDisIdx = i;
             }
         }
         return minDisIdx + 1;
-    },
-    _distanceFrom: function (pointA, pointB) {
-        return Math.sqrt(Math.pow(pointA.x - pointB.x, 2) + Math.pow(pointA.y - pointB.y, 2));
     },
 });
 
