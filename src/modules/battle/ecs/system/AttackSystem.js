@@ -11,7 +11,7 @@ let AttackSystem = System.extend({
         let towerList = EntityManager.getInstance()
             .getEntitiesHasComponents(AttackComponent);
         let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(MonsterInfoComponent);
+            .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
 
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
@@ -40,7 +40,7 @@ let AttackSystem = System.extend({
 
                         this._changeTowerAnimation(tower, targetMonster);
 
-                        if (tower.typeID == GameConfig.ENTITY_ID.FROG_TOWER) {
+                        if (tower.typeID === GameConfig.ENTITY_ID.FROG_TOWER) {
                             let distance = this._distanceFrom(tower, targetMonster);
                             let k = attackComponent.range / distance;
                             let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);

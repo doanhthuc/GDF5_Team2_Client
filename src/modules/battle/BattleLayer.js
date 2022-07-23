@@ -72,7 +72,6 @@ let BattleLayer = cc.Layer.extend({
         this.movementSystem.start(dt);
 
 
-
         if (GameConfig.DEBUG) {
             cc.warn("---------------------------------------")
             cc.warn("* Entity Manager size = " + Object.keys(EntityManager.getInstance().entities).length);
@@ -116,7 +115,7 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        //EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // setTimeout(function () {
         //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // }, 1000);
@@ -132,7 +131,7 @@ let BattleLayer = cc.Layer.extend({
         // EntityFactory.createAssassinMonster(pixelPos, mode);
         // EntityFactory.createGiantMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-         EntityFactory.createNinjaMonster(pixelPos, mode);
+        EntityFactory.createNinjaMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createBatMonster(pixelPos, mode);
@@ -361,10 +360,10 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
-      //  this.battleLoop.start();
-        this.schedule(this.update,0.1,10000);
-       // this.scheduleUpdate();
-       //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        //  this.battleLoop.start();
+        //this.schedule(this.update,0.1,10000);
+        this.scheduleUpdate();
+        //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
     stopGame: function () {
