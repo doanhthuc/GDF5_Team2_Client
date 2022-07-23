@@ -57,10 +57,12 @@ SpellFactory.createTrap = function (tilePos, mode) {
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createTrapNode(), mode, pixelPos);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, PotionAnimationConfig.trap);
     let collisionComponent = ComponentFactory.create(CollisionComponent, GameConfig.TILE_WIDTH, GameConfig.TILE_HEIGH);
+    let trapInfo = ComponentFactory.create(TrapInfoComponent, 0.55);
 
     entity.addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(spriteComponent)
+        .addComponent(trapInfo)
         .addComponent(collisionComponent);
 
     return entity;

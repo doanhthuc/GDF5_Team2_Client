@@ -14,6 +14,7 @@ let EffectSystem = System.extend({
         // IMPORTANT: SlowEffect < FrozenEffect
         this._handleSlowEffect(tick);
         this._handleFrozenEffect(tick);
+        this._handleTrapEffect(tick);
     },
 
     _handleBuffAttackSpeedEffect: function (tick) {
@@ -84,6 +85,46 @@ let EffectSystem = System.extend({
             } else {
                 velocityComponent.speedX = slowComponent.percent * velocityComponent.originSpeedX;
                 velocityComponent.speedY = slowComponent.percent * velocityComponent.originSpeedY;
+            }
+        }
+    },
+
+    _handleTrapEffect: function (dt) {
+        let monsterList = EntityManager.getInstance()
+            .getEntitiesHasComponents(TrapEffect);
+
+        for (let entity of monsterList) {
+            let trapEffect = entity.getComponent(TrapEffect);
+
+            if (trapEffect.isExecuted) {
+                if (trapEffect.countdown > 0) {
+                    trapEffect.countdown -= dt;
+                } else {
+                    let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, entity.mode);
+                    let newPos = ComponentFactory.create(PositionComponent, bornPos.x, bornPos.y);
+                    entity.addComponent(newPos);
+
+                    let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(entity.mode)[GameConfig.MAP_HEIGH - 1 - GameConfig.MONSTER_BORN_POSITION.y][GameConfig.MONSTER_BORN_POSITION.x];
+                    let pathComponent = ComponentFactory.create(PathComponent, path, entity.mode);
+                    entity.addComponent(pathComponent);
+
+                    entity.removeComponent(TrapEffect);
+                }
+            } else {
+                let pos = entity.getComponent(PositionComponent);
+
+                let pathComponent = entity.getComponent(PathComponent);
+                let appearanceComponent = entity.getComponent(AppearanceComponent);
+
+                pathComponent.currentPathIdx = 0;
+                entity.removeComponent(PositionComponent);
+
+                let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, entity.mode);
+                let time = Utils.euclidDistance(pos, bornPos) / (2*GameConfig.TILE_WIDTH);
+                let action = cc.spawn(cc.jumpTo(time, bornPos, 100, 1));
+                appearanceComponent.sprite.runAction(action);
+
+                trapEffect.setCountDown(time+0.5);
             }
         }
     },
