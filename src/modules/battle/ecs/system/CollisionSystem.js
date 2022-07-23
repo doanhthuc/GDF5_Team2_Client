@@ -15,7 +15,7 @@ let CollisionSystem = System.extend({
 
     _run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(CollisionComponent)
+            .getEntitiesHasComponents(CollisionComponent, PositionComponent)
 
         if (GameConfig.DEBUG) {
             cc.error("Collision entity size = " + entityList.length);
@@ -111,21 +111,35 @@ let CollisionSystem = System.extend({
                     let appearanceComponent = entity.getComponent(AppearanceComponent);
                     pathComponent.path.unshift({x: pos.x, y: pos.y});
                     pathComponent.currentPathIdx = 0;
-                    // pathComponent.reset(pathComponent.path, pathComponent.mode, false);
                     // let origin = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(entity.mode)[GameConfig.MAP_HEIGH - 1 - 4][0];
                     // entity.removeComponent(VelocityComponent);
                     // entity.removeComponent(PathComponent);
+                    entity.removeComponent(PositionComponent);
                     // pos.x = pathComponent.path[0].x;
                     // pos.y = pathComponent.path[0].y;
 
                     // cc.log("origin position = " + JSON.stringify(origin));
-                    let action = cc.spawn(
-                        cc.jumpTo(4, pathComponent.path[1], 100, 4),
-                        cc.rotateBy(4, 720));
+                    let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, trapEntity.mode);
+                    let time = Utils.euclidDistance(pos, bornPos) / (2*GameConfig.TILE_WIDTH);
+                    let action = cc.spawn(cc.jumpTo(time, bornPos, 100, 1));
+                    entity.trapEffect = {
+                        countDown: time
+                    }
+                    cc.log(time);
+                    let tmpEntity = entity;
+                    setTimeout(function() {
+                        cc.error("Execute");
+                        let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, trapEntity.mode);
+                        let newPos = ComponentFactory.create(PositionComponent, bornPos.x, bornPos.y);
+                        tmpEntity.addComponent(newPos);
+                        tmpEntity.getComponent(PathComponent).currentPathIdx = 1;
+                    }, (time+0.5)*1000);
 
                     appearanceComponent.sprite.runAction(action);
                     delete trapEntity.isTriggered;
                 }
+
+                EntityManager.destroy(trapEntity);
             }
         } else {
             if (!trapEntity.countTrigger || trapEntity.countTrigger < 1) {
@@ -144,8 +158,10 @@ let CollisionSystem = System.extend({
                     let entity1 = trapEntity, entity2 = returnObjects[j].entity;
                     if (entity1 !== entity2 && entity1.mode === entity2.mode && this._isCollide(entity1, entity2)) {
                         // The first monster will trigger the trap
-                        trapEntity.isTriggered = 0.3;
+                        trapEntity.isTriggered = 0.55;
                         trapEntity.countTrigger = 2;
+                        let spriteComponent = trapEntity.getComponent(SpriteSheetAnimationComponent);
+                        spriteComponent.changeCurrentState("ATTACK");
                         break;
                     }
                 }

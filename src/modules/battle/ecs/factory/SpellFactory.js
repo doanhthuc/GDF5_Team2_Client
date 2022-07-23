@@ -48,7 +48,7 @@ SpellFactory.createFireSpell = function (pixelPos, mode) {
 }
 
 SpellFactory.createTrap = function (tilePos, mode) {
-    let typeID = GameConfig.ENTITY_ID.TRAP;
+    let typeID = GameConfig.ENTITY_ID.TRAP_SPELL;
     let entity = EntityFactory._createEntity(typeID, mode);
 
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
@@ -56,12 +56,14 @@ SpellFactory.createTrap = function (tilePos, mode) {
 
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, createTrapNode(), mode, pixelPos);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, PotionAnimationConfig.trap);
-    let collisionComponent = ComponentFactory.create(CollisionComponent, GameConfig.TILE_WIDTH / 2, GameConfig.TILE_HEIGH / 2);
+    let collisionComponent = ComponentFactory.create(CollisionComponent, GameConfig.TILE_WIDTH, GameConfig.TILE_HEIGH);
 
     entity.addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(spriteComponent)
         .addComponent(collisionComponent);
+
+    return entity;
 }
 
 function createTrapNode () {

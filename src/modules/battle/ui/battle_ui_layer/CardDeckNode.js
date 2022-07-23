@@ -37,7 +37,7 @@ let CardDeckNode = cc.Node.extend({
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 3:
-                    cardDeckSlot = new CardDeckSlot("textures/card/card_potion_frozen.png", "textures/card/card_background_2.png", 3, GameConfig.ENTITY_ID.BUNNY_TOWER);
+                    cardDeckSlot = new CardDeckSlot("textures/card/card_potion_frozen.png", "textures/card/card_background_2.png", 3, GameConfig.ENTITY_ID.TRAP_SPELL);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
