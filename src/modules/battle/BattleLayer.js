@@ -5,7 +5,7 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-        if (GameConfig.NETWORK == 0) BattleData.fakeData();
+        if (GameConfig.NETWORK === 0) BattleData.fakeData();
         this.battleData = BattleManager.getInstance().getBattleData();
         // this.battleLoop = new BattleLoop();
 
@@ -230,14 +230,18 @@ let BattleLayer = cc.Layer.extend({
                 || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
                 return;
             }
+        } else if (ValidatorECS.isTrap(type)) {
+            // check valid position
         } else {
             throw new Error("Type is invalid");
         }
 
-        if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
+        if (ValidatorECS.isSpell(type)) {
             this.dropSpell(type, pixelPos, mode)
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
-        } else {
+        } else if (ValidatorECS.isTrap(type)) {
+            SpellFactory.createTrap(tilePos, mode);
+        } else if (ValidatorECS.isTower(type)) {
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()
             //         .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
@@ -248,15 +252,19 @@ let BattleLayer = cc.Layer.extend({
             // }
             this.putTowerCardIntoMap(type, tilePos, mode);
         }
+
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
     putTowerCardIntoMap: function (type, tilePos, mode) {
-        if (this.shouldUpgradeTower(type, tilePos)) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
-            return;
+        if (GameConfig.NETWORK) {
+            if (this.shouldUpgradeTower(type, tilePos)) {
+                EventDispatcher.getInstance()
+                    .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+                return;
+            }
         }
+
         if (this.shouldPutNewTower(tilePos)) {
             this.buildTower(type, tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);

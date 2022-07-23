@@ -23,7 +23,8 @@ let AttackSystem = System.extend({
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
-                    if (monster.getActive() && monster.mode === tower.mode) {
+                    if (monster.getActive() && monster.mode === tower.mode
+                        && monster.hasAllComponent(PositionComponent)) {
                         let distance = this._distanceFrom(tower, monster);
                         if (distance <= attackComponent.range) {
                             monsterInAttackRange.push(monster);

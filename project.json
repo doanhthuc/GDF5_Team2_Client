@@ -121,6 +121,8 @@
         "src/modules/battle/ecs/component/SpriteSheetAnimationComponent.js",
         "src/modules/battle/ecs/component/TowerAbilityComponent.js",
         "src/modules/battle/ecs/component/TowerInfoComponent.js",
+        "src/modules/battle/ecs/component/TrapEffect.js",
+        "src/modules/battle/ecs/component/TrapInfoComponent.js",
         "src/modules/battle/ecs/component/UnderGroundComponent.js",
         "src/modules/battle/ecs/component/VelocityComponent.js",
         "src/modules/battle/ecs/system/System.js",
