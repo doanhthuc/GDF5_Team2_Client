@@ -147,9 +147,9 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
         //EntityFactory.createBatMonster(pixelPos, mode);
-        // setTimeout(function () {
-        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // }, 1000);
+        setTimeout(function () {
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        }, 1000);
         // setTimeout(function () {
         //     EntityFactory.createAssassinMonster(pixelPos, mode);
         // }, 2000);
@@ -353,10 +353,10 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
-       this.scheduleUpdate();
-        // this.battleLoop.start();
-        // this.schedule(this.update,0.5,10000);
-        // BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+      //  this.battleLoop.start();
+        this.schedule(this.update,0.1,10000);
+       // this.scheduleUpdate();
+       //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
     stopGame: function () {
