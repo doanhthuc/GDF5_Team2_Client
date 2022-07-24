@@ -5,8 +5,11 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-        if (GameConfig.NETWORK == 0) BattleData.fakeData();
+        if (GameConfig.NETWORK == 0) {
+            BattleData.fakeData();
+        }
         this.battleData = BattleManager.getInstance().getBattleData();
+
         // this.battleLoop = new BattleLoop();
 
         this._setupUI();
@@ -72,7 +75,6 @@ let BattleLayer = cc.Layer.extend({
         this.movementSystem.start(dt);
 
 
-
         if (GameConfig.DEBUG) {
             cc.warn("---------------------------------------")
             cc.warn("* Entity Manager size = " + Object.keys(EntityManager.getInstance().entities).length);
@@ -132,7 +134,7 @@ let BattleLayer = cc.Layer.extend({
         // EntityFactory.createAssassinMonster(pixelPos, mode);
         // EntityFactory.createGiantMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-         EntityFactory.createNinjaMonster(pixelPos, mode);
+        EntityFactory.createNinjaMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createBatMonster(pixelPos, mode);
@@ -307,6 +309,8 @@ let BattleLayer = cc.Layer.extend({
             default:
                 return;
         }
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.DROP_SPELL, {cardId: spellId, mode: mode});
     },
 
     shouldUpgradeTower: function (towerId, tilePos) {
@@ -330,12 +334,6 @@ let BattleLayer = cc.Layer.extend({
         return cellObject.objectInCellType === ObjectInCellType.NONE;
     },
 
-    _initTower: function () {
-        EntityFactory.createCannonOwlTower({x: 1, y: 3}, GameConfig.PLAYER);
-        EntityFactory.createIceGunPolarBearTower({x: 1, y: 1}, GameConfig.PLAYER);
-        EntityFactory.createBoomerangFrogTower({x: 3, y: 3}, GameConfig.PLAYER);
-    },
-
     _handleEventKey: function () {
         cc.eventManager.addListener(cc.EventListener.create({
             event: cc.EventListener.TOUCH_ALL_AT_ONCE,
@@ -353,7 +351,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
-       this.scheduleUpdate();
+        this.scheduleUpdate();
         // this.battleLoop.start();
         // this.schedule(this.update,0.5,10000);
         // BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
@@ -405,6 +403,7 @@ let BattleLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/dark_giant.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/satyr.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/tower_pedestal.plist");
     },
 
     _clearAsset: function () {

@@ -1,9 +1,13 @@
 let CardDeckNode = cc.Node.extend({
-    ctor: function () {
+    ctor: function (cardDeckListData) {
         this._super();
+
+        this.cardDeckListData = cardDeckListData;
+        this.selectableCardIdList = this.cardDeckListData.getFirst4CardId();
 
         this.rootNode = ccs.load(BattleResource.CARD_DECK_NODE, "").node;
         this.addChild(this.rootNode);
+        BattleManager.getInstance().registerCardDeckNode(this);
 
         // background
         let background = this.rootNode.getChildByName("background");
@@ -18,7 +22,7 @@ let CardDeckNode = cc.Node.extend({
 
         this.cardSlotManager = [];
         this.spriteDragManager = {};
-        this.fixedCardPosition = [null, ];
+        this.fixedCardPosition = [null,];
         for (let i = 1; i <= 4; i++) {
             let card = this.rootNode.getChildByName("card_" + i);
             let cardPos = this.rootNode.convertToNodeSpace(card.getPosition());
@@ -29,33 +33,33 @@ let CardDeckNode = cc.Node.extend({
             let cardDeckSlot = null;
             switch (i) {
                 case 1:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.CANNON_TOWER);
+                    cardDeckSlot = new CardDeckSlot(this.selectableCardIdList[i - 1]);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 2:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.FROG_TOWER);
+                    cardDeckSlot = new CardDeckSlot(this.selectableCardIdList[i - 1]);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 3:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.SNAKE_TOWER);
+                    cardDeckSlot = new CardDeckSlot(this.selectableCardIdList[i - 1]);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 4:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.WIZARD_TOWER);
+                    cardDeckSlot = new CardDeckSlot(this.selectableCardIdList[i - 1]);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
             }
 
+            cardDeckSlot.id = i;
             cardDeckSlot.name = "card" + i;
             cardDeckSlot.isUp = false;
             cardDeckSlot.number = i;
             cardDeckSlot.isClicked = false;
             this.cardSlotManager.push(cardDeckSlot);
-            cardDeckSlot.id = i;
 
             cc.eventManager.addListener({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -68,11 +72,30 @@ let CardDeckNode = cc.Node.extend({
         this._handleEventKey();
 
         this.genNextCardSlot();
+
+        EventDispatcher.getInstance()
+            .addEventHandler(EventType.PUT_NEW_TOWER,
+                this.handleChangeCardEvent.bind(this))
+            .addEventHandler(EventType.UPGRADE_TOWER,
+                this.handleChangeCardEvent.bind(this))
+            .addEventHandler(EventType.DROP_SPELL,
+                this.handleChangeCardEvent.bind(this))
+    },
+
+    handleChangeCardEvent: function (data) {
+        let index = this.cardSlotManager.findIndex(function (cardSlot) {
+            return cardSlot.type === data.cardId;
+        });
+        cc.log(JSON.stringify(this.cardSlotManager))
+        cc.log("==> index = cardDeckNode line 89 " + index);
+        if (index === -1) return;
+        this.nextCard(index);
     },
 
     genNextCardSlot: function () {
         let card = this.rootNode.getChildByName("card_5");
-        this.nextCardSlot = new CardDeckSlot(GameConfig.ENTITY_ID.FIRE_SPELL);
+        let cardId = this.cardDeckListData.getNextCardId();
+        this.nextCardSlot = new CardDeckSlot(cardId);
         this.nextCardSlot.setPosition(card.getPosition());
         this.nextCardSlot.setScale(0.6449, 0.6449);
         this.rootNode.addChild(this.nextCardSlot, 1);
@@ -204,7 +227,7 @@ let CardDeckNode = cc.Node.extend({
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
                 onKeyPressed: function (key, event) {
-                    this.nextCard(2)
+                    this.nextCard(3)
                 }.bind(this),
                 onKeyReleased: function (key, event) {
                     cc.log("Key up:" + key);
@@ -229,6 +252,7 @@ let CardDeckNode = cc.Node.extend({
 
                 this.nextCardSlot.id = currentCardSlot.id;
                 this.cardSlotManager[i] = this.nextCardSlot;
+                cc.log("Card Deck Node js line 243 : " + JSON.stringify(this.cardSlotManager[i]));
                 this.cardSlotManager[i].runAction(cc.spawn(cc.moveTo(0.3, this.fixedCardPosition[currentCardSlot.number]), cc.scaleTo(0.3, 1)).easing(cc.easeElasticIn()));
                 cc.eventManager.addListener({
                     event: cc.EventListener.TOUCH_ONE_BY_ONE,

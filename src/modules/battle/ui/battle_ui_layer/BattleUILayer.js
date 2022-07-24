@@ -3,6 +3,9 @@ let BattleUILayer = cc.Layer.extend({
         this._super();
 
         this.battleData = battleData;
+        let fakeBattleDeckData = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        this.cardDeckListData = new CardDeckListData(fakeBattleDeckData);
+        // this.battleData.setCards(this.cardDeckListData.getFirst4CardId(), GameConfig.PLAYER);
 
         this.twoPlayerInfoLayer = new TwoPlayerInfoLayer(BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.PLAYER)
             , BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.OPPONENT));
@@ -20,7 +23,7 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _showDeckCard: function () {
-        this.cardDeckNode = new CardDeckNode();
+        this.cardDeckNode = new CardDeckNode(this.cardDeckListData);
         this.cardDeckNode.x = this.width / 2;
         this.cardDeckNode.y = this.cardDeckNode.height / 2;
         this.addChild(this.cardDeckNode);

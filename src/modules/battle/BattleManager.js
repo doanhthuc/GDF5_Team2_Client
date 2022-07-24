@@ -2,9 +2,10 @@ let BattleManager = cc.Class.extend({
     ctor: function () {
         this.battleData = null;
         this.battleLayer = null;
+        this.cardDeckNode = null;
     },
 
-    registerBattleData: function (battleData, override=false) {
+    registerBattleData: function (battleData, override = false) {
         if (override === false && this.battleData) {
             throw new Error("Battle Data exists. Can't re-register")
         }
@@ -25,6 +26,14 @@ let BattleManager = cc.Class.extend({
     getBattleLayer: function () {
         return this.battleLayer;
     },
+
+    registerCardDeckNode: function (node) {
+        this.cardDeckNode = node;
+    },
+
+    getCardDeckNode: function () {
+        return this.cardDeckNode;
+    }
 });
 
 let _instanceBuilder = (function () {
