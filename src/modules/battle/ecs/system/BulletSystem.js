@@ -15,16 +15,24 @@ let BulletSystem = System.extend({
             let bulletPos = bullet.getComponent(PositionComponent);
             let bulletVelocity = bullet.getComponent(VelocityComponent);
 
-            if (!bulletVelocity.dynamicPosition) continue;
+            if (!bulletVelocity.entityID) continue;
 
-            if (bulletVelocity.dynamicPosition.getActive() === false) {
-                bulletVelocity.dynamicPosition = null;
-                EntityManager.destroy(bullet);
-                continue;
+            let targetEntity = EntityManager.getInstance().getEntity(bulletVelocity.entityID);
+
+            if (targetEntity) {
+                let dynamicPos = targetEntity.getComponent(PositionComponent);
+                if (dynamicPos && dynamicPos.getActive() === false) {
+                    EntityManager.destroy(bullet);
+                    continue;
+                }
             }
 
-            if (Math.abs(bulletVelocity.dynamicPosition.x - bulletPos.x) <= 3
-                && Math.abs(bulletVelocity.dynamicPosition.y - bulletPos.y) <= 3) {
+            if (!targetEntity) continue;
+            let dynamicPos = targetEntity.getComponent(PositionComponent);
+            if (!dynamicPos) continue;
+
+            if (Math.abs(dynamicPos.x - bulletPos.x) <= 3
+                && Math.abs(dynamicPos.y - bulletPos.y) <= 3) {
                 // bullet.removeComponent(VelocityComponent);
                 let collisionComponent = bullet.getComponent(CollisionComponent);
                 if (collisionComponent) {
