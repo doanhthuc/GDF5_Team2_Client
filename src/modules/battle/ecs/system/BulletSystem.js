@@ -15,7 +15,7 @@ let BulletSystem = System.extend({
             let bulletVelocity = bullet.getComponent(VelocityComponent);
             let pathComponent = bullet.getComponent(PathComponent);
             if (pathComponent != null) {
-                if (pathComponent.currentPathIdx == pathComponent.path.length - 2) EntityManager.destroy(bullet);
+                if (pathComponent.currentPathIdx === pathComponent.path.length - 2) EntityManager.destroy(bullet);
                 continue;
             }
             if (!bulletVelocity.dynamicPosition) continue;
@@ -31,8 +31,6 @@ let BulletSystem = System.extend({
                 // bullet.removeComponent(VelocityComponent);
                 let collisionComponent = bullet.getComponent(CollisionComponent);
                 if (collisionComponent) {
-                    // collisionComponent.width = 1;
-                    // collisionComponent.height = 1;
                     collisionComponent.width = collisionComponent.originWidth;
                     collisionComponent.height = collisionComponent.originHeight;
                 }

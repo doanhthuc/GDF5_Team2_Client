@@ -208,7 +208,7 @@ let CollisionSystem = System.extend({
 
         if ((w1 === 0 && h1 === 0) || (w2 === 0 && h2 === 0)) return false;
 
-        // // DEBUG
+        //DEBUG
         // if (this._isMonsterAndBullet(entity1, entity2)
         //     && cc.rectIntersectsRect(cc.rect(pos1.x - w1 / 2, pos1.y - h1 / 2, w1, h1), cc.rect(pos2.x - w2 / 2, pos2.y - h2 / 2, w2, h2))) {
         //     let rect1 = cc.DrawNode.create();

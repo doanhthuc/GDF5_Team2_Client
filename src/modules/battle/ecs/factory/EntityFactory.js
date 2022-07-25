@@ -26,7 +26,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, 0.6);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
-        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
 
         let bulletSpeed = 5 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
