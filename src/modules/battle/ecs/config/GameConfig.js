@@ -98,6 +98,11 @@ GameConfig.TOWER_TARGET_STRATEGY = {
     MIN_DISTANCE: 4
 }
 
+GameConfig.FROG_BULLET= {
+    HIT_FIRST_TIME:1,
+    HIT_SECOND_TIME:2,
+    HIT_BOTH_TIME:3,
+}
 GameConfig.HOUSE_POSITION = {x: 6, y: 0};
 GameConfig.MONSTER_BORN_POSITION = {x: 0, y: 4};
 GameConfig.TILE_WIDTH = 77;

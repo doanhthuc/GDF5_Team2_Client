@@ -66,10 +66,37 @@ let CollisionSystem = System.extend({
                 if (data) {
                     let monster = data.monster, bullet = data.bullet;
                     let bulletInfo = bullet.getComponent(BulletInfoComponent);
+                    //Handle Frog Bullet
                     if (bulletInfo.type && bulletInfo.type === "frog") {
-                        for (let effect of bulletInfo.effects) {
-                            monster.addComponent(effect.clone());
+                        let pathComponent = bullet.getComponent(PathComponent);
+                        //check the the bullet is in first path
+                        if (pathComponent.currentPathIdx <= pathComponent.path.length / 2) {
+                            if (bulletInfo.hitMonster.has(monster.id) === false)
+                                for (let effect of bulletInfo.effects) {
+                                    monster.addComponent(effect.clone());
+                                    bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_FIRST_TIME);
+                                }
+                        } //check the second path
+                        else {
+                            // check if this monster was not hit in First Path
+                            if (bulletInfo.hitMonster.has(monster.id) === false) {
+                                for (let effect of bulletInfo.effects) {
+                                    monster.addComponent(effect.clone());
+                                    bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_SECOND_TIME);
+                                }
+                            }  // else if this monster is hit in First Path
+                            else if (bulletInfo.hitMonster.get(monster.id) === GameConfig.FROG_BULLET.HIT_FIRST_TIME) {
+                                for (let effect of bulletInfo.effects) {
+                                    if (effect.typeID === GameConfig.COMPONENT_ID.DAMAGE_EFFECT) {
+                                        let newDamageEffect = effect.clone();
+                                        newDamageEffect.damage = effect.damage * 1.5;
+                                        monster.addComponent(newDamageEffect);
+                                        bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_BOTH_TIME);
+                                    }
+                                }
+                            }
                         }
+
                     } else {
                         // IMPORTANT: 1 bullet can affect only 1 monster
                         if (bulletInfo.radius) {
@@ -88,11 +115,13 @@ let CollisionSystem = System.extend({
                         }
                         EntityManager.destroy(bullet);
                         break;
+
                     }
                 }
             }
         }
-    },
+    }
+    ,
 
     _handleCollisionTrap: function (trapEntity, dt) {
         if (trapEntity.isTriggered) {
@@ -165,7 +194,8 @@ let CollisionSystem = System.extend({
             }
 
         }
-    },
+    }
+    ,
 
     _isCollide: function (entity1, entity2) {
         let pos1 = entity1.getComponent(PositionComponent);
@@ -193,7 +223,8 @@ let CollisionSystem = System.extend({
         return cc.rectIntersectsRect(cc.rect(pos1.x - w1 / 2, pos1.y - h1 / 2, w1, h1), cc.rect(pos2.x - w2 / 2, pos2.y - h2 / 2, w2, h2));
         // let x1 = pos1.x - w1 / 2, x2 = pos2.x - w2 / 2, y1 = pos1.y - h1 / 2, y2 = pos2.y - h2 / 2;
         // return x1 <= x2 + w2 && x1 + w1 >= x2 && y1 + h1 >= y2 && y2 + h2 >= y1;
-    },
+    }
+    ,
 
     _isMonsterAndBullet: function (entity1, entity2) {
         // TODO: check entity2 is monster, not only sword man
