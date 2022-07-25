@@ -20,6 +20,9 @@ let CardDeckNode = cc.Node.extend({
         this.deckEnergyProgress.setPosition(this.rootNode.convertToNodeSpace(progressPos));
         this.rootNode.addChild(this.deckEnergyProgress);
 
+        // Cancel button
+        // let cancelButtonNode = ccs
+
         this.cardSlotManager = [];
         this.spriteDragManager = {};
         this.fixedCardPosition = [null,];
@@ -80,16 +83,12 @@ let CardDeckNode = cc.Node.extend({
                 this.handleChangeCardEvent.bind(this))
             .addEventHandler(EventType.DROP_SPELL,
                 this.handleChangeCardEvent.bind(this))
+
+        this.selectedCard = null;
     },
 
     handleChangeCardEvent: function (data) {
-        let index = this.cardSlotManager.findIndex(function (cardSlot) {
-            return cardSlot.type === data.cardId;
-        });
-        cc.log(JSON.stringify(this.cardSlotManager))
-        cc.log("==> index = cardDeckNode line 89 " + index);
-        if (index === -1) return;
-        this.nextCard(index);
+        this.nextCard(this.selectedCard.id);
     },
 
     genNextCardSlot: function () {
@@ -104,11 +103,12 @@ let CardDeckNode = cc.Node.extend({
     _onTouchBegan: function (touch, event) {
         let touchPos = touch.getLocation();
         let selectedCard = event.getCurrentTarget();
-
         let selectedCardBoundingBox = cc.rect(-selectedCard.width / 2, -selectedCard.height / 2, selectedCard.width, selectedCard.height);
         let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos)) === true;
 
         if (touchInCard) {
+            cc.log("CardDeckNode _onTouchBegan " + JSON.stringify(selectedCard));
+            this.selectedCard = selectedCard;
             if (selectedCard.isUp === false) {
                 this._moveCardUp(selectedCard);
                 // Select card
@@ -242,18 +242,21 @@ let CardDeckNode = cc.Node.extend({
         for (let i = 0; i < this.cardSlotManager.length; i++) {
             let currentCardSlot = this.cardSlotManager[i];
             if (currentCardSlot.id === replaceCardSlotID) {
-                currentCardSlot.setVisible(false);
+                // currentCardSlot.setVisible(false);
                 // should save position of 5 card in array, and use it, not use the current slot card position
                 let cardPos = currentCardSlot.getPosition();
-                if (currentCardSlot.isUp) {
-                    // FIXME: hardcode
-                    cardPos.y = cardPos.y - 30;
-                }
+                // if (currentCardSlot.isUp) {
+                //     // FIXME: hardcode
+                //     cardPos.y = cardPos.y - 30;
+                // }
+
 
                 this.nextCardSlot.id = currentCardSlot.id;
-                this.cardSlotManager[i] = this.nextCardSlot;
+                cc.log("Card Deck Node line 256 : " + JSON.stringify(this.nextCardSlot));
+                cc.log(JSON.stringify(currentCardSlot))
+                this.cardSlotManager[i].setCardType(this.nextCardSlot.type);
                 cc.log("Card Deck Node js line 243 : " + JSON.stringify(this.cardSlotManager[i]));
-                this.cardSlotManager[i].runAction(cc.spawn(cc.moveTo(0.3, this.fixedCardPosition[currentCardSlot.number]), cc.scaleTo(0.3, 1)).easing(cc.easeElasticIn()));
+                // this.cardSlotManager[i].runAction(cc.spawn(cc.moveTo(0.3, this.fixedCardPosition[currentCardSlot.number]), cc.scaleTo(0.3, 1)).easing(cc.easeElasticIn()));
                 cc.eventManager.addListener({
                     event: cc.EventListener.TOUCH_ONE_BY_ONE,
                     onTouchBegan: this._onTouchBegan.bind(this),
