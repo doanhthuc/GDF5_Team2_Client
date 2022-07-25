@@ -31,10 +31,10 @@ let BulletSystem = System.extend({
                 // bullet.removeComponent(VelocityComponent);
                 let collisionComponent = bullet.getComponent(CollisionComponent);
                 if (collisionComponent) {
-                    collisionComponent.width = 1;
-                    collisionComponent.height = 1;
-                    // collisionComponent.width = collisionComponent.originWidth;
-                    // collisionComponent.height = collisionComponent.originHeight;
+                    // collisionComponent.width = 1;
+                    // collisionComponent.height = 1;
+                    collisionComponent.width = collisionComponent.originWidth;
+                    collisionComponent.height = collisionComponent.originHeight;
                 }
             }
 
