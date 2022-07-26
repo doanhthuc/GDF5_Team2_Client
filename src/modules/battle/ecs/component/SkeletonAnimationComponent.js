@@ -7,8 +7,7 @@ let SkeletonAnimationComponent = Component.extend({
         this.reset(fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position, mode);
     },
 
-    reset: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position, mode) {
-        Utils.validateMode(mode);
+    reset: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, parent) {
         this.fileJson = fileJson;
         this.fileAtlas = fileAtlas;
         this.timeLine = timeLine;
@@ -16,14 +15,9 @@ let SkeletonAnimationComponent = Component.extend({
         this.sequenceAnimLoop = sequenceAnimLoop;
         this.accTime = 0;
         this.currentIdx = 0;
-        this.position = position;
 
         this.spine = new sp.SkeletonAnimation(this.fileJson, this.fileAtlas);
-        if (mode === GameConfig.PLAYER) {
-            BattleManager.getInstance().getBattleLayer().getPlayerMapNode().addChild(this.spine, 4);
-        } else if (mode === GameConfig.OPPONENT) {
-            BattleManager.getInstance().getBattleLayer().getOpponentMapNode().addChild(this.spine, 4);
-        }
+        parent.addChild(this.spine, 4);
     },
 
     clone: function () {

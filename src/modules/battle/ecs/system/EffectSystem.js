@@ -89,6 +89,7 @@ let EffectSystem = System.extend({
             }
         }
     },
+    
     _handleBuffAttackRangeEffect: function () {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackRangeEffect, AttackComponent);
@@ -99,6 +100,7 @@ let EffectSystem = System.extend({
             attackComponent.range = attackComponent.originRange + attackComponent.originRange * buffAttackRangeComponent.percent;
         }
     },
+    
     _handleTrapEffect: function (dt) {
         let monsterList = EntityManager.getInstance()
             .getEntitiesHasComponents(TrapEffect);

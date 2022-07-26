@@ -30,6 +30,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
 
         let bulletSpeed = 5 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
+
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetPosition);
 
         entity.addComponent(infoComponent)
@@ -849,6 +850,7 @@ function createSatyrNodeAnimation() {
 
 function createOwlNodeAnimation(range) {
     let node = new cc.Node();
+    let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_wood.png");
     let towerSprite = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_attack_2_0009.png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
@@ -878,6 +880,7 @@ function createOwlNodeAnimation(range) {
     towerSprite.runAction(cc.repeatForever(towerAction));
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(pedestalSprite, 0, "pedestal");
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
     return node;
@@ -885,6 +888,7 @@ function createOwlNodeAnimation(range) {
 
 function createBearNodeAnimation(attackRange, isShowRange) {
     let node = new cc.Node();
+    let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
     let towerSprite = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_0010.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_0010.png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
@@ -916,6 +920,7 @@ function createBearNodeAnimation(attackRange, isShowRange) {
     if (isShowRange) {
         node.addChild(rangeAttackSprite, 0, "rangeAttack");
     }
+    node.addChild(pedestalSprite, 0, "pedestal");
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
     return node;
@@ -923,6 +928,7 @@ function createBearNodeAnimation(attackRange, isShowRange) {
 
 function createFrogNodeAnimation(attackRange) {
     let node = new cc.Node();
+    let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_steel.png");
     let towerSprite = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_attack_0_0011.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_attack_1_0011.png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
@@ -952,6 +958,7 @@ function createFrogNodeAnimation(attackRange) {
     weaponSprite.runAction(cc.repeatForever(weaponAction));
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(pedestalSprite, 0, "pedestal");
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
     return node;
@@ -959,10 +966,12 @@ function createFrogNodeAnimation(attackRange) {
 
 function createBunnyNodeAnimation(attackRange) {
     let node = new cc.Node();
+    let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
     let towerSprite = new cc.Sprite("res/textures/tower/frame/oil_gun_1_2/tower_oil_gun_attack_0_0011.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/oil_gun_1_2/tower_oil_gun_attack_1_0011.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(pedestalSprite, 0, "pedestal");
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
     return node;
@@ -970,10 +979,12 @@ function createBunnyNodeAnimation(attackRange) {
 
 function createWizardNodeAnimation(attackRange) {
     let node = new cc.Node();
+    let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_steel.png");
     let towerSprite = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_attack_0_0000.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_attack_1_0000.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(pedestalSprite, 0, "pedestal");
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
     return node;
@@ -981,10 +992,12 @@ function createWizardNodeAnimation(attackRange) {
 
 function createSnakeAttackSpeedNodeAnimation(attackRange) {
     let node = new cc.Node();
+    let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
     let towerSprite = new cc.Sprite("res/textures/tower/frame/attack_speed_1_2/tower_attack_speed_attack_0_0000.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/attack_speed_1_2/tower_attack_speed_attack_1_0000.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(pedestalSprite, 0, "pedestal");
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
     return node;
@@ -992,11 +1005,28 @@ function createSnakeAttackSpeedNodeAnimation(attackRange) {
 
 function createGoatDamageNodeAnimation(attackRange) {
     let node = new cc.Node();
+    let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
     let towerSprite = new cc.Sprite("res/textures/tower/frame/damage_1_2/tower_damage_attack_0_0000.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/damage_1_2/tower_damage_attack_1_0000.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(pedestalSprite, 0, "pedestal");
     node.addChild(towerSprite, 0, "tower");
     node.addChild(weaponSprite, 0, "weapon");
+    return node;
+}
+
+function createDragTowerNode(towerId) {
+    let node = new cc.Node();
+    let towerName = TOWER_NAME[towerId];
+    let config = TowerAnimationConfig[towerName].level.A.animation.IDLE_270;
+    let numberDigits = config.tower.start.toString().length;
+    let towerSprite = new cc.Sprite("#" + config.tower.prefix + "0".repeat(4 - numberDigits) + config.tower.start + ".png");
+    let weaponSprite = new cc.Sprite("#" + config.weapon.prefix + "0".repeat(4 - numberDigits) + config.weapon.start + ".png");
+    let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
+    rangeAttackSprite.setScale(2 * 1.5 * GameConfig.TILE_WIDTH / 687)
+    node.addChild(towerSprite, 0, "tower");
+    node.addChild(weaponSprite, 0, "weapon");
+    node.addChild(rangeAttackSprite, 0, "rangeAttack");
     return node;
 }

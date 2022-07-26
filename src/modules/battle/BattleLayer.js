@@ -5,8 +5,11 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-        if (GameConfig.NETWORK === 0) BattleData.fakeData();
+        if (GameConfig.NETWORK == 0) {
+            BattleData.fakeData();
+        }
         this.battleData = BattleManager.getInstance().getBattleData();
+
         // this.battleLoop = new BattleLoop();
 
         this._setupUI();
@@ -314,6 +317,8 @@ let BattleLayer = cc.Layer.extend({
             default:
                 return;
         }
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.DROP_SPELL, {cardId: spellId, mode: mode});
     },
 
     shouldUpgradeTower: function (towerId, tilePos) {
@@ -337,12 +342,6 @@ let BattleLayer = cc.Layer.extend({
         return cellObject.objectInCellType === ObjectInCellType.NONE;
     },
 
-    _initTower: function () {
-        EntityFactory.createCannonOwlTower({x: 1, y: 3}, GameConfig.PLAYER);
-        EntityFactory.createIceGunPolarBearTower({x: 1, y: 1}, GameConfig.PLAYER);
-        EntityFactory.createBoomerangFrogTower({x: 3, y: 3}, GameConfig.PLAYER);
-    },
-
     _handleEventKey: function () {
         cc.eventManager.addListener(cc.EventListener.create({
             event: cc.EventListener.TOUCH_ALL_AT_ONCE,
@@ -357,6 +356,23 @@ let BattleLayer = cc.Layer.extend({
                 }
             }
         }), this.uiLayer)
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            onTouchBegan: function (touch, event) {
+                let globalPos = touch.getLocation();
+                let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
+                let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
+                if (Utils.validateTilePos(tilePos)) {
+                    let playeMapMatrix = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+                    if (playeMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
+                        BattleManager.getInstance().getBattleLayer()
+                            .uiLayer.showTargetCircle(tilePos.x, tilePos.y);
+                    }
+                }
+                return false;
+            },
+        }, this.uiLayer);
     },
 
     startGame: function () {
@@ -412,6 +428,7 @@ let BattleLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/dark_giant.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/satyr.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/tower_pedestal.plist");
     },
 
     _clearAsset: function () {
