@@ -639,7 +639,7 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 1000);
+    let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 1.2);
     let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, 1.5 * GameConfig.TILE_WIDTH, buffAttackDamageEffect);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
 
