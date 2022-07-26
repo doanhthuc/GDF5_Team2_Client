@@ -590,7 +590,7 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, 50, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 0.6, 0, [])
+    let attackComponent = ComponentFactory.create(AttackComponent, 50, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [])
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.wizard.level.A);
 
     entity.addComponent(infoComponent)
