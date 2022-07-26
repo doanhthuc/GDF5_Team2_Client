@@ -64,6 +64,12 @@ Utils.validateMode = function (mode) {
     }
 }
 
+/**
+ *
+ * @param worldPos {pixel}
+ * @param mode {GameConfig.PLAYER | GameConfig.OPPONENT}
+ * @returns {vec2_object|cc.Point|*}
+ */
 Utils.convertWorldSpace2MapNodeSpace = function (worldPos, mode) {
     Utils.validateMode(mode);
 
@@ -71,6 +77,16 @@ Utils.convertWorldSpace2MapNodeSpace = function (worldPos, mode) {
         return BattleManager.getInstance().getBattleLayer().getPlayerMapNode().convertToNodeSpace(worldPos);
     } else {
         return BattleManager.getInstance().getBattleLayer().getOpponentMapNode().convertToNodeSpace(worldPos);
+    }
+}
+
+Utils.convertMapNodeSpace2WorldSpace = function (pixelPos, mode) {
+    Utils.validateMode(mode);
+
+    if (mode === GameConfig.PLAYER) {
+        return BattleManager.getInstance().getBattleLayer().getPlayerMapNode().convertToWorldSpace(pixelPos);
+    } else {
+        return BattleManager.getInstance().getBattleLayer().getOpponentMapNode().convertToWorldSpace(pixelPos);
     }
 }
 
@@ -214,7 +230,7 @@ Utils.cell2Pixel = function (cellX, cellY, mode) {
  * Convert cell coordination to tile coordination (1 tile = 11 cells)
  * @param cellX
  * @param cellY
- * @returns {{x: number, y: number}|{x: *, y: *}|{x: *, y: *}}
+ * @returns {{x: number, y: number}|{x: *, y: *}|{x: *, y: *}} tile position
  */
 Utils.cell2Tile = function (cellX, cellY) {
     if (cellX < 0 || cellX >= cellsX || cellY < 0 || cellY >= cellsY) {

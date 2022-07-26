@@ -8,7 +8,6 @@ let SpriteSheetAnimationComponent = Component.extend({
     },
 
     reset: function (config) {
-        if(this.id === 49) cc.log("config.initState ||" , config.initState);
         this.currentState = config.initState;
         this.currentStateIsRendered = false;
         this.animationMap = {
@@ -68,21 +67,24 @@ let SpriteSheetAnimationComponent = Component.extend({
         for (let i = start; i <= end; i++) {
             let numberDigits = i.toString().length;
             let fileName = prefix + ("0".repeat(4 - numberDigits) + i) + suffix;
+            //cc.log(fileName)
             let sprite = cc.spriteFrameCache.getSpriteFrame(fileName);
             animFrames.push(sprite);
         }
+
         let animation = new cc.Animation(animFrames);
-        let delay = time || 1000;
-        animation.setDelayPerUnit(delay / 1000 / animFrames.length);
+        let delay = (time || 1000) / 1000;
+        animation.setDelayPerUnit(delay / animFrames.length);
         animation.retain();
 
         let animArr = [];
         if (sequenceAnimName) {
             animArr.push(this._buildConfig(config, sequenceAnimName[0], spriteName));
         }
-        return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat};
+
+        return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat, delay: delay};
     },
-    getCurrentState: function () {
+    getCurrentState:function (){
         return this.currentState;
     }
 });

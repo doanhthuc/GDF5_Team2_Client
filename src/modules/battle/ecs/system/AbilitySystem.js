@@ -20,15 +20,18 @@ let AbilitySystem = System.extend({
                 let lifeComponent = entity.getComponent(LifeComponent);
                 let underGroundComponent = entity.getComponent(UnderGroundComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
-                if (underGroundComponent.isInGround === false) {
-                    if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
-                        underGroundComponent.trigger += 1;
-                        underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 2;
-                        underGroundComponent.isInGround = true;
-                    }
-                } else {
-                    if (underGroundComponent.disableMoveDistance <= positionComponent.moveDistance) {
-                        underGroundComponent.isInGround = false;
+                //check if the Monster have Position Component
+                if (positionComponent) {
+                    if (underGroundComponent.isInGround === false) {
+                        if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
+                            underGroundComponent.trigger += 1;
+                            underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 2;
+                            underGroundComponent.isInGround = true;
+                        }
+                    } else {
+                        if (underGroundComponent.disableMoveDistance <= positionComponent.moveDistance) {
+                            underGroundComponent.isInGround = false;
+                        }
                     }
                 }
             }
@@ -56,11 +59,11 @@ let AbilitySystem = System.extend({
         },
 
         _handleHealingAbility: function (tick) {
-            let entityList = EntityManager.getInstance().getEntitiesHasComponents(HealingAbility);
+            let entityList = EntityManager.getInstance().getEntitiesHasComponents(HealingAbility, PositionComponent);
 
             let monsterList = null;
             if (entityList) {
-                monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
+                monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
             }
 
             for (let satyr of entityList) {
@@ -71,10 +74,12 @@ let AbilitySystem = System.extend({
                     healingAbility.countdown = 1;
                     for (let monster of monsterList) {
                         if (monster.getActive() && monster.mode === satyr.mode) {
-                            let distance = this._distanceFrom(satyr, monster);
-                            if (distance <= healingAbility.range) {
-                                let lifeComponent = monster.getComponent(LifeComponent);
-                                lifeComponent.hp = Math.min(lifeComponent.hp + lifeComponent.maxHP * healingAbility.healingRate, lifeComponent.maxHP);
+                            if (monster.getComponent(PositionComponent)) {
+                                let distance = this._distanceFrom(satyr, monster);
+                                if (distance <= healingAbility.range) {
+                                    let lifeComponent = monster.getComponent(LifeComponent);
+                                    lifeComponent.hp = Math.min(lifeComponent.hp + lifeComponent.maxHP * healingAbility.healingRate, lifeComponent.maxHP);
+                                }
                             }
                         }
                     }
@@ -95,7 +100,6 @@ let AbilitySystem = System.extend({
                         switch (towerAbilityComponent.effect.typeID) {
                             case BuffAttackDamageEffect.typeID:
                                 let attackComponent = damageTower.getComponent(AttackComponent);
-                                cc.log('AbilitySystem.js line 99 ' + (attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent));
                                 attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
                                 break;
                             case BuffAttackSpeedEffect.typeID:

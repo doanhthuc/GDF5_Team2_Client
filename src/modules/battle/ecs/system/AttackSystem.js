@@ -11,7 +11,7 @@ let AttackSystem = System.extend({
         let towerList = EntityManager.getInstance()
             .getEntitiesHasComponents(AttackComponent);
         let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(MonsterInfoComponent);
+            .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
 
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
@@ -23,7 +23,8 @@ let AttackSystem = System.extend({
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
-                    if (monster.getActive() && monster.mode === tower.mode) {
+                    if (monster.getActive() && monster.mode === tower.mode
+                        && monster.hasAllComponent(PositionComponent)) {
                         let distance = this._distanceFrom(tower, monster);
                         if (distance <= attackComponent.range) {
                             monsterInAttackRange.push(monster);
@@ -39,7 +40,7 @@ let AttackSystem = System.extend({
 
                         this._changeTowerAnimation(tower, targetMonster);
 
-                        if (tower.typeID == GameConfig.ENTITY_ID.FROG_TOWER) {
+                        if (tower.typeID === GameConfig.ENTITY_ID.FROG_TOWER) {
                             let distance = this._distanceFrom(tower, targetMonster);
                             let k = attackComponent.range / distance;
                             let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
@@ -65,17 +66,14 @@ let AttackSystem = System.extend({
         for (let monster of monsterInAttackRange) {
             if (monster.typeID === GameConfig.ENTITY_ID.DARK_GIANT) return monster;
         }
-        for (let monster of monsterInAttackRange) {
-            let underGroundComponent = monster.getComponent(UnderGroundComponent);
-            if ((!(underGroundComponent) || underGroundComponent.isInGround === false)) return monster;
-        }
+        return monsterInAttackRange[0];
         let targetMonster = null;
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP:
                 let maxHP = -1;
                 let maxIdx = -1;
                 for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterInfo = monsterInAttackRange[i].getComponent(MonsterInfoComponent);
+                    let monsterInfo = monsterInAttackRange[i].getComponent(LifeComponent);
                     if (monsterInfo.hp > maxHP) {
                         maxHP = monsterInfo.hp;
                         maxIdx = i;

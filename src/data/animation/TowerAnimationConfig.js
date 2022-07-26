@@ -27,6 +27,14 @@ let TowerAnimationConfig = {
                             end: 74,
                             time: 1000,
                             repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_25: {
@@ -43,6 +51,14 @@ let TowerAnimationConfig = {
                             suffix: ".png",
                             start: 75,
                             end: 89,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         }
@@ -63,13 +79,21 @@ let TowerAnimationConfig = {
                             end: 104,
                             time: 1000,
                             repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_75: {
                         tower: {
                             prefix: "tower_cannon_idle_0_",
                             suffix: ".png",
-                            start: 91,
+                            start: 105,
                             end: 119,
                             time: 1000,
                             repeat: true,
@@ -77,8 +101,16 @@ let TowerAnimationConfig = {
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
                             suffix: ".png",
-                            start: 91,
+                            start: 105,
                             end: 119,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         }
@@ -99,6 +131,14 @@ let TowerAnimationConfig = {
                             end: 134,
                             time: 1000,
                             repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_115: {
@@ -110,6 +150,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "IDLE_75",
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         }
                     },
@@ -123,6 +171,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_50",
                             repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_165: {
@@ -134,6 +190,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "IDLE_25",
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         }
                     },
@@ -147,6 +211,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_0",
                             repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_205: {
@@ -158,6 +230,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "IDLE_345",
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         }
                     },
@@ -171,6 +251,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_320",
                             repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_255: {
@@ -182,6 +270,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "IDLE_295",
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         }
                     },
@@ -199,6 +295,14 @@ let TowerAnimationConfig = {
                             suffix: ".png",
                             start: 0,
                             end: 14,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         }
@@ -219,6 +323,14 @@ let TowerAnimationConfig = {
                             end: 29,
                             time: 1000,
                             repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         }
                     },
                     IDLE_320: {
@@ -235,6 +347,14 @@ let TowerAnimationConfig = {
                             suffix: ".png",
                             start: 30,
                             end: 44,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         }
@@ -255,6 +375,14 @@ let TowerAnimationConfig = {
                             end: 59,
                             time: 1000,
                             repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         }
                     },
 
@@ -273,6 +401,14 @@ let TowerAnimationConfig = {
                             end: 44,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_0"]
                     },
                     ATTACK_25: {
@@ -289,6 +425,14 @@ let TowerAnimationConfig = {
                             start: 45,
                             end: 53,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_25"]
                     },
@@ -307,6 +451,14 @@ let TowerAnimationConfig = {
                             end: 62,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_50"]
                     },
                     ATTACK_75: {
@@ -323,6 +475,14 @@ let TowerAnimationConfig = {
                             start: 63,
                             end: 71,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_75"]
                     },
@@ -341,6 +501,14 @@ let TowerAnimationConfig = {
                             end: 80,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_90"]
                     },
                     ATTACK_115: {
@@ -351,6 +519,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "ATTACK_75"
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_115"]
                     },
@@ -363,6 +539,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "ATTACK_50"
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_140"]
                     },
                     ATTACK_165: {
@@ -374,6 +558,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "ATTACK_25"
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_165"]
                     },
                     ATTACK_180: {
@@ -384,8 +576,15 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "ATTACK_0"
-                        }
-                        ,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_180"]
                     },
                     ATTACK_205: {
@@ -396,6 +595,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "ATTACK_345"
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_205"]
                     },
@@ -408,6 +615,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "ATTACK_320"
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_230"]
                     },
                     ATTACK_255: {
@@ -419,7 +634,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "ATTACK_295"
                         },
-                        sequence: ["IDLE_295"]
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        sequence: ["IDLE_255"]
                     },
                     ATTACK_270: {
                         tower: {
@@ -435,6 +658,14 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 8,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_270"]
                     },
@@ -453,6 +684,14 @@ let TowerAnimationConfig = {
                             end: 17,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_295"]
                     },
                     ATTACK_320: {
@@ -470,6 +709,14 @@ let TowerAnimationConfig = {
                             end: 26,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_320"]
                     },
                     ATTACK_345: {
@@ -486,6 +733,14 @@ let TowerAnimationConfig = {
                             start: 27,
                             end: 35,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_wood_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_345"]
                     },
@@ -521,7 +776,15 @@ let TowerAnimationConfig = {
                             end: 69,
                             time: 1000,
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_25: {
                         tower: {
@@ -539,14 +802,22 @@ let TowerAnimationConfig = {
                             end: 83,
                             time: 1000,
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_50: {
                         tower: {
                             prefix: "tower_ice_gun_idle_0_",
                             suffix: ".png",
                             start: 84,
-                            end: 98,
+                            end: 97,
                             time: 1000,
                             repeat: true,
                         },
@@ -554,16 +825,24 @@ let TowerAnimationConfig = {
                             prefix: "tower_ice_gun_idle_1_",
                             suffix: ".png",
                             start: 84,
-                            end: 98,
+                            end: 97,
                             time: 1000,
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_75: {
                         tower: {
                             prefix: "tower_ice_gun_idle_0_",
                             suffix: ".png",
-                            start: 99,
+                            start: 98,
                             end: 111,
                             time: 1000,
                             repeat: true,
@@ -571,11 +850,19 @@ let TowerAnimationConfig = {
                         weapon: {
                             prefix: "tower_ice_gun_idle_1_",
                             suffix: ".png",
-                            start: 99,
+                            start: 98,
                             end: 111,
                             time: 1000,
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_90: {
                         tower: {
@@ -593,7 +880,15 @@ let TowerAnimationConfig = {
                             end: 125,
                             time: 1000,
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_115: {
                         tower: {
@@ -605,7 +900,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_75",
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_140: {
                         tower: {
@@ -617,7 +920,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_50",
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_165: {
                         tower: {
@@ -629,7 +940,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_25",
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_180: {
                         tower: {
@@ -641,7 +960,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_0",
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_205: {
                         tower: {
@@ -653,7 +980,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_345",
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_230: {
                         tower: {
@@ -665,7 +1000,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_320",
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_255: {
                         tower: {
@@ -677,7 +1020,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "IDLE_295",
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_270: {
                         tower: {
@@ -695,7 +1046,15 @@ let TowerAnimationConfig = {
                             end: 13,
                             time: 1000,
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_295: {
                         tower: {
@@ -713,7 +1072,15 @@ let TowerAnimationConfig = {
                             end: 27,
                             time: 1000,
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_320: {
                         tower: {
@@ -731,7 +1098,15 @@ let TowerAnimationConfig = {
                             end: 41,
                             time: 1000,
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_345: {
                         tower: {
@@ -749,7 +1124,15 @@ let TowerAnimationConfig = {
                             end: 55,
                             time: 1000,
                             repeat: true,
-                        }
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
 
                     ATTACK_0: {
@@ -766,6 +1149,14 @@ let TowerAnimationConfig = {
                             start: 40,
                             end: 49,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_0"]
                     },
@@ -784,6 +1175,14 @@ let TowerAnimationConfig = {
                             end: 59,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_25"]
                     },
                     ATTACK_50: {
@@ -800,6 +1199,14 @@ let TowerAnimationConfig = {
                             start: 60,
                             end: 69,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_50"]
                     },
@@ -818,6 +1225,14 @@ let TowerAnimationConfig = {
                             end: 79,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_75"]
                     },
                     ATTACK_90: {
@@ -835,6 +1250,14 @@ let TowerAnimationConfig = {
                             end: 89,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_90"]
                     },
                     ATTACK_115: {
@@ -845,6 +1268,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "ATTACK_75"
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_115"]
                     },
@@ -857,6 +1288,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "ATTACK_50"
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_140"]
                     },
                     ATTACK_165: {
@@ -868,6 +1307,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "ATTACK_25"
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_165"]
                     },
                     ATTACK_180: {
@@ -878,8 +1325,15 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "ATTACK_0"
-                        }
-                        ,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_180"]
                     },
                     ATTACK_205: {
@@ -890,6 +1344,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: "ATTACK_345"
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_205"]
                     },
@@ -902,6 +1364,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "ATTACK_320"
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_230"]
                     },
                     ATTACK_255: {
@@ -913,7 +1383,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: "ATTACK_295"
                         },
-                        sequence: ["IDLE_295"]
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        sequence: ["IDLE_255"]
                     },
                     ATTACK_270: {
                         tower: {
@@ -929,6 +1407,14 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 9,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_270"]
                     },
@@ -947,6 +1433,14 @@ let TowerAnimationConfig = {
                             end: 19,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_295"]
                     },
                     ATTACK_320: {
@@ -964,6 +1458,14 @@ let TowerAnimationConfig = {
                             end: 29,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ["IDLE_320"]
                     },
                     ATTACK_345: {
@@ -980,6 +1482,14 @@ let TowerAnimationConfig = {
                             start: 30,
                             end: 39,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ["IDLE_345"]
                     },
@@ -1048,6 +1558,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_25: {
                         tower: {
@@ -1063,6 +1581,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 70,
                             end: 83,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -1084,6 +1610,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_75: {
                         tower: {
@@ -1099,6 +1633,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 98,
                             end: 111,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -1120,6 +1662,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_115: {
                         tower: {
@@ -1130,6 +1680,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_75',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -1144,6 +1702,14 @@ let TowerAnimationConfig = {
                             flipState: 'IDLE_50',
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_165: {
                         tower: {
@@ -1154,6 +1720,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_25',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -1168,6 +1742,14 @@ let TowerAnimationConfig = {
                             flipState: 'IDLE_0',
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_205: {
                         tower: {
@@ -1178,6 +1760,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_345',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -1192,6 +1782,14 @@ let TowerAnimationConfig = {
                             flipState: 'IDLE_320',
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_255: {
                         tower: {
@@ -1202,6 +1800,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_295',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -1219,6 +1825,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 0,
                             end: 13,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -1240,6 +1854,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_320: {
                         tower: {
@@ -1255,6 +1877,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 28,
                             end: 41,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -1276,6 +1906,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
 
                     ATTACK_0: {
@@ -1284,14 +1922,22 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 44,
                             end: 54,
-                            time: 596,
+                            time: 726,
                         },
                         weapon: {
                             prefix: 'tower_boomerang_attack_1_',
                             suffix: '.png',
                             start: 44,
                             end: 54,
-                            time: 596,
+                            time: 726,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_0'],
                     },
@@ -1301,14 +1947,22 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 55,
                             end: 65,
-                            time: 596,
+                            time: 726,
                         },
                         weapon: {
                             prefix: 'tower_boomerang_attack_1_',
                             suffix: '.png',
                             start: 55,
                             end: 65,
-                            time: 596,
+                            time: 726,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_25'],
                     },
@@ -1318,14 +1972,22 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 66,
                             end: 76,
-                            time: 596,
+                            time: 726,
                         },
                         weapon: {
                             prefix: 'tower_boomerang_attack_1_',
                             suffix: '.png',
                             start: 66,
                             end: 76,
-                            time: 596,
+                            time: 726,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_50'],
                     },
@@ -1335,14 +1997,22 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 77,
                             end: 87,
-                            time: 596,
+                            time: 726,
                         },
                         weapon: {
                             prefix: 'tower_boomerang_attack_1_',
                             suffix: '.png',
                             start: 77,
                             end: 87,
-                            time: 596,
+                            time: 726,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_75'],
                     },
@@ -1352,14 +2022,22 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 88,
                             end: 98,
-                            time: 596,
+                            time: 726,
                         },
                         weapon: {
                             prefix: 'tower_boomerang_attack_1_',
                             suffix: '.png',
                             start: 88,
                             end: 98,
-                            time: 596,
+                            time: 726,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_90'],
                     },
@@ -1372,6 +2050,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_75',
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_115'],
                     },
                     ATTACK_140: {
@@ -1382,6 +2068,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_50',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_140'],
                     },
@@ -1394,6 +2088,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_25',
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_165'],
                     },
                     ATTACK_180: {
@@ -1404,6 +2106,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_0',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_180'],
                     },
@@ -1416,6 +2126,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_345',
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_205'],
                     },
                     ATTACK_230: {
@@ -1426,6 +2144,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_320',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_230'],
                     },
@@ -1438,7 +2164,15 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_295',
                         },
-                        sequence: ['IDLE_295'],
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
+                        },
+                        sequence: ['IDLE_255'],
                     },
                     ATTACK_270: {
                         tower: {
@@ -1446,14 +2180,22 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 0,
                             end: 10,
-                            time: 596,
+                            time: 726,
                         },
                         weapon: {
                             prefix: 'tower_boomerang_attack_1_',
                             suffix: '.png',
                             start: 0,
                             end: 10,
-                            time: 596,
+                            time: 726,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_270'],
                     },
@@ -1463,14 +2205,22 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 11,
                             end: 21,
-                            time: 596,
+                            time: 726,
                         },
                         weapon: {
                             prefix: 'tower_boomerang_attack_1_',
                             suffix: '.png',
                             start: 11,
                             end: 21,
-                            time: 596,
+                            time: 726,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_295'],
                     },
@@ -1480,14 +2230,22 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 22,
                             end: 32,
-                            time: 596,
+                            time: 726,
                         },
                         weapon: {
                             prefix: 'tower_boomerang_attack_1_',
                             suffix: '.png',
                             start: 22,
                             end: 32,
-                            time: 596,
+                            time: 726,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_320'],
                     },
@@ -1497,14 +2255,22 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 33,
                             end: 43,
-                            time: 596,
+                            time: 726,
                         },
                         weapon: {
                             prefix: 'tower_boomerang_attack_1_',
                             suffix: '.png',
                             start: 33,
                             end: 43,
-                            time: 596,
+                            time: 726,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 726,
+                            repeat: true,
                         },
                         sequence: ['IDLE_345'],
                     },
@@ -1573,6 +2339,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_25: {
                         tower: {
@@ -1588,6 +2362,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 70,
                             end: 83,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -1609,6 +2391,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_75: {
                         tower: {
@@ -1624,6 +2414,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 98,
                             end: 111,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -1645,6 +2443,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_115: {
                         tower: {
@@ -1655,6 +2461,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_75',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -1669,6 +2483,14 @@ let TowerAnimationConfig = {
                             flipState: 'IDLE_50',
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_165: {
                         tower: {
@@ -1679,6 +2501,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_25',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -1693,6 +2523,14 @@ let TowerAnimationConfig = {
                             flipState: 'IDLE_0',
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_205: {
                         tower: {
@@ -1703,6 +2541,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_345',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -1717,6 +2563,14 @@ let TowerAnimationConfig = {
                             flipState: 'IDLE_320',
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_255: {
                         tower: {
@@ -1727,6 +2581,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_295',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -1744,6 +2606,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 0,
                             end: 13,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -1765,6 +2635,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_320: {
                         tower: {
@@ -1780,6 +2658,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 28,
                             end: 41,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -1801,6 +2687,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
 
                     ATTACK_0: {
@@ -1817,6 +2711,14 @@ let TowerAnimationConfig = {
                             start: 44,
                             end: 54,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_0'],
                     },
@@ -1835,6 +2737,14 @@ let TowerAnimationConfig = {
                             end: 65,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_25'],
                     },
                     ATTACK_50: {
@@ -1851,6 +2761,14 @@ let TowerAnimationConfig = {
                             start: 66,
                             end: 76,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_50'],
                     },
@@ -1869,6 +2787,14 @@ let TowerAnimationConfig = {
                             end: 87,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_75'],
                     },
                     ATTACK_90: {
@@ -1886,6 +2812,14 @@ let TowerAnimationConfig = {
                             end: 98,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_90'],
                     },
                     ATTACK_115: {
@@ -1896,6 +2830,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_75',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_115'],
                     },
@@ -1908,6 +2850,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_50',
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_140'],
                     },
                     ATTACK_165: {
@@ -1918,6 +2868,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_25',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_165'],
                     },
@@ -1930,6 +2888,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_0',
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_180'],
                     },
                     ATTACK_205: {
@@ -1940,6 +2906,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_345',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_205'],
                     },
@@ -1952,6 +2926,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_320',
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_230'],
                     },
                     ATTACK_255: {
@@ -1962,6 +2944,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_295',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_295'],
                     },
@@ -1980,6 +2970,14 @@ let TowerAnimationConfig = {
                             end: 10,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_270'],
                     },
                     ATTACK_295: {
@@ -1996,6 +2994,14 @@ let TowerAnimationConfig = {
                             start: 11,
                             end: 21,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_295'],
                     },
@@ -2014,6 +3020,14 @@ let TowerAnimationConfig = {
                             end: 32,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_320'],
                     },
                     ATTACK_345: {
@@ -2030,6 +3044,14 @@ let TowerAnimationConfig = {
                             start: 33,
                             end: 43,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_345'],
                     },
@@ -2098,6 +3120,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_25: {
                         tower: {
@@ -2113,6 +3143,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 75,
                             end: 89,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -2134,6 +3172,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_75: {
                         tower: {
@@ -2149,6 +3195,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 105,
                             end: 119,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -2170,6 +3224,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_115: {
                         tower: {
@@ -2180,6 +3242,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_75',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -2194,6 +3264,14 @@ let TowerAnimationConfig = {
                             flipState: 'IDLE_50',
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_165: {
                         tower: {
@@ -2204,6 +3282,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_25',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -2218,6 +3304,14 @@ let TowerAnimationConfig = {
                             flipState: 'IDLE_0',
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_205: {
                         tower: {
@@ -2228,6 +3322,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_345',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -2242,6 +3344,14 @@ let TowerAnimationConfig = {
                             flipState: 'IDLE_320',
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_255: {
                         tower: {
@@ -2252,6 +3362,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'IDLE_295',
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
                             repeat: true,
                         },
                     },
@@ -2269,6 +3387,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 0,
                             end: 14,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -2290,6 +3416,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
                     IDLE_320: {
                         tower: {
@@ -2305,6 +3439,14 @@ let TowerAnimationConfig = {
                             suffix: '.png',
                             start: 30,
                             end: 44,
+                            time: 1000,
+                            repeat: true,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
                             time: 1000,
                             repeat: true,
                         },
@@ -2326,6 +3468,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
 
                     ATTACK_0: {
@@ -2342,6 +3492,14 @@ let TowerAnimationConfig = {
                             start: 36,
                             end: 44,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_0'],
                     },
@@ -2360,6 +3518,14 @@ let TowerAnimationConfig = {
                             end: 53,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_25'],
                     },
                     ATTACK_50: {
@@ -2376,6 +3542,14 @@ let TowerAnimationConfig = {
                             start: 54,
                             end: 62,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_50'],
                     },
@@ -2394,6 +3568,14 @@ let TowerAnimationConfig = {
                             end: 71,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_75'],
                     },
                     ATTACK_90: {
@@ -2411,6 +3593,14 @@ let TowerAnimationConfig = {
                             end: 80,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_90'],
                     },
                     ATTACK_115: {
@@ -2421,6 +3611,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_75',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_115'],
                     },
@@ -2433,6 +3631,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_50',
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_140'],
                     },
                     ATTACK_165: {
@@ -2443,6 +3649,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_25',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_165'],
                     },
@@ -2455,6 +3669,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_0',
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_180'],
                     },
                     ATTACK_205: {
@@ -2465,6 +3687,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_345',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_205'],
                     },
@@ -2477,6 +3707,14 @@ let TowerAnimationConfig = {
                             flipX: true,
                             flipState: 'ATTACK_320',
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_230'],
                     },
                     ATTACK_255: {
@@ -2487,6 +3725,14 @@ let TowerAnimationConfig = {
                         weapon: {
                             flipX: true,
                             flipState: 'ATTACK_295',
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_295'],
                     },
@@ -2505,6 +3751,14 @@ let TowerAnimationConfig = {
                             end: 8,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_270'],
                     },
                     ATTACK_295: {
@@ -2521,6 +3775,14 @@ let TowerAnimationConfig = {
                             start: 9,
                             end: 17,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_295'],
                     },
@@ -2539,6 +3801,14 @@ let TowerAnimationConfig = {
                             end: 26,
                             time: 596,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                         sequence: ['IDLE_320'],
                     },
                     ATTACK_345: {
@@ -2555,6 +3825,14 @@ let TowerAnimationConfig = {
                             start: 27,
                             end: 35,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_steel_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_345'],
                     },
@@ -2590,6 +3868,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
 
                     ATTACK_270: {
@@ -2606,6 +3892,14 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 15,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_270'],
                     },
@@ -2641,6 +3935,14 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
+                        },
                     },
 
                     ATTACK_270: {
@@ -2657,6 +3959,14 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 14,
                             time: 596,
+                        },
+                        pedestal: {
+                            prefix: "battle_tower_pedestal_rock_",
+                            suffix: ".png",
+                            start: 0,
+                            end: 0,
+                            time: 1000,
+                            repeat: true,
                         },
                         sequence: ['IDLE_270'],
                     },
