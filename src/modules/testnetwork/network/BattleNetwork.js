@@ -115,6 +115,13 @@ BattleNetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
+    sendChangeTowerTargetStrategy: function (towerTilePos, targetStrategy) {
+        cc.log("aaaaaaaaaaaaaaaaaaaafffffffffffffvvvvvvvvvvvvvvvvvvvv")
+        let pk = this.gameClient.getOutPacket(CMDChangeTowerStrategy);
+        pk.pack(towerTilePos, targetStrategy);
+        this.gameClient.sendPacket(pk);
+    },
+
     _handlePutTower: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 76] received put tower packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
@@ -125,11 +132,7 @@ BattleNetwork.Connector = cc.Class.extend({
         cellObject.tower.towerId = packet.towerId;
         cellObject.tower.level = packet.towerLevel;
 
-        for (let i = 0; i < playerObjectMap.length; i++) {
-            for (let j = 0; j < playerObjectMap[i].length; j++) {
-                cc.log('[BattleNetwork.js line 98] _handlePutTower: ' + JSON.stringify(playerObjectMap[i][j]));
-            }
-        }
+        cc.log(JSON.stringify(playerObjectMap[packet.x][packet.y]))
     },
 
     _handleOpponentPutTower: function (cmd, packet) {
@@ -205,6 +208,6 @@ BattleNetwork.Connector = cc.Class.extend({
         let entityId = tileObject.tower.entityId;
         let tower = EntityManager.getInstance().getEntity(entityId);
         let attackComponent = tower.getComponent(AttackComponent);
-        attackComponent.setTargetStrategy(packet.strategy);
+        attackComponent.setTargetStrategy(packet.strategyId);
     }
 })

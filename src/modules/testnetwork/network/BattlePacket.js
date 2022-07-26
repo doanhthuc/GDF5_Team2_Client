@@ -107,6 +107,7 @@ CMDChangeTowerStrategy = fr.OutPacket.extend({
         this.putInt(tilePos.x);
         this.putInt(tilePos.y);
         this.putInt(strategy);
+        this.updateSize();
     }
 });
 
@@ -309,10 +310,8 @@ BattleNetwork.packetMap[gv.CMD.CHANGE_TOWER_STRATEGY] = fr.InPacket.extend({
     },
 
     readData: function () {
-        this.tilePos = {
-            x: this.getInt(),
-            y: this.getInt()
-        }
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
         this.strategyId = this.getInt();
     }
 });
@@ -323,10 +322,8 @@ BattleNetwork.packetMap[gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY] = fr.InPacket.exte
     },
 
     readData: function () {
-        this.tilePos = {
-            x: this.getInt(),
-            y: this.getInt()
-        }
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
         this.strategyId = this.getInt();
     }
 });

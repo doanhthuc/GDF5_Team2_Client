@@ -14,11 +14,11 @@ let CircleTarget = cc.Node.extend({
         this.towerTilepos = null;
 
         this.mappingFunction = [
-            {node: this.minHp, handler: this._handlerMinHP},
-            {node: this.maxHp, handler: this._handlerMaxHP},
-            {node: this.minDistance, handler: this._handlerMinDistance},
-            {node: this.maxDistance, handler: this._handlerMaxDistance},
-            {node: this.cancelBtn, handler: this._handlerCancelBtn},
+            {node: this.minHp, handler: this._handlerMinHP.bind(this)},
+            {node: this.maxHp, handler: this._handlerMaxHP.bind(this)},
+            {node: this.minDistance, handler: this._handlerMinDistance.bind(this)},
+            {node: this.maxDistance, handler: this._handlerMaxDistance.bind(this)},
+            {node: this.cancelBtn, handler: this._handlerCancelBtn.bind(this)},
         ];
 
         cc.eventManager.addListener({
@@ -77,15 +77,21 @@ let CircleTarget = cc.Node.extend({
 
     _findTowerEntityIdByTilePos: function (tilePos, mode = GameConfig.PLAYER) {
         let battleData = BattleManager.getInstance().getBattleData();
-        let opponentMap = battleData.getMapObject(mode);
-        let tileObject = opponentMap[tilePos.x][tilePos.y];
+        let mapObject = battleData.getMapObject(mode);
+        let tileObject = mapObject[tilePos.x][tilePos.y];
+        cc.log("[CircleTarget] _findTowerEntityIdByTilePos: " + JSON.stringify(tileObject));
         return tileObject.tower.entityId;
     },
 
-    changeTowerTargetStrategy: function (strategy) {
-        let entityId = this._findTowerEntityIdByTilePos(this.towerTilepos);
+    changeTowerTargetStrategy: function (strategy, tilePos = this.towerTilepos) {
+        let entityId = this._findTowerEntityIdByTilePos(tilePos);
         let towerEntity = EntityManager.getInstance().getEntity(entityId);
+        cc.log("changeTowerTargetStrategy line 88", entityId);
         let attackComponent = towerEntity.getComponent(AttackComponent);
         attackComponent.setTargetStrategy(strategy);
-    }
+        cc.log("[CircleTarget line 92] _changeTowerTargetStrategy: " + strategy + " pos: " + JSON.stringify(tilePos));
+        BattleNetwork.connector.sendChangeTowerTargetStrategy(tilePos, strategy);
+    },
+
+
 });

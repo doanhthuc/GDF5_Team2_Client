@@ -85,6 +85,7 @@ let BattleUILayer = cc.Layer.extend({
         let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
         pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
         circleNode.setPosition(pixelPos);
+        circleNode.setTowerTilePos(x, y);
         this.addChild(circleNode, 100);
     },
 

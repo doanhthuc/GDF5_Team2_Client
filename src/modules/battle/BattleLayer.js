@@ -301,20 +301,27 @@ let BattleLayer = cc.Layer.extend({
                 return;
         }
 
+        if (GameConfig.NETWORK === 1) {
+            this.setEntityIdForTileObject(tower.id, tilePos, mode);
+        }
+        if (mode === GameConfig.PLAYER) {
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
+        }
+        return tower;
+    },
+
+    setEntityIdForTileObject: function (entityId, tilePos, mode = GameConfig.PLAYER) {
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);
         let tileObject = mapObject[tilePos.x][tilePos.y];
         if (tileObject.tower) {
-            tileObject.tower.entityId = tower.id;
+            tileObject.tower.entityId = entityId;
         } else {
             tileObject.tower = {
-                entityId: tower.id,
+                entityId: entityId,
             }
         }
-
-        EventDispatcher.getInstance()
-            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
-        return tower;
     },
 
     dropSpell: function (spellId, pixelPos, mode) {

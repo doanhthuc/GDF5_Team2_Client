@@ -108,10 +108,10 @@ let CardDeckNode = cc.Node.extend({
 
         if (touchInCard) {
             cc.log("CardDeckNode _onTouchBegan " + JSON.stringify(selectedCard));
-            this.selectedCard = selectedCard;
             if (selectedCard.isUp === false) {
                 this._moveCardUp(selectedCard);
                 // Select card
+                this.selectedCard = selectedCard;
                 BattleManager.getInstance().getBattleLayer().selectedCard = selectedCard.type;
 
                 // move another card down if it is up
