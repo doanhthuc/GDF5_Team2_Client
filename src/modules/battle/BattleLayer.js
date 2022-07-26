@@ -143,28 +143,28 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        setTimeout(function () {
-            EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        }, 1000);
-        setTimeout(function () {
-            EntityFactory.createAssassinMonster(pixelPos, mode);
-        }, 2000);
-        setTimeout(function () {
-            EntityFactory.createNinjaMonster(pixelPos, mode);
-        }, 3000);
-        setTimeout(function () {
-            EntityFactory.createGiantMonster(pixelPos, mode);
-        }, 5000);
-        setTimeout(function () {
-            EntityFactory.createSatyrBoss(pixelPos, mode);
-        }, 20000);
-        setTimeout(function () {
-            EntityFactory.createDarkGiantBoss(pixelPos, mode);
-        }, 40000);
-        setTimeout(function () {
-            EntityFactory.createDemonTreeBoss(pixelPos, mode);
-        }, 60000);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // setTimeout(function () {
+        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // }, 1000);
+        // setTimeout(function () {
+        //     EntityFactory.createAssassinMonster(pixelPos, mode);
+        // }, 2000);
+        // setTimeout(function () {
+        //     EntityFactory.createNinjaMonster(pixelPos, mode);
+        // }, 3000);
+        // setTimeout(function () {
+        //     EntityFactory.createGiantMonster(pixelPos, mode);
+        // }, 5000);
+        // setTimeout(function () {
+        //     EntityFactory.createSatyrBoss(pixelPos, mode);
+        // }, 20000);
+        // setTimeout(function () {
+        //     EntityFactory.createDarkGiantBoss(pixelPos, mode);
+        // }, 40000);
+        // setTimeout(function () {
+        //     EntityFactory.createDemonTreeBoss(pixelPos, mode);
+        // }, 60000);
 
     },
     // bornMonsterInWave: function (monsterWave, mode) {
@@ -345,6 +345,23 @@ let BattleLayer = cc.Layer.extend({
                 }
             }
         }), this.uiLayer)
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            onTouchBegan: function (touch, event) {
+                let globalPos = touch.getLocation();
+                let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
+                let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
+                if (Utils.validateTilePos(tilePos)) {
+                    let playeMapMatrix = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+                    if (playeMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
+                        BattleManager.getInstance().getBattleLayer()
+                            .uiLayer.showTargetCircle(tilePos.x, tilePos.y);
+                    }
+                }
+                return false;
+            },
+        }, this.uiLayer);
     },
 
     startGame: function () {

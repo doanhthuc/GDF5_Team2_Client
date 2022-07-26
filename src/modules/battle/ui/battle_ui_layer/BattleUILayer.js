@@ -72,6 +72,19 @@ let BattleUILayer = cc.Layer.extend({
         this.timerNode.endTimer();
     },
 
+    /**
+     * Show target strategy selection of tower
+     * @param x tile pos of player map
+     * @param y tile pos of player map
+     */
+    showTargetCircle: function (x, y) {
+        let circleNode = new CircleTarget();
+        let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
+        pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
+        circleNode.setPosition(pixelPos);
+        this.addChild(circleNode, 100);
+    },
+
     _backToLobby: function () {
         fr.view(MainScreen);
     }

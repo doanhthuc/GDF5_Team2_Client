@@ -179,6 +179,7 @@
         "src/modules/battle/ui/battle_ui_layer/deck/DeckEnergyProgress.js",
         "src/modules/battle/ui/battle_ui_layer/house/HouseEnergyNode.js",
         "src/modules/battle/ui/battle_ui_layer/info/PlayerInfoNode.js",
+        "src/modules/battle/ui/battle_ui_layer/target_strategy/CircleTarget.js",
         "src/modules/battle/ui/battle_ui_layer/timer/BattleTimerNode.js",
         "src/modules/battle/ui/battle_ui_layer/wave/WaveNode.js",
         "src/modules/battle/ui/matching/MatchingScene.js",
