@@ -165,6 +165,7 @@
         "src/modules/battle/ecs/entity/Entity.js",
         "src/modules/battle/ecs/factory/ComponentFactory.js",
         "src/modules/battle/ecs/factory/EntityFactory.js",
+        "src/modules/battle/ecs/factory/NodeFactory.js",
         "src/modules/battle/ecs/factory/SpellFactory.js",
         "src/modules/battle/ecs/factory/SystemFactory.js",
         "src/modules/battle/loop/BattleLoop.js",

@@ -46,4 +46,10 @@ const BattleResource = {
     MATCHING_TEXT_NODE: "ui/battle/matching/MatchingTextNode.json",
     MAP_ICON_NODE: "ui/battle/matching/MapIconNode.json",
     MATCHING_CANCEL_BTN: "ui/battle/matching/CancelButtonNode.json",
+
+    // Spell
+    FROZEN_SKELETON_ATLAS: "textures/potion/effect_atk_ice.atlas",
+    FROZEN_SKELETON_JSON: "textures/potion/effect_atk_ice.json",
+    FIRE_SKELETON_ATLAS: "textures/potion/effect_atk_fire.atlas",
+    FIRE_SKELETON_JSON: "textures/potion/effect_atk_fire.json",
 }
