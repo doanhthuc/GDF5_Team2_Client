@@ -93,7 +93,7 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_cannon_idle_0_",
                             suffix: ".png",
-                            start: 91,
+                            start: 105,
                             end: 119,
                             time: 1000,
                             repeat: true,
@@ -101,7 +101,7 @@ let TowerAnimationConfig = {
                         weapon: {
                             prefix: "tower_cannon_idle_1_",
                             suffix: ".png",
-                            start: 91,
+                            start: 105,
                             end: 119,
                             time: 1000,
                             repeat: true,
@@ -642,7 +642,7 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
-                        sequence: ["IDLE_295"]
+                        sequence: ["IDLE_255"]
                     },
                     ATTACK_270: {
                         tower: {
@@ -817,7 +817,7 @@ let TowerAnimationConfig = {
                             prefix: "tower_ice_gun_idle_0_",
                             suffix: ".png",
                             start: 84,
-                            end: 98,
+                            end: 97,
                             time: 1000,
                             repeat: true,
                         },
@@ -825,7 +825,7 @@ let TowerAnimationConfig = {
                             prefix: "tower_ice_gun_idle_1_",
                             suffix: ".png",
                             start: 84,
-                            end: 98,
+                            end: 97,
                             time: 1000,
                             repeat: true,
                         },
@@ -842,7 +842,7 @@ let TowerAnimationConfig = {
                         tower: {
                             prefix: "tower_ice_gun_idle_0_",
                             suffix: ".png",
-                            start: 99,
+                            start: 98,
                             end: 111,
                             time: 1000,
                             repeat: true,
@@ -850,7 +850,7 @@ let TowerAnimationConfig = {
                         weapon: {
                             prefix: "tower_ice_gun_idle_1_",
                             suffix: ".png",
-                            start: 99,
+                            start: 98,
                             end: 111,
                             time: 1000,
                             repeat: true,
@@ -1391,7 +1391,7 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
-                        sequence: ["IDLE_295"]
+                        sequence: ["IDLE_255"]
                     },
                     ATTACK_270: {
                         tower: {

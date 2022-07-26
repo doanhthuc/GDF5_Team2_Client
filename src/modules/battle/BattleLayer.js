@@ -148,7 +148,7 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        //EntityFactory.createBatMonster(pixelPos, mode);
+        EntityFactory.createBatMonster(pixelPos, mode);
         // setTimeout(function () {
         //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // }, 1000);
@@ -232,14 +232,18 @@ let BattleLayer = cc.Layer.extend({
                 || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
                 return;
             }
+        } else if (ValidatorECS.isTrap(type)) {
+            // check valid position
         } else {
             throw new Error("Type is invalid");
         }
 
-        if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
+        if (ValidatorECS.isSpell(type)) {
             this.dropSpell(type, pixelPos, mode)
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
-        } else {
+        } else if (ValidatorECS.isTrap(type)) {
+            SpellFactory.createTrap(tilePos, mode);
+        } else if (ValidatorECS.isTower(type)) {
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()
             //         .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
@@ -250,15 +254,19 @@ let BattleLayer = cc.Layer.extend({
             // }
             this.putTowerCardIntoMap(type, tilePos, mode);
         }
+
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
     putTowerCardIntoMap: function (type, tilePos, mode) {
-        if (this.shouldUpgradeTower(type, tilePos)) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
-            return;
+        if (GameConfig.NETWORK) {
+            if (this.shouldUpgradeTower(type, tilePos)) {
+                EventDispatcher.getInstance()
+                    .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+                return;
+            }
         }
+
         if (this.shouldPutNewTower(tilePos)) {
             this.buildTower(type, tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
@@ -348,6 +356,23 @@ let BattleLayer = cc.Layer.extend({
                 }
             }
         }), this.uiLayer)
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            onTouchBegan: function (touch, event) {
+                let globalPos = touch.getLocation();
+                let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
+                let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
+                if (Utils.validateTilePos(tilePos)) {
+                    let playeMapMatrix = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+                    if (playeMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
+                        BattleManager.getInstance().getBattleLayer()
+                            .uiLayer.showTargetCircle(tilePos.x, tilePos.y);
+                    }
+                }
+                return false;
+            },
+        }, this.uiLayer);
     },
 
     startGame: function () {

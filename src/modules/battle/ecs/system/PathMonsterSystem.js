@@ -8,7 +8,7 @@ let PathMonsterSystem = System.extend({
     },
 
     _run: function (tick) {
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent, PositionComponent);
         for (let entity of entityList) {
            {
                 let pathComponent = entity.getComponent(PathComponent);

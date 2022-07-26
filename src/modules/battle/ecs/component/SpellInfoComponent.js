@@ -7,17 +7,17 @@ let SpellInfoComponent = Component.extend({
         this.reset(position, effects, range, duration);
     },
 
-    reset: function (position, effects, range, duration) {
+    reset: function (position, effects, range, delay) {
         this.position = position;
         this.effects = effects;
         this.range = range;
-        this.duration = duration;
-        this.countdown = this.duration;
+        this.delay = delay;
+        this.countdown = this.delay;
     },
 
     clone: function () {
         // TODO: should effect.clone()??
-        return ComponentFactory.create(SpellInfoComponent, this.pos, this.effects, this.range, this.duration);
+        return ComponentFactory.create(SpellInfoComponent, this.pos, this.effects, this.range, this.delay);
     }
 });
 SpellInfoComponent.typeID = GameConfig.COMPONENT_ID.SPELL;

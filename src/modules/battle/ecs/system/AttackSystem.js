@@ -23,7 +23,8 @@ let AttackSystem = System.extend({
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
-                    if (monster.getActive() && monster.mode === tower.mode) {
+                    if (monster.getActive() && monster.mode === tower.mode
+                        && monster.hasAllComponent(PositionComponent)) {
                         let distance = this._distanceFrom(tower, monster);
                         if (distance <= attackComponent.range) {
                             monsterInAttackRange.push(monster);
@@ -38,7 +39,7 @@ let AttackSystem = System.extend({
                         let towerPos = tower.getComponent(PositionComponent);
 
                         this._changeTowerAnimation(tower, targetMonster);
-                        EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode);
+                        EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, targetMonster, attackComponent.effects, tower.mode);
                         // reset count down time
                         attackComponent.countdown = attackComponent.speed;
                     }
