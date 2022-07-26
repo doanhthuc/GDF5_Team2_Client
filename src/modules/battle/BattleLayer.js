@@ -360,10 +360,10 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
-        //  this.battleLoop.start();
+      //  this.battleLoop.start();
         //this.schedule(this.update,0.1,10000);
         this.scheduleUpdate();
-        //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+       //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
     stopGame: function () {

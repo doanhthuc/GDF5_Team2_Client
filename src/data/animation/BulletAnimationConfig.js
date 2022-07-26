@@ -13,7 +13,7 @@ let BulletAnimationConfig = {
                             suffix: ".png",
                             start: 0,
                             end: 9,
-                            time: 1000,
+                            time: 300,
                             repeat: true,
                         }
                     },
