@@ -440,7 +440,7 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
     let lifeComponent = ComponentFactory.create(LifeComponent, 1000);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.satyr)
 
-    let healingAbilityComponent = ComponentFactory.create(HealingAbility, 2 * GameConfig.TILE_WIDTH, 0.2);
+    let healingAbilityComponent = ComponentFactory.create(HealingAbility, 2 * GameConfig.TILE_WIDTH, 0.03);
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);

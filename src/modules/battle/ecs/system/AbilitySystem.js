@@ -59,11 +59,11 @@ let AbilitySystem = System.extend({
         },
 
         _handleHealingAbility: function (tick) {
-            let entityList = EntityManager.getInstance().getEntitiesHasComponents(HealingAbility);
+            let entityList = EntityManager.getInstance().getEntitiesHasComponents(HealingAbility, PositionComponent);
 
             let monsterList = null;
             if (entityList) {
-                monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
+                monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
             }
 
             for (let satyr of entityList) {
@@ -74,10 +74,12 @@ let AbilitySystem = System.extend({
                     healingAbility.countdown = 1;
                     for (let monster of monsterList) {
                         if (monster.getActive() && monster.mode === satyr.mode) {
-                            let distance = this._distanceFrom(satyr, monster);
-                            if (distance <= healingAbility.range) {
-                                let lifeComponent = monster.getComponent(LifeComponent);
-                                lifeComponent.hp = Math.min(lifeComponent.hp + lifeComponent.maxHP * healingAbility.healingRate, lifeComponent.maxHP);
+                            if (monster.getComponent(PositionComponent)) {
+                                let distance = this._distanceFrom(satyr, monster);
+                                if (distance <= healingAbility.range) {
+                                    let lifeComponent = monster.getComponent(LifeComponent);
+                                    lifeComponent.hp = Math.min(lifeComponent.hp + lifeComponent.maxHP * healingAbility.healingRate, lifeComponent.maxHP);
+                                }
                             }
                         }
                     }

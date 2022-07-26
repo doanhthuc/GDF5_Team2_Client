@@ -100,7 +100,7 @@ let CollisionSystem = System.extend({
                     } else {
                         // IMPORTANT: 1 bullet can affect only 1 monster
                         if (bulletInfo.radius) {
-                            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
+                            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent,PositionComponent);
                             for (let monster of monsterList) {
                                 if (Utils.euclidDistance(monster.getComponent(PositionComponent), pos) <= bulletInfo.radius) {
                                     for (let effect of bulletInfo.effects) {
