@@ -96,7 +96,6 @@ let AbilitySystem = System.extend({
                         switch (towerAbilityComponent.effect.typeID) {
                             case BuffAttackDamageEffect.typeID:
                                 let attackComponent = damageTower.getComponent(AttackComponent);
-                                cc.log('AbilitySystem.js line 99 ' + (attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent));
                                 attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
                                 break;
                             case BuffAttackSpeedEffect.typeID:

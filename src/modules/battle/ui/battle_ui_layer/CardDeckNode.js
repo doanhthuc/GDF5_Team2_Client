@@ -133,9 +133,8 @@ let CardDeckNode = cc.Node.extend({
         let touchPos = touch.getLocation();
         touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.PLAYER);
 
-        let isSpellCard = selectedCard.type === GameConfig.ENTITY_ID.FIRE_SPELL || selectedCard.type === GameConfig.ENTITY_ID.FROZEN_SPELL;
         // FIXME: hardcode
-        if (isSpellCard) {
+        if (ValidatorECS.isSpell(selectedCard.type)) {
             if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
                 this._createOrGetSprite(selectedCard, touch, GameConfig.PLAYER);
                 this.spriteDragManager[touch.getID()].setVisible(true);
@@ -145,7 +144,7 @@ let CardDeckNode = cc.Node.extend({
                     this.spriteDragManager[touch.getID()].setVisible(false);
                 }
             }
-        } else {
+        } else if (ValidatorECS.isTower(selectedCard.type) || ValidatorECS.isTrap(selectedCard.type)) {
             if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
                 this._createOrGetSprite(selectedCard, touch, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(touchPos.x, touchPos.y, GameConfig.PLAYER);
@@ -209,10 +208,13 @@ let CardDeckNode = cc.Node.extend({
             // FIXME: hardcode sprite, use map to cache
             let mapNode = mode === GameConfig.PLAYER ? battleLayer.getPlayerMapNode()
                 : battleLayer.getOpponentMapNode();
-            if (selectedCard.type === GameConfig.ENTITY_ID.FIRE_SPELL || selectedCard.type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
+            if (ValidatorECS.isSpell(selectedCard.type)) {
                 let sp = new cc.Sprite(BattleResource.POTION_RANGE_IMG);
                 sp.setScale(2 * 1.2 * GameConfig.TILE_WIDTH / sp.width);
                 this.spriteDragManager[touch.getID()] = sp;
+                mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
+            } else if (ValidatorECS.isTrap(selectedCard.type)) {
+                this.spriteDragManager[touch.getID()] = new cc.Sprite(BattleResource.TRAP_IMG);
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             } else {
                 // this.spriteDragManager[touch.getID()] = createBearNodeAnimation(1.5 * GameConfig.TILE_WIDTH, true);
@@ -242,21 +244,8 @@ let CardDeckNode = cc.Node.extend({
         for (let i = 0; i < this.cardSlotManager.length; i++) {
             let currentCardSlot = this.cardSlotManager[i];
             if (currentCardSlot.id === replaceCardSlotID) {
-                // currentCardSlot.setVisible(false);
-                // should save position of 5 card in array, and use it, not use the current slot card position
-                let cardPos = currentCardSlot.getPosition();
-                // if (currentCardSlot.isUp) {
-                //     // FIXME: hardcode
-                //     cardPos.y = cardPos.y - 30;
-                // }
-
-
                 this.nextCardSlot.id = currentCardSlot.id;
-                cc.log("Card Deck Node line 256 : " + JSON.stringify(this.nextCardSlot));
-                cc.log(JSON.stringify(currentCardSlot))
                 this.cardSlotManager[i].setCardType(this.nextCardSlot.type);
-                cc.log("Card Deck Node js line 243 : " + JSON.stringify(this.cardSlotManager[i]));
-                // this.cardSlotManager[i].runAction(cc.spawn(cc.moveTo(0.3, this.fixedCardPosition[currentCardSlot.number]), cc.scaleTo(0.3, 1)).easing(cc.easeElasticIn()));
                 cc.eventManager.addListener({
                     event: cc.EventListener.TOUCH_ONE_BY_ONE,
                     onTouchBegan: this._onTouchBegan.bind(this),
