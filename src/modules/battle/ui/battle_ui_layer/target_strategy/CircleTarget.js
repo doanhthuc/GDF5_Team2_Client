@@ -11,6 +11,8 @@ let CircleTarget = cc.Node.extend({
         this.minDistance = this.rootNode.getChildByName("min_distance");
         this.maxDistance = this.rootNode.getChildByName("max_distance");
 
+        this.towerTilepos = null;
+
         this.mappingFunction = [
             {node: this.minHp, handler: this._handlerMinHP},
             {node: this.maxHp, handler: this._handlerMaxHP},
@@ -41,6 +43,10 @@ let CircleTarget = cc.Node.extend({
         return false;
     },
 
+    setTowerTilePos: function (x, y) {
+        this.towerTilepos = cc.p(x, y);
+    },
+
     destroy: function () {
         this.parent.removeChild(this);
     },
@@ -51,17 +57,35 @@ let CircleTarget = cc.Node.extend({
 
     _handlerMinHP: function () {
         cc.error("min_hp")
+        this.changeTowerTargetStrategy(GameConfig.TOWER_TARGET_STRATEGY.MIN_HP);
     },
 
     _handlerMaxHP: function () {
         cc.error("max_hp")
+        this.changeTowerTargetStrategy(GameConfig.TOWER_TARGET_STRATEGY.MAX_HP);
     },
 
     _handlerMinDistance: function () {
         cc.error("min_distance")
+        this.changeTowerTargetStrategy(GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE);
     },
 
     _handlerMaxDistance: function () {
         cc.error("max_distance")
+        this.changeTowerTargetStrategy(GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE);
+    },
+
+    _findTowerEntityIdByTilePos: function (tilePos, mode = GameConfig.PLAYER) {
+        let battleData = BattleManager.getInstance().getBattleData();
+        let opponentMap = battleData.getMapObject(mode);
+        let tileObject = opponentMap[tilePos.x][tilePos.y];
+        return tileObject.tower.entityId;
+    },
+
+    changeTowerTargetStrategy: function (strategy) {
+        let entityId = this._findTowerEntityIdByTilePos(this.towerTilepos);
+        let towerEntity = EntityManager.getInstance().getEntity(entityId);
+        let attackComponent = towerEntity.getComponent(AttackComponent);
+        attackComponent.setTargetStrategy(strategy);
     }
 });

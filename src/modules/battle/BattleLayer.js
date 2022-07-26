@@ -274,33 +274,47 @@ let BattleLayer = cc.Layer.extend({
     },
 
     buildTower: function (towerId, tilePos, mode) {
+        let tower = null;
         switch (towerId) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
-                EntityFactory.createCannonOwlTower(tilePos, mode);
+                tower = EntityFactory.createCannonOwlTower(tilePos, mode);
                 break;
             case GameConfig.ENTITY_ID.FROG_TOWER:
-                EntityFactory.createBoomerangFrogTower(tilePos, mode);
+                tower = EntityFactory.createBoomerangFrogTower(tilePos, mode);
                 break;
             case GameConfig.ENTITY_ID.BEAR_TOWER:
-                EntityFactory.createIceGunPolarBearTower(tilePos, mode);
+                tower = EntityFactory.createIceGunPolarBearTower(tilePos, mode);
                 break;
             case GameConfig.ENTITY_ID.BUNNY_TOWER:
-                EntityFactory.createBunnyOilGunTower(tilePos, mode);
+                tower = EntityFactory.createBunnyOilGunTower(tilePos, mode);
                 break;
             case GameConfig.ENTITY_ID.WIZARD_TOWER:
-                EntityFactory.createWizardTower(tilePos, mode);
+                tower = EntityFactory.createWizardTower(tilePos, mode);
                 break;
             case GameConfig.ENTITY_ID.SNAKE_TOWER:
-                EntityFactory.createSnakeAttackSpeedTower(tilePos, mode);
+                tower = EntityFactory.createSnakeAttackSpeedTower(tilePos, mode);
                 break;
             case GameConfig.ENTITY_ID.GOAT_TOWER:
-                EntityFactory.createGoatDamageTower(tilePos, mode);
+                tower = EntityFactory.createGoatDamageTower(tilePos, mode);
                 break;
             default:
                 return;
         }
+
+        let battleData = BattleManager.getInstance().getBattleData();
+        let mapObject = battleData.getMapObject(mode);
+        let tileObject = mapObject[tilePos.x][tilePos.y];
+        if (tileObject.tower) {
+            tileObject.tower.entityId = tower.id;
+        } else {
+            tileObject.tower = {
+                entityId: tower.id,
+            }
+        }
+
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
+        return tower;
     },
 
     dropSpell: function (spellId, pixelPos, mode) {
@@ -364,8 +378,8 @@ let BattleLayer = cc.Layer.extend({
                 let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
                 if (Utils.validateTilePos(tilePos)) {
-                    let playeMapMatrix = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
-                    if (playeMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
+                    let playerMapMatrix = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+                    if (playerMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
                         BattleManager.getInstance().getBattleLayer()
                             .uiLayer.showTargetCircle(tilePos.x, tilePos.y);
                     }

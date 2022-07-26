@@ -29,6 +29,14 @@ let AttackComponent = Component.extend({
         return this._damage;
     },
 
+    getTargetStrategy: function () {
+        return this.targetStrategy;
+    },
+
+    setTargetStrategy: function (targetStrategy) {
+        this.targetStrategy = targetStrategy;
+    },
+
     reset: function (damage, targetStrategy, range, speed, countdown, effects) {
         this.originDamage = damage;
         this._damage = damage;

@@ -27,17 +27,19 @@ let AttackSystem = System.extend({
                         && monster.hasAllComponent(PositionComponent)) {
                         let distance = this._distanceFrom(tower, monster);
                         if (distance <= attackComponent.range) {
-                            monsterInAttackRange.push(monster);
+                            let underGroundComponent = monster.getComponent(UnderGroundComponent);
+                            if ((!(underGroundComponent) || underGroundComponent.isInGround === false)) {
+                                monsterInAttackRange.push(monster);
+                            }
                         }
                     }
                 }
                 if (monsterInAttackRange.length > 0) {
                     // TODO: switch case target_strategy here
-                    let targetMonster = this._findTargetMonsterByStrategy(attackComponent.targetStrategy, monsterInAttackRange);
+                    let towerPos = tower.getComponent(PositionComponent);
+                    let targetMonster = this._findTargetMonsterByStrategy(towerPos, attackComponent.targetStrategy, monsterInAttackRange);
                     if (targetMonster != null) {
                         let monsterPos = targetMonster.getComponent(PositionComponent);
-                        let towerPos = tower.getComponent(PositionComponent);
-
                         this._changeTowerAnimation(tower, targetMonster);
                         EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, targetMonster, attackComponent.effects, tower.mode);
                         // reset count down time
@@ -54,35 +56,72 @@ let AttackSystem = System.extend({
         return Utils.euclidDistance(towerPos, monsterPos);
     },
 
-    _findTargetMonsterByStrategy: function (strategy, monsterInAttackRange) {
+    _findTargetMonsterByStrategy: function (towerPos, strategy, monsterInAttackRange) {
         //check DarkGiantBoss
         for (let monster of monsterInAttackRange) {
             if (monster.typeID === GameConfig.ENTITY_ID.DARK_GIANT) return monster;
         }
-        for (let monster of monsterInAttackRange) {
-            let underGroundComponent = monster.getComponent(UnderGroundComponent);
-            if ((!(underGroundComponent) || underGroundComponent.isInGround === false)) return monster;
-        }
+
         let targetMonster = null;
         switch (strategy) {
-            case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP:
+            case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
                 let maxHP = -1;
                 let maxIdx = -1;
+
+                maxIdx = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    return monsterHP > monsterInAttackRange[acc] ? idx : acc;
+                });
+
+                // for (let i = 0; i < monsterInAttackRange.length; i++) {
+                //     let monsterInfo = monsterInAttackRange[i].getComponent(LifeComponent);
+                //     if (monsterInfo.hp > maxHP) {
+                //         maxHP = monsterInfo.hp;
+                //         maxIdx = i;
+                //     }
+                // }
+                targetMonster = monsterInAttackRange[maxIdx];
+                break;
+            }
+            case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP: {
+                let minHP = Number.MAX_VALUE;
+                let minIdx = -1;
                 for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterInfo = monsterInAttackRange[i].getComponent(MonsterInfoComponent);
-                    if (monsterInfo.hp > maxHP) {
-                        maxHP = monsterInfo.hp;
+                    let monsterInfo = monsterInAttackRange[i].getComponent(LifeComponent);
+                    if (monsterInfo.hp < minHP) {
+                        minHP = monsterInfo.hp;
+                        minIdx = i;
+                    }
+                }
+                break;
+            }
+            case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE:
+            {
+                let maxDistance = -1;
+                let maxIdx = -1;
+                for (let i = 0; i < monsterInAttackRange.length; i++) {
+                    let monsterPos = monsterInAttackRange[i].getComponent(PositionComponent);
+                    let distance = Utils.euclidDistance(towerPos, monsterPos);
+                    if (distance > maxDistance) {
+                        maxDistance = distance;
                         maxIdx = i;
                     }
                 }
-                targetMonster = monsterInAttackRange[maxIdx];
                 break;
-            case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP:
+            }
+            case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE: {
+                let minDistance = Number.MAX_VALUE;
+                let minIdx = -1;
+                for (let i = 0; i < monsterInAttackRange.length; i++) {
+                    let monsterPos = monsterInAttackRange[i].getComponent(PositionComponent);
+                    let distance = Utils.euclidDistance(towerPos, monsterPos);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        minIdx = i;
+                    }
+                }
                 break;
-            case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE:
-                break;
-            case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE:
-                break;
+            }
             default:
                 // TODO: create custom error type
                 throw new Error("Invalid strategy");

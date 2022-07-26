@@ -41,6 +41,11 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.OPPONENT_DROP_SPELL:
                 this._handleOpponentDropSpell(cmd, packet);
                 break;
+            case gv.CMD.CHANGE_TOWER_STRATEGY:
+                this._handleChangeTowerStrategy(cmd, packet);
+                break;
+            case gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY:
+                this._handleOpponentChangeTowerStrategy(cmd, packet);
         }
     },
 
@@ -116,10 +121,10 @@ BattleNetwork.Connector = cc.Class.extend({
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let cellObject = playerObjectMap[packet.x][packet.y];
         cellObject.objectInCellType = ObjectInCellType.TOWER;
-        cellObject.tower = {
-            id: packet.towerId,
-            level: packet.towerLevel,
-        };
+
+        cellObject.tower.towerId = packet.towerId;
+        cellObject.tower.level = packet.towerLevel;
+
         for (let i = 0; i < playerObjectMap.length; i++) {
             for (let j = 0; j < playerObjectMap[i].length; j++) {
                 cc.log('[BattleNetwork.js line 98] _handlePutTower: ' + JSON.stringify(playerObjectMap[i][j]));
@@ -131,15 +136,15 @@ BattleNetwork.Connector = cc.Class.extend({
         cc.log('[BattleNetwork.js line 80] received put tower packet: ' + JSON.stringify(packet));
         // let pixelPos = Utils.tile2Pixel(packet.tileX, packet.tileY, GameConfig.OPPONENT);
         let tilePos = cc.p(packet.tileX, packet.tileY);
-        OpponentAction.getInstance().buildTower(packet.towerId, tilePos);
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentMap = battleData.getMapObject(GameConfig.OPPONENT);
         let cellObject = opponentMap[packet.tileX][packet.tileY];
         cellObject.objectInCellType = ObjectInCellType.TOWER;
         cellObject.tower = {
-            id: packet.towerId,
+            towerId: packet.towerId,
             level: packet.towerLevel,
         };
+        OpponentAction.getInstance().buildTower(packet.towerId, tilePos);
     },
 
     _handleGetBattleMapObject: function (cmd, packet) {
@@ -186,5 +191,20 @@ BattleNetwork.Connector = cc.Class.extend({
         let pixelPos = cc.p(packet.pixelX, packet.pixelY);
         pixelPos = Utils.playerPixel2OpponentPixel(pixelPos.x, pixelPos.y);
         OpponentAction.getInstance().dropSpell(packet.spellId, pixelPos);
+    },
+
+    _handleChangeTowerStrategy: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 197] received change tower strategy packet: ' + JSON.stringify(packet));
+    },
+
+    _handleOpponentChangeTowerStrategy: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 201] received change tower strategy packet: ' + JSON.stringify(packet));
+        let battleData = BattleManager.getInstance().getBattleData();
+        let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
+        let tileObject = opponentObjectMap[packet.tileX][packet.tileY];
+        let entityId = tileObject.tower.entityId;
+        let tower = EntityManager.getInstance().getEntity(entityId);
+        let attackComponent = tower.getComponent(AttackComponent);
+        attackComponent.setTargetStrategy(packet.strategy);
     }
 })
