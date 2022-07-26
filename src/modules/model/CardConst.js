@@ -132,3 +132,13 @@ const CARD_CONST = {
 }
 
 const MAX_CARD_LEVEL = 10;
+
+const TOWER_NAME = {
+    0: "cannon",
+    1: "wizard",
+    2: "boomerang",
+    3: "bunnyOil",
+    4: "bear",
+    5: "snake",
+    6: "goat",
+}

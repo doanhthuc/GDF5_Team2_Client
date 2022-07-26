@@ -105,12 +105,17 @@ FindPathUtil.findShortestPathForEachTile = function (mode) {
         cc.log(str);
     }
 
+    function findPathAble(x) {
+        return (x == GameConfig.MAP.NONE || x === GameConfig.MAP.ATTACK_DAMAGE || x === GameConfig.MAP.ATTACK_RANGE || x === GameConfig.MAP.ATTACK_SPEED);
+    }
+
     for (let row = 0; row < map.length; row++) {
         for (let col = 0; col < map[0].length; col++) {
-            if (map[row][col] === 0) {
-                let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
+            if (findPathAble(map[row][col])) {
+                let path = FindPathUtil.findShortestPath(map, {x: col, y: 4 - row}, {x: 6, y: 0});
                 if (path && path.length > 0) {
                     shortestPathForEachTiles[row][col] = path;
+                    cc.log()
                 }
             }
         }

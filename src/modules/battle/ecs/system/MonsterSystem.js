@@ -9,7 +9,7 @@ let MonsterSystem = System.extend({
 
     _run: function (tick) {
         let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(MonsterInfoComponent);
+            .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
 
         for (let monster of monsterList) {
             let monsterPos = monster.getComponent(PositionComponent);

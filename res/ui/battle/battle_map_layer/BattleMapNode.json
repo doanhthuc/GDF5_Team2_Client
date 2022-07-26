@@ -99,23 +99,27 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "ui/battle/battle_map_layer/BattleMapPlayer.json",
+              "Path": "textures/map/map_background.png",
               "Plist": ""
             },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
             "Position": {
-              "X": 0.0,
-              "Y": -242.5
+              "X": 395.28,
+              "Y": 3.74
             },
             "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
+              "ScaleX": 0.3491,
+              "ScaleY": 0.2037
             },
             "CColor": {},
-            "IconVisible": true,
+            "IconVisible": false,
             "PrePosition": {
               "X": 0.0,
               "Y": 0.0
@@ -124,16 +128,63 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "TopMargin": 242.5,
-            "BottomMargin": -242.5,
-            "Tag": 1100,
-            "ActionTag": 870241969,
+            "LeftMargin": 85.28,
+            "RightMargin": -705.28,
+            "TopMargin": -531.74,
+            "BottomMargin": -524.26,
+            "Tag": 1365,
+            "ActionTag": 784057406,
             "Size": {
+              "X": 620.0,
+              "Y": 1056.0
+            },
+            "Name": "background_right",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "textures/map/map_monster_gate_enemy.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 195.6367,
+              "Y": 4.5655
+            },
+            "Scale": {
+              "ScaleX": 0.8832,
+              "ScaleY": 0.8832
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "player_map",
-            "ctype": "ProjectNodeObjectData"
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 116.1367,
+            "RightMargin": -275.1367,
+            "TopMargin": -67.0655,
+            "BottomMargin": -57.9345,
+            "Tag": 58,
+            "ActionTag": 1355550480,
+            "Size": {
+              "X": 159.0,
+              "Y": 125.0
+            },
+            "Name": "opponent_monster_gateway",
+            "ctype": "SpriteObjectData"
           },
           {
             "FileData": {
@@ -177,7 +228,7 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "textures/map/map_background.png",
+              "Path": "textures/map/map_monster_gate_player.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -189,12 +240,12 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 395.28,
-              "Y": 3.74
+              "X": -192.4854,
+              "Y": 13.0167
             },
             "Scale": {
-              "ScaleX": 0.3491,
-              "ScaleY": 0.2037
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "CColor": {},
             "IconVisible": false,
@@ -206,18 +257,57 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 85.28,
-            "RightMargin": -705.28,
-            "TopMargin": -531.74,
-            "BottomMargin": -524.26,
-            "Tag": 1365,
-            "ActionTag": 784057406,
+            "LeftMargin": -295.4854,
+            "RightMargin": 89.4854,
+            "TopMargin": -90.0167,
+            "BottomMargin": -63.9833,
+            "Tag": 57,
+            "ActionTag": 337272511,
             "Size": {
-              "X": 620.0,
-              "Y": 1056.0
+              "X": 206.0,
+              "Y": 154.0
             },
-            "Name": "background_right",
+            "Name": "player_monster_gateway",
             "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/battle_map_layer/BattleMapPlayer.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": -242.5
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": 242.5,
+            "BottomMargin": -242.5,
+            "Tag": 1100,
+            "ActionTag": 870241969,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "player_map",
+            "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
@@ -532,96 +622,6 @@
               "Y": 227.0
             },
             "Name": "decoration1",
-            "ctype": "SpriteObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "textures/map/map_monster_gate_enemy.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 195.6367,
-              "Y": 4.5655
-            },
-            "Scale": {
-              "ScaleX": 0.8832,
-              "ScaleY": 0.8832
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 116.1367,
-            "RightMargin": -275.1367,
-            "TopMargin": -67.0655,
-            "BottomMargin": -57.9345,
-            "Tag": 58,
-            "ActionTag": 1355550480,
-            "Size": {
-              "X": 159.0,
-              "Y": 125.0
-            },
-            "Name": "opponent_monster_gateway",
-            "ctype": "SpriteObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "textures/map/map_monster_gate_player.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": -192.4854,
-              "Y": 13.0167
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -295.4854,
-            "RightMargin": 89.4854,
-            "TopMargin": -90.0167,
-            "BottomMargin": -63.9833,
-            "Tag": 57,
-            "ActionTag": 337272511,
-            "Size": {
-              "X": 206.0,
-              "Y": 154.0
-            },
-            "Name": "player_monster_gateway",
             "ctype": "SpriteObjectData"
           },
           {
