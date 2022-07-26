@@ -15,7 +15,7 @@ EntityFactory._createEntity = function (typeID, mode) {
     return entity;
 }
 
-EntityFactory.createBullet = function (towerType, startPosition, targetPosition, targetEntity, effects, mode) {
+EntityFactory.createBullet = function (towerType, startPosition, targetPosition, effects, mode) {
     Utils.validateMode(mode);
     if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
@@ -31,11 +31,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let bulletSpeed = 5 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
 
-        let targetEntityID = null;
-        if (targetEntity) {
-            targetEntityID = targetEntity.id;
-        }
-        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetEntityID);
+        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetPosition);
 
         entity.addComponent(infoComponent)
             .addComponent(positionComponent)
