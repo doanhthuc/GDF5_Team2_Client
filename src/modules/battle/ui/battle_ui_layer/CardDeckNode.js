@@ -218,7 +218,7 @@ let CardDeckNode = cc.Node.extend({
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             } else {
                 // this.spriteDragManager[touch.getID()] = createBearNodeAnimation(1.5 * GameConfig.TILE_WIDTH, true);
-                this.spriteDragManager[touch.getID()] = createDragTowerNode(selectedCard.type);
+                this.spriteDragManager[touch.getID()] = NodeFactory.createDragTowerNode(selectedCard.type);
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             }
         }
