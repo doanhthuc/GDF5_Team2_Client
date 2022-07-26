@@ -151,19 +151,19 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        //EntityFactory.createBatMonster(pixelPos, mode);
-        // setTimeout(function () {
-        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // }, 1000);
-        // setTimeout(function () {
-        //     EntityFactory.createAssassinMonster(pixelPos, mode);
-        // }, 2000);
-        // setTimeout(function () {
-        //     EntityFactory.createNinjaMonster(pixelPos, mode);
-        // }, 3000);
-        // setTimeout(function () {
-        //     EntityFactory.createGiantMonster(pixelPos, mode);
-        // }, 5000);
+        EntityFactory.createBatMonster(pixelPos, mode);
+        setTimeout(function () {
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        }, 1000);
+        setTimeout(function () {
+            EntityFactory.createAssassinMonster(pixelPos, mode);
+        }, 2000);
+        setTimeout(function () {
+            EntityFactory.createNinjaMonster(pixelPos, mode);
+        }, 3000);
+        setTimeout(function () {
+            EntityFactory.createGiantMonster(pixelPos, mode);
+        }, 5000);
         setTimeout(function () {
             EntityFactory.createSatyrBoss(pixelPos, mode);
         }, 20000);
