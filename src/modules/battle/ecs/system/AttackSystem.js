@@ -66,13 +66,14 @@ let AttackSystem = System.extend({
         for (let monster of monsterInAttackRange) {
             if (monster.typeID === GameConfig.ENTITY_ID.DARK_GIANT) return monster;
         }
+        return monsterInAttackRange[0];
         let targetMonster = null;
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP:
                 let maxHP = -1;
                 let maxIdx = -1;
                 for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterInfo = monsterInAttackRange[i].getComponent(MonsterInfoComponent);
+                    let monsterInfo = monsterInAttackRange[i].getComponent(LifeComponent);
                     if (monsterInfo.hp > maxHP) {
                         maxHP = monsterInfo.hp;
                         maxIdx = i;
