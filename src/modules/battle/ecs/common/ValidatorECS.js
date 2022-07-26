@@ -72,5 +72,5 @@ ValidatorECS.isTrap = function (entityOrTypeID) {
         type = entityOrTypeID.typeID;
     }
 
-    return GameConfig.ENTITY_ID.TRAP === type;
+    return GameConfig.ENTITY_ID.TRAP_SPELL === type;
 }

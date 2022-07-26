@@ -5,8 +5,11 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-        if (GameConfig.NETWORK == 0) BattleData.fakeData();
+        if (GameConfig.NETWORK == 0) {
+            BattleData.fakeData();
+        }
         this.battleData = BattleManager.getInstance().getBattleData();
+
         // this.battleLoop = new BattleLoop();
 
         this._setupUI();
@@ -38,6 +41,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     _initSystem: function () {
+        this.resetSystem = SystemFactory.create(ResetSystem);
         this.movementSystem = SystemFactory.create(MovementSystem);
         this.renderSystem = SystemFactory.create(RenderSystem);
         this.lifeSystem = SystemFactory.create(LifeSystem);
@@ -55,18 +59,19 @@ let BattleLayer = cc.Layer.extend({
 
     update: function (dt) {
         // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
+        this.resetSystem.start(dt);
+        this.abilitySystem.start(dt);
+        this.effectSystem.start(dt);
         this.attackSystem.start(dt);
         this.renderSystem.start(dt);
         this.lifeSystem.start(dt);
         this.collisionSystem.start(dt);
-        this.effectSystem.start(dt);
         this.pathSystem.start(dt);
         this.spriteSheetAnimationSystem.start(dt);
         this.spellSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
         this.monsterSystem.start(dt);
         this.bulletSystem.start(dt);
-        this.abilitySystem.start(dt);
         this.movementSystem.start(dt);
 
 
@@ -126,13 +131,16 @@ let BattleLayer = cc.Layer.extend({
         setTimeout(function () {
             EntityFactory.createGiantMonster(pixelPos, mode);
         }, 5000);
-        //EntityFactory.createAssassinMonster(pixelPos, mode);
+        // EntityFactory.createAssassinMonster(pixelPos, mode);
         // EntityFactory.createGiantMonster(pixelPos, mode);
+        //EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createNinjaMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+
+        //EntityFactory.createNinjaMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        //EntityFactory.createBatMonster(pixelPos, mode);
+        // EntityFactory.createBatMonster(pixelPos, mode);
         // EntityFactory.createSatyrBoss(pixelPos, mode);
     },
 
@@ -143,7 +151,7 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createBatMonster(pixelPos, mode);
         setTimeout(function () {
             EntityFactory.createSwordsmanMonster(pixelPos, mode);
         }, 1000);
@@ -174,8 +182,8 @@ let BattleLayer = cc.Layer.extend({
     //     // //    // setTimeout(this.createMonster(pixelPos,mode,entityID),time);
     //     // // )
     // },
-    createMonster: function (pixelPos,mode,entityID){
-        switch (entityID){
+    createMonster: function (pixelPos, mode, entityID) {
+        switch (entityID) {
             case GameConfig.ENTITY_ID.SWORD_MAN:
                 EntityFactory.createSwordsmanMonster(pixelPos, mode);
                 break;
@@ -227,14 +235,18 @@ let BattleLayer = cc.Layer.extend({
                 || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
                 return;
             }
+        } else if (ValidatorECS.isTrap(type)) {
+            // check valid position
         } else {
             throw new Error("Type is invalid");
         }
 
-        if (type === GameConfig.ENTITY_ID.FIRE_SPELL || type === GameConfig.ENTITY_ID.FROZEN_SPELL) {
+        if (ValidatorECS.isSpell(type)) {
             this.dropSpell(type, pixelPos, mode)
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
-        } else {
+        } else if (ValidatorECS.isTrap(type)) {
+            SpellFactory.createTrap(tilePos, mode);
+        } else if (ValidatorECS.isTower(type)) {
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()
             //         .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
@@ -245,15 +257,19 @@ let BattleLayer = cc.Layer.extend({
             // }
             this.putTowerCardIntoMap(type, tilePos, mode);
         }
+
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
     putTowerCardIntoMap: function (type, tilePos, mode) {
-        if (this.shouldUpgradeTower(type, tilePos)) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
-            return;
+        if (GameConfig.NETWORK) {
+            if (this.shouldUpgradeTower(type, tilePos)) {
+                EventDispatcher.getInstance()
+                    .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+                return;
+            }
         }
+
         if (this.shouldPutNewTower(tilePos)) {
             this.buildTower(type, tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
@@ -273,6 +289,15 @@ let BattleLayer = cc.Layer.extend({
                 break;
             case GameConfig.ENTITY_ID.BUNNY_TOWER:
                 EntityFactory.createBunnyOilGunTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.WIZARD_TOWER:
+                EntityFactory.createWizardTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.SNAKE_TOWER:
+                EntityFactory.createSnakeAttackSpeedTower(tilePos, mode);
+                break;
+            case GameConfig.ENTITY_ID.GOAT_TOWER:
+                EntityFactory.createGoatDamageTower(tilePos, mode);
                 break;
             default:
                 return;
@@ -295,9 +320,12 @@ let BattleLayer = cc.Layer.extend({
             default:
                 return;
         }
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.DROP_SPELL, {cardId: spellId, mode: mode});
     },
 
     shouldUpgradeTower: function (towerId, tilePos) {
+        if (GameConfig.NETWORK === 0) return false;
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
         if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null) {
             let tower = cellObject.tower;
@@ -317,12 +345,6 @@ let BattleLayer = cc.Layer.extend({
         return cellObject.objectInCellType === ObjectInCellType.NONE;
     },
 
-    _initTower: function () {
-        EntityFactory.createCannonOwlTower({x: 1, y: 3}, GameConfig.PLAYER);
-        EntityFactory.createIceGunPolarBearTower({x: 1, y: 1}, GameConfig.PLAYER);
-        EntityFactory.createBoomerangFrogTower({x: 3, y: 3}, GameConfig.PLAYER);
-    },
-
     _handleEventKey: function () {
         cc.eventManager.addListener(cc.EventListener.create({
             event: cc.EventListener.TOUCH_ALL_AT_ONCE,
@@ -337,12 +359,30 @@ let BattleLayer = cc.Layer.extend({
                 }
             }
         }), this.uiLayer)
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            onTouchBegan: function (touch, event) {
+                let globalPos = touch.getLocation();
+                let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
+                let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
+                if (Utils.validateTilePos(tilePos)) {
+                    let playeMapMatrix = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+                    if (playeMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
+                        BattleManager.getInstance().getBattleLayer()
+                            .uiLayer.showTargetCircle(tilePos.x, tilePos.y);
+                    }
+                }
+                return false;
+            },
+        }, this.uiLayer);
     },
 
     startGame: function () {
-        // this.battleLoop.start();
+      //  this.battleLoop.start();
+        //this.schedule(this.update,0.1,10000);
         this.scheduleUpdate();
-        // BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+       //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
     stopGame: function () {
@@ -378,6 +418,9 @@ let BattleLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/ice_gun.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/oil_gun.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/boomerang.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/wizard.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/attack_speed.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/tower_damage.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/swordsman.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/ninja.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/assassin.plist");
@@ -388,6 +431,7 @@ let BattleLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/dark_giant.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/monster/sprite_sheet/satyr.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/potion/fx_trap/sprite_sheet/trap.plist");
+        cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/tower_pedestal.plist");
     },
 
     _clearAsset: function () {

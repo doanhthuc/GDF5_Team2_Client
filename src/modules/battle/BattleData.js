@@ -119,7 +119,7 @@ let BattleData = cc.Class.extend({
         this.dataInGame.currentWave = currentWave;
         return this.dataInGame.currentWave;
     },
-    getCurrentMonsterWave: function (){
+    getCurrentMonsterWave: function () {
         return this.dataInGame.battleWave[this.dataInGame.currentWave];
     },
 
@@ -189,7 +189,17 @@ let BattleData = cc.Class.extend({
     },
     increaseWave: function () {
         this.dataInGame.currentWave++;
-    }
+    },
+
+    setCards: function (cards, mode) {
+        Utils.validateMode(mode);
+        this.dataInGame[mode].cards = cards;
+    },
+
+    getCards: function (mode) {
+        Utils.validateMode(mode);
+        return this.dataInGame[mode].cards;
+    },
 });
 
 BattleData.fakeData = function () {

@@ -15,7 +15,7 @@ let CollisionSystem = System.extend({
 
     _run: function (tick) {
         let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(CollisionComponent)
+            .getEntitiesHasComponents(CollisionComponent, PositionComponent)
 
         if (GameConfig.DEBUG) {
             cc.error("Collision entity size = " + entityList.length);
@@ -66,25 +66,67 @@ let CollisionSystem = System.extend({
                 if (data) {
                     let monster = data.monster, bullet = data.bullet;
                     let bulletInfo = bullet.getComponent(BulletInfoComponent);
+                    //Handle Frog Bullet
                     if (bulletInfo.type && bulletInfo.type === "frog") {
-                        // handle here
+                        let pathComponent = bullet.getComponent(PathComponent);
+                        //check the the bullet is in first path
+                        if (pathComponent.currentPathIdx <= pathComponent.path.length / 2) {
+                            if (bulletInfo.hitMonster.has(monster.id) === false)
+                                for (let effect of bulletInfo.effects) {
+                                    monster.addComponent(effect.clone());
+                                    bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_FIRST_TIME);
+                                }
+                        } //check the second path
+                        else {
+                            // check if this monster was not hit in First Path
+                            if (bulletInfo.hitMonster.has(monster.id) === false) {
+                                for (let effect of bulletInfo.effects) {
+                                    monster.addComponent(effect.clone());
+                                    bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_SECOND_TIME);
+                                }
+                            }  // else if this monster is hit in First Path
+                            else if (bulletInfo.hitMonster.get(monster.id) === GameConfig.FROG_BULLET.HIT_FIRST_TIME) {
+                                for (let effect of bulletInfo.effects) {
+                                    if (effect.typeID === GameConfig.COMPONENT_ID.DAMAGE_EFFECT) {
+                                        let newDamageEffect = effect.clone();
+                                        newDamageEffect.damage = effect.damage * 1.5;
+                                        monster.addComponent(newDamageEffect);
+                                        bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_BOTH_TIME);
+                                    }
+                                }
+                            }
+                        }
+
                     } else {
-                        for (let effect of bulletInfo.effects) {
-                            monster.addComponent(effect.clone());
+                        // IMPORTANT: 1 bullet can affect only 1 monster
+                        if (bulletInfo.radius) {
+                            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent,PositionComponent);
+                            for (let monster of monsterList) {
+                                if (Utils.euclidDistance(monster.getComponent(PositionComponent), pos) <= bulletInfo.radius) {
+                                    for (let effect of bulletInfo.effects) {
+                                        monster.addComponent(effect.clone());
+                                    }
+                                }
+                            }
+                        } else {
+                            for (let effect of bulletInfo.effects) {
+                                monster.addComponent(effect.clone());
+                            }
                         }
                         EntityManager.destroy(bullet);
-                        // IMPORTANT: 1 bullet can affect only 1 monster
                         break;
+
                     }
                 }
             }
         }
-    },
-
+    }
+    ,
     _handleCollisionTrap: function (trapEntity, dt) {
-        if (trapEntity.isTriggered) {
-            if (trapEntity.isTriggered > 0) {
-                trapEntity.isTriggered -= dt;
+        let trapInfo = trapEntity.getComponent(TrapInfoComponent);
+        if (trapInfo.isTriggered) {
+            if (trapInfo.delayTrigger > 0) {
+                trapInfo.delayTrigger -= dt;
             } else {
                 let pos = trapEntity.getComponent(PositionComponent);
                 let collisionComponent = trapEntity.getComponent(CollisionComponent);
@@ -97,60 +139,46 @@ let CollisionSystem = System.extend({
                     returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
                 }
 
-                let monsterList = [];
                 for (let j = 0; j < returnObjects.length; j++) {
                     let entity1 = trapEntity, entity2 = returnObjects[j].entity;
-                    if (entity1 !== entity2 && entity1.mode === entity2.mode && ValidatorECS.isMonster(entity2) && this._isCollide(entity1, entity2)) {
-                        monsterList.push(entity2);
+                    if (entity1 !== entity2
+                        && entity1.mode === entity2.mode
+                        && ValidatorECS.isMonster(entity2)
+                        && this._isCollide(entity1, entity2)) {
+
+                        entity2.addComponent(ComponentFactory.create(TrapEffect));
                     }
                 }
 
-                for (let entity of monsterList) {
-                    let pos = entity.getComponent(PositionComponent);
-                    let pathComponent = entity.getComponent(PathComponent);
-                    let appearanceComponent = entity.getComponent(AppearanceComponent);
-                    pathComponent.path.unshift({x: pos.x, y: pos.y});
-                    pathComponent.currentPathIdx = 0;
-                    // pathComponent.reset(pathComponent.path, pathComponent.mode, false);
-                    // let origin = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(entity.mode)[GameConfig.MAP_HEIGH - 1 - 4][0];
-                    // entity.removeComponent(VelocityComponent);
-                    // entity.removeComponent(PathComponent);
-                    // pos.x = pathComponent.path[0].x;
-                    // pos.y = pathComponent.path[0].y;
-
-                    // cc.log("origin position = " + JSON.stringify(origin));
-                    let action = cc.spawn(
-                        cc.jumpTo(4, pathComponent.path[1], 100, 4),
-                        cc.rotateBy(4, 720));
-
-                    appearanceComponent.sprite.runAction(action);
-                    delete trapEntity.isTriggered;
-                }
+                EntityManager.destroy(trapEntity);
             }
         } else {
-            if (!trapEntity.countTrigger || trapEntity.countTrigger < 1) {
-                let pos = trapEntity.getComponent(PositionComponent);
-                let collisionComponent = trapEntity.getComponent(CollisionComponent);
-                let w = collisionComponent.width, h = collisionComponent.height;
+            let pos = trapEntity.getComponent(PositionComponent);
+            let collisionComponent = trapEntity.getComponent(CollisionComponent);
+            let w = collisionComponent.width, h = collisionComponent.height;
 
-                let returnObjects = null;
-                if (trapEntity.mode === GameConfig.PLAYER) {
-                    returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
-                } else {
-                    returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
-                }
-
-                for (let j = 0; j < returnObjects.length; j++) {
-                    let entity1 = trapEntity, entity2 = returnObjects[j].entity;
-                    if (entity1 !== entity2 && entity1.mode === entity2.mode && this._isCollide(entity1, entity2)) {
-                        // The first monster will trigger the trap
-                        trapEntity.isTriggered = 0.3;
-                        trapEntity.countTrigger = 2;
-                        break;
-                    }
-                }
+            let returnObjects = null;
+            if (trapEntity.mode === GameConfig.PLAYER) {
+                returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
+            } else {
+                returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
             }
 
+            for (let j = 0; j < returnObjects.length; j++) {
+                let entity1 = trapEntity, entity2 = returnObjects[j].entity;
+                if (entity1 !== entity2
+                    && entity1.mode === entity2.mode
+                    && ValidatorECS.isMonster(entity2)
+                    && this._isCollide(entity1, entity2)) {
+
+                    trapInfo.setTrigger(true);
+                    let spriteComponent = trapEntity.getComponent(SpriteSheetAnimationComponent);
+                    spriteComponent.changeCurrentState("ATTACK");
+
+                    // only the first monster triggers this trap
+                    break;
+                }
+            }
         }
     },
 
@@ -165,7 +193,7 @@ let CollisionSystem = System.extend({
 
         if ((w1 === 0 && h1 === 0) || (w2 === 0 && h2 === 0)) return false;
 
-        // DEBUG
+        //DEBUG
         // if (this._isMonsterAndBullet(entity1, entity2)
         //     && cc.rectIntersectsRect(cc.rect(pos1.x - w1 / 2, pos1.y - h1 / 2, w1, h1), cc.rect(pos2.x - w2 / 2, pos2.y - h2 / 2, w2, h2))) {
         //     let rect1 = cc.DrawNode.create();
@@ -175,12 +203,13 @@ let CollisionSystem = System.extend({
         //     rect2.drawRect(cc.p(pos2.x - (w2 / 2), pos2.y - (h2 / 2)), cc.p(pos2.x + w2/2, pos2.y + h2/2), cc.color(255,0,255,255));
         //     BattleManager.getInstance().getBattleLayer().getPlayerMapNode().addChild(rect2, 100);
         // }
-        // END DEBUG
+        //END DEBUG
 
         return cc.rectIntersectsRect(cc.rect(pos1.x - w1 / 2, pos1.y - h1 / 2, w1, h1), cc.rect(pos2.x - w2 / 2, pos2.y - h2 / 2, w2, h2));
         // let x1 = pos1.x - w1 / 2, x2 = pos2.x - w2 / 2, y1 = pos1.y - h1 / 2, y2 = pos2.y - h2 / 2;
         // return x1 <= x2 + w2 && x1 + w1 >= x2 && y1 + h1 >= y2 && y2 + h2 >= y1;
-    },
+    }
+    ,
 
     _isMonsterAndBullet: function (entity1, entity2) {
         // TODO: check entity2 is monster, not only sword man

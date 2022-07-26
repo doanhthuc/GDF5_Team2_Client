@@ -10,6 +10,7 @@ let PositionComponent = Component.extend({
     reset: function (x, y) {
         this.x = x;
         this.y = y;
+        this.moveDistance = 0;
     },
 
     clone: function () {

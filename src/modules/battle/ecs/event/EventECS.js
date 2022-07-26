@@ -24,5 +24,6 @@ let EventType = {
     PUT_NEW_TOWER: 7,
     FINISH_MATCHING: 8,
     CHANGE_STATE_ENTITY: 9,
-    UPGRADE_TOWER: 10
+    UPGRADE_TOWER: 10,
+    DROP_SPELL: 11,
 }

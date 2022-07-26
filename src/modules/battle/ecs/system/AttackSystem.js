@@ -11,7 +11,7 @@ let AttackSystem = System.extend({
         let towerList = EntityManager.getInstance()
             .getEntitiesHasComponents(AttackComponent);
         let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(MonsterInfoComponent);
+            .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
 
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
@@ -23,7 +23,8 @@ let AttackSystem = System.extend({
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
-                    if (monster.getActive() && monster.mode === tower.mode) {
+                    if (monster.getActive() && monster.mode === tower.mode
+                        && monster.hasAllComponent(PositionComponent)) {
                         let distance = this._distanceFrom(tower, monster);
                         if (distance <= attackComponent.range) {
                             monsterInAttackRange.push(monster);
@@ -38,8 +39,15 @@ let AttackSystem = System.extend({
                         let towerPos = tower.getComponent(PositionComponent);
 
                         this._changeTowerAnimation(tower, targetMonster);
-                        EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode);
-                        // reset count down time
+
+                        if (tower.typeID === GameConfig.ENTITY_ID.FROG_TOWER) {
+                            let distance = this._distanceFrom(tower, targetMonster);
+                            let k = attackComponent.range / distance;
+                            let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
+                            EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode);
+                        } else {
+                            EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode)
+                        }
                         attackComponent.countdown = attackComponent.speed;
                     }
                 }
@@ -58,17 +66,14 @@ let AttackSystem = System.extend({
         for (let monster of monsterInAttackRange) {
             if (monster.typeID === GameConfig.ENTITY_ID.DARK_GIANT) return monster;
         }
-        for (let monster of monsterInAttackRange) {
-            let underGroundComponent = monster.getComponent(UnderGroundComponent);
-            if ((!(underGroundComponent) || underGroundComponent.isInGround === false)) return monster;
-        }
+        return monsterInAttackRange[0];
         let targetMonster = null;
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP:
                 let maxHP = -1;
                 let maxIdx = -1;
                 for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterInfo = monsterInAttackRange[i].getComponent(MonsterInfoComponent);
+                    let monsterInfo = monsterInAttackRange[i].getComponent(LifeComponent);
                     if (monsterInfo.hp > maxHP) {
                         maxHP = monsterInfo.hp;
                         maxIdx = i;
@@ -95,7 +100,7 @@ let AttackSystem = System.extend({
 
         let deg = Utils.calcSlopeOfLine({x: towerPos.x, y: towerPos.y}, {x: monsterPos.x, y: monsterPos.y});
         let directionDegree = [0, 25, 50, 75, 90, 115, 140, 165, 180, 205, 230, 255, 270, 295, 320, 345];
-        let minValue = Math.abs(deg-directionDegree[0]), minIdx = 0;
+        let minValue = Math.abs(deg - directionDegree[0]), minIdx = 0;
         for (let i = 1; i < directionDegree.length; i++) {
             if (Math.abs(deg - directionDegree[i]) < minValue) {
                 minIdx = i;

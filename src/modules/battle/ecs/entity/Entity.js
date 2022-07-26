@@ -33,7 +33,7 @@ let EntityECS = cc.Class.extend({
     },
 
     getComponent: function (ComponentCls) {
-        if (ComponentCls.typeID === null || ComponentCls.typeID === undefined) {
+        if (ComponentCls.typeID == null) {
             throw new Error("Class doesn't have typeID property");
         }
         return this.components[ComponentCls.typeID];

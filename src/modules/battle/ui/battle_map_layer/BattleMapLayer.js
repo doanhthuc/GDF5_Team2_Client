@@ -12,7 +12,6 @@ let BattleMapLayer = cc.Layer.extend({
             x: cc.winSize.width / 2,
             y: (cc.winSize.height - BattleResource.DECK_CARD_HEIGHT) / 2 + BattleResource.DECK_CARD_HEIGHT
         });
-
     },
 
     _genMap: function (mode) {

@@ -73,8 +73,8 @@ let SpriteSheetAnimationComponent = Component.extend({
         }
 
         let animation = new cc.Animation(animFrames);
-        let delay = time || 1000;
-        animation.setDelayPerUnit(delay / 1000 / animFrames.length);
+        let delay = (time || 1000) / 1000;
+        animation.setDelayPerUnit(delay / animFrames.length);
         animation.retain();
 
         let animArr = [];
@@ -82,7 +82,7 @@ let SpriteSheetAnimationComponent = Component.extend({
             animArr.push(this._buildConfig(config, sequenceAnimName[0], spriteName));
         }
 
-        return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat};
+        return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat, delay: delay};
     },
     getCurrentState:function (){
         return this.currentState;
