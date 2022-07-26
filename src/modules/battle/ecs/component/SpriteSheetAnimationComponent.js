@@ -82,7 +82,7 @@ let SpriteSheetAnimationComponent = Component.extend({
             animArr.push(this._buildConfig(config, sequenceAnimName[0], spriteName));
         }
 
-        return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat};
+        return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat, delay: delay};
     },
     getCurrentState:function (){
         return this.currentState;

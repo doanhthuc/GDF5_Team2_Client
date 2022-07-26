@@ -41,7 +41,7 @@ let SpriteSheetAnimationSystem = System.extend({
                                 action.setTag(0);
                                 tmpSprite.runAction(action);
                             })
-                            actionArr.push(actionFuncCall);
+                            actionArr.push(actionFuncCall, cc.delayTime(stateAnim[spriteName].delay));
                         }
 
                         for (let stateAnimI of stateAnim[spriteName].sequenceAnimations) {
@@ -61,7 +61,7 @@ let SpriteSheetAnimationSystem = System.extend({
                                     action.setTag(0);
                                     tmpSprite.runAction(action);
                                 })
-                                actionArr.push(actionFuncCall)
+                                actionArr.push(actionFuncCall, cc.delayTime(stateAnimI.delay))
                             }
                         }
 
