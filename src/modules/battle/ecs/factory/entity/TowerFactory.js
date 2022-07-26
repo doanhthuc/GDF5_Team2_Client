@@ -1,5 +1,3 @@
-let EntityFactory = EntityFactory || {};
-
 EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
