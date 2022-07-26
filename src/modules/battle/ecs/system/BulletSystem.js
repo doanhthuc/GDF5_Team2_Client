@@ -26,8 +26,7 @@ let BulletSystem = System.extend({
                 continue;
             }
 
-            if (Math.abs(bulletVelocity.dynamicPosition.x - bulletPos.x) <= 3
-                && Math.abs(bulletVelocity.dynamicPosition.y - bulletPos.y) <= 3) {
+            if (Math.abs(bulletVelocity.dynamicPosition.x - bulletPos.x) <= 3) {
                 // bullet.removeComponent(VelocityComponent);
                 let collisionComponent = bullet.getComponent(CollisionComponent);
                 if (collisionComponent) {

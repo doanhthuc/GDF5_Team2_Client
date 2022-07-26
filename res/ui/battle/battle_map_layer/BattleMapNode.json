@@ -99,6 +99,51 @@
           {
             "FileData": {
               "Type": "Normal",
+              "Path": "textures/map/map_background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 395.28,
+              "Y": 3.74
+            },
+            "Scale": {
+              "ScaleX": 0.3491,
+              "ScaleY": 0.2037
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 85.28,
+            "RightMargin": -705.28,
+            "TopMargin": -531.74,
+            "BottomMargin": -524.26,
+            "Tag": 1365,
+            "ActionTag": 784057406,
+            "Size": {
+              "X": 620.0,
+              "Y": 1056.0
+            },
+            "Name": "background_right",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
               "Path": "textures/map/map_monster_gate_enemy.png",
               "Plist": ""
             },
@@ -140,6 +185,45 @@
             },
             "Name": "opponent_monster_gateway",
             "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui/battle/battle_map_layer/BattleMapOpponent.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": 242.5
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": -242.5,
+            "BottomMargin": 242.5,
+            "Tag": 1095,
+            "ActionTag": 1363554369,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "opponent_map",
+            "ctype": "ProjectNodeObjectData"
           },
           {
             "FileData": {
@@ -224,90 +308,6 @@
             },
             "Name": "player_map",
             "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "ui/battle/battle_map_layer/BattleMapOpponent.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 0.0,
-              "Y": 242.5
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "TopMargin": -242.5,
-            "BottomMargin": 242.5,
-            "Tag": 1095,
-            "ActionTag": 1363554369,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "opponent_map",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "textures/map/map_background.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 395.28,
-              "Y": 3.74
-            },
-            "Scale": {
-              "ScaleX": 0.3491,
-              "ScaleY": 0.2037
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 85.28,
-            "RightMargin": -705.28,
-            "TopMargin": -531.74,
-            "BottomMargin": -524.26,
-            "Tag": 1365,
-            "ActionTag": 784057406,
-            "Size": {
-              "X": 620.0,
-              "Y": 1056.0
-            },
-            "Name": "background_right",
-            "ctype": "SpriteObjectData"
           },
           {
             "FileData": {

@@ -13,8 +13,11 @@ let MovementSystem = System.extend({
         for (let entity of entityList) {
             let positionComponent = entity.getComponent(PositionComponent);
             let velocityComponent = entity.getComponent(VelocityComponent);
-            if (velocityComponent.dynamicPosition && (velocityComponent.dynamicPosition).getActive()) {
-                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition, velocityComponent.originSpeed);
+            let appearanceComponent = entity.getComponent(AppearanceComponent);
+
+            if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive()) {
+                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
+                    velocityComponent.originSpeed);
                 velocityComponent.speedX = newVelocity.speedX;
                 velocityComponent.speedY = newVelocity.speedY;
             }
@@ -26,6 +29,28 @@ let MovementSystem = System.extend({
                 positionComponent.y += moveDistanceY;
                 let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
                 positionComponent.moveDistance += moveDistance;
+            }
+
+            if (velocityComponent && appearanceComponent) {
+                let spriteList = appearanceComponent.sprite.getChildren();
+                let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
+                for (let sprite of spriteList) {
+                    // if (sprite.myRunningAction) {
+                    //     sprite.myRunningAction.setSpeed(0.5);
+                    // }
+                    if (sprite.getActionByTag(0)) {
+                        sprite.getActionByTag(0).setSpeed(speed / 50);
+                    }
+                    // if (!sprite.tagActions) continue;
+                    // for (let tag of sprite.tagActions) {
+                    //     let action = sprite.getActionByTag(1);
+                    //     cc.log("tag = " + tag + ", action = " + action + ", number running = " + sprite.getNumberOfRunningActions());
+                    //     if (action) {
+                    //         action.setSpeed(0.5);
+                    //         cc.warn("set");
+                    //     }
+                    // }
+                }
             }
         }
     },

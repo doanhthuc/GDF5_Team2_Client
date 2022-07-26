@@ -13,6 +13,7 @@ let RenderSystem = System.extend({
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
             appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
+            appearanceComponent.sprite.setLocalZOrder(10000 - positionComponent.y);
 
             // side effect
             this._updateHpBarMonsterUI(entity);

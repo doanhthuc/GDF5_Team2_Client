@@ -8,7 +8,7 @@ let PathMonsterSystem = System.extend({
     },
 
     _run: function (tick) {
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent, PositionComponent);
         for (let entity of entityList) {
             {
                 let pathComponent = entity.getComponent(PathComponent);
@@ -25,6 +25,7 @@ let PathMonsterSystem = System.extend({
                 velocityComponent.speedX = newVelocity.speedX;
                 velocityComponent.speedY = newVelocity.speedY;
 
+                //Update Direction for Monster
                 if (entity._hasComponent(SpriteSheetAnimationComponent) && entity.hasAnyComponent(MonsterInfoComponent)) {
                     let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
                     let state = this._getMovingDirection(entity);

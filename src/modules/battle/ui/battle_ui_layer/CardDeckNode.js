@@ -1,9 +1,13 @@
 let CardDeckNode = cc.Node.extend({
-    ctor: function () {
+    ctor: function (cardDeckListData) {
         this._super();
+
+        this.cardDeckListData = cardDeckListData;
+        this.selectableCardIdList = this.cardDeckListData.getFirst4CardId();
 
         this.rootNode = ccs.load(BattleResource.CARD_DECK_NODE, "").node;
         this.addChild(this.rootNode);
+        BattleManager.getInstance().registerCardDeckNode(this);
 
         // background
         let background = this.rootNode.getChildByName("background");
@@ -16,43 +20,49 @@ let CardDeckNode = cc.Node.extend({
         this.deckEnergyProgress.setPosition(this.rootNode.convertToNodeSpace(progressPos));
         this.rootNode.addChild(this.deckEnergyProgress);
 
+        // Cancel button
+        // let cancelButtonNode = ccs
+
         this.cardSlotManager = [];
         this.spriteDragManager = {};
+        this.fixedCardPosition = [null,];
         for (let i = 1; i <= 4; i++) {
             let card = this.rootNode.getChildByName("card_" + i);
             let cardPos = this.rootNode.convertToNodeSpace(card.getPosition());
+            this.fixedCardPosition.push(cardPos);
 
             // FIXME: harcode
             // should save position of 5 card in array
             let cardDeckSlot = null;
             switch (i) {
                 case 1:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.CANNON_TOWER);
+                    cardDeckSlot = new CardDeckSlot(this.selectableCardIdList[i - 1]);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 2:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.FROG_TOWER);
+                    cardDeckSlot = new CardDeckSlot(this.selectableCardIdList[i - 1]);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 3:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.SNAKE_TOWER);
+                    cardDeckSlot = new CardDeckSlot(this.selectableCardIdList[i - 1]);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
                 case 4:
-                    cardDeckSlot = new CardDeckSlot(GameConfig.ENTITY_ID.WIZARD_TOWER);
+                    cardDeckSlot = new CardDeckSlot(this.selectableCardIdList[i - 1]);
                     cardDeckSlot.setPosition(cardPos);
                     this.rootNode.addChild(cardDeckSlot);
                     break;
             }
 
+            cardDeckSlot.id = i;
             cardDeckSlot.name = "card" + i;
             cardDeckSlot.isUp = false;
+            cardDeckSlot.number = i;
             cardDeckSlot.isClicked = false;
             this.cardSlotManager.push(cardDeckSlot);
-            cardDeckSlot.id = i;
 
             cc.eventManager.addListener({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -65,11 +75,26 @@ let CardDeckNode = cc.Node.extend({
         this._handleEventKey();
 
         this.genNextCardSlot();
+
+        EventDispatcher.getInstance()
+            .addEventHandler(EventType.PUT_NEW_TOWER,
+                this.handleChangeCardEvent.bind(this))
+            .addEventHandler(EventType.UPGRADE_TOWER,
+                this.handleChangeCardEvent.bind(this))
+            .addEventHandler(EventType.DROP_SPELL,
+                this.handleChangeCardEvent.bind(this))
+
+        this.selectedCard = null;
+    },
+
+    handleChangeCardEvent: function (data) {
+        this.nextCard(this.selectedCard.id);
     },
 
     genNextCardSlot: function () {
         let card = this.rootNode.getChildByName("card_5");
-        this.nextCardSlot = new CardDeckSlot(GameConfig.ENTITY_ID.FIRE_SPELL);
+        let cardId = this.cardDeckListData.getNextCardId();
+        this.nextCardSlot = new CardDeckSlot(cardId);
         this.nextCardSlot.setPosition(card.getPosition());
         this.nextCardSlot.setScale(0.6449, 0.6449);
         this.rootNode.addChild(this.nextCardSlot, 1);
@@ -78,11 +103,12 @@ let CardDeckNode = cc.Node.extend({
     _onTouchBegan: function (touch, event) {
         let touchPos = touch.getLocation();
         let selectedCard = event.getCurrentTarget();
-
         let selectedCardBoundingBox = cc.rect(-selectedCard.width / 2, -selectedCard.height / 2, selectedCard.width, selectedCard.height);
         let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos)) === true;
 
         if (touchInCard) {
+            cc.log("CardDeckNode _onTouchBegan " + JSON.stringify(selectedCard));
+            this.selectedCard = selectedCard;
             if (selectedCard.isUp === false) {
                 this._moveCardUp(selectedCard);
                 // Select card
@@ -189,7 +215,8 @@ let CardDeckNode = cc.Node.extend({
                 this.spriteDragManager[touch.getID()] = sp;
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             } else {
-                this.spriteDragManager[touch.getID()] = createBearNodeAnimation(1.5 * GameConfig.TILE_WIDTH, true);
+                // this.spriteDragManager[touch.getID()] = createBearNodeAnimation(1.5 * GameConfig.TILE_WIDTH, true);
+                this.spriteDragManager[touch.getID()] = createDragTowerNode(selectedCard.type);
                 mapNode.addChild(this.spriteDragManager[touch.getID()], 5);
             }
         }
@@ -200,7 +227,7 @@ let CardDeckNode = cc.Node.extend({
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
                 onKeyPressed: function (key, event) {
-                    this.nextCard(2)
+                    this.nextCard(3)
                 }.bind(this),
                 onKeyReleased: function (key, event) {
                     cc.log("Key up:" + key);
@@ -215,17 +242,21 @@ let CardDeckNode = cc.Node.extend({
         for (let i = 0; i < this.cardSlotManager.length; i++) {
             let currentCardSlot = this.cardSlotManager[i];
             if (currentCardSlot.id === replaceCardSlotID) {
-                currentCardSlot.setVisible(false);
+                // currentCardSlot.setVisible(false);
                 // should save position of 5 card in array, and use it, not use the current slot card position
                 let cardPos = currentCardSlot.getPosition();
-                if (currentCardSlot.isUp) {
-                    // FIXME: hardcode
-                    cardPos.y = cardPos.y - 30;
-                }
+                // if (currentCardSlot.isUp) {
+                //     // FIXME: hardcode
+                //     cardPos.y = cardPos.y - 30;
+                // }
+
 
                 this.nextCardSlot.id = currentCardSlot.id;
-                this.cardSlotManager[i] = this.nextCardSlot;
-                this.cardSlotManager[i].runAction(cc.spawn(cc.moveTo(0.3, cardPos), cc.scaleTo(0.3, 1)).easing(cc.easeElasticIn()));
+                cc.log("Card Deck Node line 256 : " + JSON.stringify(this.nextCardSlot));
+                cc.log(JSON.stringify(currentCardSlot))
+                this.cardSlotManager[i].setCardType(this.nextCardSlot.type);
+                cc.log("Card Deck Node js line 243 : " + JSON.stringify(this.cardSlotManager[i]));
+                // this.cardSlotManager[i].runAction(cc.spawn(cc.moveTo(0.3, this.fixedCardPosition[currentCardSlot.number]), cc.scaleTo(0.3, 1)).easing(cc.easeElasticIn()));
                 cc.eventManager.addListener({
                     event: cc.EventListener.TOUCH_ONE_BY_ONE,
                     onTouchBegan: this._onTouchBegan.bind(this),
@@ -237,6 +268,7 @@ let CardDeckNode = cc.Node.extend({
                 this.cardSlotManager[i].name = "card" + currentCardSlot.id;
                 this.cardSlotManager[i].isUp = false;
                 this.cardSlotManager[i].isClicked = false;
+                this.cardSlotManager[i].number = currentCardSlot.number;
 
                 this.genNextCardSlot();
                 break;
