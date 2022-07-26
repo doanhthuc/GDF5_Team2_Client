@@ -2,9 +2,9 @@ let CollisionComponent = Component.extend({
     name: "CollisionComponent",
     typeID: GameConfig.COMPONENT_ID.COLLISION,
 
-    ctor: function (width, height) {
+    ctor: function (width, height, originWidth, originHeight) {
         this._super();
-        this.reset(width, height);
+        this.reset(width, height, originWidth, originHeight);
     },
 
     reset: function (width, height, originWidth, originHeight) {
