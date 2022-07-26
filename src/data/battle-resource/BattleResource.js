@@ -52,4 +52,7 @@ const BattleResource = {
     FROZEN_SKELETON_JSON: "textures/potion/effect_atk_ice.json",
     FIRE_SKELETON_ATLAS: "textures/potion/effect_atk_fire.atlas",
     FIRE_SKELETON_JSON: "textures/potion/effect_atk_fire.json",
+
+    // Trap
+    TRAP_IMG: "textures/potion/fx_trap/image0000.png",
 }
