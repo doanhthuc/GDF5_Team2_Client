@@ -37,7 +37,6 @@ let SpriteSheetAnimationSystem = System.extend({
                             let tmpSprite = sprite;
                             let tmpSpriteAnimation = stateAnim[spriteName].animation;
                             let actionFuncCall = cc.callFunc(() => {
-                                cc.warn("AAA");
                                 let action =cc.speed(cc.animate(tmpSpriteAnimation), 1);
                                 action.setTag(0);
                                 tmpSprite.runAction(action);
@@ -48,7 +47,6 @@ let SpriteSheetAnimationSystem = System.extend({
                         for (let stateAnimI of stateAnim[spriteName].sequenceAnimations) {
                             if (stateAnimI.repeat) {
                                 let actionFuncCall = cc.callFunc(() => {
-                                    cc.warn("BBB");
                                     sprite.stopAllActions();
                                     let action =cc.speed(cc.repeatForever(cc.animate(stateAnimI.animation)), 1);
                                     action.setTag(0);
