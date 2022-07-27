@@ -40,7 +40,13 @@ let CollisionSystem = System.extend({
 
         for (let i = 0; i < entityList.length; i++) {
             if (ValidatorECS.isBullet(entityList[i])) {
-                this._handleCollisionBullet(entityList[i]);
+                let bulletInfoComponent = entityList[i].getComponent(BulletInfoComponent);
+                if (bulletInfoComponent.radius) {
+                    this._handleRadiusBullet(entityList[i]);
+                } else {
+                    this._handleCollisionBullet(entityList[i]);
+                }
+
             } else if (ValidatorECS.isTrap(entityList[i])) {
                 this._handleCollisionTrap(entityList[i], tick);
             }
@@ -99,19 +105,8 @@ let CollisionSystem = System.extend({
 
                     } else {
                         // IMPORTANT: 1 bullet can affect only 1 monster
-                        if (bulletInfo.radius) {
-                            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
-                            for (let monster of monsterList) {
-                                if (Utils.euclidDistance(monster.getComponent(PositionComponent), pos) <= bulletInfo.radius) {
-                                    for (let effect of bulletInfo.effects) {
-                                        monster.addComponent(effect.clone());
-                                    }
-                                }
-                            }
-                        } else {
-                            for (let effect of bulletInfo.effects) {
-                                monster.addComponent(effect.clone());
-                            }
+                        for (let effect of bulletInfo.effects) {
+                            monster.addComponent(effect.clone());
                         }
                         EntityManager.destroy(bullet);
                         break;
@@ -120,8 +115,27 @@ let CollisionSystem = System.extend({
                 }
             }
         }
-    }
-    ,
+    },
+
+    _handleRadiusBullet: function (bullet) {
+        let bulletPos = bullet.getComponent(PositionComponent);
+        let bulletVelocity = bullet.getComponent(VelocityComponent);
+        let bulletInfo = bullet.getComponent(BulletInfoComponent);
+        if ((Math.abs(bulletVelocity.staticPostition.x - bulletPos.x) <= 5)
+            && (Math.abs(bulletVelocity.staticPostition.y - bulletPos.y) <= 5)) {
+            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
+            for (let monster of monsterList) {
+                if (monster.mode === bullet.mode) {
+                    if (Utils.euclidDistance(monster.getComponent(PositionComponent), bulletPos) <= bulletInfo.radius) {
+                        for (let effect of bulletInfo.effects) {
+                            monster.addComponent(effect.clone());
+                        }
+                    }
+                }
+            }
+            EntityManager.destroy(bullet);
+        }
+    },
     _handleCollisionTrap: function (trapEntity, dt) {
         let trapInfo = trapEntity.getComponent(TrapInfoComponent);
         if (trapInfo.isTriggered) {
