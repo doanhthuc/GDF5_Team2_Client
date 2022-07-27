@@ -53,6 +53,8 @@ let AbilitySystem = System.extend({
                             x: positionComponent.x,
                             y: positionComponent.y
                         }, entity.mode);
+
+                        BattleAnimation.animationBornMonster(entity);
                     }
                 }
             }

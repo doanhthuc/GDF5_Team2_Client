@@ -50,6 +50,8 @@ let EffectSystem = System.extend({
                 let damageComponent = entity.getComponent(DamageEffect);
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
+
+                BattleAnimation.animationDamage(entity);
             }
         }
     },
