@@ -164,6 +164,7 @@
         "src/modules/battle/BattleData.js",
         "src/modules/battle/BattleLayer.js",
         "src/modules/battle/BattleManager.js",
+        "src/modules/battle/ecs/common/BattleAnimation.js",
         "src/modules/battle/ecs/common/Exception.js",
         "src/modules/battle/ecs/common/FindPathUtil.js",
         "src/modules/battle/ecs/common/MonsterConfig.js",

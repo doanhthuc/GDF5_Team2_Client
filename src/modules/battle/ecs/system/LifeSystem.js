@@ -13,6 +13,11 @@ let LifeSystem = System.extend({
         for (let entity of entityList) {
             let lifeComponent = entity.getComponent(LifeComponent);
             if (lifeComponent.hp <= 0) {
+                let pos = entity.getComponent(PositionComponent);
+                let monsterInfo = entity.getComponent(MonsterInfoComponent)
+                if (pos && monsterInfo) {
+                    BattleAnimation.animationPlusEnergy(pos, monsterInfo.gainEnergy, entity.mode);
+                }
                 EntityManager.destroy(entity);
             }
         }

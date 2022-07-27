@@ -45,15 +45,15 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -28.0,
-            "RightMargin": -28.0,
-            "TopMargin": -4.5,
-            "BottomMargin": -4.5,
+            "LeftMargin": -26.0,
+            "RightMargin": -26.0,
+            "TopMargin": -3.5,
+            "BottomMargin": -3.5,
             "Tag": 1961,
             "ActionTag": 149616487,
             "Size": {
-              "X": 56.0,
-              "Y": 9.0
+              "X": 52.0,
+              "Y": 7.0
             },
             "Name": "background",
             "ctype": "ImageViewObjectData"
@@ -87,15 +87,15 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -28.0,
-            "RightMargin": -28.0,
-            "TopMargin": -4.5,
-            "BottomMargin": -4.5,
+            "LeftMargin": -25.0,
+            "RightMargin": -25.0,
+            "TopMargin": -3.0,
+            "BottomMargin": -3.0,
             "Tag": 144,
             "ActionTag": 2105529075,
             "Size": {
-              "X": 56.0,
-              "Y": 9.0
+              "X": 50.0,
+              "Y": 6.0
             },
             "Name": "progress_bar",
             "ctype": "LoadingBarObjectData"

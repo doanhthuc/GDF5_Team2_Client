@@ -60,13 +60,3 @@ let BattleMapLayer = cc.Layer.extend({
         }
     },
 });
-
-BattleMapLayer.animationHouse = function (mode) {
-    Utils.validateMode(mode);
-    let mapLayer = BattleManager.getInstance().getBattleLayer().mapLayer;
-    let sp = mapLayer.houseSprite[mode];
-
-    let moveRight = cc.moveBy(0.1, cc.p(5, 0));
-    let moveLeft = cc.moveBy(0.1, cc.p(-5, 0));
-    sp.runAction(cc.sequence(moveRight, moveLeft).repeat(1));
-}
