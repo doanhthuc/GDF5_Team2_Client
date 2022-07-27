@@ -120,24 +120,30 @@ BattleAnimation.addAnimationHealing = function (entity) {
             childNode.addChild(spine, 0);
             spine.setAnimation(0, "fx_back", true);
             spine.setPosition(cc.p(childNode.width / 2, childNode.height / 2));
+        }
+    }
+}
 
-            function animationStateEvent(obj, trackIndex, type, event, loopCount) {
-                let entry = spine.getCurrent();
-                let animationName = (entry && entry.animation) ? entry.animation.name : 0;
+const HIT_SLOW_EFFECT_TAG = 102;
+BattleAnimation.addAnimationHitSlowEffect = function (entity) {
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
+    if (appearanceComponent && appearanceComponent.sprite) {
+        let childSprite = appearanceComponent.sprite.getChildByName("monster");
+        if (childSprite) {
+            let spine = new sp.SkeletonAnimation("textures/tower/fx/tower_oil_fx.json", "textures/tower/fx/tower_oil_fx.atlas");
+            spine.setPosition(cc.p(childSprite.width / 2, childSprite.height / 2));
+            spine.setAnimation(0, "hit_target_bullet", false);
+            childSprite.addChild(spine, 0, HIT_SLOW_EFFECT_TAG);
+        }
+    }
+}
 
-                switch (type) {
-                    case GameConfig.ANIMATION_TYPE.ANIMATION_COMPLETE:
-                        cc.log(trackIndex + " complete: " + animationName + "," + loopCount);
-                        if (animationName === "fx_back") {
-                            spine.addAnimation(0, "fx_cover", false);
-                        }
-                        break;
-                    default :
-                        break;
-                }
-            }
-
-            spine.setAnimationListener(spine, animationStateEvent);
+BattleAnimation.removeAnimationHitSlowEffect = function (entity) {
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
+    if (appearanceComponent && appearanceComponent.sprite) {
+        let childSprite = appearanceComponent.sprite.getChildByName("monster");
+        if (childSprite) {
+            childSprite.removeChildByTag(HIT_SLOW_EFFECT_TAG);
         }
     }
 }
