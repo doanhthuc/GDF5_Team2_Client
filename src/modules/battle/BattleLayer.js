@@ -248,14 +248,6 @@ let BattleLayer = cc.Layer.extend({
             EntityFactory.createTrap(tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTrap(tilePos);
         } else if (ValidatorECS.isTower(type)) {
-            // if (this.shouldUpgradeTower(type, tilePos)) {
-            //     EventDispatcher.getInstance()
-            //         .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
-            // } else if (this.shouldPutNewTower(tilePos)) {
-            //     this.buildTower(type, tilePos, mode);
-            //     EventDispatcher.getInstance()
-            //         .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: type, pos: tilePos, mode: mode});
-            // }
             this.putTowerCardIntoMap(type, tilePos, mode);
         }
 
@@ -402,10 +394,10 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
-      //  this.battleLoop.start();
+        //  this.battleLoop.start();
         //this.schedule(this.update,0.1,10000);
         this.scheduleUpdate();
-       //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
     stopGame: function () {

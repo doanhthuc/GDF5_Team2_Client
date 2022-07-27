@@ -53,6 +53,12 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.OPPONENT_PUT_TRAP:
                 this._handleOpponentPutTrap(cmd, packet);
                 break;
+            case gv.CMD.DESTROY_TOWER:
+                this._handleDestroyTower(cmd, packet);
+                break;
+            case gv.CMD.OPPONENT_DESTROY_TOWER:
+                this._handleOpponentDestroyTower(cmd, packet);
+                break;
         }
     },
 
@@ -135,6 +141,12 @@ BattleNetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
+    sendDestroyTower: function (tilePos) {
+        let pk = this.gameClient.getOutPacket(CMDDestroyTower);
+        pk.pack(tilePos);
+        this.gameClient.sendPacket(pk);
+    },
+
     _handlePutTower: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 76] received put tower packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
@@ -210,11 +222,11 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handlePutTrap: function (cmd, packet) {
-        cc.log()("[BattleNetwork.js line 206: _handlePutTrap packet: " + JSON.stringify(packet));
+        cc.log("[BattleNetwork.js line 206: _handlePutTrap packet: " + JSON.stringify(packet));
     },
 
     _handleOpponentPutTrap: function (cmd, packet) {
-        cc.log()("[BattleNetwork.js line 210: _handleOpponentPutTrap packet: " + JSON.stringify(packet));
+        cc.log("[BattleNetwork.js line 210: _handleOpponentPutTrap packet: " + JSON.stringify(packet));
         let tilePos = cc.p(packet.tilePosX, packet.tilePosY);
         OpponentAction.getInstance().putTrap(tilePos);
     },
@@ -232,5 +244,27 @@ BattleNetwork.Connector = cc.Class.extend({
         let tower = EntityManager.getInstance().getEntity(entityId);
         let attackComponent = tower.getComponent(AttackComponent);
         attackComponent.setTargetStrategy(packet.strategyId);
+    },
+
+    _handleDestroyTower: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 244] received destroy tower packet: ' + JSON.stringify(packet));
+        let battleData = BattleManager.getInstance().getBattleData();
+        let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
+        let cellObject = playerObjectMap[packet.tileX][packet.tileY];
+        cellObject.objectInCellType = ObjectInCellType.NONE;
+        cellObject.tower = null;
+    },
+
+    _handleOpponentDestroyTower: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 253] received destroy tower packet: ' + JSON.stringify(packet));
+        let battleData = BattleManager.getInstance().getBattleData();
+        let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
+        let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
+        let towerEntityId = cellObject.tower.entityId;
+        cc.log('[BattleNetwork.js line 258] towerEntityId: ' + towerEntityId);
+        let towerEntity = EntityManager.getInstance().getEntity(towerEntityId);
+        EntityManager.destroy(towerEntity);
+        cellObject.objectInCellType = ObjectInCellType.NONE;
+        cellObject.tower = null;
     }
 })

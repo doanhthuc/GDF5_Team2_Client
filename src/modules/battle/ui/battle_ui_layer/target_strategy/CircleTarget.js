@@ -53,6 +53,7 @@ let CircleTarget = cc.Node.extend({
 
     _handlerCancelBtn: function () {
         cc.error("cancel_btn");
+        this.destroyTower(this.towerTilepos);
     },
 
     _handlerMinHP: function () {
@@ -93,5 +94,10 @@ let CircleTarget = cc.Node.extend({
         BattleNetwork.connector.sendChangeTowerTargetStrategy(tilePos, strategy);
     },
 
-
+    destroyTower: function (tilePos = this.towerTilepos) {
+        let entityId = this._findTowerEntityIdByTilePos(tilePos);
+        let towerEntity = EntityManager.getInstance().getEntity(entityId);
+        EntityManager.destroy(towerEntity);
+        BattleNetwork.connector.sendDestroyTower(tilePos);
+    }
 });
