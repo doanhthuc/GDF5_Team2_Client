@@ -118,7 +118,7 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        //EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createBatMonster(pixelPos, mode);
         // setTimeout(function () {
         //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // }, 1000);
@@ -152,7 +152,7 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createBatMonster(pixelPos, mode);
+        EntityFactory.createAssassinMonster(pixelPos, mode);
         // setTimeout(function () {
         //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // }, 1000);
