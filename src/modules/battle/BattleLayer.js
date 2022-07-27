@@ -216,34 +216,15 @@ let BattleLayer = cc.Layer.extend({
     putCardAt: function (type, pixelPos, mode) {
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
 
-        // FIXME: reduce if statement
-        if (ValidatorECS.isSpell(type)) {
-            if (!Utils.isPixelPositionInMap(pixelPos, mode)) {
-                cc.warn("put spell at pixel pos = " + JSON.stringify(pixelPos) + " is invalid")
-                return;
-            }
-        } else if (ValidatorECS.isTower(type)) {
-            if (!Utils.validateTilePos(tilePos)) {
-                return;
-            }
-
-            let row = GameConfig.MAP_HEIGH - 1 - tilePos.y;
-            let col = tilePos.x;
-            let map = this.battleData.getMap(mode);
-            if (map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
-                || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
-                || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
-                return;
-            }
-        } else if (ValidatorECS.isTrap(type)) {
-            // check valid position
-        } else {
-            throw new Error("Type is invalid");
+        let {error, msg} = ValidatorECS.validatePositionPutCard(type, pixelPos, mode);
+        if (error) {
+            this.uiLayer.notify(msg);
+            return;
         }
 
         if (ValidatorECS.isSpell(type)) {
             this.dropSpell(type, pixelPos, mode)
-            if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
+            if (GameConfig.NETWORK) BattleNetwork.connector.sendDropSell(type, pixelPos);
         } else if (ValidatorECS.isTrap(type)) {
             EntityFactory.createTrap(tilePos, mode);
         } else if (ValidatorECS.isTower(type)) {
