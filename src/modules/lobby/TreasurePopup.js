@@ -147,7 +147,16 @@ const TreasurePopup = cc.Node.extend({
             cc.log('TreasurePopup onSpeedUpBtnClick user.gold: ' + (user.gem < exchangeDurationToGem(this.claimTime - Date.now())));
             switch (this.action) {
                 case ChestConst.ACTION.SPEED_UP:
-                    if (user.gem < exchangeDurationToGem(this.claimTime - Date.now() + TimeUtil.getDeltaTime())) {
+                    if (contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT).treasureList[this.slotId].state === TreasureSlotResources.STATE.OCCUPIED) {
+                        // FIXME: get duration of chest type from config
+                        if (user.gem < exchangeDurationToGem(10800000)) {
+                            let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
+                            notify.setNotifyTxt('Không Đủ Gem');
+                            notify.showNotify();
+                            return;
+                        }
+                    }
+                    if (user.gem < exchangeDurationToGem(this.claimTime - Date.now() + TimeUtil.getDeltaTime()) || user.gem < exchangeDurationToGem()) {
                         let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
                         notify.setNotifyTxt('Không Đủ Gem');
                         notify.showNotify();

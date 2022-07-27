@@ -242,6 +242,7 @@ let BattleLayer = cc.Layer.extend({
         }
 
         if (ValidatorECS.isSpell(type)) {
+            cc.log("[BattleLayer.js line 245] put spell at pixel pos = " + JSON.stringify(pixelPos) + " is valid");
             this.dropSpell(type, pixelPos, mode)
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
         } else if (ValidatorECS.isTrap(type)) {
@@ -336,6 +337,7 @@ let BattleLayer = cc.Layer.extend({
                 EntityFactory.createFrozenSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.TRAP:
+                cc.log("[BattleLayer.js line 340] drop trap at pixel pos = " + JSON.stringify(pixelPos));
                 EntityFactory.createTrap(tilePos, mode);
                 break;
             default:
