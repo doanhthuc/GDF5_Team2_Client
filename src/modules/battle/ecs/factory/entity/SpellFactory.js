@@ -42,7 +42,7 @@ EntityFactory.createFireSpell = function (pixelPos, mode) {
     let speed = Utils.calculateVelocityVector(cc.p(pixelPos.x, pixelPos.y + S), pixelPos, V);
     let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
 
-    let damageEffect = ComponentFactory.create(DamageEffect, 50);
+    let damageEffect = ComponentFactory.create(DamageEffect, 100);
 
     let parent;
     if (mode === GameConfig.PLAYER) {

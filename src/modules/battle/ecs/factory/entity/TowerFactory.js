@@ -40,13 +40,12 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
     let node = NodeFactory.createBearNodeAnimation(attackRange);
 
     let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
-    let damageEffect = ComponentFactory.create(DamageEffect, 8);
 
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "support", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, 1, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 2, 0, [frozenEffect, damageEffect])
+    let attackComponent = ComponentFactory.create(AttackComponent, 8, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 2, 0, [frozenEffect])
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bear.level.A);
 
     entity.addComponent(infoComponent)
@@ -72,7 +71,7 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, 80, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [])
+    let attackComponent = ComponentFactory.create(AttackComponent, 30, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, 1.5, 0, [])
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.boomerang.level.A);
 
     entity.addComponent(infoComponent)
@@ -173,7 +172,7 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 1000);
+    let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 1.5);
     let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, 1.5 * GameConfig.TILE_WIDTH, buffAttackDamageEffect);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
 
