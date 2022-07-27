@@ -78,7 +78,6 @@ BattleAnimation.addAnimationUnderGround = function (entity) {
 
                 switch (type) {
                     case GameConfig.ANIMATION_TYPE.ANIMATION_COMPLETE:
-                        cc.log(trackIndex + " complete: " + animationName + "," + loopCount);
                         if (animationName === "fx_back") {
                             spine.setAnimation(0, "fx_cover", false);
                         } else if (animationName === "fx_cover") {

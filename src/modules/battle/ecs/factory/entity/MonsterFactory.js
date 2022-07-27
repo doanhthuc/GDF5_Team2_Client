@@ -85,8 +85,11 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
 
     // FIXME: PathMonsterSystem check currentPos and NextPos is same => velocity.SpeedX = 0
     // path.push(Utils.tile2Pixel(0,4,mode));
+    path.push(Utils.tile2Pixel(1, 3, mode));
     path.push(Utils.tile2Pixel(2, 2, mode));
+    path.push(Utils.tile2Pixel(3, 1, mode));
     path.push(Utils.tile2Pixel(4, 0, mode));
+    path.push(Utils.tile2Pixel(4.1, 0, mode));
     path.push(Utils.tile2Pixel(6, 0, mode));
     let pathComponent = ComponentFactory.create(PathComponent, path, mode, false);
     entity.addComponent(infoComponent)
