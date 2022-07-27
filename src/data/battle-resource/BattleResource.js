@@ -4,6 +4,7 @@ const BattleResource = {
     TWO_PLAYER_INFO_NODE: "ui/battle/battle_ui_layer/avatar/TwoPlayerInfoNode.json",
 
     // Battle
+    HOUSE_IMG: "textures/map/map_house.png",
     WAVE_NODE: "ui/battle/battle_ui_layer/wave/WaveNode.json",
     TIMER_NODE: "ui/battle/battle_ui_layer/timer/BattleTimerNode.json",
     MAP_LAYER: "ui/battle/battle_map_layer/BattleMapLayer.json",

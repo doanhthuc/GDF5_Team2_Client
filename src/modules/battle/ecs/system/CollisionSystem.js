@@ -160,6 +160,11 @@ let CollisionSystem = System.extend({
                         && ValidatorECS.isMonster(entity2)
                         && this._isCollide(entity1, entity2)) {
 
+                        // trap doesn't affect to Boss and Air monster
+                        let monsterInfo = entity2.getComponent(MonsterInfoComponent);
+                        if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
+                        if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
+
                         entity2.addComponent(ComponentFactory.create(TrapEffect));
                     }
                 }
@@ -184,6 +189,11 @@ let CollisionSystem = System.extend({
                     && entity1.mode === entity2.mode
                     && ValidatorECS.isMonster(entity2)
                     && this._isCollide(entity1, entity2)) {
+
+                    // trap only trigger with normal monster, except Boss and Air monster
+                    let monsterInfo = entity2.getComponent(MonsterInfoComponent);
+                    if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
+                    if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
 
                     trapInfo.setTrigger(true);
                     let spriteComponent = trapEntity.getComponent(SpriteSheetAnimationComponent);
@@ -222,8 +232,7 @@ let CollisionSystem = System.extend({
         return cc.rectIntersectsRect(cc.rect(pos1.x - w1 / 2, pos1.y - h1 / 2, w1, h1), cc.rect(pos2.x - w2 / 2, pos2.y - h2 / 2, w2, h2));
         // let x1 = pos1.x - w1 / 2, x2 = pos2.x - w2 / 2, y1 = pos1.y - h1 / 2, y2 = pos2.y - h2 / 2;
         // return x1 <= x2 + w2 && x1 + w1 >= x2 && y1 + h1 >= y2 && y2 + h2 >= y1;
-    }
-    ,
+    },
 
     _isMonsterAndBullet: function (entity1, entity2) {
         // TODO: check entity2 is monster, not only sword man

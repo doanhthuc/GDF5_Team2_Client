@@ -35,21 +35,9 @@ let MovementSystem = System.extend({
                 let spriteList = appearanceComponent.sprite.getChildren();
                 let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
                 for (let sprite of spriteList) {
-                    // if (sprite.myRunningAction) {
-                    //     sprite.myRunningAction.setSpeed(0.5);
-                    // }
                     if (sprite.getActionByTag(0)) {
                         sprite.getActionByTag(0).setSpeed(speed / 50);
                     }
-                    // if (!sprite.tagActions) continue;
-                    // for (let tag of sprite.tagActions) {
-                    //     let action = sprite.getActionByTag(1);
-                    //     cc.log("tag = " + tag + ", action = " + action + ", number running = " + sprite.getNumberOfRunningActions());
-                    //     if (action) {
-                    //         action.setSpeed(0.5);
-                    //         cc.warn("set");
-                    //     }
-                    // }
                 }
             }
         }
