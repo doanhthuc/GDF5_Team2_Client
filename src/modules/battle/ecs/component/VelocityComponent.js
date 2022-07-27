@@ -2,22 +2,22 @@ let VelocityComponent = Component.extend({
     name: "VelocityComponent",
     typeID: GameConfig.COMPONENT_ID.VELOCITY,
 
-    ctor: function (speedX, speedY, entityID) {
+    ctor: function (speedX, speedY, dynamicPosition) {
         this._super();
-        this.reset(speedX, speedY, entityID);
+        this.reset(speedX, speedY, dynamicPosition);
     },
 
-    reset: function (speedX, speedY, entityID) {
+    reset: function (speedX, speedY, dynamicPosition) {
         this.speedX = speedX;
         this.speedY = speedY;
-        this.entityID = entityID;
+        this.dynamicPosition = dynamicPosition;
         this.originSpeed = Math.sqrt(Math.pow(this.speedX, 2) + Math.pow(this.speedY, 2));
         this.originSpeedX = this.speedX;
         this.originSpeedY = this.speedY;
     },
 
     clone: function () {
-        return ComponentFactory.create(VelocityComponent, this.speedX, this.speedY, this.entityID);
+        return ComponentFactory.create(VelocityComponent, this.speedX, this.speedY, this.dynamicPosition);
     },
 });
 VelocityComponent.typeID = GameConfig.COMPONENT_ID.VELOCITY;

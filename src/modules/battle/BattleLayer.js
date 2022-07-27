@@ -118,23 +118,26 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        setTimeout(function () {
-            EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        }, 1000);
-        setTimeout(function () {
-            EntityFactory.createAssassinMonster(pixelPos, mode);
-        }, 2000);
-        setTimeout(function () {
-            EntityFactory.createNinjaMonster(pixelPos, mode);
-        }, 3000);
-        setTimeout(function () {
-            EntityFactory.createGiantMonster(pixelPos, mode);
-        }, 5000);
+        //EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // setTimeout(function () {
+        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // }, 1000);
+        // setTimeout(function () {
+        //     EntityFactory.createAssassinMonster(pixelPos, mode);
+        // }, 2000);
+        // setTimeout(function () {
+        //     EntityFactory.createNinjaMonster(pixelPos, mode);
+        // }, 3000);
+        // setTimeout(function () {
+        //     EntityFactory.createGiantMonster(pixelPos, mode);
+        // }, 5000);
         // EntityFactory.createAssassinMonster(pixelPos, mode);
         // EntityFactory.createGiantMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createNinjaMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+
+        //EntityFactory.createNinjaMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createBatMonster(pixelPos, mode);
@@ -242,7 +245,7 @@ let BattleLayer = cc.Layer.extend({
             this.dropSpell(type, pixelPos, mode)
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
         } else if (ValidatorECS.isTrap(type)) {
-            SpellFactory.createTrap(tilePos, mode);
+            EntityFactory.createTrap(tilePos, mode);
         } else if (ValidatorECS.isTower(type)) {
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()
@@ -327,13 +330,13 @@ let BattleLayer = cc.Layer.extend({
     dropSpell: function (spellId, pixelPos, mode) {
         switch (spellId) {
             case GameConfig.ENTITY_ID.FIRE_SPELL:
-                SpellFactory.createFireSpell(pixelPos, mode);
+                EntityFactory.createFireSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
-                SpellFactory.createFrozenSpell(pixelPos, mode);
+                EntityFactory.createFrozenSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.TRAP:
-                SpellFactory.createTrap(tilePos, mode);
+                EntityFactory.createTrap(tilePos, mode);
                 break;
             default:
                 return;
@@ -397,10 +400,10 @@ let BattleLayer = cc.Layer.extend({
     },
 
     startGame: function () {
+      //  this.battleLoop.start();
+        //this.schedule(this.update,0.1,10000);
         this.scheduleUpdate();
-        // this.battleLoop.start();
-        // this.schedule(this.update,0.5,10000);
-        // BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+       //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
 
     stopGame: function () {

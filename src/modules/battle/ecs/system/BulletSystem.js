@@ -10,36 +10,37 @@ let BulletSystem = System.extend({
     _run: function (tick) {
         let bulletList = EntityManager.getInstance()
             .getEntitiesHasComponents(VelocityComponent, PositionComponent, BulletInfoComponent);
-
         for (let bullet of bulletList) {
             let bulletPos = bullet.getComponent(PositionComponent);
             let bulletVelocity = bullet.getComponent(VelocityComponent);
+            let pathComponent = bullet.getComponent(PathComponent);
+            if (pathComponent != null) {
+                if (pathComponent.currentPathIdx === pathComponent.path.length - 2) EntityManager.destroy(bullet);
+                continue;
+            }
+            if (!bulletVelocity.dynamicPosition) continue;
 
-            if (!bulletVelocity.entityID) continue;
-
-            let targetEntity = EntityManager.getInstance().getEntity(bulletVelocity.entityID);
-
-            if (targetEntity) {
-                let dynamicPos = targetEntity.getComponent(PositionComponent);
-                if (dynamicPos && dynamicPos.getActive() === false) {
-                    EntityManager.destroy(bullet);
-                    continue;
-                }
+            if ((bulletVelocity.dynamicPosition).getActive() === false) {
+                bulletVelocity.dynamicPosition = null;
+                EntityManager.destroy(bullet);
+                continue;
             }
 
-            if (!targetEntity) continue;
-            let dynamicPos = targetEntity.getComponent(PositionComponent);
-            if (!dynamicPos) continue;
-
-            if (Math.abs(dynamicPos.x - bulletPos.x) <= 3
-                && Math.abs(dynamicPos.y - bulletPos.y) <= 3) {
+            if (Math.abs(bulletVelocity.dynamicPosition.x - bulletPos.x) <= 3) {
                 // bullet.removeComponent(VelocityComponent);
                 let collisionComponent = bullet.getComponent(CollisionComponent);
                 if (collisionComponent) {
-                    collisionComponent.width = 1;
-                    collisionComponent.height = 1;
+                    collisionComponent.width = collisionComponent.originWidth;
+                    collisionComponent.height = collisionComponent.originHeight;
                 }
             }
+
+            //Check Frog Bullet
+            // if (bullet.hasAnyComponent(PathComponent) ) {
+            //     let pathComponent = bullet.getComponent(PathComponent);
+            //     cc.log("Bullet Has Path Component")
+            //     if (pathComponent.currentPathIdx == pathComponent.path.length - 1) EntityManager.destroy(bullet);
+            // }
         }
     }
 })

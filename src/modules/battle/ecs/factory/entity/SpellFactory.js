@@ -1,6 +1,4 @@
-let SpellFactory = EntityFactory.extend({});
-
-SpellFactory.createFrozenSpell = function (pixelPos, mode) {
+EntityFactory.createFrozenSpell = function (pixelPos, mode) {
     let typeID = GameConfig.ENTITY_ID.FROZEN_SPELL;
     let entity = EntityFactory._createEntity(typeID, mode);
 
@@ -33,7 +31,7 @@ SpellFactory.createFrozenSpell = function (pixelPos, mode) {
     return entity;
 }
 
-SpellFactory.createFireSpell = function (pixelPos, mode) {
+EntityFactory.createFireSpell = function (pixelPos, mode) {
     let typeID = GameConfig.ENTITY_ID.FIRE_SPELL;
     let entity = EntityFactory._createEntity(typeID, mode);
 
@@ -63,7 +61,7 @@ SpellFactory.createFireSpell = function (pixelPos, mode) {
     return entity;
 }
 
-SpellFactory.createTrap = function (tilePos, mode) {
+EntityFactory.createTrap = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.TRAP_SPELL;
     let entity = EntityFactory._createEntity(typeID, mode);
 

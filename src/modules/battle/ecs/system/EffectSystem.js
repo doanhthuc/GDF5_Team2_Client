@@ -25,7 +25,7 @@ let EffectSystem = System.extend({
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackSpeedComponent = entity.getComponent(BuffAttackSpeedEffect);
 
-            attackComponent.speed = attackComponent.originSpeed * (1 - (buffAttackSpeedComponent.percent-1));
+            attackComponent.speed = attackComponent.originSpeed * (1 - (buffAttackSpeedComponent.percent - 1));
         }
     },
 
@@ -89,7 +89,7 @@ let EffectSystem = System.extend({
             }
         }
     },
-
+    
     _handleBuffAttackRangeEffect: function () {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackRangeEffect, AttackComponent);
@@ -100,7 +100,7 @@ let EffectSystem = System.extend({
             attackComponent.range = attackComponent.originRange + attackComponent.originRange * buffAttackRangeComponent.percent;
         }
     },
-
+    
     _handleTrapEffect: function (dt) {
         let monsterList = EntityManager.getInstance()
             .getEntitiesHasComponents(TrapEffect);
@@ -132,11 +132,11 @@ let EffectSystem = System.extend({
                 entity.removeComponent(PositionComponent);
 
                 let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, entity.mode);
-                let time = Utils.euclidDistance(pos, bornPos) / (2*GameConfig.TILE_WIDTH);
+                let time = Utils.euclidDistance(pos, bornPos) / (2 * GameConfig.TILE_WIDTH);
                 let action = cc.spawn(cc.jumpTo(time, bornPos, 100, 1));
                 appearanceComponent.sprite.runAction(action);
 
-                trapEffect.setCountDown(time+0.5);
+                trapEffect.setCountDown(time + 0.5);
             }
         }
     },

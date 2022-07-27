@@ -20,16 +20,18 @@ let AbilitySystem = System.extend({
                 let lifeComponent = entity.getComponent(LifeComponent);
                 let underGroundComponent = entity.getComponent(UnderGroundComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
-                if (underGroundComponent.isInGround === false) {
-                    if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
-                        underGroundComponent.trigger += 1;
-                        underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 2;
-                        cc.log(positionComponent.moveDistance+ " "+underGroundComponent.disableMoveDistance);
-                        underGroundComponent.isInGround = true;
-                    }
-                } else {
-                    if (underGroundComponent.disableMoveDistance <= positionComponent.moveDistance) {
-                        underGroundComponent.isInGround = false;
+                //check if the Monster have Position Component
+                if (positionComponent) {
+                    if (underGroundComponent.isInGround === false) {
+                        if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
+                            underGroundComponent.trigger += 1;
+                            underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 2;
+                            underGroundComponent.isInGround = true;
+                        }
+                    } else {
+                        if (underGroundComponent.disableMoveDistance <= positionComponent.moveDistance) {
+                            underGroundComponent.isInGround = false;
+                        }
                     }
                 }
             }
@@ -96,7 +98,6 @@ let AbilitySystem = System.extend({
                         switch (towerAbilityComponent.effect.typeID) {
                             case BuffAttackDamageEffect.typeID:
                                 let attackComponent = damageTower.getComponent(AttackComponent);
-                                cc.log('AbilitySystem.js line 99 ' + (attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent));
                                 attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
                                 break;
                             case BuffAttackSpeedEffect.typeID:

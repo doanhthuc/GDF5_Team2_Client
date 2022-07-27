@@ -15,14 +15,11 @@ let MovementSystem = System.extend({
             let velocityComponent = entity.getComponent(VelocityComponent);
             let appearanceComponent = entity.getComponent(AppearanceComponent);
 
-            if (velocityComponent.entityID) {
-                let targetEntity =  EntityManager.getInstance().getEntity(velocityComponent.entityID);
-                if (targetEntity) {
-                    let dynamicPos = targetEntity.getComponent(PositionComponent);
-                    let newVelocity = Utils.calculateVelocityVector(positionComponent, dynamicPos, velocityComponent.originSpeed);
-                    velocityComponent.speedX = newVelocity.speedX;
-                    velocityComponent.speedY = newVelocity.speedY;
-                }
+            if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive()) {
+                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
+                    velocityComponent.originSpeed);
+                velocityComponent.speedX = newVelocity.speedX;
+                velocityComponent.speedY = newVelocity.speedY;
             }
 
             if (velocityComponent.getActive()) {
@@ -30,9 +27,8 @@ let MovementSystem = System.extend({
                 let moveDistanceY = velocityComponent.speedY * tick;
                 positionComponent.x += moveDistanceX;
                 positionComponent.y += moveDistanceY;
-                let moveDistance=Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
+                let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
                 positionComponent.moveDistance += moveDistance;
-                // cc.log(positionComponent.moveDistance+" "+moveDistance);
             }
 
             if (velocityComponent && appearanceComponent) {

@@ -11,6 +11,7 @@ let BulletInfoComponent = InfoComponent.extend({
         this.effects = effects;
         this.type = type;
         this.radius = radius;
+        this.hitMonster = new Map();
     },
 
     clone: function () {
