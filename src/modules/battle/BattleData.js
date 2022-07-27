@@ -128,6 +128,17 @@ let BattleData = cc.Class.extend({
         return this.dataInGame[mode].map;
     },
 
+    cloneMap: function (mode) {
+        let map = this.getMap(mode);
+        let cloneMap = FindPathUtil.create2DMatrix(map.length, map[0].length);
+        for (let row = 0; row < map.length; row++) {
+            for (let col = 0; col < map[0].length; col++) {
+                cloneMap[row][col] = map[row][col];
+            }
+        }
+        return cloneMap;
+    },
+
     setMap: function (map, mode) {
         Utils.validateMode(mode);
         if (GameConfig.MAP_HEIGH !== map.length && GameConfig.MAP_WIDTH !== map[0].length) {

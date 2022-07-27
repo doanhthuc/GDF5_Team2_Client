@@ -33,12 +33,7 @@ GameConfig.COMPONENT_ID = {
     TOWER_ABILITY: 24,
     BUFF_ATTACK_RANGE: 25,
 }
-GameConfig.MAP = {
-    NONE: 0,
-    ATTACK_SPEED: 1,
-    ATTACK_DAMAGE: 2,
-    ATTACK_RANGE: 3,
-}
+
 GameConfig.SYSTEM_ID = {
     MOVEMENT: 1,
     PATH_MONSTER: 2,
@@ -131,11 +126,11 @@ GameConfig.BATTLE_RESULT = {
 }
 
 GameConfig.MAP = {
-    TOWER: 7,
+    NONE: 0,
     ATTACK_SPEED: 1,
     ATTACK_RANGE: 2,
     ATTACK_DAMAGE: 3,
     TREE: 5,
     HOLE: 6,
-    NONE: 0
+    TOWER: 7
 }
