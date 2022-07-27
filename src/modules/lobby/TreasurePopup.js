@@ -156,7 +156,7 @@ const TreasurePopup = cc.Node.extend({
                             return;
                         }
                     }
-                    if (user.gem < exchangeDurationToGem(this.claimTime - Date.now() + TimeUtil.getDeltaTime()) || user.gem < exchangeDurationToGem()) {
+                    if (user.gem < exchangeDurationToGem(this.claimTime - Date.now() + TimeUtil.getDeltaTime())) {
                         let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
                         notify.setNotifyTxt('Không Đủ Gem');
                         notify.showNotify();
