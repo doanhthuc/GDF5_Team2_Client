@@ -17,6 +17,7 @@ let MonsterSystem = System.extend({
             if (posTile.x === GameConfig.HOUSE_POSITION.x && posTile.y === GameConfig.HOUSE_POSITION.y) {
                 let monsterInfo = monster.getComponent(MonsterInfoComponent);
                 BattleUILayer.minusHouseEnergy(monsterInfo.damageEnergy, monster.mode);
+                BattleMapLayer.animationHouse(monster.mode);
                 EntityManager.destroy(monster);
             }
         }

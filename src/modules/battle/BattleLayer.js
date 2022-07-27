@@ -387,11 +387,11 @@ let BattleLayer = cc.Layer.extend({
     },
 
     getPlayerMapNode: function () {
-        return this.mapLayer.playerMapNode;
+        return this.mapLayer.mapNode[GameConfig.PLAYER];
     },
 
     getOpponentMapNode: function () {
-        return this.mapLayer.opponentMapNode;
+        return this.mapLayer.mapNode[GameConfig.OPPONENT];
     },
 
     _prefetchAssetGame: function () {
