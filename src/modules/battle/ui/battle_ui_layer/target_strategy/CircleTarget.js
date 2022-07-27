@@ -80,18 +80,17 @@ let CircleTarget = cc.Node.extend({
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);
         let tileObject = mapObject[tilePos.x][tilePos.y];
-        cc.log("[CircleTarget] _findTowerEntityIdByTilePos: " + JSON.stringify(tileObject));
         return tileObject.tower.entityId;
     },
 
     changeTowerTargetStrategy: function (strategy, tilePos = this.towerTilepos) {
         let entityId = this._findTowerEntityIdByTilePos(tilePos);
         let towerEntity = EntityManager.getInstance().getEntity(entityId);
-        cc.log("changeTowerTargetStrategy line 88", entityId);
         let attackComponent = towerEntity.getComponent(AttackComponent);
-        attackComponent.setTargetStrategy(strategy);
-        cc.log("[CircleTarget line 92] _changeTowerTargetStrategy: " + strategy + " pos: " + JSON.stringify(tilePos));
-        BattleNetwork.connector.sendChangeTowerTargetStrategy(tilePos, strategy);
+        if (attackComponent) {
+            attackComponent.setTargetStrategy(strategy);
+            BattleNetwork.connector.sendChangeTowerTargetStrategy(tilePos, strategy);
+        }
     },
 
     destroyTower: function (tilePos = this.towerTilepos) {

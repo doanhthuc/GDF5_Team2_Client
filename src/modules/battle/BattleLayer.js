@@ -246,6 +246,8 @@ let BattleLayer = cc.Layer.extend({
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
         } else if (ValidatorECS.isTrap(type)) {
             EntityFactory.createTrap(tilePos, mode);
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.PUT_TRAP, {tilePos: tilePos, mode: mode});
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTrap(tilePos);
         } else if (ValidatorECS.isTower(type)) {
             this.putTowerCardIntoMap(type, tilePos, mode);
@@ -328,10 +330,6 @@ let BattleLayer = cc.Layer.extend({
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
                 EntityFactory.createFrozenSpell(pixelPos, mode);
                 break;
-            case GameConfig.ENTITY_ID.TRAP:
-                cc.log("[BattleLayer.js line 340] drop trap at pixel pos = " + JSON.stringify(pixelPos));
-                EntityFactory.createTrap(tilePos, mode);
-                break;
             default:
                 return;
         }
@@ -349,7 +347,6 @@ let BattleLayer = cc.Layer.extend({
             if (card && card.cardLevel > tower.level) {
                 return true;
             }
-            // return true;
         }
         return false;
     },
