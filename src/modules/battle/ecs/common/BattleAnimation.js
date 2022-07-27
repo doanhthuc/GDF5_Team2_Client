@@ -36,8 +36,8 @@ BattleAnimation.animationDamage = function (entity) {
         // FIXME: hardcode monster sprite name
         let childSprite = appearance.sprite.getChildByName("monster");
         if (childSprite) {
-            let action1 = cc.tintBy(0.05, -64, -64, -64);
-            let action2 = action1.reverse();
+            let action1 = cc.tintTo(0.05, -64, -64, -64);
+            let action2 = cc.tintTo(0.05, 255, 255, 255);
             childSprite.runAction(cc.sequence(action1, action2));
         }
     }
