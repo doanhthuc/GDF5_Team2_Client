@@ -34,11 +34,11 @@ BattleAnimation.animationDamage = function (entity) {
     let appearance = entity.getComponent(AppearanceComponent);
     if (appearance) {
         // FIXME: hardcode monster sprite name
-        let child = appearance.sprite.getChildByName("monster");
-        if (child) {
+        let childSprite = appearance.sprite.getChildByName("monster");
+        if (childSprite) {
             let action1 = cc.tintBy(0.05, -64, -64, -64);
             let action2 = action1.reverse();
-            child.runAction(cc.sequence(action1, action2));
+            childSprite.runAction(cc.sequence(action1, action2));
         }
     }
 }
@@ -47,11 +47,11 @@ BattleAnimation.animationBornMonster = function (entity) {
     let appearanceComponent = entity.getComponent(AppearanceComponent);
     if (appearanceComponent && appearanceComponent.sprite) {
         // FIXME: hardcode sprite name
-        let child = appearanceComponent.sprite.getChildByName("monster");
-        if (child) {
+        let childSprite = appearanceComponent.sprite.getChildByName("monster");
+        if (childSprite) {
             let spine = new sp.SkeletonAnimation("textures/monster/fx/fx_boss_demon_tree.json", "textures/monster/fx/fx_boss_demon_tree.atlas");
-            child.addChild(spine);
-            spine.setPosition(cc.p(child.width / 2, child.height / 2));
+            childSprite.addChild(spine);
+            spine.setPosition(cc.p(childSprite.width / 2, childSprite.height / 2));
             spine.setAnimation(0, "fx_cover", false);
         }
     }
@@ -62,15 +62,15 @@ BattleAnimation.addAnimationUnderGround = function (entity) {
     let appearanceComponent = entity.getComponent(AppearanceComponent);
     if (appearanceComponent && appearanceComponent.sprite) {
         // FIXME: hardcode sprite name
-        let child = appearanceComponent.sprite.getChildByName("monster");
-        if (child) {
+        let childSprite = appearanceComponent.sprite.getChildByName("monster");
+        if (childSprite) {
             let spine = new sp.SkeletonAnimation("textures/monster/fx/fx_boss_stone_monster.json", "textures/monster/fx/fx_boss_stone_monster.atlas");
-            child.addChild(spine, 1, UNDER_GROUND_TAG);
-            spine.setPosition(cc.p(child.width / 2, child.height / 2));
+            childSprite.addChild(spine, 1, UNDER_GROUND_TAG);
+            spine.setPosition(cc.p(childSprite.width / 2, childSprite.height / 2));
             spine.setAnimation(0, "fx_back", false);
 
             // hide monster
-            child.setOpacity(0);
+            childSprite.setOpacity(0);
 
             function animationStateEvent(obj, trackIndex, type, event, loopCount) {
                 let entry = spine.getCurrent();
@@ -89,7 +89,7 @@ BattleAnimation.addAnimationUnderGround = function (entity) {
                 }
             }
 
-            spine.setAnimationListener(child, animationStateEvent);
+            spine.setAnimationListener(childSprite, animationStateEvent);
         }
     }
 }
@@ -98,13 +98,51 @@ BattleAnimation.removeAnimationUnderGround = function (entity) {
     let appearanceComponent = entity.getComponent(AppearanceComponent);
     // FIXME: hardcode sprite name
     if (appearanceComponent && appearanceComponent.sprite) {
-        let child = appearanceComponent.sprite.getChildByName("monster");
-        if (child) {
-            child.removeChildByTag(UNDER_GROUND_TAG);
+        let childSprite = appearanceComponent.sprite.getChildByName("monster");
+        if (childSprite) {
+            childSprite.removeChildByTag(UNDER_GROUND_TAG);
             cc.error("Remove here")
 
             // show monster
-            child.setOpacity(255);
+            childSprite.setOpacity(255);
+        }
+    }
+}
+
+BattleAnimation.addAnimationHealing = function (entity) {
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
+    // FIXME: hardcode sprite name
+    if (appearanceComponent && appearanceComponent.sprite) {
+        let childNode = appearanceComponent.sprite;
+        if (childNode) {
+            let spine = new sp.SkeletonAnimation("/textures/monster/fx/fx_boss_jungle_god.json", "/textures/monster/fx/fx_boss_jungle_god.atlas");
+            childNode.addChild(spine, 0);
+            spine.setAnimation(0, "fx_back", true);
+            spine.setPosition(cc.p(childNode.width / 2, childNode.height / 2));
+        }
+    }
+}
+
+const HIT_SLOW_EFFECT_TAG = 102;
+BattleAnimation.addAnimationHitSlowEffect = function (entity) {
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
+    if (appearanceComponent && appearanceComponent.sprite) {
+        let childSprite = appearanceComponent.sprite.getChildByName("monster");
+        if (childSprite) {
+            let spine = new sp.SkeletonAnimation("textures/tower/fx/tower_oil_fx.json", "textures/tower/fx/tower_oil_fx.atlas");
+            spine.setPosition(cc.p(childSprite.width / 2, childSprite.height / 2));
+            spine.setAnimation(0, "hit_target_bullet", false);
+            childSprite.addChild(spine, 0, HIT_SLOW_EFFECT_TAG);
+        }
+    }
+}
+
+BattleAnimation.removeAnimationHitSlowEffect = function (entity) {
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
+    if (appearanceComponent && appearanceComponent.sprite) {
+        let childSprite = appearanceComponent.sprite.getChildByName("monster");
+        if (childSprite) {
+            childSprite.removeChildByTag(HIT_SLOW_EFFECT_TAG);
         }
     }
 }

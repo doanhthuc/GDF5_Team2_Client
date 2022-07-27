@@ -43,7 +43,7 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 15, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let velocityComponent = ComponentFactory.create(VelocityComponent, 5 * GameConfig.TILE_WIDTH, 0);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, 1.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createAssassinNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
     let lifeComponent = ComponentFactory.create(LifeComponent, 120);

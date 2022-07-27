@@ -83,11 +83,21 @@ let EffectSystem = System.extend({
 
             slowComponent.countdown = slowComponent.countdown - tick;
             if (slowComponent.countdown <= 0) {
+                // animation
+                BattleAnimation.removeAnimationHitSlowEffect(entity);
+                slowComponent.addedAnimation = false;
+
                 this._updateOriginVelocity(velocityComponent);
                 entity.removeComponent(slowComponent);
             } else {
                 velocityComponent.speedX = slowComponent.percent * velocityComponent.originSpeedX;
                 velocityComponent.speedY = slowComponent.percent * velocityComponent.originSpeedY;
+
+                // animation
+                if (!slowComponent.addedAnimation) {
+                    BattleAnimation.addAnimationHitSlowEffect(entity);
+                    slowComponent.addedAnimation = true;
+                }
             }
         }
     },

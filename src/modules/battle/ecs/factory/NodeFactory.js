@@ -46,7 +46,7 @@ NodeFactory.createAssassinNodeAnimation = function () {
     monsterAnimation.setRestoreOriginalFrame(true);
     let monsterAction = cc.animate(monsterAnimation);
     monsterSprite.runAction(cc.repeatForever(monsterAction));
-    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(monsterSprite, 1, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
@@ -193,7 +193,7 @@ NodeFactory.createSatyrNodeAnimation = function () {
     monsterAnimation.setRestoreOriginalFrame(true);
     let monsterAction = cc.animate(monsterAnimation);
     monsterSprite.runAction(cc.repeatForever(monsterAction));
-    node.addChild(monsterSprite, 0, "monster");
+    node.addChild(monsterSprite, 1, "monster");
     node.addChild(hpBarNode.node, 0, "hp");
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;

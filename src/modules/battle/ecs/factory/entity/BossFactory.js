@@ -132,5 +132,6 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
     // .addComponent(frozenEffect)
 
     //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    BattleAnimation.addAnimationHealing(entity);
     return entity;
 }
