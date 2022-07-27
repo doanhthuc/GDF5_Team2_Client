@@ -16,6 +16,10 @@ let OpponentAction = cc.Class.extend({
     dropSpell: function (spellId, pixelPos) {
         cc.log('[OpponentAction line 20] dropSpell: '  + JSON.stringify(pixelPos) + '  spellId: ' + spellId);
         BattleManager.getInstance().getBattleLayer().dropSpell(spellId, pixelPos, GameConfig.OPPONENT);
+    },
+
+    putTrap: function (tilePos) {
+        EntityFactory.getInstance().createTrap(tilePos, GameConfig.OPPONENT);
     }
 });
 

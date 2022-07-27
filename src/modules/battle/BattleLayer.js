@@ -242,11 +242,11 @@ let BattleLayer = cc.Layer.extend({
         }
 
         if (ValidatorECS.isSpell(type)) {
-            cc.log("[BattleLayer.js line 245] put spell at pixel pos = " + JSON.stringify(pixelPos) + " is valid");
             this.dropSpell(type, pixelPos, mode)
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
         } else if (ValidatorECS.isTrap(type)) {
             EntityFactory.createTrap(tilePos, mode);
+            if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTrap(tilePos);
         } else if (ValidatorECS.isTower(type)) {
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()

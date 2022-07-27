@@ -46,6 +46,13 @@ BattleNetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY:
                 this._handleOpponentChangeTowerStrategy(cmd, packet);
+                break;
+            case gv.CMD.PUT_TRAP:
+                this._handlePutTrap(cmd, packet);
+                break;
+            case gv.CMD.OPPONENT_PUT_TRAP:
+                this._handleOpponentPutTrap(cmd, packet);
+                break;
         }
     },
 
@@ -112,6 +119,12 @@ BattleNetwork.Connector = cc.Class.extend({
     sendDropSell: function (towerId, pixelPos) {
         let pk = this.gameClient.getOutPacket(CMDDropSpell);
         pk.pack(towerId, pixelPos);
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendPutTrap: function (tilePos) {
+        let pk = this.gameClient.getOutPacket(CMDPutTrap);
+        pk.pack(tilePos);
         this.gameClient.sendPacket(pk);
     },
 
@@ -194,6 +207,16 @@ BattleNetwork.Connector = cc.Class.extend({
         let pixelPos = cc.p(packet.pixelX, packet.pixelY);
         pixelPos = Utils.playerPixel2OpponentPixel(pixelPos.x, pixelPos.y);
         OpponentAction.getInstance().dropSpell(packet.spellId, pixelPos);
+    },
+
+    _handlePutTrap: function (cmd, packet) {
+        cc.log()("[BattleNetwork.js line 206: _handlePutTrap packet: " + JSON.stringify(packet));
+    },
+
+    _handleOpponentPutTrap: function (cmd, packet) {
+        cc.log()("[BattleNetwork.js line 210: _handleOpponentPutTrap packet: " + JSON.stringify(packet));
+        let tilePos = cc.p(packet.tilePosX, packet.tilePosY);
+        OpponentAction.getInstance().putTrap(tilePos);
     },
 
     _handleChangeTowerStrategy: function (cmd, packet) {

@@ -11,6 +11,8 @@ gv.CMD.DROP_SPELL = 5008;
 gv.CMD.OPPONENT_DROP_SPELL = 5009;
 gv.CMD.CHANGE_TOWER_STRATEGY = 5010;
 gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY = 5011;
+gv.CMD.PUT_TRAP = 5012;
+gv.CMD.OPPONENT_PUT_TRAP = 5013;
 
 let BattleNetwork = BattleNetwork || {};
 
@@ -92,6 +94,22 @@ CMDDropSpell = fr.OutPacket.extend({
         this.putDouble(pixelPos.y);
         this.updateSize();
     }
+})
+
+CMDPutTrap = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.PUT_TRAP);
+    },
+
+    pack: function (tilePos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.updateSize();
+    },
 })
 
 CMDChangeTowerStrategy = fr.OutPacket.extend({
@@ -301,6 +319,27 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_DROP_SPELL] = fr.InPacket.extend({
         this.spellLevel = this.getInt();
         this.pixelX = this.getDouble();
         this.pixelY = this.getDouble();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.PUT_TRAP] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tilePosX = this.getInt();
+        this.tilePosY = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TRAP] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+    readData: function () {
+        this.tilePosX = this.getInt();
+        this.tilePosY = this.getInt();
     }
 });
 
