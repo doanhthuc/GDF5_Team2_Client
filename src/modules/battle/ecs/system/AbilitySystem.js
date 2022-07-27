@@ -27,10 +27,13 @@ let AbilitySystem = System.extend({
                             underGroundComponent.trigger += 1;
                             underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 2;
                             underGroundComponent.isInGround = true;
+
+                            BattleAnimation.addAnimationUnderGround(entity);
                         }
                     } else {
                         if (underGroundComponent.disableMoveDistance <= positionComponent.moveDistance) {
                             underGroundComponent.isInGround = false;
+                            BattleAnimation.removeAnimationUnderGround(entity);
                         }
                     }
                 }
