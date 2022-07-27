@@ -33,6 +33,8 @@ var ScreenNetwork = cc.Layer.extend({
         this.lblLog = gv.commonText(fr.Localization.text(""), size.width * 0.8, size.height * 0.03);
         this.lblLog.setString(res.version);
         this.addChild(this.lblLog);
+        this.textFieldUID.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
+        this.textFieldUID.setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER);
         this.scheduleUpdate();
     },
     update: function (dt) {
