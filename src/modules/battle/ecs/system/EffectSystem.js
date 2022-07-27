@@ -133,7 +133,10 @@ let EffectSystem = System.extend({
 
                 let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, entity.mode);
                 let time = Utils.euclidDistance(pos, bornPos) / (2 * GameConfig.TILE_WIDTH);
-                let action = cc.spawn(cc.jumpTo(time, bornPos, 100, 1));
+                let action = cc.spawn(
+                    cc.jumpTo(time, bornPos, 100, 1),
+                    cc.sequence(cc.scaleTo(time/2, 0.8), cc.scaleTo(time/2, 1))
+                );
                 appearanceComponent.sprite.runAction(action);
 
                 trapEffect.setCountDown(time + 0.5);

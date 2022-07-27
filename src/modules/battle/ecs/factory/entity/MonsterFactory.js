@@ -5,7 +5,7 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 30, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 30, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createSwordmanNodeAnimation(), mode, pixelPos);
@@ -41,7 +41,7 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 15, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 15, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 1.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createAssassinNodeAnimation(), mode, pixelPos);
@@ -74,7 +74,7 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "air", 25, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.AIR, 25, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.7 * GameConfig.TILE_WIDTH, 0.7 * GameConfig.TILE_WIDTH);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createBatNodeAnimation(), mode);
@@ -107,7 +107,7 @@ EntityFactory.createGiantMonster = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 200, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 200, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.5 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createGiantNodeAnimation(), mode);
@@ -141,7 +141,7 @@ EntityFactory.createNinjaMonster = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 30, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 30, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createNinjaNodeAnimation(), mode);

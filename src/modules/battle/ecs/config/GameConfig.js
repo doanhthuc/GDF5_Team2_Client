@@ -134,3 +134,14 @@ GameConfig.MAP = {
     HOLE: 6,
     TOWER: 7
 }
+
+GameConfig.MONSTER = {
+    CATEGORY: {
+        NORMAL: "normal",
+        BOSS: "boss",
+    },
+    CLASS : {
+        LAND: "land",
+        AIR: "air",
+    }
+}
