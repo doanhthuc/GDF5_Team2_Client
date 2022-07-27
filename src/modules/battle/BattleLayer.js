@@ -245,7 +245,7 @@ let BattleLayer = cc.Layer.extend({
             this.dropSpell(type, pixelPos, mode)
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
         } else if (ValidatorECS.isTrap(type)) {
-            SpellFactory.createTrap(tilePos, mode);
+            EntityFactory.createTrap(tilePos, mode);
         } else if (ValidatorECS.isTower(type)) {
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()
@@ -309,13 +309,13 @@ let BattleLayer = cc.Layer.extend({
     dropSpell: function (spellId, pixelPos, mode) {
         switch (spellId) {
             case GameConfig.ENTITY_ID.FIRE_SPELL:
-                SpellFactory.createFireSpell(pixelPos, mode);
+                EntityFactory.createFireSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
-                SpellFactory.createFrozenSpell(pixelPos, mode);
+                EntityFactory.createFrozenSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.TRAP:
-                SpellFactory.createTrap(tilePos, mode);
+                EntityFactory.createTrap(tilePos, mode);
                 break;
             default:
                 return;
