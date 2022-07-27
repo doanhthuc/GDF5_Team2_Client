@@ -118,8 +118,7 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = NodeFactory.createWizardNodeAnimation(attackRange);
 
-    let damageEffect = ComponentFactory.create(DamageEffect, 3);
-
+    
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
