@@ -68,65 +68,44 @@ let AttackSystem = System.extend({
         for (let monster of monsterInAttackRange) {
             if (monster.typeID === GameConfig.ENTITY_ID.DARK_GIANT) return monster;
         }
-
+        // return monsterInAttackRange[0];
         let targetMonster = null;
+        let monsterIndex = -1;
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
-                let maxHP = -1;
-                let maxIdx = -1;
-
-                maxIdx = monsterInAttackRange.reduce((acc, cur, idx) => {
+                cc.log("[AttackSystem] find target by max hp");
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
                     let monsterHP = cur.getComponent(LifeComponent).hp;
                     return monsterHP > monsterInAttackRange[acc] ? idx : acc;
-                });
-
-                // for (let i = 0; i < monsterInAttackRange.length; i++) {
-                //     let monsterInfo = monsterInAttackRange[i].getComponent(LifeComponent);
-                //     if (monsterInfo.hp > maxHP) {
-                //         maxHP = monsterInfo.hp;
-                //         maxIdx = i;
-                //     }
-                // }
-                targetMonster = monsterInAttackRange[maxIdx];
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
             }
             case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP: {
-                let minHP = Number.MAX_VALUE;
-                let minIdx = -1;
-                for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterInfo = monsterInAttackRange[i].getComponent(LifeComponent);
-                    if (monsterInfo.hp < minHP) {
-                        minHP = monsterInfo.hp;
-                        minIdx = i;
-                    }
-                }
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    return monsterHP < monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
             }
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE:
             {
-                let maxDistance = -1;
-                let maxIdx = -1;
-                for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterPos = monsterInAttackRange[i].getComponent(PositionComponent);
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterPos = cur.getComponent(PositionComponent);
                     let distance = Utils.euclidDistance(towerPos, monsterPos);
-                    if (distance > maxDistance) {
-                        maxDistance = distance;
-                        maxIdx = i;
-                    }
-                }
+                    return distance > monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
             }
             case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE: {
-                let minDistance = Number.MAX_VALUE;
-                let minIdx = -1;
-                for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterPos = monsterInAttackRange[i].getComponent(PositionComponent);
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterPos = cur.getComponent(PositionComponent);
                     let distance = Utils.euclidDistance(towerPos, monsterPos);
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        minIdx = i;
-                    }
-                }
+                    return distance < monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
             }
             default:

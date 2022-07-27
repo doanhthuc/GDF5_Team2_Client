@@ -5,8 +5,8 @@ EventDispatcher.getInstance()
         BattleManager.getInstance().getBattleData().increaseWave();
         // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.PLAYER);
         // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.OPPONENT);
-        // BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
-        // BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
+        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
         BattleManager.getInstance().getBattleLayer().stopGame();
