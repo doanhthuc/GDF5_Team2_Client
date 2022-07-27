@@ -133,8 +133,8 @@ let BattleLayer = cc.Layer.extend({
         // }, 5000);
         EntityFactory.createAssassinMonster(pixelPos, mode);
         // EntityFactory.createGiantMonster(pixelPos, mode);
-        // EntityFactory.createSatyrBoss(pixelPos, mode);
-        // EntityFactory.createNinjaMonster(pixelPos, mode);
+        EntityFactory.createSatyrBoss(pixelPos, mode);
+        EntityFactory.createNinjaMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
 
