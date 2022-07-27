@@ -88,7 +88,7 @@ let CardDeckNode = cc.Node.extend({
     },
 
     handleChangeCardEvent: function (data) {
-        this.nextCard(this.selectedCard.id);
+        this.nextCard(data.cardId);
     },
 
     genNextCardSlot: function () {
