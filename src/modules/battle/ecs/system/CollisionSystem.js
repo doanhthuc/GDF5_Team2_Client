@@ -40,7 +40,13 @@ let CollisionSystem = System.extend({
 
         for (let i = 0; i < entityList.length; i++) {
             if (ValidatorECS.isBullet(entityList[i])) {
-                this._handleCollisionBullet(entityList[i]);
+                let bulletInfoComponent = entityList[i].getComponent(BulletInfoComponent);
+                if (bulletInfoComponent.radius) {
+                    this._handleRadiusBullet(entityList[i]);
+                } else {
+                    this._handleCollisionBullet(entityList[i]);
+                }
+
             } else if (ValidatorECS.isTrap(entityList[i])) {
                 this._handleCollisionTrap(entityList[i], tick);
             }
@@ -99,19 +105,8 @@ let CollisionSystem = System.extend({
 
                     } else {
                         // IMPORTANT: 1 bullet can affect only 1 monster
-                        if (bulletInfo.radius) {
-                            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
-                            for (let monster of monsterList) {
-                                if (Utils.euclidDistance(monster.getComponent(PositionComponent), pos) <= bulletInfo.radius) {
-                                    for (let effect of bulletInfo.effects) {
-                                        monster.addComponent(effect.clone());
-                                    }
-                                }
-                            }
-                        } else {
-                            for (let effect of bulletInfo.effects) {
-                                monster.addComponent(effect.clone());
-                            }
+                        for (let effect of bulletInfo.effects) {
+                            monster.addComponent(effect.clone());
                         }
                         EntityManager.destroy(bullet);
                         break;
@@ -120,8 +115,27 @@ let CollisionSystem = System.extend({
                 }
             }
         }
-    }
-    ,
+    },
+
+    _handleRadiusBullet: function (bullet) {
+        let bulletPos = bullet.getComponent(PositionComponent);
+        let bulletVelocity = bullet.getComponent(VelocityComponent);
+        let bulletInfo = bullet.getComponent(BulletInfoComponent);
+        if ((Math.abs(bulletVelocity.staticPostition.x - bulletPos.x) <= 5)
+            && (Math.abs(bulletVelocity.staticPostition.y - bulletPos.y) <= 5)) {
+            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
+            for (let monster of monsterList) {
+                if (monster.mode === bullet.mode) {
+                    if (Utils.euclidDistance(monster.getComponent(PositionComponent), bulletPos) <= bulletInfo.radius) {
+                        for (let effect of bulletInfo.effects) {
+                            monster.addComponent(effect.clone());
+                        }
+                    }
+                }
+            }
+            EntityManager.destroy(bullet);
+        }
+    },
     _handleCollisionTrap: function (trapEntity, dt) {
         let trapInfo = trapEntity.getComponent(TrapInfoComponent);
         if (trapInfo.isTriggered) {
@@ -145,6 +159,11 @@ let CollisionSystem = System.extend({
                         && entity1.mode === entity2.mode
                         && ValidatorECS.isMonster(entity2)
                         && this._isCollide(entity1, entity2)) {
+
+                        // trap doesn't affect to Boss and Air monster
+                        let monsterInfo = entity2.getComponent(MonsterInfoComponent);
+                        if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
+                        if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
 
                         entity2.addComponent(ComponentFactory.create(TrapEffect));
                     }
@@ -170,6 +189,11 @@ let CollisionSystem = System.extend({
                     && entity1.mode === entity2.mode
                     && ValidatorECS.isMonster(entity2)
                     && this._isCollide(entity1, entity2)) {
+
+                    // trap only trigger with normal monster, except Boss and Air monster
+                    let monsterInfo = entity2.getComponent(MonsterInfoComponent);
+                    if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
+                    if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
 
                     trapInfo.setTrigger(true);
                     let spriteComponent = trapEntity.getComponent(SpriteSheetAnimationComponent);
@@ -208,8 +232,7 @@ let CollisionSystem = System.extend({
         return cc.rectIntersectsRect(cc.rect(pos1.x - w1 / 2, pos1.y - h1 / 2, w1, h1), cc.rect(pos2.x - w2 / 2, pos2.y - h2 / 2, w2, h2));
         // let x1 = pos1.x - w1 / 2, x2 = pos2.x - w2 / 2, y1 = pos1.y - h1 / 2, y2 = pos2.y - h2 / 2;
         // return x1 <= x2 + w2 && x1 + w1 >= x2 && y1 + h1 >= y2 && y2 + h2 >= y1;
-    }
-    ,
+    },
 
     _isMonsterAndBullet: function (entity1, entity2) {
         // TODO: check entity2 is monster, not only sword man

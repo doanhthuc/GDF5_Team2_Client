@@ -42,7 +42,7 @@ EntityFactory.createFireSpell = function (pixelPos, mode) {
     let speed = Utils.calculateVelocityVector(cc.p(pixelPos.x, pixelPos.y + S), pixelPos, V);
     let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
 
-    let damageEffect = ComponentFactory.create(DamageEffect, 50);
+    let damageEffect = ComponentFactory.create(DamageEffect, 100);
 
     let parent;
     if (mode === GameConfig.PLAYER) {
@@ -71,7 +71,7 @@ EntityFactory.createTrap = function (tilePos, mode) {
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createTrapNode(), mode, pixelPos);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, PotionAnimationConfig.trap);
     let collisionComponent = ComponentFactory.create(CollisionComponent, GameConfig.TILE_WIDTH, GameConfig.TILE_HEIGH);
-    let trapInfo = ComponentFactory.create(TrapInfoComponent, 0.55);
+    let trapInfo = ComponentFactory.create(TrapInfoComponent, 0.3);
 
     entity.addComponent(positionComponent)
         .addComponent(appearanceComponent)

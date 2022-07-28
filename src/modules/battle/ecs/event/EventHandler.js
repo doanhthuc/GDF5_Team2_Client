@@ -31,7 +31,7 @@ EventDispatcher.getInstance()
 
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
         for (let entity of entityList) {
-            if (entity.mode === currentMode) {
+            if (entity.mode === currentMode && entity.typeID!=GameConfig.ENTITY_ID.BAT) {
                 let pathComponent = entity.getComponent(PathComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {

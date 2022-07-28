@@ -5,7 +5,7 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "boss", "land", 400, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.BOSS, GameConfig.MONSTER.CLASS.LAND, 400, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createDemonTreeNodeAnimation(), mode);
@@ -40,7 +40,7 @@ EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "normal", "land", 50, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 50, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createDemonTreeMinionNodeAnimation(), mode);
@@ -73,7 +73,7 @@ EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "boss", "land", 500, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.BOSS, GameConfig.MONSTER.CLASS.LAND, 500, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createDarkGiantNodeAnimation(), mode);
@@ -106,7 +106,7 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
     let entity = this._createEntity(typeID, mode);
 
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, "boss", "land", 300, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.BOSS, GameConfig.MONSTER.CLASS.LAND, 300, 1, 1, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createSatyrNodeAnimation(), mode);
@@ -114,7 +114,7 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
     let lifeComponent = ComponentFactory.create(LifeComponent, 1000);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.satyr)
 
-    let healingAbilityComponent = ComponentFactory.create(HealingAbility, 2 * GameConfig.TILE_WIDTH, 0.2);
+    let healingAbilityComponent = ComponentFactory.create(HealingAbility, 2 * GameConfig.TILE_WIDTH, 0.03);
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
@@ -132,5 +132,6 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
     // .addComponent(frozenEffect)
 
     //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
+    BattleAnimation.addAnimationHealing(entity);
     return entity;
 }

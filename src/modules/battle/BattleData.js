@@ -5,7 +5,7 @@ let BattleData = cc.Class.extend({
             currentWave: 0,
             battleWave: null,
             maxWave: 10000,
-            timer: 2,
+            timer: 10,
             player: {
                 username: "HOVANVYDUT",
                 clanName: "GDF5_DN_TEAM_2",
@@ -126,6 +126,17 @@ let BattleData = cc.Class.extend({
     getMap: function (mode) {
         Utils.validateMode(mode);
         return this.dataInGame[mode].map;
+    },
+
+    cloneMap: function (mode) {
+        let map = this.getMap(mode);
+        let cloneMap = FindPathUtil.create2DMatrix(map.length, map[0].length);
+        for (let row = 0; row < map.length; row++) {
+            for (let col = 0; col < map[0].length; col++) {
+                cloneMap[row][col] = map[row][col];
+            }
+        }
+        return cloneMap;
     },
 
     setMap: function (map, mode) {

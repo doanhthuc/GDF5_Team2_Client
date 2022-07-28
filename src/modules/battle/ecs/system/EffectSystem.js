@@ -50,6 +50,8 @@ let EffectSystem = System.extend({
                 let damageComponent = entity.getComponent(DamageEffect);
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
+
+                BattleAnimation.animationDamage(entity);
             }
         }
     },
@@ -81,11 +83,21 @@ let EffectSystem = System.extend({
 
             slowComponent.countdown = slowComponent.countdown - tick;
             if (slowComponent.countdown <= 0) {
+                // animation
+                BattleAnimation.removeAnimationHitSlowEffect(entity);
+                slowComponent.addedAnimation = false;
+
                 this._updateOriginVelocity(velocityComponent);
                 entity.removeComponent(slowComponent);
             } else {
                 velocityComponent.speedX = slowComponent.percent * velocityComponent.originSpeedX;
                 velocityComponent.speedY = slowComponent.percent * velocityComponent.originSpeedY;
+
+                // animation
+                if (!slowComponent.addedAnimation) {
+                    BattleAnimation.addAnimationHitSlowEffect(entity);
+                    slowComponent.addedAnimation = true;
+                }
             }
         }
     },
@@ -133,7 +145,10 @@ let EffectSystem = System.extend({
 
                 let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, entity.mode);
                 let time = Utils.euclidDistance(pos, bornPos) / (2 * GameConfig.TILE_WIDTH);
-                let action = cc.spawn(cc.jumpTo(time, bornPos, 100, 1));
+                let action = cc.spawn(
+                    cc.jumpTo(time, bornPos, 100, 1),
+                    cc.sequence(cc.scaleTo(time/2, 0.8), cc.scaleTo(time/2, 1))
+                );
                 appearanceComponent.sprite.runAction(action);
 
                 trapEffect.setCountDown(time + 0.5);
