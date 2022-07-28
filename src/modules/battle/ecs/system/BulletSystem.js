@@ -18,20 +18,22 @@ let BulletSystem = System.extend({
                 if (pathComponent.currentPathIdx === pathComponent.path.length - 2) EntityManager.destroy(bullet);
                 continue;
             }
-            if (!bulletVelocity.dynamicPosition) continue;
 
-            if ((bulletVelocity.dynamicPosition).getActive() === false) {
-                bulletVelocity.dynamicPosition = null;
-                EntityManager.destroy(bullet);
-                continue;
-            }
 
-            if (Math.abs(bulletVelocity.dynamicPosition.x - bulletPos.x) <= 3) {
-                // bullet.removeComponent(VelocityComponent);
-                let collisionComponent = bullet.getComponent(CollisionComponent);
-                if (collisionComponent) {
-                    collisionComponent.width = collisionComponent.originWidth;
-                    collisionComponent.height = collisionComponent.originHeight;
+            if (bulletVelocity.dynamicPosition) {
+                if ((bulletVelocity.dynamicPosition).getActive() === false) {
+                    bulletVelocity.dynamicPosition = null;
+                    EntityManager.destroy(bullet);
+                    continue;
+                }
+
+                if (Math.abs(bulletVelocity.dynamicPosition.x - bulletPos.x) <= 3) {
+                    // bullet.removeComponent(VelocityComponent);
+                    let collisionComponent = bullet.getComponent(CollisionComponent);
+                    if (collisionComponent) {
+                        collisionComponent.width = collisionComponent.originWidth;
+                        collisionComponent.height = collisionComponent.originHeight;
+                    }
                 }
             }
 

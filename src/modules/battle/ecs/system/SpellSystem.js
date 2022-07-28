@@ -16,7 +16,7 @@ let SpellSystem = System.extend({
             spellComponent.delay = spellComponent.delay - tick;
 
             if (spellComponent.delay <= 0) {
-                let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
+                let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
                 for (let monster of monsters) {
                     if (monster.mode === spellEntity.mode) {
                         let monsterPosition = monster.getComponent(PositionComponent)

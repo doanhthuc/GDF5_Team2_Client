@@ -4,6 +4,7 @@ const BattleResource = {
     TWO_PLAYER_INFO_NODE: "ui/battle/battle_ui_layer/avatar/TwoPlayerInfoNode.json",
 
     // Battle
+    HOUSE_IMG: "textures/map/map_house.png",
     WAVE_NODE: "ui/battle/battle_ui_layer/wave/WaveNode.json",
     TIMER_NODE: "ui/battle/battle_ui_layer/timer/BattleTimerNode.json",
     MAP_LAYER: "ui/battle/battle_map_layer/BattleMapLayer.json",
@@ -52,4 +53,7 @@ const BattleResource = {
     FROZEN_SKELETON_JSON: "textures/potion/effect_atk_ice.json",
     FIRE_SKELETON_ATLAS: "textures/potion/effect_atk_fire.atlas",
     FIRE_SKELETON_JSON: "textures/potion/effect_atk_fire.json",
+
+    // Trap
+    TRAP_IMG: "textures/potion/fx_trap/image0000.png",
 }

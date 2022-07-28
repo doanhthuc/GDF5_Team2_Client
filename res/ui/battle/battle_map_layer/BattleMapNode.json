@@ -447,96 +447,6 @@
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "textures/map/map_house.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": -231.2499,
-              "Y": 421.5014
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -287.2499,
-            "RightMargin": 175.2499,
-            "TopMargin": -488.5014,
-            "BottomMargin": 354.5014,
-            "Tag": 1385,
-            "ActionTag": 1052832577,
-            "Size": {
-              "X": 112.0,
-              "Y": 134.0
-            },
-            "Name": "opponent_house",
-            "ctype": "SpriteObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "textures/map/map_house.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 234.2932,
-              "Y": -360.0322
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 178.2932,
-            "RightMargin": -290.2932,
-            "TopMargin": 293.0322,
-            "BottomMargin": -427.0322,
-            "Tag": 1384,
-            "ActionTag": 130553818,
-            "Size": {
-              "X": 112.0,
-              "Y": 134.0
-            },
-            "Name": "player_house",
-            "ctype": "SpriteObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
               "Path": "textures/map/map_decoration_0001.png",
               "Plist": ""
             },
@@ -2083,7 +1993,6 @@
         "../../../textures/map/map_decoration_tree_0001.png",
         "../../../textures/map/map_decoration_tree_0002.png",
         "../../../textures/map/map_decoration_tree_0003.png",
-        "../../../textures/map/map_house.png",
         "../../../textures/map/map_monster_gate_enemy.png",
         "../../../textures/map/map_monster_gate_player.png",
         "BattleMapOpponent.json",

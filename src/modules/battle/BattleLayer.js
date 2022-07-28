@@ -118,7 +118,7 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        //EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createBatMonster(pixelPos, mode);
         // setTimeout(function () {
         //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // }, 1000);
@@ -131,12 +131,16 @@ let BattleLayer = cc.Layer.extend({
         // setTimeout(function () {
         //     EntityFactory.createGiantMonster(pixelPos, mode);
         // }, 5000);
-        // EntityFactory.createAssassinMonster(pixelPos, mode);
-        // EntityFactory.createGiantMonster(pixelPos, mode);
+        //EntityFactory.createAssassinMonster(pixelPos, mode);
+        //EntityFactory.createGiantMonster(pixelPos, mode);
+        //EntityFactory.createDarkGiantBoss(pixelPos, mode);
+        //EntityFactory.createNinjaMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+
         EntityFactory.createNinjaMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createBatMonster(pixelPos, mode);
         // EntityFactory.createSatyrBoss(pixelPos, mode);
     },
@@ -148,10 +152,10 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        //EntityFactory.createBatMonster(pixelPos, mode);
-        setTimeout(function () {
-            EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        }, 1000);
+        EntityFactory.createAssassinMonster(pixelPos, mode);
+        // setTimeout(function () {
+        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // }, 1000);
         // setTimeout(function () {
         //     EntityFactory.createAssassinMonster(pixelPos, mode);
         // }, 2000);
@@ -213,36 +217,17 @@ let BattleLayer = cc.Layer.extend({
     putCardAt: function (type, pixelPos, mode) {
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
 
-        // FIXME: reduce if statement
-        if (ValidatorECS.isSpell(type)) {
-            if (!Utils.isPixelPositionInMap(pixelPos, mode)) {
-                cc.warn("put spell at pixel pos = " + JSON.stringify(pixelPos) + " is invalid")
-                return;
-            }
-        } else if (ValidatorECS.isTower(type)) {
-            if (!Utils.validateTilePos(tilePos)) {
-                return;
-            }
-
-            let row = GameConfig.MAP_HEIGH - 1 - tilePos.y;
-            let col = tilePos.x;
-            let map = this.battleData.getMap(mode);
-            if (map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
-                || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
-                || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
-                return;
-            }
-        } else if (ValidatorECS.isTrap(type)) {
-            // check valid position
-        } else {
-            throw new Error("Type is invalid");
+        let {error, msg} = ValidatorECS.validatePositionPutCard(type, pixelPos, mode);
+        if (error) {
+            this.uiLayer.notify(msg);
+            return;
         }
 
         if (ValidatorECS.isSpell(type)) {
             this.dropSpell(type, pixelPos, mode)
-            if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendDropSell(type, pixelPos);
+            if (GameConfig.NETWORK) BattleNetwork.connector.sendDropSell(type, pixelPos);
         } else if (ValidatorECS.isTrap(type)) {
-            SpellFactory.createTrap(tilePos, mode);
+            EntityFactory.createTrap(tilePos, mode);
         } else if (ValidatorECS.isTower(type)) {
             // if (this.shouldUpgradeTower(type, tilePos)) {
             //     EventDispatcher.getInstance()
@@ -306,13 +291,13 @@ let BattleLayer = cc.Layer.extend({
     dropSpell: function (spellId, pixelPos, mode) {
         switch (spellId) {
             case GameConfig.ENTITY_ID.FIRE_SPELL:
-                SpellFactory.createFireSpell(pixelPos, mode);
+                EntityFactory.createFireSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
-                SpellFactory.createFrozenSpell(pixelPos, mode);
+                EntityFactory.createFrozenSpell(pixelPos, mode);
                 break;
             case GameConfig.ENTITY_ID.TRAP:
-                SpellFactory.createTrap(tilePos, mode);
+                EntityFactory.createTrap(tilePos, mode);
                 break;
             default:
                 return;
@@ -403,11 +388,11 @@ let BattleLayer = cc.Layer.extend({
     },
 
     getPlayerMapNode: function () {
-        return this.mapLayer.playerMapNode;
+        return this.mapLayer.mapNode[GameConfig.PLAYER];
     },
 
     getOpponentMapNode: function () {
-        return this.mapLayer.opponentMapNode;
+        return this.mapLayer.mapNode[GameConfig.OPPONENT];
     },
 
     _prefetchAssetGame: function () {

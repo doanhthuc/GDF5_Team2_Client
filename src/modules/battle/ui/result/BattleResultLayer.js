@@ -5,13 +5,6 @@ let BattleResultLayer = cc.Layer.extend({
         this.result = result;
         this.battleData = battleData;
 
-        this.ANIMATION_TYPE = {
-            ANIMATION_START: 0,
-            ANIMATION_END: 1,
-            ANIMATION_COMPLETE: 2,
-            ANIMATION_EVENT: 3
-        };
-
         this._setupUI();
     },
 
@@ -59,16 +52,7 @@ let BattleResultLayer = cc.Layer.extend({
     animationStateEvent: function (obj, trackIndex, type, event, loopCount) {
         let animationName = (trackIndex && trackIndex.animation) ? trackIndex.animation.name : 0;
         switch (type) {
-            case this.ANIMATION_TYPE.ANIMATION_START:
-                cc.log(trackIndex + " start: " + animationName);
-                break;
-            case this.ANIMATION_TYPE.ANIMATION_END:
-                cc.log(trackIndex + " end:" + animationName);
-                break;
-            case this.ANIMATION_TYPE.ANIMATION_EVENT:
-                cc.log(trackIndex + " event: " + animationName);
-                break;
-            case this.ANIMATION_TYPE.ANIMATION_COMPLETE:
+            case GameConfig.ANIMATION_TYPE.ANIMATION_COMPLETE:
                 cc.log(trackIndex + " complete: " + animationName + "," + loopCount);
                 if (animationName === this.animationName.init) {
                     this._showResult();

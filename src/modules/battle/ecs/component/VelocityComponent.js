@@ -2,15 +2,16 @@ let VelocityComponent = Component.extend({
     name: "VelocityComponent",
     typeID: GameConfig.COMPONENT_ID.VELOCITY,
 
-    ctor: function (speedX, speedY, dynamicPosition) {
+    ctor: function (speedX, speedY, dynamicPosition, staticPosition) {
         this._super();
-        this.reset(speedX, speedY, dynamicPosition);
+        this.reset(speedX, speedY, dynamicPosition, staticPosition);
     },
 
-    reset: function (speedX, speedY, dynamicPosition) {
+    reset: function (speedX, speedY, dynamicPosition, staticPosition) {
         this.speedX = speedX;
         this.speedY = speedY;
         this.dynamicPosition = dynamicPosition;
+        this.staticPostition = staticPosition;
         this.originSpeed = Math.sqrt(Math.pow(this.speedX, 2) + Math.pow(this.speedY, 2));
         this.originSpeedX = this.speedX;
         this.originSpeedY = this.speedY;

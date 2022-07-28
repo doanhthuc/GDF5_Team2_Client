@@ -23,11 +23,14 @@ let AttackSystem = System.extend({
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
-                    if (monster.getActive() && monster.mode === tower.mode
-                        && monster.hasAllComponent(PositionComponent)) {
-                        let distance = this._distanceFrom(tower, monster);
-                        if (distance <= attackComponent.range) {
-                            monsterInAttackRange.push(monster);
+                    let underGroundComponent = monster.getComponent(UnderGroundComponent);
+                    if ((underGroundComponent == null) || underGroundComponent.isInGround === false) {
+                        if (monster.getActive() && monster.mode === tower.mode
+                            && monster.hasAllComponent(PositionComponent)) {
+                            let distance = this._distanceFrom(tower, monster);
+                            if (distance <= attackComponent.range) {
+                                monsterInAttackRange.push(monster);
+                            }
                         }
                     }
                 }
@@ -66,17 +69,14 @@ let AttackSystem = System.extend({
         for (let monster of monsterInAttackRange) {
             if (monster.typeID === GameConfig.ENTITY_ID.DARK_GIANT) return monster;
         }
-        for (let monster of monsterInAttackRange) {
-            let underGroundComponent = monster.getComponent(UnderGroundComponent);
-            if ((!(underGroundComponent) || underGroundComponent.isInGround === false)) return monster;
-        }
+        return monsterInAttackRange[0];
         let targetMonster = null;
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP:
                 let maxHP = -1;
                 let maxIdx = -1;
                 for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterInfo = monsterInAttackRange[i].getComponent(MonsterInfoComponent);
+                    let monsterInfo = monsterInAttackRange[i].getComponent(LifeComponent);
                     if (monsterInfo.hp > maxHP) {
                         maxHP = monsterInfo.hp;
                         maxIdx = i;
