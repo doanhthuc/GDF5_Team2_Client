@@ -116,7 +116,7 @@ BattleAnimation.addAnimationHealing = function (entity) {
     if (appearanceComponent && appearanceComponent.sprite) {
         let childNode = appearanceComponent.sprite;
         if (childNode) {
-            let spine = new sp.SkeletonAnimation("/textures/monster/fx/fx_boss_jungle_god.json", "/textures/monster/fx/fx_boss_jungle_god.atlas");
+            let spine = new sp.SkeletonAnimation("textures/monster/fx/fx_boss_jungle_god.json", "textures/monster/fx/fx_boss_jungle_god.atlas");
             childNode.addChild(spine, 0);
             spine.setAnimation(0, "fx_back", true);
             spine.setPosition(cc.p(childNode.width / 2, childNode.height / 2));
@@ -153,10 +153,10 @@ BattleAnimation.addAnimationForBullet = function (bulletEntity) {
         if (pos) {
             switch (bulletEntity.typeID) {
                 case GameConfig.ENTITY_ID.SLOW_BULLET:
-                    animationSlowEffect(bulletEntity);
+                    animationSlowEffectExplosion(bulletEntity);
                     break;
                 case GameConfig.ENTITY_ID.WIZARD_BULLET:
-                    animationWizardBullet(bulletEntity);
+                    animationWizardBulletExplosion(bulletEntity);
                     break;
                 default:
                     break;
@@ -165,52 +165,116 @@ BattleAnimation.addAnimationForBullet = function (bulletEntity) {
     }
 }
 
-function animationSlowEffect (bulletEntity) {
+function animationSlowEffectExplosion(bulletEntity) {
+    const ANIMATION_NAME = "hit_target_eff";
     let pos = bulletEntity.getComponent(PositionComponent);
     let spine = new sp.SkeletonAnimation("textures/tower/fx/tower_oil_fx.json", "textures/tower/fx/tower_oil_fx.atlas");
     spine.setPosition(cc.p(pos.x, pos.y));
-    spine.setAnimation(0, "hit_target_eff", false);
+    spine.setAnimation(0, ANIMATION_NAME, false);
     let mapNode = BattleManager.getInstance().getBattleLayer().getMapNode(bulletEntity.mode);
     mapNode.addChild(spine, 0);
 
     function animationStateEvent(obj, trackIndex, type, event, loopCount) {
         let entry = spine.getCurrent();
         let animationName = (entry && entry.animation) ? entry.animation.name : 0;
-
-        switch (type) {
-            case GameConfig.ANIMATION_TYPE.ANIMATION_COMPLETE:
-                if (animationName === "hit_target_eff") {
-                    obj.removeChild(spine);
-                }
-                break;
-            default :
-                break;
+        if (animationName === ANIMATION_NAME) {
+            mapNode.scheduleOnce(() => {
+                mapNode.removeChild(spine);
+            });
         }
     }
-    spine.setAnimationListener(mapNode, animationStateEvent);
+
+    spine.setCompleteListener(animationStateEvent);
 }
 
-function animationWizardBullet (bulletEntity) {
+function animationWizardBulletExplosion(bulletEntity) {
+    const ANIMATION_NAME = "hit_target_eff";
     let pos = bulletEntity.getComponent(PositionComponent);
     let spine = new sp.SkeletonAnimation("textures/tower/fx/tower_wizard_fx.json", "textures/tower/fx/tower_wizard_fx.atlas");
     spine.setPosition(cc.p(pos.x, pos.y));
-    spine.setAnimation(0, "hit_target_eff", false);
+    spine.setAnimation(0, ANIMATION_NAME, false);
     let mapNode = BattleManager.getInstance().getBattleLayer().getMapNode(bulletEntity.mode);
     mapNode.addChild(spine, 0);
 
     function animationStateEvent(obj, trackIndex, type, event, loopCount) {
         let entry = spine.getCurrent();
         let animationName = (entry && entry.animation) ? entry.animation.name : 0;
-
-        switch (type) {
-            case GameConfig.ANIMATION_TYPE.ANIMATION_COMPLETE:
-                if (animationName === "hit_target_eff") {
-                    obj.removeChild(spine);
-                }
-                break;
-            default :
-                break;
+        if (animationName === ANIMATION_NAME) {
+            mapNode.scheduleOnce(() => {
+                mapNode.removeChild(spine);
+            });
         }
     }
-    spine.setAnimationListener(mapNode, animationStateEvent);
+
+    spine.setCompleteListener(animationStateEvent);
+}
+
+BattleAnimation.addBuffDamageAnimation = function (entity) {
+    const BUFF_DAMAGE_NAME = "BUFF_DAMAGE_NAME";
+    const BUFF_JSON = "textures/tower/fx/tower_strength_fx.json";
+    const BUFF_ATLAS = "textures/tower/fx/tower_strength_fx.atlas";
+    const ANIMATION_NAME = "attack_1";
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
+    if (appearanceComponent && appearanceComponent.sprite) {
+        let childNode = appearanceComponent.sprite;
+
+        if (childNode.getChildByName(BUFF_DAMAGE_NAME)) {
+            let spine = childNode.getChildByName(BUFF_DAMAGE_NAME);
+            if (spine.myEndAnim === false) {
+                spine.setVisible(true);
+                spine.setAnimation(0, ANIMATION_NAME, false);
+                spine.myEndAnim = true;
+            }
+        } else {
+            let spine = new sp.SkeletonAnimation(BUFF_JSON, BUFF_ATLAS);
+            spine.setPosition(cc.p(0, 0));
+            spine.setAnimation(0, ANIMATION_NAME, false);
+            spine.setName(BUFF_DAMAGE_NAME);
+            childNode.addChild(spine, 0);
+
+            spine.myEndAnim = true;
+
+            function animationStateEvent() {
+                spine.myEndAnim = false;
+                spine.setVisible(false);
+            }
+
+            spine.setCompleteListener(animationStateEvent);
+        }
+    }
+}
+
+BattleAnimation.addBuffSpeedAnimation = function (entity) {
+    const BUFF_DAMAGE_NAME = "BUFF_SPEED_NAME";
+    const BUFF_JSON = "textures/tower/fx/tower_speed_fx.json";
+    const BUFF_ATLAS = "textures/tower/fx/tower_speed_fx.atlas";
+    const ANIMATION_NAME = "attack_1";
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
+    if (appearanceComponent && appearanceComponent.sprite) {
+        let childNode = appearanceComponent.sprite;
+
+        if (childNode.getChildByName(BUFF_DAMAGE_NAME)) {
+            let spine = childNode.getChildByName(BUFF_DAMAGE_NAME);
+            if (spine.myEndAnim === false) {
+                spine.setVisible(true);
+                spine.setAnimation(0, ANIMATION_NAME, false);
+                spine.myEndAnim = true;
+            }
+        } else {
+            let spine = new sp.SkeletonAnimation(BUFF_JSON, BUFF_ATLAS);
+            spine.setPosition(cc.p(0, 0));
+            spine.setAnimation(0, ANIMATION_NAME, false);
+            spine.setName(BUFF_DAMAGE_NAME);
+            childNode.addChild(spine, 0);
+
+            spine.myEndAnim = true;
+
+            function animationStateEvent() {
+                spine.myEndAnim = false;
+                spine.setVisible(false);
+            }
+
+            spine.setCompleteListener(animationStateEvent);
+        }
+    }
 }
