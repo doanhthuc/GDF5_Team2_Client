@@ -394,6 +394,10 @@ let BattleLayer = cc.Layer.extend({
         return this.mapLayer.mapNode[GameConfig.OPPONENT];
     },
 
+    getMapNode: function (mode) {
+        return this.mapLayer.mapNode[mode];
+    },
+
     _prefetchAssetGame: function () {
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/cannon.plist");
         cc.spriteFrameCache.addSpriteFrames("res/textures/tower/sprite_sheet/ice_gun.plist");

@@ -133,6 +133,7 @@ let CollisionSystem = System.extend({
                     }
                 }
             }
+            BattleAnimation.addAnimationForBullet(bullet);
             EntityManager.destroy(bullet);
         }
     },
