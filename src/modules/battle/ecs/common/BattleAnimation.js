@@ -227,6 +227,7 @@ BattleAnimation.addBuffDamageAnimation = function (entity) {
             }
         } else {
             let spine = new sp.SkeletonAnimation(BUFF_JSON, BUFF_ATLAS);
+            spine.setScale(0.7);
             spine.setPosition(cc.p(0, 0));
             spine.setAnimation(0, ANIMATION_NAME, false);
             spine.setName(BUFF_DAMAGE_NAME);
@@ -262,6 +263,7 @@ BattleAnimation.addBuffSpeedAnimation = function (entity) {
             }
         } else {
             let spine = new sp.SkeletonAnimation(BUFF_JSON, BUFF_ATLAS);
+            spine.setScale(0.7);
             spine.setPosition(cc.p(0, 0));
             spine.setAnimation(0, ANIMATION_NAME, false);
             spine.setName(BUFF_DAMAGE_NAME);
