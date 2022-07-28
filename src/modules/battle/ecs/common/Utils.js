@@ -447,7 +447,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                 //Hình minh họa : https://drive.google.com/file/d/1GT3Iq4VKiKe3VukIlYxqmEntlNaLMsLC/view?usp=sharing
                 else {
                     cellX = tileArr[i].x * cellsEachTile + (beforeCellY + magicNumber) % moduleCellRange + cellBound;
-                    cellY = (tileArr[i].y - 1) * cellsEachTile + moduleCellRange + cellBound;
+                    cellY = (tileArr[i].y - 1) * cellsEachTile + cellsEachTile - 1;
                     beforeCellX = (beforeCellY + magicNumber) % moduleCellRange + cellBound;
 
                     if (cellArr.length != 0) {
@@ -474,11 +474,12 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                     cellY = tileArr[i].y * cellsEachTile + (beforeCellX + magicNumber) % moduleCellRange + cellBound;
                     beforeCellY = (beforeCellX + magicNumber) % moduleCellRange + cellBound;
 
-                    let lastCell = cellArr[cellArr.length - 1];
-                    let nextCell = Utils.cell2Pixel(cellX, cellY, mode);
-
-                    let divideGapCellPath = Utils.divideCellPath(lastCell, nextCell, divideAmount);
-                    for (let cell of divideGapCellPath) cellArr.push(cell);
+                    if (cellArr.length != 0) {
+                        let lastCell = cellArr[cellArr.length - 1];
+                        let nextCell = Utils.cell2Pixel(cellX, cellY, mode);
+                        let divideGapCellPath = Utils.divideCellPath(lastCell, nextCell, divideAmount);
+                        for (let cell of divideGapCellPath) cellArr.push(cell);
+                    }
                 }
                 cellArr.push(Utils.cell2Pixel(cellX, cellY, mode));
                 beforeCellX = 0;
