@@ -232,9 +232,9 @@ NodeFactory.createOwlNodeAnimation = function (range) {
     towerSprite.runAction(cc.repeatForever(towerAction));
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
-    node.addChild(pedestalSprite, 0, "pedestal");
-    node.addChild(towerSprite, 0, "tower");
-    node.addChild(weaponSprite, 0, "weapon");
+    node.addChild(pedestalSprite, 1, "pedestal");
+    node.addChild(towerSprite, 1, "tower");
+    node.addChild(weaponSprite, 1, "weapon");
     return node;
 }
 
@@ -272,9 +272,9 @@ NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange) {
     if (isShowRange) {
         node.addChild(rangeAttackSprite, 0, "rangeAttack");
     }
-    node.addChild(pedestalSprite, 0, "pedestal");
-    node.addChild(towerSprite, 0, "tower");
-    node.addChild(weaponSprite, 0, "weapon");
+    node.addChild(pedestalSprite, 1, "pedestal");
+    node.addChild(towerSprite, 1, "tower");
+    node.addChild(weaponSprite, 1, "weapon");
     return node;
 }
 
@@ -310,9 +310,9 @@ NodeFactory.createFrogNodeAnimation = function (attackRange) {
     weaponSprite.runAction(cc.repeatForever(weaponAction));
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
-    node.addChild(pedestalSprite, 0, "pedestal");
-    node.addChild(towerSprite, 0, "tower");
-    node.addChild(weaponSprite, 0, "weapon");
+    node.addChild(pedestalSprite, 1, "pedestal");
+    node.addChild(towerSprite, 1, "tower");
+    node.addChild(weaponSprite, 1, "weapon");
     return node;
 }
 
@@ -323,9 +323,9 @@ NodeFactory.createBunnyNodeAnimation = function (attackRange) {
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/oil_gun_1_2/tower_oil_gun_attack_1_0011.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
-    node.addChild(pedestalSprite, 0, "pedestal");
-    node.addChild(towerSprite, 0, "tower");
-    node.addChild(weaponSprite, 0, "weapon");
+    node.addChild(pedestalSprite, 1, "pedestal");
+    node.addChild(towerSprite, 1, "tower");
+    node.addChild(weaponSprite, 1, "weapon");
     return node;
 }
 
@@ -336,9 +336,9 @@ NodeFactory.createWizardNodeAnimation = function (attackRange) {
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_attack_1_0000.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
-    node.addChild(pedestalSprite, 0, "pedestal");
-    node.addChild(towerSprite, 0, "tower");
-    node.addChild(weaponSprite, 0, "weapon");
+    node.addChild(pedestalSprite, 1, "pedestal");
+    node.addChild(towerSprite, 1, "tower");
+    node.addChild(weaponSprite, 1, "weapon");
     return node;
 }
 
@@ -349,9 +349,9 @@ NodeFactory.createSnakeAttackSpeedNodeAnimation = function (attackRange) {
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/attack_speed_1_2/tower_attack_speed_attack_1_0000.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
-    node.addChild(pedestalSprite, 0, "pedestal");
-    node.addChild(towerSprite, 0, "tower");
-    node.addChild(weaponSprite, 0, "weapon");
+    node.addChild(pedestalSprite, 1, "pedestal");
+    node.addChild(towerSprite, 1, "tower");
+    node.addChild(weaponSprite, 1, "weapon");
     return node;
 }
 
@@ -361,10 +361,10 @@ NodeFactory.createGoatDamageNodeAnimation = function (attackRange) {
     let towerSprite = new cc.Sprite("res/textures/tower/frame/damage_1_2/tower_damage_attack_0_0000.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/damage_1_2/tower_damage_attack_1_0000.png");
 
-    // node.addChild(rangeAttackSprite, 0, "rangeAttack");
-    node.addChild(pedestalSprite, 0, "pedestal");
-    node.addChild(towerSprite, 0, "tower");
-    node.addChild(weaponSprite, 0, "weapon");
+    // node.addChild(rangeAttackSprite, 1, "rangeAttack");
+    node.addChild(pedestalSprite, 1, "pedestal");
+    node.addChild(towerSprite, 1, "tower");
+    node.addChild(weaponSprite, 1, "weapon");
     return node;
 }
 
@@ -377,8 +377,8 @@ NodeFactory.createDragTowerNode = function (towerId) {
     let weaponSprite = new cc.Sprite("#" + config.weapon.prefix + "0".repeat(4 - numberDigits) + config.weapon.start + ".png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
     rangeAttackSprite.setScale(2 * 1.5 * GameConfig.TILE_WIDTH / 687)
-    node.addChild(towerSprite, 0, "tower");
-    node.addChild(weaponSprite, 0, "weapon");
-    node.addChild(rangeAttackSprite, 0, "rangeAttack");
+    node.addChild(towerSprite, 1, "tower");
+    node.addChild(weaponSprite, 1, "weapon");
+    node.addChild(rangeAttackSprite, 1, "rangeAttack");
     return node;
 }

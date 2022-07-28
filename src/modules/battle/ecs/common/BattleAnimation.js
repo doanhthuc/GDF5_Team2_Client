@@ -246,7 +246,7 @@ BattleAnimation.addBuffDamageAnimation = function (entity) {
 }
 
 BattleAnimation.addBuffSpeedAnimation = function (entity) {
-    const BUFF_DAMAGE_NAME = "BUFF_SPEED_NAME";
+    const BUFF_SPEED_NAME = "BUFF_SPEED_NAME";
     const BUFF_JSON = "textures/tower/fx/tower_speed_fx.json";
     const BUFF_ATLAS = "textures/tower/fx/tower_speed_fx.atlas";
     const ANIMATION_NAME = "attack_1";
@@ -254,8 +254,8 @@ BattleAnimation.addBuffSpeedAnimation = function (entity) {
     if (appearanceComponent && appearanceComponent.sprite) {
         let childNode = appearanceComponent.sprite;
 
-        if (childNode.getChildByName(BUFF_DAMAGE_NAME)) {
-            let spine = childNode.getChildByName(BUFF_DAMAGE_NAME);
+        if (childNode.getChildByName(BUFF_SPEED_NAME)) {
+            let spine = childNode.getChildByName(BUFF_SPEED_NAME);
             if (spine.myEndAnim === false) {
                 spine.setVisible(true);
                 spine.setAnimation(0, ANIMATION_NAME, false);
@@ -266,7 +266,7 @@ BattleAnimation.addBuffSpeedAnimation = function (entity) {
             spine.setScale(0.7);
             spine.setPosition(cc.p(0, 0));
             spine.setAnimation(0, ANIMATION_NAME, false);
-            spine.setName(BUFF_DAMAGE_NAME);
+            spine.setName(BUFF_SPEED_NAME);
             childNode.addChild(spine, 0);
 
             spine.myEndAnim = true;
