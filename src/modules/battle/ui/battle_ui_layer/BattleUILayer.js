@@ -24,7 +24,7 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _showDeckCard: function () {
-        this.cardDeckNode = new CardDeckNode(this.cardDeckListData);
+        this.cardDeckNode = new CardDeckNode2(this.cardDeckListData);
         this.cardDeckNode.x = this.width / 2;
         this.cardDeckNode.y = this.cardDeckNode.height / 2;
         this.addChild(this.cardDeckNode);

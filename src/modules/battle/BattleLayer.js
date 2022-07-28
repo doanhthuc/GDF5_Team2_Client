@@ -27,8 +27,8 @@ let BattleLayer = cc.Layer.extend({
         // this._initTower();
         this._handleEventKey();
         this.startGame();
-        this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
-        this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
+        // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
     },
 
     _setupUI: function () {

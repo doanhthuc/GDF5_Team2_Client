@@ -1,11 +1,8 @@
-let CardDeckSlot = cc.Node.extend({
+const CardDeckSlot2 = cc.Node.extend({
     ctor: function (cardType) {
         this._super();
         this._setupUI();
 
-        // this.setCardImg(cardImg);
-        // this.setBackground(cardBackground);
-        // this.setEnergy(energy);
         this.setCardTexture(cardType);
         this.type = cardType;
         this.isUp = false;
@@ -13,12 +10,16 @@ let CardDeckSlot = cc.Node.extend({
     },
 
     _setupUI: function () {
-        let rootNode = ccs.load(BattleResource.BATTLE_CARD_NODE, "").node;
+        let rootNode = ccs.load(BattleResource.BATTLE_CARD_NODE_2, "").node;
 
-        this.backgroundSprite = rootNode.getChildByName("card_background");
-        this.cardSlotBackground = rootNode.getChildByName("card_slot_background");
-        this.width = this.cardSlotBackground.width;
-        this.height = this.cardSlotBackground.height;
+        this.cardBackgroundBtn = rootNode.getChildByName("cardBackgroundBtn");
+        this.cardBorderImg = rootNode.getChildByName("cardBorderImg");
+        this.cardImage = rootNode.getChildByName("cardImage");
+        this.energyNode = rootNode.getChildByName("energyNode");
+        this.energyTxt = this.energyNode.getChildByName("energyTxt");
+
+        this.width = this.cardBackgroundBtn.width;
+        this.height = this.cardBackgroundBtn.height;
         this.energyNode = rootNode.getChildByName("energy");
         this.cardImgSprite = rootNode.getChildByName("entity_image");
         this.addChild(rootNode);
@@ -38,17 +39,17 @@ let CardDeckSlot = cc.Node.extend({
     },
 
     setCardImg: function (cardImg) {
-        this.cardImgSprite.setTexture(cardImg);
+        this.cardImage.setTexture(cardImg);
     },
 
     setBackground: function (cardBackground) {
-        this.backgroundSprite.setTexture(cardBackground);
+        this.cardBackgroundBtn.loadTextures(cardBackground, cardBackground);
     },
 
     setEnergy: function (energy) {
         if (energy < 0)
             return;
-        this.energyNode.getChildByName("value").setString(energy);
+        this.energyTxt.setString(energy);
     },
 
     setIsSelected: function (isSelected) {
