@@ -283,8 +283,13 @@ let BattleLayer = cc.Layer.extend({
             default:
                 return;
         }
-        EventDispatcher.getInstance()
-            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
+
+        if (mode === GameConfig.PLAYER) {
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode})
+        }
+        // EventDispatcher.getInstance()
+        //     .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
     },
 
     dropSpell: function (spellId, pixelPos, mode) {
