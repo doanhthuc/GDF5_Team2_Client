@@ -5,15 +5,6 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-        if (GameConfig.NETWORK == 0) {
-            BattleData.fakeData();
-        }
-        this.battleData = BattleManager.getInstance().getBattleData();
-
-        // this.battleLoop = new BattleLoop();
-
-        this._setupUI();
-
         this._prefetchAssetGame();
 
         // init entity manager
@@ -21,6 +12,15 @@ let BattleLayer = cc.Layer.extend({
         EntityManager.getInstance = function () {
             return this._entityManager;
         }.bind(this);
+
+        if (!GameConfig.NETWORK) {
+            BattleData.fakeData();
+        }
+        this.battleData = BattleManager.getInstance().getBattleData();
+
+        // this.battleLoop = new BattleLoop();
+
+        this._setupUI();
 
         this._initSystem();
 

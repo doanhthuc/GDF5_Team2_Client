@@ -151,3 +151,46 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
     }
     return null;
 }
+
+EntityFactory.createTree = function (tilePos, mode) {
+    let typeID = GameConfig.ENTITY_ID.TREE;
+    let entity = this._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+
+    let node = new cc.Node();
+    let sp = new cc.Sprite(BattleResource.OBSTACLE_IMG_2);
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "").node;
+    hpBarNode.setPosition(cc.p(0, 50));
+    node.addChild(sp, 1, "tree");
+    node.addChild(hpBarNode, 1, "hp");
+
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 80, 100);
+
+    entity.addComponent(appearanceComponent)
+        .addComponent(positionComponent)
+        .addComponent(lifeComponent);
+
+    return entity;
+}
+
+EntityFactory.createHole = function (tilePos, mode) {
+    let typeID = GameConfig.ENTITY_ID.HOLE;
+    let entity = this._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+
+    let node = new cc.Node();
+    let sp = new cc.Sprite(BattleResource.HOLE_IMG);
+    node.addChild(sp, 1, "hole");
+
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+
+    entity.addComponent(appearanceComponent)
+        .addComponent(positionComponent);
+
+    return entity;
+}

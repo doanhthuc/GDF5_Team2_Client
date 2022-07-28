@@ -14,11 +14,7 @@ let AppearanceComponent = Component.extend({
         this.mode = mode;
         this.sprite.setVisible(true);
 
-        if (mode === GameConfig.PLAYER) {
-            BattleManager.getInstance().getBattleLayer().getPlayerMapNode().addChild(this.sprite, this.zOrder);
-        } else if (mode === GameConfig.OPPONENT) {
-            BattleManager.getInstance().getBattleLayer().getOpponentMapNode().addChild(this.sprite, this.zOrder);
-        }
+        BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(this.sprite, this.zOrder);
 
         if (initPos) {
             this.iniPos = initPos;

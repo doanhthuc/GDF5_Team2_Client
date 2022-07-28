@@ -76,6 +76,8 @@ GameConfig.ENTITY_ID = {
     BULLET: 20,
     SLOW_BULLET: 21,
     WIZARD_BULLET: 22,
+    TREE: 23,
+    HOLE: 24,
 }
 
 GameConfig.GROUP_ID = {
