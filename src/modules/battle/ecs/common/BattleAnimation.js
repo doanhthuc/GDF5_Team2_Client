@@ -49,7 +49,6 @@ BattleAnimation.animationBornMonster = function (entity) {
         // FIXME: hardcode sprite name
         let childSprite = appearanceComponent.sprite.getChildByName("monster");
         if (childSprite) {
-            cc.log("Animation Born");
             let spine = new sp.SkeletonAnimation("textures/monster/fx/fx_boss_demon_tree.json", "textures/monster/fx/fx_boss_demon_tree.atlas");
             childSprite.addChild(spine);
             spine.setPosition(cc.p(childSprite.width / 2, childSprite.height / 2));
@@ -65,7 +64,6 @@ BattleAnimation.addAnimationUnderGround = function (entity) {
         // FIXME: hardcode sprite name
         let childSprite = appearanceComponent.sprite.getChildByName("monster");
         if (childSprite) {
-            cc.log("Animation Under ground");
             let spine = new sp.SkeletonAnimation("textures/monster/fx/fx_boss_stone_monster.json", "textures/monster/fx/fx_boss_stone_monster.atlas");
             childSprite.addChild(spine, 1, UNDER_GROUND_TAG);
             spine.setPosition(cc.p(childSprite.width / 2, childSprite.height / 2));
@@ -103,7 +101,6 @@ BattleAnimation.removeAnimationUnderGround = function (entity) {
         let childSprite = appearanceComponent.sprite.getChildByName("monster");
         if (childSprite) {
             childSprite.removeChildByTag(UNDER_GROUND_TAG);
-            cc.error("Remove here")
 
             // show monster
             childSprite.setOpacity(255);
@@ -117,8 +114,7 @@ BattleAnimation.addAnimationHealing = function (entity) {
     if (appearanceComponent && appearanceComponent.sprite) {
         let childNode = appearanceComponent.sprite;
         if (childNode) {
-            cc.log("Animation Healing");
-            let spine = new sp.SkeletonAnimation("/textures/monster/fx/fx_boss_jungle_god.json", "/textures/monster/fx/fx_boss_jungle_god.atlas");
+            let spine = new sp.SkeletonAnimation("textures/monster/fx/fx_boss_jungle_god.json", "textures/monster/fx/fx_boss_jungle_god.atlas");
             childNode.addChild(spine, 0);
             spine.setAnimation(0, "fx_back", true);
             spine.setPosition(cc.p(childNode.width / 2, childNode.height / 2));
@@ -132,7 +128,6 @@ BattleAnimation.addAnimationHitSlowEffect = function (entity) {
     if (appearanceComponent && appearanceComponent.sprite) {
         let childSprite = appearanceComponent.sprite.getChildByName("monster");
         if (childSprite) {
-            cc.log("Animation Slow");
             let spine = new sp.SkeletonAnimation("textures/tower/fx/tower_oil_fx.json", "textures/tower/fx/tower_oil_fx.atlas");
             spine.setPosition(cc.p(childSprite.width / 2, childSprite.height / 2));
             spine.setAnimation(0, "hit_target_bullet", false);
