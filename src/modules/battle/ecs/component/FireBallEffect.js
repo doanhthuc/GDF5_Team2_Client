@@ -1,5 +1,5 @@
-let AccelerationComponent = Component.extend({
-    name: "AccelerationComponent",
+let FireBallEffect = Component.extend({
+    name: "FireBallEffect",
     typeID: GameConfig.COMPONENT_ID.ACCELERATION,
 
     ctor: function (a, maxDuration, startPos, endPos, V0) {
@@ -17,7 +17,7 @@ let AccelerationComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(AccelerationComponent, this.a, this.maxDuration,
+        return ComponentFactory.create(FireBallEffect, this.a, this.maxDuration,
             this.startPos, this.endPos, this.V0);
     },
 
@@ -26,9 +26,9 @@ let AccelerationComponent = Component.extend({
         this.y += otherAcceleration.y;
     },
 });
-AccelerationComponent.typeID = GameConfig.COMPONENT_ID.ACCELERATION;
-ComponentManager.getInstance().registerClass(AccelerationComponent);
+FireBallEffect.typeID = GameConfig.COMPONENT_ID.ACCELERATION;
+ComponentManager.getInstance().registerClass(FireBallEffect);
 
-AccelerationComponent.calculateSpeed = function (speedX, speedY) {
+FireBallEffect.calculateSpeed = function (speedX, speedY) {
     return Math.sqrt(Math.pow(speedX, 2) + Math.pow(speedY, 2));
 }

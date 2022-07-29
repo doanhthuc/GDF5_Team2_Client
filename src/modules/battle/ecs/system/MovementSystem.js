@@ -14,7 +14,7 @@ let MovementSystem = System.extend({
             let positionComponent = entity.getComponent(PositionComponent);
             let velocityComponent = entity.getComponent(VelocityComponent);
             let appearanceComponent = entity.getComponent(AppearanceComponent);
-            let accelerationComponent = entity.getComponent(AccelerationComponent);
+            let fireballEffect = entity.getComponent(FireBallEffect);
 
             if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive()) {
                 let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
@@ -23,16 +23,18 @@ let MovementSystem = System.extend({
                 velocityComponent.speedY = newVelocity.speedY;
             }
 
-            if (accelerationComponent && velocityComponent) {
-                if (accelerationComponent.accTime < accelerationComponent.maxDuration) {
-                    accelerationComponent.accTime += tick;
-                    let newSpeed = (-1) * accelerationComponent.a * accelerationComponent.accTime + accelerationComponent.V0;
-                    let newVelocity = Utils.calculateVelocityVector(accelerationComponent.startPos, accelerationComponent.endPos, newSpeed);
+
+            // start handle fireball effect
+            if (fireballEffect && velocityComponent) {
+                if (fireballEffect.accTime < fireballEffect.maxDuration) {
+                    fireballEffect.accTime += tick;
+                    let newSpeed = (-1) * fireballEffect.a * fireballEffect.accTime + fireballEffect.V0;
+                    let newVelocity = Utils.calculateVelocityVector(fireballEffect.startPos, fireballEffect.endPos, newSpeed);
                     velocityComponent.speedX = newVelocity.speedX;
                     velocityComponent.speedY = newVelocity.speedY;
 
                 } else {
-                    entity.removeComponent(AccelerationComponent);
+                    entity.removeComponent(FireBallEffect);
                     if (ValidatorECS.isMonster(entity)) {
                         let monsterPos = entity.getComponent(PositionComponent);
                         if (monsterPos) {
@@ -55,21 +57,29 @@ let MovementSystem = System.extend({
                     }
                 }
             }
+            // end handle fireball effect
 
             if (velocityComponent.getActive()) {
                 let moveDistanceX = velocityComponent.speedX * tick;
                 let moveDistanceY = velocityComponent.speedY * tick;
+
                 let tmpPos = {};
                 tmpPos.x = positionComponent.x + moveDistanceX;
                 tmpPos.y = positionComponent.y + moveDistanceY;
 
-                if (ValidatorECS.isMonster(entity)) {
-                    let tilePos = Utils.pixel2Tile(tmpPos.x, tmpPos.y, entity.mode);
+                // only update position of monster when the future position is valid
+                if (ValidatorECS.isMonster(entity) && entity.getComponent(FireBallEffect)) {
+                    let currentTilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
+                    let futureTilePos = Utils.pixel2Tile(tmpPos.x, tmpPos.y, entity.mode);
                     let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
-                    if ((!Utils.validateTilePos(tilePos, entity.mode))
-                        || (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x]  === GameConfig.MAP.TOWER)
-                        || (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x]  === GameConfig.MAP.TREE)) {
-
+                    if (Utils.validateTilePos(currentTilePos, entity.mode)
+                        && (
+                            !Utils.validateTilePos(futureTilePos, entity.mode)
+                            || (map[GameConfig.MAP_HEIGH - 1 - futureTilePos.y][futureTilePos.x]  === GameConfig.MAP.TOWER)
+                            || (map[GameConfig.MAP_HEIGH - 1 - futureTilePos.y][futureTilePos.x]  === GameConfig.MAP.TREE)
+                        )
+                    ) {
+                        // position is invalid
                     } else {
                         positionComponent.x = tmpPos.x;
                         positionComponent.y = tmpPos.y;

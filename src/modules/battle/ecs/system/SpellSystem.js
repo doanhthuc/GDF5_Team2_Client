@@ -60,10 +60,10 @@ let SpellSystem = System.extend({
                                     oldVelocity.speedY = newVectorVelocity.speedY;
 
 
-                                    let acceleration = ComponentFactory.create(AccelerationComponent,
+                                    let fireballEffect = ComponentFactory.create(FireBallEffect,
                                         A, T, cc.p(spellPos.x, spellPos.y), cc.p(monsterPos.x, monsterPos.y), V0);
 
-                                    monster.addComponent(acceleration);
+                                    monster.addComponent(fireballEffect);
                                     monster.removeComponent(PathComponent);
                                 }
                             }
