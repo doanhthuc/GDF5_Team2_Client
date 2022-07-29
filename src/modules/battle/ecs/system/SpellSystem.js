@@ -52,19 +52,15 @@ let SpellSystem = System.extend({
                                         monsterPos,
                                         V0
                                     );
-                                    oldVelocity.reset(newVectorVelocity.speedX, newVectorVelocity.speedY);
+                                    oldVelocity.speedX = newVectorVelocity.speedX;
+                                    oldVelocity.speedY = newVectorVelocity.speedY;
 
 
                                     let acceleration = ComponentFactory.create(AccelerationComponent,
                                         A, T, cc.p(spellPos.x, spellPos.y), cc.p(monsterPos.x, monsterPos.y), V0);
 
-                                    cc.log("acceleration = " + JSON.stringify(acceleration))
-                                    cc.log("new velocity: " + JSON.stringify(oldVelocity));
-
                                     monster.addComponent(acceleration);
-
                                     monster.removeComponent(PathComponent);
-                                    cc.warn("**ABCxx")
                                 }
                             }
                         }

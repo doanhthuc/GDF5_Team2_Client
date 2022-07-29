@@ -23,13 +23,65 @@ let MovementSystem = System.extend({
                 velocityComponent.speedY = newVelocity.speedY;
             }
 
+            if (accelerationComponent && velocityComponent) {
+                if (accelerationComponent.accTime < accelerationComponent.maxDuration) {
+                    accelerationComponent.accTime += tick;
+                    let newSpeed = (-1) * accelerationComponent.a * accelerationComponent.accTime + accelerationComponent.V0;
+                    let newVelocity = Utils.calculateVelocityVector(accelerationComponent.startPos, accelerationComponent.endPos, newSpeed);
+                    velocityComponent.speedX = newVelocity.speedX;
+                    velocityComponent.speedY = newVelocity.speedY;
+
+                } else {
+                    entity.removeComponent(AccelerationComponent);
+                    if (ValidatorECS.isMonster(entity)) {
+                        let monsterPos = entity.getComponent(PositionComponent);
+                        if (monsterPos) {
+                            let tilePos = Utils.pixel2Tile(monsterPos.x, monsterPos.y, entity.mode);
+                            if (!Utils.validateTilePos(tilePos)) continue;
+                            let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
+                            if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE) {
+                                let lifeComponent = entity.getComponent(LifeComponent);
+                                lifeComponent.hp = 0;
+                            } else {
+                                let shortestPathForEachTile = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(entity.mode);
+                                let pathTile = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+                                let newPath = ComponentFactory.create(PathComponent, pathTile, entity.mode);
+                                entity.addComponent(newPath);
+                            }
+                        }
+                        let velocityComp = entity.getComponent(VelocityComponent);
+                        velocityComp.speedX = velocityComp.originSpeedX;
+                        velocityComp.speedY = velocityComp.originSpeedY;
+                    }
+                }
+            }
+
             if (velocityComponent.getActive()) {
                 let moveDistanceX = velocityComponent.speedX * tick;
                 let moveDistanceY = velocityComponent.speedY * tick;
-                positionComponent.x += moveDistanceX;
-                positionComponent.y += moveDistanceY;
-                let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
-                positionComponent.moveDistance += moveDistance;
+                let tmpPos = {};
+                tmpPos.x = positionComponent.x + moveDistanceX;
+                tmpPos.y = positionComponent.y + moveDistanceY;
+
+                if (ValidatorECS.isMonster(entity)) {
+                    let tilePos = Utils.pixel2Tile(tmpPos.x, tmpPos.y, entity.mode);
+                    let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
+                    if ((!Utils.validateTilePos(tilePos, entity.mode))
+                        || (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x]  === GameConfig.MAP.TOWER)
+                        || (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x]  === GameConfig.MAP.TREE)) {
+
+                    } else {
+                        positionComponent.x = tmpPos.x;
+                        positionComponent.y = tmpPos.y;
+                        let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
+                        positionComponent.moveDistance += moveDistance;
+                    }
+                } else {
+                    positionComponent.x = tmpPos.x;
+                    positionComponent.y = tmpPos.y;
+                    let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
+                    positionComponent.moveDistance += moveDistance;
+                }
             }
 
             if (velocityComponent && appearanceComponent) {
@@ -39,33 +91,6 @@ let MovementSystem = System.extend({
                     if (sprite.getActionByTag(0)) {
                         sprite.getActionByTag(0).setSpeed(speed / 50);
                     }
-                }
-            }
-
-            if (accelerationComponent && velocityComponent) {
-                if (accelerationComponent.accTime < accelerationComponent.maxDuration) {
-                    accelerationComponent.accTime += tick;
-                    let newSpeed = (-1) * accelerationComponent.a * accelerationComponent.accTime + accelerationComponent.V0;
-                    let newVelocity = Utils.calculateVelocityVector(accelerationComponent.startPos, accelerationComponent.endPos, newSpeed);
-                    velocityComponent.speedX = newVelocity.speedX;
-                    velocityComponent.speedY = newVelocity.speedY;
-                    cc.log("new speed = " + VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY));
-
-                } else {
-                    entity.removeComponent(AccelerationComponent);
-                    entity.removeComponent(VelocityComponent);
-                    // if (ValidatorECS.isMonster(entity)) {
-                    //     let monsterPos = entity.getComponent(PositionComponent);
-                    //     if (monsterPos) {
-                    //         let tilePos = Utils.pixel2Tile(monsterPos.x, monsterPos.y, entity.mode);
-                    //         if (!Utils.validateTilePos(tilePos)) continue;
-                    //         let shortestPathForEachTile = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(entity.mode);
-                    //         let pathTile = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
-                    //         let newPath = ComponentFactory.create(PathComponent, pathTile, entity.mode);
-                    //         entity.addComponent(newPath);
-                    //     }
-                    // }
-                    cc.warn("remove acc, vel")
                 }
             }
         }

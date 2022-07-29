@@ -12,6 +12,15 @@ let RenderSystem = System.extend({
         for (let entity of entityList) {
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
+
+            if (ValidatorECS.isMonster(entity)) {
+                let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
+                if (tilePos.x === 2 && tilePos.y === 3) {
+                    let lifeComponent = entity.getComponent(LifeComponent);
+                    lifeComponent.hp = 0;
+                }
+            }
+
             appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
             appearanceComponent.sprite.setLocalZOrder(10000 - positionComponent.y);
 
