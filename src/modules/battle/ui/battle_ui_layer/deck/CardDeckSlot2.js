@@ -23,6 +23,8 @@ const CardDeckSlot2 = cc.Node.extend({
         this.energyNode = rootNode.getChildByName("energy");
         this.cardImgSprite = rootNode.getChildByName("entity_image");
         this.addChild(rootNode);
+
+        this.cardBackgroundBtn.setSwallowTouches(false);
     },
 
     setCardType: function (cardType) {

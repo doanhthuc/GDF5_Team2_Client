@@ -228,12 +228,13 @@ let BattleLayer = cc.Layer.extend({
         } else if (ValidatorECS.isTrap(type)) {
             EntityFactory.createTrap(tilePos, mode);
             EventDispatcher.getInstance()
-                .dispatchEvent(EventType.PUT_TRAP, {tilePos: tilePos, mode: mode});
+                .dispatchEvent(EventType.PUT_TRAP, {cardId: type, tilePos: tilePos, mode: mode});
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTrap(tilePos);
         } else if (ValidatorECS.isTower(type)) {
+            cc.log("fdbhdpibhfpihsbpirebbpehprewb")
             this.putTowerCardIntoMap(type, tilePos, mode);
         }
-
+        // BattleManager.getInstance().getCardDeckNode().onCardPutIntoMap(type);
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
@@ -241,7 +242,7 @@ let BattleLayer = cc.Layer.extend({
         if (GameConfig.NETWORK) {
             if (this.shouldUpgradeTower(type, tilePos)) {
                 EventDispatcher.getInstance()
-                    .dispatchEvent(EventType.UPGRADE_TOWER, {towerId: type, pos: tilePos});
+                    .dispatchEvent(EventType.UPGRADE_TOWER, {cardId: type, pos: tilePos, mode: mode});
                 return;
             }
         }
@@ -347,8 +348,10 @@ let BattleLayer = cc.Layer.extend({
                 if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
                     let pixelPos = touches[0].getLocation();
                     let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
+                    let selectedCardType = BattleManager.getInstance().getBattleLayer().selectedCard
                     BattleManager.getInstance().getBattleLayer()
-                        .putCardAt(BattleManager.getInstance().getBattleLayer().selectedCard, pixelInMap, GameConfig.PLAYER);
+                        .putCardAt(selectedCardType, pixelInMap, GameConfig.PLAYER);
+
                 }
             }
         }), this.uiLayer)

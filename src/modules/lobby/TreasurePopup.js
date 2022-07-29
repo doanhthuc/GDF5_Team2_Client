@@ -156,7 +156,7 @@ const TreasurePopup = cc.Node.extend({
                             return;
                         }
                     }
-                    if (user.gem < exchangeDurationToGem(this.claimTime - Date.now() + TimeUtil.getDeltaTime())) {
+                    if (user.gem < exchangeDurationToGem(this.claimTime - TimeUtil.getServerTime())) {
                         let notify = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOTIFY);
                         notify.setNotifyTxt('Không Đủ Gem');
                         notify.showNotify();
@@ -212,7 +212,7 @@ const TreasurePopup = cc.Node.extend({
 
     setCountDownString: function () {
         // let distance = claimTime - Date.now();
-        let distance = this.claimTime - Date.now() + TimeUtil.getDeltaTime();
+        let distance = this.claimTime - TimeUtil.getServerTime();
         this.speedUpGemTxt.setString(exchangeDurationToGem(distance));
         this.countdownTxt.setString(millisecondToTimeString(distance));
         if (distance < 0) {
