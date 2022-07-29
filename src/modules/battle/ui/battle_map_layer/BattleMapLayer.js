@@ -9,6 +9,14 @@ let BattleMapLayer = cc.Layer.extend({
         this.mapNode[GameConfig.PLAYER] = rootNode.getChildByName("player_map");
         this.mapNode[GameConfig.OPPONENT] = rootNode.getChildByName("opponent_map");
 
+        // river
+        // FIXME: hardcode
+        let riverSpine = new sp.SkeletonAnimation("res/textures/map/fx/ho_nuoc.json", "res/textures/map/fx/ho_nuoc.atlas");
+        riverSpine.setAnimation(0, "animation", true);
+        riverSpine.setAnchorPoint(cc.p(0.5, 0.5));
+        riverSpine.setPosition(0, -64);
+        rootNode.addChild(riverSpine, 0);
+
         rootNode.attr({
             x: cc.winSize.width / 2,
             y: (cc.winSize.height - BattleResource.DECK_CARD_HEIGHT) / 2 + BattleResource.DECK_CARD_HEIGHT
