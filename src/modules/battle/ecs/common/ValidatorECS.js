@@ -150,7 +150,6 @@ ValidatorECS.validatePositionPutCard = function (type, pixelPos, mode) {
                 if (checkMap[row][col] !== CHECK_MARK) continue;
 
                 let path = FindPathUtil.findShortestPath(clonedMap, cc.p(col, GameConfig.MAP_HEIGH - 1 - row), cc.p(GameConfig.HOUSE_POSITION.x, GameConfig.HOUSE_POSITION.y));
-                // cc.warn(JSON.stringify(path))
                 if (!path || path.length <= 0) {
                     return {error: true, msg: MSG_INVALID_TOWER};
                 }

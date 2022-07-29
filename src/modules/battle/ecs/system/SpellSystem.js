@@ -20,10 +20,52 @@ let SpellSystem = System.extend({
                 for (let monster of monsters) {
                     if (monster.mode === spellEntity.mode) {
                         let monsterPosition = monster.getComponent(PositionComponent)
+                        if (!monsterPosition) continue;
+
                         let distance = Utils.euclidDistance(monsterPosition, spellComponent.position)
                         if (distance <= spellComponent.range) {
                             for (let effect of spellComponent.effects) {
                                 monster.addComponent(effect.clone());
+
+                                if (spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
+                                    let oldVelocity = monster.getComponent(VelocityComponent);
+                                    let monsterInfo = monster.getComponent(MonsterInfoComponent);
+
+                                    if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) {
+                                        continue;
+                                    }
+
+                                    if (!(oldVelocity && monsterInfo)) {
+                                        continue;
+                                    }
+
+                                    let spellPos = spellComponent.position;
+                                    let monsterPos = monsterPosition;
+
+                                    const force = 3000;
+                                    const mass = monsterInfo.weight;
+                                    let A = 40 + force / mass;
+                                    cc.log("mass = " + mass);
+                                    cc.log("A = " + A);
+                                    let T = 1;
+                                    const V0 = Math.abs(A * T);
+
+
+                                    let newVectorVelocity = Utils.calculateVelocityVector(
+                                        spellPos,
+                                        monsterPos,
+                                        V0
+                                    );
+                                    oldVelocity.speedX = newVectorVelocity.speedX;
+                                    oldVelocity.speedY = newVectorVelocity.speedY;
+
+
+                                    let fireballEffect = ComponentFactory.create(FireBallEffect,
+                                        A, T, cc.p(spellPos.x, spellPos.y), cc.p(monsterPos.x, monsterPos.y), V0);
+
+                                    monster.addComponent(fireballEffect);
+                                    monster.removeComponent(PathComponent);
+                                }
                             }
                         }
                     }

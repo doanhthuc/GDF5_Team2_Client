@@ -103,7 +103,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
             .addComponent(spriteComponent);
         return entity;
     } else if (towerType === GameConfig.ENTITY_ID.BUNNY_TOWER) {
-        let typeID = GameConfig.ENTITY_ID.BULLET;
+        let typeID = GameConfig.ENTITY_ID.SLOW_BULLET;
         let entity = this._createEntity(typeID, mode);
 
         let node = new cc.Node();
@@ -128,14 +128,26 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
             .addComponent(spriteComponent);
         return entity;
     } else if (towerType === GameConfig.ENTITY_ID.WIZARD_TOWER) {
-        let typeID = GameConfig.ENTITY_ID.BULLET;
+        let typeID = GameConfig.ENTITY_ID.WIZARD_BULLET;
         let entity = this._createEntity(typeID, mode);
 
-        // NOTE: get component from pool
+        let node = new cc.Node();
+        // let particle = new cc.ParticleSystem("res/textures/tower/fx/wizard_particle_1.plist");
         let bulletNode = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_bullet_0000.png");
+        node.addChild(bulletNode, 1);
+        // node.addChild(particle, 22);
+
+        // particle.resetSystem();
+        // particle.setDuration(10)
+        // particle.setSpeed(200)
+        // particle.setBlendAdditive(true)
+        // particle.setPositionType(cc.ParticleSystem.TYPE_FREE);
+        // // particle.setScale(1, 1);
+        // particle.setPosition(cc.p(0, 0));
+
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "wizard", GameConfig.TILE_WIDTH);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
-        let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
+        let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 20, 20);
 
         let bulletSpeed = 3 * GameConfig.TILE_WIDTH;
@@ -150,4 +162,47 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         return entity;
     }
     return null;
+}
+
+EntityFactory.createTree = function (tilePos, mode) {
+    let typeID = GameConfig.ENTITY_ID.TREE;
+    let entity = this._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+
+    let node = new cc.Node();
+    let sp = new cc.Sprite(BattleResource.OBSTACLE_IMG_2);
+    let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "").node;
+    hpBarNode.setPosition(cc.p(0, 50));
+    node.addChild(sp, 1, "tree");
+    node.addChild(hpBarNode, 1, "hp");
+
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 80, 100);
+
+    entity.addComponent(appearanceComponent)
+        .addComponent(positionComponent)
+        .addComponent(lifeComponent);
+
+    return entity;
+}
+
+EntityFactory.createHole = function (tilePos, mode) {
+    let typeID = GameConfig.ENTITY_ID.HOLE;
+    let entity = this._createEntity(typeID, mode);
+
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+
+    let node = new cc.Node();
+    let sp = new cc.Sprite(BattleResource.HOLE_IMG);
+    node.addChild(sp, 1, "hole");
+
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
+    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+
+    entity.addComponent(appearanceComponent)
+        .addComponent(positionComponent);
+
+    return entity;
 }

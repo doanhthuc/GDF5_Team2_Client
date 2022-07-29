@@ -26,7 +26,8 @@ let BattleMapLayer = cc.Layer.extend({
         let map = this.battleData.getMap(mode);
         for (let r = 0; r < map.length; r++) {
             for (let c = 0; c < map[0].length; c++) {
-                let pos = Utils.tile2Pixel(c, GameConfig.MAP_HEIGH - 1 - r, mode);
+                let tilePos = cc.p(c, GameConfig.MAP_HEIGH - 1 - r);
+                let pos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
                 let texture = null;
 
                 switch (map[r][c]) {
@@ -40,11 +41,11 @@ let BattleMapLayer = cc.Layer.extend({
                         texture = BattleResource.ITEM_BUFF_DAMAGE_IMG;
                         break;
                     case GameConfig.MAP.TREE:
-                        texture = BattleResource.OBSTACLE_IMG_2;
-                        break;
+                        EntityFactory.createTree(tilePos, mode);
+                        continue;
                     case GameConfig.MAP.HOLE:
-                        texture = BattleResource.HOLE_IMG;
-                        break;
+                        EntityFactory.createHole(tilePos, mode);
+                        continue;
                     default:
                         continue;
                 }

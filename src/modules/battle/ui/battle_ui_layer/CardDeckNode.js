@@ -116,10 +116,8 @@ let CardDeckNode = cc.Node.extend({
         let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos)) === true;
 
         if (touchInCard) {
-            for (let i = 0; i < this.cardSlotManager.length; i++) {
-                cc.log("CardDeckNode.js line 120: isUp: " + this.cardSlotManager[i].isUp + " isClicked: " + this.cardSlotManager[i].isClicked + " id: " + this.cardSlotManager[i].id);
-            }
-            cc.log("\n\n");
+            // cc.log("CardDeckNode _onTouchBegan " + JSON.stringify(selectedCard));
+            this.selectedCard = selectedCard;
             if (selectedCard.isUp === false) {
                 this._moveCardUp(selectedCard);
                 // Select card

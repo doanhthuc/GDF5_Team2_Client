@@ -21,58 +21,70 @@ let SpriteSheetAnimationSystem = System.extend({
                     let sprite = appearanceComponent.sprite.getChildByName(spriteName);
                     if (sprite) {
                         sprite.stopAllActions();
+
+                        let isShadow = stateAnim[spriteName].shadow;
+
+                        let shadowSprite = appearanceComponent.sprite.getChildByName(spriteName + "_shadow");
                         let actionArr = [];
 
                         if (stateAnim[spriteName].repeat) {
-                            let tmpSprite = sprite;
                             let tmpSpriteAnimation = stateAnim[spriteName].animation;
-                            let actionFuncCall = cc.callFunc(() => {
-                                tmpSprite.stopAllActions();
+                            let actionFuncCall = cc.callFunc((sender) => {
+                                sender.stopAllActions();
                                 let action =cc.speed(cc.repeatForever(cc.animate(tmpSpriteAnimation)), 1);
                                 action.setTag(0);
-                                tmpSprite.runAction(action);
+                                sender.runAction(action);
                             });
                             actionArr.push(actionFuncCall);
                         } else {
-                            let tmpSprite = sprite;
                             let tmpSpriteAnimation = stateAnim[spriteName].animation;
-                            let actionFuncCall = cc.callFunc(() => {
+                            let actionFuncCall = cc.callFunc((sender) => {
                                 let action =cc.speed(cc.animate(tmpSpriteAnimation), 1);
                                 action.setTag(0);
-                                tmpSprite.runAction(action);
+                                sender.runAction(action);
                             })
                             actionArr.push(actionFuncCall, cc.delayTime(stateAnim[spriteName].delay));
                         }
 
                         for (let stateAnimI of stateAnim[spriteName].sequenceAnimations) {
                             if (stateAnimI.repeat) {
-                                let actionFuncCall = cc.callFunc(() => {
-                                    sprite.stopAllActions();
+                                let actionFuncCall = cc.callFunc((sender) => {
+                                    sender.stopAllActions();
                                     let action =cc.speed(cc.repeatForever(cc.animate(stateAnimI.animation)), 1);
                                     action.setTag(0);
-                                    sprite.runAction(action);
+                                    sender.runAction(action);
                                 })
                                 actionArr.push(actionFuncCall);
                             } else {
-                                let tmpSprite = sprite;
                                 let tmpSpriteAnimation = stateAnimI.animation;
-                                let actionFuncCall = cc.callFunc(() => {
+                                let actionFuncCall = cc.callFunc((sender) => {
                                     let action =cc.speed(cc.animate(tmpSpriteAnimation), 1);
                                     action.setTag(0);
-                                    tmpSprite.runAction(action);
+                                    sender.runAction(action);
                                 })
                                 actionArr.push(actionFuncCall, cc.delayTime(stateAnimI.delay))
                             }
                         }
 
+                        let isFlipX = stateAnim[spriteName].flipX;
+
                         if (actionArr.length > 0) {
                             sprite.runAction(cc.sequence(...actionArr));
+                            if (shadowSprite) {
+                                shadowSprite.runAction(cc.sequence(...actionArr).clone());
+                            }
                         }
 
-                        if (stateAnim[spriteName].flipX) {
+                        if (isFlipX) {
                             sprite.setFlippedX(true);
+                            if (shadowSprite) {
+                                shadowSprite.setFlippedX(true);
+                            }
                         } else {
                             sprite.setFlippedX(false);
+                            if (shadowSprite) {
+                                shadowSprite.setFlippedX(false);
+                            }
                         }
                     }
                 }
