@@ -31,6 +31,10 @@ let SpellSystem = System.extend({
                                     let oldVelocity = monster.getComponent(VelocityComponent);
                                     let monsterInfo = monster.getComponent(MonsterInfoComponent);
 
+                                    if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) {
+                                        continue;
+                                    }
+
                                     if (!(oldVelocity && monsterInfo)) {
                                         continue;
                                     }
