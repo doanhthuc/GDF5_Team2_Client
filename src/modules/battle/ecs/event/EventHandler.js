@@ -28,6 +28,7 @@ EventDispatcher.getInstance()
 
         map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
+        BattleManager.getInstance().getBattleData().setShortestPathForEachTile(shortestPathForEachTile, currentMode);
 
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
         for (let entity of entityList) {
@@ -51,6 +52,10 @@ EventDispatcher.getInstance()
                     }
                 }
             }
+        }
+
+        if (currentMode === GameConfig.PLAYER) {
+            BattleManager.getInstance().getBattleLayer().mapLayer.showPlayerMonsterPath();
         }
     })
     .addEventHandler(EventType.UPGRADE_TOWER, function (data) {
