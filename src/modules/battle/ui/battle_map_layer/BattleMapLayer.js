@@ -17,6 +17,15 @@ let BattleMapLayer = cc.Layer.extend({
         riverSpine.setPosition(0, -64);
         rootNode.addChild(riverSpine, 0);
 
+        // light
+        let lightSpinePlayer = new sp.SkeletonAnimation("res/textures/map/fx/as_duoi.json", "res/textures/map/fx/as_duoi.atlas");
+        lightSpinePlayer.setAnimation(0, "animation", true);
+        rootNode.addChild(lightSpinePlayer, 1);
+
+        let lightSpineOpponent = new sp.SkeletonAnimation("res/textures/map/fx/as_tren.json", "res/textures/map/fx/as_tren.atlas")
+        lightSpineOpponent.setAnimation(0, "animation", true);
+        rootNode.addChild(lightSpineOpponent, 1);
+
         rootNode.attr({
             x: cc.winSize.width / 2,
             y: (cc.winSize.height - BattleResource.DECK_CARD_HEIGHT) / 2 + BattleResource.DECK_CARD_HEIGHT
