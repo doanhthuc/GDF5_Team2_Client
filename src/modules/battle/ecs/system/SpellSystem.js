@@ -13,10 +13,10 @@ let SpellSystem = System.extend({
 
         for (let spellEntity of spellList) {
             let spellComponent = spellEntity.getComponent(SpellInfoComponent);
-            spellComponent.countdown = spellComponent.countdown - tick;
+            spellComponent.delay = spellComponent.delay - tick;
 
-            if (spellComponent.countdown <= 0) {
-                let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
+            if (spellComponent.delay <= 0) {
+                let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
                 for (let monster of monsters) {
                     if (monster.mode === spellEntity.mode) {
                         let monsterPosition = monster.getComponent(PositionComponent)

@@ -13,6 +13,7 @@ let RenderSystem = System.extend({
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
             appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
+            appearanceComponent.sprite.setLocalZOrder(10000 - positionComponent.y);
 
             // side effect
             this._updateHpBarMonsterUI(entity);
@@ -32,7 +33,7 @@ let RenderSystem = System.extend({
     },
 
     _updateHpBarMonsterUI: function (entity) {
-        if (Utils.isMonster(entity)) {
+        if (ValidatorECS.isMonster(entity)) {
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let lifeComponent = entity.getComponent(LifeComponent);
             if (appearanceComponent) {
@@ -42,7 +43,10 @@ let RenderSystem = System.extend({
                 if (hpNode) {
                     let hpProgressBar = hpNode.getChildByName("progress_bar");
                     hpProgressBar.setPercent(lifeComponent.hp / lifeComponent.maxHP * 100);
+                    if (hpProgressBar.getPercent() == 100) hpNode.setVisible(false);
+                    else hpNode.setVisible(true);
                 }
+
             }
         }
     },

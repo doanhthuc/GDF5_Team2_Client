@@ -5,6 +5,16 @@ gv.CMD.PUT_TOWER = 5002;
 gv.CMD.OPPONENT_PUT_TOWER = 5003;
 gv.CMD.GET_BATTLE_MAP_OBJECT = 5004;
 gv.CMD.GET_CELL_OBJECT = 5005;
+gv.CMD.UPGRADE_TOWER = 5006;
+gv.CMD.OPPONENT_UPGRADE_TOWER = 5007;
+gv.CMD.DROP_SPELL = 5008;
+gv.CMD.OPPONENT_DROP_SPELL = 5009;
+gv.CMD.CHANGE_TOWER_STRATEGY = 5010;
+gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY = 5011;
+gv.CMD.PUT_TRAP = 5012;
+gv.CMD.OPPONENT_PUT_TRAP = 5013;
+gv.CMD.DESTROY_TOWER = 5014;
+gv.CMD.OPPONENT_DESTROY_TOWER = 5015;
 
 let BattleNetwork = BattleNetwork || {};
 
@@ -44,15 +54,95 @@ CMDPutTower = fr.OutPacket.extend({
         this.setCmdId(gv.CMD.PUT_TOWER);
     },
 
-    pack: function (roomId, towerId, tilePos, pixelPos) {
+    pack: function (roomId, towerId, tilePos) {
         this.packHeader();
         this.putInt(roomId);
         this.putInt(towerId);
-        // this.putInt(towerLevel);
         this.putInt(tilePos.x);
         this.putInt(tilePos.y);
+        this.updateSize();
+    }
+});
+
+CMDUpgradeTower = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.UPGRADE_TOWER);
+    },
+
+    pack: function (towerId, tilePos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(towerId);
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.updateSize();
+    }
+})
+
+CMDDropSpell = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.DROP_SPELL);
+    },
+
+    pack: function (spellId, pixelPos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(spellId);
         this.putDouble(pixelPos.x);
         this.putDouble(pixelPos.y);
+        this.updateSize();
+    }
+})
+
+CMDPutTrap = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.PUT_TRAP);
+    },
+
+    pack: function (tilePos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.updateSize();
+    },
+})
+
+CMDDestroyTower = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.DESTROY_TOWER);
+    },
+
+    pack: function (tilePos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.updateSize();
+    }
+})
+
+CMDChangeTowerStrategy = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.CHANGE_TOWER_STRATEGY);
+    },
+
+    pack: function (tilePos, strategy) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.putInt(strategy);
         this.updateSize();
     }
 });
@@ -123,8 +213,6 @@ BattleNetwork.packetMap[gv.CMD.PUT_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.x = this.getInt();
         this.y = this.getInt();
-        this.pixelX = this.getDouble();
-        this.pixelY = this.getDouble();
     }
 })
 
@@ -141,22 +229,49 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
     }
 });
 
+BattleNetwork.packetMap[gv.CMD.UPGRADE_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.towerId = this.getInt();
+        this.towerLevel = this.getInt();
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+})
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_UPGRADE_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.towerId = this.getInt();
+        this.towerLevel = this.getInt();
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+})
+
 BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
     ctor: function () {
         this._super();
     },
 
     readData: function () {
-        this.mapHeight = this.getInt();
-        this.mapWidth = this.getInt();
-        this.battleMapObject = this._unpackMapObject();
+        this.playerBattleMapObject = this._unpackMapObject();
+        this.opponentBattleMapObject = this._unpackMapObject();
     },
 
     _unpackMapObject: function () {
-        let mapObject = new Array(this.mapHeight);
-        for (let i = 0; i < this.mapHeight; i++) {
-            mapObject[i] = new Array(this.mapWidth);
-            for (let j = 0; j < this.mapWidth; j++) {
+        let mapHeight = this.getInt();
+        let mapWidth = this.getInt();
+        let mapObject = new Array(mapHeight);
+        for (let i = 0; i < mapHeight; i++) {
+            mapObject[i] = new Array(mapWidth);
+            for (let j = 0; j < mapWidth; j++) {
                 mapObject[i][j] = this._unpackCellObject();
 
             }
@@ -179,18 +294,18 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
 
     _unpackObjectInCell: function (cellObject) {
         switch (cellObject.objectInCellType) {
-            case 1:
+            case ObjectInCellType.TREE:
                 cellObject.tree = {
                     hp: this.getDouble()
                 }
                 break;
-            case 2:
+            case ObjectInCellType.TOWER:
                 cellObject.tower = {
-                    towerId: this.getInt(),
-                    towerLevel: this.getInt(),
+                    id: this.getInt(),
+                    level: this.getInt(),
                 }
                 break;
-            case 3:
+            case ObjectInCellType.PIT:
                 cellObject.pit = this.getInt();
                 break;
             default:
@@ -198,3 +313,96 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
         }
     }
 })
+
+BattleNetwork.packetMap[gv.CMD.DROP_SPELL] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.spellId = this.getInt();
+        this.spellLevel = this.getInt();
+        this.pixelX = this.getDouble();
+        this.pixelY = this.getDouble();
+    }
+})
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_DROP_SPELL] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.spellId = this.getInt();
+        this.spellLevel = this.getInt();
+        this.pixelX = this.getDouble();
+        this.pixelY = this.getDouble();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.PUT_TRAP] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tilePosX = this.getInt();
+        this.tilePosY = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TRAP] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+    readData: function () {
+        this.tilePosX = this.getInt();
+        this.tilePosY = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.CHANGE_TOWER_STRATEGY] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+        this.strategyId = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+        this.strategyId = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.DESTROY_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_DESTROY_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+});

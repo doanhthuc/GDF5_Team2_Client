@@ -3,6 +3,9 @@ let BattleUILayer = cc.Layer.extend({
         this._super();
 
         this.battleData = battleData;
+        let fakeBattleDeckData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        this.cardDeckListData = new CardDeckListData(fakeBattleDeckData);
+        // this.battleData.setCards(this.cardDeckListData.getFirst4CardId(), GameConfig.PLAYER);
 
         this.twoPlayerInfoLayer = new TwoPlayerInfoLayer(BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.PLAYER)
             , BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.OPPONENT));
@@ -17,10 +20,11 @@ let BattleUILayer = cc.Layer.extend({
         this._showHouseEnergy();
         this._showPlayerInfo();
         this._showBackButton();
+        this._initNotification();
     },
 
     _showDeckCard: function () {
-        this.cardDeckNode = new CardDeckNode();
+        this.cardDeckNode = new CardDeckNode2(this.cardDeckListData);
         this.cardDeckNode.x = this.width / 2;
         this.cardDeckNode.y = this.cardDeckNode.height / 2;
         this.addChild(this.cardDeckNode);
@@ -70,6 +74,35 @@ let BattleUILayer = cc.Layer.extend({
 
     stopTimer: function () {
         this.timerNode.endTimer();
+    },
+
+    _initNotification: function () {
+        this.notificationNode = new NotificationNode(cc.winSize.width);
+        this.notificationNode.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        this.notificationNode.hide();
+        this.addChild(this.notificationNode);
+    },
+
+    notify: function (txt) {
+        this.notificationNode.setText(txt);
+        this.notificationNode.show();
+        setTimeout(() => {
+            this.notificationNode.hide();
+        }, 2000);
+    },
+
+    /**
+     * Show target strategy selection of tower
+     * @param x tile pos of player map
+     * @param y tile pos of player map
+     */
+    showTargetCircle: function (x, y) {
+        let circleNode = new CircleTarget();
+        let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
+        pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
+        circleNode.setPosition(pixelPos);
+        circleNode.setTowerTilePos(x, y);
+        this.addChild(circleNode, 100);
     },
 
     _backToLobby: function () {

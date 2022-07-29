@@ -2,8 +2,11 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
         uiLayer.waveNode.increaseWave();
-        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
-        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
+        BattleManager.getInstance().getBattleData().increaseWave();
+        // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.PLAYER);
+        // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.OPPONENT);
+        // BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
+        // BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
         BattleManager.getInstance().getBattleLayer().stopGame();
@@ -14,6 +17,7 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let tilePos = data.pos;
         let currentMode = data.mode;
+        let cardId = data.cardId;
         let map = BattleManager.getInstance().getBattleData().getMap(currentMode);
 
         if (!Utils.validateTilePos(tilePos)) {
@@ -25,9 +29,9 @@ EventDispatcher.getInstance()
         map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
 
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent);
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
         for (let entity of entityList) {
-            if (entity.mode === currentMode) {
+            if (entity.mode === currentMode && entity.typeID!=GameConfig.ENTITY_ID.BAT) {
                 let pathComponent = entity.getComponent(PathComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {
@@ -37,7 +41,10 @@ EventDispatcher.getInstance()
                         if (path.length > 0) {
                             // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
                             // newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
-                            let newPath = Utils.tileArray2PixelArray(path, currentMode);
+                            let newPath = Utils.tileArray2PixelCellArray(path, currentMode);
+                            //newPath = newPath.slice(1, newPath.length);
+                            //newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
+                            //cc.log(JSON.stringify(newPath))
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
                         }
@@ -45,4 +52,10 @@ EventDispatcher.getInstance()
                 }
             }
         }
+    })
+    .addEventHandler(EventType.UPGRADE_TOWER, function (data) {
+        let towerId = data.towerId;
+        let tilePos = data.pos;
+        BattleNetwork.connector.sendUpgradeTower(towerId, tilePos);
+        cc.log('[EventHandler.js line 52 ]Upgrade tower event data: ' + JSON.stringify(data));
     })

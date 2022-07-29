@@ -21,14 +21,27 @@ let AttackComponent = Component.extend({
         // this.effects.push(new DamageEffect(this._damage));
     },
 
+    setSpeed: function (speed) {
+        this.speed = speed;
+    },
+
     getDamage: function () {
         return this._damage;
+    },
+
+    getTargetStrategy: function () {
+        return this.targetStrategy;
+    },
+
+    setTargetStrategy: function (targetStrategy) {
+        this.targetStrategy = targetStrategy;
     },
 
     reset: function (damage, targetStrategy, range, speed, countdown, effects) {
         this.originDamage = damage;
         this._damage = damage;
         this.targetStrategy = targetStrategy;
+        this.originRange = range;
         this.range = range;
         this.originSpeed = speed;
         this.speed = speed;

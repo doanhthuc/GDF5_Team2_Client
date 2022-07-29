@@ -11,7 +11,7 @@ let AttackSystem = System.extend({
         let towerList = EntityManager.getInstance()
             .getEntitiesHasComponents(AttackComponent);
         let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(MonsterInfoComponent);
+            .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
 
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
@@ -23,22 +23,33 @@ let AttackSystem = System.extend({
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
-                    if (monster.getActive() && monster.mode === tower.mode) {
-                        let distance = this._distanceFrom(tower, monster);
-                        if (distance <= attackComponent.range) {
-                            monsterInAttackRange.push(monster);
+                    let underGroundComponent = monster.getComponent(UnderGroundComponent);
+                    if ((underGroundComponent == null) || underGroundComponent.isInGround === false) {
+                        if (monster.getActive() && monster.mode === tower.mode
+                            && monster.hasAllComponent(PositionComponent)) {
+                            let distance = this._distanceFrom(tower, monster);
+                            if (distance <= attackComponent.range) {
+                                monsterInAttackRange.push(monster);
+                            }
                         }
                     }
                 }
                 if (monsterInAttackRange.length > 0) {
                     // TODO: switch case target_strategy here
-                    let targetMonster = this._findTargetMonsterByStrategy(attackComponent.targetStrategy, monsterInAttackRange);
+                    let towerPos = tower.getComponent(PositionComponent);
+                    let targetMonster = this._findTargetMonsterByStrategy(towerPos, attackComponent.targetStrategy, monsterInAttackRange);
                     if (targetMonster != null) {
                         let monsterPos = targetMonster.getComponent(PositionComponent);
-                        let towerPos = tower.getComponent(PositionComponent);
+                        this._changeTowerAnimation(tower, targetMonster);
 
-                        EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode);
-                        // reset count down time
+                        if (tower.typeID === GameConfig.ENTITY_ID.FROG_TOWER) {
+                            let distance = this._distanceFrom(tower, targetMonster);
+                            let k = attackComponent.range / distance;
+                            let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
+                            EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode);
+                        } else {
+                            EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode)
+                        }
                         attackComponent.countdown = attackComponent.speed;
                     }
                 }
@@ -52,40 +63,76 @@ let AttackSystem = System.extend({
         return Utils.euclidDistance(towerPos, monsterPos);
     },
 
-    _findTargetMonsterByStrategy: function (strategy, monsterInAttackRange) {
+    _findTargetMonsterByStrategy: function (towerPos, strategy, monsterInAttackRange) {
         //check DarkGiantBoss
         for (let monster of monsterInAttackRange) {
-            if (monster.typeID == GameConfig.ENTITY_ID.DARK_GIANT) return monster;
+            if (monster.typeID === GameConfig.ENTITY_ID.DARK_GIANT) return monster;
         }
-        for (let monster of monsterInAttackRange) {
-            let underGroundComponent = monster.getComponent(UnderGroundComponent);
-            if ((!(underGroundComponent) || underGroundComponent.isInGround === false)) return monster;
-        }
+        // return monsterInAttackRange[0];
         let targetMonster = null;
+        let monsterIndex = -1;
         switch (strategy) {
-            case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP:
-                let maxHP = -1;
-                let maxIdx = -1;
-                for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterInfo = monsterInAttackRange[i].getComponent(MonsterInfoComponent);
-                    if (monsterInfo.hp > maxHP) {
-                        maxHP = monsterInfo.hp;
-                        maxIdx = i;
-                    }
-                }
-                targetMonster = monsterInAttackRange[maxIdx];
+            case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
+                cc.log("[AttackSystem] find target by max hp");
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    return monsterHP > monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
-            case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP:
+            }
+            case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP: {
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    return monsterHP < monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
+            }
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE:
+            {
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterPos = cur.getComponent(PositionComponent);
+                    let distance = Utils.euclidDistance(towerPos, monsterPos);
+                    return distance > monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
-            case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE:
+            }
+            case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE: {
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterPos = cur.getComponent(PositionComponent);
+                    let distance = Utils.euclidDistance(towerPos, monsterPos);
+                    return distance < monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
+            }
             default:
                 // TODO: create custom error type
                 throw new Error("Invalid strategy");
         }
         return targetMonster;
+    },
+
+    _changeTowerAnimation: function (tower, monster) {
+        let monsterPos = monster.getComponent(PositionComponent);
+        let towerPos = tower.getComponent(PositionComponent)
+
+        let deg = Utils.calcSlopeOfLine({x: towerPos.x, y: towerPos.y}, {x: monsterPos.x, y: monsterPos.y});
+        let directionDegree = [0, 25, 50, 75, 90, 115, 140, 165, 180, 205, 230, 255, 270, 295, 320, 345];
+        let minValue = Math.abs(deg - directionDegree[0]), minIdx = 0;
+        for (let i = 1; i < directionDegree.length; i++) {
+            if (Math.abs(deg - directionDegree[i]) < minValue) {
+                minIdx = i;
+                minValue = Math.abs(deg - directionDegree[i]);
+            }
+        }
+
+        let spriteComponent = tower.getComponent(SpriteSheetAnimationComponent);
+        if (spriteComponent) {
+            spriteComponent.changeCurrentState("ATTACK_" + directionDegree[minIdx]);
+        }
     }
 });
 AttackSystem.typeID = GameConfig.SYSTEM_ID.ATTACK;

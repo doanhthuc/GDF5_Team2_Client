@@ -16,6 +16,13 @@ FindPathUtil.create2DMatrix = function (numRow, numCol, defaultValue) {
     return matrix;
 }
 
+/**
+ *
+ * @param map
+ * @param startt {cc.p} tile position
+ * @param destt {cc.p} tile position
+ * @returns {{x, y: number}[]|null}
+ */
 FindPathUtil.findShortestPath = function (map, startt, destt) {
     // convert tile
     let start = {x: startt.x, y: GameConfig.MAP_HEIGH - 1 - startt.y}
@@ -105,10 +112,14 @@ FindPathUtil.findShortestPathForEachTile = function (mode) {
         cc.log(str);
     }
 
+    function findPathAble(x) {
+        return (x === GameConfig.MAP.NONE || x === GameConfig.MAP.ATTACK_DAMAGE || x === GameConfig.MAP.ATTACK_RANGE || x === GameConfig.MAP.ATTACK_SPEED);
+    }
+
     for (let row = 0; row < map.length; row++) {
         for (let col = 0; col < map[0].length; col++) {
-            if (map[row][col] === 0) {
-                let path = FindPathUtil.findShortestPath(map, {x: col, y: 4-row}, {x: 6, y: 0});
+            if (findPathAble(map[row][col])) {
+                let path = FindPathUtil.findShortestPath(map, cc.p(col, GameConfig.MAP_HEIGH - 1 - row), cc.p(GameConfig.HOUSE_POSITION.x, GameConfig.HOUSE_POSITION.y));
                 if (path && path.length > 0) {
                     shortestPathForEachTiles[row][col] = path;
                 }

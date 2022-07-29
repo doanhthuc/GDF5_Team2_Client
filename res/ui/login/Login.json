@@ -29,8 +29,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 316.8,
-              "Y": 571.8624
+              "X": 317.3372,
+              "Y": 571.8625
             },
             "Scale": {
               "ScaleX": 1.0597,
@@ -41,17 +41,17 @@
             "PositionPercentXEnabled": true,
             "PositionPercentYEnabled": true,
             "PrePosition": {
-              "X": 0.495,
+              "X": 0.4958,
               "Y": 0.5034
             },
             "PreSize": {
               "X": 1.0,
               "Y": 1.0
             },
-            "LeftMargin": -3.2,
-            "RightMargin": 3.2,
-            "TopMargin": -3.8624,
-            "BottomMargin": 3.8624,
+            "LeftMargin": -2.6628,
+            "RightMargin": 2.6628,
+            "TopMargin": -3.8625,
+            "BottomMargin": 3.8625,
             "Tag": 604,
             "ActionTag": -51723058,
             "Size": {
@@ -113,6 +113,11 @@
             "ctype": "ImageViewObjectData"
           },
           {
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
             "FontSize": 20,
             "IsCustomSize": true,
             "LabelText": "",
@@ -124,12 +129,12 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 338.368,
-              "Y": 463.9424
+              "X": 312.26,
+              "Y": 461.33
             },
             "Scale": {
-              "ScaleX": 3.6072,
-              "ScaleY": 3.1764
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "CColor": {
               "R": 229,
@@ -137,41 +142,36 @@
               "B": 229
             },
             "IconVisible": false,
-            "PositionPercentXEnabled": true,
-            "PositionPercentYEnabled": true,
             "PrePosition": {
-              "X": 0.5287,
-              "Y": 0.4084
+              "X": 0.4879,
+              "Y": 0.4061
             },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
             "PreSize": {
-              "X": 0.1313,
-              "Y": 0.0202
+              "X": 0.625,
+              "Y": 0.0616
             },
-            "LeftMargin": 296.352,
-            "RightMargin": 259.616,
-            "TopMargin": 660.584,
-            "BottomMargin": 452.4688,
+            "LeftMargin": 112.26,
+            "RightMargin": 127.74,
+            "TopMargin": 639.67,
+            "BottomMargin": 426.33,
             "Tag": 606,
             "ActionTag": -394581719,
             "Size": {
-              "X": 84.032,
-              "Y": 22.9472
+              "X": 400.0,
+              "Y": 70.0
             },
             "Name": "TextField_1",
             "ctype": "TextFieldObjectData"
           },
           {
-            "FontSize": 22,
-            "ButtonText": "",
-            "TextColor": {
-              "R": 65,
-              "G": 65,
-              "B": 70
+            "FontSize": 24,
+            "ButtonText": "Đăng nhập",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
             },
+            "TextColor": {},
             "DisabledFileData": {
               "Type": "Default",
               "Path": "Default/Button_Disable.png",
@@ -209,12 +209,12 @@
               "ScaleY": 1.0
             },
             "Position": {
-              "X": 314.3037,
+              "X": 314.304,
               "Y": 375.5616
             },
             "Scale": {
-              "ScaleX": 2.3218,
-              "ScaleY": 0.7877
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "CColor": {},
             "IconVisible": false,
@@ -229,79 +229,21 @@
             "PercentWidthEnabled": true,
             "PercentHeightEnabled": true,
             "PreSize": {
-              "X": 0.3031,
+              "X": 0.5,
               "Y": 0.0977
             },
-            "LeftMargin": 217.3117,
-            "RightMargin": 228.7043,
+            "LeftMargin": 154.304,
+            "RightMargin": 165.696,
             "TopMargin": 760.4384,
-            "BottomMargin": 264.5745,
+            "BottomMargin": 264.5744,
             "Tag": 608,
             "ActionTag": 1298295327,
             "Size": {
-              "X": 193.984,
+              "X": 320.0,
               "Y": 110.9872
             },
             "Name": "Button_1",
             "ctype": "ButtonObjectData"
-          },
-          {
-            "FontResource": {
-              "Type": "Normal",
-              "Path": "textures/font/SVN-Avo bold.ttf",
-              "Plist": ""
-            },
-            "FontSize": 22,
-            "IsCustomSize": true,
-            "LabelText": "",
-            "PlaceHolderText": "Đăng nhập",
-            "MaxLengthText": 10,
-            "AnchorPoint": {
-              "ScaleX": 0.52,
-              "ScaleY": 0.519
-            },
-            "Position": {
-              "X": 317.3654,
-              "Y": 339.7778
-            },
-            "Scale": {
-              "ScaleX": 3.0038,
-              "ScaleY": 2.2867
-            },
-            "RotationSkewX": 0.4451,
-            "RotationSkewY": 0.4442,
-            "CColor": {
-              "R": 0,
-              "G": 0,
-              "B": 0
-            },
-            "IconVisible": false,
-            "PositionPercentXEnabled": true,
-            "PositionPercentYEnabled": true,
-            "PrePosition": {
-              "X": 0.4959,
-              "Y": 0.2991
-            },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
-            "PreSize": {
-              "X": 0.1937,
-              "Y": 0.0273
-            },
-            "LeftMargin": 252.8854,
-            "RightMargin": 263.1146,
-            "TopMargin": 781.3112,
-            "BottomMargin": 323.6888,
-            "Tag": 609,
-            "ActionTag": -1603028119,
-            "Size": {
-              "X": 124.0,
-              "Y": 31.0
-            },
-            "Name": "TextField_2",
-            "ctype": "TextFieldObjectData"
           },
           {
             "FileData": {
@@ -309,6 +251,7 @@
               "Path": "textures/lobby/lobby_box.png",
               "Plist": ""
             },
+            "Scale9Enable": true,
             "Scale9OriginX": 46,
             "Scale9OriginY": 13,
             "Scale9Width": 48,
@@ -318,41 +261,89 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 312.256,
-              "Y": 461.3296
+              "X": 312.26,
+              "Y": 461.33
             },
             "Scale": {
-              "ScaleX": 3.2772,
-              "ScaleY": 2.5673
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "CColor": {},
             "IconVisible": false,
-            "PositionPercentXEnabled": true,
-            "PositionPercentYEnabled": true,
             "PrePosition": {
               "X": 0.4879,
               "Y": 0.4061
             },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
             "PreSize": {
-              "X": 0.2188,
-              "Y": 0.0352
+              "X": 0.625,
+              "Y": 0.0616
             },
-            "LeftMargin": 242.24,
-            "RightMargin": 257.728,
-            "TopMargin": 654.6768,
-            "BottomMargin": 441.336,
+            "LeftMargin": 112.26,
+            "RightMargin": 127.74,
+            "TopMargin": 639.67,
+            "BottomMargin": 426.33,
             "Tag": 253,
             "ActionTag": -1659999984,
             "Size": {
-              "X": 140.032,
-              "Y": 39.9872
+              "X": 400.0,
+              "Y": 70.0
             },
             "Name": "Image_3",
             "ctype": "ImageViewObjectData"
+          },
+          {
+            "FontSize": 20,
+            "LabelText": "Team_2_DN",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Plist": ""
+            },
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 317.3823,
+              "Y": 43.735
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.4959,
+              "Y": 0.0385
+            },
+            "PreSize": {
+              "X": 0.2469,
+              "Y": 0.0238
+            },
+            "LeftMargin": 238.3823,
+            "RightMargin": 243.6177,
+            "TopMargin": 1078.765,
+            "BottomMargin": 30.235,
+            "Tag": 11,
+            "ActionTag": -549485077,
+            "Size": {
+              "X": 158.0,
+              "Y": 27.0
+            },
+            "Name": "Text_1",
+            "ctype": "TextObjectData"
           }
         ],
         "Size": {
@@ -367,7 +358,7 @@
         "../../textures/common/common_arena_forest.png",
         "../../textures/common/common_btn_blue.png",
         "../../textures/common/common_btn_gray.png",
-        "../../textures/font/SVN-Avo bold.ttf",
+        "../../textures/font/SVN-Supercell Magic.ttf",
         "../../textures/lobby/lobby_background.png",
         "../../textures/lobby/lobby_box.png"
       ],

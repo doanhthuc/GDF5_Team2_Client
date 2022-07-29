@@ -4,13 +4,11 @@ let UnderGroundComponent = Component.extend({
 
     ctor: function () {
         this._super();
-        this.currentPathIdx = 0;
-        this.trigger = 0;
-        this.isInGround = false;
+        this.reset();
     },
 
     reset: function () {
-        this.currentPathIdx = 0;
+        this.disableMoveDistance = 0;
         this.trigger = 0;
         this.isInGround = false;
     },

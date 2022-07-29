@@ -1,12 +1,15 @@
 let CardDeckSlot = cc.Node.extend({
-    ctor: function (cardImg, cardBackground, energy, cardType) {
+    ctor: function (cardType) {
         this._super();
         this._setupUI();
 
-        this.setCardImg(cardImg);
-        this.setBackground(cardBackground);
-        this.setEnergy(energy);
+        // this.setCardImg(cardImg);
+        // this.setBackground(cardBackground);
+        // this.setEnergy(energy);
+        this.setCardTexture(cardType);
         this.type = cardType;
+        this.isUp = false;
+        this.isSelected = false;
     },
 
     _setupUI: function () {
@@ -21,6 +24,19 @@ let CardDeckSlot = cc.Node.extend({
         this.addChild(rootNode);
     },
 
+    setCardType: function (cardType) {
+        this.type = cardType;
+        this.setCardTexture(cardType);
+    },
+
+    setCardTexture: function (cardId) {
+        let cardAsset = CARD_CONST[cardId];
+
+        this.setBackground(cardAsset.background);
+        this.setCardImg(cardAsset.cardImage);
+        this.setEnergy(cardAsset.energy);
+    },
+
     setCardImg: function (cardImg) {
         this.cardImgSprite.setTexture(cardImg);
     },
@@ -33,5 +49,13 @@ let CardDeckSlot = cc.Node.extend({
         if (energy < 0)
             return;
         this.energyNode.getChildByName("value").setString(energy);
+    },
+
+    setIsSelected: function (isSelected) {
+        this.isSelected = isSelected;
+    },
+
+    setIsUp: function (isUp) {
+        this.isUp = isUp;
     }
 });
