@@ -92,7 +92,7 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
     let attackRange = 1.5 * GameConfig.TILE_WIDTH;
     let node = NodeFactory.createBunnyNodeAnimation(attackRange);
 
-    let slowEffect = ComponentFactory.create(SlowEffect, 5, 0.3);
+    let slowEffect = ComponentFactory.create(SlowEffect, 1, 0.3);
     // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);

@@ -43,6 +43,12 @@ BattleAnimation.animationDamage = function (entity) {
             let action2 = cc.tintTo(0.05, 255, 255, 255);
             childSprite.runAction(cc.sequence(action1, action2));
         }
+
+        let hpNode = appearance.sprite.getChildByName("hp");
+        if (hpNode && hpNode.isVisible() === false) {
+            hpNode.setVisible(true);
+            _.delay(() => hpNode.setVisible(false), 1000);
+        }
     }
 }
 
