@@ -53,6 +53,7 @@ let SpriteSheetAnimationComponent = Component.extend({
         let time = config.animation[state][spriteName].time
         let sequenceAnimName = config.animation[state].sequence;
         let repeat = config.animation[state][spriteName].repeat;
+        let shadow = config.animation[state][spriteName].shadow;
 
         if (flipX) {
             let flipState = config.animation[state][spriteName].flipState;
@@ -75,6 +76,7 @@ let SpriteSheetAnimationComponent = Component.extend({
         let animation = new cc.Animation(animFrames);
         let delay = (time || 1000) / 1000;
         animation.setDelayPerUnit(delay / animFrames.length);
+        // FIXME: remove component and release this animation
         animation.retain();
 
         let animArr = [];
@@ -82,7 +84,7 @@ let SpriteSheetAnimationComponent = Component.extend({
             animArr.push(this._buildConfig(config, sequenceAnimName[0], spriteName));
         }
 
-        return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat, delay: delay};
+        return {animation: animation, sequenceAnimations: animArr, flipX: flipX, repeat: repeat, delay: delay, shadow: shadow};
     },
     getCurrentState:function (){
         return this.currentState;

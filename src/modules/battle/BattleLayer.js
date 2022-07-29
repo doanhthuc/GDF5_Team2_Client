@@ -5,15 +5,6 @@ let BattleLayer = cc.Layer.extend({
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
 
-        if (GameConfig.NETWORK == 0) {
-            BattleData.fakeData();
-        }
-        this.battleData = BattleManager.getInstance().getBattleData();
-
-        // this.battleLoop = new BattleLoop();
-
-        this._setupUI();
-
         this._prefetchAssetGame();
 
         // init entity manager
@@ -21,6 +12,15 @@ let BattleLayer = cc.Layer.extend({
         EntityManager.getInstance = function () {
             return this._entityManager;
         }.bind(this);
+
+        if (!GameConfig.NETWORK) {
+            BattleData.fakeData();
+        }
+        this.battleData = BattleManager.getInstance().getBattleData();
+
+        // this.battleLoop = new BattleLoop();
+
+        this._setupUI();
 
         this._initSystem();
 
@@ -131,17 +131,16 @@ let BattleLayer = cc.Layer.extend({
         // setTimeout(function () {
         //     EntityFactory.createGiantMonster(pixelPos, mode);
         // }, 5000);
-        //EntityFactory.createAssassinMonster(pixelPos, mode);
-        //EntityFactory.createGiantMonster(pixelPos, mode);
-        //EntityFactory.createDarkGiantBoss(pixelPos, mode);
+        EntityFactory.createAssassinMonster(pixelPos, mode);
+        EntityFactory.createGiantMonster(pixelPos, mode);
+        EntityFactory.createNinjaMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
+
         //EntityFactory.createNinjaMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-
-        EntityFactory.createNinjaMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createBatMonster(pixelPos, mode);
+        EntityFactory.createBatMonster(pixelPos, mode);
         // EntityFactory.createSatyrBoss(pixelPos, mode);
     },
 
@@ -153,27 +152,27 @@ let BattleLayer = cc.Layer.extend({
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
         EntityFactory.createAssassinMonster(pixelPos, mode);
-        // setTimeout(function () {
-        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // }, 1000);
-        // setTimeout(function () {
-        //     EntityFactory.createAssassinMonster(pixelPos, mode);
-        // }, 2000);
-        // setTimeout(function () {
-        //     EntityFactory.createNinjaMonster(pixelPos, mode);
-        // }, 3000);
-        // setTimeout(function () {
-        //     EntityFactory.createGiantMonster(pixelPos, mode);
-        // }, 5000);
-        // setTimeout(function () {
-        //     EntityFactory.createSatyrBoss(pixelPos, mode);
-        // }, 20000);
-        // setTimeout(function () {
-        //     EntityFactory.createDarkGiantBoss(pixelPos, mode);
-        // }, 40000);
-        // setTimeout(function () {
-        //     EntityFactory.createDemonTreeBoss(pixelPos, mode);
-        // }, 60000);
+        setTimeout(function () {
+            EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        }, 1000);
+        setTimeout(function () {
+            EntityFactory.createAssassinMonster(pixelPos, mode);
+        }, 2000);
+        setTimeout(function () {
+            EntityFactory.createNinjaMonster(pixelPos, mode);
+        }, 3000);
+        setTimeout(function () {
+            EntityFactory.createGiantMonster(pixelPos, mode);
+        }, 5000);
+        setTimeout(function () {
+            EntityFactory.createSatyrBoss(pixelPos, mode);
+        }, 20000);
+        setTimeout(function () {
+            EntityFactory.createDarkGiantBoss(pixelPos, mode);
+        }, 40000);
+        setTimeout(function () {
+            EntityFactory.createDemonTreeBoss(pixelPos, mode);
+        }, 60000);
 
     },
     // bornMonsterInWave: function (monsterWave, mode) {
@@ -393,6 +392,10 @@ let BattleLayer = cc.Layer.extend({
 
     getOpponentMapNode: function () {
         return this.mapLayer.mapNode[GameConfig.OPPONENT];
+    },
+
+    getMapNode: function (mode) {
+        return this.mapLayer.mapNode[mode];
     },
 
     _prefetchAssetGame: function () {

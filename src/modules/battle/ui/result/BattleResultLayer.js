@@ -53,7 +53,6 @@ let BattleResultLayer = cc.Layer.extend({
         let animationName = (trackIndex && trackIndex.animation) ? trackIndex.animation.name : 0;
         switch (type) {
             case GameConfig.ANIMATION_TYPE.ANIMATION_COMPLETE:
-                cc.log(trackIndex + " complete: " + animationName + "," + loopCount);
                 if (animationName === this.animationName.init) {
                     this._showResult();
                 }

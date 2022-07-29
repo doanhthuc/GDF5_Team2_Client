@@ -5,7 +5,7 @@ let BattleData = cc.Class.extend({
             currentWave: 0,
             battleWave: null,
             maxWave: 10000,
-            timer: 2,
+            timer: 10,
             player: {
                 username: "HOVANVYDUT",
                 clanName: "GDF5_DN_TEAM_2",
@@ -214,7 +214,7 @@ let BattleData = cc.Class.extend({
 });
 
 BattleData.fakeData = function () {
-    let map = [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 1, 0], [0, 3, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]];
+    let map = [[0, 0, 0, GameConfig.MAP.TREE, 0, 0, 0], [0, 0, GameConfig.MAP.HOLE, 0, 0, 0, 0], [0, 0, 0, 2, 0, 1, 0], [0, 3, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]];
     //let map = [[1,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]];
     let battleWave = [[]];
     let wave = [];

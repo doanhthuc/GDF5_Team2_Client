@@ -149,7 +149,7 @@ EntityFactory.createNinjaMonster = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createNinjaNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 500);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 100);
     let underGroundComponent = ComponentFactory.create(UnderGroundComponent);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.ninja)
 
