@@ -3,7 +3,11 @@ let BattleUILayer = cc.Layer.extend({
         this._super();
 
         this.battleData = battleData;
-        let fakeBattleDeckData = [6, 1, 3, 5];
+        let fakeBattleDeckData = [
+            GameConfig.ENTITY_ID.BUNNY_TOWER,
+            GameConfig.ENTITY_ID.GOAT_TOWER,
+            GameConfig.ENTITY_ID.FIRE_SPELL,
+            GameConfig.ENTITY_ID.FROG_TOWER];
         this.cardDeckListData = new CardDeckListData(fakeBattleDeckData);
         // this.battleData.setCards(this.cardDeckListData.getFirst4CardId(), GameConfig.PLAYER);
 

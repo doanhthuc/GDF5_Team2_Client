@@ -32,6 +32,7 @@ GameConfig.COMPONENT_ID = {
     TRAP_EFFECT: 23,
     TOWER_ABILITY: 24,
     BUFF_ATTACK_RANGE: 25,
+    ACCELERATION: 26,
 }
 
 GameConfig.SYSTEM_ID = {

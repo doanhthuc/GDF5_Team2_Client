@@ -102,6 +102,7 @@
         "src/modules/battle/ecs/component/Component.js",
         "src/modules/battle/ecs/component/InfoComponent.js",
         "src/modules/battle/ecs/component/EffectComponent.js",
+        "src/modules/battle/ecs/component/AccelerationComponent.js",
         "src/modules/battle/ecs/component/AppearanceComponent.js",
         "src/modules/battle/ecs/component/AttackComponent.js",
         "src/modules/battle/ecs/component/BuffAttackDamageEffect.js",

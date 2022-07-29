@@ -107,7 +107,7 @@ let CardDeckNode = cc.Node.extend({
         let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos)) === true;
 
         if (touchInCard) {
-            cc.log("CardDeckNode _onTouchBegan " + JSON.stringify(selectedCard));
+            // cc.log("CardDeckNode _onTouchBegan " + JSON.stringify(selectedCard));
             this.selectedCard = selectedCard;
             if (selectedCard.isUp === false) {
                 this._moveCardUp(selectedCard);
