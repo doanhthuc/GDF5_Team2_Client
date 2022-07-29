@@ -70,7 +70,7 @@ let SpellSystem = System.extend({
                         }
                     }
                 }
-                spellEntity.removeComponent(    VelocityComponent);
+                spellEntity.removeComponent(VelocityComponent);
                 spellEntity.removeComponent(PositionComponent);
                 spellEntity.removeComponent(SpellInfoComponent);
             }
