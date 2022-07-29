@@ -7,7 +7,7 @@ let BattleUILayer = cc.Layer.extend({
             GameConfig.ENTITY_ID.BUNNY_TOWER,
             GameConfig.ENTITY_ID.GOAT_TOWER,
             GameConfig.ENTITY_ID.FIRE_SPELL,
-            GameConfig.ENTITY_ID.FROG_TOWER];
+            GameConfig.ENTITY_ID.TRAP_SPELL];
         this.cardDeckListData = new CardDeckListData(fakeBattleDeckData);
         // this.battleData.setCards(this.cardDeckListData.getFirst4CardId(), GameConfig.PLAYER);
 
