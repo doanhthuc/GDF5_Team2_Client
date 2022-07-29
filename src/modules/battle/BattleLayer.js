@@ -284,10 +284,10 @@ let BattleLayer = cc.Layer.extend({
         if (GameConfig.NETWORK === 1) {
             this.setEntityIdForTileObject(tower.id, tilePos, mode);
         }
-        if (mode === GameConfig.PLAYER) {
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
-        }
+        
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
+
         return tower;
     },
 
