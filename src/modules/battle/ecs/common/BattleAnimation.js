@@ -65,6 +65,7 @@ BattleAnimation.addAnimationUnderGround = function (entity) {
     if (appearanceComponent && appearanceComponent.sprite) {
         // FIXME: hardcode sprite name
         let childSprite = appearanceComponent.sprite.getChildByName("monster");
+        let shadowSprite = appearanceComponent.sprite.getChildByName("monster_shadow");
         if (childSprite) {
             let spine = new sp.SkeletonAnimation("textures/monster/fx/fx_boss_stone_monster.json", "textures/monster/fx/fx_boss_stone_monster.atlas");
             childSprite.addChild(spine, 1, UNDER_GROUND_TAG);
@@ -73,6 +74,7 @@ BattleAnimation.addAnimationUnderGround = function (entity) {
 
             // hide monster
             childSprite.setOpacity(0);
+            shadowSprite.setOpacity(0);
 
             function animationStateEvent(obj, trackIndex, type, event, loopCount) {
                 let entry = spine.getCurrent();
@@ -101,11 +103,14 @@ BattleAnimation.removeAnimationUnderGround = function (entity) {
     // FIXME: hardcode sprite name
     if (appearanceComponent && appearanceComponent.sprite) {
         let childSprite = appearanceComponent.sprite.getChildByName("monster");
+        let shadowSprite = appearanceComponent.sprite.getChildByName("monster_shadow");
         if (childSprite) {
             childSprite.removeChildByTag(UNDER_GROUND_TAG);
 
             // show monster
             childSprite.setOpacity(255);
+            shadowSprite.setOpacity(255);
+
         }
     }
 }

@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>angle</key>
-	<real>-3</real>
+	<real>90</real>
 	<key>angleVariance</key>
-	<real>0</real>
+	<real>360</real>
 	<key>blendFuncDestination</key>
-	<integer>771</integer>
+	<integer>1</integer>
 	<key>blendFuncSource</key>
 	<integer>770</integer>
 	<key>duration</key>
@@ -31,13 +31,13 @@
 	<key>finishColorVarianceRed</key>
 	<real>0</real>
 	<key>finishParticleSize</key>
-	<real>16</real>
+	<real>-1</real>
 	<key>finishParticleSizeVariance</key>
 	<real>0</real>
 	<key>gravityx</key>
-	<real>10</real>
+	<real>0</real>
 	<key>gravityy</key>
-	<real>45</real>
+	<real>0</real>
 	<key>maxParticles</key>
 	<real>10</real>
 	<key>maxRadius</key>
@@ -47,9 +47,9 @@
 	<key>minRadius</key>
 	<real>0</real>
 	<key>particleLifespan</key>
-	<real>0.3</real>
+	<real>2</real>
 	<key>particleLifespanVariance</key>
-	<real>0</real>
+	<real>1</real>
 	<key>radialAccelVariance</key>
 	<real>0</real>
 	<key>radialAcceleration</key>
@@ -67,15 +67,15 @@
 	<key>rotationStartVariance</key>
 	<real>0</real>
 	<key>sourcePositionVariancex</key>
-	<real>-10</real>
+	<real>0</real>
 	<key>sourcePositionVariancey</key>
-	<real>15</real>
+	<real>0</real>
 	<key>sourcePositionx</key>
-	<real>176.58227848101268</real>
+	<real>74.05063291139241</real>
 	<key>sourcePositiony</key>
-	<real>594.3037974683544</real>
+	<real>645.5696202531647</real>
 	<key>speed</key>
-	<real>150</real>
+	<real>15</real>
 	<key>speedVariance</key>
 	<real>5</real>
 	<key>startColorAlpha</key>
@@ -95,9 +95,9 @@
 	<key>startColorVarianceRed</key>
 	<real>0</real>
 	<key>startParticleSize</key>
-	<real>60</real>
+	<real>36</real>
 	<key>startParticleSizeVariance</key>
-	<real>26</real>
+	<real>10</real>
 	<key>tangentialAccelVariance</key>
 	<real>0</real>
 	<key>tangentialAcceleration</key>

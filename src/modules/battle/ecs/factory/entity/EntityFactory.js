@@ -131,11 +131,23 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let typeID = GameConfig.ENTITY_ID.WIZARD_BULLET;
         let entity = this._createEntity(typeID, mode);
 
-        // NOTE: get component from pool
+        let node = new cc.Node();
+        // let particle = new cc.ParticleSystem("res/textures/tower/fx/wizard_particle_1.plist");
         let bulletNode = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_bullet_0000.png");
+        node.addChild(bulletNode, 1);
+        // node.addChild(particle, 22);
+
+        // particle.resetSystem();
+        // particle.setDuration(10)
+        // particle.setSpeed(200)
+        // particle.setBlendAdditive(true)
+        // particle.setPositionType(cc.ParticleSystem.TYPE_FREE);
+        // // particle.setScale(1, 1);
+        // particle.setPosition(cc.p(0, 0));
+
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "wizard", GameConfig.TILE_WIDTH);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
-        let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
+        let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 20, 20);
 
         let bulletSpeed = 3 * GameConfig.TILE_WIDTH;
