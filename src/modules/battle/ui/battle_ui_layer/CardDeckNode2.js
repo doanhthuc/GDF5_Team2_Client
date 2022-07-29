@@ -7,6 +7,7 @@ const CardDeckNode2 = cc.Node.extend({
         this.nextCardPosition = null;
         this.isCardPuttedIntoMap = false;
         this.cardSlotNodeList = [];
+        this.cardSlotNodeFixedPosList = [];
         this.spriteDragManager = {};
 
         this.rootNode = ccs.load(BattleResource.CARD_DECK_NODE, "").node;
@@ -44,6 +45,7 @@ const CardDeckNode2 = cc.Node.extend({
             let cardSlot = new CardDeckSlot2(this.selectableCardIdList[i]);
             cardSlot.setPosition(cardPos);
             // cardSlot.cardBackgroundBtn.addTouchEventListener(this.onCardClick.bind(this), this);
+            this.cardSlotNodeFixedPosList.push(cardPos);
             this.cardSlotNodeList.push(cardSlot);
             this.rootNode.addChild(cardSlot);
 
@@ -77,13 +79,17 @@ const CardDeckNode2 = cc.Node.extend({
     },
 
     _moveCardUp: function (card) {
-        let moveTop = cc.moveBy(1, cc.p(0, 30)).easing(cc.easeElasticOut());
+        let index = this.cardSlotNodeList.indexOf(card);
+        let moveY = this.cardSlotNodeFixedPosList[index].y + 30;
+        let moveTop = cc.moveBy(1, cc.p(0, moveY)).easing(cc.easeElasticOut());
         card.runAction(cc.sequence(moveTop));
         card.isUp = true;
     },
 
     _moveCardDown: function (card) {
-        let moveDown = cc.moveBy(1, cc.p(0, -30)).easing(cc.easeElasticOut());
+        let index = this.cardSlotNodeList.indexOf(card);
+        let pos = this.cardSlotNodeFixedPosList[index];
+        let moveDown = cc.moveTo(1, pos).easing(cc.easeElasticOut());
         card.runAction(cc.sequence(moveDown));
         card.isUp = false;
     },
@@ -95,6 +101,7 @@ const CardDeckNode2 = cc.Node.extend({
         // let selectedCardBoundingBox = cc.rect(0, 0, selectedCard.width, selectedCard.height);
         let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos));
         if (touchInCard) {
+            this.removeDragSprite(this.selectedCardType);
             if (selectedCard.type === this.selectedCardType) {
                 // let card = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
                 cc.log(JSON.stringify(this.selectedCardType));
@@ -173,24 +180,35 @@ const CardDeckNode2 = cc.Node.extend({
     onCardPutIntoMap: function (cardType) {
         cc.log("[CardDeckNode2] onCardPutIntoMap: " + cardType);
         cc.log(this.isCardPuttedIntoMap);
-        if (this.isCardPuttedIntoMap === true ) {
+        if (this.isCardPuttedIntoMap === true) {
             cc.log(JSON.stringify(this.spriteDragManager[cardType]));
-            if (this.spriteDragManager[cardType]) {
-                this.spriteDragManager[cardType].setVisible(false);
-                BattleManager.getInstance().getBattleLayer().removeChild(this.spriteDragManager[cardType]);
-                this.spriteDragManager[cardType] = null;
-            }
+            this.removeDragSprite(cardType);
             let cardSlotNode = this.cardSlotNodeList.find(card => card.type === cardType);
-            for (let i = 0; i < this.cardSlotNodeList.length; i++) {
-                cc.log("[CardDeckNode2.js line 182] cardSlotNodeList: " + cardSlotNode.type);
-            }
             if (cardSlotNode) {
-                cc.log("gfjdddddddddddsfghsgfhfsg")
                 this._moveCardDown(cardSlotNode);
+                cardSlotNode.setCardType(this.nextCardSlot.type)
+                this.nextCardSlot.setCardType(this.cardDeckListData.getNextCardId());
+                this.cardDeckListData.pushUsedCardIntoDeck(cardType);
             }
             BattleManager.getInstance().getBattleLayer().selectedCard = null;
             this.selectedCardType = null;
             this.isCardPuttedIntoMap = false;
         }
+    },
+
+    removeDragSprite: function (cardType) {
+        if (!this.spriteDragManager[cardType]) {
+            return;
+        }
+        this.spriteDragManager[cardType].setVisible(false);
+        BattleManager.getInstance().getBattleLayer().removeChild(this.spriteDragManager[cardType]);
+        this.spriteDragManager[cardType] = null;
+    },
+
+    onPutCardIntoInvalidPosition: function () {
+        this.isCardPuttedIntoMap = false;
+        this.removeDragSprite(this.selectedCardType);
+        this.selectedCardType = null;
+        BattleManager.getInstance().getBattleLayer().selectedCard = null;
     }
 });
