@@ -231,7 +231,6 @@ let BattleLayer = cc.Layer.extend({
                 .dispatchEvent(EventType.PUT_TRAP, {cardId: type, tilePos: tilePos, mode: mode});
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTrap(tilePos);
         } else if (ValidatorECS.isTower(type)) {
-            cc.log("fdbhdpibhfpihsbpirebbpehprewb")
             this.putTowerCardIntoMap(type, tilePos, mode);
         }
         // BattleManager.getInstance().getCardDeckNode().onCardPutIntoMap(type);
@@ -284,7 +283,7 @@ let BattleLayer = cc.Layer.extend({
         if (GameConfig.NETWORK === 1) {
             this.setEntityIdForTileObject(tower.id, tilePos, mode);
         }
-        
+
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
 
@@ -322,7 +321,7 @@ let BattleLayer = cc.Layer.extend({
     shouldUpgradeTower: function (towerId, tilePos) {
         if (GameConfig.NETWORK === 0) return false;
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
-        if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null) {
+        if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null && cellObject.tower.towerId === towerId) {
             let tower = cellObject.tower;
             let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
             let card = inventoryContext.getCardById(towerId);

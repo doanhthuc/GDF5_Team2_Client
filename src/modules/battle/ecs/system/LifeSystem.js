@@ -17,6 +17,8 @@ let LifeSystem = System.extend({
                 let monsterInfo = entity.getComponent(MonsterInfoComponent)
                 if (pos && monsterInfo) {
                     BattleAnimation.animationPlusEnergy(pos, monsterInfo.gainEnergy, entity.mode);
+                    let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
+                    deckEnergyProgress.plusEnergy(monsterInfo.gainEnergy);
                 }
                 EntityManager.destroy(entity);
             }

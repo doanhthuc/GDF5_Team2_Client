@@ -74,6 +74,9 @@ const CardDeckNode2 = cc.Node.extend({
             this.isCardPuttedIntoMap = true;
             cc.log("[CardDeckNode2] handlePutCardIntoMap event ==============:  " + data.cardId);
             this.onCardPutIntoMap(data.cardId);
+            let cardEnergy = CARD_CONST[data.cardId].energy;
+            let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
+            deckEnergyProgress.minusEnergy(cardEnergy);
             // this.setNextCardSlotVisible(false);
         }
     },
@@ -210,5 +213,11 @@ const CardDeckNode2 = cc.Node.extend({
         this.removeDragSprite(this.selectedCardType);
         this.selectedCardType = null;
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
+    },
+
+    validateEnoughEnergySelectCard: function (cardType) {
+        let cardEnergy = CARD_CONST[cardType].energy;
+        let playerEnergy = BattleManager.getInstance().getBattleData().getCurrentEnergy(GameConfig.PLAYER);
+        return playerEnergy >= cardEnergy;
     }
 });

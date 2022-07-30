@@ -46,9 +46,9 @@ let AttackSystem = System.extend({
                             let distance = this._distanceFrom(tower, targetMonster);
                             let k = attackComponent.range / distance;
                             let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
-                            EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode);
+                            EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
                         } else {
-                            EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode)
+                            EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
                         }
                         attackComponent.countdown = attackComponent.speed;
                     }
@@ -89,8 +89,7 @@ let AttackSystem = System.extend({
                 targetMonster = monsterInAttackRange[monsterIndex];
                 break;
             }
-            case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE:
-            {
+            case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE: {
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
                     let monsterPos = cur.getComponent(PositionComponent);
                     let distance = Utils.euclidDistance(towerPos, monsterPos);

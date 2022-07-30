@@ -2,9 +2,9 @@ let AttackComponent = Component.extend({
     name: "AttackComponent",
     typeID: GameConfig.COMPONENT_ID.ATTACK,
 
-    ctor: function (damage, targetStrategy, range, speed, countdown, effects) {
+    ctor: function (damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius) {
         this._super();
-        this.reset(damage, targetStrategy, range, speed, countdown, effects);
+        this.reset(damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius);
     },
 
     setDamage: function (damage) {
@@ -37,7 +37,7 @@ let AttackComponent = Component.extend({
         this.targetStrategy = targetStrategy;
     },
 
-    reset: function (damage, targetStrategy, range, speed, countdown, effects) {
+    reset: function (damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius) {
         this.originDamage = damage;
         this._damage = damage;
         this.targetStrategy = targetStrategy;
@@ -47,12 +47,14 @@ let AttackComponent = Component.extend({
         this.speed = speed;
         this.countdown = countdown;
         this.effects = effects || [];
+        this.bulletSpeed = bulletSpeed;
+        this.bulletRadius = bulletRadius;
         this.effects.push(new DamageEffect(this._damage));
     },
 
     clone: function () {
         return ComponentFactory.create(AttackComponent, this.damage, this.targetStrategy, this.range,
-            this.speed, this.countdown, this.effects);
+            this.speed, this.countdown, this.effects, this.bulletSpeed, this.bulletRadius);
     }
 });
 AttackComponent.typeID = GameConfig.COMPONENT_ID.ATTACK;
