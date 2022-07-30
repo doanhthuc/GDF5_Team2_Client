@@ -290,6 +290,10 @@ let BattleLayer = cc.Layer.extend({
         return tower;
     },
 
+    onUpdateTower: function (entityId, tilePos, mode) {
+
+    },
+
     setEntityIdForTileObject: function (entityId, tilePos, mode = GameConfig.PLAYER) {
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);

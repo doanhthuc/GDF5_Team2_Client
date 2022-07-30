@@ -198,6 +198,8 @@ BattleNetwork.Connector = cc.Class.extend({
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let cellObject = playerObjectMap[packet.tileX][packet.tileY];
         cellObject.tower.level = packet.towerLevel;
+        EntityFactory.onUpdateTowerLevel(cellObject.tower.entityId, packet.towerLevel);
+
         cc.log('[BattleNetwork.js line 153] cellObject: ' + JSON.stringify(playerObjectMap[packet.tileX][packet.tileY]));
     },
 
@@ -207,6 +209,7 @@ BattleNetwork.Connector = cc.Class.extend({
         let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
         let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
         cellObject.tower.level = packet.towerLevel;
+        EntityFactory.onUpdateTowerLevel(cellObject.tower.entityId, packet.towerLevel);
         cc.log('[BattleNetwork.js line 165] cellObject: ' + JSON.stringify(opponentObjectMap[packet.tileX][packet.tileY]));
     },
 

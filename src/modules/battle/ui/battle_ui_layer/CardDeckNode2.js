@@ -39,6 +39,8 @@ const CardDeckNode2 = cc.Node.extend({
         this.deckEnergyProgress.setPosition(this.rootNode.convertToNodeSpace(progressPos));
         this.rootNode.addChild(this.deckEnergyProgress);
 
+        this.initNextCardSlot();
+
         for (let i = 0; i < this.selectableCardIdList.length; i++) {
             let card = this.rootNode.getChildByName("card_" + (i + 1));
             let cardPos = this.rootNode.convertToNodeSpace(card.getPosition());
@@ -47,7 +49,7 @@ const CardDeckNode2 = cc.Node.extend({
             // cardSlot.cardBackgroundBtn.addTouchEventListener(this.onCardClick.bind(this), this);
             this.cardSlotNodeFixedPosList.push(cardPos);
             this.cardSlotNodeList.push(cardSlot);
-            this.rootNode.addChild(cardSlot);
+            this.rootNode.addChild(cardSlot, 10);
 
             cc.eventManager.addListener({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -56,7 +58,6 @@ const CardDeckNode2 = cc.Node.extend({
             }, cardSlot);
         }
 
-        this.initNextCardSlot();
     },
 
     initNextCardSlot: function () {
@@ -113,7 +114,7 @@ const CardDeckNode2 = cc.Node.extend({
             } else {
                 if (this.selectedCardType !== null) {
                     let prevSelectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
-                    this._moveCardDown(prevSelectedCard);
+                    // this._moveCardDown(prevSelectedCard);
                 }
                 let card = selectedCard;
                 this.selectedCardType = card.type;
@@ -188,8 +189,11 @@ const CardDeckNode2 = cc.Node.extend({
             this.removeDragSprite(cardType);
             let cardSlotNode = this.cardSlotNodeList.find(card => card.type === cardType);
             if (cardSlotNode) {
-                this._moveCardDown(cardSlotNode);
+                let index = this.cardSlotNodeList.indexOf(cardSlotNode);
+                cardSlotNode.setPosition(this.nextCardPosition);
+                cardSlotNode.setScale(0.6449, 0.6449);
                 cardSlotNode.setCardType(this.nextCardSlot.type)
+                cardSlotNode.runAction(cc.spawn(cc.moveTo(0.15, this.cardSlotNodeFixedPosList[index]), cc.scaleTo(0.15, 1)));
                 this.nextCardSlot.setCardType(this.cardDeckListData.getNextCardId());
                 this.cardDeckListData.pushUsedCardIntoDeck(cardType);
             }
