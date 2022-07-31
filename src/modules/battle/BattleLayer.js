@@ -219,6 +219,8 @@ let BattleLayer = cc.Layer.extend({
         let {error, msg} = ValidatorECS.validatePositionPutCard(type, pixelPos, mode);
         if (error) {
             this.uiLayer.notify(msg);
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.INVALID_PUT_CARD_POSITION, {cardId: type, mode: mode})
             return;
         }
 

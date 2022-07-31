@@ -26,5 +26,6 @@ let EventType = {
     CHANGE_STATE_ENTITY: 9,
     UPGRADE_TOWER: 10,
     DROP_SPELL: 11,
-    PUT_TRAP: 12
+    PUT_TRAP: 12,
+    INVALID_PUT_CARD_POSITION: 13,
 }

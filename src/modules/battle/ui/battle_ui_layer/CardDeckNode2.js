@@ -26,6 +26,8 @@ const CardDeckNode2 = cc.Node.extend({
                 this.handlePutCardIntoMap.bind(this))
             .addEventHandler(EventType.PUT_TRAP,
                 this.handlePutCardIntoMap.bind(this))
+            .addEventHandler(EventType.INVALID_PUT_CARD_POSITION,
+                this.handleInvalidPutCardPosition.bind(this));
     },
 
     init: function () {
@@ -56,10 +58,21 @@ const CardDeckNode2 = cc.Node.extend({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
                 onTouchBegan: this._onTouchBegan.bind(this),
                 onTouchMoved: this._onTouchMoved.bind(this),
-                onTouchEnded: this._onTouchEnded.bind(this),
+                // onTouchEnded: this._onTouchEnded.bind(this),
             }, cardSlot);
         }
 
+    },
+
+    handleInvalidPutCardPosition: function (data) {
+        let cardId = data.cardId;
+        let cardSlot = this.cardSlotNodeList.find((cardSlot) => cardSlot.type === cardId);
+        if (cardSlot) {
+            this._moveCardDown(cardSlot);
+        }
+        this.removeDragSprite(this.selectedCardType);
+        this.selectedCardType = null;
+        BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
     initNextCardSlot: function () {
