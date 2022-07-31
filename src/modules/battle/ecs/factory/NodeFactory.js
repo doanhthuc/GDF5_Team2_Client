@@ -27,6 +27,7 @@ NodeFactory.createSwordmanNodeAnimation = function () {
 
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
+    hpBarNode.node.setVisible(false);
     return node;
 }
 
@@ -45,6 +46,7 @@ NodeFactory.createAssassinNodeAnimation = function () {
 
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
+    hpBarNode.node.setVisible(false);
 
     node.addChild(monsterSprite, 1, "monster");
     node.addChild(hpBarNode.node, 1, "hp");
@@ -70,6 +72,7 @@ NodeFactory.createBatNodeAnimation = function () {
 
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
+    hpBarNode.node.setVisible(false);
     return node;
 }
 
@@ -92,6 +95,7 @@ NodeFactory.createGiantNodeAnimation = function () {
 
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
+    hpBarNode.node.setVisible(false);
     return node;
 }
 
@@ -114,6 +118,7 @@ NodeFactory.createNinjaNodeAnimation = function () {
 
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
+    hpBarNode.node.setVisible(false);
     return node;
 }
 
@@ -136,6 +141,7 @@ NodeFactory.createDemonTreeNodeAnimation = function () {
 
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
+    hpBarNode.node.setVisible(false);
     return node;
 }
 
@@ -158,6 +164,7 @@ NodeFactory.createDemonTreeMinionNodeAnimation = function () {
 
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
+    hpBarNode.node.setVisible(false);
     return node;
 }
 
@@ -180,6 +187,7 @@ NodeFactory.createDarkGiantNodeAnimation = function () {
 
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
+    hpBarNode.node.setVisible(false);
     return node;
 }
 
@@ -202,6 +210,7 @@ NodeFactory.createSatyrNodeAnimation = function () {
 
     hpBarNode.node.x = 0;
     hpBarNode.node.y = 50;
+    hpBarNode.node.setVisible(false);
     return node;
 }
 
