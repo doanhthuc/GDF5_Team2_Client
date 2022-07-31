@@ -41,7 +41,7 @@ let MovementSystem = System.extend({
                             let tilePos = Utils.pixel2Tile(monsterPos.x, monsterPos.y, entity.mode);
                             if (!Utils.validateTilePos(tilePos)) continue;
                             let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
-                            if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID!==GameConfig.ENTITY_ID.BAT) {
+                            if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID !== GameConfig.ENTITY_ID.BAT) {
                                 let lifeComponent = entity.getComponent(LifeComponent);
                                 lifeComponent.hp = 0;
                             } else {
@@ -75,8 +75,8 @@ let MovementSystem = System.extend({
                     if (Utils.validateTilePos(currentTilePos, entity.mode)
                         && (
                             !Utils.validateTilePos(futureTilePos, entity.mode)
-                            || (map[GameConfig.MAP_HEIGH - 1 - futureTilePos.y][futureTilePos.x]  === GameConfig.MAP.TOWER)
-                            || (map[GameConfig.MAP_HEIGH - 1 - futureTilePos.y][futureTilePos.x]  === GameConfig.MAP.TREE)
+                            || (map[GameConfig.MAP_HEIGH - 1 - futureTilePos.y][futureTilePos.x] === GameConfig.MAP.TOWER)
+                            || (map[GameConfig.MAP_HEIGH - 1 - futureTilePos.y][futureTilePos.x] === GameConfig.MAP.TREE)
                         )
                     ) {
                         // position is invalid

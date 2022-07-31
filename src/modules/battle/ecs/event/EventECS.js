@@ -28,5 +28,6 @@ let EventType = {
     DROP_SPELL: 11,
     PUT_TRAP: 12,
     INVALID_PUT_CARD_POSITION: 13,
-    DESTROY_TOWER: 14,
+    SPAWN_MONSTER:14,
+        DESTROY_TOWER: 15,
 }

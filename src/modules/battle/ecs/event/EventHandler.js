@@ -2,11 +2,18 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
         uiLayer.waveNode.increaseWave();
-        BattleManager.getInstance().getBattleData().increaseWave();
         // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.PLAYER);
         // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.OPPONENT);
-        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
-        BattleManager.getInstance().getBattleLayer().bornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+    })
+    .addEventHandler(EventType.SPAWN_MONSTER, function (data) {
+        let battleData = BattleManager.getInstance().getBattleData();
+        let currentWave = battleData.dataInGame.currentWave;
+        let monsterWave = battleData.dataInGame.monsterWave;
+        if (monsterWave[currentWave].length > 0) {
+            let monsterTypeID = battleData.dataInGame.monsterWave[currentWave].pop();
+            BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER,monsterTypeID);
+            BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.OPPONENT,monsterTypeID);
+        }
     })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
         BattleManager.getInstance().getBattleLayer().stopGame();

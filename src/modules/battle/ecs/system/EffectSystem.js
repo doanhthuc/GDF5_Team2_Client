@@ -51,8 +51,7 @@ let EffectSystem = System.extend({
                 // cc.log("[EffectSystem.js line 51] damageComponent.damage: " + damageComponent.damage + " lifeComponent.life: " + lifeComponent.hp);
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
-
-                BattleAnimation.animationDamage(entity);
+               // BattleAnimation.animationDamage(entity);
             }
         }
     },

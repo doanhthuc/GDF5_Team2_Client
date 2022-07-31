@@ -151,7 +151,7 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleGetBattleInfo: function (cmd, packet) {
-        // cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
+        cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
         BattleManager.getInstance().getBattleData().setBattleStartTime(packet.battleStartTime);
         BattleManager.getInstance().getBattleData().setWaveAmount(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
@@ -169,7 +169,6 @@ BattleNetwork.Connector = cc.Class.extend({
         cellObject.objectInCellType = ObjectInCellType.TOWER;
         cellObject.tower.towerId = packet.towerId;
         cellObject.tower.level = packet.towerLevel;
-
         cc.log(JSON.stringify(playerObjectMap[packet.x][packet.y]))
     },
 
