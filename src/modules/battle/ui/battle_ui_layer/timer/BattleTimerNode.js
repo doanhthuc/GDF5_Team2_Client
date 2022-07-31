@@ -1,9 +1,8 @@
 let BattleTimerNode = cc.Node.extend({
-    ctor: function (duration) {
+    ctor: function (countdown, duration) {
         this._super();
         this._duration = duration || 20;
-        this._countdown = this._duration;
-
+        this._countdown = countdown;
         this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
         this.addChild(this.node);
         this.progress = new cc.ProgressTimer(new cc.Sprite(BattleResource.TIMER_BACKGROUND));

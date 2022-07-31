@@ -16,6 +16,9 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.SEND_CANCEL_MATCHING:
                 this._handleCancelMatching(cmd, packet);
                 break;
+            case gv.CMD.GET_BATTLE_INFO:
+                this._handleGetBattleInfo(cmd, packet);
+                break;
             case gv.CMD.PUT_TOWER:
                 this._handlePutTower(cmd, packet);
                 break;
@@ -147,13 +150,23 @@ BattleNetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
+    _handleGetBattleInfo: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
+        BattleManager.getInstance().getBattleData().setBattleStartTime(packet.battleStartTime);
+        BattleManager.getInstance().getBattleData().setWaveAmount(packet.waveAmount);
+        BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
+        //let battleData = BattleManager.getInstance().getBattleData();
+        // cc.log(battleData.battleStartTime);
+        // cc.log(TimeUtil.getServerTime());
+        // cc.log(TimeUtil.getDeltaTime())
+    },
+
     _handlePutTower: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 76] received put tower packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let cellObject = playerObjectMap[packet.x][packet.y];
         cellObject.objectInCellType = ObjectInCellType.TOWER;
-
         cellObject.tower.towerId = packet.towerId;
         cellObject.tower.level = packet.towerLevel;
 
@@ -176,16 +189,16 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleGetBattleMapObject: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 95] received get battle map object packet: ' + JSON.stringify(packet));
+        //  cc.log('[BattleNetwork.js line 95] received get battle map object packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         battleData.setMapObject(packet.playerBattleMapObject, GameConfig.PLAYER);
         battleData.setMapObject(packet.opponentBattleMapObject, GameConfig.OPPONENT);
         let battleMapObject = battleData.getMapObject(GameConfig.PLAYER);
-        for (let i = 0; i < battleMapObject.length; i++) {
-            for (let j = 0; j < battleMapObject[i].length; j++) {
-                cc.log('[BattleNetwork.js line 102] battleMapObject: ' + JSON.stringify(battleMapObject[i][j]));
-            }
-        }
+        // for (let i = 0; i < battleMapObject.length; i++) {
+        //     for (let j = 0; j < battleMapObject[i].length; j++) {
+        //         cc.log('[BattleNetwork.js line 102] battleMapObject: ' + JSON.stringify(battleMapObject[i][j]));
+        //     }
+        // }
     },
 
     _handleGetCellObject: function (cmd, packet) {

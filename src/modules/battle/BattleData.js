@@ -1,9 +1,11 @@
 let BattleData = cc.Class.extend({
     ctor: function () {
         this.roomId = 0;
+        this.battleStartTime = 0;
         this.dataInGame = {
             currentWave: 0,
-            battleWave: null,
+            waveAmount: 0,
+            monsterWave: null,
             maxWave: 10000,
             timer: 10,
             player: {
@@ -61,6 +63,21 @@ let BattleData = cc.Class.extend({
         this.roomId = roomId;
     },
 
+    setWaveAmount: function (waveAmount) {
+        this.dataInGame.waveAmount = waveAmount;
+    },
+
+    setMonsterWave: function (monsterWave) {
+        this.dataInGame.monsterWave = monsterWave;
+    },
+
+    setBattleStartTime: function (battleStartTime) {
+        this.battleStartTime = battleStartTime;
+    },
+
+    getBattleStartTime: function () {
+        return this.battleStartTime;
+    },
     getTimer: function () {
         return this.dataInGame.timer;
     },
