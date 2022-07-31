@@ -350,9 +350,11 @@ let BattleLayer = cc.Layer.extend({
                     let pixelPos = touches[0].getLocation();
                     let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
                     let selectedCardType = BattleManager.getInstance().getBattleLayer().selectedCard
-                    BattleManager.getInstance().getBattleLayer()
-                        .putCardAt(selectedCardType, pixelInMap, GameConfig.PLAYER);
-
+                    let tilePos = Utils.pixel2Tile(pixelInMap.x, pixelInMap.y, GameConfig.OPPONENT);
+                    if (Utils.validateTilePos(tilePos)) {
+                        BattleManager.getInstance().getBattleLayer()
+                            .putCardAt(selectedCardType, pixelInMap, GameConfig.PLAYER);
+                    }
                 }
             }
         }), this.uiLayer)
