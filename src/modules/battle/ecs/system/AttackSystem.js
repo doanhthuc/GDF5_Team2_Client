@@ -15,8 +15,8 @@ let AttackSystem = System.extend({
 
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
-            cc.log("[AttackSystem.js line 34] attackComponent: " + JSON.stringify(attackComponent));
-            cc.log("[AttackSystem.js line 35] attackComponent.targetStrategy: " + JSON.stringify(attackComponent.effects));
+            //cc.log("[AttackSystem.js line 34] attackComponent: " + JSON.stringify(attackComponent));
+            //cc.log("[AttackSystem.js line 35] attackComponent.targetStrategy: " + JSON.stringify(attackComponent.effects));
             // update count down time
             if (attackComponent.countdown > 0) {
                 attackComponent.countdown -= tick;

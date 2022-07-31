@@ -16,7 +16,7 @@ let RenderSystem = System.extend({
             if (ValidatorECS.isMonster(entity)) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                 let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
-                if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE) {
+                if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID!== GameConfig.ENTITY_ID.BAT) {
                     let lifeComponent = entity.getComponent(LifeComponent);
                     lifeComponent.hp = 0;
                 }
@@ -26,7 +26,7 @@ let RenderSystem = System.extend({
             appearanceComponent.sprite.setLocalZOrder(10000 - positionComponent.y);
 
             // side effect
-            // this._updateHpBarMonsterUI(entity);
+            this._updateHpBarMonsterUI(entity);
         }
 
         this._updateSkeletonComponentPosition();

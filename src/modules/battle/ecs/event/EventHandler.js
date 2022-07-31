@@ -8,7 +8,6 @@ EventDispatcher.getInstance()
     .addEventHandler(EventType.SPAWN_MONSTER, function (data) {
         let battleData = BattleManager.getInstance().getBattleData();
         let currentWave = battleData.dataInGame.currentWave;
-        cc.log(currentWave);
         let monsterWave = battleData.dataInGame.monsterWave;
         if (monsterWave[currentWave].length > 0) {
             let monsterTypeID = battleData.dataInGame.monsterWave[currentWave].pop();
