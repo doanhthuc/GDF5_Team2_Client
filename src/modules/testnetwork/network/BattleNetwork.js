@@ -151,7 +151,7 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleGetBattleInfo: function (cmd, packet) {
-       // cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
+        // cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
         BattleManager.getInstance().getBattleData().setBattleStartTime(packet.battleStartTime);
         BattleManager.getInstance().getBattleData().setWaveAmount(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
@@ -212,8 +212,10 @@ BattleNetwork.Connector = cc.Class.extend({
         let cellObject = playerObjectMap[packet.tileX][packet.tileY];
         cellObject.tower.level = packet.towerLevel;
         EntityFactory.onUpdateTowerLevel(cellObject.tower.entityId, packet.towerLevel);
-
-        cc.log('[BattleNetwork.js line 153] cellObject: ' + JSON.stringify(playerObjectMap[packet.tileX][packet.tileY]));
+        let towerEntity = EntityManager.getInstance().getEntity(cellObject.tower.entityId);
+        cc.log("[BattleNetwork.js line 227]: towerEntity: " + JSON.stringify(towerEntity));
+        let attackComponent = towerEntity.getComponent(AttackComponent);
+        cc.log('[BattleNetwork.js line 165] attackComponent: ' + JSON.stringify(attackComponent));
     },
 
     _handleOpponentUpgradeTower: function (cmd, packet) {
@@ -223,7 +225,6 @@ BattleNetwork.Connector = cc.Class.extend({
         let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
         cellObject.tower.level = packet.towerLevel;
         EntityFactory.onUpdateTowerLevel(cellObject.tower.entityId, packet.towerLevel);
-        cc.log('[BattleNetwork.js line 165] cellObject: ' + JSON.stringify(opponentObjectMap[packet.tileX][packet.tileY]));
     },
 
     _handleDropSpell: function (cmd, packet) {
@@ -266,15 +267,19 @@ BattleNetwork.Connector = cc.Class.extend({
         cc.log('[BattleNetwork.js line 244] received destroy tower packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
-        let cellObject = playerObjectMap[packet.tileX][packet.tileY];
+        let tilePos = cc.p(packet.tileX, packet.tileY);
+        let cellObject = playerObjectMap[tilePos.x][tilePos.y];
         cellObject.objectInCellType = ObjectInCellType.NONE;
         cellObject.tower = null;
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.DESTROY_TOWER, {pos: tilePos, mode: GameConfig.PLAYER});
     },
 
     _handleOpponentDestroyTower: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 253] received destroy tower packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
+        let tilePos = cc.p(packet.tileX, packet.tileY);
         let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
         let towerEntityId = cellObject.tower.entityId;
         cc.log('[BattleNetwork.js line 258] towerEntityId: ' + towerEntityId);
@@ -282,5 +287,7 @@ BattleNetwork.Connector = cc.Class.extend({
         EntityManager.destroy(towerEntity);
         cellObject.objectInCellType = ObjectInCellType.NONE;
         cellObject.tower = null;
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.DESTROY_TOWER, {pos: tilePos, mode: GameConfig.PLAYER});
     }
 })
