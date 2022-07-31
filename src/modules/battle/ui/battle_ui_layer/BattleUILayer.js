@@ -3,7 +3,7 @@ let BattleUILayer = cc.Layer.extend({
         this._super();
 
         this.battleData = battleData;
-        let fakeBattleDeckData = [1, 2, 3, 4];
+        let fakeBattleDeckData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         this.cardDeckListData = new CardDeckListData(fakeBattleDeckData);
         // this.battleData.setCards(this.cardDeckListData.getFirst4CardId(), GameConfig.PLAYER);
 
@@ -24,14 +24,16 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _showDeckCard: function () {
-        this.cardDeckNode = new CardDeckNode(this.cardDeckListData);
+        this.cardDeckNode = new CardDeckNode2(this.cardDeckListData);
         this.cardDeckNode.x = this.width / 2;
         this.cardDeckNode.y = this.cardDeckNode.height / 2;
         this.addChild(this.cardDeckNode);
     },
 
     _showTimer: function () {
-        this.timerNode = new BattleTimerNode(this.battleData.getTimer());
+        //let remainingTime = this.battleData.getBattleStartTime() - Date.now();
+        //cc.log(this.battleData.getBattleStartTime() + " " + TimeUtil.getServerTime() + this.battleData.getBattleStartTime() - TimeUtil.getServerTime());
+        this.timerNode = new BattleTimerNode((this.battleData.getBattleStartTime() - TimeUtil.getServerTime()) / 1000, this.battleData.dataInGame.timer);
         this.timerNode.x = cc.winSize.width / 2 - this.timerNode.width / 2;
         this.timerNode.y = (cc.winSize.height - this.cardDeckNode.height) / 2 + this.cardDeckNode.height;
         this.addChild(this.timerNode);
@@ -101,6 +103,7 @@ let BattleUILayer = cc.Layer.extend({
         let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
         pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
         circleNode.setPosition(pixelPos);
+        circleNode.setTowerTilePos(x, y);
         this.addChild(circleNode, 100);
     },
 

@@ -9,7 +9,13 @@ gv.CMD.UPGRADE_TOWER = 5006;
 gv.CMD.OPPONENT_UPGRADE_TOWER = 5007;
 gv.CMD.DROP_SPELL = 5008;
 gv.CMD.OPPONENT_DROP_SPELL = 5009;
-
+gv.CMD.CHANGE_TOWER_STRATEGY = 5010;
+gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY = 5011;
+gv.CMD.PUT_TRAP = 5012;
+gv.CMD.OPPONENT_PUT_TRAP = 5013;
+gv.CMD.DESTROY_TOWER = 5014;
+gv.CMD.OPPONENT_DESTROY_TOWER = 5015;
+gv.CMD.GET_BATTLE_INFO = 5016;
 let BattleNetwork = BattleNetwork || {};
 
 BattleNetwork.packetMap = {};
@@ -91,6 +97,55 @@ CMDDropSpell = fr.OutPacket.extend({
         this.updateSize();
     }
 })
+
+CMDPutTrap = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.PUT_TRAP);
+    },
+
+    pack: function (tilePos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.updateSize();
+    },
+})
+
+CMDDestroyTower = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.DESTROY_TOWER);
+    },
+
+    pack: function (tilePos) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.updateSize();
+    }
+})
+
+CMDChangeTowerStrategy = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.CHANGE_TOWER_STRATEGY);
+    },
+
+    pack: function (tilePos, strategy) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(tilePos.x);
+        this.putInt(tilePos.y);
+        this.putInt(strategy);
+        this.updateSize();
+    }
+});
 
 BattleNetwork.packetMap[gv.CMD.SEND_MATCHING] = fr.InPacket.extend({
     ctor: function () {
@@ -282,5 +337,95 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_DROP_SPELL] = fr.InPacket.extend({
         this.spellLevel = this.getInt();
         this.pixelX = this.getDouble();
         this.pixelY = this.getDouble();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.PUT_TRAP] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tilePosX = this.getInt();
+        this.tilePosY = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TRAP] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+    readData: function () {
+        this.tilePosX = this.getInt();
+        this.tilePosY = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.CHANGE_TOWER_STRATEGY] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+        this.strategyId = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+        this.strategyId = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.DESTROY_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.OPPONENT_DESTROY_TOWER] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tileX = this.getInt();
+        this.tileY = this.getInt();
+    }
+});
+
+
+BattleNetwork.packetMap[gv.CMD.GET_BATTLE_INFO] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.battleStartTime = this.getLong();
+        this.waveAmount = this.getInt();
+        cc.log(this.battleStartTime,this.waveAmount);
+        this.monsterWave = [];
+        this.monsterWave.push([]);
+        for (let i = 0; i < this.waveAmount; i++) {
+            let wave = [];
+            let monsterAmount = this.getInt();
+            for (let j = 0; j < monsterAmount; j++) {
+                wave.push(this.getInt());
+            }
+            this.monsterWave.push(wave);
+        }
     }
 });

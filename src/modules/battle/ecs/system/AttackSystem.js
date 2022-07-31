@@ -15,7 +15,8 @@ let AttackSystem = System.extend({
 
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
-
+            //cc.log("[AttackSystem.js line 34] attackComponent: " + JSON.stringify(attackComponent));
+            //cc.log("[AttackSystem.js line 35] attackComponent.targetStrategy: " + JSON.stringify(attackComponent.effects));
             // update count down time
             if (attackComponent.countdown > 0) {
                 attackComponent.countdown -= tick;
@@ -36,20 +37,19 @@ let AttackSystem = System.extend({
                 }
                 if (monsterInAttackRange.length > 0) {
                     // TODO: switch case target_strategy here
-                    let targetMonster = this._findTargetMonsterByStrategy(attackComponent.targetStrategy, monsterInAttackRange);
+                    let towerPos = tower.getComponent(PositionComponent);
+                    let targetMonster = this._findTargetMonsterByStrategy(towerPos, attackComponent.targetStrategy, monsterInAttackRange);
                     if (targetMonster != null) {
                         let monsterPos = targetMonster.getComponent(PositionComponent);
-                        let towerPos = tower.getComponent(PositionComponent);
-
                         this._changeTowerAnimation(tower, targetMonster);
 
                         if (tower.typeID === GameConfig.ENTITY_ID.FROG_TOWER) {
                             let distance = this._distanceFrom(tower, targetMonster);
                             let k = attackComponent.range / distance;
                             let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
-                            EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode);
+                            EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
                         } else {
-                            EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode)
+                            EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
                         }
                         attackComponent.countdown = attackComponent.speed;
                     }
@@ -64,32 +64,50 @@ let AttackSystem = System.extend({
         return Utils.euclidDistance(towerPos, monsterPos);
     },
 
-    _findTargetMonsterByStrategy: function (strategy, monsterInAttackRange) {
+    _findTargetMonsterByStrategy: function (towerPos, strategy, monsterInAttackRange) {
         //check DarkGiantBoss
         for (let monster of monsterInAttackRange) {
             if (monster.typeID === GameConfig.ENTITY_ID.DARK_GIANT) return monster;
         }
-        return monsterInAttackRange[0];
+        // return monsterInAttackRange[0];
         let targetMonster = null;
+        let monsterIndex = -1;
         switch (strategy) {
-            case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP:
-                let maxHP = -1;
-                let maxIdx = -1;
-                for (let i = 0; i < monsterInAttackRange.length; i++) {
-                    let monsterInfo = monsterInAttackRange[i].getComponent(LifeComponent);
-                    if (monsterInfo.hp > maxHP) {
-                        maxHP = monsterInfo.hp;
-                        maxIdx = i;
-                    }
-                }
-                targetMonster = monsterInAttackRange[maxIdx];
+            case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
+               // cc.log("[AttackSystem] find target by max hp");
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    return monsterHP > monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
-            case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP:
+            }
+            case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP: {
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    return monsterHP < monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
-            case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE:
+            }
+            case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE: {
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterPos = cur.getComponent(PositionComponent);
+                    let distance = Utils.euclidDistance(towerPos, monsterPos);
+                    return distance > monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
-            case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE:
+            }
+            case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE: {
+                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    let monsterPos = cur.getComponent(PositionComponent);
+                    let distance = Utils.euclidDistance(towerPos, monsterPos);
+                    return distance < monsterInAttackRange[acc] ? idx : acc;
+                }, 0);
+                targetMonster = monsterInAttackRange[monsterIndex];
                 break;
+            }
             default:
                 // TODO: create custom error type
                 throw new Error("Invalid strategy");

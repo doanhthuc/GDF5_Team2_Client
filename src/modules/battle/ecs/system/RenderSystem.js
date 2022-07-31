@@ -12,6 +12,16 @@ let RenderSystem = System.extend({
         for (let entity of entityList) {
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
+
+            if (ValidatorECS.isMonster(entity)) {
+                let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
+                let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
+                if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID!== GameConfig.ENTITY_ID.BAT) {
+                    let lifeComponent = entity.getComponent(LifeComponent);
+                    lifeComponent.hp = 0;
+                }
+            }
+
             appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
             appearanceComponent.sprite.setLocalZOrder(10000 - positionComponent.y);
 
@@ -33,20 +43,18 @@ let RenderSystem = System.extend({
     },
 
     _updateHpBarMonsterUI: function (entity) {
-        if (ValidatorECS.isMonster(entity)) {
-            let appearanceComponent = entity.getComponent(AppearanceComponent);
-            let lifeComponent = entity.getComponent(LifeComponent);
-            if (appearanceComponent) {
-
-                let sprite = appearanceComponent.sprite;
-                let hpNode = sprite.getChildByName("hp");
-                if (hpNode) {
-                    let hpProgressBar = hpNode.getChildByName("progress_bar");
-                    hpProgressBar.setPercent(lifeComponent.hp / lifeComponent.maxHP * 100);
-                    if (hpProgressBar.getPercent() == 100) hpNode.setVisible(false);
-                    else hpNode.setVisible(true);
-                }
-
+        let appearanceComponent = entity.getComponent(AppearanceComponent);
+        let lifeComponent = entity.getComponent(LifeComponent);
+        if (appearanceComponent && lifeComponent) {
+            let sprite = appearanceComponent.sprite;
+            let hpNode = sprite.getChildByName("hp");
+            if (hpNode) {
+                let hpProgressBar = hpNode.getChildByName("progress_bar");
+                hpProgressBar.setPercent(lifeComponent.hp / lifeComponent.maxHP * 100);
+                if (hpProgressBar.getPercent() === 100)
+                    hpNode.setVisible(false);
+                else
+                    hpNode.setVisible(true);
             }
         }
     },

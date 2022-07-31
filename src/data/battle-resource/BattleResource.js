@@ -15,6 +15,7 @@ const BattleResource = {
 
     CARD_DECK_NODE: "ui/battle/battle_ui_layer/card/BattleCardDeckNode.json",
     BATTLE_CARD_NODE: "ui/battle/battle_ui_layer/card/BattleCardNode.json",
+    BATTLE_CARD_NODE_2: "ui/battleCardDeck/BattleCardSlot.json",
     ENERGY_PROGRESS_NODE: "ui/battle/battle_ui_layer/card/EnergyProgressNode.json",
 
     HOUSE_ENERGY_NODE: "ui/battle/battle_ui_layer/energy/HouseEnergy.json",

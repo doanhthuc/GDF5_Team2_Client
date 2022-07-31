@@ -9,13 +9,17 @@ let OpponentAction = cc.Class.extend({
     // },
 
     buildTower: function (towerId, tilePos) {
-        cc.log('[OpponentAction line 12] buildTower: '  + JSON.stringify(tilePos) + '  towerId: ' + towerId);
+        cc.log('[OpponentAction line 12] buildTower: ' + JSON.stringify(tilePos) + '  towerId: ' + towerId);
         BattleManager.getInstance().getBattleLayer().buildTower(towerId, tilePos, GameConfig.OPPONENT);
     },
 
     dropSpell: function (spellId, pixelPos) {
-        cc.log('[OpponentAction line 20] dropSpell: '  + JSON.stringify(pixelPos) + '  spellId: ' + spellId);
+        cc.log('[OpponentAction line 20] dropSpell: ' + JSON.stringify(pixelPos) + '  spellId: ' + spellId);
         BattleManager.getInstance().getBattleLayer().dropSpell(spellId, pixelPos, GameConfig.OPPONENT);
+    },
+
+    putTrap: function (tilePos) {
+        EntityFactory.createTrap(tilePos, GameConfig.OPPONENT);
     }
 });
 

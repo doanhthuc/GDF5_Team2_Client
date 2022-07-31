@@ -19,6 +19,7 @@ let MonsterAnimationConfig = {
                     end: 11,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT: {
@@ -29,6 +30,7 @@ let MonsterAnimationConfig = {
                     end: 35,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_UP: {
@@ -39,6 +41,7 @@ let MonsterAnimationConfig = {
                     end: 59,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_DOWN: {
@@ -49,6 +52,7 @@ let MonsterAnimationConfig = {
                     end: 23,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_UP: {
@@ -59,6 +63,7 @@ let MonsterAnimationConfig = {
                     end: 47,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_LEFT_DOWN: {
@@ -99,6 +104,7 @@ let MonsterAnimationConfig = {
                     end: 9,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT: {
@@ -109,6 +115,7 @@ let MonsterAnimationConfig = {
                     end: 29,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_UP: {
@@ -119,6 +126,7 @@ let MonsterAnimationConfig = {
                     end: 49,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_DOWN: {
@@ -129,6 +137,7 @@ let MonsterAnimationConfig = {
                     end: 19,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_UP: {
@@ -139,6 +148,7 @@ let MonsterAnimationConfig = {
                     end: 39,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_LEFT_DOWN: {
@@ -179,6 +189,7 @@ let MonsterAnimationConfig = {
                     end: 15,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT: {
@@ -189,6 +200,7 @@ let MonsterAnimationConfig = {
                     end: 47,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_UP: {
@@ -199,6 +211,7 @@ let MonsterAnimationConfig = {
                     end: 79,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_DOWN: {
@@ -209,6 +222,7 @@ let MonsterAnimationConfig = {
                     end: 31,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_UP: {
@@ -219,6 +233,7 @@ let MonsterAnimationConfig = {
                     end: 63,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_LEFT_DOWN: {
@@ -259,6 +274,7 @@ let MonsterAnimationConfig = {
                     end: 9,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT: {
@@ -269,6 +285,7 @@ let MonsterAnimationConfig = {
                     end: 29,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_UP: {
@@ -279,6 +296,7 @@ let MonsterAnimationConfig = {
                     end: 49,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_DOWN: {
@@ -289,6 +307,7 @@ let MonsterAnimationConfig = {
                     end: 19,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_UP: {
@@ -299,6 +318,7 @@ let MonsterAnimationConfig = {
                     end: 39,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_LEFT_DOWN: {
@@ -339,6 +359,7 @@ let MonsterAnimationConfig = {
                     end: 7,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT: {
@@ -349,6 +370,7 @@ let MonsterAnimationConfig = {
                     end: 23,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_UP: {
@@ -359,6 +381,7 @@ let MonsterAnimationConfig = {
                     end: 39,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_DOWN: {
@@ -369,6 +392,7 @@ let MonsterAnimationConfig = {
                     end: 15,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_UP: {
@@ -379,6 +403,7 @@ let MonsterAnimationConfig = {
                     end: 31,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_LEFT_DOWN: {
@@ -419,6 +444,7 @@ let MonsterAnimationConfig = {
                     end: 10,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT: {
@@ -429,6 +455,7 @@ let MonsterAnimationConfig = {
                     end: 32,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_UP: {
@@ -439,6 +466,7 @@ let MonsterAnimationConfig = {
                     end: 54,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_DOWN: {
@@ -449,6 +477,7 @@ let MonsterAnimationConfig = {
                     end: 21,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_UP: {
@@ -459,6 +488,7 @@ let MonsterAnimationConfig = {
                     end: 43,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_LEFT_DOWN: {
@@ -499,6 +529,7 @@ let MonsterAnimationConfig = {
                     end: 11,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT: {
@@ -509,6 +540,7 @@ let MonsterAnimationConfig = {
                     end: 35,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_UP: {
@@ -519,6 +551,7 @@ let MonsterAnimationConfig = {
                     end: 59,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_DOWN: {
@@ -529,6 +562,7 @@ let MonsterAnimationConfig = {
                     end: 23,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_UP: {
@@ -539,6 +573,7 @@ let MonsterAnimationConfig = {
                     end: 47,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_LEFT_DOWN: {
@@ -579,6 +614,7 @@ let MonsterAnimationConfig = {
                     end: 13,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT: {
@@ -589,6 +625,7 @@ let MonsterAnimationConfig = {
                     end: 41,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_UP: {
@@ -599,6 +636,7 @@ let MonsterAnimationConfig = {
                     end: 69,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_DOWN: {
@@ -609,6 +647,7 @@ let MonsterAnimationConfig = {
                     end: 27,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_UP: {
@@ -619,6 +658,7 @@ let MonsterAnimationConfig = {
                     end: 55,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_LEFT_DOWN: {
@@ -659,6 +699,7 @@ let MonsterAnimationConfig = {
                     end: 12,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT: {
@@ -669,6 +710,7 @@ let MonsterAnimationConfig = {
                     end: 38,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_UP: {
@@ -679,6 +721,7 @@ let MonsterAnimationConfig = {
                     end: 64,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_DOWN: {
@@ -689,6 +732,7 @@ let MonsterAnimationConfig = {
                     end: 25,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_RIGHT_UP: {
@@ -699,6 +743,7 @@ let MonsterAnimationConfig = {
                     end: 51,
                     repeat: true,
                     time: 1000,
+                    shadow: true,
                 }
             },
             MOVE_LEFT_DOWN: {

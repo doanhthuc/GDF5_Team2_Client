@@ -139,6 +139,6 @@ const TOWER_NAME = {
     2: "boomerang",
     3: "bunnyOil",
     4: "bear",
-    5: "snake",
-    6: "goat",
+    5: "goat",
+    6: "snake",
 }

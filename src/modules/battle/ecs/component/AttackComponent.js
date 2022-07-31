@@ -2,9 +2,9 @@ let AttackComponent = Component.extend({
     name: "AttackComponent",
     typeID: GameConfig.COMPONENT_ID.ATTACK,
 
-    ctor: function (damage, targetStrategy, range, speed, countdown, effects) {
+    ctor: function (damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius) {
         this._super();
-        this.reset(damage, targetStrategy, range, speed, countdown, effects);
+        this.reset(damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius);
     },
 
     setDamage: function (damage) {
@@ -29,7 +29,15 @@ let AttackComponent = Component.extend({
         return this._damage;
     },
 
-    reset: function (damage, targetStrategy, range, speed, countdown, effects) {
+    getTargetStrategy: function () {
+        return this.targetStrategy;
+    },
+
+    setTargetStrategy: function (targetStrategy) {
+        this.targetStrategy = targetStrategy;
+    },
+
+    reset: function (damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius) {
         this.originDamage = damage;
         this._damage = damage;
         this.targetStrategy = targetStrategy;
@@ -39,12 +47,26 @@ let AttackComponent = Component.extend({
         this.speed = speed;
         this.countdown = countdown;
         this.effects = effects || [];
+        this.bulletSpeed = bulletSpeed;
+        this.bulletRadius = bulletRadius;
         this.effects.push(new DamageEffect(this._damage));
     },
 
     clone: function () {
         return ComponentFactory.create(AttackComponent, this.damage, this.targetStrategy, this.range,
-            this.speed, this.countdown, this.effects);
+            this.speed, this.countdown, this.effects, this.bulletSpeed, this.bulletRadius);
+    },
+
+    updateAttackStatistic: function (damage, range, speed, effects, bulletSpeed, bulletRadius) {
+        this._damage = damage;
+        this.range = range;
+        this.speed = speed;
+        this.effects = effects;
+        this.bulletSpeed = bulletSpeed;
+        this.bulletRadius = bulletRadius;
+        this.effects.push(new DamageEffect(this._damage));
+        cc.log("[AttackComponent.js line 100] this.effects: " + JSON.stringify(this.effects));
+        cc.log("[AttackComponent.js line 101] this._damage " + this._damage);
     }
 });
 AttackComponent.typeID = GameConfig.COMPONENT_ID.ATTACK;

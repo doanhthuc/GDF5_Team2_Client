@@ -1,14 +1,17 @@
 const CardDeckListData = cc.Class.extend({
     ctor: function (battleDeckIdList) {
         this.cardDeckIdList = battleDeckIdList || [];
-        this.curIndex = 0;
     },
 
     getNextCardId: function () {
-        let cardId = this.cardDeckIdList[this.curIndex];
-        this.curIndex++;
-        this.curIndex = this.curIndex % this.cardDeckIdList.length;
-        return cardId;
+        if (this.cardDeckIdList.length < 0) {
+            return null;
+        }
+        return this.cardDeckIdList.shift();
+    },
+
+    pushUsedCardIntoDeck: function (cardId) {
+        this.cardDeckIdList.push(cardId);
     },
 
     setCardDeckIdList: function (cardIdList) {
@@ -25,6 +28,4 @@ const CardDeckListData = cc.Class.extend({
         }
         return cardIdList;
     },
-
-
 })

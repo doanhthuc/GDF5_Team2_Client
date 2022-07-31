@@ -1,6 +1,6 @@
 let TowerConfig = TowerConfig || {};
 
-TowerConfig.getTowerConfigFromJson = function (towerId, level) {
+TowerConfig.getTowerConfigFromJson = (towerId, level) => {
     let towerRank = ReadConfigUtils.getTowerRankByLevel(level);
     let towerConfig = JsonReader.getTowerConfig()[towerId];
     let cloneConfig = _.clone(towerConfig);
@@ -8,31 +8,44 @@ TowerConfig.getTowerConfigFromJson = function (towerId, level) {
     return cloneConfig;
 }
 
-TowerConfig.getBunnyOilGunTowerConfigFromJson = (towerId, level) => {
+TowerConfig.getBunnyOilGunTowerConfigFromJson = (level) => {
+    let towerId = GameConfig.ENTITY_ID.BUNNY_TOWER;
     let towerRank = ReadConfigUtils.getTowerRankByLevel(level);
     let towerConfig = TowerConfig.getTowerConfigFromJson(towerId, level);
     let targetBuffConfigData = JsonReader.getTargetBuffConfig()[towerConfig.bulletTargetBuffType]
-    towerConfig.slowDuration = targetBuffConfigData.duration[towerRank];
-    towerConfig.slowValue = targetBuffConfigData.effects[towerRank][0].value;
+    cc.log("targetBuffConfigData line 15:  ", JSON.stringify(towerConfig));
+    let cloneConfig = _.clone(towerConfig);
+    cloneConfig.slowDuration = targetBuffConfigData.duration[towerRank];
+    cloneConfig.slowValue = targetBuffConfigData.effects[towerRank][0].value;
+    return cloneConfig;
 }
 
-TowerConfig.getBearIceGunTowerConfigFromJson = (towerId, level) => {
+TowerConfig.getBearIceGunTowerConfigFromJson = (level) => {
+    let towerId = GameConfig.ENTITY_ID.BEAR_TOWER;
     let towerRank = ReadConfigUtils.getTowerRankByLevel(level);
     let towerConfig = TowerConfig.getTowerConfigFromJson(towerId, level);
     let targetBuffConfigData = JsonReader.getTargetBuffConfig()[towerConfig.bulletTargetBuffType]
+    // let cloneConfig = _.clone(towerConfig);
     towerConfig.frozenDuration = targetBuffConfigData.duration[towerRank];
+    return towerConfig;
 }
 
-TowerConfig.getDamageGoatTowerConfigFromJson = (towerId, level) => {
+TowerConfig.getDamageGoatTowerConfigFromJson = (level) => {
+    let towerId = GameConfig.ENTITY_ID.GOAT_TOWER;
     let towerRank = ReadConfigUtils.getTowerRankByLevel(level);
     let towerConfig = TowerConfig.getTowerConfigFromJson(towerId, level);
     let towerBuffConfigData = JsonReader.getTowerBuffConfig()[towerConfig.auraTowerBuffType]
+    // let cloneConfig = _.clone(towerConfig);
     towerConfig.damageUpValue = towerBuffConfigData.effects[towerRank][0].value;
+    return towerConfig;
 }
 
-TowerConfig.getAttackSpeedSnakeTowerConfigFromJson = (towerId, level) => {
+TowerConfig.getAttackSpeedSnakeTowerConfigFromJson = (level) => {
+    let towerId = GameConfig.ENTITY_ID.SNAKE_TOWER;
     let towerRank = ReadConfigUtils.getTowerRankByLevel(level);
     let towerConfig = TowerConfig.getTowerConfigFromJson(towerId, level);
     let towerBuffConfigData = JsonReader.getTowerBuffConfig()[towerConfig.auraTowerBuffType]
+    // let cloneConfig = _.clone(towerConfig);
     towerConfig.attackSpeedUpValue = towerBuffConfigData.effects[towerRank][0].value;
+    return towerConfig;
 }
