@@ -124,13 +124,18 @@ const CardDeckNode2 = cc.Node.extend({
             this.removeDragSprite(this.selectedCardType);
             if (selectedCard.type === this.selectedCardType) {
                 // let card = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
-                cc.log(JSON.stringify(this.selectedCardType));
                 this.selectedCardType = null;
                 this._moveCardDown(selectedCard)
             } else {
                 if (this.selectedCardType !== null) {
                     let prevSelectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
                     this._moveCardDown(prevSelectedCard);
+                }
+                if (!this.validateEnoughEnergySelectCard(selectedCard.type)) {
+                    BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lưuong");
+                    this.selectedCardType = null;
+                    BattleManager.getInstance().getBattleLayer().selectedCard = null;
+                    return false;
                 }
                 let card = selectedCard;
                 this.selectedCardType = card.type;
