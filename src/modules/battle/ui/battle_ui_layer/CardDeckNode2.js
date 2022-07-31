@@ -6,6 +6,7 @@ const CardDeckNode2 = cc.Node.extend({
         this.selectedCardType = null;
         this.nextCardPosition = null;
         this.isCardPuttedIntoMap = false;
+        this.isDragging = false;
         this.cardSlotNodeList = [];
         this.cardSlotNodeFixedPosList = [];
         this.spriteDragManager = {};
@@ -55,6 +56,7 @@ const CardDeckNode2 = cc.Node.extend({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
                 onTouchBegan: this._onTouchBegan.bind(this),
                 onTouchMoved: this._onTouchMoved.bind(this),
+                onTouchEnded: this._onTouchEnded.bind(this),
             }, cardSlot);
         }
 
@@ -99,6 +101,7 @@ const CardDeckNode2 = cc.Node.extend({
     },
 
     _onTouchBegan: function (touch, event) {
+        this.isDragging = false;
         let touchPos = touch.getLocation();
         let selectedCard = event.getCurrentTarget();
         let selectedCardBoundingBox = cc.rect(-selectedCard.width / 2, -selectedCard.height / 2, selectedCard.width, selectedCard.height);
@@ -114,7 +117,7 @@ const CardDeckNode2 = cc.Node.extend({
             } else {
                 if (this.selectedCardType !== null) {
                     let prevSelectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
-                    // this._moveCardDown(prevSelectedCard);
+                    this._moveCardDown(prevSelectedCard);
                 }
                 let card = selectedCard;
                 this.selectedCardType = card.type;
@@ -127,6 +130,7 @@ const CardDeckNode2 = cc.Node.extend({
     },
 
     _onTouchMoved: function (touch, event) {
+        this.isDragging = true;
         let selectedCard = event.getCurrentTarget();
         // cc.log("CardDeckNode2.js line 100: " + JSON.stringify(selectedCard))
         let touchPos = touch.getLocation();
@@ -155,6 +159,14 @@ const CardDeckNode2 = cc.Node.extend({
                     this.spriteDragManager[cardType].setVisible(false);
                 }
             }
+        }
+    },
+
+    _onTouchEnded: function (touch, event) {
+        if (this.isDragging && this.selectedCardType !== null) {
+            this.isDragging = false;
+            let selectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
+            this.removeDragSprite(this.selectedCardType);
         }
     },
 
