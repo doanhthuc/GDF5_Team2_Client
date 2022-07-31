@@ -54,26 +54,31 @@ let CircleTarget = cc.Node.extend({
     _handlerCancelBtn: function () {
         cc.error("cancel_btn");
         this.destroyTower(this.towerTilepos);
+        this.destroy();
     },
 
     _handlerMinHP: function () {
         cc.error("min_hp")
         this.changeTowerTargetStrategy(GameConfig.TOWER_TARGET_STRATEGY.MIN_HP);
+        this.destroy();
     },
 
     _handlerMaxHP: function () {
         cc.error("max_hp")
         this.changeTowerTargetStrategy(GameConfig.TOWER_TARGET_STRATEGY.MAX_HP);
+        this.destroy();
     },
 
     _handlerMinDistance: function () {
         cc.error("min_distance")
         this.changeTowerTargetStrategy(GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE);
+        this.destroy();
     },
 
     _handlerMaxDistance: function () {
         cc.error("max_distance")
         this.changeTowerTargetStrategy(GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE);
+        this.destroy();
     },
 
     _findTowerEntityIdByTilePos: function (tilePos, mode = GameConfig.PLAYER) {

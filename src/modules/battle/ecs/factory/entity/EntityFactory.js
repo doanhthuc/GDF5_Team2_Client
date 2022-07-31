@@ -21,6 +21,8 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
 
+        cc.log("[EntityFactory] createBullet: " + JSON.stringify(effects) + " ");
+
         // NOTE: get component from pool
         let bulletNode = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, 0.6);
