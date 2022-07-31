@@ -230,6 +230,10 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
 
 EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
     let towerEntity = EntityManager.getInstance().getEntity(entityId);
+    // let towerRank = ReadConfigUtils.getTowerCharRankByLevel(towerLevel);
+    // let animationConfig = towerEntity.getComponent(SpriteSheetAnimationComponent);
+    // let towerName = TOWER_NAME[towerEntity.typeID];
+    // animationConfig.reset(TowerAnimationConfig[towerName].level[towerRank]);
     switch (towerEntity.typeID) {
         case GameConfig.ENTITY_ID.CANNON_TOWER:
         case GameConfig.ENTITY_ID.WIZARD_TOWER:
