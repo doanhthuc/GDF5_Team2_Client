@@ -182,7 +182,8 @@ let BattleLayer = cc.Layer.extend({
     //     // //    // setTimeout(this.createMonster(pixelPos,mode,entityID),time);
     //     // // )
     // },
-    createMonster: function (pixelPos, mode, entityID) {
+    createMonsterByEntityID: function (mode, entityID) {
+        let pixelPos = Utils.tile2Pixel(0, 4, mode);
         switch (entityID) {
             case GameConfig.ENTITY_ID.SWORD_MAN:
                 EntityFactory.createSwordsmanMonster(pixelPos, mode);

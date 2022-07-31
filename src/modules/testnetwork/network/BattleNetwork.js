@@ -151,7 +151,7 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleGetBattleInfo: function (cmd, packet) {
-       // cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
+        cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
         BattleManager.getInstance().getBattleData().setBattleStartTime(packet.battleStartTime);
         BattleManager.getInstance().getBattleData().setWaveAmount(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);

@@ -418,6 +418,7 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_INFO] = fr.InPacket.extend({
         this.waveAmount = this.getInt();
         cc.log(this.battleStartTime,this.waveAmount);
         this.monsterWave = [];
+        this.monsterWave.push([]);
         for (let i = 0; i < this.waveAmount; i++) {
             let wave = [];
             let monsterAmount = this.getInt();
