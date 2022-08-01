@@ -48,16 +48,18 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let bulletNode = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_bullet_0000.png");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
-        let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
+        // let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
 
         // let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetPosition);
 
+        BattleAnimation.createBearBullet(startPosition, targetPosition, bulletNode, bulletSpeed, mode);
+
         entity.addComponent(infoComponent)
             .addComponent(positionComponent)
-            .addComponent(appearanceComponent)
+            // .addComponent(appearanceComponent)
             .addComponent(velocityComponent)
             .addComponent(collisionComponent);
         return entity;
