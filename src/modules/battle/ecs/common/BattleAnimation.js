@@ -44,11 +44,11 @@ BattleAnimation.animationDamage = function (entity) {
             childSprite.runAction(cc.sequence(action1, action2));
         }
 
-        let hpNode = appearance.sprite.getChildByName("hp");
-        if (hpNode && hpNode.isVisible() === false) {
-            hpNode.setVisible(true);
-            _.delay(() => hpNode.setVisible(false), 1000);
-        }
+        // let hpNode = appearance.sprite.getChildByName("hp");
+        // if (hpNode && hpNode.isVisible() === false) {
+        //     hpNode.setVisible(true);
+        //     _.delay(() => hpNode.setVisible(false), 1000);
+        // }
     }
 }
 

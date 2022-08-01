@@ -21,6 +21,7 @@ let BattleUILayer = cc.Layer.extend({
         this._showPlayerInfo();
         this._showBackButton();
         this._initNotification();
+        // this.showTargetCircle();
     },
 
     _showDeckCard: function () {
@@ -99,6 +100,12 @@ let BattleUILayer = cc.Layer.extend({
      * @param y tile pos of player map
      */
     showTargetCircle: function (x, y) {
+        // this.circleNode = new CircleTarget();
+        // this.circleNode.retain();
+        // this.addChild(this.circleNode, 10000);
+        // this.circleNode.setVisible(true);
+        // this.circleNode.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        // this.circleNode.setPosition(cc.p(0,0));
         let circleNode = new CircleTarget();
         let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
         pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
@@ -106,6 +113,21 @@ let BattleUILayer = cc.Layer.extend({
         circleNode.setTowerTilePos(x, y);
         this.addChild(circleNode, 100);
     },
+
+    // setTargetCirclePos: function (x, y) {
+    //     let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
+    //     pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
+    //     cc.log("setTargetCirclePos " + this.circleNode.getPosition().x + " " + this.circleNode.getPosition().y + " " + this.circleNode.isVisible());
+    //     cc.log(pixelPos)
+    //     if (this.circleNode.getPosition().x === pixelPos.x && this.circleNode.y === pixelPos.y && this.circleNode.isVisible()) {
+    //         this.circleNode.setVisible(false);
+    //     } else {
+    //         cc.error("aaaaaaaaaaaaaaaaaaa")
+    //         this.circleNode.setPosition(cc.winSize.width / 2 - 50, cc.winSize.height / 2 - 50)
+    //         this.circleNode.setTowerTilePos(x, y);
+    //         this.circleNode.setVisible(true);
+    //     }
+    // },
 
     _backToLobby: function () {
         fr.view(MainScreen);

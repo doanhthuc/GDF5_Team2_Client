@@ -365,6 +365,9 @@ let BattleLayer = cc.Layer.extend({
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             onTouchBegan: function (touch, event) {
+                if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
+                    return false;
+                }
                 let globalPos = touch.getLocation();
                 let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
