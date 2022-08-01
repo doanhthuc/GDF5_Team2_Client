@@ -20,10 +20,11 @@ let RenderSystem = System.extend({
                     let lifeComponent = entity.getComponent(LifeComponent);
                     lifeComponent.hp = 0;
                 }
+
+                appearanceComponent.sprite.setLocalZOrder(10000 - positionComponent.y);
             }
 
             appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
-            appearanceComponent.sprite.setLocalZOrder(10000 - positionComponent.y);
 
             // side effect
             this._updateHpBarMonsterUI(entity);
