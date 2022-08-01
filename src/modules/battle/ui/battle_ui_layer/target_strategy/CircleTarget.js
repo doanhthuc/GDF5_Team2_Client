@@ -54,6 +54,9 @@ let CircleTarget = cc.Node.extend({
     _handlerCancelBtn: function () {
         cc.error("cancel_btn");
         this.destroyTower(this.towerTilepos);
+        let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
+        //Fixme: add energy plus when destroy tower
+        deckEnergyProgress.plusEnergy(6);
         this.destroy();
     },
 

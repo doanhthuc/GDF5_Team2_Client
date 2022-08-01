@@ -48,7 +48,7 @@ const CardNode = cc.Node.extend({
         this.upgradeReadyAnimation.setPosition(0, -this.cardBorderImg.height / 2);
         this.upgradeReadyAnimation.setAnimation(0, 'card_upgrade_ready', true);
         this.addChild(this.upgradeReadyAnimation, 4);
-        this.upgradeReadyAnimationTxt = new cc.LabelTTF("", "font/SVN-Supercell Magic.ttf");
+        this.upgradeReadyAnimationTxt = new cc.LabelTTF("", "textures/font/SVN-Supercell Magic.ttf");
         this.upgradeReadyAnimation.addChild(this.upgradeReadyAnimationTxt);
         this.upgradeReadyAnimation.setVisible(false);
     },

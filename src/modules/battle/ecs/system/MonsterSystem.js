@@ -19,8 +19,9 @@ let MonsterSystem = System.extend({
                 BattleUILayer.minusHouseEnergy(monsterInfo.damageEnergy, monster.mode);
                 BattleAnimation.animationHouse(monster.mode);
                 BattleAnimation.animationPlusEnergy(monsterPos, 10, monster.mode);
-
                 EntityManager.destroy(monster);
+                let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
+                deckEnergyProgress.plusEnergy(10);
             }
         }
     }
