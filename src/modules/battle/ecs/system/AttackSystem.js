@@ -73,7 +73,7 @@ let AttackSystem = System.extend({
         let monsterIndex = -1;
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
-                cc.log("[AttackSystem] find target by max hp");
+                // cc.log("[AttackSystem] find target by max hp");
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
                     let monsterHP = cur.getComponent(LifeComponent).hp;
                     return monsterHP > monsterInAttackRange[acc] ? idx : acc;
