@@ -51,6 +51,9 @@ const CardNode = cc.Node.extend({
         this.upgradeReadyAnimationTxt = new cc.LabelTTF("", "res/textures/font/SVN-Supercell Magic.ttf");
         this.upgradeReadyAnimation.addChild(this.upgradeReadyAnimationTxt);
         this.upgradeReadyAnimation.setVisible(false);
+
+        this._width = this.cardBorderImg.getContentSize().width;
+        this._height = this.cardBorderImg.getContentSize().height;
     },
 
     setCardEnergyTxt: function (energy) {
@@ -69,8 +72,12 @@ const CardNode = cc.Node.extend({
 
     onCardClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED && this.cardModel) {
-            PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setCardModel(this.cardModel);
-            PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL);
+            if (ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE).isSelectingCardToBattleDeck) {
+                ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE).onSelectCardInBattleDeckToSwap(this.cardModel);
+            } else {
+                PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setCardModel(this.cardModel);
+                PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL);
+            }
         }
     },
 
@@ -95,6 +102,12 @@ const CardNode = cc.Node.extend({
             this.upgradeReadyAnimation.setVisible(true);
             this.upgradeReadyAnimationTxt.setString(accumulatedCard + '/' + JsonReader.getCardUpgradeConfig()[this.cardModel.level + 1].fragments);
         }
+    },
+
+    setUpgradeProgressBarVisible: function (visible) {
+        this.progressBorderImg.setVisible(visible);
+        this.upgradeReadyAnimation.setVisible(visible);
+        this.accumulateTxt.setVisible(visible);
     }
 });
 

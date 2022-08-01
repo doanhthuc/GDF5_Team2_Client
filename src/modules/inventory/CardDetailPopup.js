@@ -159,7 +159,9 @@ const CardDetailPopup = cc.Node.extend({
 
     onSelectBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-            cc.log('Card DetailPopup line 122 : onSelectBtnClick');
+            let inventoryLayer = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE);
+            inventoryLayer.onSelectCardBtnClick(this.cardModel);
+            this.setVisible(false);
         }
     },
 
