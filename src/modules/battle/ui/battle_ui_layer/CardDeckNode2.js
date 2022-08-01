@@ -6,6 +6,7 @@ const CardDeckNode2 = cc.Node.extend({
         this.selectedCardType = null;
         this.nextCardPosition = null;
         this.isCardPuttedIntoMap = false;
+        this.isDragging = false;
         this.cardSlotNodeList = [];
         this.cardSlotNodeFixedPosList = [];
         this.spriteDragManager = {};
@@ -25,6 +26,8 @@ const CardDeckNode2 = cc.Node.extend({
                 this.handlePutCardIntoMap.bind(this))
             .addEventHandler(EventType.PUT_TRAP,
                 this.handlePutCardIntoMap.bind(this))
+            .addEventHandler(EventType.INVALID_PUT_CARD_POSITION,
+                this.handleInvalidPutCardPosition.bind(this));
     },
 
     init: function () {
@@ -55,9 +58,21 @@ const CardDeckNode2 = cc.Node.extend({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
                 onTouchBegan: this._onTouchBegan.bind(this),
                 onTouchMoved: this._onTouchMoved.bind(this),
+                // onTouchEnded: this._onTouchEnded.bind(this),
             }, cardSlot);
         }
 
+    },
+
+    handleInvalidPutCardPosition: function (data) {
+        let cardId = data.cardId;
+        let cardSlot = this.cardSlotNodeList.find((cardSlot) => cardSlot.type === cardId);
+        if (cardSlot) {
+            this._moveCardDown(cardSlot);
+        }
+        this.removeDragSprite(this.selectedCardType);
+        this.selectedCardType = null;
+        BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
     initNextCardSlot: function () {
@@ -99,6 +114,7 @@ const CardDeckNode2 = cc.Node.extend({
     },
 
     _onTouchBegan: function (touch, event) {
+        this.isDragging = false;
         let touchPos = touch.getLocation();
         let selectedCard = event.getCurrentTarget();
         let selectedCardBoundingBox = cc.rect(-selectedCard.width / 2, -selectedCard.height / 2, selectedCard.width, selectedCard.height);
@@ -108,13 +124,18 @@ const CardDeckNode2 = cc.Node.extend({
             this.removeDragSprite(this.selectedCardType);
             if (selectedCard.type === this.selectedCardType) {
                 // let card = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
-                cc.log(JSON.stringify(this.selectedCardType));
                 this.selectedCardType = null;
                 this._moveCardDown(selectedCard)
             } else {
                 if (this.selectedCardType !== null) {
                     let prevSelectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
-                    // this._moveCardDown(prevSelectedCard);
+                    this._moveCardDown(prevSelectedCard);
+                }
+                if (!this.validateEnoughEnergySelectCard(selectedCard.type)) {
+                    BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lưuong");
+                    this.selectedCardType = null;
+                    BattleManager.getInstance().getBattleLayer().selectedCard = null;
+                    return false;
                 }
                 let card = selectedCard;
                 this.selectedCardType = card.type;
@@ -127,6 +148,7 @@ const CardDeckNode2 = cc.Node.extend({
     },
 
     _onTouchMoved: function (touch, event) {
+        this.isDragging = true;
         let selectedCard = event.getCurrentTarget();
         // cc.log("CardDeckNode2.js line 100: " + JSON.stringify(selectedCard))
         let touchPos = touch.getLocation();
@@ -155,6 +177,14 @@ const CardDeckNode2 = cc.Node.extend({
                     this.spriteDragManager[cardType].setVisible(false);
                 }
             }
+        }
+    },
+
+    _onTouchEnded: function (touch, event) {
+        if (this.isDragging && this.selectedCardType !== null) {
+            this.isDragging = false;
+            let selectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
+            this.removeDragSprite(this.selectedCardType);
         }
     },
 

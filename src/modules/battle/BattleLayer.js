@@ -118,7 +118,7 @@ let BattleLayer = cc.Layer.extend({
         } else {
             pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
         }
-        EntityFactory.createBatMonster(pixelPos, mode);
+        EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // setTimeout(function () {
         //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // }, 1000);
@@ -131,10 +131,10 @@ let BattleLayer = cc.Layer.extend({
         // setTimeout(function () {
         //     EntityFactory.createGiantMonster(pixelPos, mode);
         // }, 5000);
-        EntityFactory.createAssassinMonster(pixelPos, mode);
-        EntityFactory.createGiantMonster(pixelPos, mode);
-        EntityFactory.createNinjaMonster(pixelPos, mode);
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
+        // EntityFactory.createAssassinMonster(pixelPos, mode);
+        // EntityFactory.createGiantMonster(pixelPos, mode);
+        // EntityFactory.createNinjaMonster(pixelPos, mode);
+        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
         // EntityFactory.createSwordsmanMonster(pixelPos, mode);
 
         //EntityFactory.createNinjaMonster(pixelPos, mode);
@@ -182,7 +182,8 @@ let BattleLayer = cc.Layer.extend({
     //     // //    // setTimeout(this.createMonster(pixelPos,mode,entityID),time);
     //     // // )
     // },
-    createMonster: function (pixelPos, mode, entityID) {
+    createMonsterByEntityID: function (mode, entityID) {
+        let pixelPos = Utils.tile2Pixel(0, 4, mode);
         switch (entityID) {
             case GameConfig.ENTITY_ID.SWORD_MAN:
                 EntityFactory.createSwordsmanMonster(pixelPos, mode);
@@ -219,6 +220,8 @@ let BattleLayer = cc.Layer.extend({
         let {error, msg} = ValidatorECS.validatePositionPutCard(type, pixelPos, mode);
         if (error) {
             this.uiLayer.notify(msg);
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.INVALID_PUT_CARD_POSITION, {cardId: type, mode: mode})
             return;
         }
 
@@ -239,6 +242,7 @@ let BattleLayer = cc.Layer.extend({
 
     putTowerCardIntoMap: function (type, tilePos, mode) {
         if (GameConfig.NETWORK) {
+            cc.log("putTowerCardIntoMap: shouldUpgradeTower: " + this.shouldUpgradeTower(type, tilePos));
             if (this.shouldUpgradeTower(type, tilePos)) {
                 EventDispatcher.getInstance()
                     .dispatchEvent(EventType.UPGRADE_TOWER, {cardId: type, pos: tilePos, mode: mode});
@@ -290,10 +294,6 @@ let BattleLayer = cc.Layer.extend({
         return tower;
     },
 
-    onUpdateTower: function (entityId, tilePos, mode) {
-
-    },
-
     setEntityIdForTileObject: function (entityId, tilePos, mode = GameConfig.PLAYER) {
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);
@@ -327,11 +327,12 @@ let BattleLayer = cc.Layer.extend({
         let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
         if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null && cellObject.tower.towerId === towerId) {
             let tower = cellObject.tower;
-            let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
-            let card = inventoryContext.getCardById(towerId);
-            if (card && card.cardLevel > tower.level) {
-                return true;
-            }
+            // let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
+            // let card = inventoryContext.getCardById(towerId);
+            // if (card && card.cardLevel > tower.level) {
+            //     return true;
+            // }
+            return true;
         }
         return false;
     },
@@ -364,6 +365,9 @@ let BattleLayer = cc.Layer.extend({
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             onTouchBegan: function (touch, event) {
+                if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
+                    return false;
+                }
                 let globalPos = touch.getLocation();
                 let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);

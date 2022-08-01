@@ -1,16 +1,18 @@
 let BattleData = cc.Class.extend({
     ctor: function () {
         this.roomId = 0;
+        this.battleStartTime = 0;
         this.dataInGame = {
             currentWave: 0,
-            battleWave: null,
-            maxWave: 10000,
-            timer: 3,
+            waveAmount: 0,
+            monsterWave: null,
+            maxWave: 20,
+            timer: 20,
             player: {
                 username: "HOVANVYDUT",
                 clanName: "GDF5_DN_TEAM_2",
                 trophy: 30,
-                energyHouse: 1000,
+                energyHouse: 20,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
                 mapObject: null,
                 longestPath: null,
@@ -44,7 +46,7 @@ let BattleData = cc.Class.extend({
                 username: "OPPONENT333",
                 clanName: "HIHI",
                 trophy: 5,
-                energyHouse: 1000,
+                energyHouse: 20,
                 map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
                 mapObject: null,
                 longestPath: null,
@@ -61,6 +63,21 @@ let BattleData = cc.Class.extend({
         this.roomId = roomId;
     },
 
+    setWaveAmount: function (waveAmount) {
+        this.dataInGame.waveAmount = waveAmount;
+    },
+
+    setMonsterWave: function (monsterWave) {
+        this.dataInGame.monsterWave = monsterWave;
+    },
+
+    setBattleStartTime: function (battleStartTime) {
+        this.battleStartTime = battleStartTime;
+    },
+
+    getBattleStartTime: function () {
+        return this.battleStartTime;
+    },
     getTimer: function () {
         return this.dataInGame.timer;
     },

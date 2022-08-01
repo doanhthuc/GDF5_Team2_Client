@@ -15,7 +15,8 @@ let AttackSystem = System.extend({
 
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
-
+            // cc.log("[AttackSystem.js line 34] attackComponent: " + JSON.stringify(attackComponent));
+            // cc.log("[AttackSystem.js line 35] attackComponent.targetStrategy: " + JSON.stringify(attackComponent.effects));
             // update count down time
             if (attackComponent.countdown > 0) {
                 attackComponent.countdown -= tick;
@@ -73,7 +74,7 @@ let AttackSystem = System.extend({
         let monsterIndex = -1;
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
-                // cc.log("[AttackSystem] find target by max hp");
+               // cc.log("[AttackSystem] find target by max hp");
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
                     let monsterHP = cur.getComponent(LifeComponent).hp;
                     return monsterHP > monsterInAttackRange[acc] ? idx : acc;

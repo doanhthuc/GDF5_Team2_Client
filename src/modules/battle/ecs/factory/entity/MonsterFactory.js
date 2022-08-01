@@ -10,7 +10,7 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createSwordmanNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 300);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 30);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.sword_man);
 
     // let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
@@ -46,7 +46,7 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 1.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createAssassinNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 120);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 15);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.assasin);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
@@ -79,7 +79,7 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.7 * GameConfig.TILE_WIDTH, 0.7 * GameConfig.TILE_WIDTH);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createBatNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 140);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 25);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.bat);
     let path = []
 
@@ -115,7 +115,7 @@ EntityFactory.createGiantMonster = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.5 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createGiantNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 820);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 200);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.giant);
 
 
@@ -149,7 +149,7 @@ EntityFactory.createNinjaMonster = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createNinjaNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 100);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 30);
     let underGroundComponent = ComponentFactory.create(UnderGroundComponent);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.ninja)
 
