@@ -179,7 +179,7 @@ EntityFactory.createTree = function (tilePos, mode) {
 
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 80, 100);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 100, 100);
 
     entity.addComponent(appearanceComponent)
         .addComponent(positionComponent)

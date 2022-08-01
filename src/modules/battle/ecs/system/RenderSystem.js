@@ -26,7 +26,7 @@ let RenderSystem = System.extend({
             appearanceComponent.sprite.setLocalZOrder(10000 - positionComponent.y);
 
             // side effect
-            // this._updateHpBarMonsterUI(entity);
+            this._updateHpBarMonsterUI(entity);
         }
 
         this._updateSkeletonComponentPosition();
