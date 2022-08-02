@@ -27,9 +27,7 @@ testnetwork.Connector = cc.Class.extend({
                 userInfo.show();
                 // let userContext = contextManager.getContext(ContextManagerConst.USER_CONTEXT);
                 let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
-                // contextManager.registerContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT, userContext);
-                // let inventoryContext = new InventoryContext();
-                // contextManager.registerContext(ContextManagerConst.INVENTORY_CONTEXT, inventoryContext);
+
                 TimeUtil.setDeltaTime(packet.serverTime);
                 userContext.setUserInfoFromPackage(userInfo);
 
@@ -41,12 +39,7 @@ testnetwork.Connector = cc.Class.extend({
                 inventoryContext.setCardCollectionList(packet.cardCollection);
                 inventoryContext.setBattleDeckIdList(packet.battleDeckCard);
                 ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).updateBattleDeck(inventoryContext.battleDeckList);
-                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setBattleDeck(inventoryContext.battleDeckList);
-                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.BATTLE_DECK_NODE).setCardInBattleDeckPosition();
-
                 ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).updateCardCollection(inventoryContext.cardCollectionList);
-                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).setCardCollection(inventoryContext.cardCollectionList);
-                // ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).setPositionForCardCollection();
 
                 userCardCollection.getItemList(packet);
                 cc.log("GetInventory");

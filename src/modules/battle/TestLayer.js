@@ -53,15 +53,15 @@ let TestLayer = cc.Layer.extend({
                     return;
 
                 let pixel = touches[0].getLocation();
-                // let spine = new sp.SkeletonAnimation();
-                //
-                // spine.setPosition(pixel);
-                // spine.setAnimation(0, "hit_target_bullet", true);
-                // this.addChild(spine);
+                let spine = new sp.SkeletonAnimation("textures/tower/fx/tower_cannon_fx.json", "textures/tower/fx/tower_cannon_fx.atlas");
 
-                let targetPos = cc.p(cc.winSize.width / 2, cc.winSize.height - 50);
-                let goldAnimation = new GoldAnimation(pixel, targetPos, this);
-                goldAnimation.run();
+                spine.setPosition(pixel);
+                spine.setAnimation(0, "attack_1", true);
+                this.addChild(spine);
+
+                // let targetPos = cc.p(cc.winSize.width / 2, cc.winSize.height - 50);
+                // let goldAnimation = new GoldAnimation(pixel, targetPos, this);
+                // goldAnimation.run();
 
             }.bind(this)
         }), this)

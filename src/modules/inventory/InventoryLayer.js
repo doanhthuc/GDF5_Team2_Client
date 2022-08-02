@@ -32,6 +32,9 @@ const InventoryLayer = cc.Node.extend({
         this.fakeCardImageFromCardCollection = new CardNode();
         this.addChild(this.fakeCardImageFromCardCollection);
         this.fakeCardImageFromCardCollection.setVisible(false);
+        this.cardBackgroundBtn = this.fakeCardImageFromCardCollection.cardBackgroundBtn;
+        this.cardBackgroundBtn.addTouchEventListener(this.onFakeCardImageFromCardCollectionClick.bind(this), this);
+
 
         let cardSize = this.fakeCardImageFromCardCollection.cardBorderImg.getContentSize();
         let posY = cc.winSize.height - (this.headerHeight + this.battleDeckNode.heightNode + cardSize.height / 2 + 10);
@@ -111,6 +114,17 @@ const InventoryLayer = cc.Node.extend({
             this.cardCollectionNode.setVisible(true);
             this.fakeCardImageFromCardCollection.setVisible(false);
             this.cancelSelectBtn.setVisible(false);
+        }
+    },
+
+    onFakeCardImageFromCardCollectionClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            if (this.isSelectingCardToBattleDeck) {
+                this.isSelectingCardToBattleDeck = false;
+                this.cardCollectionNode.setVisible(true);
+                this.fakeCardImageFromCardCollection.setVisible(false);
+                this.cancelSelectBtn.setVisible(false);
+            }
         }
     }
 });

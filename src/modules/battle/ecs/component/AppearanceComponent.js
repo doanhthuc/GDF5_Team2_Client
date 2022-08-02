@@ -10,7 +10,7 @@ let AppearanceComponent = Component.extend({
 
     reset: function (sprite, mode, initPos) {
         this.sprite = sprite;
-        this.zOrder = 100;
+        this.zOrder = 1;
         this.mode = mode;
         this.sprite.setVisible(true);
 
