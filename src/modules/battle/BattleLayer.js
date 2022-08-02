@@ -259,7 +259,8 @@ let BattleLayer = cc.Layer.extend({
 
     buildTower: function (towerId, tilePos, mode) {
         NodeFactory.createBuildingTowerTimer(tilePos, mode);
-
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
         this.scheduleOnce(() => {
             this._createTower(towerId, tilePos, mode);
         }, 1);
@@ -296,9 +297,6 @@ let BattleLayer = cc.Layer.extend({
         if (GameConfig.NETWORK === 1) {
             this.setEntityIdForTileObject(tower.id, tilePos, mode);
         }
-
-        EventDispatcher.getInstance()
-            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
 
         return tower;
     },

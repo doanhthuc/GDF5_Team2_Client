@@ -10,6 +10,7 @@ const CardDeckNode2 = cc.Node.extend({
         this.cardSlotNodeList = [];
         this.cardSlotNodeFixedPosList = [];
         this.spriteDragManager = {};
+        this.shouldBeginTouch = true;
 
         this.rootNode = ccs.load(BattleResource.CARD_DECK_NODE, "").node;
         this.addChild(this.rootNode);
@@ -58,7 +59,7 @@ const CardDeckNode2 = cc.Node.extend({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
                 onTouchBegan: this._onTouchBegan.bind(this),
                 onTouchMoved: this._onTouchMoved.bind(this),
-                // onTouchEnded: this._onTouchEnded.bind(this),
+                onTouchEnded: this._onTouchEnded.bind(this),
             }, cardSlot);
         }
 
@@ -102,7 +103,8 @@ const CardDeckNode2 = cc.Node.extend({
         let moveY = this.cardSlotNodeFixedPosList[index].y + 30;
         let posX = this.cardSlotNodeFixedPosList[index].x;
         let moveTop = cc.moveTo(1, cc.p(posX, moveY)).easing(cc.easeElasticOut());
-        card.runAction(cc.sequence(moveTop));
+        card.stopAllActions();
+        card.runAction(moveTop);
         card.isUp = true;
     },
 
@@ -110,7 +112,8 @@ const CardDeckNode2 = cc.Node.extend({
         let index = this.cardSlotNodeList.indexOf(card);
         let pos = this.cardSlotNodeFixedPosList[index];
         let moveDown = cc.moveTo(1, pos).easing(cc.easeElasticOut());
-        card.runAction(cc.sequence(moveDown));
+        card.stopAllActions();
+        card.runAction(moveDown);
         card.isUp = false;
     },
 
@@ -122,11 +125,18 @@ const CardDeckNode2 = cc.Node.extend({
         // let selectedCardBoundingBox = cc.rect(0, 0, selectedCard.width, selectedCard.height);
         let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos));
         if (touchInCard) {
+            if (!this.shouldBeginTouch) {
+                return false;
+            }
+            this.shouldBeginTouch = false;
+
+
             this.removeDragSprite(this.selectedCardType);
             if (selectedCard.type === this.selectedCardType) {
                 // let card = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
                 this.selectedCardType = null;
                 this._moveCardDown(selectedCard)
+                this.setSelectedCardType(null);
             } else {
                 if (this.selectedCardType !== null) {
                     let prevSelectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
@@ -134,17 +144,17 @@ const CardDeckNode2 = cc.Node.extend({
                 }
                 if (!this.validateEnoughEnergySelectCard(selectedCard.type)) {
                     BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lượng");
-                    this.selectedCardType = null;
-                    BattleManager.getInstance().getBattleLayer().selectedCard = null;
+                    this.setSelectedCardType(null);
+                    this.setShouldBeginTouch(true);
                     return false;
                 }
                 let card = selectedCard;
-                this.selectedCardType = card.type;
-                BattleManager.getInstance().getBattleLayer().selectedCard = this.selectedCardType;
+                this.setSelectedCardType(card.type);
                 this._moveCardUp(card);
             }
             return true;
         }
+        this.setShouldBeginTouch(true);
         return false;
     },
 
@@ -182,11 +192,16 @@ const CardDeckNode2 = cc.Node.extend({
     },
 
     _onTouchEnded: function (touch, event) {
-        if (this.isDragging && this.selectedCardType !== null) {
-            this.isDragging = false;
-            let selectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
-            this.removeDragSprite(this.selectedCardType);
-        }
+        this.setShouldBeginTouch(true);
+    },
+
+    setShouldBeginTouch: function (shouldBeginTouch) {
+        this.shouldBeginTouch = shouldBeginTouch;
+    },
+
+    setSelectedCardType: function (cardType) {
+        this.selectedCardType = cardType;
+        BattleManager.getInstance().getBattleLayer().selectedCard = cardType;
     },
 
     _createOrGetSprite: function (selectedCard, cardType, mode) {
