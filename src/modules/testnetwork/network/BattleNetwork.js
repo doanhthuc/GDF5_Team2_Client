@@ -167,6 +167,9 @@ BattleNetwork.Connector = cc.Class.extend({
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let cellObject = playerObjectMap[packet.x][packet.y];
         cellObject.objectInCellType = ObjectInCellType.TOWER;
+        if (!cellObject.tower) {
+            cellObject.tower = {};
+        }
         cellObject.tower.towerId = packet.towerId;
         cellObject.tower.level = packet.towerLevel;
         cc.log(JSON.stringify(playerObjectMap[packet.x][packet.y]))

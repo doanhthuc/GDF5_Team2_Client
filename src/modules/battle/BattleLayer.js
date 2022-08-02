@@ -251,8 +251,8 @@ let BattleLayer = cc.Layer.extend({
         }
 
         if (this.shouldPutNewTower(tilePos)) {
-            this.buildTower(type, tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
+            this.buildTower(type, tilePos, mode);
         }
     },
 
