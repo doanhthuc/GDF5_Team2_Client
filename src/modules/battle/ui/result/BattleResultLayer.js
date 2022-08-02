@@ -94,6 +94,15 @@ let BattleResultLayer = cc.Layer.extend({
             y: backButton.height / 2
         });
         this.addChild(backButtonNode);
+
+        let rewardNode;
+        if (this.result === GameConfig.BATTLE_RESULT.WIN) {
+            rewardNode = ccs.load("ui/battle/battle_result_layer/WinReward.json", "").node;
+        } else {
+            rewardNode = ccs.load("ui/battle/battle_result_layer/LoseReward.json", "").node;
+        }
+        rewardNode.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 4));
+        this.addChild(rewardNode);
     },
 
     _backToLobby: function () {
