@@ -4,6 +4,8 @@ let BattleTimerNode = cc.Node.extend({
         this._duration = duration || 20;
         this._countdown = this._duration;
 
+        tickManager.getTickData().setBattleTimerData(this._countdown);
+
         this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
         this.addChild(this.node);
         this.progress = new cc.ProgressTimer(new cc.Sprite(BattleResource.TIMER_BACKGROUND));
@@ -25,19 +27,29 @@ let BattleTimerNode = cc.Node.extend({
     },
 
     update: function (tick) {
-        this.timer(tick);
+        // this.timer(tick);
     },
 
-    timer: function (tick) {
-        if (this._countdown <= 0) {
-            this._countdown = this._duration;
-            EventDispatcher.getInstance()
-                .dispatchEvent(EventType.END_ONE_TIMER);
-        }
+    timer: function () {
+        const dt = tickManager.getDeltaFromLatestTickToNow() / 1000;
+        let countDownLatestTick = tickManager.getTickData().getBattleTimerCountDown();
+        const countDown = countDownLatestTick - dt;
+        // if (countDown <= 0) {
+        //     EventDispatcher.getInstance()
+        //         .dispatchEvent(EventType.END_ONE_TIMER);
+        // }
 
-        this.progress.setPercentage(this._countdown / this._duration * 100);
+        this.progress.setPercentage(countDown / this._duration * 100);
         let time = this.node.getChildByName("time")
-        time.setString(Math.round(this._countdown));
-        this._countdown = this._countdown - tick;
+        time.setString(countDown.toFixed(2));
     },
+
+    updateData: function () {
+        let countDownLatestTick = tickManager.getTickData().getBattleTimerCountDown();
+        if (countDownLatestTick <= 0) {
+            countDownLatestTick = this._duration;
+        }
+        countDownLatestTick = countDownLatestTick - tickManager.getTickRate() / 1000;
+        tickManager.getTickData().setBattleTimerData(countDownLatestTick);
+    }
 });

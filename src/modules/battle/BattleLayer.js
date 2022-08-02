@@ -58,7 +58,13 @@ let BattleLayer = cc.Layer.extend({
     },
 
     update: function (dt) {
+        let currentTick = tickManager.getCurrentTick();
+        while (tickManager.getLatestUpdateTick() < currentTick) {
+            tickManager.updateData();
+        }
+
         // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
+        this.getTimerNode().timer();
         this.resetSystem.start(dt);
         this.abilitySystem.start(dt);
         this.effectSystem.start(dt);
@@ -390,6 +396,8 @@ let BattleLayer = cc.Layer.extend({
     startGame: function () {
         //  this.battleLoop.start();
         //this.schedule(this.update,0.1,10000);
+        this.uiLayer.startGame();
+        tickManager.setStartTime(Utils.currentTimeMillis());
         this.scheduleUpdate();
         //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
@@ -450,5 +458,9 @@ let BattleLayer = cc.Layer.extend({
 
     _clearAsset: function () {
         cc.spriteFrameCache.removeUnusedSpriteFrames();
+    },
+
+    getTimerNode: function () {
+        return this.uiLayer.timerNode;
     }
 });

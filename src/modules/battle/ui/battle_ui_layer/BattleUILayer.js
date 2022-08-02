@@ -10,7 +10,6 @@ let BattleUILayer = cc.Layer.extend({
         this.twoPlayerInfoLayer = new TwoPlayerInfoLayer(BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.PLAYER)
             , BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.OPPONENT));
         this.addChild(this.twoPlayerInfoLayer);
-        this.scheduleOnce(this.startGame, 2);
     },
 
     _setupUI: function () {
