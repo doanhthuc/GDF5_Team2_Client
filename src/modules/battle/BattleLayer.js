@@ -258,6 +258,14 @@ let BattleLayer = cc.Layer.extend({
     },
 
     buildTower: function (towerId, tilePos, mode) {
+        NodeFactory.createBuildingTowerTimer(tilePos, mode);
+
+        this.scheduleOnce(() => {
+            this._createTower(towerId, tilePos, mode);
+        }, 1);
+    },
+
+    _createTower: function (towerId, tilePos, mode) {
         let tower = null;
         switch (towerId) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
