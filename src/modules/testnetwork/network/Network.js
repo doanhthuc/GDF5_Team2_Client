@@ -56,6 +56,9 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log(packet.goldChange + " " + packet.cardType + " " + packet.fragmentChange);
                 contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).onUpgradeCardSuccess(packet);
                 break;
+            case gv.CMD.SWAP_CARD:
+                cc.log(JSON.stringify(packet));
+                break;
             case gv.CMD.GET_USER_LOBBY:
                 let treasureContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT);
                 treasureContext.setTreasureList(packet);
