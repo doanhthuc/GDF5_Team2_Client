@@ -301,7 +301,7 @@ const mapAnimationAngel = {
     0: "attack_5",
     25: "attack_6",
     50: "attack_7",
-    75: "atack_8",
+    75: "attack_8",
     90: "attack_9",
     115: {
         flipX: true,
@@ -333,27 +333,29 @@ const mapAnimationAngel = {
     },
 }
 BattleAnimation.createCannonBullet = function (startPosition, targetPosition, bulletNode, bulletSpeed, mode) {
-    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(bulletNode, 100);
+    let zOrder = 1;
+    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(bulletNode, zOrder);
+    bulletNode.setPosition(startPosition);
+
     let h = 60;
     let distance = Utils.euclidDistance(startPosition, targetPosition);
     let t = (Math.sqrt(Math.pow((distance / 2), 2) + Math.pow(h, 2))) * 2 / bulletSpeed;
-    bulletNode.setPosition(startPosition);
     let jumpAction = cc.jumpTo(t ,cc.p(targetPosition.x, targetPosition.y), h, 1);
+
     let cleanFunc = cc.callFunc(function (sender) {
         sender.removeFromParent();
     })
+
     let spine = new sp.SkeletonAnimation("textures/tower/fx/tower_cannon_fx.json", "textures/tower/fx/tower_cannon_fx.atlas");
     spine.setPosition(startPosition);
-    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(spine, 2);
-
-    function animationStateEvent(obj, trackIndex, type, event, loopCount) {
+    function animationStateEvent() {
         let mapNode = BattleManager.getInstance().getBattleLayer().getMapNode(mode);
         mapNode.scheduleOnce(() => {
             mapNode.removeChild(spine);
         });
     }
-
     spine.setCompleteListener(animationStateEvent);
+    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(spine, 20);
 
     let deg = Utils.calcSlopeOfLine(cc.p(startPosition.x, startPosition.y), cc.p(targetPosition.x, targetPosition.y));
     let minValue = Math.abs(deg - directionDegree[0]), minIdx = 0;
@@ -363,7 +365,6 @@ BattleAnimation.createCannonBullet = function (startPosition, targetPosition, bu
             minValue = Math.abs(deg - directionDegree[i]);
         }
     }
-
     let animationAngel = mapAnimationAngel[directionDegree[minIdx]];
 
     let attackAnimFunc = cc.callFunc(function (sender) {
@@ -374,30 +375,33 @@ BattleAnimation.createCannonBullet = function (startPosition, targetPosition, bu
             spine.setAnimation(1, animationAngel, false);
         }
     })
+
     bulletNode.runAction(cc.sequence(attackAnimFunc, jumpAction, cleanFunc));
 }
 
 BattleAnimation.createBearBullet = function (startPosition, targetPosition, bulletNode, bulletSpeed, mode) {
-    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(bulletNode, 100);
-    let h = 60;
+    bulletNode.setPosition(startPosition);
+    let zOrder = 1;
+    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(bulletNode, zOrder);
+
+    let h = 70;
     let distance = Utils.euclidDistance(startPosition, targetPosition);
     let t = (Math.sqrt(Math.pow((distance / 2), 2) + Math.pow(h, 2))) * 2 / bulletSpeed;
-    bulletNode.setPosition(startPosition);
     let jumpAction = cc.jumpTo(t ,cc.p(targetPosition.x, targetPosition.y), h, 1);
+
     let cleanFunc = cc.callFunc(function (sender) {
         sender.removeFromParent();
     })
+
     let spine = new sp.SkeletonAnimation("textures/tower/fx/tower_ice_fx.json", "textures/tower/fx/tower_ice_fx.atlas");
     spine.setPosition(startPosition);
-    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(spine, 2);
-
-    function animationStateEvent(obj, trackIndex, type, event, loopCount) {
+    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(spine, 20);
+    function animationStateEvent() {
         let mapNode = BattleManager.getInstance().getBattleLayer().getMapNode(mode);
         mapNode.scheduleOnce(() => {
             mapNode.removeChild(spine);
         });
     }
-
     spine.setCompleteListener(animationStateEvent);
 
     let deg = Utils.calcSlopeOfLine(cc.p(startPosition.x, startPosition.y), cc.p(targetPosition.x, targetPosition.y));
@@ -419,5 +423,6 @@ BattleAnimation.createBearBullet = function (startPosition, targetPosition, bull
             spine.setAnimation(1, animationAngel, false);
         }
     })
+
     bulletNode.runAction(cc.sequence(attackAnimFunc, jumpAction, cleanFunc));
 }
