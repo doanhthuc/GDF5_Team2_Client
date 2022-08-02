@@ -4,6 +4,7 @@ let BattleLayer = cc.Layer.extend({
         this._super();
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
+        this.selectedCardLevel = null;
 
         this._prefetchAssetGame();
 

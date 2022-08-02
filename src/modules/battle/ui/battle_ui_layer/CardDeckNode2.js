@@ -2,8 +2,9 @@ const CardDeckNode2 = cc.Node.extend({
     ctor: function (cardDeckListData) {
         this._super();
         this.cardDeckListData = cardDeckListData;
-        this.selectableCardIdList = this.cardDeckListData.getFirst4CardId();
+        this.selectableCardIdList = this.cardDeckListData.getFirst4Card();
         this.selectedCardType = null;
+        this.selectedCardLevel = null;
         this.nextCardPosition = null;
         this.isCardPuttedIntoMap = false;
         this.isDragging = false;
@@ -73,15 +74,16 @@ const CardDeckNode2 = cc.Node.extend({
         }
         this.removeDragSprite(this.selectedCardType);
         this.selectedCardType = null;
+        this.selectedCardLevel = null;
         BattleManager.getInstance().getBattleLayer().selectedCard = null;
     },
 
     initNextCardSlot: function () {
-        let card = this.rootNode.getChildByName("card_5");
-        let cardId = this.cardDeckListData.getNextCardId();
-        this.nextCardSlot = new CardDeckSlot(cardId);
-        this.nextCardPosition = card.getPosition();
-        this.nextCardSlot.setPosition(card.getPosition());
+        let cardNode = this.rootNode.getChildByName("card_5");
+        let nextCard = this.cardDeckListData.getNextCard();
+        this.nextCardSlot = new CardDeckSlot2(nextCard);
+        this.nextCardPosition = cardNode.getPosition();
+        this.nextCardSlot.setPosition(cardNode.getPosition());
         this.nextCardSlot.setScale(0.6449, 0.6449);
         this.rootNode.addChild(this.nextCardSlot, 1);
     },
@@ -135,8 +137,9 @@ const CardDeckNode2 = cc.Node.extend({
             if (selectedCard.type === this.selectedCardType) {
                 // let card = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
                 this.selectedCardType = null;
+                this.selectedCardLevel = null;
                 this._moveCardDown(selectedCard)
-                this.setSelectedCardType(null);
+                this.setSelectedCardType(null, null);
             } else {
                 if (this.selectedCardType !== null) {
                     let prevSelectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
@@ -144,12 +147,12 @@ const CardDeckNode2 = cc.Node.extend({
                 }
                 if (!this.validateEnoughEnergySelectCard(selectedCard.type)) {
                     BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lượng");
-                    this.setSelectedCardType(null);
+                    this.setSelectedCardType(null, null);
                     this.setShouldBeginTouch(true);
                     return false;
                 }
                 let card = selectedCard;
-                this.setSelectedCardType(card.type);
+                this.setSelectedCardType(card.type, card.level);
                 this._moveCardUp(card);
             }
             return true;
@@ -199,9 +202,11 @@ const CardDeckNode2 = cc.Node.extend({
         this.shouldBeginTouch = shouldBeginTouch;
     },
 
-    setSelectedCardType: function (cardType) {
+    setSelectedCardType: function (cardType, cardLevel) {
         this.selectedCardType = cardType;
+        this.selectedCardLevel = cardLevel;
         BattleManager.getInstance().getBattleLayer().selectedCard = cardType;
+        BattleManager.getInstance().getBattleLayer().selectedCardLevel = cardLevel;
     },
 
     _createOrGetSprite: function (selectedCard, cardType, mode) {
@@ -238,13 +243,16 @@ const CardDeckNode2 = cc.Node.extend({
                 let index = this.cardSlotNodeList.indexOf(cardSlotNode);
                 cardSlotNode.setPosition(this.nextCardPosition);
                 cardSlotNode.setScale(0.6449, 0.6449);
-                cardSlotNode.setCardType(this.nextCardSlot.type)
+                let prevCardLevel = this.selectedCardLevel;
+                cardSlotNode.setCardTypeAndLevel(this.nextCardSlot.type, this.nextCardSlot.level);
                 cardSlotNode.runAction(cc.spawn(cc.moveTo(0.15, this.cardSlotNodeFixedPosList[index]), cc.scaleTo(0.15, 1)));
-                this.nextCardSlot.setCardType(this.cardDeckListData.getNextCardId());
-                this.cardDeckListData.pushUsedCardIntoDeck(cardType);
+                let nextCard = this.cardDeckListData.getNextCard();
+                this.nextCardSlot.setCardTypeAndLevel(nextCard.id, nextCard.level);
+                this.cardDeckListData.pushUsedCardIntoDeck({id: cardType, level: prevCardLevel});
             }
             BattleManager.getInstance().getBattleLayer().selectedCard = null;
             this.selectedCardType = null;
+            this.selectedCardLevel = null;
             this.isCardPuttedIntoMap = false;
         }
     },
