@@ -301,7 +301,7 @@ const mapAnimationAngel = {
     0: "attack_5",
     25: "attack_6",
     50: "attack_7",
-    75: "atack_8",
+    75: "attack_8",
     90: "attack_9",
     115: {
         flipX: true,
@@ -355,7 +355,7 @@ BattleAnimation.createCannonBullet = function (startPosition, targetPosition, bu
         });
     }
     spine.setCompleteListener(animationStateEvent);
-    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(spine, 2);
+    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(spine, 20);
 
     let deg = Utils.calcSlopeOfLine(cc.p(startPosition.x, startPosition.y), cc.p(targetPosition.x, targetPosition.y));
     let minValue = Math.abs(deg - directionDegree[0]), minIdx = 0;
@@ -395,7 +395,7 @@ BattleAnimation.createBearBullet = function (startPosition, targetPosition, bull
 
     let spine = new sp.SkeletonAnimation("textures/tower/fx/tower_ice_fx.json", "textures/tower/fx/tower_ice_fx.atlas");
     spine.setPosition(startPosition);
-    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(spine, 2);
+    BattleManager.getInstance().getBattleLayer().getMapNode(mode).addChild(spine, 20);
     function animationStateEvent() {
         let mapNode = BattleManager.getInstance().getBattleLayer().getMapNode(mode);
         mapNode.scheduleOnce(() => {
