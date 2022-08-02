@@ -35,8 +35,9 @@ const ShopLayer = cc.Node.extend({
         PopupUIManager.getInstance().closeUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
     },
 
-    renderDailySection: function (itemList) {
-        this.dailySection.addDataForDailySection(itemList);
+    renderDailySection: function (dailyShopData) {
+        this.dailySection.addDataForDailySection(dailyShopData.itemList);
+        this.dailySection.setDailyTime(dailyShopData.futureResetTime);
     },
 
     renderGoldSection: function (itemList) {

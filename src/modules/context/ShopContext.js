@@ -2,16 +2,23 @@ let Context = cc.Class.extend({
 
 });
 
+let DailyShopData = cc.Class.extend({
+    ctor: function (itemList, futureResetTime) {
+        this.itemList = itemList;
+        this.futureResetTime = futureResetTime;
+    },
+})
+
 let ShopContext = Context.extend({
     ctor: function () {
-        this._dailyShopItemList = [];
+        this.dailyShopData = null;
         this._goldItemList = [];
     },
 
-    setDailyShopItemList: function (itemList) {
-        this._dailyShopItemList = itemList;
+    setDailyShopData: function (itemList) {
+        this.dailyShopData = itemList;
         ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE)
-            .renderDailySection(this._dailyShopItemList);
+            .renderDailySection(this.dailyShopData);
     },
 
     setGoldItemList: function (itemList) {
