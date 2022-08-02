@@ -251,12 +251,20 @@ let BattleLayer = cc.Layer.extend({
         }
 
         if (this.shouldPutNewTower(tilePos)) {
-            this.buildTower(type, tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
+            this.buildTower(type, tilePos, mode);
         }
     },
 
     buildTower: function (towerId, tilePos, mode) {
+        NodeFactory.createBuildingTowerTimer(tilePos, mode);
+
+        this.scheduleOnce(() => {
+            this._createTower(towerId, tilePos, mode);
+        }, 1);
+    },
+
+    _createTower: function (towerId, tilePos, mode) {
         let tower = null;
         switch (towerId) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
@@ -404,7 +412,8 @@ let BattleLayer = cc.Layer.extend({
             result = GameConfig.BATTLE_RESULT.LOSE;
         }
 
-        this.addChild(new BattleResultLayer(result, this.battleData), 2);
+        const trophyChange = this.battleData.getTrophyChange();
+        this.addChild(new BattleResultLayer(result, this.battleData, trophyChange), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
         // TODO: remove file from sprite frame cache

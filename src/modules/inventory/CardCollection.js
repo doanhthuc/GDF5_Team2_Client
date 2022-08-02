@@ -24,7 +24,6 @@ const CardCollectionNode = cc.Node.extend({
 
     setCardCollection: function (cardCollectionList) {
         this.cardCollection = [];
-        this.cardNodeList = [];
         cardCollectionList.forEach(card => {
             if (!card.isBattleDeck) {
                 this.cardCollection.push(card);
@@ -34,18 +33,21 @@ const CardCollectionNode = cc.Node.extend({
     },
 
     setCardNodeListByCardCollection: function (cardCollection) {
+        this.cardNodeList.forEach(cardNode => {
+            cardNode.removeFromParent();
+        })
+        this.cardNodeList = [];
         cardCollection.forEach(card => {
             let cardModel = CardFactory.createCard(
                 card.cardType,
                 card.cardLevel,
                 card.amount
             );
-            this.addCardNode(cardModel);
+            this.addCardNodeByModel(cardModel);
         });
-
     },
 
-    addCardNode: function (cardModel) {
+    addCardNodeByModel: function (cardModel) {
         let cardNode = new CardNode(cardModel);
         this.node.addChild(cardNode);
         this.cardNodeList.push(cardNode);

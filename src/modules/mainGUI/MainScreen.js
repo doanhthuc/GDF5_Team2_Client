@@ -76,6 +76,7 @@ const MainScreen = cc.Layer.extend({
     onEnter: function () {
         this._super();
         // this.initTouchEvent();
+        this.shopLayer.renderDailySection(shopContext.dailyShopData);
         PopupUIManager.getInstance().setAllPopupVisible(false);
     },
 

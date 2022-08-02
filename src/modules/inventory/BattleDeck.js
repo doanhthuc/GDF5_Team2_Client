@@ -16,7 +16,6 @@ const BattleDeckNode = cc.Node.extend({
 
     setNodeHeight: function () {
         this.heightNode = this.battleDeckHolder.height;
-        cc.log('BattleDeckNode line 21 heightNode: ' + this.heightNode);
     },
 
     updateBattleDeck: function (battleDeck) {
@@ -30,6 +29,9 @@ const BattleDeckNode = cc.Node.extend({
     },
 
     setCardNodeListByBattleDeck: function (battleDeck) {
+        this.cardNodeList.forEach(cardNode => {
+            cardNode.removeFromParent();
+        });
         this.cardNodeList = []
         battleDeck.forEach(card => {
             let cardModel = CardFactory.createCard(
@@ -39,11 +41,11 @@ const BattleDeckNode = cc.Node.extend({
                 card.isBattleDeck
             );
             // this.battleDeckHolder.addChild(card);
-            this.addCardNode(cardModel);
+            this.addCardNodeByModel(cardModel);
         });
     },
 
-    addCardNode: function (cardModel) {
+    addCardNodeByModel: function (cardModel) {
         let cardNode = new CardNode(cardModel);
         // this.node.addChild(cardNode);
         this.cardNodeList.push(cardNode);
@@ -65,5 +67,5 @@ const BattleDeckNode = cc.Node.extend({
             this.cardNodeList[i].setPosition(startX, startY);
             startX += InventoryResources.CARD_RIGHT_MARGIN + InventoryResources.CARD_WIDTH;
         }
-    }
+    },
 });

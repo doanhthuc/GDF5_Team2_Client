@@ -79,6 +79,7 @@ ShopNetwork.packetMap[gv.CMD.GET_USER_DAILY_SHOP] = fr.InPacket.extend({
             let itemState = this.getInt();
             this.dailyShopItem.push(new ShopItem(id, itemType, itemQuantity, itemPrice, itemState));
         }
+        this.futureResetTime = this.getLong();
     }
 });
 

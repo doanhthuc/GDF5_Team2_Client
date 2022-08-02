@@ -28,10 +28,12 @@ const Header = cc.Node.extend({
     },
 
     setUserGold: function (gold) {
+        gold = UiUtil.convertIntToString(gold);
         this.userGoldTxt.setString(gold);
     },
 
     setUserGem: function (gem) {
+        gem = UiUtil.convertIntToString(gem);
         this.userGemTxt.setString(gem);
     },
 
@@ -55,12 +57,12 @@ const Header = cc.Node.extend({
         this.cheatBtn.addTouchEventListener(this.onCheatBtnClicked.bind(this), this);
         this.cheatBtnNode.setPosition(cc.winSize.width / 2 - (this.cheatBtn.getSize().width * 0.8) / 2 + 3, this.cheatBtn.getSize().height * 0.2 / 2);
     },
-    addLogoutButton:function(){
-        this.logoutButtonNode=ccs.load('ui/login/LogoutButton.json',"").node;
+    addLogoutButton: function () {
+        this.logoutButtonNode = ccs.load('ui/login/LogoutButton.json', "").node;
         this.addChild(this.logoutButtonNode);
-        this.logoutButton=this.logoutButtonNode.getChildByName("LogoutButton");
-        this.logoutButton.addTouchEventListener(this.onLogoutButtonClicked.bind(this),this);
-        this.logoutButtonNode.setPosition(-(cc.winSize.width / 2 - (this.logoutButton.getSize().width * 0.8) / 2 + 15 ), this.cheatBtn.getSize().height * 0.2 / 2);
+        this.logoutButton = this.logoutButtonNode.getChildByName("LogoutButton");
+        this.logoutButton.addTouchEventListener(this.onLogoutButtonClicked.bind(this), this);
+        this.logoutButtonNode.setPosition(-(cc.winSize.width / 2 - (this.logoutButton.getSize().width * 0.8) / 2 + 15), this.cheatBtn.getSize().height * 0.2 / 2);
     },
 
     onCheatBtnClicked: function (sender, type) {
@@ -69,8 +71,8 @@ const Header = cc.Node.extend({
             PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CHEAT).resetCheatForm();
         }
     },
-    onLogoutButtonClicked: function (){
-       // this.logoutButton.setEnable();
+    onLogoutButtonClicked: function () {
+        // this.logoutButton.setEnable();
         testnetwork.connector.sendLogout();
     }
 
