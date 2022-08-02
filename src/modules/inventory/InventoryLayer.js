@@ -100,6 +100,7 @@ const InventoryLayer = cc.Node.extend({
             cardInCollection.setModel(cardModelFromBattleDeck);
             cardInCollection.setVisible(true);
         }.bind(this))));
+        testnetwork.connector.sendSwapCard(cardModelFromCardCollection.id, cardModelFromBattleDeck.id);
         cardModelFromCardCollection.isBattleDeck = true;
         cardModelFromBattleDeck.isBattleDeck = false;
         ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE).cardNodeMap.set(cardModelFromCardCollection.id, cardNodeInBattleDeck);

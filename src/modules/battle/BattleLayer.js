@@ -4,6 +4,7 @@ let BattleLayer = cc.Layer.extend({
         this._super();
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
+        this.selectedCardLevel = null;
 
         this._prefetchAssetGame();
 
@@ -215,6 +216,7 @@ let BattleLayer = cc.Layer.extend({
      * @param mode
      */
     putCardAt: function (type, pixelPos, mode) {
+        BattleManager.getInstance().getCardDeckNode().removeDragSprite(type);
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
 
         let {error, msg} = ValidatorECS.validatePositionPutCard(type, pixelPos, mode);
@@ -258,7 +260,8 @@ let BattleLayer = cc.Layer.extend({
 
     buildTower: function (towerId, tilePos, mode) {
         NodeFactory.createBuildingTowerTimer(tilePos, mode);
-
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
         this.scheduleOnce(() => {
             this._createTower(towerId, tilePos, mode);
         }, 1);
@@ -295,9 +298,6 @@ let BattleLayer = cc.Layer.extend({
         if (GameConfig.NETWORK === 1) {
             this.setEntityIdForTileObject(tower.id, tilePos, mode);
         }
-
-        EventDispatcher.getInstance()
-            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
 
         return tower;
     },

@@ -3,7 +3,9 @@ let BattleUILayer = cc.Layer.extend({
         this._super();
 
         this.battleData = battleData;
-        let fakeBattleDeckData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let fakeBattleDeckData = [{id: 0, level: 1}, {id: 1, level: 1}, {id: 2, level: 1}, {id: 3, level: 1}, {id: 4, level: 1},
+            {id: 5, level: 1}, {id: 6, level: 1}, {id: 7, level: 1}, {id: 8, level: 1}, {id: 9, level: 1}
+        ];
         this.cardDeckListData = new CardDeckListData(fakeBattleDeckData);
         // this.battleData.setCards(this.cardDeckListData.getFirst4CardId(), GameConfig.PLAYER);
 
