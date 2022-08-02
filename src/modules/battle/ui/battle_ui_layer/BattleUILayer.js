@@ -34,7 +34,9 @@ let BattleUILayer = cc.Layer.extend({
     _showTimer: function () {
         //let remainingTime = this.battleData.getBattleStartTime() - Date.now();
         //cc.log(this.battleData.getBattleStartTime() + " " + TimeUtil.getServerTime() + this.battleData.getBattleStartTime() - TimeUtil.getServerTime());
-        this.timerNode = new BattleTimerNode((this.battleData.getBattleStartTime() - TimeUtil.getServerTime()) / 1000, this.battleData.dataInGame.timer);
+
+        let countdown = (this.battleData.getBattleStartTime() - TimeUtil.getServerTime()) / 1000;
+        this.timerNode = new BattleTimerNode(countdown, this.battleData.dataInGame.timer);
         this.timerNode.x = cc.winSize.width / 2 - this.timerNode.width / 2;
         this.timerNode.y = (cc.winSize.height - this.cardDeckNode.height) / 2 + this.cardDeckNode.height;
         this.addChild(this.timerNode);

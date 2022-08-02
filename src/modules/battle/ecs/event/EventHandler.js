@@ -9,6 +9,7 @@ EventDispatcher.getInstance()
         let battleData = BattleManager.getInstance().getBattleData();
         let currentWave = battleData.dataInGame.currentWave;
         let monsterWave = battleData.dataInGame.monsterWave;
+        cc.log(currentWave)
         if (monsterWave[currentWave].length > 0) {
             let monsterTypeID = battleData.dataInGame.monsterWave[currentWave].pop();
             BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER,monsterTypeID);
