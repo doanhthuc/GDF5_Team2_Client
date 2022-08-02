@@ -412,7 +412,7 @@ let BattleLayer = cc.Layer.extend({
             result = GameConfig.BATTLE_RESULT.LOSE;
         }
 
-        const trophyChange = 11;
+        const trophyChange = this.battleData.getTrophyChange();
         this.addChild(new BattleResultLayer(result, this.battleData, trophyChange), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
