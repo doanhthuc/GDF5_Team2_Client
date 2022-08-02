@@ -13,6 +13,7 @@ const ShopSection = cc.Node.extend({
         this.categoryNode = this.shopSectionNode.getChildByName('ShopSectionTitleNode');
         this.categoryBackgroundImg = this.categoryNode.getChildByName('categoryBackgroundImg');
         this.shopRefreshNode = this.shopSectionNode.getChildByName('shopRefreshNode');
+        this.countDownTimeStr = this.shopRefreshNode.getChildByName("countdownTimeTxt");
         this._height = this.backgroundImg.height + this.categoryBackgroundImg.height;
 
         if (this.type === "gold") {
@@ -22,9 +23,39 @@ const ShopSection = cc.Node.extend({
                 .setTexture(ShopResources.SHOP_SECTION_TITLE_GOLD_TXT);
             this.shopRefreshNode.setVisible(false);
         }
+
+        this._spriteContainerActive = [];
+    },
+
+    /**
+     *
+     * @param futureTime - server time
+     */
+    setDailyTime: function (futureResetTime) {
+        // daily shop
+        // this.futureTime = TimeUtil.getServerTime() + (60 * 1000) * 1 / 10; // plus + 1 minute
+        this.futureResetTime = futureResetTime;
+        this.schedule(this.updateTimeDailyShop, 0.1);
+    },
+
+    updateTimeDailyShop: function () {
+        let distanceTime = this.futureResetTime - TimeUtil.getServerTime();
+        if (distanceTime >= 0) {
+            this.countDownTimeStr.setString(millisecondToTimeString(distanceTime));
+        } else {
+            // call get daily shop
+            cc.error("Call get daily shop")
+            ShopNetwork.connector.sendGetUserDailyShop();
+            this.unschedule(this.updateTimeDailyShop);
+        }
     },
 
     addDataForDailySection: function (itemList) {
+        while (this._spriteContainerActive.length > 0) {
+            let activeSp = this._spriteContainerActive.pop();
+            activeSp.removeFromParent();
+        }
+
         let startX = ShopResources.SHOP_ITEM_SLOT_START_X;
         let startY = ShopResources.SHOP_ITEM_SLOT_START_Y;
         for (let itemData of itemList) {
@@ -33,6 +64,8 @@ const ShopSection = cc.Node.extend({
             item.setPosition(startX, startY);
             this.dailyItemSlot.set(item.id, item);
             this.backgroundImg.addChild(item);
+            this._spriteContainerActive.push(item);
+
             startX += ShopResources.SHOP_ITEM_SLOT_WIDTH + ShopResources.SHOP_ITEM_SLOT_MARGIN_BETWEEN;
         }
     },

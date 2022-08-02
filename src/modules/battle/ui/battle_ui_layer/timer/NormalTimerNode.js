@@ -25,7 +25,7 @@ let NormalTimerNode = cc.Node.extend({
 
     endTimer: function () {
         this.unscheduleUpdate();
-        this.removeFromParent();
+        this.scheduleOnce(() => this.removeFromParent());
     },
 
     update: function (tick) {

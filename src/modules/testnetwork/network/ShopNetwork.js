@@ -27,7 +27,8 @@ ShopNetwork.Connector = cc.Class.extend({
     _handleGetUserDailyShop: function (cmd, packet) {
         cc.log("@@@@@@@@@@@")
         cc.log(JSON.stringify(packet.dailyShopItem));
-        shopContext.setDailyShopItemList(packet.dailyShopItem);
+        let dailyShopData = new DailyShopData(packet.dailyShopItem, packet.futureResetTime);
+        shopContext.setDailyShopData(dailyShopData);
         cc.log("Call_handleGetUserDailyShop")
     },
 
