@@ -330,3 +330,12 @@ NodeFactory.createDragTowerNode = function (towerId) {
     node.addChild(rangeAttackSprite, 1, "rangeAttack");
     return node;
 }
+
+NodeFactory.createBuildingTowerTimer = function (tilePos, mode) {
+    // create timer
+    let mapNode = BattleManager.getInstance().getBattleLayer().getMapNode(mode);
+    let timer = new NormalTimerNode(1);
+    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
+    timer.setPosition(pixelPos);
+    mapNode.addChild(timer);
+}

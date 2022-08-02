@@ -197,6 +197,7 @@
         "src/modules/battle/ui/battle_ui_layer/notification/NotificationNode.js",
         "src/modules/battle/ui/battle_ui_layer/target_strategy/CircleTarget.js",
         "src/modules/battle/ui/battle_ui_layer/timer/BattleTimerNode.js",
+        "src/modules/battle/ui/battle_ui_layer/timer/NormalTimerNode.js",
         "src/modules/battle/ui/battle_ui_layer/wave/WaveNode.js",
         "src/modules/battle/ui/matching/MatchingScene.js",
         "src/modules/battle/ui/matching/TwoPlayerInfoLayer.js",
