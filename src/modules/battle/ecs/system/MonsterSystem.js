@@ -21,7 +21,7 @@ let MonsterSystem = System.extend({
                 BattleAnimation.animationPlusEnergy(monsterPos, 10, monster.mode);
                 EntityManager.destroy(monster);
                 let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
-                deckEnergyProgress.plusEnergy(10);
+                if (monster.mode === GameConfig.PLAYER) deckEnergyProgress.plusEnergy(10);
             }
         }
     }
