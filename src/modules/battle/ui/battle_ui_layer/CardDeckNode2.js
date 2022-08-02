@@ -100,7 +100,8 @@ const CardDeckNode2 = cc.Node.extend({
     _moveCardUp: function (card) {
         let index = this.cardSlotNodeList.indexOf(card);
         let moveY = this.cardSlotNodeFixedPosList[index].y + 30;
-        let moveTop = cc.moveBy(1, cc.p(0, moveY)).easing(cc.easeElasticOut());
+        let posX = this.cardSlotNodeFixedPosList[index].x;
+        let moveTop = cc.moveTo(1, cc.p(posX, moveY)).easing(cc.easeElasticOut());
         card.runAction(cc.sequence(moveTop));
         card.isUp = true;
     },
@@ -132,7 +133,7 @@ const CardDeckNode2 = cc.Node.extend({
                     this._moveCardDown(prevSelectedCard);
                 }
                 if (!this.validateEnoughEnergySelectCard(selectedCard.type)) {
-                    BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lưuong");
+                    BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lượng");
                     this.selectedCardType = null;
                     BattleManager.getInstance().getBattleLayer().selectedCard = null;
                     return false;
@@ -216,7 +217,7 @@ const CardDeckNode2 = cc.Node.extend({
         cc.log(this.isCardPuttedIntoMap);
         if (this.isCardPuttedIntoMap === true) {
             cc.log(JSON.stringify(this.spriteDragManager[cardType]));
-            this.removeDragSprite(cardType);
+            // this.removeDragSprite(cardType);
             let cardSlotNode = this.cardSlotNodeList.find(card => card.type === cardType);
             if (cardSlotNode) {
                 let index = this.cardSlotNodeList.indexOf(cardSlotNode);

@@ -215,6 +215,7 @@ let BattleLayer = cc.Layer.extend({
      * @param mode
      */
     putCardAt: function (type, pixelPos, mode) {
+        BattleManager.getInstance().getCardDeckNode().removeDragSprite(type);
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
 
         let {error, msg} = ValidatorECS.validatePositionPutCard(type, pixelPos, mode);
