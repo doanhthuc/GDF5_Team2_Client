@@ -15,7 +15,8 @@ gv.CMD.PUT_TRAP = 5012;
 gv.CMD.OPPONENT_PUT_TRAP = 5013;
 gv.CMD.DESTROY_TOWER = 5014;
 gv.CMD.OPPONENT_DESTROY_TOWER = 5015;
-
+gv.CMD.GET_BATTLE_INFO = 5016;
+gv.CMD.END_BATTLE = 5017;
 let BattleNetwork = BattleNetwork || {};
 
 BattleNetwork.packetMap = {};
@@ -406,3 +407,44 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_DESTROY_TOWER] = fr.InPacket.extend({
         this.tileY = this.getInt();
     }
 });
+
+
+BattleNetwork.packetMap[gv.CMD.GET_BATTLE_INFO] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.battleStartTime = this.getLong();
+        this.waveAmount = this.getInt();
+        cc.log(this.battleStartTime,this.waveAmount);
+        this.monsterWave = [];
+        this.monsterWave.push([]);
+        for (let i = 0; i < this.waveAmount; i++) {
+            let wave = [];
+            let monsterAmount = this.getInt();
+            for (let j = 0; j < monsterAmount; j++) {
+                wave.push(this.getInt());
+            }
+            this.monsterWave.push(wave);
+        }
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.END_BATTLE] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.result = this.getInt();
+        this.playerEnergyHouse = this.getInt();
+        this.opponentEnergyHouse = this.getInt();
+        this.trophyAfterBattle = this.getInt();
+        this.trophyChange = this.getInt();
+        this.hasChest = false;
+        if (this.result === GameConfig.BATTLE_RESULT.WIN) {
+            this.hasChest = this.getInt();
+        }
+    }
+})

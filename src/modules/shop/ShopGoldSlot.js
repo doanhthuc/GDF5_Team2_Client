@@ -36,7 +36,7 @@ const ShopGoldSlot = cc.Node.extend({
         } else {
             this.goldImg.setTexture("textures/lobby/lobby_shop_item_gold_3.png");
         }
-        this.goldSlotValueTxt.setString(this.quantity);
+        this.goldSlotValueTxt.setString(UiUtil.convertIntToString(this.quantity));
     },
 
     setPrice: function (price) {
@@ -44,7 +44,7 @@ const ShopGoldSlot = cc.Node.extend({
         this.shopItemBtnNode.getChildByName("priceTxt").setString(this.price);
     },
 
-    _onBuyBtnClick: function(sender, type) {
+    _onBuyBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             let buyGoldPopup = PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);
             PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD);

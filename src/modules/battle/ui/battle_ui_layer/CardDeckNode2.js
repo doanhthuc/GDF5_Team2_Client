@@ -2,13 +2,16 @@ const CardDeckNode2 = cc.Node.extend({
     ctor: function (cardDeckListData) {
         this._super();
         this.cardDeckListData = cardDeckListData;
-        this.selectableCardIdList = this.cardDeckListData.getFirst4CardId();
+        this.selectableCardIdList = this.cardDeckListData.getFirst4Card();
         this.selectedCardType = null;
+        this.selectedCardLevel = null;
         this.nextCardPosition = null;
         this.isCardPuttedIntoMap = false;
+        this.isDragging = false;
         this.cardSlotNodeList = [];
         this.cardSlotNodeFixedPosList = [];
         this.spriteDragManager = {};
+        this.shouldBeginTouch = true;
 
         this.rootNode = ccs.load(BattleResource.CARD_DECK_NODE, "").node;
         this.addChild(this.rootNode);
@@ -25,6 +28,8 @@ const CardDeckNode2 = cc.Node.extend({
                 this.handlePutCardIntoMap.bind(this))
             .addEventHandler(EventType.PUT_TRAP,
                 this.handlePutCardIntoMap.bind(this))
+            .addEventHandler(EventType.INVALID_PUT_CARD_POSITION,
+                this.handleInvalidPutCardPosition.bind(this));
     },
 
     init: function () {
@@ -55,17 +60,30 @@ const CardDeckNode2 = cc.Node.extend({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
                 onTouchBegan: this._onTouchBegan.bind(this),
                 onTouchMoved: this._onTouchMoved.bind(this),
+                onTouchEnded: this._onTouchEnded.bind(this),
             }, cardSlot);
         }
 
     },
 
+    handleInvalidPutCardPosition: function (data) {
+        let cardId = data.cardId;
+        let cardSlot = this.cardSlotNodeList.find((cardSlot) => cardSlot.type === cardId);
+        if (cardSlot) {
+            this._moveCardDown(cardSlot);
+        }
+        this.removeDragSprite(this.selectedCardType);
+        this.selectedCardType = null;
+        this.selectedCardLevel = null;
+        BattleManager.getInstance().getBattleLayer().selectedCard = null;
+    },
+
     initNextCardSlot: function () {
-        let card = this.rootNode.getChildByName("card_5");
-        let cardId = this.cardDeckListData.getNextCardId();
-        this.nextCardSlot = new CardDeckSlot(cardId);
-        this.nextCardPosition = card.getPosition();
-        this.nextCardSlot.setPosition(card.getPosition());
+        let cardNode = this.rootNode.getChildByName("card_5");
+        let nextCard = this.cardDeckListData.getNextCard();
+        this.nextCardSlot = new CardDeckSlot2(nextCard);
+        this.nextCardPosition = cardNode.getPosition();
+        this.nextCardSlot.setPosition(cardNode.getPosition());
         this.nextCardSlot.setScale(0.6449, 0.6449);
         this.rootNode.addChild(this.nextCardSlot, 1);
     },
@@ -85,8 +103,10 @@ const CardDeckNode2 = cc.Node.extend({
     _moveCardUp: function (card) {
         let index = this.cardSlotNodeList.indexOf(card);
         let moveY = this.cardSlotNodeFixedPosList[index].y + 30;
-        let moveTop = cc.moveBy(1, cc.p(0, moveY)).easing(cc.easeElasticOut());
-        card.runAction(cc.sequence(moveTop));
+        let posX = this.cardSlotNodeFixedPosList[index].x;
+        let moveTop = cc.moveTo(1, cc.p(posX, moveY)).easing(cc.easeElasticOut());
+        card.stopAllActions();
+        card.runAction(moveTop);
         card.isUp = true;
     },
 
@@ -94,39 +114,55 @@ const CardDeckNode2 = cc.Node.extend({
         let index = this.cardSlotNodeList.indexOf(card);
         let pos = this.cardSlotNodeFixedPosList[index];
         let moveDown = cc.moveTo(1, pos).easing(cc.easeElasticOut());
-        card.runAction(cc.sequence(moveDown));
+        card.stopAllActions();
+        card.runAction(moveDown);
         card.isUp = false;
     },
 
     _onTouchBegan: function (touch, event) {
+        this.isDragging = false;
         let touchPos = touch.getLocation();
         let selectedCard = event.getCurrentTarget();
         let selectedCardBoundingBox = cc.rect(-selectedCard.width / 2, -selectedCard.height / 2, selectedCard.width, selectedCard.height);
         // let selectedCardBoundingBox = cc.rect(0, 0, selectedCard.width, selectedCard.height);
         let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos));
         if (touchInCard) {
+            if (!this.shouldBeginTouch) {
+                return false;
+            }
+            this.shouldBeginTouch = false;
+
+
             this.removeDragSprite(this.selectedCardType);
             if (selectedCard.type === this.selectedCardType) {
                 // let card = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
-                cc.log(JSON.stringify(this.selectedCardType));
                 this.selectedCardType = null;
+                this.selectedCardLevel = null;
                 this._moveCardDown(selectedCard)
+                this.setSelectedCardType(null, null);
             } else {
                 if (this.selectedCardType !== null) {
                     let prevSelectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
-                    // this._moveCardDown(prevSelectedCard);
+                    this._moveCardDown(prevSelectedCard);
+                }
+                if (!this.validateEnoughEnergySelectCard(selectedCard.type)) {
+                    BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lượng");
+                    this.setSelectedCardType(null, null);
+                    this.setShouldBeginTouch(true);
+                    return false;
                 }
                 let card = selectedCard;
-                this.selectedCardType = card.type;
-                BattleManager.getInstance().getBattleLayer().selectedCard = this.selectedCardType;
+                this.setSelectedCardType(card.type, card.level);
                 this._moveCardUp(card);
             }
             return true;
         }
+        this.setShouldBeginTouch(true);
         return false;
     },
 
     _onTouchMoved: function (touch, event) {
+        this.isDragging = true;
         let selectedCard = event.getCurrentTarget();
         // cc.log("CardDeckNode2.js line 100: " + JSON.stringify(selectedCard))
         let touchPos = touch.getLocation();
@@ -158,6 +194,21 @@ const CardDeckNode2 = cc.Node.extend({
         }
     },
 
+    _onTouchEnded: function (touch, event) {
+        this.setShouldBeginTouch(true);
+    },
+
+    setShouldBeginTouch: function (shouldBeginTouch) {
+        this.shouldBeginTouch = shouldBeginTouch;
+    },
+
+    setSelectedCardType: function (cardType, cardLevel) {
+        this.selectedCardType = cardType;
+        this.selectedCardLevel = cardLevel;
+        BattleManager.getInstance().getBattleLayer().selectedCard = cardType;
+        BattleManager.getInstance().getBattleLayer().selectedCardLevel = cardLevel;
+    },
+
     _createOrGetSprite: function (selectedCard, cardType, mode) {
         const battleLayer = BattleManager.getInstance().getBattleLayer();
         Utils.validateMode(mode);
@@ -186,19 +237,22 @@ const CardDeckNode2 = cc.Node.extend({
         cc.log(this.isCardPuttedIntoMap);
         if (this.isCardPuttedIntoMap === true) {
             cc.log(JSON.stringify(this.spriteDragManager[cardType]));
-            this.removeDragSprite(cardType);
+            // this.removeDragSprite(cardType);
             let cardSlotNode = this.cardSlotNodeList.find(card => card.type === cardType);
             if (cardSlotNode) {
                 let index = this.cardSlotNodeList.indexOf(cardSlotNode);
                 cardSlotNode.setPosition(this.nextCardPosition);
                 cardSlotNode.setScale(0.6449, 0.6449);
-                cardSlotNode.setCardType(this.nextCardSlot.type)
+                let prevCardLevel = this.selectedCardLevel;
+                cardSlotNode.setCardTypeAndLevel(this.nextCardSlot.type, this.nextCardSlot.level);
                 cardSlotNode.runAction(cc.spawn(cc.moveTo(0.15, this.cardSlotNodeFixedPosList[index]), cc.scaleTo(0.15, 1)));
-                this.nextCardSlot.setCardType(this.cardDeckListData.getNextCardId());
-                this.cardDeckListData.pushUsedCardIntoDeck(cardType);
+                let nextCard = this.cardDeckListData.getNextCard();
+                this.nextCardSlot.setCardTypeAndLevel(nextCard.id, nextCard.level);
+                this.cardDeckListData.pushUsedCardIntoDeck({id: cardType, level: prevCardLevel});
             }
             BattleManager.getInstance().getBattleLayer().selectedCard = null;
             this.selectedCardType = null;
+            this.selectedCardLevel = null;
             this.isCardPuttedIntoMap = false;
         }
     },

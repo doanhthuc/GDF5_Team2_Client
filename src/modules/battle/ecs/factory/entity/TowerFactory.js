@@ -230,6 +230,11 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
 
 EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
     let towerEntity = EntityManager.getInstance().getEntity(entityId);
+    cc.log("[TowerFactory.js line 233]: ======================== " + JSON.stringify(towerEntity));
+    let towerRank = ReadConfigUtils.getTowerCharRankByLevel(towerLevel);
+    let animationConfig = towerEntity.getComponent(SpriteSheetAnimationComponent);
+    let towerName = TOWER_NAME[towerEntity.typeID];
+    animationConfig.reset(TowerAnimationConfig[towerName].level[towerRank]);
     switch (towerEntity.typeID) {
         case GameConfig.ENTITY_ID.CANNON_TOWER:
         case GameConfig.ENTITY_ID.WIZARD_TOWER:
@@ -241,6 +246,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             let attackSpeed = towerConfig.stat.attackSpeed / 1000;
             let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
             let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
+            cc.log("[TowerFactory.js line 275 ] attackDamage: " + attackDamage)
             attackComponent.updateAttackStatistic(attackDamage, attackRange, attackSpeed, [], bulletSpeed, bulletRadius);
             break;
         }

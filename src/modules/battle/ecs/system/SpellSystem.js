@@ -44,7 +44,7 @@ let SpellSystem = System.extend({
 
                                     const force = 3000;
                                     const mass = monsterInfo.weight;
-                                    let A = 40 + force / mass;
+                                    let A =  40 + force / mass;
                                     cc.log("mass = " + mass);
                                     cc.log("A = " + A);
                                     let T = 1;

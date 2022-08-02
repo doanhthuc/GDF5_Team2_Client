@@ -9,3 +9,14 @@ ReadConfigUtils.getTowerRankByLevel = function (level) {
         return 3;
     }
 }
+
+ReadConfigUtils.getTowerCharRankByLevel = function (level) {
+    switch (level) {
+        case 1:
+            return "A";
+        case 2:
+            return "B";
+        case 3:
+            return "C";
+    }
+}
