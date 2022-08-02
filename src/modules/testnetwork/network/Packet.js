@@ -501,8 +501,10 @@ testnetwork.packetMap[gv.CMD.SWAP_CARD] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-          this.cardInID = this.getInt();
-          this.cardOutID = this.getInt();
+          if (this.error === 0) {
+              this.cardInID = this.getInt();
+              this.cardOutID = this.getInt();
+          }
         }
     }
 );

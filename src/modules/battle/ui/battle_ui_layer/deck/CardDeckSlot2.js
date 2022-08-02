@@ -1,12 +1,11 @@
 const CardDeckSlot2 = cc.Node.extend({
-    ctor: function (cardType) {
+    ctor: function (card) {
         this._super();
         this._setupUI();
 
-        this.setCardTexture(cardType);
-        this.type = cardType;
-        this.isUp = false;
-        this.isSelected = false;
+        this.type = card.id;
+        this.level = card.level;
+        this.setCardTexture(card.id);
     },
 
     _setupUI: function () {
@@ -27,8 +26,15 @@ const CardDeckSlot2 = cc.Node.extend({
         this.cardBackgroundBtn.setSwallowTouches(false);
     },
 
-    setCardType: function (cardType) {
+    setCardType: function (card) {
+        this.type = card.id;
+        this.level = card.level;
+        this.setCardTexture(card.id);
+    },
+
+    setCardTypeAndLevel: function (cardType, cardLevel) {
         this.type = cardType;
+        this.level = cardLevel;
         this.setCardTexture(cardType);
     },
 
@@ -53,12 +59,4 @@ const CardDeckSlot2 = cc.Node.extend({
             return;
         this.energyTxt.setString(energy);
     },
-
-    setIsSelected: function (isSelected) {
-        this.isSelected = isSelected;
-    },
-
-    setIsUp: function (isUp) {
-        this.isUp = isUp;
-    }
 });
