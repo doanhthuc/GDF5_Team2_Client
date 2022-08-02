@@ -48,10 +48,10 @@ let EffectSystem = System.extend({
             let lifeComponent = entity.getComponent(LifeComponent);
             if (lifeComponent) {
                 let damageComponent = entity.getComponent(DamageEffect);
+                // cc.log("[EffectSystem.js line 51] damageComponent.damage: " + damageComponent.damage + " lifeComponent.life: " + lifeComponent.hp);
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
-
-                BattleAnimation.animationDamage(entity);
+               // BattleAnimation.animationDamage(entity);
             }
         }
     },
@@ -101,7 +101,7 @@ let EffectSystem = System.extend({
             }
         }
     },
-    
+
     _handleBuffAttackRangeEffect: function () {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackRangeEffect, AttackComponent);
@@ -112,7 +112,7 @@ let EffectSystem = System.extend({
             attackComponent.range = attackComponent.originRange + attackComponent.originRange * buffAttackRangeComponent.percent;
         }
     },
-    
+
     _handleTrapEffect: function (dt) {
         let monsterList = EntityManager.getInstance()
             .getEntitiesHasComponents(TrapEffect);
@@ -147,7 +147,7 @@ let EffectSystem = System.extend({
                 let time = Utils.euclidDistance(pos, bornPos) / (2 * GameConfig.TILE_WIDTH);
                 let action = cc.spawn(
                     cc.jumpTo(time, bornPos, 100, 1),
-                    cc.sequence(cc.scaleTo(time/2, 0.8), cc.scaleTo(time/2, 1))
+                    cc.sequence(cc.scaleTo(time / 2, 0.8), cc.scaleTo(time / 2, 1))
                 );
                 appearanceComponent.sprite.runAction(action);
 

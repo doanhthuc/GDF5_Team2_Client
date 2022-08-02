@@ -24,9 +24,9 @@ GameConfig.COMPONENT_ID = {
     BUFF_ATTACK_DAMAGE: 15,
     SPELL: 16,
     SKELETON: 17,
-    UNDER_GROUND:18,
-    SPAWN_MINION:19,
-    HEALING_ABILITY:20,
+    UNDER_GROUND: 18,
+    SPAWN_MINION: 19,
+    HEALING_ABILITY: 20,
     SPRITE_SHEET: 21,
     TRAP_INFO: 22,
     TRAP_EFFECT: 23,
@@ -100,10 +100,10 @@ GameConfig.TOWER_TARGET_STRATEGY = {
     MIN_DISTANCE: 4
 }
 
-GameConfig.FROG_BULLET= {
-    HIT_FIRST_TIME:1,
-    HIT_SECOND_TIME:2,
-    HIT_BOTH_TIME:3,
+GameConfig.FROG_BULLET = {
+    HIT_FIRST_TIME: 1,
+    HIT_SECOND_TIME: 2,
+    HIT_BOTH_TIME: 3,
 }
 GameConfig.HOUSE_POSITION = {x: 6, y: 0};
 GameConfig.MONSTER_BORN_POSITION = {x: 0, y: 4};
@@ -145,7 +145,7 @@ GameConfig.MONSTER = {
         NORMAL: "normal",
         BOSS: "boss",
     },
-    CLASS : {
+    CLASS: {
         LAND: "land",
         AIR: "air",
     }

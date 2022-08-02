@@ -3,11 +3,7 @@ let BattleUILayer = cc.Layer.extend({
         this._super();
 
         this.battleData = battleData;
-        let fakeBattleDeckData = [
-            GameConfig.ENTITY_ID.BUNNY_TOWER,
-            GameConfig.ENTITY_ID.GOAT_TOWER,
-            GameConfig.ENTITY_ID.FIRE_SPELL,
-            GameConfig.ENTITY_ID.TRAP_SPELL];
+        let fakeBattleDeckData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         this.cardDeckListData = new CardDeckListData(fakeBattleDeckData);
         // this.battleData.setCards(this.cardDeckListData.getFirst4CardId(), GameConfig.PLAYER);
 
@@ -25,17 +21,20 @@ let BattleUILayer = cc.Layer.extend({
         this._showPlayerInfo();
         this._showBackButton();
         this._initNotification();
+        // this.showTargetCircle();
     },
 
     _showDeckCard: function () {
-        this.cardDeckNode = new CardDeckNode(this.cardDeckListData);
+        this.cardDeckNode = new CardDeckNode2(this.cardDeckListData);
         this.cardDeckNode.x = this.width / 2;
         this.cardDeckNode.y = this.cardDeckNode.height / 2;
         this.addChild(this.cardDeckNode);
     },
 
     _showTimer: function () {
-        this.timerNode = new BattleTimerNode(this.battleData.getTimer());
+        //let remainingTime = this.battleData.getBattleStartTime() - Date.now();
+        //cc.log(this.battleData.getBattleStartTime() + " " + TimeUtil.getServerTime() + this.battleData.getBattleStartTime() - TimeUtil.getServerTime());
+        this.timerNode = new BattleTimerNode((this.battleData.getBattleStartTime() - TimeUtil.getServerTime()) / 1000, this.battleData.dataInGame.timer);
         this.timerNode.x = cc.winSize.width / 2 - this.timerNode.width / 2;
         this.timerNode.y = (cc.winSize.height - this.cardDeckNode.height) / 2 + this.cardDeckNode.height;
         this.addChild(this.timerNode);
@@ -101,12 +100,34 @@ let BattleUILayer = cc.Layer.extend({
      * @param y tile pos of player map
      */
     showTargetCircle: function (x, y) {
+        // this.circleNode = new CircleTarget();
+        // this.circleNode.retain();
+        // this.addChild(this.circleNode, 10000);
+        // this.circleNode.setVisible(true);
+        // this.circleNode.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        // this.circleNode.setPosition(cc.p(0,0));
         let circleNode = new CircleTarget();
         let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
         pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
         circleNode.setPosition(pixelPos);
+        circleNode.setTowerTilePos(x, y);
         this.addChild(circleNode, 100);
     },
+
+    // setTargetCirclePos: function (x, y) {
+    //     let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
+    //     pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
+    //     cc.log("setTargetCirclePos " + this.circleNode.getPosition().x + " " + this.circleNode.getPosition().y + " " + this.circleNode.isVisible());
+    //     cc.log(pixelPos)
+    //     if (this.circleNode.getPosition().x === pixelPos.x && this.circleNode.y === pixelPos.y && this.circleNode.isVisible()) {
+    //         this.circleNode.setVisible(false);
+    //     } else {
+    //         cc.error("aaaaaaaaaaaaaaaaaaa")
+    //         this.circleNode.setPosition(cc.winSize.width / 2 - 50, cc.winSize.height / 2 - 50)
+    //         this.circleNode.setTowerTilePos(x, y);
+    //         this.circleNode.setVisible(true);
+    //     }
+    // },
 
     _backToLobby: function () {
         fr.view(MainScreen);

@@ -16,14 +16,24 @@ let RenderSystem = System.extend({
             if (ValidatorECS.isMonster(entity)) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                 let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
-                if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE) {
+                if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID!== GameConfig.ENTITY_ID.BAT) {
                     let lifeComponent = entity.getComponent(LifeComponent);
                     lifeComponent.hp = 0;
+                }
+
+                appearanceComponent.sprite.setLocalZOrder(1000 - positionComponent.y);
+            }
+
+            if (ValidatorECS.isTower(entity)) {
+                let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
+                if (entity.mode === GameConfig.PLAYER) {
+                    appearanceComponent.sprite.setLocalZOrder(GameConfig.MAP_HEIGH - tilePos.y);
+                } else {
+                    appearanceComponent.sprite.setLocalZOrder(tilePos.y);
                 }
             }
 
             appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
-            appearanceComponent.sprite.setLocalZOrder(10000 - positionComponent.y);
 
             // side effect
             this._updateHpBarMonsterUI(entity);

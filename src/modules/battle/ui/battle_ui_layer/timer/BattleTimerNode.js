@@ -1,9 +1,9 @@
 let BattleTimerNode = cc.Node.extend({
-    ctor: function (duration) {
+    ctor: function (countdown, duration) {
         this._super();
         this._duration = duration || 20;
-        this._countdown = this._duration;
-
+        this._countdown = countdown;
+        this._monsterSpawmTime = 1;
         this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
         this.addChild(this.node);
         this.progress = new cc.ProgressTimer(new cc.Sprite(BattleResource.TIMER_BACKGROUND));
@@ -34,10 +34,17 @@ let BattleTimerNode = cc.Node.extend({
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.END_ONE_TIMER);
         }
-
         this.progress.setPercentage(this._countdown / this._duration * 100);
         let time = this.node.getChildByName("time")
         time.setString(Math.round(this._countdown));
         this._countdown = this._countdown - tick;
+        let battleData = BattleManager.getInstance().getBattleData();
+        if (battleData.dataInGame.currentWave === 0) return;
+        if (this._monsterSpawmTime <= 0 && battleData.dataInGame.monsterWave[battleData.dataInGame.currentWave].length > 0) {
+            this._monsterSpawmTime = 1;
+            EventDispatcher.getInstance().dispatchEvent(EventType.SPAWN_MONSTER);
+        } else {
+            this._monsterSpawmTime -= tick;
+        }
     },
 });

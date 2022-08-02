@@ -106,6 +106,16 @@ ValidatorECS.validatePositionPutCard = function (type, pixelPos, mode) {
             || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
             return {error: true, msg: MSG_INVALID_TOWER};
         }
+        let mapObject = BattleManager.getInstance().getBattleData().getMapObject(mode);
+        cc.log("mapObject height:  " + mapObject.length + " width: " + mapObject[0].length);
+        cc.log("mapObject = row: " + row + " col: " + col + " mapObject: " + mapObject);
+        if (mapObject[tilePos.x][tilePos.y].objectInCellType === ObjectInCellType.TOWER) {
+            let tower = mapObject[tilePos.x][tilePos.y].tower;
+            cc.log("ValidatorECS line 114: " + JSON.stringify(mapObject[tilePos.x][tilePos.y]));
+            if (tower.towerId !== type || tower.level >= 3) {
+                return {error: true, msg: MSG_INVALID_TOWER};
+            }
+        }
 
         let checkMap = BattleManager.getInstance().getBattleData().cloneMap(mode);
         let clonedMap = BattleManager.getInstance().getBattleData().cloneMap(mode);
@@ -117,7 +127,8 @@ ValidatorECS.validatePositionPutCard = function (type, pixelPos, mode) {
         clonedMap[roww][coll] = GameConfig.MAP.TOWER;
 
         const CHECK_MARK = "x";
-        roww = GameConfig.MAP_HEIGH - 1 - GameConfig.MONSTER_BORN_POSITION.y; coll = GameConfig.MONSTER_BORN_POSITION.x;
+        roww = GameConfig.MAP_HEIGH - 1 - GameConfig.MONSTER_BORN_POSITION.y;
+        coll = GameConfig.MONSTER_BORN_POSITION.x;
         checkMap[roww][coll] = CHECK_MARK;
 
         for (let monster of listMonster) {
