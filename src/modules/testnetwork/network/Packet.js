@@ -12,6 +12,8 @@ gv.CMD.SEND_LOGOUT = 1004;
 
 gv.CMD.GET_USER_INVENTORY = 3001;
 gv.CMD.UPGRADE_CARD = 3002;
+gv.CMD.SWAP_CARD = 3003;
+
 
 gv.CMD.GET_USER_LOBBY = 4001;
 gv.CMD.UNLOCK_LOBBY_CHEST = 4002;
@@ -166,6 +168,7 @@ CMDSendGetUserInventory = fr.OutPacket.extend(
         }
     }
 )
+
 CMDSendUpgradeCard = fr.OutPacket.extend(
     {
         ctor: function () {
@@ -176,6 +179,22 @@ CMDSendUpgradeCard = fr.OutPacket.extend(
         pack: function (cardType) {
             this.packHeader();
             this.putInt(cardType);
+            this.updateSize();
+        }
+    }
+)
+
+CMDSendSwapCard = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.SWAP_CARD);
+        },
+        pack: function (cardInID, cardOutID) {
+            this.packHeader();
+            this.putInt(cardInID);
+            this.putInt(cardOutID);
             this.updateSize();
         }
     }
@@ -472,6 +491,18 @@ testnetwork.packetMap[gv.CMD.UPGRADE_CARD] = fr.InPacket.extend(
             this.goldChange = this.getInt();
             this.cardType = this.getInt();
             this.fragmentChange = this.getInt();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.SWAP_CARD] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+          this.cardInID = this.getInt();
+          this.cardOutID = this.getInt();
         }
     }
 );
