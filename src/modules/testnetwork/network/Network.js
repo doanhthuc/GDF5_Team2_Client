@@ -50,7 +50,8 @@ testnetwork.Connector = cc.Class.extend({
                 contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).onUpgradeCardSuccess(packet);
                 break;
             case gv.CMD.SWAP_CARD:
-                cc.log(JSON.stringify(packet));
+                cc.log("asdgdsbgdbdbdbdfbdfbdfsbdfb: " + JSON.stringify(packet));
+                this.handleSwapCard(cmd, packet);
                 break;
             case gv.CMD.GET_USER_LOBBY:
                 let treasureContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.TREASURE_CONTEXT);
@@ -217,6 +218,19 @@ testnetwork.Connector = cc.Class.extend({
         var pk= this.gameClient.getOutPacket(CMDSendLogout);
         pk.pack();
         this.gameClient.sendPacket(pk);
+    },
+
+    sendSwapCard:function (cardInId, cardOutId){
+        cc.log("Send Swap Card");
+        var pk= this.gameClient.getOutPacket(CMDSendSwapCard);
+        pk.pack(cardOutId,cardInId);
+        this.gameClient.sendPacket(pk);
+    },
+
+    handleSwapCard:function (cmd, packet){
+        cc.log("Handle Swap Card");
+        cc.log(packet.cardInID + " " + packet.cardInID);
+        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).onSwapCardSuccess(packet.cardInID, packet.cardOutID);
     }
 
 });
