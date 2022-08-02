@@ -59,6 +59,8 @@ let AttackComponent = Component.extend({
 
     updateAttackStatistic: function (damage, range, speed, effects, bulletSpeed, bulletRadius) {
         this._damage = damage;
+        this.originDamage = damage;
+        this.originSpeed = speed;
         this.range = range;
         this.speed = speed;
         this.effects = effects;

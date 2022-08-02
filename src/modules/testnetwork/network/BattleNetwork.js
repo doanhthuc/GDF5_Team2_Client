@@ -62,6 +62,9 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.OPPONENT_DESTROY_TOWER:
                 this._handleOpponentDestroyTower(cmd, packet);
                 break;
+            case gv.CMD.END_BATTLE:
+                this._handleEndBattle(cmd, packet);
+                break;
         }
     },
 
@@ -138,7 +141,6 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     sendChangeTowerTargetStrategy: function (towerTilePos, targetStrategy) {
-        cc.log("aaaaaaaaaaaaaaaaaaaafffffffffffffvvvvvvvvvvvvvvvvvvvv")
         let pk = this.gameClient.getOutPacket(CMDChangeTowerStrategy);
         pk.pack(towerTilePos, targetStrategy);
         this.gameClient.sendPacket(pk);
@@ -217,10 +219,6 @@ BattleNetwork.Connector = cc.Class.extend({
         let cellObject = playerObjectMap[packet.tileX][packet.tileY];
         cellObject.tower.level = packet.towerLevel;
         EntityFactory.onUpdateTowerLevel(cellObject.tower.entityId, packet.towerLevel);
-        let towerEntity = EntityManager.getInstance().getEntity(cellObject.tower.entityId);
-        cc.log("[BattleNetwork.js line 227]: towerEntity: " + JSON.stringify(towerEntity));
-        let attackComponent = towerEntity.getComponent(AttackComponent);
-        cc.log('[BattleNetwork.js line 165] attackComponent: ' + JSON.stringify(attackComponent));
     },
 
     _handleOpponentUpgradeTower: function (cmd, packet) {
@@ -294,5 +292,14 @@ BattleNetwork.Connector = cc.Class.extend({
         cellObject.tower = null;
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.DESTROY_TOWER, {pos: tilePos, mode: GameConfig.PLAYER});
+    },
+
+    _handleEndBattle: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 303] received end battle packet: ' + JSON.stringify(packet));
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.PLAYER);
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.OPPONENT);
+        BattleManager.getInstance().getBattleData().setTrophyChange(packet.trophyChange);
+        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).setTrophy(packet.trophyAfterBattle);
+        BattleManager.getInstance().getBattleLayer().stopGame();
     }
 })

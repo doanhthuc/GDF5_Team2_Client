@@ -8,6 +8,7 @@ let BattleData = cc.Class.extend({
             monsterWave: null,
             maxWave: 20,
             timer: 20,
+            trophyChange: 0,
             player: {
                 username: "HOVANVYDUT",
                 clanName: "GDF5_DN_TEAM_2",
@@ -227,6 +228,14 @@ let BattleData = cc.Class.extend({
     getCards: function (mode) {
         Utils.validateMode(mode);
         return this.dataInGame[mode].cards;
+    },
+
+    setTrophyChange: function (trophyChange) {
+        this.dataInGame.trophyChange = trophyChange;
+    },
+
+    getTrophyChange: function (trophyChange) {
+        return this.dataInGame.trophyChange;
     },
 });
 
