@@ -408,7 +408,8 @@ let BattleLayer = cc.Layer.extend({
             result = GameConfig.BATTLE_RESULT.LOSE;
         }
 
-        this.addChild(new BattleResultLayer(result, this.battleData), 2);
+        const trophyChange = 11;
+        this.addChild(new BattleResultLayer(result, this.battleData, trophyChange), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
         // TODO: remove file from sprite frame cache

@@ -1,9 +1,10 @@
 let BattleResultLayer = cc.Layer.extend({
-    ctor: function (result, battleData) {
+    ctor: function (result, battleData, trophyChange) {
         this._super();
 
         this.result = result;
         this.battleData = battleData;
+        this.trophyChange = trophyChange;
 
         this._setupUI();
     },
@@ -101,6 +102,8 @@ let BattleResultLayer = cc.Layer.extend({
         } else {
             rewardNode = ccs.load("ui/battle/battle_result_layer/LoseReward.json", "").node;
         }
+
+        rewardNode.getChildByName("trophy_amount").setString(this.trophyChange);
         rewardNode.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 4));
         this.addChild(rewardNode);
     },
