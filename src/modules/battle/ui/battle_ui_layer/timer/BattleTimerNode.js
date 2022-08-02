@@ -3,7 +3,7 @@ let BattleTimerNode = cc.Node.extend({
         this._super();
         this._duration = duration || 20;
         this._countdown = countdown || 5;
-        this._monsterSpawmTime = 1;
+        this._monsterSpawmTime = 0;
         this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
         this.addChild(this.node);
         this.progress = new cc.ProgressTimer(new cc.Sprite(BattleResource.TIMER_BACKGROUND));

@@ -304,7 +304,7 @@ BattleNetwork.Connector = cc.Class.extend({
         BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.PLAYER);
         BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.OPPONENT);
         BattleManager.getInstance().getBattleData().setTrophyChange(packet.trophyChange);
-        contextManager.getContext(ContextManagerConst.USER_CONTEXT).setTrophy(packet.trophyAfterBattle);
+        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).setTrophy(packet.trophyAfterBattle);
         BattleManager.getInstance().getBattleLayer().stopGame();
     }
 })

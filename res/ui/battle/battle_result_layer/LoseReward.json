@@ -152,65 +152,6 @@
           },
           {
             "FontSize": 36,
-            "LabelText": "-",
-            "FontResource": {
-              "Type": "Normal",
-              "Path": "textures/font/SVN-Supercell Magic.ttf",
-              "Plist": ""
-            },
-            "OutlineColor": {
-              "G": 0,
-              "B": 0
-            },
-            "ShadowColor": {
-              "R": 0,
-              "G": 0,
-              "B": 0
-            },
-            "ShadowOffsetX": 2.0,
-            "ShadowOffsetY": -2.0,
-            "ShadowEnabled": true,
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 22.9534,
-              "Y": -50.0001
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {
-              "R": 128,
-              "G": 0,
-              "B": 128
-            },
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 14.9534,
-            "RightMargin": -30.9534,
-            "TopMargin": 25.5001,
-            "BottomMargin": -74.5001,
-            "Tag": 43,
-            "ActionTag": -735511536,
-            "Size": {
-              "X": 16.0,
-              "Y": 49.0
-            },
-            "Name": "Text_2",
-            "ctype": "TextObjectData"
-          },
-          {
-            "FontSize": 36,
             "LabelText": "10",
             "FontResource": {
               "Type": "Normal",
