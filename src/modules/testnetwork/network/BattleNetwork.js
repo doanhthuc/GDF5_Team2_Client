@@ -65,6 +65,9 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.END_BATTLE:
                 this._handleEndBattle(cmd, packet);
                 break;
+            case gv.CMD.GET_BATTLE_DECK_IN_BATTLE:
+                this._handleGetBattleDeckInBattle(cmd, packet);
+                break;
         }
     },
 
@@ -217,6 +220,12 @@ BattleNetwork.Connector = cc.Class.extend({
 
     _handleGetCellObject: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 113] received get cell object packet: ' + JSON.stringify(packet));
+    },
+
+    _handleGetBattleDeckInBattle: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 117] received get battle deck in battle packet: ' + JSON.stringify(packet));
+        let battleDeck = packet.battleDeck;
+        cc.log(JSON.stringify(battleDeck));
     },
 
     _handleUpgradeTower: function (cmd, packet) {
