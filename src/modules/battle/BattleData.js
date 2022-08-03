@@ -18,8 +18,8 @@ let BattleData = cc.Class.extend({
                 mapObject: null,
                 longestPath: null,
                 shortestPathForEachTile: null,
-                currentEnergy: 30,
-                maxEnergy: 30,
+                currentEnergy: 1000,
+                maxEnergy: 1000,
                 cards: [
                     {
                         id: 0,
