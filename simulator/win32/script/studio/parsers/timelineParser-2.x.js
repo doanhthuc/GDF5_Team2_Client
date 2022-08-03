@@ -1369,11 +1369,14 @@
     var loadTexture = function(json, resourcePath, cb){
         if(json != null){
             var path = json["Path"];
-            //GSN custom
             var type;
+            if(json["Type"] === "Default" || json["Type"] === "Normal")
+                type = 0;
+            else
                 type = 1;
             var plist = json["Plist"];
             if(plist){
+                //cc.log("isPlist: %s", path);
                 if(cc.loader.getRes(resourcePath + plist)){
                     loadedPlist[resourcePath + plist] = true;
                     cc.spriteFrameCache.addSpriteFrames(resourcePath + plist);
@@ -1382,16 +1385,19 @@
                         cc.log("%s need to be preloaded", resourcePath + plist);
                 }
             }
+            else{
+                // get file name encoded
+                if(gv.ENCODE_FILE_NAME && extname(path) === "png"){
+                    path = cc.path.changeBasename(path, XORCipher.encode(getFileName(path)), true);
+                    //cc.log("new path encoded: %s", path);
+                }
+            }
+
             if(type !== 0){
                 if(cc.spriteFrameCache.getSpriteFrame(path))
                     cb(path, type);
-                else{
-                    if(path.indexOf(".fnt") == -1) {
-                        cc.log("failed to get spriteFrame: %s", path);
-                    }
-                    cb(resourcePath + path, 0);
-                }
-
+                else
+                    cc.log("failed to get spriteFrame: %s", path);
             }else
                 cb(resourcePath + path, type);
         }

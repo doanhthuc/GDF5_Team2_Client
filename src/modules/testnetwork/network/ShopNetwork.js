@@ -27,7 +27,8 @@ ShopNetwork.Connector = cc.Class.extend({
     _handleGetUserDailyShop: function (cmd, packet) {
         cc.log("@@@@@@@@@@@")
         cc.log(JSON.stringify(packet.dailyShopItem));
-        shopContext.setDailyShopItemList(packet.dailyShopItem);
+        let dailyShopData = new DailyShopData(packet.dailyShopItem, packet.futureResetTime);
+        shopContext.setDailyShopData(dailyShopData);
         cc.log("Call_handleGetUserDailyShop")
     },
 
@@ -46,6 +47,11 @@ ShopNetwork.Connector = cc.Class.extend({
             userContext.updateUserGold(packet.goldChange);
             let shopLayer = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.SHOP_NODE);
             shopLayer.closePopup();
+
+            let targetPos = cc.p(cc.winSize.width / 2, cc.winSize.height - 50);
+            let pixel = cc.p(cc.winSize.width / 2, cc.winSize.height / 2);
+            let goldAnimation = new GoldAnimation(pixel, targetPos, shopLayer);
+            goldAnimation.run();
         } else {
             cc.log("[ShopNetwork.js] error response buy gold shop");
         }

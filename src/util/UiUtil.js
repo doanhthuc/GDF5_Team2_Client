@@ -1,5 +1,8 @@
 const UiUtil = {
     convertIntToString: function (number) {
+        if (number <= 0) {
+            return "0";
+        }
         let res = "", count = 0;
         while (number) {
             res = (number % 10).toString() + res;

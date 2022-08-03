@@ -4,6 +4,9 @@ let CardDeckNode = cc.Node.extend({
 
         this.cardDeckListData = cardDeckListData;
         this.selectableCardIdList = this.cardDeckListData.getFirst4CardId();
+        this.selectedCard = null;
+        this.nextCardPosition = null;
+        this.isCardPuttedIntoMap = false;
 
         this.rootNode = ccs.load(BattleResource.CARD_DECK_NODE, "").node;
         this.addChild(this.rootNode);
@@ -83,18 +86,24 @@ let CardDeckNode = cc.Node.extend({
                 this.handleChangeCardEvent.bind(this))
             .addEventHandler(EventType.DROP_SPELL,
                 this.handleChangeCardEvent.bind(this))
+            .addEventHandler(EventType.PUT_TRAP,
+                this.handleChangeCardEvent.bind(this))
 
-        this.selectedCard = null;
+
     },
 
     handleChangeCardEvent: function (data) {
-        this.nextCard(this.selectedCard.id);
+        if (data.mode === GameConfig.PLAYER) {
+            this.isCardPuttedIntoMap = true;
+            this.nextCard(this.selectedCard.id);
+        }
     },
 
     genNextCardSlot: function () {
         let card = this.rootNode.getChildByName("card_5");
         let cardId = this.cardDeckListData.getNextCardId();
         this.nextCardSlot = new CardDeckSlot(cardId);
+        this.nextCardPosition = card.getPosition();
         this.nextCardSlot.setPosition(card.getPosition());
         this.nextCardSlot.setScale(0.6449, 0.6449);
         this.rootNode.addChild(this.nextCardSlot, 1);
@@ -107,11 +116,12 @@ let CardDeckNode = cc.Node.extend({
         let touchInCard = cc.rectContainsPoint(selectedCardBoundingBox, selectedCard.convertToNodeSpace(touchPos)) === true;
 
         if (touchInCard) {
-            cc.log("CardDeckNode _onTouchBegan " + JSON.stringify(selectedCard));
+            // cc.log("CardDeckNode _onTouchBegan " + JSON.stringify(selectedCard));
             this.selectedCard = selectedCard;
             if (selectedCard.isUp === false) {
                 this._moveCardUp(selectedCard);
                 // Select card
+                this.selectedCard = selectedCard;
                 BattleManager.getInstance().getBattleLayer().selectedCard = selectedCard.type;
 
                 // move another card down if it is up
@@ -246,6 +256,9 @@ let CardDeckNode = cc.Node.extend({
             if (currentCardSlot.id === replaceCardSlotID) {
                 this.nextCardSlot.id = currentCardSlot.id;
                 this.cardSlotManager[i].setCardType(this.nextCardSlot.type);
+                cc.log("[CardDeckNode,js line 253: " + JSON.stringify(this.nextCardPosition))
+                // this.cardSlotManager[i].setPosition(this.nextCardPosition);
+                // this.cardSlotManager[i].runAction(cc.spawn(cc.moveTo(0.3, this.fixedCardPosition[currentCardSlot.number]), cc.scaleTo(0.3, 1)).easing(cc.easeElasticIn()));
                 cc.eventManager.addListener({
                     event: cc.EventListener.TOUCH_ONE_BY_ONE,
                     onTouchBegan: this._onTouchBegan.bind(this),

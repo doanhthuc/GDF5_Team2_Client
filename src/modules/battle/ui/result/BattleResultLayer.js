@@ -1,9 +1,10 @@
 let BattleResultLayer = cc.Layer.extend({
-    ctor: function (result, battleData) {
+    ctor: function (result, battleData, trophyChange) {
         this._super();
 
         this.result = result;
         this.battleData = battleData;
+        this.trophyChange = trophyChange;
 
         this._setupUI();
     },
@@ -53,7 +54,6 @@ let BattleResultLayer = cc.Layer.extend({
         let animationName = (trackIndex && trackIndex.animation) ? trackIndex.animation.name : 0;
         switch (type) {
             case GameConfig.ANIMATION_TYPE.ANIMATION_COMPLETE:
-                cc.log(trackIndex + " complete: " + animationName + "," + loopCount);
                 if (animationName === this.animationName.init) {
                     this._showResult();
                 }
@@ -95,6 +95,17 @@ let BattleResultLayer = cc.Layer.extend({
             y: backButton.height / 2
         });
         this.addChild(backButtonNode);
+
+        let rewardNode;
+        if (this.result === GameConfig.BATTLE_RESULT.WIN) {
+            rewardNode = ccs.load("ui/battle/battle_result_layer/WinReward.json", "").node;
+        } else {
+            rewardNode = ccs.load("ui/battle/battle_result_layer/LoseReward.json", "").node;
+        }
+
+        rewardNode.getChildByName("trophy_amount").setString(this.trophyChange);
+        rewardNode.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 4));
+        this.addChild(rewardNode);
     },
 
     _backToLobby: function () {

@@ -1,8 +1,8 @@
 let BattleTimerNode = cc.Node.extend({
-    ctor: function (duration) {
+    ctor: function (countdown, duration) {
         this._super();
         this._duration = duration || 20;
-        this._countdown = this._duration;
+		this._monsterSpawmTime = 0;
 
         this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
         this.addChild(this.node);
@@ -24,20 +24,33 @@ let BattleTimerNode = cc.Node.extend({
         this.unscheduleUpdate();
     },
 
-    update: function (tick) {
-        this.timer(tick);
+    timer: function () {
+        const dt = tickManager.getDeltaFromLatestTickToNow() / 1000;
+        let countDownLatestTick = tickManager.getTickData().getBattleTimerCountDown();
+        const countDown = countDownLatestTick - dt;
+
+        this.progress.setPercentage(countDown / this._duration * 100);
+        let time = this.node.getChildByName("time")
+        time.setString(countDown.toFixed(2));
     },
 
-    timer: function (tick) {
-        if (this._countdown <= 0) {
-            this._countdown = this._duration;
+    updateData: function () {
+        let countDownLatestTick = tickManager.getTickData().getBattleTimerCountDown();
+        if (countDownLatestTick <= 0) {
+            countDownLatestTick = this._duration;
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.END_ONE_TIMER);
         }
+        countDownLatestTick = countDownLatestTick - tickManager.getTickRate() / 1000;
+        tickManager.getTickData().setBattleTimerData(countDownLatestTick);
 
-        this.progress.setPercentage(this._countdown / this._duration * 100);
-        let time = this.node.getChildByName("time")
-        time.setString(Math.round(this._countdown));
-        this._countdown = this._countdown - tick;
-    },
+        let battleData = BattleManager.getInstance().getBattleData();
+        if (battleData.getCurrentWave() === 0) return;
+        if (this._monsterSpawmTime <= 0 && battleData.dataInGame.monsterWave[battleData.dataInGame.currentWave].length > 0) {
+            this._monsterSpawmTime = 1;
+            EventDispatcher.getInstance().dispatchEvent(EventType.SPAWN_MONSTER);
+        } else {
+            this._monsterSpawmTime -= tickManager.getTickRate() / 1000;
+        }
+    }
 });

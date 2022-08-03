@@ -300,8 +300,8 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
             direction = Utils.getDirectionOf2Tile(tileArr[i], tileArr[i + 1]);
         }
         if (i === 0) {
-            beforeCellX = Math.floor(Math.random() * moduleCellRange) + cellBound;
-            beforeCellY = Math.floor(Math.random() * moduleCellRange) + cellBound;
+            beforeCellX = cellBound;
+            beforeCellY = cellBound;
         }
         // switch (direction) {
         //     case GameConfig.DIRECTION.LEFT:
@@ -537,4 +537,8 @@ Utils.divideCellPath = function (pointA, pointB, divideAmount) {
         cellArr.push({x: cellX, y: cellY});
     }
     return cellArr;
+}
+
+Utils.currentTimeMillis = function () {
+    return Date.now();
 }

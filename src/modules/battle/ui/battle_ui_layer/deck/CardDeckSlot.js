@@ -8,6 +8,8 @@ let CardDeckSlot = cc.Node.extend({
         // this.setEnergy(energy);
         this.setCardTexture(cardType);
         this.type = cardType;
+        this.isUp = false;
+        this.isSelected = false;
     },
 
     _setupUI: function () {
@@ -22,7 +24,7 @@ let CardDeckSlot = cc.Node.extend({
         this.addChild(rootNode);
     },
 
-    setCardType : function(cardType){
+    setCardType: function (cardType) {
         this.type = cardType;
         this.setCardTexture(cardType);
     },
@@ -47,5 +49,13 @@ let CardDeckSlot = cc.Node.extend({
         if (energy < 0)
             return;
         this.energyNode.getChildByName("value").setString(energy);
+    },
+
+    setIsSelected: function (isSelected) {
+        this.isSelected = isSelected;
+    },
+
+    setIsUp: function (isUp) {
+        this.isUp = isUp;
     }
 });

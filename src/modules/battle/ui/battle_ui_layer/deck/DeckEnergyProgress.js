@@ -28,4 +28,20 @@ let DeckEnergyProgress = cc.Node.extend({
         this.currentEnergyNode.getChildByName("value").setString(currentEnergy);
         this.progressBar.setPercent(this.battleData.getCurrentEnergy(mode) / this.battleData.getMaxEnergy(mode) * 100);
     },
+
+    plusEnergy: function (plusEnergy) {
+        let energy = this.battleData.getCurrentEnergy(GameConfig.PLAYER) + plusEnergy;
+        if (energy <= this.battleData.getMaxEnergy(GameConfig.PLAYER)) {
+            this.setCurrentEnergy(this.battleData.getMaxEnergy(GameConfig.PLAYER));
+        }
+    },
+
+    minusEnergy: function (minusEnergy) {
+        let energy = this.battleData.getCurrentEnergy(GameConfig.PLAYER) - minusEnergy;
+        if (energy >= 0) {
+            this.setCurrentEnergy(energy);
+        } else {
+            this.setCurrentEnergy(0);
+        }
+    }
 })

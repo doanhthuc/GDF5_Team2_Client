@@ -106,10 +106,12 @@ let AbilitySystem = System.extend({
                             case BuffAttackDamageEffect.typeID:
                                 let attackComponent = damageTower.getComponent(AttackComponent);
                                 attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
+                                BattleAnimation.addBuffDamageAnimation(damageTower);
                                 break;
                             case BuffAttackSpeedEffect.typeID:
                                 let attackSpeedComponent = damageTower.getComponent(AttackComponent);
                                 attackSpeedComponent.setSpeed(attackSpeedComponent.speed - (attackSpeedComponent.originSpeed * towerAbilityComponent.effect.percent));
+                                BattleAnimation.addBuffSpeedAnimation(damageTower);
                                 break;
                         }
                     }

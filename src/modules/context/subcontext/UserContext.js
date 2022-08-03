@@ -88,5 +88,9 @@ const UserContext = cc.Class.extend({
         this.isAuthenticated = false;
         this.isAuthenticating = false;
         this.clientUIManager = ClientUIManager.getInstance();
+    },
+
+    setTrophy: function (trophy) {
+        this.user.trophy = trophy;
     }
 })
