@@ -7,7 +7,58 @@ let AttackSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    _run: function (tick) {
+    _run: function (dt) {
+        // let towerList = EntityManager.getInstance()
+        //     .getEntitiesHasComponents(AttackComponent);
+        // let monsterList = EntityManager.getInstance()
+        //     .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
+        //
+        // for (let tower of towerList) {
+        //     let attackComponent = tower.getComponent(AttackComponent);
+        //     // cc.log("[AttackSystem.js line 35] attackComponent.targetStrategy: " + JSON.stringify(attackComponent.effects));
+        //     // update count down time
+        //     if (attackComponent.countdown > 0) {
+        //         attackComponent.countdown -= dt;
+        //     }
+        //     if (attackComponent.countdown <= 0) {
+        //         let monsterInAttackRange = []
+        //         for (let monster of monsterList) {
+        //             let underGroundComponent = monster.getComponent(UnderGroundComponent);
+        //             if ((underGroundComponent == null) || underGroundComponent.isInGround === false) {
+        //                 if (monster.getActive() && monster.mode === tower.mode
+        //                     && monster.hasAllComponent(PositionComponent)) {
+        //                     let distance = this._distanceFrom(tower, monster);
+        //                     if (distance <= attackComponent.range) {
+        //                         monsterInAttackRange.push(monster);
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         if (monsterInAttackRange.length > 0) {
+        //             // TODO: switch case target_strategy here
+        //             let towerPos = tower.getComponent(PositionComponent);
+        //             let targetMonster = this._findTargetMonsterByStrategy(towerPos, attackComponent.targetStrategy, monsterInAttackRange);
+        //             if (targetMonster != null) {
+        //                 let monsterPos = targetMonster.getComponent(PositionComponent);
+        //                 this._changeTowerAnimation(tower, targetMonster);
+        //
+        //                 if (tower.typeID === GameConfig.ENTITY_ID.FROG_TOWER) {
+        //                     let distance = this._distanceFrom(tower, targetMonster);
+        //                     let k = attackComponent.range / distance;
+        //                     let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
+        //                     EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
+        //                 } else {
+        //                     EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
+        //                 }
+        //                 attackComponent.countdown = attackComponent.speed;
+        //             }
+        //         }
+        //     }
+        // }
+    },
+
+    updateData: function () {
+        const dt = tickManager.getTickRate() / 1000;
         let towerList = EntityManager.getInstance()
             .getEntitiesHasComponents(AttackComponent);
         let monsterList = EntityManager.getInstance()
@@ -15,10 +66,13 @@ let AttackSystem = System.extend({
 
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
+
+            attackComponent.updateDataFromLatestTick();
+
             // cc.log("[AttackSystem.js line 35] attackComponent.targetStrategy: " + JSON.stringify(attackComponent.effects));
             // update count down time
             if (attackComponent.countdown > 0) {
-                attackComponent.countdown -= tick;
+                attackComponent.countdown -= dt;
             }
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
@@ -51,9 +105,12 @@ let AttackSystem = System.extend({
                             EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
                         }
                         attackComponent.countdown = attackComponent.speed;
+                        cc.error("UUUUUUUUUxxxx:" + attackComponent.speed);
                     }
                 }
             }
+
+            attackComponent.saveData();
         }
     },
 

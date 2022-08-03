@@ -14,6 +14,11 @@ let CollisionSystem = System.extend({
     },
 
     _run: function (tick) {
+
+    },
+
+    updateData: function () {
+        const dt = tickManager.getTickRate() / 1000;
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(CollisionComponent, PositionComponent)
 
@@ -48,7 +53,7 @@ let CollisionSystem = System.extend({
                 }
 
             } else if (ValidatorECS.isTrap(entityList[i])) {
-                this._handleCollisionTrap(entityList[i], tick);
+                this._handleCollisionTrap(entityList[i], dt);
             }
         }
     },

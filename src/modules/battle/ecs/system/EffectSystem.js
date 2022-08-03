@@ -18,6 +18,30 @@ let EffectSystem = System.extend({
         this._handleTrapEffect(tick);
     },
 
+    updateData: function () {
+        this._updateDamageEffect();
+    },
+
+    _updateDamageEffect: function () {
+        let entityList = EntityManager.getInstance()
+            .getEntitiesHasComponents(DamageEffect);
+
+        for (let entity of entityList) {
+            let lifeComponent = entity.getComponent(LifeComponent);
+
+            if (lifeComponent) {
+                let damageComponent = entity.getComponent(DamageEffect);
+                lifeComponent.updateDataFromLatestTick();
+                damageComponent.updateDataFromLatestTick();
+
+                lifeComponent.hp -= damageComponent.damage;
+                entity.removeComponent(damageComponent)
+
+                lifeComponent.saveData();
+            }
+        }
+    },
+
     _handleBuffAttackSpeedEffect: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackSpeedEffect, AttackComponent);

@@ -7,7 +7,11 @@ let LifeSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    _run: function (tick) {
+    _run: function (dt) {
+
+    },
+
+    updateData: function () {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(LifeComponent);
         for (let entity of entityList) {
