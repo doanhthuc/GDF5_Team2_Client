@@ -105,7 +105,6 @@ let AttackSystem = System.extend({
                             EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
                         }
                         attackComponent.countdown = attackComponent.speed;
-                        cc.error("UUUUUUUUUxxxx:" + attackComponent.speed);
                     }
                 }
             }

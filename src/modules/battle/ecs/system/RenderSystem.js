@@ -88,10 +88,6 @@ let RenderSystem = System.extend({
             let hpNode = sprite.getChildByName("hp");
             if (hpNode) {
                 let hpProgressBar = hpNode.getChildByName("progress_bar");
-                cc.warn("=============")
-                cc.error("hp = " + lifeComponent.hp);
-                cc.error("maxhp = " + lifeComponent.maxHP)
-                cc.warn("=============")
 
                 hpProgressBar.setPercent(lifeComponent.hp / lifeComponent.maxHP * 100);
                 if (hpProgressBar.getPercent() === 100)

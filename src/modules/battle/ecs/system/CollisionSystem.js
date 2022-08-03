@@ -32,6 +32,10 @@ let CollisionSystem = System.extend({
         for (let i = 0; i < entityList.length - 1; i++) {
             let pos = entityList[i].getComponent(PositionComponent);
             let collisionComponent = entityList[i].getComponent(CollisionComponent);
+
+            pos.updateDataFromLatestTick();
+            collisionComponent.updateDataFromLatestTick();
+
             let w = collisionComponent.width, h = collisionComponent.height;
 
             let rect = cc.rect(pos.x - w / 2, pos.y - h / 2, w, h);
@@ -46,6 +50,7 @@ let CollisionSystem = System.extend({
         for (let i = 0; i < entityList.length; i++) {
             if (ValidatorECS.isBullet(entityList[i])) {
                 let bulletInfoComponent = entityList[i].getComponent(BulletInfoComponent);
+                bulletInfoComponent.updateDataFromLatestTick();
                 if (bulletInfoComponent.radius) {
                     this._handleRadiusBullet(entityList[i]);
                 } else {
@@ -61,6 +66,10 @@ let CollisionSystem = System.extend({
     _handleCollisionBullet: function (bulletEntity) {
         let pos = bulletEntity.getComponent(PositionComponent);
         let collisionComponent = bulletEntity.getComponent(CollisionComponent);
+
+        pos.updateDataFromLatestTick();
+        collisionComponent.updateDataFromLatestTick();
+
         let w = collisionComponent.width, h = collisionComponent.height;
 
         let returnObjects = null;
@@ -77,32 +86,39 @@ let CollisionSystem = System.extend({
                 if (data) {
                     let monster = data.monster, bullet = data.bullet;
                     let bulletInfo = bullet.getComponent(BulletInfoComponent);
+                    bulletInfo.updateDataFromLatestTick();
+
                     //Handle Frog Bullet
                     if (bulletInfo.type && bulletInfo.type === "frog") {
-                        let pathComponent = bullet.getComponent(PathComponent);
+                        let pathComponent = bullet.getComponent(PathComponent)
+                        pathComponent.updateDataFromLatestTick();
+
                         //check the the bullet is in first path
                         if (pathComponent.currentPathIdx <= pathComponent.path.length / 2) {
-                            if (bulletInfo.hitMonster.has(monster.id) === false)
+                            if (bulletInfo.hitMonster.has(monster.id) === false) {
                                 for (let effect of bulletInfo.effects) {
                                     monster.addComponent(effect.clone());
                                     bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_FIRST_TIME);
+                                    bulletInfo.saveData();
                                 }
-                        } //check the second path
-                        else {
+                            }
+                        } else { //check the second path
                             // check if this monster was not hit in First Path
                             if (bulletInfo.hitMonster.has(monster.id) === false) {
                                 for (let effect of bulletInfo.effects) {
                                     monster.addComponent(effect.clone());
                                     bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_SECOND_TIME);
+                                    bulletInfo.saveData();
                                 }
-                            }  // else if this monster is hit in First Path
-                            else if (bulletInfo.hitMonster.get(monster.id) === GameConfig.FROG_BULLET.HIT_FIRST_TIME) {
+                                // else if this monster is hit in First Path
+                            } else if (bulletInfo.hitMonster.get(monster.id) === GameConfig.FROG_BULLET.HIT_FIRST_TIME) {
                                 for (let effect of bulletInfo.effects) {
                                     if (effect.typeID === GameConfig.COMPONENT_ID.DAMAGE_EFFECT) {
                                         let newDamageEffect = effect.clone();
                                         newDamageEffect.damage = effect.damage * 1.5;
                                         monster.addComponent(newDamageEffect);
                                         bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_BOTH_TIME);
+                                        bulletInfo.saveData();
                                     }
                                 }
                             }
@@ -126,6 +142,11 @@ let CollisionSystem = System.extend({
         let bulletPos = bullet.getComponent(PositionComponent);
         let bulletVelocity = bullet.getComponent(VelocityComponent);
         let bulletInfo = bullet.getComponent(BulletInfoComponent);
+
+        bulletPos.updateDataFromLatestTick();
+        bulletVelocity.updateDataFromLatestTick();
+        bulletInfo.updateDataFromLatestTick();
+
         if ((Math.abs(bulletVelocity.staticPosition.x - bulletPos.x) <= 5)
             && (Math.abs(bulletVelocity.staticPosition.y - bulletPos.y) <= 5)) {
             let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
@@ -142,14 +163,20 @@ let CollisionSystem = System.extend({
             EntityManager.destroy(bullet);
         }
     },
+
     _handleCollisionTrap: function (trapEntity, dt) {
         let trapInfo = trapEntity.getComponent(TrapInfoComponent);
+        trapInfo.updateDataFromLatestTick();
+
         if (trapInfo.isTriggered) {
             if (trapInfo.delayTrigger > 0) {
                 trapInfo.delayTrigger -= dt;
             } else {
                 let pos = trapEntity.getComponent(PositionComponent);
                 let collisionComponent = trapEntity.getComponent(CollisionComponent);
+                pos.updateDataFromLatestTick();
+                collisionComponent.updateDataFromLatestTick();
+
                 let w = collisionComponent.width, h = collisionComponent.height;
 
                 let returnObjects = null;
@@ -168,6 +195,8 @@ let CollisionSystem = System.extend({
 
                         // trap doesn't affect to Boss and Air monster
                         let monsterInfo = entity2.getComponent(MonsterInfoComponent);
+                        monsterInfo.updateDataFromLatestTick();
+
                         if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
                         if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
 
@@ -180,6 +209,9 @@ let CollisionSystem = System.extend({
         } else {
             let pos = trapEntity.getComponent(PositionComponent);
             let collisionComponent = trapEntity.getComponent(CollisionComponent);
+            pos.updateDataFromLatestTick();
+            collisionComponent.updateDataFromLatestTick();
+
             let w = collisionComponent.width, h = collisionComponent.height;
 
             let returnObjects = null;
@@ -198,6 +230,8 @@ let CollisionSystem = System.extend({
 
                     // trap only trigger with normal monster, except Boss and Air monster
                     let monsterInfo = entity2.getComponent(MonsterInfoComponent);
+                    monsterInfo.updateDataFromLatestTick();
+
                     if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
                     if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
 
@@ -206,6 +240,7 @@ let CollisionSystem = System.extend({
                     spriteComponent.changeCurrentState("ATTACK");
 
                     // only the first monster triggers this trap
+                    trapInfo.saveData();
                     break;
                 }
             }

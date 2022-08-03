@@ -71,8 +71,8 @@ let BattleLayer = cc.Layer.extend({
         // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
         this.getTimerNode().timer();
         this.resetSystem.start(dt);// empty _run
-        this.abilitySystem.start(dt);
-        this.effectSystem.start(dt);
+        this.abilitySystem.start(dt);// empty _run
+        this.effectSystem.start(dt);//empty _run
         this.attackSystem.start(dt);// convert damage effect, empty _run
         this.renderSystem.start(dt); // hybrid empty _run
         this.lifeSystem.start(dt);// empty_run
@@ -82,7 +82,7 @@ let BattleLayer = cc.Layer.extend({
         this.spellSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
         this.monsterSystem.start(dt); // empty _run
-        this.bulletSystem.start(dt);
+        this.bulletSystem.start(dt);// empty _run
         this.movementSystem.start(dt);//chua convert spell
 
         if (GameConfig.DEBUG) {

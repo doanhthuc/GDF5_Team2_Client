@@ -9,7 +9,6 @@ let MovementSystem = System.extend({
 
     _run: function (dt) {
         // const dt = tickManager.getDeltaFromLatestTickToNow() / 1000;
-        cc.log("dt = " + dt);
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(VelocityComponent, PositionComponent);
         for (let entity of entityList) {

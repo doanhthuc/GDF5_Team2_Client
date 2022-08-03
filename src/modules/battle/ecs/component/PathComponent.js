@@ -35,7 +35,6 @@ let PathComponent = Component.extend({
 
     updateDataFromLatestTick: function () {
         let componentData = tickManager.getTickData().getComponentData(this.id);
-        cc.warn(this.name + " = " + JSON.stringify(componentData));
         this.path = componentData.path;
         this.mode = componentData.mode;
         this.currentPathIdx = componentData.currentPathIdx;
