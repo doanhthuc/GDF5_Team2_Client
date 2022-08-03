@@ -7,7 +7,7 @@ let BattleData = cc.Class.extend({
             waveAmount: 0,
             monsterWave: null,
             maxWave: 20,
-            timer: 20,
+            timer: 5,
             trophyChange: 0,
             player: {
                 username: "HOVANVYDUT",
@@ -70,6 +70,10 @@ let BattleData = cc.Class.extend({
 
     setMonsterWave: function (monsterWave) {
         this.dataInGame.monsterWave = monsterWave;
+    },
+
+    getMonsterWave: function () {
+        return this.dataInGame.monsterWave;
     },
 
     setBattleStartTime: function (battleStartTime) {
