@@ -17,7 +17,8 @@ gv.CMD.DESTROY_TOWER = 5014;
 gv.CMD.OPPONENT_DESTROY_TOWER = 5015;
 gv.CMD.GET_BATTLE_INFO = 5016;
 gv.CMD.END_BATTLE = 5017;
-let BattleNetwork = BattleNetwork || {};
+gv.CMD.GET_BATTLE_DECK_IN_BATTLE = 5018;
+BattleNetwork = BattleNetwork || {};
 
 BattleNetwork.packetMap = {};
 
@@ -417,7 +418,7 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_INFO] = fr.InPacket.extend({
     readData: function () {
         this.battleStartTime = this.getLong();
         this.waveAmount = this.getInt();
-        cc.log(this.battleStartTime,this.waveAmount);
+        cc.log(this.battleStartTime, this.waveAmount);
         this.monsterWave = [];
         this.monsterWave.push([]);
         for (let i = 0; i < this.waveAmount; i++) {
@@ -448,3 +449,22 @@ BattleNetwork.packetMap[gv.CMD.END_BATTLE] = fr.InPacket.extend({
         }
     }
 })
+
+BattleNetwork.packetMap[gv.CMD.GET_BATTLE_DECK_IN_BATTLE] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.battleDeckSize = this.getInt();
+        this.battleDeck = [];
+        for (let i = 0; i < this.battleDeckSize; i++) {
+            let card = {
+                id: this.getInt(),
+                level: this.getInt(),
+                amount: this.getInt(),
+            }
+            this.battleDeck.push(card);
+        }
+    }
+});
