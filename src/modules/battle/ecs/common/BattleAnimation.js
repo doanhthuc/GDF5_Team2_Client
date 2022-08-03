@@ -115,7 +115,7 @@ BattleAnimation.removeAnimationUnderGround = function (entity) {
 
             // show monster
             childSprite.setOpacity(255);
-            shadowSprite.setOpacity(255);
+            shadowSprite.setOpacity(80);
 
         }
     }
