@@ -89,6 +89,7 @@ let EffectSystem = System.extend({
             frozenComponent.updateDataFromLatestTick();
 
             frozenComponent.countdown = frozenComponent.countdown - tick;
+            frozenComponent.saveData();
             if (frozenComponent.countdown <= 0) {
                 entity.removeComponent(frozenComponent);
                 this._updateOriginVelocity(velocityComponent);
@@ -98,7 +99,6 @@ let EffectSystem = System.extend({
             }
 
             velocityComponent.saveData();
-            frozenComponent.saveData();
         }
     },
 

@@ -79,7 +79,7 @@ let BattleLayer = cc.Layer.extend({
         this.collisionSystem.start(dt);// empty _run
         this.pathSystem.start(dt);//done
         this.spriteSheetAnimationSystem.start(dt);
-        this.spellSystem.start(dt);
+        this.spellSystem.start(dt);//done
         this.skeletonAnimationSystem.start(dt);
         this.monsterSystem.start(dt); // empty _run
         this.bulletSystem.start(dt);// empty _run

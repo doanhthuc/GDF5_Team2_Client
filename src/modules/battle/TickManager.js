@@ -40,6 +40,7 @@ let TickManager = cc.Class.extend({
         battleLayer.lifeSystem.updateData();
         battleLayer.collisionSystem.updateData();
         battleLayer.pathSystem.updateData();
+        battleLayer.spellSystem.updateData();
         battleLayer.monsterSystem.updateData();
         battleLayer.bulletSystem.updateData();
         battleLayer.movementSystem.updateData();
