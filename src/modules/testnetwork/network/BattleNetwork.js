@@ -65,6 +65,9 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.END_BATTLE:
                 this._handleEndBattle(cmd, packet);
                 break;
+            case gv.CMD.GET_BATTLE_DECK_IN_BATTLE:
+                this._handleGetBattleDeckInBattle(cmd, packet);
+                break;
         }
     },
 
@@ -103,11 +106,6 @@ BattleNetwork.Connector = cc.Class.extend({
         battleData.setTrophy(userContext.getTrophy(), GameConfig.PLAYER);
         battleData.setUsername(packet.opponentInfo.username, GameConfig.OPPONENT);
         battleData.setTrophy(packet.opponentInfo.trophy, GameConfig.OPPONENT);
-
-        setTimeout(function () {
-            fr.view(BattleLayer, 0.5, true)
-            cc.log("===> Switch to Game Layer Scene !!!")
-        }, 2000);
     },
 
     _handleCancelMatching: function (cmd, packet) {
@@ -141,7 +139,6 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     sendChangeTowerTargetStrategy: function (towerTilePos, targetStrategy) {
-        cc.log("aaaaaaaaaaaaaaaaaaaafffffffffffffvvvvvvvvvvvvvvvvvvvv")
         let pk = this.gameClient.getOutPacket(CMDChangeTowerStrategy);
         pk.pack(towerTilePos, targetStrategy);
         this.gameClient.sendPacket(pk);
@@ -155,13 +152,25 @@ BattleNetwork.Connector = cc.Class.extend({
 
     _handleGetBattleInfo: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
-        BattleManager.getInstance().getBattleData().setBattleStartTime(packet.battleStartTime);
+
+        // IMPORTANT: remove battle data save battle start time
+        let battleData = BattleManager.getInstance().getBattleData();
+        battleData.setBattleStartTime(packet.battleStartTime);
+        tickManager.setStartTime(packet.battleStartTime);
+
+        cc.warn("packet.battleStartTime = " + packet.battleStartTime);
+        cc.log("time server = " + TimeUtil.getServerTime());
+        tickManager.getTickData().setBattleTimerData(battleData.getTimer());
         BattleManager.getInstance().getBattleData().setWaveAmount(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
         //let battleData = BattleManager.getInstance().getBattleData();
         // cc.log(battleData.battleStartTime);
         // cc.log(TimeUtil.getServerTime());
         // cc.log(TimeUtil.getDeltaTime())
+        setTimeout(function () {
+            fr.view(BattleLayer, 0.5, true)
+            cc.log("===> Switch to Game Layer Scene !!!")
+        }, 2000);
     },
 
     _handlePutTower: function (cmd, packet) {
@@ -213,6 +222,12 @@ BattleNetwork.Connector = cc.Class.extend({
         cc.log('[BattleNetwork.js line 113] received get cell object packet: ' + JSON.stringify(packet));
     },
 
+    _handleGetBattleDeckInBattle: function (cmd, packet) {
+        cc.log('[BattleNetwork.js line 117] received get battle deck in battle packet: ' + JSON.stringify(packet));
+        let battleDeck = packet.battleDeck;
+        cc.log(JSON.stringify(battleDeck));
+    },
+
     _handleUpgradeTower: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 118] received upgrade tower packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
@@ -220,10 +235,6 @@ BattleNetwork.Connector = cc.Class.extend({
         let cellObject = playerObjectMap[packet.tileX][packet.tileY];
         cellObject.tower.level = packet.towerLevel;
         EntityFactory.onUpdateTowerLevel(cellObject.tower.entityId, packet.towerLevel);
-        let towerEntity = EntityManager.getInstance().getEntity(cellObject.tower.entityId);
-        cc.log("[BattleNetwork.js line 227]: towerEntity: " + JSON.stringify(towerEntity));
-        let attackComponent = towerEntity.getComponent(AttackComponent);
-        cc.log('[BattleNetwork.js line 165] attackComponent: ' + JSON.stringify(attackComponent));
     },
 
     _handleOpponentUpgradeTower: function (cmd, packet) {

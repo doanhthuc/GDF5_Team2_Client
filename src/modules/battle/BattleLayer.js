@@ -4,6 +4,7 @@ let BattleLayer = cc.Layer.extend({
         this._super();
         BattleManager.getInstance().registerBattleLayer(this);
         this.selectedCard = null;
+        this.selectedCardLevel = null;
 
         this._prefetchAssetGame();
 
@@ -26,7 +27,11 @@ let BattleLayer = cc.Layer.extend({
 
         // this._initTower();
         this._handleEventKey();
-        this.startGame();
+
+        let delayTime = (tickManager.getStartTime() - TimeUtil.getServerTime()) / 1000;
+        cc.error("start time = " + tickManager.getStartTime());
+        cc.error("delay time = " + delayTime);
+        this.scheduleOnce(this.startGame, delayTime);
         // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
         // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
     },
@@ -58,7 +63,13 @@ let BattleLayer = cc.Layer.extend({
     },
 
     update: function (dt) {
+        let currentTick = tickManager.getCurrentTick();
+        while (tickManager.getLatestUpdateTick() < currentTick) {
+            tickManager.updateData();
+        }
+
         // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
+        this.getTimerNode().timer();
         this.resetSystem.start(dt);
         this.abilitySystem.start(dt);
         this.effectSystem.start(dt);
@@ -208,6 +219,7 @@ let BattleLayer = cc.Layer.extend({
                 break;
         }
     },
+
     /**
      *
      * @param type
@@ -215,6 +227,7 @@ let BattleLayer = cc.Layer.extend({
      * @param mode
      */
     putCardAt: function (type, pixelPos, mode) {
+        BattleManager.getInstance().getCardDeckNode().removeDragSprite(type);
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
 
         let {error, msg} = ValidatorECS.validatePositionPutCard(type, pixelPos, mode);
@@ -258,7 +271,8 @@ let BattleLayer = cc.Layer.extend({
 
     buildTower: function (towerId, tilePos, mode) {
         NodeFactory.createBuildingTowerTimer(tilePos, mode);
-
+        EventDispatcher.getInstance()
+            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
         this.scheduleOnce(() => {
             this._createTower(towerId, tilePos, mode);
         }, 1);
@@ -295,9 +309,6 @@ let BattleLayer = cc.Layer.extend({
         if (GameConfig.NETWORK === 1) {
             this.setEntityIdForTileObject(tower.id, tilePos, mode);
         }
-
-        EventDispatcher.getInstance()
-            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
 
         return tower;
     },
@@ -394,6 +405,8 @@ let BattleLayer = cc.Layer.extend({
     startGame: function () {
         //  this.battleLoop.start();
         //this.schedule(this.update,0.1,10000);
+        this.uiLayer.startGame();
+        tickManager.setStartTime(Utils.currentTimeMillis());
         this.scheduleUpdate();
         //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
@@ -454,5 +467,9 @@ let BattleLayer = cc.Layer.extend({
 
     _clearAsset: function () {
         cc.spriteFrameCache.removeUnusedSpriteFrames();
+    },
+
+    getTimerNode: function () {
+        return this.uiLayer.timerNode;
     }
 });

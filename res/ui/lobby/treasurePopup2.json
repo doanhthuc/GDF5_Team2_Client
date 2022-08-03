@@ -72,10 +72,11 @@
               "Path": "textures/common/common_panel_background.png",
               "Plist": ""
             },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
+            "Scale9OriginX": 149,
+            "Scale9OriginY": 129,
+            "Scale9Width": 155,
+            "Scale9Height": 135,
+            "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
@@ -102,14 +103,14 @@
             "RightMargin": -226.5,
             "TopMargin": -196.5,
             "BottomMargin": -196.5,
-            "Tag": 164,
-            "ActionTag": 69175336,
+            "Tag": 151,
+            "ActionTag": -2046375402,
             "Size": {
               "X": 453.0,
               "Y": 393.0
             },
             "Name": "backgroundPanelImg",
-            "ctype": "SpriteObjectData"
+            "ctype": "ImageViewObjectData"
           },
           {
             "FileData": {

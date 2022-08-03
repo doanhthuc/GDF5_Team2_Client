@@ -8,12 +8,16 @@ const InventoryContext = cc.Class.extend({
     setBattleDeckIdList: function (battleDeckIdList) {
         this.battleDeckIdList = battleDeckIdList;
         this.mapIdListToBattleDeckList();
+
+        for (let i = 0; i < this.cardCollectionList.length; i++) {
+            cc.log(JSON.stringify(this.cardCollectionList[i]));
+        }
     },
 
     mapIdListToBattleDeckList: function () {
         this.battleDeckIdList.forEach((id) => {
             //TODO: add spell
-            for (let i = 0; i < this.battleDeckIdList.length; i++) {
+            for (let i = 0; i < this.cardCollectionList.length; i++) {
                 if (this.cardCollectionList[i].cardType === id) {
                     this.cardCollectionList[i].isBattleDeck = true;
                     this.battleDeckList.push(this.cardCollectionList[i]);
@@ -58,7 +62,7 @@ const InventoryContext = cc.Class.extend({
             let cardNode = ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE)
                 .cardNodeMap.get(data.cardType);
             cardNode.onUpgradeCard(card.cardLevel, card.amount);
-            
+
             PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.UPGRADE_SUCCESS_POPUP).setCardModel(cardNode.cardModel);
             PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.UPGRADE_SUCCESS_POPUP);
 
@@ -94,5 +98,26 @@ const InventoryContext = cc.Class.extend({
         this.battleDeckIdList = [];
         this.battleDeckList = [];
         this.cardCollectionList = [];
-    }
+    },
+
+    onSwapCardSuccess: function (newCardIdInBattleDeck, newCardIdInCollection) {
+        this.cardCollectionList.forEach((card) => {
+            if (card.cardType === newCardIdInBattleDeck) {
+                card.isBattleDeck = true;
+                this.battleDeckList.push(card);
+            } else if (card.cardType === newCardIdInCollection) {
+                card.isBattleDeck = false;
+            }
+        });
+        this.removeCardFromBattleDeck(newCardIdInCollection);
+    },
+
+    removeCardFromBattleDeck: function (cardId) {
+        for (let i = 0; i < this.battleDeckList.length; i++) {
+            if (this.battleDeckList[i].cardType === cardId) {
+                this.battleDeckList.splice(i, 1);
+                break;
+            }
+        }
+    },
 });

@@ -538,3 +538,7 @@ Utils.divideCellPath = function (pointA, pointB, divideAmount) {
     }
     return cellArr;
 }
+
+Utils.currentTimeMillis = function () {
+    return Date.now();
+}
