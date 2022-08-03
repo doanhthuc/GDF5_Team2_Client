@@ -76,6 +76,7 @@
             "Scale9OriginY": 129,
             "Scale9Width": 155,
             "Scale9Height": 135,
+            "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
               "ScaleY": 0.5
