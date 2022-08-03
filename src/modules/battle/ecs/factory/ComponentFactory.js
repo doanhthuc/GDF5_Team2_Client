@@ -5,6 +5,11 @@ ComponentFactory.create = function (cls, ...data) {
     let component = this.pool.checkOut(cls);
     if (component) {
         component.reset(...data);
+        if (component.typeID === PositionComponent.typeID
+            || component.typeID === VelocityComponent.typeID
+            || component.typeID === PathComponent.typeID) {
+            component.saveData();
+        }
     } else {
         component = new cls(...data);
         ComponentManager.getInstance().add(component);

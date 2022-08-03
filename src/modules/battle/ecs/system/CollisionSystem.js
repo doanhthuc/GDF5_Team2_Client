@@ -121,8 +121,8 @@ let CollisionSystem = System.extend({
         let bulletPos = bullet.getComponent(PositionComponent);
         let bulletVelocity = bullet.getComponent(VelocityComponent);
         let bulletInfo = bullet.getComponent(BulletInfoComponent);
-        if ((Math.abs(bulletVelocity.staticPostition.x - bulletPos.x) <= 5)
-            && (Math.abs(bulletVelocity.staticPostition.y - bulletPos.y) <= 5)) {
+        if ((Math.abs(bulletVelocity.staticPosition.x - bulletPos.x) <= 5)
+            && (Math.abs(bulletVelocity.staticPosition.y - bulletPos.y) <= 5)) {
             let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
             for (let monster of monsterList) {
                 if (monster.mode === bullet.mode) {

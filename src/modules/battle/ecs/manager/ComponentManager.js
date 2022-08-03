@@ -35,6 +35,7 @@ let ComponentManager = ManagerECS.extend({
     remove: function (component) {
         component.setActive(false);
         this._storeInstance.delete(component.id);
+        tickManager.getTickData().deleteComponentData(component.id);
     },
 });
 

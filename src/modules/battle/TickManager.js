@@ -10,6 +10,16 @@ let TickManager = cc.Class.extend({
         }
     },
 
+    updateData: function () {
+        const battleLayer = this.getBattleLayer();
+
+        battleLayer.getTimerNode().updateData();
+        battleLayer.pathSystem.updateData();
+        battleLayer.movementSystem.updateData();
+
+        this.increaseUpdateTick();
+    },
+
     setStartTime: function (millisecond) {
         this.startTime = millisecond;
     },
@@ -34,12 +44,18 @@ let TickManager = cc.Class.extend({
         return this.lastedTick;
     },
 
+    increaseUpdateTick: function () {
+        this.lastedTick++;
+    },
+
     /**
      *
      * @returns {number} delta - millisecond
      */
     getDeltaFromLatestTickToNow: function () {
-        return (Utils.currentTimeMillis() - (this.startTime + this.getLatestUpdateTick() * this.tickRate));
+        // return (Utils.currentTimeMillis() - (this.startTime + this.getLatestUpdateTick() * this.tickRate));
+        return (Utils.currentTimeMillis() - this.startTime) % this.tickRate;
+
     },
 
     getTickData: function () {
@@ -53,11 +69,6 @@ let TickManager = cc.Class.extend({
     getTickRate: function () {
         return this.tickRate;
     },
-
-    updateData: function () {
-        this.getBattleLayer().getTimerNode().updateData();
-        this.lastedTick++;
-    }
 })
 
 let tickManager = new TickManager();
