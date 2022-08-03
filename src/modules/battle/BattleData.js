@@ -72,6 +72,10 @@ let BattleData = cc.Class.extend({
         this.dataInGame.monsterWave = monsterWave;
     },
 
+    getMonsterWave: function () {
+        return this.dataInGame.monsterWave;
+    },
+
     setBattleStartTime: function (battleStartTime) {
         this.battleStartTime = battleStartTime;
     },

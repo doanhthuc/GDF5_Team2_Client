@@ -215,6 +215,7 @@ let BattleLayer = cc.Layer.extend({
                 break;
         }
     },
+
     /**
      *
      * @param type

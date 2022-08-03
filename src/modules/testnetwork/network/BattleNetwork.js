@@ -155,6 +155,8 @@ BattleNetwork.Connector = cc.Class.extend({
     _handleGetBattleInfo: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
         BattleManager.getInstance().getBattleData().setBattleStartTime(packet.battleStartTime);
+        let countdown = (packet.battleStartTime - TimeUtil.getServerTime()) / 1000;
+        tickManager.getTickData().setBattleTimerData(countdown);
         BattleManager.getInstance().getBattleData().setWaveAmount(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
         //let battleData = BattleManager.getInstance().getBattleData();
