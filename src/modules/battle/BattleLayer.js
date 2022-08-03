@@ -27,7 +27,11 @@ let BattleLayer = cc.Layer.extend({
 
         // this._initTower();
         this._handleEventKey();
-        this.startGame();
+
+        let delayTime = (tickManager.getStartTime() - TimeUtil.getServerTime()) / 1000;
+        cc.error("start time = " + tickManager.getStartTime());
+        cc.error("delay time = " + delayTime);
+        this.scheduleOnce(this.startGame, delayTime);
         // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
         // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
     },

@@ -103,11 +103,6 @@ BattleNetwork.Connector = cc.Class.extend({
         battleData.setTrophy(userContext.getTrophy(), GameConfig.PLAYER);
         battleData.setUsername(packet.opponentInfo.username, GameConfig.OPPONENT);
         battleData.setTrophy(packet.opponentInfo.trophy, GameConfig.OPPONENT);
-
-        setTimeout(function () {
-            fr.view(BattleLayer, 0.5, true)
-            cc.log("===> Switch to Game Layer Scene !!!")
-        }, 2000);
     },
 
     _handleCancelMatching: function (cmd, packet) {
@@ -154,15 +149,25 @@ BattleNetwork.Connector = cc.Class.extend({
 
     _handleGetBattleInfo: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
-        BattleManager.getInstance().getBattleData().setBattleStartTime(packet.battleStartTime);
-        let countdown = (packet.battleStartTime - TimeUtil.getServerTime()) / 1000;
-        tickManager.getTickData().setBattleTimerData(countdown);
+
+        // IMPORTANT: remove battle data save battle start time
+        let battleData = BattleManager.getInstance().getBattleData();
+        battleData.setBattleStartTime(packet.battleStartTime);
+        tickManager.setStartTime(packet.battleStartTime);
+
+        cc.warn("packet.battleStartTime = " + packet.battleStartTime);
+        cc.log("time server = " + TimeUtil.getServerTime());
+        tickManager.getTickData().setBattleTimerData(battleData.getTimer());
         BattleManager.getInstance().getBattleData().setWaveAmount(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
         //let battleData = BattleManager.getInstance().getBattleData();
         // cc.log(battleData.battleStartTime);
         // cc.log(TimeUtil.getServerTime());
         // cc.log(TimeUtil.getDeltaTime())
+        setTimeout(function () {
+            fr.view(BattleLayer, 0.5, true)
+            cc.log("===> Switch to Game Layer Scene !!!")
+        }, 2000);
     },
 
     _handlePutTower: function (cmd, packet) {

@@ -2,7 +2,6 @@ let BattleTimerNode = cc.Node.extend({
     ctor: function (countdown, duration) {
         this._super();
         this._duration = duration || 20;
-        this._countdown = this._duration;
 		this._monsterSpawmTime = 0;
 
         this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
