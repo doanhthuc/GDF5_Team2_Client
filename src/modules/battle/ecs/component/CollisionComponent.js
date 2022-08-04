@@ -5,6 +5,7 @@ let CollisionComponent = Component.extend({
     ctor: function (width, height, originWidth, originHeight) {
         this._super();
         this.reset(width, height, originWidth, originHeight);
+        this.saveData();
     },
 
     reset: function (width, height, originWidth, originHeight) {
@@ -16,7 +17,24 @@ let CollisionComponent = Component.extend({
 
     clone: function () {
         return ComponentFactory.create(CollisionComponent, this.width, this.height);
-    }
+    },
+
+    saveData: function () {
+        const data = {
+            width: this.width,
+            height: this.height,
+            originWidth: this.originWidth,
+            originHeight: this.originHeight
+        };
+
+        tickManager.getTickData()
+            .saveComponentData(this.id, data);
+    },
+
+    updateDataFromLatestTick: function () {
+        let componentData = tickManager.getTickData().getComponentData(this.id);
+        this.reset(componentData.width, componentData.height, componentData.originWidth, componentData.originHeight);
+    },
 });
 CollisionComponent.typeID = GameConfig.COMPONENT_ID.COLLISION;
 ComponentManager.getInstance().registerClass(CollisionComponent);

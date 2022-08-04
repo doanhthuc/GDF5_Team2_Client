@@ -8,6 +8,11 @@ let EffectSystem = System.extend({
     },
 
     _run: function (tick) {
+
+    },
+
+    updateData: function () {
+        const tick = tickManager.getTickRate() / 1000;
         this._handleBuffAttackRangeEffect(tick);
         this._handleBuffAttackSpeedEffect(tick);
         this._handleBuffAttackDamageEffect(tick);
@@ -21,37 +26,53 @@ let EffectSystem = System.extend({
     _handleBuffAttackSpeedEffect: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackSpeedEffect, AttackComponent);
+
         for (let entity of entityList) {
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackSpeedComponent = entity.getComponent(BuffAttackSpeedEffect);
 
+            attackComponent.updateDataFromLatestTick();
+            buffAttackSpeedComponent.updateDataFromLatestTick();
+
             attackComponent.speed = attackComponent.originSpeed * (1 - (buffAttackSpeedComponent.percent - 1));
+
+            attackComponent.saveData();
         }
     },
 
     _handleBuffAttackDamageEffect: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackDamageEffect, AttackComponent);
+
         for (let entity of entityList) {
-            cc.log("_handleBuffAttackDamageEffect line 34");
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackDamageComponent = entity.getComponent(BuffAttackDamageEffect);
+
+            attackComponent.updateDataFromLatestTick();
+            buffAttackDamageComponent.updateDataFromLatestTick();
+
             attackComponent.setDamage(attackComponent.damage + attackComponent.originDamage * buffAttackDamageComponent.percent);
+
+            attackComponent.saveData();
         }
     },
 
     _handleDamageEffect: function (tick) {
-        // damage effects
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(DamageEffect);
+
         for (let entity of entityList) {
             let lifeComponent = entity.getComponent(LifeComponent);
+
             if (lifeComponent) {
                 let damageComponent = entity.getComponent(DamageEffect);
-                // cc.log("[EffectSystem.js line 51] damageComponent.damage: " + damageComponent.damage + " lifeComponent.life: " + lifeComponent.hp);
+                lifeComponent.updateDataFromLatestTick();
+                damageComponent.updateDataFromLatestTick();
+
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
-               // BattleAnimation.animationDamage(entity);
+
+                lifeComponent.saveData();
             }
         }
     },
@@ -59,11 +80,16 @@ let EffectSystem = System.extend({
     _handleFrozenEffect: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(FrozenEffect)
+
         for (let entity of entityList) {
             let velocityComponent = entity.getComponent(VelocityComponent);
             let frozenComponent = entity.getComponent(FrozenEffect);
 
+            velocityComponent.updateDataFromLatestTick()
+            frozenComponent.updateDataFromLatestTick();
+
             frozenComponent.countdown = frozenComponent.countdown - tick;
+            frozenComponent.saveData();
             if (frozenComponent.countdown <= 0) {
                 entity.removeComponent(frozenComponent);
                 this._updateOriginVelocity(velocityComponent);
@@ -71,15 +97,21 @@ let EffectSystem = System.extend({
                 velocityComponent.speedX = 0;
                 velocityComponent.speedY = 0;
             }
+
+            velocityComponent.saveData();
         }
     },
 
     _handleSlowEffect: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(SlowEffect);
+
         for (let entity of entityList) {
             let velocityComponent = entity.getComponent(VelocityComponent);
             let slowComponent = entity.getComponent(SlowEffect);
+
+            slowComponent.updateDataFromLatestTick();
+            velocityComponent.updateDataFromLatestTick();
 
             slowComponent.countdown = slowComponent.countdown - tick;
             if (slowComponent.countdown <= 0) {
@@ -98,6 +130,8 @@ let EffectSystem = System.extend({
                     BattleAnimation.addAnimationHitSlowEffect(entity);
                     slowComponent.addedAnimation = true;
                 }
+                slowComponent.saveData();
+                velocityComponent.saveData();
             }
         }
     },
@@ -105,11 +139,17 @@ let EffectSystem = System.extend({
     _handleBuffAttackRangeEffect: function () {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackRangeEffect, AttackComponent);
+
         for (let entity of entityList) {
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackRangeComponent = entity.getComponent(BuffAttackRangeEffect);
 
+            attackComponent.updateDataFromLatestTick();
+            buffAttackRangeComponent.updateDataFromLatestTick();
+
             attackComponent.range = attackComponent.originRange + attackComponent.originRange * buffAttackRangeComponent.percent;
+
+            attackComponent.saveData();
         }
     },
 
@@ -119,6 +159,8 @@ let EffectSystem = System.extend({
 
         for (let entity of monsterList) {
             let trapEffect = entity.getComponent(TrapEffect);
+
+            trapEffect.updateDataFromLatestTick();
 
             if (trapEffect.isExecuted) {
                 if (trapEffect.countdown > 0) {
@@ -152,6 +194,7 @@ let EffectSystem = System.extend({
                 appearanceComponent.sprite.runAction(action);
 
                 trapEffect.setCountDown(time + 0.5);
+                trapEffect.saveData();
             }
         }
     },

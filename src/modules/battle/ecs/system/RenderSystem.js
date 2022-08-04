@@ -14,6 +14,34 @@ let RenderSystem = System.extend({
             let positionComponent = entity.getComponent(PositionComponent);
 
             if (ValidatorECS.isMonster(entity)) {
+                appearanceComponent.sprite.setLocalZOrder(1000 - positionComponent.y);
+            }
+
+            if (ValidatorECS.isTower(entity)) {
+                let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
+                if (entity.mode === GameConfig.PLAYER) {
+                    appearanceComponent.sprite.setLocalZOrder(GameConfig.MAP_HEIGH - tilePos.y);
+                } else {
+                    appearanceComponent.sprite.setLocalZOrder(tilePos.y);
+                }
+            }
+
+            appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
+
+            // side effect
+            this._updateHpBarMonsterUI(entity);
+        }
+
+        this._updateSkeletonComponentPosition();
+    },
+
+    updateData: function () {
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(AppearanceComponent, PositionComponent);
+        for (let entity of entityList) {
+            let appearanceComponent = entity.getComponent(AppearanceComponent);
+            let positionComponent = entity.getComponent(PositionComponent);
+
+            if (ValidatorECS.isMonster(entity)) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                 let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
                 if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID!== GameConfig.ENTITY_ID.BAT) {
@@ -60,6 +88,7 @@ let RenderSystem = System.extend({
             let hpNode = sprite.getChildByName("hp");
             if (hpNode) {
                 let hpProgressBar = hpNode.getChildByName("progress_bar");
+
                 hpProgressBar.setPercent(lifeComponent.hp / lifeComponent.maxHP * 100);
                 if (hpProgressBar.getPercent() === 100)
                     hpNode.setVisible(false);

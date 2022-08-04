@@ -14,7 +14,21 @@ let TowerAbilityComponent = Component.extend({
     reset: function (range, effect) {
         this.range = range;
         this.effect = effect;
-    }
+    },
+
+    saveData: function () {
+        const data = {
+            range: this.range,
+            effect: this.effect.clone()
+        }
+        tickManager.getTickData()
+            .saveComponentData(this.id, data);
+    },
+
+    updateDataFromLatestTick: function () {
+        let componentData = tickManager.getTickData().getComponentData(this.id);
+        this.reset(componentData.range, componentData.effect.clone());
+    },
 });
 TowerAbilityComponent.typeID = GameConfig.COMPONENT_ID.TOWER_ABILITY;
 ComponentManager.getInstance().registerClass(TowerAbilityComponent);

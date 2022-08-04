@@ -29,7 +29,7 @@ let EntityECS = cc.Class.extend({
             delete this.components[componentOrCls.typeID];
             this.bitmask = this.bitmask & (~(1 << componentOrCls.typeID));
         }
-
+        tickManager.getTickData().deleteComponentData(component.id);
     },
 
     getComponent: function (ComponentCls) {

@@ -8,10 +8,13 @@ const ResetSystem = System.extend({
     },
 
     _run: function (tick) {
-        this.handleResetDamageEffect(tick);
     },
 
-    handleResetDamageEffect: function (tick) {
+    updateData: function () {
+        this.handleResetDamageEffect();
+    },
+
+    handleResetDamageEffect: function () {
         let towerList = EntityManager.getInstance().getEntitiesHasComponents(AttackComponent);
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
