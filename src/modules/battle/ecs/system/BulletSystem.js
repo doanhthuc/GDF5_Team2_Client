@@ -41,7 +41,7 @@ let BulletSystem = System.extend({
                     continue;
                 }
 
-                if (Math.abs(bulletVelocity.getDynamicPosition().x - bulletPos.x) <= 11 || Math.abs(bulletVelocity.getDynamicPosition().y - bulletPos.y) <= 11) {
+                if (Math.abs(bulletVelocity.getDynamicPosition().x - bulletPos.x) <= 10 || Math.abs(bulletVelocity.getDynamicPosition().y - bulletPos.y) <= 10) {
                     // bullet.removeComponent(VelocityComponent);
                     let collisionComponent = bullet.getComponent(CollisionComponent);
                     collisionComponent.updateDataFromLatestTick();

@@ -73,7 +73,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "frog", bulletRadius);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-        let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 20, 20, 20);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 40, 40, 40, 40);
 
         let path = []
 

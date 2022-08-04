@@ -2,7 +2,7 @@ let TickManager = cc.Class.extend({
     ctor: function () {
         this.startTime = 0;
         this.lastedTick = 0;
-        this.tickRate = 100; // millisecond
+        this.tickRate = 50; // millisecond
 
         this.tickData = new TickData();
         this.tickInputHandler = new TickInputHandler();
