@@ -24,6 +24,7 @@ let TickManager = cc.Class.extend({
         const battleLayer = this.getBattleLayer();
 
         const currentTick = this.getLatestUpdateTick();
+        cc.log("start game: " + this.startTime);
         cc.log("updateData_currentTick=" + currentTick);
         // const nextTick = latestUpdateTick + 1;
 
@@ -46,6 +47,7 @@ let TickManager = cc.Class.extend({
         battleLayer.collisionSystem.updateData();
         battleLayer.pathSystem.updateData();
         battleLayer.spellSystem.updateData();
+        battleLayer.skeletonAnimationSystem.updateData();
         battleLayer.monsterSystem.updateData();
         battleLayer.bulletSystem.updateData();
         battleLayer.movementSystem.updateData();

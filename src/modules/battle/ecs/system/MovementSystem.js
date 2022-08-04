@@ -26,38 +26,15 @@ let MovementSystem = System.extend({
 
 
             // start handle fireball effect
-            // if (fireballEffect && velocityComponent) {
-            //     if (fireballEffect.accTime < fireballEffect.maxDuration) {
-            //         fireballEffect.accTime += tick;
-            //         let newSpeed = (-1) * fireballEffect.a * fireballEffect.accTime + fireballEffect.V0;
-            //         let newVelocity = Utils.calculateVelocityVector(fireballEffect.startPos, fireballEffect.endPos, newSpeed);
-            //         velocityComponent.speedX = newVelocity.speedX;
-            //         velocityComponent.speedY = newVelocity.speedY;
-            //
-            //     } else {
-            //         entity.removeComponent(FireBallEffect);
-            //         if (ValidatorECS.isMonster(entity)) {
-            //             let monsterPos = entity.getComponent(PositionComponent);
-            //             if (monsterPos) {
-            //                 let tilePos = Utils.pixel2Tile(monsterPos.x, monsterPos.y, entity.mode);
-            //                 if (!Utils.validateTilePos(tilePos)) continue;
-            //                 let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
-            //                 if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID !== GameConfig.ENTITY_ID.BAT) {
-            //                     let lifeComponent = entity.getComponent(LifeComponent);
-            //                     lifeComponent.hp = 0;
-            //                 } else {
-            //                     let shortestPathForEachTile = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(entity.mode);
-            //                     let pathTile = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
-            //                     let newPath = ComponentFactory.create(PathComponent, pathTile, entity.mode);
-            //                     entity.addComponent(newPath);
-            //                 }
-            //             }
-            //             let velocityComp = entity.getComponent(VelocityComponent);
-            //             velocityComp.speedX = velocityComp.originSpeedX;
-            //             velocityComp.speedY = velocityComp.originSpeedY;
-            //         }
-            //     }
-            // }
+            if (fireballEffect && velocityComponent) {
+                if (fireballEffect.accTime < fireballEffect.maxDuration) {
+                    fireballEffect.accTime += dt;
+                    let newSpeed = (-1) * fireballEffect.a * fireballEffect.accTime + fireballEffect.V0;
+                    let newVelocity = Utils.calculateVelocityVector(fireballEffect.startPos, fireballEffect.endPos, newSpeed);
+                    velocityComponent.speedX = newVelocity.speedX;
+                    velocityComponent.speedY = newVelocity.speedY;
+                }
+            }
             // end handle fireball effect
 
             if (velocityComponent.getActive()) {
@@ -108,7 +85,7 @@ let MovementSystem = System.extend({
     },
 
     updateData: function () {
-        const tickRate = tickManager.getTickRate() / 1000;
+        const tick = tickManager.getTickRate() / 1000;
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(VelocityComponent, PositionComponent);
 
@@ -130,43 +107,49 @@ let MovementSystem = System.extend({
 
 
             // start handle fireball effect
-            // if (fireballEffect && velocityComponent) {
-            //     if (fireballEffect.accTime < fireballEffect.maxDuration) {
-            //         fireballEffect.accTime += tick;
-            //         let newSpeed = (-1) * fireballEffect.a * fireballEffect.accTime + fireballEffect.V0;
-            //         let newVelocity = Utils.calculateVelocityVector(fireballEffect.startPos, fireballEffect.endPos, newSpeed);
-            //         velocityComponent.speedX = newVelocity.speedX;
-            //         velocityComponent.speedY = newVelocity.speedY;
-            //
-            //     } else {
-            //         entity.removeComponent(FireBallEffect);
-            //         if (ValidatorECS.isMonster(entity)) {
-            //             let monsterPos = entity.getComponent(PositionComponent);
-            //             if (monsterPos) {
-            //                 let tilePos = Utils.pixel2Tile(monsterPos.x, monsterPos.y, entity.mode);
-            //                 if (!Utils.validateTilePos(tilePos)) continue;
-            //                 let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
-            //                 if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID !== GameConfig.ENTITY_ID.BAT) {
-            //                     let lifeComponent = entity.getComponent(LifeComponent);
-            //                     lifeComponent.hp = 0;
-            //                 } else {
-            //                     let shortestPathForEachTile = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(entity.mode);
-            //                     let pathTile = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
-            //                     let newPath = ComponentFactory.create(PathComponent, pathTile, entity.mode);
-            //                     entity.addComponent(newPath);
-            //                 }
-            //             }
-            //             let velocityComp = entity.getComponent(VelocityComponent);
-            //             velocityComp.speedX = velocityComp.originSpeedX;
-            //             velocityComp.speedY = velocityComp.originSpeedY;
-            //         }
-            //     }
-            // }
+            if (fireballEffect && velocityComponent) {
+                fireballEffect.updateDataFromLatestTick();
+
+                if (fireballEffect.accTime < fireballEffect.maxDuration) {
+                    fireballEffect.accTime += tick;
+                    let newSpeed = (-1) * fireballEffect.a * fireballEffect.accTime + fireballEffect.V0;
+                    let newVelocity = Utils.calculateVelocityVector(fireballEffect.startPos, fireballEffect.endPos, newSpeed);
+                    velocityComponent.speedX = newVelocity.speedX;
+                    velocityComponent.speedY = newVelocity.speedY;
+
+                } else {
+                    entity.removeComponent(FireBallEffect);
+                    if (ValidatorECS.isMonster(entity)) {
+                        let monsterPos = entity.getComponent(PositionComponent);
+                        if (monsterPos) {
+                            monsterPos.updateDataFromLatestTick();
+                            let tilePos = Utils.pixel2Tile(monsterPos.x, monsterPos.y, entity.mode);
+                            if (!Utils.validateTilePos(tilePos)) continue;
+                            let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
+                            if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID !== GameConfig.ENTITY_ID.BAT) {
+                                let lifeComponent = entity.getComponent(LifeComponent);
+                                lifeComponent.updateDataFromLatestTick()
+                                lifeComponent.hp = 0;
+                                lifeComponent.saveData();
+                            } else {
+                                let shortestPathForEachTile = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(entity.mode);
+                                let pathTile = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
+                                let newPath = ComponentFactory.create(PathComponent, pathTile, entity.mode);
+                                entity.addComponent(newPath);
+                            }
+                        }
+                        let velocityComp = entity.getComponent(VelocityComponent);
+                        velocityComp.speedX = velocityComp.originSpeedX;
+                        velocityComp.speedY = velocityComp.originSpeedY;
+                    }
+                }
+                fireballEffect.saveData();
+            }
             // end handle fireball effect
 
             if (velocityComponent.getActive()) {
-                let moveDistanceX = velocityComponent.speedX * tickRate;
-                let moveDistanceY = velocityComponent.speedY * tickRate;
+                let moveDistanceX = velocityComponent.speedX * tick;
+                let moveDistanceY = velocityComponent.speedY * tick;
 
                 let tmpPos = {};
                 tmpPos.x = positionComponent.x + moveDistanceX;
