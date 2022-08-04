@@ -428,6 +428,7 @@ let BattleLayer = cc.Layer.extend({
         this.addChild(new BattleResultLayer(result, this.battleData, trophyChange), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
+        tickManager.clearAndCreateNew();
         // TODO: remove file from sprite frame cache
     },
 

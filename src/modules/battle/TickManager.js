@@ -97,6 +97,10 @@ let TickManager = cc.Class.extend({
     getTickRate: function () {
         return this.tickRate;
     },
+
+    clearAndCreateNew: function () {
+        tickManager = new TickManager;
+    }
 })
 
 let tickManager = new TickManager();
