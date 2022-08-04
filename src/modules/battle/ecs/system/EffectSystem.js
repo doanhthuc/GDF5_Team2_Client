@@ -88,8 +88,6 @@ let EffectSystem = System.extend({
             velocityComponent.updateDataFromLatestTick()
             frozenComponent.updateDataFromLatestTick();
 
-            cc.log("frozenComponent.countdown=" + frozenComponent.countdown);
-            cc.log("tick="+tick);
             frozenComponent.countdown = frozenComponent.countdown - tick;
             frozenComponent.saveData();
 

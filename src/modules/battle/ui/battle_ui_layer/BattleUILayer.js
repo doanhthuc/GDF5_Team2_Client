@@ -109,6 +109,7 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _backToLobby: function () {
+        BattleManager.getInstance().getBattleLayer().stopGame();
         fr.view(MainScreen);
     }
 });
