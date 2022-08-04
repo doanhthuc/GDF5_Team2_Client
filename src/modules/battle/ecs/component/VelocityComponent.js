@@ -45,8 +45,8 @@ let VelocityComponent = Component.extend({
             dynamicPositionComponentId: this.dynamicPositionComponentId,
             staticPosition: this.staticPosition,
             originSpeed: this.originSpeed,
-            originSpeedX: this.speedX,
-            originSpeedY: this.speedY
+            originSpeedX: this.originSpeedX,
+            originSpeedY: this.originSpeedX
         }
         tickManager.getTickData()
             .saveComponentData(this.id, data);
@@ -55,6 +55,13 @@ let VelocityComponent = Component.extend({
     updateDataFromLatestTick: function () {
         let componentData = tickManager.getTickData().getComponentData(this.id);
         this.reset(componentData.speedX, componentData.speedY, componentData.dynamicPositionComponentId, componentData.staticPosition);
+        this.speedX = componentData.speedX;
+        this.speedY = componentData.speedY;
+        this.dynamicPositionComponentId = componentData.dynamicPositionComponentId;
+        this.staticPosition = componentData.staticPosition ? cc.p(componentData.staticPosition.x, componentData.staticPosition.y) : componentData.staticPosition;
+        this.originSpeed = componentData.originSpeed;
+        this.originSpeedX = componentData.originSpeedX;
+        this.originSpeedY = componentData.originSpeedY;
     },
 });
 VelocityComponent.typeID = GameConfig.COMPONENT_ID.VELOCITY;

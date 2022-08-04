@@ -88,11 +88,15 @@ let EffectSystem = System.extend({
             velocityComponent.updateDataFromLatestTick()
             frozenComponent.updateDataFromLatestTick();
 
+            cc.log("frozenComponent.countdown=" + frozenComponent.countdown);
+            cc.log("tick="+tick);
             frozenComponent.countdown = frozenComponent.countdown - tick;
             frozenComponent.saveData();
+
             if (frozenComponent.countdown <= 0) {
                 entity.removeComponent(frozenComponent);
                 this._updateOriginVelocity(velocityComponent);
+                cc.log("Finish frozen effect")
             } else {
                 velocityComponent.speedX = 0;
                 velocityComponent.speedY = 0;
@@ -209,6 +213,9 @@ let EffectSystem = System.extend({
     _updateOriginVelocity: function (velocityComponent) {
         velocityComponent.speedX = velocityComponent.originSpeedX;
         velocityComponent.speedY = velocityComponent.originSpeedY;
+        cc.log("xxxUUX: " + velocityComponent.originSpeedX);
+        cc.log("xxxUUY: " + velocityComponent.originSpeedY);
+
     }
 });
 EffectSystem.typeID = GameConfig.SYSTEM_ID.EFFECT;

@@ -51,6 +51,8 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
     let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
 
     let frozenDuration = towerConfig.frozenDuration / 1000;
+    cc.error("=====>frozenduration=" + frozenDuration);
+    cc.error("=====>attackSpeed=" + attackSpeed);
     cc.log("[EntityFactory line 599] create ice gun polar bear tower: " + frozenDuration);
     let towerEnergy = CARD_CONST[typeID].energy;
 
