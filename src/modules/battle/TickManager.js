@@ -21,9 +21,12 @@ let TickManager = cc.Class.extend({
     updateData: function () {
         const battleLayer = this.getBattleLayer();
 
-        const latestUpdateTick = this.getLatestUpdateTick();
-        const nextTick = latestUpdateTick + 1;
-        let queueInput = this.inputTick[nextTick];
+        const currentTick = this.getLatestUpdateTick();
+        cc.log("updateData_currentTick=" + currentTick);
+        // const nextTick = latestUpdateTick + 1;
+
+        // handle input of current tick
+        let queueInput = this.inputTick[currentTick];
         if (queueInput && queueInput.length > 0) {
             for (let i = 0; i < queueInput.length; i++) {
                 let {cmd, packet} = queueInput[i];

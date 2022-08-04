@@ -215,6 +215,7 @@ BattleNetwork.packetMap[gv.CMD.PUT_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.x = this.getInt();
         this.y = this.getInt();
+        this.tickNumber = this.getInt();
     }
 })
 
@@ -228,6 +229,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
     }
 });
 

@@ -20,11 +20,14 @@ BattleNetwork.Connector = cc.Class.extend({
                 this._handleGetBattleInfo(cmd, packet);
                 break;
             case gv.CMD.PUT_TOWER:
-                this._handlePutTower(cmd, packet);
+                cc.log("# Current Tick = " + tickManager.getLatestUpdateTick());
+                tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.OPPONENT_PUT_TOWER:
-                cc.log('[BattleNetwork.js] line 23 Opponent Put Tower');
-                this._handleOpponentPutTower(cmd, packet);
+                cc.log("# Current Tick = " + tickManager.getLatestUpdateTick());
+                tickManager.addInput(packet.tickNumber, cmd, packet);
+                // show timer build tower
+                BattleManager.getInstance().getBattleLayer().showTimerBuildTower(cc.p(packet.tileX, packet.tileY), GameConfig.OPPONENT);
                 break;
             case gv.CMD.GET_BATTLE_MAP_OBJECT:
                 this._handleGetBattleMapObject(cmd, packet);
@@ -171,38 +174,6 @@ BattleNetwork.Connector = cc.Class.extend({
             fr.view(BattleLayer, 0.5, true)
             cc.log("===> Switch to Game Layer Scene !!!")
         }, 2000);
-    },
-
-    _handlePutTower: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 76] received put tower packet: ' + JSON.stringify(packet));
-        let battleData = BattleManager.getInstance().getBattleData();
-        let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
-        let cellObject = playerObjectMap[packet.x][packet.y];
-        cellObject.objectInCellType = ObjectInCellType.TOWER;
-        if (!cellObject.tower) {
-            cellObject.tower = {};
-        }
-        cellObject.tower.towerId = packet.towerId;
-        cellObject.tower.level = packet.towerLevel;
-        cc.log(JSON.stringify(playerObjectMap[packet.x][packet.y]))
-    },
-
-    _handleOpponentPutTower: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 80] received put tower packet: ' + JSON.stringify(packet));
-        // let pixelPos = Utils.tile2Pixel(packet.tileX, packet.tileY, GameConfig.OPPONENT);
-        let tilePos = cc.p(packet.tileX, packet.tileY);
-        let battleData = BattleManager.getInstance().getBattleData();
-        let opponentMap = battleData.getMapObject(GameConfig.OPPONENT);
-        let cellObject = opponentMap[packet.tileX][packet.tileY];
-        cellObject.objectInCellType = ObjectInCellType.TOWER;
-        if (!cellObject.tower) {
-            cellObject.tower = {};
-        }
-        cellObject.tower = {
-            towerId: packet.towerId,
-            level: packet.towerLevel,
-        };
-        OpponentAction.getInstance().buildTower(packet.towerId, tilePos);
     },
 
     _handleGetBattleMapObject: function (cmd, packet) {
