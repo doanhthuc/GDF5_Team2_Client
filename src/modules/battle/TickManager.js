@@ -9,6 +9,8 @@ let TickManager = cc.Class.extend({
         this.inputTick = {
             tickNumber: [{cmd: "cmd", packet: "packet"}]
         }
+
+        this.normalTimerNodeContainer = [];
     },
 
     addInput: function (tickNumber, cmd, packet) {
@@ -47,6 +49,9 @@ let TickManager = cc.Class.extend({
         battleLayer.monsterSystem.updateData();
         battleLayer.bulletSystem.updateData();
         battleLayer.movementSystem.updateData();
+
+        // timer for build tower
+        this.updateNormalTimerNode();
 
         this.increaseUpdateTick();
     },
@@ -103,6 +108,30 @@ let TickManager = cc.Class.extend({
 
     clearAndCreateNew: function () {
         tickManager = new TickManager;
+    },
+
+    getNormalTimerNodeContainer: function () {
+        return this.normalTimerNodeContainer;
+    },
+
+    addNormalTimerNodeToContainer: function (timerNode) {
+        this.normalTimerNodeContainer.push(timerNode);
+    },
+
+    updateNormalTimerNode: function () {
+        const tick = this.getTickRate() / 1000;
+        let remainNode = [];
+        for (let timerNode of this.normalTimerNodeContainer) {
+            timerNode.updateData(tick);
+
+            if (timerNode.getCountDown() <= 0) {
+                // IMPORTANT: should remove it in the next frame???
+                timerNode.removeFromParent();
+            } else {
+                remainNode.push(timerNode);
+            }
+        }
+        this.normalTimerNodeContainer = remainNode;
     }
 })
 
