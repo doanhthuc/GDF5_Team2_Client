@@ -106,7 +106,7 @@ let AttackSystem = System.extend({
                             let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
                             EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
                         } else {
-                            EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
+                            EntityFactory.createBullet(tower.typeID, towerPos, targetMonster, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
                         }
                         attackComponent.countdown = attackComponent.speed;
                     }

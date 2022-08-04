@@ -15,8 +15,9 @@ EntityFactory._createEntity = function (typeID, mode) {
     return entity;
 }
 
-EntityFactory.createBullet = function (towerType, startPosition, targetPosition, effects, mode, bulletSpeed, bulletRadius) {
+EntityFactory.createBullet = function (towerType, startPosition, targetEntity, effects, mode, bulletSpeed, bulletRadius) {
     Utils.validateMode(mode);
+    let targetPosition = targetEntity.getComponent(PositionComponent);
     if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
@@ -33,7 +34,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
 
         // BattleAnimation.createCannonBullet(startPosition, targetPosition, bulletNode, bulletSpeed, mode);
 
-        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetPosition.id);
+        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetEntity.id);
 
         entity.addComponent(infoComponent)
             .addComponent(positionComponent)
@@ -53,7 +54,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetPosition,
 
         // let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
-        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetPosition.id);
+        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetEntity.id);
 
         BattleAnimation.createBearBullet(startPosition, targetPosition, bulletNode, bulletSpeed, mode);
 

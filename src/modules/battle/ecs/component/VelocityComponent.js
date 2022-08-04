@@ -2,16 +2,16 @@ let VelocityComponent = Component.extend({
     name: "VelocityComponent",
     typeID: GameConfig.COMPONENT_ID.VELOCITY,
 
-    ctor: function (speedX, speedY, dynamicPositionComponentId, staticPosition) {
+    ctor: function (speedX, speedY, dynamicEntityId, staticPosition) {
         this._super();
-        this.reset(speedX, speedY, dynamicPositionComponentId, staticPosition);
+        this.reset(speedX, speedY, dynamicEntityId, staticPosition);
         this.saveData();
     },
 
-    reset: function (speedX, speedY, dynamicPositionComponentId, staticPosition) {
+    reset: function (speedX, speedY, dynamicEntityId, staticPosition) {
         this.speedX = speedX;
         this.speedY = speedY;
-        this.dynamicPositionComponentId = dynamicPositionComponentId;
+        this.dynamicEntityId = dynamicEntityId;
         this.staticPosition = staticPosition;
         this.originSpeed = Math.sqrt(Math.pow(this.speedX, 2) + Math.pow(this.speedY, 2));
         this.originSpeedX = this.speedX;
@@ -19,30 +19,28 @@ let VelocityComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(VelocityComponent, this.speedX, this.speedY, this.dynamicPositionComponentId);
+        return ComponentFactory.create(VelocityComponent, this.speedX, this.speedY, this.dynamicEntityId);
     },
 
     getDynamicPosition: function () {
-        if (!this.dynamicPositionComponentId) {
+        if (!this.dynamicEntityId) {
             return null;
         }
-        // let component = ComponentManager.getInstance().findByInstanceId(this.dynamicPositionComponentId);
-        // if (component) {
-        //     return component;
-        // } else {
-        //     return -1;
-        // }
-        if (!ComponentManager.getInstance().findByInstanceId(this.dynamicPositionComponentId)) {
-            cc.log("errorwithid = " + this.dynamicPositionComponentId);
+
+        let entity = EntityManager.getInstance().getEntity(this.dynamicEntityId);
+
+        if (entity) {
+            return entity.getComponent(PositionComponent);
         }
-        return ComponentManager.getInstance().findByInstanceId(this.dynamicPositionComponentId);;
+        
+        return null;
     },
 
     saveData: function () {
         const data = {
             speedX: this.speedX,
             speedY: this.speedY,
-            dynamicPositionComponentId: this.dynamicPositionComponentId,
+            dynamicEntityId: this.dynamicEntityId,
             staticPosition: this.staticPosition,
             originSpeed: this.originSpeed,
             originSpeedX: this.originSpeedX,
@@ -54,10 +52,10 @@ let VelocityComponent = Component.extend({
 
     updateDataFromLatestTick: function () {
         let componentData = tickManager.getTickData().getComponentData(this.id);
-        this.reset(componentData.speedX, componentData.speedY, componentData.dynamicPositionComponentId, componentData.staticPosition);
+        this.reset(componentData.speedX, componentData.speedY, componentData.dynamicEntityId, componentData.staticPosition);
         this.speedX = componentData.speedX;
         this.speedY = componentData.speedY;
-        this.dynamicPositionComponentId = componentData.dynamicPositionComponentId;
+        this.dynamicEntityId = componentData.dynamicEntityId;
         this.staticPosition = componentData.staticPosition ? cc.p(componentData.staticPosition.x, componentData.staticPosition.y) : componentData.staticPosition;
         this.originSpeed = componentData.originSpeed;
         this.originSpeedX = componentData.originSpeedX;
