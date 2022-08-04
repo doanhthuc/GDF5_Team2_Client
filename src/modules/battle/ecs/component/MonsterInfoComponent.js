@@ -66,7 +66,7 @@ let MonsterInfoComponent = InfoComponent.extend({
         this.setCategory(componentData.category);
         this.classs = componentData.classs;
         this.weight = componentData.weight;
-        this.damageEnergy = componentData.energy;
+        this.damageEnergy = componentData.damageEnergy;
         this.gainEnergy = componentData.gainEnergy;
         this.ability = componentData.ability;
         this.effects = componentData.effects;

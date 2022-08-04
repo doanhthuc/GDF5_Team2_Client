@@ -74,10 +74,12 @@ let AttackSystem = System.extend({
             if (attackComponent.countdown > 0) {
                 attackComponent.countdown -= dt;
             }
+
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
                     let underGroundComponent = monster.getComponent(UnderGroundComponent);
+                    if (underGroundComponent) underGroundComponent.updateDataFromLatestTick();
                     if ((underGroundComponent == null) || underGroundComponent.isInGround === false) {
                         if (monster.getActive() && monster.mode === tower.mode
                             && monster.hasAllComponent(PositionComponent)) {
@@ -91,9 +93,11 @@ let AttackSystem = System.extend({
                 if (monsterInAttackRange.length > 0) {
                     // TODO: switch case target_strategy here
                     let towerPos = tower.getComponent(PositionComponent);
+                    towerPos.updateDataFromLatestTick();
                     let targetMonster = this._findTargetMonsterByStrategy(towerPos, attackComponent.targetStrategy, monsterInAttackRange);
                     if (targetMonster != null) {
                         let monsterPos = targetMonster.getComponent(PositionComponent);
+                        monsterPos.updateDataFromLatestTick();
                         this._changeTowerAnimation(tower, targetMonster);
 
                         if (tower.typeID === GameConfig.ENTITY_ID.FROG_TOWER) {
@@ -102,6 +106,8 @@ let AttackSystem = System.extend({
                             let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
                             EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
                         } else {
+                            cc.log("monsterposid = " + monsterPos.id);
+                            cc.log("get" + ComponentManager.getInstance().findByInstanceId(monsterPos.id));
                             EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
                         }
                         attackComponent.countdown = attackComponent.speed;
@@ -131,7 +137,9 @@ let AttackSystem = System.extend({
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
                // cc.log("[AttackSystem] find target by max hp");
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
-                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    let lifeComponent = cur.getComponent(LifeComponent);
+                    lifeComponent.updateDataFromLatestTick();
+                    let monsterHP = lifeComponent.hp;
                     return monsterHP > monsterInAttackRange[acc] ? idx : acc;
                 }, 0);
                 targetMonster = monsterInAttackRange[monsterIndex];
@@ -139,7 +147,9 @@ let AttackSystem = System.extend({
             }
             case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP: {
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
-                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    let lifeComponent = cur.getComponent(LifeComponent);
+                    lifeComponent.updateDataFromLatestTick();
+                    let monsterHP = lifeComponent.hp;
                     return monsterHP < monsterInAttackRange[acc] ? idx : acc;
                 }, 0);
                 targetMonster = monsterInAttackRange[monsterIndex];
@@ -148,6 +158,7 @@ let AttackSystem = System.extend({
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE: {
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
                     let monsterPos = cur.getComponent(PositionComponent);
+                    monsterPos.updateDataFromLatestTick();
                     let distance = Utils.euclidDistance(towerPos, monsterPos);
                     return distance > monsterInAttackRange[acc] ? idx : acc;
                 }, 0);
@@ -157,6 +168,7 @@ let AttackSystem = System.extend({
             case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE: {
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
                     let monsterPos = cur.getComponent(PositionComponent);
+                    monsterPos.updateDataFromLatestTick();
                     let distance = Utils.euclidDistance(towerPos, monsterPos);
                     return distance < monsterInAttackRange[acc] ? idx : acc;
                 }, 0);

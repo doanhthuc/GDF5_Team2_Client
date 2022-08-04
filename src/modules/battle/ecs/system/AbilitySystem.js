@@ -26,7 +26,9 @@ let AbilitySystem = System.extend({
                 let underGroundComponent = entity.getComponent(UnderGroundComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
 
+                lifeComponent.updateDataFromLatestTick();
                 underGroundComponent.updateDataFromLatestTick();
+                positionComponent.updateDataFromLatestTick();
 
                 //check if the Monster have Position Component
                 if (positionComponent) {
@@ -63,6 +65,7 @@ let AbilitySystem = System.extend({
                 } else {
                     spawnMinionComponent.period = 2;
                     let positionComponent = entity.getComponent(PositionComponent);
+                    positionComponent.updateDataFromLatestTick();
 
                     if (spawnMinionComponent.spawnAmount < 5) {
                         EntityFactory.createDemonTreeMinion({
@@ -97,11 +100,15 @@ let AbilitySystem = System.extend({
                     healingAbility.countdown = 1;
                     for (let monster of monsterList) {
                         if (monster.getActive() && monster.mode === satyr.mode) {
-                            if (monster.getComponent(PositionComponent)) {
+                            let monsterPos = monster.getComponent(PositionComponent);
+                            monsterPos.updateDataFromLatestTick();
+
+                            if (monsterPos) {
                                 let distance = this._distanceFrom(satyr, monster);
 
                                 if (distance <= healingAbility.range) {
                                     let lifeComponent = monster.getComponent(LifeComponent);
+                                    lifeComponent.updateDataFromLatestTick();
                                     lifeComponent.hp = Math.min(lifeComponent.hp + lifeComponent.maxHP * healingAbility.healingRate, lifeComponent.maxHP);
                                     lifeComponent.saveData();
                                 }
@@ -125,6 +132,7 @@ let AbilitySystem = System.extend({
 
             for (let buffTower of buffTowerList) {
                 let towerAbilityComponent = buffTower.getComponent(TowerAbilityComponent);
+                towerAbilityComponent.updateDataFromLatestTick();
                 for (let damageTower of damageTowerList) {
                     if (this._distanceFrom(buffTower, damageTower) < towerAbilityComponent.range) {
                         switch (towerAbilityComponent.effect.typeID) {

@@ -120,6 +120,8 @@ let EffectSystem = System.extend({
                 slowComponent.addedAnimation = false;
 
                 this._updateOriginVelocity(velocityComponent);
+                velocityComponent.saveData();
+                slowComponent.saveData();
                 entity.removeComponent(slowComponent);
             } else {
                 velocityComponent.speedX = slowComponent.percent * velocityComponent.originSpeedX;
@@ -165,6 +167,7 @@ let EffectSystem = System.extend({
             if (trapEffect.isExecuted) {
                 if (trapEffect.countdown > 0) {
                     trapEffect.countdown -= dt;
+                    trapEffect.saveData();
                 } else {
                     let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, entity.mode);
                     let newPos = ComponentFactory.create(PositionComponent, bornPos.x, bornPos.y);
@@ -182,6 +185,9 @@ let EffectSystem = System.extend({
                 let pathComponent = entity.getComponent(PathComponent);
                 let appearanceComponent = entity.getComponent(AppearanceComponent);
 
+                pos.updateDataFromLatestTick();
+                pathComponent.updateDataFromLatestTick();
+
                 pathComponent.currentPathIdx = 0;
                 entity.removeComponent(PositionComponent);
 
@@ -195,6 +201,7 @@ let EffectSystem = System.extend({
 
                 trapEffect.setCountDown(time + 0.5);
                 trapEffect.saveData();
+                pathComponent.saveData();
             }
         }
     },

@@ -3,6 +3,7 @@ ComponentFactory.pool = ComponentFactory.pool || ComponentPool.getInstance();
 
 ComponentFactory.create = function (cls, ...data) {
     let component = this.pool.checkOut(cls);
+
     if (component) {
         component.reset(...data);
         if (component.saveData) {
@@ -10,9 +11,11 @@ ComponentFactory.create = function (cls, ...data) {
         }
     } else {
         component = new cls(...data);
-        ComponentManager.getInstance().add(component);
         // FIXME: invalid native object
         ComponentFactory.pool.checkIn(component);
     }
+
+    ComponentManager.getInstance().add(component, true);
+
     return component;
 }

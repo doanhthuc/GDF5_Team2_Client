@@ -51,6 +51,7 @@ let CollisionSystem = System.extend({
             if (ValidatorECS.isBullet(entityList[i])) {
                 let bulletInfoComponent = entityList[i].getComponent(BulletInfoComponent);
                 bulletInfoComponent.updateDataFromLatestTick();
+
                 if (bulletInfoComponent.radius) {
                     this._handleRadiusBullet(entityList[i]);
                 } else {
@@ -99,8 +100,8 @@ let CollisionSystem = System.extend({
                                 for (let effect of bulletInfo.effects) {
                                     monster.addComponent(effect.clone());
                                     bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_FIRST_TIME);
-                                    bulletInfo.saveData();
                                 }
+                                bulletInfo.saveData();
                             }
                         } else { //check the second path
                             // check if this monster was not hit in First Path
@@ -108,8 +109,8 @@ let CollisionSystem = System.extend({
                                 for (let effect of bulletInfo.effects) {
                                     monster.addComponent(effect.clone());
                                     bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_SECOND_TIME);
-                                    bulletInfo.saveData();
                                 }
+                                bulletInfo.saveData();
                                 // else if this monster is hit in First Path
                             } else if (bulletInfo.hitMonster.get(monster.id) === GameConfig.FROG_BULLET.HIT_FIRST_TIME) {
                                 for (let effect of bulletInfo.effects) {
@@ -118,9 +119,9 @@ let CollisionSystem = System.extend({
                                         newDamageEffect.damage = effect.damage * 1.5;
                                         monster.addComponent(newDamageEffect);
                                         bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_BOTH_TIME);
-                                        bulletInfo.saveData();
                                     }
                                 }
+                                bulletInfo.saveData();
                             }
                         }
 
@@ -171,6 +172,7 @@ let CollisionSystem = System.extend({
         if (trapInfo.isTriggered) {
             if (trapInfo.delayTrigger > 0) {
                 trapInfo.delayTrigger -= dt;
+                trapInfo.saveData();
             } else {
                 let pos = trapEntity.getComponent(PositionComponent);
                 let collisionComponent = trapEntity.getComponent(CollisionComponent);

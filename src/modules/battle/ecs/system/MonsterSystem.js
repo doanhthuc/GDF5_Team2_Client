@@ -34,16 +34,23 @@ let MonsterSystem = System.extend({
 
         for (let monster of monsterList) {
             let monsterPos = monster.getComponent(PositionComponent);
+            monsterPos.updateDataFromLatestTick();
+
             let posTile = Utils.pixel2Tile(monsterPos.x, monsterPos.y, monster.mode);
+
             if (posTile.x === GameConfig.HOUSE_POSITION.x && posTile.y === GameConfig.HOUSE_POSITION.y) {
                 let monsterInfo = monster.getComponent(MonsterInfoComponent);
+                monsterInfo.updateDataFromLatestTick();
+
                 BattleUILayer.minusHouseEnergy(monsterInfo.damageEnergy, monster.mode);
                 BattleAnimation.animationHouse(monster.mode);
                 BattleAnimation.animationPlusEnergy(monsterPos, 10, monster.mode);
+
                 if (monster.mode === GameConfig.PLAYER) {
                     let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
                     deckEnergyProgress.plusEnergy(10);
                 }
+
                 EntityManager.destroy(monster);
             }
         }

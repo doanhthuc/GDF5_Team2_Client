@@ -20,8 +20,8 @@ let ComponentManager = ManagerECS.extend({
         }
     },
 
-    add: function (component) {
-        if (this._storeInstance.has(component.id)) {
+    add: function (component, override=false) {
+        if (this._storeInstance.has(component.id) && override === false) {
             throw new Error("Component with typeID = " + component.typeID + ", id = " + component.id + " exists.");
         }
 
@@ -29,7 +29,7 @@ let ComponentManager = ManagerECS.extend({
     },
 
     findByInstanceId: function (instanceId) {
-        this._storeInstance.get(instanceId);
+        return this._storeInstance.get(instanceId);
     },
 
     remove: function (component) {

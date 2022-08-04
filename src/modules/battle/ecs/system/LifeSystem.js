@@ -14,16 +14,24 @@ let LifeSystem = System.extend({
     updateData: function () {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(LifeComponent);
+
         for (let entity of entityList) {
             let lifeComponent = entity.getComponent(LifeComponent);
+            lifeComponent.updateDataFromLatestTick();
+
             if (lifeComponent.hp <= 0) {
                 let pos = entity.getComponent(PositionComponent);
                 let monsterInfo = entity.getComponent(MonsterInfoComponent)
+
                 if (pos && monsterInfo) {
+                    pos.updateDataFromLatestTick();
+                    monsterInfo.updateDataFromLatestTick();
+
                     BattleAnimation.animationPlusEnergy(pos, monsterInfo.gainEnergy, entity.mode);
                     let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
                     deckEnergyProgress.plusEnergy(monsterInfo.gainEnergy);
                 }
+
                 EntityManager.destroy(entity);
             }
         }

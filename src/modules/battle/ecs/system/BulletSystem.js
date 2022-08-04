@@ -24,24 +24,26 @@ let BulletSystem = System.extend({
             bulletVelocity.updateDataFromLatestTick();
 
             if (pathComponent != null) {
+                pathComponent.updateDataFromLatestTick();
+
                 if (pathComponent.currentPathIdx === pathComponent.path.length - 2) {
                     EntityManager.destroy(bullet);
                 }
+
                 continue;
             }
 
 
-            if (bulletVelocity.dynamicPosition) {
-                if ((bulletVelocity.dynamicPosition).getActive() === false) {
-                    bulletVelocity.dynamicPosition = null;
+            if (bulletVelocity.getDynamicPosition()) {
+                if ((bulletVelocity.getDynamicPosition()).getActive() === false) {
+                    // bulletVelocity.getDynamicPosition() = null;
                     EntityManager.destroy(bullet);
                     continue;
                 }
 
-                if (Math.abs(bulletVelocity.dynamicPosition.x - bulletPos.x) <= 11 || Math.abs(bulletVelocity.dynamicPosition.y - bulletPos.y) <= 11) {
+                if (Math.abs(bulletVelocity.getDynamicPosition().x - bulletPos.x) <= 11 || Math.abs(bulletVelocity.getDynamicPosition().y - bulletPos.y) <= 11) {
                     // bullet.removeComponent(VelocityComponent);
                     let collisionComponent = bullet.getComponent(CollisionComponent);
-
                     collisionComponent.updateDataFromLatestTick();
 
                     if (collisionComponent) {
@@ -58,8 +60,8 @@ BulletSystem.typeID = GameConfig.SYSTEM_ID.BULLET;
 SystemManager.getInstance().registerClass(BulletSystem);
 
 // FIXME: when dynamic position is not active ==> remove velocity and destroy entity???
-// if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive() === false) {
-//     velocityComponent.dynamicPosition = null;
+// if (velocityComponent.getDynamicPosition() && velocityComponent.getDynamicPosition().getActive() === false) {
+//     velocityComponent.getDynamicPosition() = null;
 //     entity.setActive(false);
 //     // set sprite false
 // }

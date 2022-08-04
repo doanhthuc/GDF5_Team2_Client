@@ -17,8 +17,8 @@ let MovementSystem = System.extend({
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let fireballEffect = entity.getComponent(FireBallEffect);
 
-            if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive()) {
-                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
+            if (velocityComponent.getDynamicPosition() && velocityComponent.getDynamicPosition().getActive()) {
+                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.getDynamicPosition(),
                     velocityComponent.originSpeed);
                 velocityComponent.speedX = newVelocity.speedX;
                 velocityComponent.speedY = newVelocity.speedY;
@@ -121,8 +121,8 @@ let MovementSystem = System.extend({
             positionComponent.updateDataFromLatestTick();
             velocityComponent.updateDataFromLatestTick();
 
-            if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive()) {
-                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
+            if (velocityComponent.getDynamicPosition() && velocityComponent.getDynamicPosition().getActive()) {
+                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.getDynamicPosition(),
                     velocityComponent.originSpeed);
                 velocityComponent.speedX = newVelocity.speedX;
                 velocityComponent.speedY = newVelocity.speedY;

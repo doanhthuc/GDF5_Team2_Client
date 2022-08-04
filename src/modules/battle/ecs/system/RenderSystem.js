@@ -40,12 +40,14 @@ let RenderSystem = System.extend({
         for (let entity of entityList) {
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
+            positionComponent.updateDataFromLatestTick();
 
             if (ValidatorECS.isMonster(entity)) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                 let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
                 if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID!== GameConfig.ENTITY_ID.BAT) {
                     let lifeComponent = entity.getComponent(LifeComponent);
+                    lifeComponent.updateDataFromLatestTick();
                     lifeComponent.hp = 0;
                 }
 
@@ -64,10 +66,10 @@ let RenderSystem = System.extend({
             appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
 
             // side effect
-            this._updateHpBarMonsterUI(entity);
+            this._updateHpBarMonsterUI2(entity);
         }
 
-        this._updateSkeletonComponentPosition();
+        this._updateSkeletonComponentPosition2();
     },
 
     _updateSkeletonComponentPosition: function () {
@@ -80,10 +82,42 @@ let RenderSystem = System.extend({
         }
     },
 
+    _updateSkeletonComponentPosition2: function () {
+        let entityList = EntityManager.getInstance()
+            .getEntitiesHasComponents(SkeletonAnimationComponent, PositionComponent);
+        for (let entity of entityList) {
+            let skeletonComponent = entity.getComponent(SkeletonAnimationComponent);
+            let positionComponent = entity.getComponent(PositionComponent);
+            positionComponent.updateDataFromLatestTick();
+            skeletonComponent.spine.setPosition(positionComponent.x, positionComponent.y);
+        }
+    },
+
     _updateHpBarMonsterUI: function (entity) {
         let appearanceComponent = entity.getComponent(AppearanceComponent);
         let lifeComponent = entity.getComponent(LifeComponent);
         if (appearanceComponent && lifeComponent) {
+            lifeComponent.updateDataFromLatestTick();
+            let sprite = appearanceComponent.sprite;
+            let hpNode = sprite.getChildByName("hp");
+            if (hpNode) {
+                let hpProgressBar = hpNode.getChildByName("progress_bar");
+
+                hpProgressBar.setPercent(lifeComponent.hp / lifeComponent.maxHP * 100);
+                if (hpProgressBar.getPercent() === 100)
+                    hpNode.setVisible(false);
+                else
+                    hpNode.setVisible(true);
+            }
+        }
+    },
+
+    _updateHpBarMonsterUI2: function (entity) {
+        let appearanceComponent = entity.getComponent(AppearanceComponent);
+        let lifeComponent = entity.getComponent(LifeComponent);
+
+        if (appearanceComponent && lifeComponent) {
+            lifeComponent.updateDataFromLatestTick();
             let sprite = appearanceComponent.sprite;
             let hpNode = sprite.getChildByName("hp");
             if (hpNode) {
