@@ -5,6 +5,7 @@ let TowerAbilityComponent = Component.extend({
     ctor: function (range, effect) {
         this._super();
         this.reset(range, effect);
+        this.saveData();
     },
 
     clone: function () {

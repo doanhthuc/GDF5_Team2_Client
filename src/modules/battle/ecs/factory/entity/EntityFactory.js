@@ -15,9 +15,8 @@ EntityFactory._createEntity = function (typeID, mode) {
     return entity;
 }
 
-EntityFactory.createBullet = function (towerType, startPosition, targetEntity, effects, mode, bulletSpeed, bulletRadius) {
+EntityFactory.createBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius) {
     Utils.validateMode(mode);
-    let targetPosition = targetEntity.getComponent(PositionComponent);
     if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
@@ -30,9 +29,10 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, e
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
 
         // let bulletSpeed = 5 * GameConfig.TILE_WIDTH;
-        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
+        let chasingPosition = targetEntity.getComponent(PositionComponent);
+        let speed = Utils.calculateVelocityVector(startPosition, chasingPosition, bulletSpeed);
 
-        // BattleAnimation.createCannonBullet(startPosition, targetPosition, bulletNode, bulletSpeed, mode);
+        // BattleAnimation.createCannonBullet(startPosition, chasingPosition, bulletNode, bulletSpeed, mode);
 
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetEntity.id);
 
@@ -53,10 +53,11 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, e
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
 
         // let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
-        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
+        let chasingPosition = targetEntity.getComponent(PositionComponent);
+        let speed = Utils.calculateVelocityVector(startPosition, chasingPosition, bulletSpeed);
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetEntity.id);
 
-        BattleAnimation.createBearBullet(startPosition, targetPosition, bulletNode, bulletSpeed, mode);
+        BattleAnimation.createBearBullet(startPosition, chasingPosition, bulletNode, bulletSpeed, mode);
 
         entity.addComponent(infoComponent)
             .addComponent(positionComponent)
@@ -80,12 +81,12 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, e
 
         // FIXME: PathMonsterSystem check currentPos and NextPos is same => velocity.SpeedX = 0
         // path.push(Utils.tile2Pixel(0,4,mode));
-        let dividePath = Utils.divideCellPath(startPosition, targetPosition, 5);
+        let dividePath = Utils.divideCellPath(startPosition, staticPosition, 5);
         path.push({x: startPosition.x, y: startPosition.y});
         for (let i = 0; i < dividePath.length; i++) {
             path.push(dividePath[i]);
         }
-        path.push({x: targetPosition.x, y: targetPosition.y});
+        path.push({x: staticPosition.x, y: staticPosition.y});
         for (let i = dividePath.length - 1; i >= 0; i--) {
             path.push(dividePath[i]);
         }
@@ -95,7 +96,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, e
         let pathComponent = ComponentFactory.create(PathComponent, path, mode, false);
 
         // let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
-        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
+        let speed = Utils.calculateVelocityVector(startPosition, staticPosition, bulletSpeed);
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
         let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, BulletAnimationConfig.boomerang.level.A);
 
@@ -120,8 +121,8 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, e
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
 
         // let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
-        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
-        let staticPosition = cc.p(targetPosition.x, targetPosition.y)
+        let speed = Utils.calculateVelocityVector(startPosition, staticPosition, bulletSpeed);
+        let staticPosition = cc.p(staticPosition.x, staticPosition.y)
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, null, staticPosition);
         let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, BulletAnimationConfig.oil.level.A);
 
@@ -156,8 +157,8 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, e
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 20, 20);
 
         // let bulletSpeed = 3 * GameConfig.TILE_WIDTH;
-        let speed = Utils.calculateVelocityVector(startPosition, targetPosition, bulletSpeed);
-        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, null, cc.p(targetPosition.x, targetPosition.y));
+        let speed = Utils.calculateVelocityVector(startPosition, staticPosition, bulletSpeed);
+        let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, null, cc.p(staticPosition.x, staticPosition.y));
 
         entity.addComponent(infoComponent)
             .addComponent(positionComponent)
