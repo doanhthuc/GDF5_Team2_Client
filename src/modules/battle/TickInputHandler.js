@@ -4,36 +4,31 @@ let TickInputHandler = cc.Class.extend({
     },
 
     handle: function (cmd, packet, tickNumber) {
+        this.logTickHandler(cmd, packet, tickNumber);
         switch (cmd) {
             case gv.CMD.PUT_TOWER:
-                this.logTickHandler(cmd, packet, tickNumber);
                 this._handlePutTower(cmd, packet);
                 break;
             case gv.CMD.OPPONENT_PUT_TOWER:
                 this._handleOpponentPutTower(cmd, packet);
                 break;
             case gv.CMD.UPGRADE_TOWER:
-                this.logTickHandler(cmd, packet, tickNumber);
                 this._handleUpgradeTower(cmd, packet);
                 break;
             case gv.CMD.OPPONENT_UPGRADE_TOWER:
-                this.logTickHandler(cmd, packet, tickNumber);
                 this._handleOpponentUpgradeTower(cmd, packet);
                 break;
             case gv.CMD.DROP_SPELL:
-                this.logTickHandler(cmd, packet, tickNumber);
                 this._handleDropSpell(cmd, packet);
                 break;
             case gv.CMD.OPPONENT_DROP_SPELL:
-                this.logTickHandler(cmd, packet, tickNumber);
+
                 this._handleOpponentDropSpell(cmd, packet);
                 break;
             case gv.CMD.CHANGE_TOWER_STRATEGY:
-                this.logTickHandler(cmd, packet, tickNumber);
                 this._handleChangeTowerStrategy(cmd, packet);
                 break;
             case gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY:
-                this.logTickHandler(cmd, packet, tickNumber);
                 this._handleOpponentChangeTowerStrategy(cmd, packet);
                 break;
             case gv.CMD.PUT_TRAP:

@@ -403,6 +403,7 @@ BattleNetwork.packetMap[gv.CMD.DESTROY_TOWER] = fr.InPacket.extend({
     readData: function () {
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
     }
 });
 
@@ -414,6 +415,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_DESTROY_TOWER] = fr.InPacket.extend({
     readData: function () {
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
     }
 });
 

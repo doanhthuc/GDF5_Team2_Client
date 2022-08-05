@@ -10,7 +10,7 @@ BattleNetwork.Connector = cc.Class.extend({
     onReceivedPacket: function (cmd, packet) {
         cc.warn('[BattleNetwork.js] onReceivedPacket: ' + cmd + "   " + JSON.stringify(packet));
         cc.log("# Current Tick = " + tickManager.getLatestUpdateTick());
-
+        this.logReceiveCommand(cmd, packet);
         switch (cmd) {
             case gv.CMD.SEND_MATCHING:
                 this._handleMatching(cmd, packet);
@@ -38,27 +38,21 @@ BattleNetwork.Connector = cc.Class.extend({
                 this._handleGetCellObject(cmd, packet);
                 break;
             case gv.CMD.UPGRADE_TOWER:
-                this.logReceiveCommand(gv.CMD.UPGRADE_TOWER, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.OPPONENT_UPGRADE_TOWER:
-                this.logReceiveCommand(gv.CMD.OPPONENT_UPGRADE_TOWER, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.DROP_SPELL:
-                this.logReceiveCommand(gv.CMD.DROP_SPELL, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.OPPONENT_DROP_SPELL:
-                this.logReceiveCommand(gv.CMD.OPPONENT_DROP_SPELL, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.CHANGE_TOWER_STRATEGY:
-                this.logReceiveCommand(gv.CMD.CHANGE_TOWER_STRATEGY, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY:
-                this.logReceiveCommand(gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.PUT_TRAP:
@@ -160,6 +154,7 @@ BattleNetwork.Connector = cc.Class.extend({
     sendDestroyTower: function (tilePos) {
         let pk = this.gameClient.getOutPacket(CMDDestroyTower);
         pk.pack(tilePos);
+        this.logSendCommand(gv.CMD.UPGRADE_TOWER, {tilePos});
         this.gameClient.sendPacket(pk);
     },
 
