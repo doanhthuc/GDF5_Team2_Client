@@ -243,6 +243,7 @@ BattleNetwork.packetMap[gv.CMD.UPGRADE_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
     }
 })
 
@@ -256,6 +257,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_UPGRADE_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
     }
 })
 
@@ -328,6 +330,7 @@ BattleNetwork.packetMap[gv.CMD.DROP_SPELL] = fr.InPacket.extend({
         this.spellLevel = this.getInt();
         this.pixelX = this.getDouble();
         this.pixelY = this.getDouble();
+        this.tickNumber = this.getInt();
     }
 })
 
@@ -341,6 +344,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_DROP_SPELL] = fr.InPacket.extend({
         this.spellLevel = this.getInt();
         this.pixelX = this.getDouble();
         this.pixelY = this.getDouble();
+        this.tickNumber = this.getInt();
     }
 });
 

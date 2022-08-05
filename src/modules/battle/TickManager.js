@@ -33,7 +33,7 @@ let TickManager = cc.Class.extend({
         if (queueInput && queueInput.length > 0) {
             for (let i = 0; i < queueInput.length; i++) {
                 let {cmd, packet} = queueInput[i];
-                this.tickInputHandler.handle(cmd, packet);
+                this.tickInputHandler.handle(cmd, packet, currentTick);
             }
         }
 

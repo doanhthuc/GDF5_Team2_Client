@@ -238,8 +238,11 @@ let BattleLayer = cc.Layer.extend({
         }
 
         if (ValidatorECS.isSpell(type)) {
-            this.dropSpell(type, pixelPos, mode)
-            if (GameConfig.NETWORK) BattleNetwork.connector.sendDropSell(type, pixelPos);
+            if (GameConfig.NETWORK) {
+                BattleNetwork.connector.sendDropSpell(type, pixelPos);
+            } else {
+                this.dropSpell(type, pixelPos, mode)
+            }
         } else if (ValidatorECS.isTrap(type)) {
             EntityFactory.createTrap(tilePos, mode);
             EventDispatcher.getInstance()
