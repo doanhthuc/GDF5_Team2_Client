@@ -136,20 +136,22 @@ let AbilitySystem = System.extend({
                 for (let damageTower of damageTowerList) {
                     if (this._distanceFrom(buffTower, damageTower) < towerAbilityComponent.range) {
                         switch (towerAbilityComponent.effect.typeID) {
-                            case BuffAttackDamageEffect.typeID:
+                            case BuffAttackDamageEffect.typeID: {
                                 let attackComponent = damageTower.getComponent(AttackComponent);
                                 attackComponent.updateDataFromLatestTick();
                                 attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
                                 attackComponent.saveData();
                                 BattleAnimation.addBuffDamageAnimation(damageTower);
                                 break;
-                            case BuffAttackSpeedEffect.typeID:
-                                let attackSpeedComponent = damageTower.getComponent(AttackComponent);
-                                attackSpeedComponent.updateDataFromLatestTick()
-                                attackSpeedComponent.setSpeed(attackSpeedComponent.speed - (attackSpeedComponent.originSpeed * towerAbilityComponent.effect.percent));
-                                attackSpeedComponent.saveData();
+                            }
+                            case BuffAttackSpeedEffect.typeID: {
+                                let attackComponent = damageTower.getComponent(AttackComponent);
+                                attackComponent.updateDataFromLatestTick()
+                                attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
+                                attackComponent.saveData();
                                 BattleAnimation.addBuffSpeedAnimation(damageTower);
                                 break;
+                            }
                         }
                     }
                 }

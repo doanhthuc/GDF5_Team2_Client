@@ -87,7 +87,7 @@ let AttackComponent = Component.extend({
         this.targetStrategy = componentData.targetStrategy;
         this.originRange = componentData.range;
         this.range = componentData.range;
-        this.originSpeed = componentData.speed;
+        this.originSpeed = componentData.originSpeed;
         this.speed = componentData.speed;
         this.countdown = componentData.countdown;
         this.effects = componentData.effects;
@@ -105,8 +105,6 @@ let AttackComponent = Component.extend({
         this.bulletSpeed = bulletSpeed;
         this.bulletRadius = bulletRadius;
         this.effects.push(new DamageEffect(this._damage));
-        cc.log("[AttackComponent.js line 100] this.effects: " + JSON.stringify(this.effects));
-        cc.log("[AttackComponent.js line 101] this._damage " + this._damage);
     }
 });
 AttackComponent.typeID = GameConfig.COMPONENT_ID.ATTACK;
