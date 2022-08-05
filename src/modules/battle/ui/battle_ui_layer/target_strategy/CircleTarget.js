@@ -102,9 +102,6 @@ let CircleTarget = cc.Node.extend({
     },
 
     destroyTower: function (tilePos = this.towerTilepos) {
-        let entityId = this._findTowerEntityIdByTilePos(tilePos);
-        let towerEntity = EntityManager.getInstance().getEntity(entityId);
-        EntityManager.destroy(towerEntity);
         BattleNetwork.connector.sendDestroyTower(tilePos);
     }
 });
