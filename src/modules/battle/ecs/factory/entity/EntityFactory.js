@@ -120,9 +120,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
 
-        // let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
         let speed = Utils.calculateVelocityVector(startPosition, staticPosition, bulletSpeed);
-        let staticPosition = cc.p(staticPosition.x, staticPosition.y)
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, null, staticPosition);
         let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, BulletAnimationConfig.oil.level.A);
 

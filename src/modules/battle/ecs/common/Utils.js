@@ -147,7 +147,7 @@ Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     return direction1 + direction2;
 };
 
-Utils.calculateVelocityVector = function (startPos, targetPos, speed) {
+    Utils.calculateVelocityVector = function (startPos, targetPos, speed) {
     let Xa = startPos.x, Ya = startPos.y, Xb = targetPos.x, Yb = targetPos.y;
     if (Xa - Xb === 0)
         return {speedX: 0, speedY: Math.sign(Yb - Ya) * speed};
