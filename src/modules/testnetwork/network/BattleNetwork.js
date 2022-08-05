@@ -22,11 +22,9 @@ BattleNetwork.Connector = cc.Class.extend({
                 this._handleGetBattleInfo(cmd, packet);
                 break;
             case gv.CMD.PUT_TOWER:
-                this.logReceiveCommand(gv.CMD.PUT_TOWER, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.OPPONENT_PUT_TOWER:
-                this.logReceiveCommand(gv.CMD.OPPONENT_PUT_TOWER, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 // show timer build tower
                 BattleManager.getInstance().getBattleLayer().showTimerBuildTower(cc.p(packet.tileX, packet.tileY), GameConfig.OPPONENT);
