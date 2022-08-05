@@ -225,7 +225,8 @@ BattleNetwork.Connector = cc.Class.extend({
     _handleGetBattleDeckInBattle: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 117] received get battle deck in battle packet: ' + JSON.stringify(packet));
         let battleDeck = packet.battleDeck;
-        cc.log(JSON.stringify(battleDeck));
+        let battleData = BattleManager.getInstance().getBattleData();
+        battleData.setCards(battleDeck, GameConfig.PLAYER);
     },
 
     _handleUpgradeTower: function (cmd, packet) {

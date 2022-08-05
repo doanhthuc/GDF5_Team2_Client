@@ -3,10 +3,13 @@ let BattleUILayer = cc.Layer.extend({
         this._super();
 
         this.battleData = battleData;
-        let fakeBattleDeckData = [{id: 0, level: 1}, {id: 1, level: 1}, {id: 2, level: 1}, {id: 3, level: 1}, {id: 4, level: 1},
+        let fakeBattleDeckData = [{id: 0, level: 1}, {id: 1, level: 1}, {id: 2, level: 1}, {id: 3, level: 1}, {
+            id: 4,
+            level: 1
+        },
             {id: 5, level: 1}, {id: 6, level: 1}, {id: 7, level: 1}, {id: 8, level: 1}, {id: 9, level: 1}
         ];
-        this.cardDeckListData = new CardDeckListData(fakeBattleDeckData);
+        this.cardDeckListData = new CardDeckListData(this.battleData.getCards(GameConfig.PLAYER));
         // this.battleData.setCards(this.cardDeckListData.getFirst4CardId(), GameConfig.PLAYER);
 
         this.twoPlayerInfoLayer = new TwoPlayerInfoLayer(BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.PLAYER)
