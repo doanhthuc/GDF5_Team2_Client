@@ -276,9 +276,9 @@ let BattleLayer = cc.Layer.extend({
     },
 
     buildTower: function (towerId, tilePos, mode) {
+        this._createTower(towerId, tilePos, mode);
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
-        this._createTower(towerId, tilePos, mode);
     },
 
     _createTower: function (towerId, tilePos, mode) {

@@ -40,10 +40,11 @@ EventDispatcher.getInstance()
 
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
         for (let entity of entityList) {
-            if (entity.mode === currentMode && entity.typeID != GameConfig.ENTITY_ID.BAT) {
+            if (entity.mode === currentMode && entity.typeID !== GameConfig.ENTITY_ID.BAT) {
                 let pathComponent = entity.getComponent(PathComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {
+                    positionComponent.updateDataFromLatestTick();
                     let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
                     if (path) {
@@ -54,8 +55,10 @@ EventDispatcher.getInstance()
                             //newPath = newPath.slice(1, newPath.length);
                             //newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
                             //cc.log(JSON.stringify(newPath))
+                            pathComponent.updateDataFromLatestTick();
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
+                            pathComponent.saveData();
                         }
                     }
                 }
@@ -94,6 +97,7 @@ EventDispatcher.getInstance()
                 let pathComponent = entity.getComponent(PathComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {
+                    positionComponent.updateDataFromLatestTick();
                     let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
                     if (path) {
@@ -104,8 +108,10 @@ EventDispatcher.getInstance()
                             //newPath = newPath.slice(1, newPath.length);
                             //newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
                             //cc.log(JSON.stringify(newPath))
+                            pathComponent.updateDataFromLatestTick();
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
+                            pathComponent.saveData();
                         }
                     }
                 }
