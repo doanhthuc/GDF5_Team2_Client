@@ -24,8 +24,8 @@ let TickManager = cc.Class.extend({
         const battleLayer = this.getBattleLayer();
 
         const currentTick = this.getLatestUpdateTick();
-        cc.log("start game: " + this.startTime);
-        cc.log("updateData_currentTick=" + currentTick);
+        cc.log("# latest tick = " + currentTick);
+        cc.log("# current tick = " + this.getCurrentTick());
         // const nextTick = latestUpdateTick + 1;
 
         // handle input of current tick
@@ -75,7 +75,7 @@ let TickManager = cc.Class.extend({
     },
 
     getCurrentTick: function () {
-        return Math.floor((Utils.currentTimeMillis() - this.startTime) / this.tickRate);
+        return Math.floor((TimeUtil.getServerTime() - this.startTime) / this.tickRate);
     },
 
     getLatestUpdateTick: function () {
@@ -92,7 +92,7 @@ let TickManager = cc.Class.extend({
      */
     getDeltaFromLatestTickToNow: function () {
         // return (Utils.currentTimeMillis() - (this.startTime + this.getLatestUpdateTick() * this.tickRate));
-        return (Utils.currentTimeMillis() - this.startTime) % this.tickRate;
+        return (TimeUtil.getServerTime() - this.startTime) % this.tickRate;
 
     },
 

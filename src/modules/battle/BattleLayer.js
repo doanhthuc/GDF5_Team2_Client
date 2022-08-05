@@ -407,7 +407,6 @@ let BattleLayer = cc.Layer.extend({
         //  this.battleLoop.start();
         //this.schedule(this.update,0.1,10000);
         this.uiLayer.startGame();
-        tickManager.setStartTime(Utils.currentTimeMillis());
         this.scheduleUpdate();
         //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
