@@ -378,6 +378,7 @@ BattleNetwork.packetMap[gv.CMD.CHANGE_TOWER_STRATEGY] = fr.InPacket.extend({
         this.tileX = this.getInt();
         this.tileY = this.getInt();
         this.strategyId = this.getInt();
+        this.tickNumber = this.getInt();
     }
 });
 
@@ -390,6 +391,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY] = fr.InPacket.exte
         this.tileX = this.getInt();
         this.tileY = this.getInt();
         this.strategyId = this.getInt();
+        this.tickNumber = this.getInt();
     }
 });
 

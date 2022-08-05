@@ -25,12 +25,15 @@ let TickInputHandler = cc.Class.extend({
                 this._handleDropSpell(cmd, packet);
                 break;
             case gv.CMD.OPPONENT_DROP_SPELL:
+                this.logTickHandler(cmd, packet, tickNumber);
                 this._handleOpponentDropSpell(cmd, packet);
                 break;
             case gv.CMD.CHANGE_TOWER_STRATEGY:
+                this.logTickHandler(cmd, packet, tickNumber);
                 this._handleChangeTowerStrategy(cmd, packet);
                 break;
             case gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY:
+                this.logTickHandler(cmd, packet, tickNumber);
                 this._handleOpponentChangeTowerStrategy(cmd, packet);
                 break;
             case gv.CMD.PUT_TRAP:
@@ -115,11 +118,18 @@ let TickInputHandler = cc.Class.extend({
     },
 
     _handleChangeTowerStrategy: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 197] received change tower strategy packet: ' + JSON.stringify(packet));
+        cc.log('[BattleNetwork.js line 197] received change tower strategy packet player: ' + JSON.stringify(packet));
+        let battleData = BattleManager.getInstance().getBattleData();
+        let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
+        let tileObject = playerObjectMap[packet.tileX][packet.tileY];
+        let entityId = tileObject.tower.entityId;
+        let tower = EntityManager.getInstance().getEntity(entityId);
+        let attackComponent = tower.getComponent(AttackComponent);
+        attackComponent.setTargetStrategy(packet.strategyId);
     },
 
     _handleOpponentChangeTowerStrategy: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 201] received change tower strategy packet: ' + JSON.stringify(packet));
+        cc.log('[BattleNetwork.js line 201] received change tower strategy packet opponent: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
         let tileObject = opponentObjectMap[packet.tileX][packet.tileY];
@@ -158,6 +168,6 @@ let TickInputHandler = cc.Class.extend({
     },
 
     logTickHandler: function (commandID, packet, tickNumber) {
-        cc.warn("* tick = " + tickNumber + " - " + "[tick handle command] #" + commandID + ": " + JSON.stringify(packet));
+        cc.warn("[tick input handle] #" + commandID + " | tickNumber = " + tickNumber + " : " + JSON.stringify(packet));
     }
 });

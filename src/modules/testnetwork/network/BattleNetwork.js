@@ -54,9 +54,11 @@ BattleNetwork.Connector = cc.Class.extend({
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.CHANGE_TOWER_STRATEGY:
+                this.logReceiveCommand(gv.CMD.CHANGE_TOWER_STRATEGY, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY:
+                this.logReceiveCommand(gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY, packet);
                 tickManager.addInput(packet.tickNumber, cmd, packet);
                 break;
             case gv.CMD.PUT_TRAP:

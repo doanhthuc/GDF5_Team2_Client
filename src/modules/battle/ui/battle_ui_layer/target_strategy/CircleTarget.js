@@ -96,7 +96,7 @@ let CircleTarget = cc.Node.extend({
         let towerEntity = EntityManager.getInstance().getEntity(entityId);
         let attackComponent = towerEntity.getComponent(AttackComponent);
         if (attackComponent) {
-            attackComponent.setTargetStrategy(strategy);
+            // attackComponent.setTargetStrategy(strategy);
             BattleNetwork.connector.sendChangeTowerTargetStrategy(tilePos, strategy);
         }
     },
