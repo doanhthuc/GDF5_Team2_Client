@@ -24,8 +24,8 @@ let TickManager = cc.Class.extend({
         const battleLayer = this.getBattleLayer();
 
         const currentTick = this.getLatestUpdateTick();
-        cc.log("# latest tick = " + currentTick);
-        cc.log("# current tick = " + this.getCurrentTick());
+        // cc.log("# latest tick = " + currentTick);
+        // cc.log("# current tick = " + this.getCurrentTick());
         // const nextTick = latestUpdateTick + 1;
 
         // handle input of current tick
