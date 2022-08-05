@@ -6,6 +6,7 @@ ComponentFactory.create = function (cls, ...data) {
 
     if (component) {
         component.reset(...data);
+        component.setActive(true);
         if (component.saveData) {
             component.saveData();
         }

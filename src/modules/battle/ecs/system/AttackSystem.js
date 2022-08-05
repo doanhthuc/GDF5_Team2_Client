@@ -69,6 +69,7 @@ let AttackSystem = System.extend({
 
             attackComponent.updateDataFromLatestTick();
 
+
             // cc.log("[AttackSystem.js line 35] attackComponent.targetStrategy: " + JSON.stringify(attackComponent.effects));
             // update count down time
             if (attackComponent.countdown > 0) {
@@ -100,13 +101,18 @@ let AttackSystem = System.extend({
                         monsterPos.updateDataFromLatestTick();
                         this._changeTowerAnimation(tower, targetMonster);
 
+                        let clonedEffects = [];
+                        for (let effect of attackComponent.effects) {
+                            clonedEffects.push(effect.clone());
+                        }
+
                         if (tower.typeID === GameConfig.ENTITY_ID.FROG_TOWER) {
                             let distance = this._distanceFrom(tower, targetMonster);
                             let k = attackComponent.range / distance;
                             let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
-                            EntityFactory.createBullet(tower.typeID, towerPos, null, destination, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
+                            EntityFactory.createBullet(tower.typeID, towerPos, null, destination, clonedEffects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
                         } else {
-                            EntityFactory.createBullet(tower.typeID, towerPos, targetMonster, cc.p(monsterPos.x, monsterPos.y), attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
+                            EntityFactory.createBullet(tower.typeID, towerPos, targetMonster, cc.p(monsterPos.x, monsterPos.y), clonedEffects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
                         }
                         attackComponent.countdown = attackComponent.speed;
                     }
