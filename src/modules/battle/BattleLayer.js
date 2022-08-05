@@ -244,7 +244,6 @@ let BattleLayer = cc.Layer.extend({
                 this.dropSpell(type, pixelPos, mode)
             }
         } else if (ValidatorECS.isTrap(type)) {
-            EntityFactory.createTrap(tilePos, mode);
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.PUT_TRAP, {cardId: type, tilePos: tilePos, mode: mode});
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTrap(tilePos);

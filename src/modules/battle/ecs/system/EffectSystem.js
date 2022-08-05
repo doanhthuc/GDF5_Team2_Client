@@ -193,6 +193,7 @@ let EffectSystem = System.extend({
                 pathComponent.currentPathIdx = 0;
                 entity.removeComponent(PositionComponent);
 
+                // animation
                 let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, entity.mode);
                 let time = Utils.euclidDistance(pos, bornPos) / (2 * GameConfig.TILE_WIDTH);
                 let action = cc.spawn(
@@ -200,6 +201,7 @@ let EffectSystem = System.extend({
                     cc.sequence(cc.scaleTo(time / 2, 0.8), cc.scaleTo(time / 2, 1))
                 );
                 appearanceComponent.sprite.runAction(action);
+                cc.error("Run animation....")
 
                 trapEffect.setCountDown(time + 0.5);
                 trapEffect.saveData();

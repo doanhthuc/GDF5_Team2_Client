@@ -356,6 +356,7 @@ BattleNetwork.packetMap[gv.CMD.PUT_TRAP] = fr.InPacket.extend({
     readData: function () {
         this.tilePosX = this.getInt();
         this.tilePosY = this.getInt();
+        this.tickNumber = this.getInt();
     }
 });
 
@@ -366,6 +367,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TRAP] = fr.InPacket.extend({
     readData: function () {
         this.tilePosX = this.getInt();
         this.tilePosY = this.getInt();
+        this.tickNumber = this.getInt();
     }
 });
 

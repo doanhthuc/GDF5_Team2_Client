@@ -28,10 +28,10 @@ let AbilitySystem = System.extend({
 
                 lifeComponent.updateDataFromLatestTick();
                 underGroundComponent.updateDataFromLatestTick();
-                positionComponent.updateDataFromLatestTick();
 
                 //check if the Monster have Position Component
                 if (positionComponent) {
+                    positionComponent.updateDataFromLatestTick();
                     if (underGroundComponent.isInGround === false) {
                         if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
                             underGroundComponent.trigger += 1;

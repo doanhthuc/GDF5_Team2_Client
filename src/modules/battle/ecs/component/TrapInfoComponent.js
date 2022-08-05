@@ -5,6 +5,7 @@ let TrapInfoComponent = InfoComponent.extend({
     ctor: function (delayTrigger) {
         this._super();
         this.reset(delayTrigger);
+        this.saveData();
     },
 
     reset: function (delayTrigger) {

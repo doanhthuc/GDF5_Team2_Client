@@ -5,6 +5,7 @@ let TrapEffect = EffectComponent.extend({
     ctor: function () {
         this._super();
         this.reset();
+        this.saveData();
     },
 
     reset: function () {

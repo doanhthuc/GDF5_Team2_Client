@@ -103,7 +103,9 @@ let TickInputHandler = cc.Class.extend({
     },
 
     _handlePutTrap: function (cmd, packet) {
+        let tilePos = cc.p(packet.tilePosX, packet.tilePosY);
         cc.log("[BattleNetwork.js line 206: _handlePutTrap packet: " + JSON.stringify(packet));
+        EntityFactory.createTrap(tilePos, GameConfig.PLAYER);
     },
 
     _handleOpponentPutTrap: function (cmd, packet) {

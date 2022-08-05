@@ -122,6 +122,7 @@ BattleNetwork.Connector = cc.Class.extend({
         let roomId = BattleManager.getInstance().getBattleData().getRoomId()
         let pk = this.gameClient.getOutPacket(CMDPutTower);
         pk.pack(roomId, towerId, tilePos);
+        this.logSendCommand(gv.CMD.PUT_TOWER, {roomId, towerId, tilePos});
         this.gameClient.sendPacket(pk);
     },
 
@@ -135,26 +136,28 @@ BattleNetwork.Connector = cc.Class.extend({
     sendDropSpell: function (towerId, pixelPos) {
         let pk = this.gameClient.getOutPacket(CMDDropSpell);
         pk.pack(towerId, pixelPos);
-        this.logSendCommand(gv.CMD.UPGRADE_TOWER, {towerId, pixelPos});
+        this.logSendCommand(gv.CMD.DROP_SPELL, {towerId, pixelPos});
         this.gameClient.sendPacket(pk);
     },
 
     sendPutTrap: function (tilePos) {
         let pk = this.gameClient.getOutPacket(CMDPutTrap);
         pk.pack(tilePos);
+        this.logSendCommand(gv.CMD.PUT_TRAP, {tilePos});
         this.gameClient.sendPacket(pk);
     },
 
     sendChangeTowerTargetStrategy: function (towerTilePos, targetStrategy) {
         let pk = this.gameClient.getOutPacket(CMDChangeTowerStrategy);
         pk.pack(towerTilePos, targetStrategy);
+        this.logSendCommand(gv.CMD.CHANGE_TOWER_STRATEGY, {towerTilePos, targetStrategy});
         this.gameClient.sendPacket(pk);
     },
 
     sendDestroyTower: function (tilePos) {
         let pk = this.gameClient.getOutPacket(CMDDestroyTower);
         pk.pack(tilePos);
-        this.logSendCommand(gv.CMD.UPGRADE_TOWER, {tilePos});
+        this.logSendCommand(gv.CMD.DESTROY_TOWER, {tilePos});
         this.gameClient.sendPacket(pk);
     },
 
