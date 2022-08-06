@@ -18,10 +18,8 @@ let SpellSystem = System.extend({
 
         for (let spellEntity of spellList) {
             let spellComponent = spellEntity.getComponent(SpellInfoComponent);
-            spellComponent.updateDataFromLatestTick();
 
             spellComponent.delay = spellComponent.delay - tick;
-            spellComponent.saveData();
 
             if (spellComponent.delay <= 0) {
                 let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
@@ -29,7 +27,6 @@ let SpellSystem = System.extend({
                     if (monster.mode === spellEntity.mode) {
                         let monsterPosition = monster.getComponent(PositionComponent)
                         if (!monsterPosition) continue;
-                        monsterPosition.updateDataFromLatestTick();
 
                         let distance = Utils.euclidDistance(monsterPosition, spellComponent.position)
                         if (distance <= spellComponent.range) {
@@ -39,9 +36,6 @@ let SpellSystem = System.extend({
                                 if (spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
                                     let oldVelocity = monster.getComponent(VelocityComponent);
                                     let monsterInfo = monster.getComponent(MonsterInfoComponent);
-
-                                    oldVelocity.updateDataFromLatestTick();
-                                    monsterInfo.updateDataFromLatestTick();
 
                                     if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) {
                                         continue;

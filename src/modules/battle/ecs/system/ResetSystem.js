@@ -18,10 +18,8 @@ const ResetSystem = System.extend({
         let towerList = EntityManager.getInstance().getEntitiesHasComponents(AttackComponent);
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
-            attackComponent.updateDataFromLatestTick();
             attackComponent.setDamage(attackComponent.originDamage);
             attackComponent.setSpeed(attackComponent.originSpeed);
-            attackComponent.saveData();
         }
     },
 })

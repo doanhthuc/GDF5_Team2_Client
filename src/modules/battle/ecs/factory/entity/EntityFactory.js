@@ -24,20 +24,20 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let bulletNode = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, 0.6);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
-        let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
+        // let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
 
         // let bulletSpeed = 5 * GameConfig.TILE_WIDTH;
         let chasingPosition = targetEntity.getComponent(PositionComponent);
         let speed = Utils.calculateVelocityVector(startPosition, chasingPosition, bulletSpeed);
 
-        // BattleAnimation.createCannonBullet(startPosition, chasingPosition, bulletNode, bulletSpeed, mode);
+        BattleAnimation.createCannonBullet(startPosition, chasingPosition, bulletNode, bulletSpeed, mode);
 
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, targetEntity.id);
 
         entity.addComponent(infoComponent)
             .addComponent(positionComponent)
-            .addComponent(appearanceComponent)
+            // .addComponent(appearanceComponent)
             .addComponent(velocityComponent)
             .addComponent(collisionComponent);
         return entity;

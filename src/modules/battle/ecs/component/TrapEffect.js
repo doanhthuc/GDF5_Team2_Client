@@ -5,7 +5,6 @@ let TrapEffect = EffectComponent.extend({
     ctor: function () {
         this._super();
         this.reset();
-        this.saveData();
     },
 
     reset: function () {
@@ -20,21 +19,6 @@ let TrapEffect = EffectComponent.extend({
     setCountDown: function (countDownTime) {
         this.countdown = countDownTime;
         this.isExecuted = true
-    },
-
-    saveData: function () {
-        const data = {
-            isExecuted: this.isExecuted,
-            countdown: this.countdown,
-        }
-        tickManager.getTickData()
-            .saveComponentData(this.id, data);
-    },
-
-    updateDataFromLatestTick: function () {
-        let componentData = tickManager.getTickData().getComponentData(this.id);
-        this.isExecuted = componentData.isExecuted;
-        this.countdown = componentData.countdown;
     },
 });
 TrapEffect.typeID = GameConfig.COMPONENT_ID.TRAP_EFFECT;

@@ -19,19 +19,15 @@ let AbilitySystem = System.extend({
             this._handleBuffAbility(tick);
         },
 
-        _handleUnderGroundComponent: function (tick) {
+        _handleUnderGroundComponent: function () {
             let entityList = EntityManager.getInstance().getEntitiesHasComponents(UnderGroundComponent);
             for (let entity of entityList) {
                 let lifeComponent = entity.getComponent(LifeComponent);
                 let underGroundComponent = entity.getComponent(UnderGroundComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
 
-                lifeComponent.updateDataFromLatestTick();
-                underGroundComponent.updateDataFromLatestTick();
-
                 //check if the Monster have Position Component
                 if (positionComponent) {
-                    positionComponent.updateDataFromLatestTick();
                     if (underGroundComponent.isInGround === false) {
                         if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
                             underGroundComponent.trigger += 1;
@@ -47,8 +43,6 @@ let AbilitySystem = System.extend({
                         }
                     }
                 }
-
-                underGroundComponent.saveData();
             }
         },
 
@@ -58,14 +52,11 @@ let AbilitySystem = System.extend({
             for (let entity of entityList) {
                 let spawnMinionComponent = entity.getComponent(SpawnMinionComponent);
 
-                spawnMinionComponent.updateDataFromLatestTick();
-
                 if (spawnMinionComponent.period >= 0) {
                     spawnMinionComponent.period = spawnMinionComponent.period - tick;
                 } else {
                     spawnMinionComponent.period = 2;
                     let positionComponent = entity.getComponent(PositionComponent);
-                    positionComponent.updateDataFromLatestTick();
 
                     if (spawnMinionComponent.spawnAmount < 5) {
                         EntityFactory.createDemonTreeMinion({
@@ -76,8 +67,6 @@ let AbilitySystem = System.extend({
                         BattleAnimation.animationBornMonster(entity);
                     }
                 }
-
-                spawnMinionComponent.saveData();
             }
         },
 
@@ -92,8 +81,6 @@ let AbilitySystem = System.extend({
             for (let satyr of entityList) {
                 let healingAbility = satyr.getComponent(HealingAbility);
 
-                healingAbility.updateDataFromLatestTick();
-
                 if (healingAbility.countdown > 0) {
                     healingAbility.countdown -= tick;
                 } else {
@@ -101,28 +88,23 @@ let AbilitySystem = System.extend({
                     for (let monster of monsterList) {
                         if (monster.getActive() && monster.mode === satyr.mode) {
                             let monsterPos = monster.getComponent(PositionComponent);
-                            monsterPos.updateDataFromLatestTick();
 
                             if (monsterPos) {
                                 let distance = this._distanceFrom(satyr, monster);
 
                                 if (distance <= healingAbility.range) {
                                     let lifeComponent = monster.getComponent(LifeComponent);
-                                    lifeComponent.updateDataFromLatestTick();
                                     lifeComponent.hp = Math.min(lifeComponent.hp + lifeComponent.maxHP * healingAbility.healingRate, lifeComponent.maxHP);
-                                    lifeComponent.saveData();
                                 }
                             }
                         }
                     }
                 }
-
-                healingAbility.saveData();
             }
 
         },
 
-        _handleBuffAbility: function (tick) {
+        _handleBuffAbility: function () {
             let buffTowerList = EntityManager.getInstance().getEntitiesHasComponents(TowerAbilityComponent);
             let damageTowerList = null;
 
@@ -132,23 +114,18 @@ let AbilitySystem = System.extend({
 
             for (let buffTower of buffTowerList) {
                 let towerAbilityComponent = buffTower.getComponent(TowerAbilityComponent);
-                towerAbilityComponent.updateDataFromLatestTick();
                 for (let damageTower of damageTowerList) {
                     if (this._distanceFrom(buffTower, damageTower) < towerAbilityComponent.range) {
                         switch (towerAbilityComponent.effect.typeID) {
                             case BuffAttackDamageEffect.typeID: {
                                 let attackComponent = damageTower.getComponent(AttackComponent);
-                                attackComponent.updateDataFromLatestTick();
                                 attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
-                                attackComponent.saveData();
                                 BattleAnimation.addBuffDamageAnimation(damageTower);
                                 break;
                             }
                             case BuffAttackSpeedEffect.typeID: {
                                 let attackComponent = damageTower.getComponent(AttackComponent);
-                                attackComponent.updateDataFromLatestTick()
                                 attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
-                                attackComponent.saveData();
                                 BattleAnimation.addBuffSpeedAnimation(damageTower);
                                 break;
                             }

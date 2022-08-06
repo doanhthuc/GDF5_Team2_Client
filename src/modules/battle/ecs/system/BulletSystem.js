@@ -20,12 +20,7 @@ let BulletSystem = System.extend({
             let bulletVelocity = bullet.getComponent(VelocityComponent);
             let pathComponent = bullet.getComponent(PathComponent);
 
-            bulletPos.updateDataFromLatestTick();
-            bulletVelocity.updateDataFromLatestTick();
-
             if (pathComponent != null) {
-                pathComponent.updateDataFromLatestTick();
-
                 if (pathComponent.currentPathIdx === pathComponent.path.length - 2) {
                     EntityManager.destroy(bullet);
                 }
@@ -44,12 +39,10 @@ let BulletSystem = System.extend({
                 if (Math.abs(bulletVelocity.getDynamicPosition().x - bulletPos.x) <= 10 || Math.abs(bulletVelocity.getDynamicPosition().y - bulletPos.y) <= 10) {
                     // bullet.removeComponent(VelocityComponent);
                     let collisionComponent = bullet.getComponent(CollisionComponent);
-                    collisionComponent.updateDataFromLatestTick();
 
                     if (collisionComponent) {
                         collisionComponent.width = collisionComponent.originWidth;
                         collisionComponent.height = collisionComponent.originHeight;
-                        collisionComponent.saveData();
                     }
                 }
             }

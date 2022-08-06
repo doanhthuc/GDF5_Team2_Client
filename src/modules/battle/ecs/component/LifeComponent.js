@@ -5,7 +5,6 @@ let LifeComponent = InfoComponent.extend({
     ctor: function (hp, maxHP) {
         this._super();
         this.reset(hp, maxHP);
-        this.saveData();
     },
 
     setMaxHP: function (maxHP) {
@@ -23,16 +22,6 @@ let LifeComponent = InfoComponent.extend({
 
     clone: function () {
         return ComponentFactory.create(LifeComponent, this.hp, this.maxHP);
-    },
-
-    saveData: function () {
-        tickManager.getTickData()
-            .saveComponentData(this.id, {hp: this.hp, maxHP: this.maxHP});
-    },
-
-    updateDataFromLatestTick: function () {
-        let componentData = tickManager.getTickData().getComponentData(this.id);
-        this.reset(componentData.hp, componentData.maxHP);
     },
 });
 LifeComponent.typeID = GameConfig.COMPONENT_ID.LIFE;

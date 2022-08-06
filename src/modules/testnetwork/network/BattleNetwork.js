@@ -78,12 +78,14 @@ BattleNetwork.Connector = cc.Class.extend({
         let pk = this.gameClient.getOutPacket(CMDSendMatching);
         pk.pack();
         this.gameClient.sendPacket(pk);
+        this.logSendCommand(gv.CMD.SEND_MATCHING);
     },
 
     sendCancelMatching: function () {
         let pk = this.gameClient.getOutPacket(CMDSendCancelMatching);
         pk.pack();
         this.gameClient.sendPacket(pk);
+        this.logSendCommand(gv.CMD.SEND_CANCEL_MATCHING);
     },
 
     _handleMatching: function (cmd, packet) {

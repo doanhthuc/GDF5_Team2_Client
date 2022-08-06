@@ -5,7 +5,6 @@ let VelocityComponent = Component.extend({
     ctor: function (speedX, speedY, dynamicEntityId, staticPosition) {
         this._super();
         this.reset(speedX, speedY, dynamicEntityId, staticPosition);
-        this.saveData();
     },
 
     reset: function (speedX, speedY, dynamicEntityId, staticPosition) {
@@ -34,32 +33,6 @@ let VelocityComponent = Component.extend({
         }
         
         return null;
-    },
-
-    saveData: function () {
-        const data = {
-            speedX: this.speedX,
-            speedY: this.speedY,
-            dynamicEntityId: this.dynamicEntityId,
-            staticPosition: this.staticPosition,
-            originSpeed: this.originSpeed,
-            originSpeedX: this.originSpeedX,
-            originSpeedY: this.originSpeedX
-        }
-        tickManager.getTickData()
-            .saveComponentData(this.id, data);
-    },
-
-    updateDataFromLatestTick: function () {
-        let componentData = tickManager.getTickData().getComponentData(this.id);
-        this.reset(componentData.speedX, componentData.speedY, componentData.dynamicEntityId, componentData.staticPosition);
-        this.speedX = componentData.speedX;
-        this.speedY = componentData.speedY;
-        this.dynamicEntityId = componentData.dynamicEntityId;
-        this.staticPosition = componentData.staticPosition ? cc.p(componentData.staticPosition.x, componentData.staticPosition.y) : componentData.staticPosition;
-        this.originSpeed = componentData.originSpeed;
-        this.originSpeedX = componentData.originSpeedX;
-        this.originSpeedY = componentData.originSpeedY;
     },
 });
 VelocityComponent.typeID = GameConfig.COMPONENT_ID.VELOCITY;

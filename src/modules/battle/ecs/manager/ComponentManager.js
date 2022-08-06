@@ -25,6 +25,7 @@ let ComponentManager = ManagerECS.extend({
             throw new Error("Component with typeID = " + component.typeID + ", id = " + component.id + " exists.");
         }
 
+        // tickManager.getTickData().deleteComponentData(component.id);
         this._storeInstance.set(component.id, component);
     },
 

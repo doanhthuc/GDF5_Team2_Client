@@ -9,7 +9,6 @@ EventDispatcher.getInstance()
         let battleData = BattleManager.getInstance().getBattleData();
         let currentWave = battleData.getCurrentWave();
         let monsterWave = battleData.getMonsterWave();
-        cc.log("===>currentwave: " + currentWave);
         if (monsterWave[currentWave].length > 0) {
             let monsterTypeID = monsterWave[currentWave].pop();
             BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, monsterTypeID);
@@ -17,10 +16,10 @@ EventDispatcher.getInstance()
         }
     })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
-        BattleManager.getInstance().getBattleLayer().stopGame();
+        // BattleManager.getInstance().getBattleLayer().stopGame();
     })
     .addEventHandler(EventType.END_ALL_WAVE, function (data) {
-        BattleManager.getInstance().getBattleLayer().stopGame();
+        // BattleManager.getInstance().getBattleLayer().stopGame();
     })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let tilePos = data.pos;
@@ -44,7 +43,6 @@ EventDispatcher.getInstance()
                 let pathComponent = entity.getComponent(PathComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {
-                    positionComponent.updateDataFromLatestTick();
                     let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
                     if (path) {
@@ -55,10 +53,8 @@ EventDispatcher.getInstance()
                             //newPath = newPath.slice(1, newPath.length);
                             //newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
                             //cc.log(JSON.stringify(newPath))
-                            pathComponent.updateDataFromLatestTick();
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
-                            pathComponent.saveData();
                         }
                     }
                 }
@@ -97,7 +93,6 @@ EventDispatcher.getInstance()
                 let pathComponent = entity.getComponent(PathComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {
-                    positionComponent.updateDataFromLatestTick();
                     let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, currentMode);
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
                     if (path) {
@@ -108,10 +103,8 @@ EventDispatcher.getInstance()
                             //newPath = newPath.slice(1, newPath.length);
                             //newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
                             //cc.log(JSON.stringify(newPath))
-                            pathComponent.updateDataFromLatestTick();
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
-                            pathComponent.saveData();
                         }
                     }
                 }

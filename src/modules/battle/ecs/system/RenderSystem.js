@@ -40,14 +40,12 @@ let RenderSystem = System.extend({
         for (let entity of entityList) {
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
-            positionComponent.updateDataFromLatestTick();
 
             if (ValidatorECS.isMonster(entity)) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                 let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
                 if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID!== GameConfig.ENTITY_ID.BAT) {
                     let lifeComponent = entity.getComponent(LifeComponent);
-                    lifeComponent.updateDataFromLatestTick();
                     lifeComponent.hp = 0;
                 }
 
@@ -88,7 +86,6 @@ let RenderSystem = System.extend({
         for (let entity of entityList) {
             let skeletonComponent = entity.getComponent(SkeletonAnimationComponent);
             let positionComponent = entity.getComponent(PositionComponent);
-            positionComponent.updateDataFromLatestTick();
             skeletonComponent.spine.setPosition(positionComponent.x, positionComponent.y);
         }
     },
@@ -97,7 +94,6 @@ let RenderSystem = System.extend({
         let appearanceComponent = entity.getComponent(AppearanceComponent);
         let lifeComponent = entity.getComponent(LifeComponent);
         if (appearanceComponent && lifeComponent) {
-            lifeComponent.updateDataFromLatestTick();
             let sprite = appearanceComponent.sprite;
             let hpNode = sprite.getChildByName("hp");
             if (hpNode) {
@@ -117,7 +113,6 @@ let RenderSystem = System.extend({
         let lifeComponent = entity.getComponent(LifeComponent);
 
         if (appearanceComponent && lifeComponent) {
-            lifeComponent.updateDataFromLatestTick();
             let sprite = appearanceComponent.sprite;
             let hpNode = sprite.getChildByName("hp");
             if (hpNode) {

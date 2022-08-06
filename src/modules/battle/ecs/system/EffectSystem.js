@@ -31,12 +31,7 @@ let EffectSystem = System.extend({
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackSpeedComponent = entity.getComponent(BuffAttackSpeedEffect);
 
-            attackComponent.updateDataFromLatestTick();
-            buffAttackSpeedComponent.updateDataFromLatestTick();
-
             attackComponent.speed = attackComponent.originSpeed * (1 - (buffAttackSpeedComponent.percent - 1));
-
-            attackComponent.saveData();
         }
     },
 
@@ -48,12 +43,7 @@ let EffectSystem = System.extend({
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackDamageComponent = entity.getComponent(BuffAttackDamageEffect);
 
-            attackComponent.updateDataFromLatestTick();
-            buffAttackDamageComponent.updateDataFromLatestTick();
-
             attackComponent.setDamage(attackComponent.damage + attackComponent.originDamage * buffAttackDamageComponent.percent);
-
-            attackComponent.saveData();
         }
     },
 
@@ -66,13 +56,9 @@ let EffectSystem = System.extend({
 
             if (lifeComponent) {
                 let damageComponent = entity.getComponent(DamageEffect);
-                lifeComponent.updateDataFromLatestTick();
-                damageComponent.updateDataFromLatestTick();
 
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
-
-                lifeComponent.saveData();
             }
         }
     },
@@ -85,22 +71,15 @@ let EffectSystem = System.extend({
             let velocityComponent = entity.getComponent(VelocityComponent);
             let frozenComponent = entity.getComponent(FrozenEffect);
 
-            velocityComponent.updateDataFromLatestTick()
-            frozenComponent.updateDataFromLatestTick();
-
             frozenComponent.countdown = frozenComponent.countdown - tick;
-            frozenComponent.saveData();
 
             if (frozenComponent.countdown <= 0) {
                 entity.removeComponent(frozenComponent);
                 this._updateOriginVelocity(velocityComponent);
-                cc.log("Finish frozen effect")
             } else {
                 velocityComponent.speedX = 0;
                 velocityComponent.speedY = 0;
             }
-
-            velocityComponent.saveData();
         }
     },
 
@@ -112,9 +91,6 @@ let EffectSystem = System.extend({
             let velocityComponent = entity.getComponent(VelocityComponent);
             let slowComponent = entity.getComponent(SlowEffect);
 
-            slowComponent.updateDataFromLatestTick();
-            velocityComponent.updateDataFromLatestTick();
-
             slowComponent.countdown = slowComponent.countdown - tick;
             if (slowComponent.countdown <= 0) {
                 // animation
@@ -122,8 +98,6 @@ let EffectSystem = System.extend({
                 slowComponent.addedAnimation = false;
 
                 this._updateOriginVelocity(velocityComponent);
-                velocityComponent.saveData();
-                slowComponent.saveData();
                 entity.removeComponent(slowComponent);
             } else {
                 velocityComponent.speedX = slowComponent.percent * velocityComponent.originSpeedX;
@@ -134,8 +108,6 @@ let EffectSystem = System.extend({
                     BattleAnimation.addAnimationHitSlowEffect(entity);
                     slowComponent.addedAnimation = true;
                 }
-                slowComponent.saveData();
-                velocityComponent.saveData();
             }
         }
     },
@@ -148,12 +120,7 @@ let EffectSystem = System.extend({
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackRangeComponent = entity.getComponent(BuffAttackRangeEffect);
 
-            attackComponent.updateDataFromLatestTick();
-            buffAttackRangeComponent.updateDataFromLatestTick();
-
             attackComponent.range = attackComponent.originRange + attackComponent.originRange * buffAttackRangeComponent.percent;
-
-            attackComponent.saveData();
         }
     },
 
@@ -164,12 +131,9 @@ let EffectSystem = System.extend({
         for (let entity of monsterList) {
             let trapEffect = entity.getComponent(TrapEffect);
 
-            trapEffect.updateDataFromLatestTick();
-
             if (trapEffect.isExecuted) {
                 if (trapEffect.countdown > 0) {
                     trapEffect.countdown -= dt;
-                    trapEffect.saveData();
                 } else {
                     let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, entity.mode);
                     let newPos = ComponentFactory.create(PositionComponent, bornPos.x, bornPos.y);
@@ -187,9 +151,6 @@ let EffectSystem = System.extend({
                 let pathComponent = entity.getComponent(PathComponent);
                 let appearanceComponent = entity.getComponent(AppearanceComponent);
 
-                pos.updateDataFromLatestTick();
-                pathComponent.updateDataFromLatestTick();
-
                 pathComponent.currentPathIdx = 0;
                 entity.removeComponent(PositionComponent);
 
@@ -201,11 +162,8 @@ let EffectSystem = System.extend({
                     cc.sequence(cc.scaleTo(time / 2, 0.8), cc.scaleTo(time / 2, 1))
                 );
                 appearanceComponent.sprite.runAction(action);
-                cc.error("Run animation....")
 
                 trapEffect.setCountDown(time + 0.5);
-                trapEffect.saveData();
-                pathComponent.saveData();
             }
         }
     },
@@ -213,8 +171,6 @@ let EffectSystem = System.extend({
     _updateOriginVelocity: function (velocityComponent) {
         velocityComponent.speedX = velocityComponent.originSpeedX;
         velocityComponent.speedY = velocityComponent.originSpeedY;
-        cc.log("xxxUUX: " + velocityComponent.originSpeedX);
-        cc.log("xxxUUY: " + velocityComponent.originSpeedY);
 
     }
 });

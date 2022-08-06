@@ -37,21 +37,50 @@ let TickManager = cc.Class.extend({
             }
         }
 
+        let startTime = Utils.currentTimeMillis();
         battleLayer.getTimerNode().updateData();
-        battleLayer.resetSystem.updateData();
-        battleLayer.abilitySystem.updateData();
-        battleLayer.effectSystem.updateData();
-        battleLayer.attackSystem.updateData();
-        battleLayer.renderSystem.updateData();
-        battleLayer.lifeSystem.updateData();
-        battleLayer.collisionSystem.updateData();
-        battleLayer.pathSystem.updateData();
-        battleLayer.spellSystem.updateData();
-        battleLayer.skeletonAnimationSystem.updateData();
-        battleLayer.monsterSystem.updateData();
-        battleLayer.bulletSystem.updateData();
-        battleLayer.movementSystem.updateData();
+        battleLayer.resetSystem.runUpdateData();
+        battleLayer.abilitySystem.runUpdateData();
+        battleLayer.effectSystem.runUpdateData();
+        battleLayer.attackSystem.runUpdateData();
+        battleLayer.renderSystem.runUpdateData();
+        battleLayer.lifeSystem.runUpdateData();
+        battleLayer.collisionSystem.runUpdateData();
+        battleLayer.pathSystem.runUpdateData();
+        battleLayer.spellSystem.runUpdateData();
+        battleLayer.skeletonAnimationSystem.runUpdateData();
+        battleLayer.monsterSystem.runUpdateData();
+        battleLayer.bulletSystem.runUpdateData();
+        battleLayer.movementSystem.runUpdateData();
+        let endTime = Utils.currentTimeMillis();
+        if (GameConfig.DEBUG) {
+            cc.error("Update time = " + (endTime - startTime));
+            cc.warn("* Entity Manager size = " + Object.keys(EntityManager.getInstance().entities).length);
+            cc.warn("* Tick size = " + Object.keys(tickManager.getTickData().data.componentData).length);
+            cc.warn("* Current id of component = " + UUIDGeneratorECS.genComponentID());
+            cc.warn("* Component Manager size = " + ComponentManager.getInstance()._storeInstance.size);
 
+
+            let poolSize = 0;
+            let componentActive = 0;
+            let componentInactive = 0;
+            for (let key of Object.keys(ComponentFactory.pool._store)) {
+                poolSize += ComponentFactory.pool._store[key].length;
+                for (let component of ComponentFactory.pool._store[key]) {
+                    if (component.getActive()) {
+                        componentActive++;
+                    } else {
+                        componentInactive++;
+                    }
+                }
+            }
+            cc.warn("* ComponentPool size = " + JSON.stringify(poolSize));
+            cc.warn("   + Active size = " + JSON.stringify(componentActive));
+            cc.warn("   + Inactive size = " + JSON.stringify(componentInactive));
+
+            cc.warn("---------------------------------------")
+            cc.warn("---------------------------------------")
+        }
         // timer for build tower
         this.updateNormalTimerNode();
 
