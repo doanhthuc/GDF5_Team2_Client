@@ -7,12 +7,18 @@ let SpellSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    _run: function (tick) {
+    _run: function (dt) {
+
+    },
+
+    updateData: function () {
+        const tick = tickManager.getTickRate() / 1000;
         let spellList = EntityManager.getInstance()
             .getEntitiesHasComponents(SpellInfoComponent);
 
         for (let spellEntity of spellList) {
             let spellComponent = spellEntity.getComponent(SpellInfoComponent);
+
             spellComponent.delay = spellComponent.delay - tick;
 
             if (spellComponent.delay <= 0) {
@@ -45,8 +51,6 @@ let SpellSystem = System.extend({
                                     const force = 3000;
                                     const mass = monsterInfo.weight;
                                     let A =  40 + force / mass;
-                                    cc.log("mass = " + mass);
-                                    cc.log("A = " + A);
                                     let T = 1;
                                     const V0 = Math.abs(A * T);
 

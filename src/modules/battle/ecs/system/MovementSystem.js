@@ -7,22 +7,27 @@ let MovementSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    _run: function (tick) {
+    _run: function (dt) {
+
+    },
+
+    updateData: function () {
+        const tick = tickManager.getTickRate() / 1000;
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(VelocityComponent, PositionComponent);
+
         for (let entity of entityList) {
             let positionComponent = entity.getComponent(PositionComponent);
             let velocityComponent = entity.getComponent(VelocityComponent);
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let fireballEffect = entity.getComponent(FireBallEffect);
 
-            if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive()) {
-                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.dynamicPosition,
+            if (velocityComponent.getDynamicPosition() && velocityComponent.getDynamicPosition().getActive()) {
+                let newVelocity = Utils.calculateVelocityVector(positionComponent, velocityComponent.getDynamicPosition(),
                     velocityComponent.originSpeed);
                 velocityComponent.speedX = newVelocity.speedX;
                 velocityComponent.speedY = newVelocity.speedY;
             }
-
 
             // start handle fireball effect
             if (fireballEffect && velocityComponent) {
@@ -104,7 +109,7 @@ let MovementSystem = System.extend({
                 }
             }
         }
-    },
+    }
 });
 MovementSystem.typeID = GameConfig.SYSTEM_ID.MOVEMENT;
 SystemManager.getInstance().registerClass(MovementSystem);

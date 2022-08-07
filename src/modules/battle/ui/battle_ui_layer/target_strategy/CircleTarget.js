@@ -96,15 +96,12 @@ let CircleTarget = cc.Node.extend({
         let towerEntity = EntityManager.getInstance().getEntity(entityId);
         let attackComponent = towerEntity.getComponent(AttackComponent);
         if (attackComponent) {
-            attackComponent.setTargetStrategy(strategy);
+            // attackComponent.setTargetStrategy(strategy);
             BattleNetwork.connector.sendChangeTowerTargetStrategy(tilePos, strategy);
         }
     },
 
     destroyTower: function (tilePos = this.towerTilepos) {
-        let entityId = this._findTowerEntityIdByTilePos(tilePos);
-        let towerEntity = EntityManager.getInstance().getEntity(entityId);
-        EntityManager.destroy(towerEntity);
         BattleNetwork.connector.sendDestroyTower(tilePos);
     }
 });

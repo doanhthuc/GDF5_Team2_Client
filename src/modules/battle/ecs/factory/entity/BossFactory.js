@@ -10,7 +10,7 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createDemonTreeNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 400);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 1000);
     let spawnMinionComponent = ComponentFactory.create(SpawnMinionComponent, 2);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.demon_tree)
 
@@ -45,7 +45,7 @@ EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createDemonTreeMinionNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 30);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 1000);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.demon_tree_minion)
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
@@ -78,7 +78,7 @@ EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createDarkGiantNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 800);
+    let lifeComponent = ComponentFactory.create(LifeComponent, 1000);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.dark_giant)
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
