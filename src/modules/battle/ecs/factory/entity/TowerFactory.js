@@ -282,15 +282,17 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             let towerConfig = TowerConfig.getDamageGoatTowerConfigFromJson(towerLevel);
             let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
             let damageUpValue = towerConfig.damageUpValue;
-            towerAbilityComponent.reset(buffRange, damageUpValue);
+            let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, damageUpValue);
+            towerAbilityComponent.reset(buffRange, buffAttackDamageEffect);
             break;
         }
         case GameConfig.ENTITY_ID.SNAKE_TOWER: {
+            let towerAbilityComponent = towerEntity.getComponent(TowerAbilityComponent);
             let towerConfig = TowerConfig.getAttackSpeedSnakeTowerConfigFromJson(towerLevel);
             let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
             let attackSpeedUpValue = towerConfig.attackSpeedUpValue;
-            let towerAbilityComponent = towerEntity.getComponent(TowerAbilityComponent);
-            towerAbilityComponent.reset(buffRange, attackSpeedUpValue);
+            let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, attackSpeedUpValue);
+            towerAbilityComponent.reset(buffRange, buffAttackSpeedEffect);
             break;
         }
     }

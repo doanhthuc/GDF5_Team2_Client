@@ -62,6 +62,7 @@ let AttackComponent = Component.extend({
         this.originDamage = damage;
         this.originSpeed = speed;
         this.range = range;
+        this.originRange = range;
         this.speed = speed;
         this.effects = effects;
         this.bulletSpeed = bulletSpeed;
