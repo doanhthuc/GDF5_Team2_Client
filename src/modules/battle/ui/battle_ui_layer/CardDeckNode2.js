@@ -20,14 +20,6 @@ const CardDeckNode2 = cc.Node.extend({
         this.init();
 
         EventDispatcher.getInstance()
-            .addEventHandler(EventType.PUT_NEW_TOWER,
-                this.handlePutCardIntoMap.bind(this))
-            .addEventHandler(EventType.UPGRADE_TOWER,
-                this.handlePutCardIntoMap.bind(this))
-            .addEventHandler(EventType.DROP_SPELL,
-                this.handlePutCardIntoMap.bind(this))
-            .addEventHandler(EventType.PUT_TRAP,
-                this.handlePutCardIntoMap.bind(this))
             .addEventHandler(EventType.INVALID_PUT_CARD_POSITION,
                 this.handleInvalidPutCardPosition.bind(this));
     },
@@ -237,7 +229,7 @@ const CardDeckNode2 = cc.Node.extend({
         cc.log(this.isCardPuttedIntoMap);
         if (this.isCardPuttedIntoMap === true) {
             cc.log(JSON.stringify(this.spriteDragManager[cardType]));
-            // this.removeDragSprite(cardType);
+            this.removeDragSprite(cardType);
             let cardSlotNode = this.cardSlotNodeList.find(card => card.type === cardType);
             if (cardSlotNode) {
                 let index = this.cardSlotNodeList.indexOf(cardSlotNode);
@@ -251,13 +243,13 @@ const CardDeckNode2 = cc.Node.extend({
                 this.cardDeckListData.pushUsedCardIntoDeck({id: cardType, level: prevCardLevel});
             }
             BattleManager.getInstance().getBattleLayer().selectedCard = null;
-            this.selectedCardType = null;
-            this.selectedCardLevel = null;
+            this.setSelectedCardType(null, null);
             this.isCardPuttedIntoMap = false;
         }
     },
 
     removeDragSprite: function (cardType) {
+        cc.error("Remove drag sprite: " + cardType);
         if (!this.spriteDragManager[cardType]) {
             return;
         }
