@@ -19,7 +19,7 @@ let TrapEffect = EffectComponent.extend({
     setCountDown: function (countDownTime) {
         this.countdown = countDownTime;
         this.isExecuted = true
-    }
+    },
 });
 TrapEffect.typeID = GameConfig.COMPONENT_ID.TRAP_EFFECT;
 ComponentManager.getInstance().registerClass(TrapEffect);

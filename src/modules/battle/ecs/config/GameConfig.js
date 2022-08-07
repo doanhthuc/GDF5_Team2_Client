@@ -157,3 +157,8 @@ GameConfig.ANIMATION_TYPE = {
     ANIMATION_COMPLETE: 2,
     ANIMATION_EVENT: 3
 };
+
+GameConfig.DELAY_BUILD_TOWER = 1;
+GameConfig.BATTLE = {
+    MAX_WAVE: 100
+}

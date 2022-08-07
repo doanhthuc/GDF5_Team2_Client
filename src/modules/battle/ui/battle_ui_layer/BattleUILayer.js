@@ -3,7 +3,7 @@ let BattleUILayer = cc.Layer.extend({
         this._super();
 
         this.battleData = battleData;
-        let fakeBattleDeckData = [{id: 0, level: 1}, {id: 1, level: 1}, {id: 2, level: 1}, {id: 3, level: 1}, {id: 4, level: 1},
+        let fakeBattleDeckData = [{id: 0, level: 1}, {id: 0, level: 1}, {id: 2, level: 1}, {id: 3, level: 1}, {id: 4, level: 1},
             {id: 5, level: 1}, {id: 6, level: 1}, {id: 7, level: 1}, {id: 8, level: 1}, {id: 9, level: 1}
         ];
         this.cardDeckListData = new CardDeckListData(fakeBattleDeckData);
@@ -33,9 +33,6 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _showTimer: function () {
-        //let remainingTime = this.battleData.getBattleStartTime() - Date.now();
-        //cc.log(this.battleData.getBattleStartTime() + " " + TimeUtil.getServerTime() + this.battleData.getBattleStartTime() - TimeUtil.getServerTime());
-
         let countdown = (this.battleData.getBattleStartTime() - TimeUtil.getServerTime()) / 1000;
         this.timerNode = new BattleTimerNode(countdown, this.battleData.dataInGame.timer);
         this.timerNode.x = cc.winSize.width / 2 - this.timerNode.width / 2;
@@ -103,12 +100,6 @@ let BattleUILayer = cc.Layer.extend({
      * @param y tile pos of player map
      */
     showTargetCircle: function (x, y) {
-        // this.circleNode = new CircleTarget();
-        // this.circleNode.retain();
-        // this.addChild(this.circleNode, 10000);
-        // this.circleNode.setVisible(true);
-        // this.circleNode.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
-        // this.circleNode.setPosition(cc.p(0,0));
         let circleNode = new CircleTarget();
         let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
         pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
@@ -117,22 +108,8 @@ let BattleUILayer = cc.Layer.extend({
         this.addChild(circleNode, 100);
     },
 
-    // setTargetCirclePos: function (x, y) {
-    //     let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
-    //     pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
-    //     cc.log("setTargetCirclePos " + this.circleNode.getPosition().x + " " + this.circleNode.getPosition().y + " " + this.circleNode.isVisible());
-    //     cc.log(pixelPos)
-    //     if (this.circleNode.getPosition().x === pixelPos.x && this.circleNode.y === pixelPos.y && this.circleNode.isVisible()) {
-    //         this.circleNode.setVisible(false);
-    //     } else {
-    //         cc.error("aaaaaaaaaaaaaaaaaaa")
-    //         this.circleNode.setPosition(cc.winSize.width / 2 - 50, cc.winSize.height / 2 - 50)
-    //         this.circleNode.setTowerTilePos(x, y);
-    //         this.circleNode.setVisible(true);
-    //     }
-    // },
-
     _backToLobby: function () {
+        BattleManager.getInstance().getBattleLayer().stopGame();
         fr.view(MainScreen);
     }
 });

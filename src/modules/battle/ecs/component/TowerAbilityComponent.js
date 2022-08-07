@@ -14,7 +14,7 @@ let TowerAbilityComponent = Component.extend({
     reset: function (range, effect) {
         this.range = range;
         this.effect = effect;
-    }
+    },
 });
 TowerAbilityComponent.typeID = GameConfig.COMPONENT_ID.TOWER_ABILITY;
 ComponentManager.getInstance().registerClass(TowerAbilityComponent);

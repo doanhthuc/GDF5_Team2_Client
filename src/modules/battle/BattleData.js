@@ -6,8 +6,8 @@ let BattleData = cc.Class.extend({
             currentWave: 0,
             waveAmount: 0,
             monsterWave: null,
-            maxWave: 20,
-            timer: 5,
+            maxWave: GameConfig.BATTLE.MAX_WAVE,
+            timer: 20,
             trophyChange: 0,
             player: {
                 username: "HOVANVYDUT",

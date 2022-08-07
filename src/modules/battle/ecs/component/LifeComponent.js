@@ -22,7 +22,7 @@ let LifeComponent = InfoComponent.extend({
 
     clone: function () {
         return ComponentFactory.create(LifeComponent, this.hp, this.maxHP);
-    }
+    },
 });
 LifeComponent.typeID = GameConfig.COMPONENT_ID.LIFE;
 ComponentManager.getInstance().registerClass(LifeComponent);

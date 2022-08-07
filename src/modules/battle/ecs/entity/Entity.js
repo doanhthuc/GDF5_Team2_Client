@@ -14,7 +14,7 @@ let EntityECS = cc.Class.extend({
 
     addComponent: function (component) {
         if (this.components[component.typeID]) {
-            // TODO: check override or not
+            // ComponentManager.getInstance().remove(component);
         }
         component.setActive(true);
         this.components[component.typeID] = component;
@@ -29,7 +29,7 @@ let EntityECS = cc.Class.extend({
             delete this.components[componentOrCls.typeID];
             this.bitmask = this.bitmask & (~(1 << componentOrCls.typeID));
         }
-
+        // tickManager.getTickData().deleteComponentData(component.id);
     },
 
     getComponent: function (ComponentCls) {
