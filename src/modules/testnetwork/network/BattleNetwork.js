@@ -22,10 +22,10 @@ BattleNetwork.Connector = cc.Class.extend({
                 this._handleGetBattleInfo(cmd, packet);
                 break;
             case gv.CMD.PUT_TOWER:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.OPPONENT_PUT_TOWER:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 // show timer build tower
                 BattleManager.getInstance().getBattleLayer().showTimerBuildTower(cc.p(packet.tileX, packet.tileY), GameConfig.OPPONENT);
                 break;
@@ -36,34 +36,34 @@ BattleNetwork.Connector = cc.Class.extend({
                 this._handleGetCellObject(cmd, packet);
                 break;
             case gv.CMD.UPGRADE_TOWER:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.OPPONENT_UPGRADE_TOWER:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.DROP_SPELL:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.OPPONENT_DROP_SPELL:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.CHANGE_TOWER_STRATEGY:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.PUT_TRAP:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.OPPONENT_PUT_TRAP:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.DESTROY_TOWER:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.OPPONENT_DESTROY_TOWER:
-                tickManager.addInput(packet.tickNumber, cmd, packet);
+                tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.END_BATTLE:
                 this._handleEndBattle(cmd, packet);

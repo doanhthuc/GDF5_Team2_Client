@@ -25,6 +25,12 @@ let AbilitySystem = System.extend({
                 let lifeComponent = entity.getComponent(LifeComponent);
                 let underGroundComponent = entity.getComponent(UnderGroundComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
+                let frozenEffect = entity.getComponent(FrozenEffect);
+
+                // frozen monster ==> monster can't exec under ground ability
+                if (frozenEffect && frozenEffect.countdown > 0) {
+                    continue;
+                }
 
                 //check if the Monster have Position Component
                 if (positionComponent) {

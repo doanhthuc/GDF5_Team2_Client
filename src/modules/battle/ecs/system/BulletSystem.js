@@ -29,13 +29,13 @@ let BulletSystem = System.extend({
             }
 
 
-            if (bulletVelocity.getDynamicPosition()) {
-                if ((bulletVelocity.getDynamicPosition()).getActive() === false) {
-                    // bulletVelocity.getDynamicPosition() = null;
-                    EntityManager.destroy(bullet);
-                    continue;
-                }
+            // destroy bullet when target monsters are died before the bullet can reach them
+            if (bulletVelocity.dynamicEntityId && !bulletVelocity.getDynamicPosition()) {
+                EntityManager.destroy(bullet);
+                continue;
+            }
 
+            if (bulletVelocity.getDynamicPosition()) {
                 if (Math.abs(bulletVelocity.getDynamicPosition().x - bulletPos.x) <= 10 || Math.abs(bulletVelocity.getDynamicPosition().y - bulletPos.y) <= 10) {
                     // bullet.removeComponent(VelocityComponent);
                     let collisionComponent = bullet.getComponent(CollisionComponent);

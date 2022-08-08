@@ -7,8 +7,52 @@ let MovementSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    _run: function (dt) {
+    _run: function () {
+        const dt = tickManager.getDeltaFromLatestTickToNow() / 1000;
+        let entityList = EntityManager.getInstance()
+            .getEntitiesHasComponents(VelocityComponent, PositionComponent);
 
+        for (let entity of entityList) {
+            let positionComponent = entity.getComponent(PositionComponent);
+            let velocityComponent = entity.getComponent(VelocityComponent);
+            let appearanceComponent = entity.getComponent(AppearanceComponent);
+            let fireballEffect = entity.getComponent(FireBallEffect);
+
+            if (velocityComponent.getActive()) {
+                let moveDistanceX = velocityComponent.speedX * dt;
+                let moveDistanceY = velocityComponent.speedY * dt;
+
+                let tmpPos = {};
+                tmpPos.x = positionComponent.x + moveDistanceX;
+                tmpPos.y = positionComponent.y + moveDistanceY;
+
+                // only update position of monster when the future position is valid
+                if (ValidatorECS.isMonster(entity) && entity.getComponent(FireBallEffect)) {
+                    let currentTilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
+                    let futureTilePos = Utils.pixel2Tile(tmpPos.x, tmpPos.y, entity.mode);
+                    let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
+                    if (Utils.validateTilePos(currentTilePos, entity.mode)
+                        && (
+                            !Utils.validateTilePos(futureTilePos, entity.mode)
+                            || (map[GameConfig.MAP_HEIGH - 1 - futureTilePos.y][futureTilePos.x] === GameConfig.MAP.TOWER)
+                            || (map[GameConfig.MAP_HEIGH - 1 - futureTilePos.y][futureTilePos.x] === GameConfig.MAP.TREE)
+                        )
+                    ) {
+                        // position is invalid
+                    } else {
+                        positionComponent.__x = tmpPos.x;
+                        positionComponent.__y = tmpPos.y;
+                        let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
+                        positionComponent.moveDistance += moveDistance;
+                    }
+                } else {
+                    positionComponent.__x = tmpPos.x;
+                    positionComponent.__y = tmpPos.y;
+                    let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
+                    positionComponent.moveDistance += moveDistance;
+                }
+            }
+        }
     },
 
     updateData: function () {

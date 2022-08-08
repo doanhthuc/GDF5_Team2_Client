@@ -69,6 +69,7 @@ let BattleLayer = cc.Layer.extend({
         }
 
         this.getTimerNode().timer();
+        this.movementSystem.start(dt);
         this.renderSystem.start(dt);
         this.spriteSheetAnimationSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
@@ -118,6 +119,11 @@ let BattleLayer = cc.Layer.extend({
                 .dispatchEvent(EventType.INVALID_PUT_CARD_POSITION, {cardId: type, mode: mode})
             return;
         }
+
+        BattleManager.getInstance().getCardDeckNode().handlePutCardIntoMap({
+            cardId: type,
+            mode: mode,
+        });
 
         if (ValidatorECS.isSpell(type)) {
             if (GameConfig.NETWORK) {
@@ -254,9 +260,10 @@ let BattleLayer = cc.Layer.extend({
                 if (touches.length <= 0)
                     return;
                 if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
+                    let selectedCardType = BattleManager.getInstance().getBattleLayer().selectedCard
+                    BattleManager.getInstance().getCardDeckNode().removeDragSprite(selectedCardType);
                     let pixelPos = touches[0].getLocation();
                     let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
-                    let selectedCardType = BattleManager.getInstance().getBattleLayer().selectedCard
                     let tilePos = Utils.pixel2Tile(pixelInMap.x, pixelInMap.y, GameConfig.OPPONENT);
                     if (Utils.validateTilePos(tilePos)) {
                         BattleManager.getInstance().getBattleLayer()

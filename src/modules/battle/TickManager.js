@@ -6,9 +6,7 @@ let TickManager = cc.Class.extend({
 
         this.tickData = new TickData();
         this.tickInputHandler = new TickInputHandler();
-        this.inputTick = {
-            tickNumber: [{cmd: "cmd", packet: "packet"}]
-        }
+        this.inputTick = {}
 
         this.normalTimerNodeContainer = [];
     },

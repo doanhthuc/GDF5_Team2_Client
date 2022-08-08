@@ -28,7 +28,7 @@ let VelocityComponent = Component.extend({
 
         let entity = EntityManager.getInstance().getEntity(this.dynamicEntityId);
 
-        if (entity) {
+        if (entity && entity.getActive()) {
             return entity.getComponent(PositionComponent);
         }
         
