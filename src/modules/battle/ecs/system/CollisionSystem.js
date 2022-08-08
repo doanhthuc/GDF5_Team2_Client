@@ -177,11 +177,13 @@ let CollisionSystem = System.extend({
                         && ValidatorECS.isMonster(entity2)
                         && this._isCollide(entity1, entity2)) {
 
-                        // trap doesn't affect to Boss and Air monster
                         let monsterInfo = entity2.getComponent(MonsterInfoComponent);
+                        let underGroundComponent = entity2.getComponent(UnderGroundComponent);
 
+                        // trap doesn't affect to Boss and Air monster, under ground monster
                         if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
                         if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
+                        if (underGroundComponent && underGroundComponent.isInGround) continue;
 
                         entity2.addComponent(ComponentFactory.create(TrapEffect));
                     }
@@ -209,11 +211,12 @@ let CollisionSystem = System.extend({
                     && ValidatorECS.isMonster(entity2)
                     && this._isCollide(entity1, entity2)) {
 
-                    // trap only trigger with normal monster, except Boss and Air monster
+                    // trap only trigger when monster traverse (except air class monster, under ground monster)
                     let monsterInfo = entity2.getComponent(MonsterInfoComponent);
+                    let underGroundComponent = entity2.getComponent(UnderGroundComponent);
 
                     if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
-                    if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
+                    if (underGroundComponent && underGroundComponent.isInGround) continue;
 
                     trapInfo.setTrigger(true);
                     let spriteComponent = trapEntity.getComponent(SpriteSheetAnimationComponent);

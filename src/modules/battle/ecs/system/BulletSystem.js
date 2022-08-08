@@ -31,7 +31,6 @@ let BulletSystem = System.extend({
 
             if (bulletVelocity.getDynamicPosition()) {
                 if ((bulletVelocity.getDynamicPosition()).getActive() === false) {
-                    // bulletVelocity.getDynamicPosition() = null;
                     EntityManager.destroy(bullet);
                     continue;
                 }
