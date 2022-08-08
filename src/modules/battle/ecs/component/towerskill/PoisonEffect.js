@@ -1,4 +1,4 @@
-let PoisonComponent = Component.extend({
+let PoisonEffect = EffectComponent.extend({
     name: "PoisonComponent",
     typeID: GameConfig.COMPONENT_ID.POISON,
 
@@ -8,7 +8,7 @@ let PoisonComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(PoisonComponent,this.healthPerSecond,this.duration);
+        return ComponentFactory.create(PoisonEffect,this.healthPerSecond,this.duration);
     },
 
     reset: function (healthPerSecond, duration) {
@@ -16,5 +16,5 @@ let PoisonComponent = Component.extend({
         this.duration = duration;
     },
 });
-PoisonComponent.typeID = GameConfig.COMPONENT_ID.POISON;
-ComponentManager.getInstance().registerClass(PoisonComponent);
+PoisonEffect.typeID = GameConfig.COMPONENT_ID.POISON;
+ComponentManager.getInstance().registerClass(PoisonEffect);

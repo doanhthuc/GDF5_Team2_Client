@@ -8,7 +8,7 @@ let WizardBulletSkillComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(WizardBulletSkillComponent);
+        return ComponentFactory.create(WizardBulletSkillComponent,this.amountMonster);
     },
 
     reset: function (amountMonster) {

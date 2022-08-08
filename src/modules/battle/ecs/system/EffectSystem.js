@@ -21,6 +21,7 @@ let EffectSystem = System.extend({
         this._handleSlowEffect(tick);
         this._handleFrozenEffect(tick);
         this._handleTrapEffect(tick);
+        this._handlePoisonEffect(tick);
     },
 
     _handleBuffAttackSpeedEffect: function (tick) {
@@ -168,6 +169,22 @@ let EffectSystem = System.extend({
         }
     },
 
+    _handlePoisonEffect: function (dt) {
+        let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PoisonEffect);
+        cc.log("HandlePoisonEffect"+ monsterList.length)
+        for (let monster of monsterList) {
+            let poisonEffect = monster.getComponent(PoisonEffect);
+
+            if (poisonEffect.duration > 0) {
+                cc.log(poisonEffect.duration+" "+dt);
+                poisonEffect.duration -= dt;
+                let lifeComponent = monster.getComponent(LifeComponent);
+                lifeComponent.hp -= poisonEffect.healthPerSecond * dt;
+            } else {
+                monster.removeComponent(PoisonEffect);
+            }
+        }
+    },
     _updateOriginVelocity: function (velocityComponent) {
         velocityComponent.speedX = velocityComponent.originSpeedX;
         velocityComponent.speedY = velocityComponent.originSpeedY;

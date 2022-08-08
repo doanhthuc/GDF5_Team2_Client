@@ -67,6 +67,9 @@ let AttackComponent = Component.extend({
         this.bulletSpeed = bulletSpeed;
         this.bulletRadius = bulletRadius;
         this.effects.push(new DamageEffect(this._damage));
+    },
+    addEffect: function (effect){
+        this.effects.push(effect);
     }
 });
 AttackComponent.typeID = GameConfig.COMPONENT_ID.ATTACK;
