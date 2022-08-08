@@ -2,15 +2,15 @@ let AppearanceComponent = Component.extend({
     name: "AppearanceComponent",
     typeID: GameConfig.COMPONENT_ID.APPEARANCE,
 
-    ctor: function (sprite, mode, initPos) {
+    ctor: function (sprite, mode, initPos, zOrder) {
         this._super();
-        this.reset(sprite, mode, initPos);
+        this.reset(sprite, mode, initPos, zOrder);
         this.sprite.retain();
     },
 
-    reset: function (sprite, mode, initPos) {
+    reset: function (sprite, mode, initPos, zOrder) {
         this.sprite = sprite;
-        this.zOrder = 1;
+        this.zOrder = zOrder || 1;
         this.mode = mode;
         this.sprite.setVisible(true);
 
@@ -23,7 +23,7 @@ let AppearanceComponent = Component.extend({
     },
 
     clone: function () {
-        return new AppearanceComponent(this.sprite, this.mode, this.iniPos);
+        return new AppearanceComponent(this.sprite, this.mode, this.iniPos, this.zOrder);
     },
 });
 AppearanceComponent.typeID = GameConfig.COMPONENT_ID.APPEARANCE;
