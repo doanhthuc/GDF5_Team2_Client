@@ -55,16 +55,16 @@
             "ShadowOffsetY": -2.0,
             "TouchEnable": true,
             "AnchorPoint": {
-              "ScaleX": 1.0945,
-              "ScaleY": -0.1906
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
             },
             "Position": {
-              "X": 75.2334,
-              "Y": -37.9435
+              "X": 0.64,
+              "Y": 3.1905
             },
             "Scale": {
-              "ScaleX": 0.6548,
-              "ScaleY": 0.5366
+              "ScaleX": 0.9037,
+              "ScaleY": 0.5154
             },
             "CColor": {},
             "IconVisible": false,
@@ -76,10 +76,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -137.0996,
-            "RightMargin": -56.9004,
-            "TopMargin": -94.2131,
-            "BottomMargin": -16.7869,
+            "LeftMargin": -96.36,
+            "RightMargin": -97.64,
+            "TopMargin": -58.6905,
+            "BottomMargin": -52.3095,
             "Tag": 15,
             "ActionTag": 458984227,
             "Size": {
@@ -95,7 +95,7 @@
               "Path": "textures/font/SVN-Supercell Magic.ttf",
               "Plist": ""
             },
-            "FontSize": 20,
+            "FontSize": 18,
             "IsCustomSize": true,
             "LabelText": "",
             "PlaceHolderText": "Đăng Xuất",
@@ -105,18 +105,19 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": -1.6779,
+              "X": 4.0707,
               "Y": 3.1858
             },
             "Scale": {
-              "ScaleX": 0.6849,
-              "ScaleY": 1.3
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
             },
             "RotationSkewX": 0.5979,
             "RotationSkewY": 0.5979,
             "CColor": {
-              "G": 0,
-              "B": 0
+              "R": 230,
+              "G": 230,
+              "B": 250
             },
             "IconVisible": false,
             "PrePosition": {
@@ -127,8 +128,8 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -78.6779,
-            "RightMargin": -75.3221,
+            "LeftMargin": -72.9293,
+            "RightMargin": -81.0707,
             "TopMargin": -16.6858,
             "BottomMargin": -10.3142,
             "Tag": 24,
