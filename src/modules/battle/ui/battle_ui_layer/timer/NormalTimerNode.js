@@ -15,29 +15,23 @@ let NormalTimerNode = cc.Node.extend({
 
         this.timeStr.setLocalZOrder(3);
         this.timeStr.setString("");
-
-        this.startTimer();
     },
 
-    startTimer: function () {
-        this.scheduleUpdate();
-    },
-
-    endTimer: function () {
-        this.unscheduleUpdate();
-        this.scheduleOnce(() => this.removeFromParent());
-    },
-
-    update: function (tick) {
-        this.timer(tick);
-    },
-
-    timer: function (tick) {
-        if (this._countdown <= 0) {
-            this.endTimer();
-        }
-
+    updateData: function (tick) {
         this.progress.setPercentage(this._countdown / this._duration * 100);
         this._countdown = this._countdown - tick;
     },
+
+    /**
+     * Used to smooth frame
+     * @param dt
+     */
+    render: function (dt) {
+        let tmp = this._countdown - dt;
+        this.progress.setPercentage(tmp / this._duration * 100);
+    },
+
+    getCountDown: function () {
+        return this._countdown;
+    }
 });

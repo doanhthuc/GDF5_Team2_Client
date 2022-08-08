@@ -2,16 +2,15 @@ let VelocityComponent = Component.extend({
     name: "VelocityComponent",
     typeID: GameConfig.COMPONENT_ID.VELOCITY,
 
-    ctor: function (speedX, speedY, dynamicPosition, staticPosition) {
+    ctor: function (speedX, speedY, dynamicEntityId, staticPosition) {
         this._super();
-        this.reset(speedX, speedY, dynamicPosition, staticPosition);
-        this.saveData();
+        this.reset(speedX, speedY, dynamicEntityId, staticPosition);
     },
 
-    reset: function (speedX, speedY, dynamicPosition, staticPosition) {
+    reset: function (speedX, speedY, dynamicEntityId, staticPosition) {
         this.speedX = speedX;
         this.speedY = speedY;
-        this.dynamicPosition = dynamicPosition;
+        this.dynamicEntityId = dynamicEntityId;
         this.staticPosition = staticPosition;
         this.originSpeed = Math.sqrt(Math.pow(this.speedX, 2) + Math.pow(this.speedY, 2));
         this.originSpeedX = this.speedX;
@@ -19,26 +18,21 @@ let VelocityComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(VelocityComponent, this.speedX, this.speedY, this.dynamicPosition);
+        return ComponentFactory.create(VelocityComponent, this.speedX, this.speedY, this.dynamicEntityId);
     },
 
-    saveData: function () {
-        const data = {
-            speedX: this.speedX,
-            speedY: this.speedY,
-            dynamicPosition: this.dynamicPosition,
-            staticPosition: this.staticPosition,
-            originSpeed: this.originSpeed,
-            originSpeedX: this.speedX,
-            originSpeedY: this.speedY
+    getDynamicPosition: function () {
+        if (!this.dynamicEntityId) {
+            return null;
         }
-        tickManager.getTickData()
-            .saveComponentData(this.id, data);
-    },
 
-    updateDataFromLatestTick: function () {
-        let componentData = tickManager.getTickData().getComponentData(this.id);
-        this.reset(componentData.speedX, componentData.speedY, componentData.dynamicPosition, componentData.staticPosition);
+        let entity = EntityManager.getInstance().getEntity(this.dynamicEntityId);
+
+        if (entity && entity.getActive()) {
+            return entity.getComponent(PositionComponent);
+        }
+        
+        return null;
     },
 });
 VelocityComponent.typeID = GameConfig.COMPONENT_ID.VELOCITY;

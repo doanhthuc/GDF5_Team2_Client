@@ -22,19 +22,12 @@ let CollisionSystem = System.extend({
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(CollisionComponent, PositionComponent)
 
-        if (GameConfig.DEBUG) {
-            cc.error("Collision entity size = " + entityList.length);
-        }
-
         // construct quad tree
         quadTreePlayer.clear();
         quadTreeOpponent.clear();
         for (let i = 0; i < entityList.length - 1; i++) {
             let pos = entityList[i].getComponent(PositionComponent);
             let collisionComponent = entityList[i].getComponent(CollisionComponent);
-
-            pos.updateDataFromLatestTick();
-            collisionComponent.updateDataFromLatestTick();
 
             let w = collisionComponent.width, h = collisionComponent.height;
 
@@ -50,7 +43,7 @@ let CollisionSystem = System.extend({
         for (let i = 0; i < entityList.length; i++) {
             if (ValidatorECS.isBullet(entityList[i])) {
                 let bulletInfoComponent = entityList[i].getComponent(BulletInfoComponent);
-                bulletInfoComponent.updateDataFromLatestTick();
+
                 if (bulletInfoComponent.radius) {
                     this._handleRadiusBullet(entityList[i]);
                 } else {
@@ -66,9 +59,6 @@ let CollisionSystem = System.extend({
     _handleCollisionBullet: function (bulletEntity) {
         let pos = bulletEntity.getComponent(PositionComponent);
         let collisionComponent = bulletEntity.getComponent(CollisionComponent);
-
-        pos.updateDataFromLatestTick();
-        collisionComponent.updateDataFromLatestTick();
 
         let w = collisionComponent.width, h = collisionComponent.height;
 
@@ -86,12 +76,16 @@ let CollisionSystem = System.extend({
                 if (data) {
                     let monster = data.monster, bullet = data.bullet;
                     let bulletInfo = bullet.getComponent(BulletInfoComponent);
-                    bulletInfo.updateDataFromLatestTick();
+                    let underGroundComponent = monster.getComponent(UnderGroundComponent);
+
+                    // The bullet can't reach the under ground monsters
+                    if (underGroundComponent && underGroundComponent.isInGround) {
+                        continue;
+                    }
 
                     //Handle Frog Bullet
                     if (bulletInfo.type && bulletInfo.type === "frog") {
                         let pathComponent = bullet.getComponent(PathComponent)
-                        pathComponent.updateDataFromLatestTick();
 
                         //check the the bullet is in first path
                         if (pathComponent.currentPathIdx <= pathComponent.path.length / 2) {
@@ -99,7 +93,6 @@ let CollisionSystem = System.extend({
                                 for (let effect of bulletInfo.effects) {
                                     monster.addComponent(effect.clone());
                                     bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_FIRST_TIME);
-                                    bulletInfo.saveData();
                                 }
                             }
                         } else { //check the second path
@@ -108,7 +101,6 @@ let CollisionSystem = System.extend({
                                 for (let effect of bulletInfo.effects) {
                                     monster.addComponent(effect.clone());
                                     bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_SECOND_TIME);
-                                    bulletInfo.saveData();
                                 }
                                 // else if this monster is hit in First Path
                             } else if (bulletInfo.hitMonster.get(monster.id) === GameConfig.FROG_BULLET.HIT_FIRST_TIME) {
@@ -118,7 +110,6 @@ let CollisionSystem = System.extend({
                                         newDamageEffect.damage = effect.damage * 1.5;
                                         monster.addComponent(newDamageEffect);
                                         bulletInfo.hitMonster.set(monster.id, GameConfig.FROG_BULLET.HIT_BOTH_TIME);
-                                        bulletInfo.saveData();
                                     }
                                 }
                             }
@@ -143,12 +134,8 @@ let CollisionSystem = System.extend({
         let bulletVelocity = bullet.getComponent(VelocityComponent);
         let bulletInfo = bullet.getComponent(BulletInfoComponent);
 
-        bulletPos.updateDataFromLatestTick();
-        bulletVelocity.updateDataFromLatestTick();
-        bulletInfo.updateDataFromLatestTick();
-
-        if ((Math.abs(bulletVelocity.staticPosition.x - bulletPos.x) <= 5)
-            && (Math.abs(bulletVelocity.staticPosition.y - bulletPos.y) <= 5)) {
+        if ((Math.abs(bulletVelocity.staticPosition.x - bulletPos.x) <= 10)
+            && (Math.abs(bulletVelocity.staticPosition.y - bulletPos.y) <= 10)) {
             let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
             for (let monster of monsterList) {
                 if (monster.mode === bullet.mode) {
@@ -166,7 +153,6 @@ let CollisionSystem = System.extend({
 
     _handleCollisionTrap: function (trapEntity, dt) {
         let trapInfo = trapEntity.getComponent(TrapInfoComponent);
-        trapInfo.updateDataFromLatestTick();
 
         if (trapInfo.isTriggered) {
             if (trapInfo.delayTrigger > 0) {
@@ -174,8 +160,6 @@ let CollisionSystem = System.extend({
             } else {
                 let pos = trapEntity.getComponent(PositionComponent);
                 let collisionComponent = trapEntity.getComponent(CollisionComponent);
-                pos.updateDataFromLatestTick();
-                collisionComponent.updateDataFromLatestTick();
 
                 let w = collisionComponent.width, h = collisionComponent.height;
 
@@ -193,12 +177,13 @@ let CollisionSystem = System.extend({
                         && ValidatorECS.isMonster(entity2)
                         && this._isCollide(entity1, entity2)) {
 
-                        // trap doesn't affect to Boss and Air monster
                         let monsterInfo = entity2.getComponent(MonsterInfoComponent);
-                        monsterInfo.updateDataFromLatestTick();
+                        let underGroundComponent = entity2.getComponent(UnderGroundComponent);
 
+                        // trap doesn't affect to Boss and Air monster, under ground monster
                         if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
                         if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
+                        if (underGroundComponent && underGroundComponent.isInGround) continue;
 
                         entity2.addComponent(ComponentFactory.create(TrapEffect));
                     }
@@ -209,8 +194,6 @@ let CollisionSystem = System.extend({
         } else {
             let pos = trapEntity.getComponent(PositionComponent);
             let collisionComponent = trapEntity.getComponent(CollisionComponent);
-            pos.updateDataFromLatestTick();
-            collisionComponent.updateDataFromLatestTick();
 
             let w = collisionComponent.width, h = collisionComponent.height;
 
@@ -228,19 +211,18 @@ let CollisionSystem = System.extend({
                     && ValidatorECS.isMonster(entity2)
                     && this._isCollide(entity1, entity2)) {
 
-                    // trap only trigger with normal monster, except Boss and Air monster
+                    // trap only trigger when monster traverse (except air class monster, under ground monster)
                     let monsterInfo = entity2.getComponent(MonsterInfoComponent);
-                    monsterInfo.updateDataFromLatestTick();
+                    let underGroundComponent = entity2.getComponent(UnderGroundComponent);
 
                     if (monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) continue;
-                    if (monsterInfo.category === GameConfig.MONSTER.CATEGORY.BOSS) continue;
+                    if (underGroundComponent && underGroundComponent.isInGround) continue;
 
                     trapInfo.setTrigger(true);
                     let spriteComponent = trapEntity.getComponent(SpriteSheetAnimationComponent);
                     spriteComponent.changeCurrentState("ATTACK");
 
                     // only the first monster triggers this trap
-                    trapInfo.saveData();
                     break;
                 }
             }

@@ -215,7 +215,20 @@ BattleNetwork.packetMap[gv.CMD.PUT_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.x = this.getInt();
         this.y = this.getInt();
-    }
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+        data.error = this.error;
+        data.towerId =this.towerId;
+        data.towerLevel = this.towerLevel;
+        data.x = this.x;
+        data.y = this.y;
+        data.tickNumber = this.tickNumber;
+
+        return data;
+    },
 })
 
 BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
@@ -228,6 +241,19 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.towerId = this.towerId;
+        data.towerLevel =this.towerLevel;
+        data.tileX = this.tileX;
+        data.tileY = this.tileY;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 });
 
@@ -241,6 +267,19 @@ BattleNetwork.packetMap[gv.CMD.UPGRADE_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.towerId = this.towerId;
+        data.towerLevel =this.towerLevel;
+        data.tileX = this.tileX;
+        data.tileY = this.tileY;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 })
 
@@ -254,6 +293,19 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_UPGRADE_TOWER] = fr.InPacket.extend({
         this.towerLevel = this.getInt();
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.towerId = this.towerId;
+        data.towerLevel =this.towerLevel;
+        data.tileX = this.tileX;
+        data.tileY = this.tileY;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 })
 
@@ -326,6 +378,19 @@ BattleNetwork.packetMap[gv.CMD.DROP_SPELL] = fr.InPacket.extend({
         this.spellLevel = this.getInt();
         this.pixelX = this.getDouble();
         this.pixelY = this.getDouble();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.spellId = this.spellId;
+        data.spellLevel =this.spellLevel;
+        data.pixelX = this.pixelX;
+        data.pixelY = this.pixelY;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 })
 
@@ -339,6 +404,19 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_DROP_SPELL] = fr.InPacket.extend({
         this.spellLevel = this.getInt();
         this.pixelX = this.getDouble();
         this.pixelY = this.getDouble();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.spellId = this.spellId;
+        data.spellLevel =this.spellLevel;
+        data.pixelX = this.pixelX;
+        data.pixelY = this.pixelY;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 });
 
@@ -350,6 +428,17 @@ BattleNetwork.packetMap[gv.CMD.PUT_TRAP] = fr.InPacket.extend({
     readData: function () {
         this.tilePosX = this.getInt();
         this.tilePosY = this.getInt();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.tilePosX = this.tilePosX;
+        data.tilePosY =this.tilePosY;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 });
 
@@ -357,9 +446,21 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TRAP] = fr.InPacket.extend({
     ctor: function () {
         this._super();
     },
+
     readData: function () {
         this.tilePosX = this.getInt();
         this.tilePosY = this.getInt();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.tilePosX = this.tilePosX;
+        data.tilePosY =this.tilePosY;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 });
 
@@ -372,6 +473,18 @@ BattleNetwork.packetMap[gv.CMD.CHANGE_TOWER_STRATEGY] = fr.InPacket.extend({
         this.tileX = this.getInt();
         this.tileY = this.getInt();
         this.strategyId = this.getInt();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.tileX = this.tileX;
+        data.tileY =this.tileY;
+        data.strategyId = this.strategyId;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 });
 
@@ -384,6 +497,18 @@ BattleNetwork.packetMap[gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY] = fr.InPacket.exte
         this.tileX = this.getInt();
         this.tileY = this.getInt();
         this.strategyId = this.getInt();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.tileX = this.tileX;
+        data.tileY =this.tileY;
+        data.strategyId = this.strategyId;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 });
 
@@ -395,6 +520,17 @@ BattleNetwork.packetMap[gv.CMD.DESTROY_TOWER] = fr.InPacket.extend({
     readData: function () {
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.tileX = this.tileX;
+        data.tileY =this.tileY;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 });
 
@@ -406,6 +542,17 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_DESTROY_TOWER] = fr.InPacket.extend({
     readData: function () {
         this.tileX = this.getInt();
         this.tileY = this.getInt();
+        this.tickNumber = this.getInt();
+    },
+
+    clone: function () {
+        let data = {};
+
+        data.tileX = this.tileX;
+        data.tileY =this.tileY;
+        data.tickNumber = this.tickNumber;
+
+        return data;
     }
 });
 

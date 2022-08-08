@@ -14,11 +14,11 @@ let RenderSystem = System.extend({
             let positionComponent = entity.getComponent(PositionComponent);
 
             if (ValidatorECS.isMonster(entity)) {
-                appearanceComponent.sprite.setLocalZOrder(1000 - positionComponent.y);
+                appearanceComponent.sprite.setLocalZOrder(1000 - positionComponent.__y);
             }
 
             if (ValidatorECS.isTower(entity)) {
-                let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
+                let tilePos = Utils.pixel2Tile(positionComponent.__x, positionComponent.__y, entity.mode);
                 if (entity.mode === GameConfig.PLAYER) {
                     appearanceComponent.sprite.setLocalZOrder(GameConfig.MAP_HEIGH - tilePos.y);
                 } else {
@@ -26,10 +26,8 @@ let RenderSystem = System.extend({
                 }
             }
 
-            appearanceComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
+            appearanceComponent.sprite.setPosition(positionComponent.__x, positionComponent.__y);
 
-            // side effect
-            this._updateHpBarMonsterUI(entity);
         }
 
         this._updateSkeletonComponentPosition();
@@ -67,10 +65,20 @@ let RenderSystem = System.extend({
             this._updateHpBarMonsterUI(entity);
         }
 
-        this._updateSkeletonComponentPosition();
+        this._updateSkeletonComponentPosition2();
     },
 
     _updateSkeletonComponentPosition: function () {
+        let entityList = EntityManager.getInstance()
+            .getEntitiesHasComponents(SkeletonAnimationComponent, PositionComponent);
+        for (let entity of entityList) {
+            let skeletonComponent = entity.getComponent(SkeletonAnimationComponent);
+            let positionComponent = entity.getComponent(PositionComponent);
+            skeletonComponent.spine.setPosition(positionComponent.__x, positionComponent.__y);
+        }
+    },
+
+    _updateSkeletonComponentPosition2: function () {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(SkeletonAnimationComponent, PositionComponent);
         for (let entity of entityList) {
@@ -83,6 +91,7 @@ let RenderSystem = System.extend({
     _updateHpBarMonsterUI: function (entity) {
         let appearanceComponent = entity.getComponent(AppearanceComponent);
         let lifeComponent = entity.getComponent(LifeComponent);
+
         if (appearanceComponent && lifeComponent) {
             let sprite = appearanceComponent.sprite;
             let hpNode = sprite.getChildByName("hp");

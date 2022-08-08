@@ -2,13 +2,13 @@ let TickManager = cc.Class.extend({
     ctor: function () {
         this.startTime = 0;
         this.lastedTick = 0;
-        this.tickRate = 100; // millisecond
+        this.tickRate = 50; // millisecond
 
         this.tickData = new TickData();
         this.tickInputHandler = new TickInputHandler();
-        this.inputTick = {
-            tickNumber: [{cmd: "cmd", packet: "packet"}]
-        }
+        this.inputTick = {}
+
+        this.normalTimerNodeContainer = [];
     },
 
     addInput: function (tickNumber, cmd, packet) {
@@ -21,29 +21,66 @@ let TickManager = cc.Class.extend({
     updateData: function () {
         const battleLayer = this.getBattleLayer();
 
-        const latestUpdateTick = this.getLatestUpdateTick();
-        const nextTick = latestUpdateTick + 1;
-        let queueInput = this.inputTick[nextTick];
+        const currentTick = this.getLatestUpdateTick();
+        // cc.log("# latest tick = " + currentTick);
+        // cc.log("# current tick = " + this.getCurrentTick());
+        // const nextTick = latestUpdateTick + 1;
+
+        // handle input of current tick
+        let queueInput = this.inputTick[currentTick];
         if (queueInput && queueInput.length > 0) {
             for (let i = 0; i < queueInput.length; i++) {
                 let {cmd, packet} = queueInput[i];
-                this.tickInputHandler.handle(cmd, packet);
+                this.tickInputHandler.handle(cmd, packet, currentTick);
             }
         }
 
+        let startTime = Utils.currentTimeMillis();
         battleLayer.getTimerNode().updateData();
-        battleLayer.resetSystem.updateData();
-        battleLayer.abilitySystem.updateData();
-        battleLayer.effectSystem.updateData();
-        battleLayer.attackSystem.updateData();
-        battleLayer.renderSystem.updateData();
-        battleLayer.lifeSystem.updateData();
-        battleLayer.collisionSystem.updateData();
-        battleLayer.pathSystem.updateData();
-        battleLayer.spellSystem.updateData();
-        battleLayer.monsterSystem.updateData();
-        battleLayer.bulletSystem.updateData();
-        battleLayer.movementSystem.updateData();
+        battleLayer.resetSystem.runUpdateData();
+        battleLayer.abilitySystem.runUpdateData();
+        battleLayer.effectSystem.runUpdateData();
+        battleLayer.attackSystem.runUpdateData();
+        battleLayer.renderSystem.runUpdateData();
+        battleLayer.lifeSystem.runUpdateData();
+        battleLayer.collisionSystem.runUpdateData();
+        battleLayer.pathSystem.runUpdateData();
+        battleLayer.spellSystem.runUpdateData();
+        battleLayer.skeletonAnimationSystem.runUpdateData();
+        battleLayer.monsterSystem.runUpdateData();
+        battleLayer.bulletSystem.runUpdateData();
+        battleLayer.movementSystem.runUpdateData();
+        let endTime = Utils.currentTimeMillis();
+        if (GameConfig.DEBUG) {
+            cc.error("Update time = " + (endTime - startTime));
+            cc.warn("* Entity Manager size = " + Object.keys(EntityManager.getInstance().entities).length);
+            cc.warn("* Tick size = " + Object.keys(tickManager.getTickData().data.componentData).length);
+            cc.warn("* Current id of component = " + UUIDGeneratorECS.genComponentID());
+            cc.warn("* Component Manager size = " + ComponentManager.getInstance()._storeInstance.size);
+
+
+            let poolSize = 0;
+            let componentActive = 0;
+            let componentInactive = 0;
+            for (let key of Object.keys(ComponentFactory.pool._store)) {
+                poolSize += ComponentFactory.pool._store[key].length;
+                for (let component of ComponentFactory.pool._store[key]) {
+                    if (component.getActive()) {
+                        componentActive++;
+                    } else {
+                        componentInactive++;
+                    }
+                }
+            }
+            cc.warn("* ComponentPool size = " + JSON.stringify(poolSize));
+            cc.warn("   + Active size = " + JSON.stringify(componentActive));
+            cc.warn("   + Inactive size = " + JSON.stringify(componentInactive));
+
+            cc.warn("---------------------------------------")
+            cc.warn("---------------------------------------")
+        }
+        // timer for build tower
+        this.updateNormalTimerNode();
 
         this.increaseUpdateTick();
     },
@@ -65,7 +102,7 @@ let TickManager = cc.Class.extend({
     },
 
     getCurrentTick: function () {
-        return Math.floor((Utils.currentTimeMillis() - this.startTime) / this.tickRate);
+        return Math.floor((TimeUtil.getServerTime() - this.startTime) / this.tickRate);
     },
 
     getLatestUpdateTick: function () {
@@ -82,7 +119,7 @@ let TickManager = cc.Class.extend({
      */
     getDeltaFromLatestTickToNow: function () {
         // return (Utils.currentTimeMillis() - (this.startTime + this.getLatestUpdateTick() * this.tickRate));
-        return (Utils.currentTimeMillis() - this.startTime) % this.tickRate;
+        return (TimeUtil.getServerTime() - this.startTime) % this.tickRate;
 
     },
 
@@ -97,6 +134,41 @@ let TickManager = cc.Class.extend({
     getTickRate: function () {
         return this.tickRate;
     },
+
+    clearAndCreateNew: function () {
+        tickManager = new TickManager;
+    },
+
+    getNormalTimerNodeContainer: function () {
+        return this.normalTimerNodeContainer;
+    },
+
+    addNormalTimerNodeToContainer: function (timerNode) {
+        this.normalTimerNodeContainer.push(timerNode);
+    },
+
+    updateNormalTimerNode: function () {
+        const tick = this.getTickRate() / 1000;
+        let remainNode = [];
+        for (let timerNode of this.normalTimerNodeContainer) {
+            timerNode.updateData(tick);
+
+            if (timerNode.getCountDown() <= 0) {
+                // IMPORTANT: should remove it in the next frame???
+                timerNode.removeFromParent();
+            } else {
+                remainNode.push(timerNode);
+            }
+        }
+        this.normalTimerNodeContainer = remainNode;
+    },
+
+    renderNormalTimerNode: function () {
+        let dt = this.getDeltaFromLatestTickToNow() / 1000;
+        for (let timerNode of this.normalTimerNodeContainer) {
+            timerNode.render(dt);
+        }
+    }
 })
 
 let tickManager = new TickManager();

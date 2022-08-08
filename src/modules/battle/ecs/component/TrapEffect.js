@@ -20,21 +20,6 @@ let TrapEffect = EffectComponent.extend({
         this.countdown = countDownTime;
         this.isExecuted = true
     },
-
-    saveData: function () {
-        const data = {
-            isExecuted: this.isExecuted,
-            countdown: this.countdown,
-        }
-        tickManager.getTickData()
-            .saveComponentData(this.id, data);
-    },
-
-    updateDataFromLatestTick: function () {
-        let componentData = tickManager.getTickData().getComponentData(this.id);
-        this.isExecuted = componentData.isExecuted;
-        this.countdown = componentData.countdown;
-    },
 });
 TrapEffect.typeID = GameConfig.COMPONENT_ID.TRAP_EFFECT;
 ComponentManager.getInstance().registerClass(TrapEffect);

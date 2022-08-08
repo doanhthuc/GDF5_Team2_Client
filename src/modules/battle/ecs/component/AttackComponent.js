@@ -5,7 +5,6 @@ let AttackComponent = Component.extend({
     ctor: function (damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius) {
         this._super();
         this.reset(damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius);
-        this.saveData();
     },
 
     setDamage: function (damage) {
@@ -58,43 +57,6 @@ let AttackComponent = Component.extend({
             this.speed, this.countdown, this.effects, this.bulletSpeed, this.bulletRadius);
     },
 
-    saveData: function () {
-        let effectCloned = [];
-        for (let effect of this.effects) {
-            effectCloned.push(effect.clone());
-        }
-        const data = {
-            originDamage: this.originDamage,
-            _damage: this._damage,
-            targetStrategy: this.targetStrategy,
-            originRange: this.originRange,
-            range: this.range,
-            originSpeed: this.originSpeed,
-            speed: this.speed,
-            countdown: this.countdown,
-            effects: effectCloned,
-            bulletSpeed: this.bulletSpeed,
-            bulletRadius: this.bulletRadius,
-        }
-        tickManager.getTickData()
-            .saveComponentData(this.id, data);
-    },
-
-    updateDataFromLatestTick: function () {
-        let componentData = tickManager.getTickData().getComponentData(this.id);
-        this.originDamage = componentData.originDamage;
-        this._damage = componentData._damage;
-        this.targetStrategy = componentData.targetStrategy;
-        this.originRange = componentData.range;
-        this.range = componentData.range;
-        this.originSpeed = componentData.speed;
-        this.speed = componentData.speed;
-        this.countdown = componentData.countdown;
-        this.effects = componentData.effects;
-        this.bulletSpeed = componentData.bulletSpeed;
-        this.bulletRadius = componentData.bulletRadius;
-    },
-
     updateAttackStatistic: function (damage, range, speed, effects, bulletSpeed, bulletRadius) {
         this._damage = damage;
         this.originDamage = damage;
@@ -105,8 +67,6 @@ let AttackComponent = Component.extend({
         this.bulletSpeed = bulletSpeed;
         this.bulletRadius = bulletRadius;
         this.effects.push(new DamageEffect(this._damage));
-        cc.log("[AttackComponent.js line 100] this.effects: " + JSON.stringify(this.effects));
-        cc.log("[AttackComponent.js line 101] this._damage " + this._damage);
     }
 });
 AttackComponent.typeID = GameConfig.COMPONENT_ID.ATTACK;
