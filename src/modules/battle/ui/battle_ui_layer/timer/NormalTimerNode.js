@@ -22,6 +22,15 @@ let NormalTimerNode = cc.Node.extend({
         this._countdown = this._countdown - tick;
     },
 
+    /**
+     * Used to smooth frame
+     * @param dt
+     */
+    render: function (dt) {
+        let tmp = this._countdown - dt;
+        this.progress.setPercentage(tmp / this._duration * 100);
+    },
+
     getCountDown: function () {
         return this._countdown;
     }
