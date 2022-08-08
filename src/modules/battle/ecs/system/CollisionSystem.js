@@ -22,10 +22,6 @@ let CollisionSystem = System.extend({
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(CollisionComponent, PositionComponent)
 
-        if (GameConfig.DEBUG) {
-            cc.error("Collision entity size = " + entityList.length);
-        }
-
         // construct quad tree
         quadTreePlayer.clear();
         quadTreeOpponent.clear();
@@ -80,6 +76,12 @@ let CollisionSystem = System.extend({
                 if (data) {
                     let monster = data.monster, bullet = data.bullet;
                     let bulletInfo = bullet.getComponent(BulletInfoComponent);
+                    let underGroundComponent = monster.getComponent(UnderGroundComponent);
+
+                    // The bullet can't reach the under ground monsters
+                    if (underGroundComponent && underGroundComponent.isInGround) {
+                        continue;
+                    }
 
                     //Handle Frog Bullet
                     if (bulletInfo.type && bulletInfo.type === "frog") {

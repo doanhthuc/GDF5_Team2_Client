@@ -24,6 +24,13 @@ let SpellSystem = System.extend({
             if (spellComponent.delay <= 0) {
                 let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
                 for (let monster of monsters) {
+
+                    // The spell can't reach the under ground monsters
+                    let underGroundComponent = monster.getComponent(UnderGroundComponent);
+                    if (underGroundComponent && underGroundComponent.isInGround) {
+                        continue;
+                    }
+
                     if (monster.mode === spellEntity.mode) {
                         let monsterPosition = monster.getComponent(PositionComponent)
                         if (!monsterPosition) continue;
