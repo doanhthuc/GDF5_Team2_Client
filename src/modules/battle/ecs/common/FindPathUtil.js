@@ -19,8 +19,8 @@ FindPathUtil.create2DMatrix = function (numRow, numCol, defaultValue) {
 /**
  *
  * @param map
- * @param startt {cc.p} tile position
- * @param destt {cc.p} tile position
+ * @param startt {{x: number, y: number}|{x: *, y: *}|{x: *, y: *}} tile position
+ * @param destt {{x: number, y: number}|{x: *, y: *}|{x: *, y: *}} tile position
  * @returns {{x, y: number}[]|null}
  */
 FindPathUtil.findShortestPath = function (map, startt, destt) {
