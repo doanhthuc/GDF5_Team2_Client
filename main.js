@@ -3,11 +3,6 @@ var gv = gv || {};
 var DESIGN_RESOLUTION_WIDTH = 640;
 var DESIGN_RESOLUTION_HEIGHT = 1136;
 
-if (cc.sys.os === cc.sys.OS_ANDROID) {
-    var PocoManager = window.PocoManager;
-    window.poco = new PocoManager();
-}
-
 cc.game.onStart = function () {
     if (!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
         document.body.removeChild(document.getElementById("cocosLoading"));
@@ -28,6 +23,11 @@ cc.game.onStart = function () {
             cc.view.setDesignResolutionSize(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_HEIGHT, cc.ResolutionPolicy.FIXED_WIDTH);
         } else {
             cc.view.setDesignResolutionSize(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_WIDTH / 2, cc.ResolutionPolicy.SHOW_ALL);
+        }
+
+        if (cc.sys.os === cc.sys.OS_ANDROID) {
+            var PocoManager = window.PocoManager;
+            window.poco = new PocoManager();
         }
 
         // The game will be resized when browser size change
