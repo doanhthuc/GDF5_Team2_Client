@@ -9,6 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/frameworks/runtime-src_release" />
       <excludeFolder url="file://$MODULE_DIR$/runtime" />
     </content>
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="cocos2d-html5-develop" level="project" />
     <orderEntry type="library" name="cocos2d-html5-develop" level="project" />

@@ -8,41 +8,44 @@ let BulletSystem = System.extend({
     },
 
     _run: function (tick) {
+
+    },
+
+    updateData: function () {
         let bulletList = EntityManager.getInstance()
             .getEntitiesHasComponents(VelocityComponent, PositionComponent, BulletInfoComponent);
+
         for (let bullet of bulletList) {
             let bulletPos = bullet.getComponent(PositionComponent);
             let bulletVelocity = bullet.getComponent(VelocityComponent);
             let pathComponent = bullet.getComponent(PathComponent);
+
             if (pathComponent != null) {
-                if (pathComponent.currentPathIdx === pathComponent.path.length - 2) EntityManager.destroy(bullet);
+                if (pathComponent.currentPathIdx === pathComponent.path.length - 2) {
+                    EntityManager.destroy(bullet);
+                }
+
                 continue;
             }
 
 
-            if (bulletVelocity.dynamicPosition) {
-                if ((bulletVelocity.dynamicPosition).getActive() === false) {
-                    bulletVelocity.dynamicPosition = null;
-                    EntityManager.destroy(bullet);
-                    continue;
-                }
+            // destroy bullet when target monsters are died before the bullet can reach them
+            if (bulletVelocity.dynamicEntityId && !bulletVelocity.getDynamicPosition()) {
+                EntityManager.destroy(bullet);
+                continue;
+            }
 
-                if (Math.abs(bulletVelocity.dynamicPosition.x - bulletPos.x) <= 3) {
+            if (bulletVelocity.getDynamicPosition()) {
+                if (Math.abs(bulletVelocity.getDynamicPosition().x - bulletPos.x) <= 10 || Math.abs(bulletVelocity.getDynamicPosition().y - bulletPos.y) <= 10) {
                     // bullet.removeComponent(VelocityComponent);
                     let collisionComponent = bullet.getComponent(CollisionComponent);
+
                     if (collisionComponent) {
                         collisionComponent.width = collisionComponent.originWidth;
                         collisionComponent.height = collisionComponent.originHeight;
                     }
                 }
             }
-
-            //Check Frog Bullet
-            // if (bullet.hasAnyComponent(PathComponent) ) {
-            //     let pathComponent = bullet.getComponent(PathComponent);
-            //     cc.log("Bullet Has Path Component")
-            //     if (pathComponent.currentPathIdx == pathComponent.path.length - 1) EntityManager.destroy(bullet);
-            // }
         }
     }
 })
@@ -50,8 +53,8 @@ BulletSystem.typeID = GameConfig.SYSTEM_ID.BULLET;
 SystemManager.getInstance().registerClass(BulletSystem);
 
 // FIXME: when dynamic position is not active ==> remove velocity and destroy entity???
-// if (velocityComponent.dynamicPosition && velocityComponent.dynamicPosition.getActive() === false) {
-//     velocityComponent.dynamicPosition = null;
+// if (velocityComponent.getDynamicPosition() && velocityComponent.getDynamicPosition().getActive() === false) {
+//     velocityComponent.getDynamicPosition() = null;
 //     entity.setActive(false);
 //     // set sprite false
 // }

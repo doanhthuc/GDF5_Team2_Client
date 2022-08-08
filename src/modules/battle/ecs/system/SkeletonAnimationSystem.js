@@ -8,6 +8,11 @@ let SkeletonAnimationSystem = System.extend({
     },
 
     _run: function (tick) {
+
+    },
+
+    updateData: function () {
+        const tick = tickManager.getTickRate() / 1000;
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(SkeletonAnimationComponent);
 
@@ -19,7 +24,7 @@ let SkeletonAnimationSystem = System.extend({
             }
             skeletonComponent.accTime += tick;
         }
-    },
+    }
 });
 SkeletonAnimationSystem.typeID = GameConfig.SYSTEM_ID.SKELETON;
 SystemManager.getInstance().registerClass(SkeletonAnimationSystem);

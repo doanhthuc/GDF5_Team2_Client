@@ -13,7 +13,7 @@ let DamageEffect = EffectComponent.extend({
 
     reset: function (damage) {
         this.damage = damage;
-    }
+    },
 });
 DamageEffect.typeID = GameConfig.COMPONENT_ID.DAMAGE_EFFECT;
 ComponentManager.getInstance().registerClass(DamageEffect);

@@ -184,6 +184,7 @@
         "src/modules/battle/mapconst/ObjectInCellType.js",
         "src/modules/battle/TestLayer.js",
         "src/modules/battle/TickData.js",
+        "src/modules/battle/TickInputHandler.js",
         "src/modules/battle/TickManager.js",
         "src/modules/battle/ui/battle_map_layer/BattleMapLayer.js",
         "src/modules/battle/ui/battle_ui_layer/BattleUILayer.js",

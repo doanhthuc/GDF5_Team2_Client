@@ -11469,7 +11469,7 @@ let TowerAnimationConfig = {
             A: {
                 // "ATTACK_270", "ATTACK_0", "ATTACK_90", "ATTACK_180",
                 states: ['IDLE_270', 'ATTACK_270'],
-                initState: 'IDLE_270',
+                initState: 'ATTACK_270',
                 attackAnimationTime: 594,
                 shootAnimationTime: 33,
                 animation: {
@@ -11507,6 +11507,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 15,
                             time: 596,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: 'tower_attack_speed_attack_1_',
@@ -11514,6 +11515,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 15,
                             time: 596,
+                            repeat: true,
                         },
                         pedestal: {
                             prefix: "battle_tower_pedestal_rock_",
@@ -11522,15 +11524,14 @@ let TowerAnimationConfig = {
                             end: 0,
                             time: 1000,
                             repeat: true,
+                            repeat: true,
                         },
-                        sequence: ['IDLE_270'],
                     },
                 },
             },
             B: {
-                // "ATTACK_270", "ATTACK_0", "ATTACK_90", "ATTACK_180",
                 states: ['IDLE_270', 'ATTACK_270'],
-                initState: 'IDLE_270',
+                initState: 'ATTACK_270',
                 attackAnimationTime: 594,
                 shootAnimationTime: 33,
                 animation: {
@@ -11568,6 +11569,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 15,
                             time: 596,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: 'tower_attack_speed_attack_2_',
@@ -11575,6 +11577,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 15,
                             time: 596,
+                            repeat: true,
                         },
                         pedestal: {
                             prefix: "battle_tower_pedestal_rock_",
@@ -11584,14 +11587,13 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
-                        sequence: ['IDLE_270'],
                     },
                 },
             },
             C: {
                 // "ATTACK_270", "ATTACK_0", "ATTACK_90", "ATTACK_180",
                 states: ['IDLE_270', 'ATTACK_270'],
-                initState: 'IDLE_270',
+                initState: 'ATTACK_270',
                 attackAnimationTime: 594,
                 shootAnimationTime: 33,
                 animation: {
@@ -11645,7 +11647,6 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
-                        sequence: ['IDLE_270'],
                     },
                 },
             },
@@ -11657,9 +11658,8 @@ let TowerAnimationConfig = {
         // "ATTACK_TOP, ATTACK_BOTTOM, ATTACK_LEFT, ATTACK_RIGHT, ATTACK_RIGHT_TOP, ATTACK_RIGHT_BOTTOM, ATTACK_LEFT_TOP, ATTACK_LEFT_BOTTOM"],
         level: {
             A: {
-                // "ATTACK_270", "ATTACK_0", "ATTACK_90", "ATTACK_180",
                 states: ['IDLE_270', 'ATTACK_270'],
-                initState: 'IDLE_270',
+                initState: 'ATTACK_270',
                 attackAnimationTime: 594,
                 shootAnimationTime: 33,
                 animation: {
@@ -11697,6 +11697,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 14,
                             time: 596,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: 'tower_damage_attack_1_',
@@ -11704,6 +11705,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 14,
                             time: 596,
+                            repeat: true,
                         },
                         pedestal: {
                             prefix: "battle_tower_pedestal_rock_",
@@ -11713,14 +11715,12 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
-                        sequence: ['IDLE_270'],
                     },
                 },
             },
             B: {
-                // "ATTACK_270", "ATTACK_0", "ATTACK_90", "ATTACK_180",
                 states: ['IDLE_270', 'ATTACK_270'],
-                initState: 'IDLE_270',
+                initState: 'ATTACK_270',
                 attackAnimationTime: 594,
                 shootAnimationTime: 33,
                 animation: {
@@ -11758,6 +11758,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 14,
                             time: 596,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: 'tower_damage_attack_2_',
@@ -11765,6 +11766,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 14,
                             time: 596,
+                            repeat: true,
                         },
                         pedestal: {
                             prefix: "battle_tower_pedestal_rock_",
@@ -11774,14 +11776,12 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
-                        sequence: ['IDLE_270'],
                     },
                 },
             },
             C: {
-                // "ATTACK_270", "ATTACK_0", "ATTACK_90", "ATTACK_180",
                 states: ['IDLE_270', 'ATTACK_270'],
-                initState: 'IDLE_270',
+                initState: 'ATTACK_270',
                 attackAnimationTime: 594,
                 shootAnimationTime: 33,
                 animation: {
@@ -11819,6 +11819,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 14,
                             time: 596,
+                            repeat: true,
                         },
                         weapon: {
                             prefix: 'tower_damage_attack_3_',
@@ -11826,6 +11827,7 @@ let TowerAnimationConfig = {
                             start: 0,
                             end: 14,
                             time: 596,
+                            repeat: true,
                         },
                         pedestal: {
                             prefix: "battle_tower_pedestal_rock_",
@@ -11835,7 +11837,6 @@ let TowerAnimationConfig = {
                             time: 1000,
                             repeat: true,
                         },
-                        sequence: ['IDLE_270'],
                     },
                 },
             },
