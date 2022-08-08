@@ -21,7 +21,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
 
-        let bulletNode = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_bullet_0000.png");
+        let bulletNode = new cc.Sprite("#tower_cannon_bullet_0000.png");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, 0.6);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         // let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
@@ -45,7 +45,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
 
-        let bulletNode = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_bullet_0000.png");
+        let bulletNode = new cc.Sprite("#tower_ice_gun_bullet_0000.png");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         // let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
@@ -69,7 +69,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let entity = this._createEntity(typeID, mode);
 
         let node = new cc.Node();
-        let bulletNode = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_bullet_1_0000.png");
+        let bulletNode = new cc.Sprite("#tower_boomerang_bullet_1_0000.png");
         node.addChild(bulletNode, 0, "weapon");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "frog", bulletRadius);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
@@ -112,7 +112,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let entity = this._createEntity(typeID, mode);
 
         let node = new cc.Node();
-        let bulletNode = new cc.Sprite("textures/tower/frame/oil_gun_1_2/tower_oil_gun_bullet_0000.png");
+        let bulletNode = new cc.Sprite("#tower_oil_gun_bullet_0000.png");
         node.addChild(bulletNode, 0, "bullet");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "bunny", bulletRadius);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
@@ -136,7 +136,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
 
         let node = new cc.Node();
         // let particle = new cc.ParticleSystem("res/textures/tower/fx/wizard_particle_1.plist");
-        let bulletNode = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_bullet_0000.png");
+        let bulletNode = new cc.Sprite("#tower_wizard_bullet_0000.png");
         node.addChild(bulletNode, 1);
         // node.addChild(particle, 22);
 
