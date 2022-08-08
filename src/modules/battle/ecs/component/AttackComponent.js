@@ -2,9 +2,9 @@ let AttackComponent = Component.extend({
     name: "AttackComponent",
     typeID: GameConfig.COMPONENT_ID.ATTACK,
 
-    ctor: function (damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius) {
+    ctor: function (damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius, canTargetAirMonster = true) {
         this._super();
-        this.reset(damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius);
+        this.reset(damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius, canTargetAirMonster);
     },
 
     setDamage: function (damage) {
@@ -37,7 +37,7 @@ let AttackComponent = Component.extend({
         this.targetStrategy = targetStrategy;
     },
 
-    reset: function (damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius) {
+    reset: function (damage, targetStrategy, range, speed, countdown, effects, bulletSpeed, bulletRadius, canTargetAirMonster = true) {
         this.originDamage = damage;
         this._damage = damage;
         this.targetStrategy = targetStrategy;
@@ -49,12 +49,13 @@ let AttackComponent = Component.extend({
         this.effects = effects || [];
         this.bulletSpeed = bulletSpeed;
         this.bulletRadius = bulletRadius;
+        this.canTargetAirMonster = canTargetAirMonster;
         this.effects.push(new DamageEffect(this._damage));
     },
 
     clone: function () {
         return ComponentFactory.create(AttackComponent, this.damage, this.targetStrategy, this.range,
-            this.speed, this.countdown, this.effects, this.bulletSpeed, this.bulletRadius);
+            this.speed, this.countdown, this.effects, this.bulletSpeed, this.bulletRadius, this.canTargetAirMonster);
     },
 
     updateAttackStatistic: function (damage, range, speed, effects, bulletSpeed, bulletRadius) {

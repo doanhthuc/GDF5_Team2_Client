@@ -138,7 +138,7 @@ let CollisionSystem = System.extend({
             for (let monster of monsterList) {
                 if (monster.mode === bullet.mode) {
                     let monsterPos = monster.getComponent(PositionComponent);
-                    if (monsterPos.classs === GameConfig.MONSTER.CLASS.AIR) {
+                    if (monsterPos.classs === GameConfig.MONSTER.CLASS.AIR && !bulletInfo.canTargetAirMonster) {
                         continue;
                     }
                     if (Utils.euclidDistance(monster.getComponent(PositionComponent), bulletPos) <= bulletInfo.radius) {
