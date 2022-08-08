@@ -142,6 +142,9 @@ let TickInputHandler = cc.Class.extend({
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let tilePos = cc.p(packet.tileX, packet.tileY);
         let cellObject = playerObjectMap[tilePos.x][tilePos.y];
+        let towerEntityId = cellObject.tower.entityId;
+        let towerEntity = EntityManager.getInstance().getEntity(towerEntityId);
+        EntityManager.destroy(towerEntity);
         cellObject.objectInCellType = ObjectInCellType.NONE;
         cellObject.tower = null;
         EventDispatcher.getInstance()
@@ -155,7 +158,6 @@ let TickInputHandler = cc.Class.extend({
         let tilePos = cc.p(packet.tileX, packet.tileY);
         let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
         let towerEntityId = cellObject.tower.entityId;
-        cc.log('[BattleNetwork.js line 258] towerEntityId: ' + towerEntityId);
         let towerEntity = EntityManager.getInstance().getEntity(towerEntityId);
         EntityManager.destroy(towerEntity);
         cellObject.objectInCellType = ObjectInCellType.NONE;
