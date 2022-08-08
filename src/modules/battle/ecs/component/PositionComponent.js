@@ -11,6 +11,10 @@ let PositionComponent = Component.extend({
         this.x = x;
         this.y = y;
         this.moveDistance = moveDistance;
+
+        // used to render between 2 tick (smooth frame)
+        this.__x = this.x;
+        this.__y = this.y;
     },
 
     clone: function () {
