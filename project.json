@@ -87,6 +87,7 @@
         "src/framework/libs/underscore.js",
         "src/framework/Localization.js",
         "src/framework/Network.js",
+        "src/framework/PlatformUtils.js",
         "src/framework/PoolObject.js",
         "src/framework/StringUtils.js",
         "src/framework/UserData.js",
