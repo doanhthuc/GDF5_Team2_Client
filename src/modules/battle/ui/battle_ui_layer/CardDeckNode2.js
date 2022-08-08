@@ -87,7 +87,7 @@ const CardDeckNode2 = cc.Node.extend({
             this.onCardPutIntoMap(data.cardId);
             let cardEnergy = CARD_CONST[data.cardId].energy;
             let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
-            deckEnergyProgress.minusEnergy(cardEnergy);
+            // deckEnergyProgress.minusEnergy(cardEnergy);
             // this.setNextCardSlotVisible(false);
         }
     },
