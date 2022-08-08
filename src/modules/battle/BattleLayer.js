@@ -73,6 +73,7 @@ let BattleLayer = cc.Layer.extend({
         this.renderSystem.start(dt);
         this.spriteSheetAnimationSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
+        tickManager.renderNormalTimerNode();
     },
 
     createMonsterByEntityID: function (mode, entityID) {

@@ -161,6 +161,13 @@ let TickManager = cc.Class.extend({
             }
         }
         this.normalTimerNodeContainer = remainNode;
+    },
+
+    renderNormalTimerNode: function () {
+        let dt = this.getDeltaFromLatestTickToNow() / 1000;
+        for (let timerNode of this.normalTimerNodeContainer) {
+            timerNode.render(dt);
+        }
     }
 })
 

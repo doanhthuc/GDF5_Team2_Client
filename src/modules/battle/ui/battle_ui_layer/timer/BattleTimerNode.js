@@ -31,7 +31,8 @@ let BattleTimerNode = cc.Node.extend({
 
         this.progress.setPercentage(countDown / this._duration * 100);
         let time = this.node.getChildByName("time")
-        time.setString(countDown.toFixed(2));
+        // time.setString(countDown.toFixed(2));
+        time.setString(Math.floor(countDown));
     },
 
     updateData: function () {
