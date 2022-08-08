@@ -145,6 +145,11 @@ let TickInputHandler = cc.Class.extend({
         let towerEntityId = cellObject.tower.entityId;
         let towerEntity = EntityManager.getInstance().getEntity(towerEntityId);
         EntityManager.destroy(towerEntity);
+        let pos = Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER);
+        let plusEnergyValue = CARD_CONST[cellObject.tower.towerId].energy / 2;
+        BattleAnimation.animationPlusEnergy(pos, plusEnergyValue, GameConfig.PLAYER);
+        let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
+        deckEnergyProgress.plusEnergy(plusEnergyValue);
         cellObject.objectInCellType = ObjectInCellType.NONE;
         cellObject.tower = null;
         EventDispatcher.getInstance()

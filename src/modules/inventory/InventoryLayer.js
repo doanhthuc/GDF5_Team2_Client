@@ -116,6 +116,8 @@ const InventoryLayer = cc.Node.extend({
     onCancelSelectCardBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.isSelectingCardToBattleDeck = false;
+            this.stopAllCardNodeShaking();
+            this.stopCarNodeShaking(this.fakeCardImageFromCardCollection);
             this.cardCollectionNode.setVisible(true);
             this.fakeCardImageFromCardCollection.setVisible(false);
             this.cancelSelectBtn.setVisible(false);
@@ -126,6 +128,8 @@ const InventoryLayer = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             if (this.isSelectingCardToBattleDeck) {
                 this.isSelectingCardToBattleDeck = false;
+                this.stopAllCardNodeShaking();
+                this.stopCarNodeShaking(this.fakeCardImageFromCardCollection);
                 this.cardCollectionNode.setVisible(true);
                 this.fakeCardImageFromCardCollection.setVisible(false);
                 this.cancelSelectBtn.setVisible(false);
