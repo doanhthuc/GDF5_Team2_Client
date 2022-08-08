@@ -13,7 +13,7 @@ let BuffAttackSpeedEffect = EffectComponent.extend({
 
     reset: function (percent) {
         this.percent = percent;
-    }
+    },
 });
 BuffAttackSpeedEffect.typeID = GameConfig.COMPONENT_ID.BUFF_ATTACK_SPEED;
 ComponentManager.getInstance().registerClass(BuffAttackSpeedEffect);

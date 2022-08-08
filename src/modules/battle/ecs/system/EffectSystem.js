@@ -8,6 +8,11 @@ let EffectSystem = System.extend({
     },
 
     _run: function (tick) {
+
+    },
+
+    updateData: function () {
+        const tick = tickManager.getTickRate() / 1000;
         this._handleBuffAttackRangeEffect(tick);
         this._handleBuffAttackSpeedEffect(tick);
         this._handleBuffAttackDamageEffect(tick);
@@ -21,6 +26,7 @@ let EffectSystem = System.extend({
     _handleBuffAttackSpeedEffect: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackSpeedEffect, AttackComponent);
+
         for (let entity of entityList) {
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackSpeedComponent = entity.getComponent(BuffAttackSpeedEffect);
@@ -32,26 +38,27 @@ let EffectSystem = System.extend({
     _handleBuffAttackDamageEffect: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackDamageEffect, AttackComponent);
+
         for (let entity of entityList) {
-            cc.log("_handleBuffAttackDamageEffect line 34");
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackDamageComponent = entity.getComponent(BuffAttackDamageEffect);
+
             attackComponent.setDamage(attackComponent.damage + attackComponent.originDamage * buffAttackDamageComponent.percent);
         }
     },
 
     _handleDamageEffect: function (tick) {
-        // damage effects
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(DamageEffect);
+
         for (let entity of entityList) {
             let lifeComponent = entity.getComponent(LifeComponent);
+
             if (lifeComponent) {
                 let damageComponent = entity.getComponent(DamageEffect);
-                // cc.log("[EffectSystem.js line 51] damageComponent.damage: " + damageComponent.damage + " lifeComponent.life: " + lifeComponent.hp);
+
                 lifeComponent.hp -= damageComponent.damage;
                 entity.removeComponent(damageComponent)
-               // BattleAnimation.animationDamage(entity);
             }
         }
     },
@@ -59,11 +66,13 @@ let EffectSystem = System.extend({
     _handleFrozenEffect: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(FrozenEffect)
+
         for (let entity of entityList) {
             let velocityComponent = entity.getComponent(VelocityComponent);
             let frozenComponent = entity.getComponent(FrozenEffect);
 
             frozenComponent.countdown = frozenComponent.countdown - tick;
+
             if (frozenComponent.countdown <= 0) {
                 entity.removeComponent(frozenComponent);
                 this._updateOriginVelocity(velocityComponent);
@@ -77,6 +86,7 @@ let EffectSystem = System.extend({
     _handleSlowEffect: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(SlowEffect);
+
         for (let entity of entityList) {
             let velocityComponent = entity.getComponent(VelocityComponent);
             let slowComponent = entity.getComponent(SlowEffect);
@@ -105,6 +115,7 @@ let EffectSystem = System.extend({
     _handleBuffAttackRangeEffect: function () {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(BuffAttackRangeEffect, AttackComponent);
+
         for (let entity of entityList) {
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackRangeComponent = entity.getComponent(BuffAttackRangeEffect);
@@ -143,6 +154,7 @@ let EffectSystem = System.extend({
                 pathComponent.currentPathIdx = 0;
                 entity.removeComponent(PositionComponent);
 
+                // animation
                 let bornPos = Utils.tile2Pixel(GameConfig.MONSTER_BORN_POSITION.x, GameConfig.MONSTER_BORN_POSITION.y, entity.mode);
                 let time = Utils.euclidDistance(pos, bornPos) / (2 * GameConfig.TILE_WIDTH);
                 let action = cc.spawn(
@@ -159,6 +171,7 @@ let EffectSystem = System.extend({
     _updateOriginVelocity: function (velocityComponent) {
         velocityComponent.speedX = velocityComponent.originSpeedX;
         velocityComponent.speedY = velocityComponent.originSpeedY;
+
     }
 });
 EffectSystem.typeID = GameConfig.SYSTEM_ID.EFFECT;

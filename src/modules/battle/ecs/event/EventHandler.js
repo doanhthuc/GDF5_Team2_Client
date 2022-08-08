@@ -9,7 +9,6 @@ EventDispatcher.getInstance()
         let battleData = BattleManager.getInstance().getBattleData();
         let currentWave = battleData.getCurrentWave();
         let monsterWave = battleData.getMonsterWave();
-        cc.log("===>currentwave: " + currentWave);
         if (monsterWave[currentWave].length > 0) {
             let monsterTypeID = monsterWave[currentWave].pop();
             BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, monsterTypeID);
@@ -17,10 +16,10 @@ EventDispatcher.getInstance()
         }
     })
     .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
-        BattleManager.getInstance().getBattleLayer().stopGame();
+        // BattleManager.getInstance().getBattleLayer().stopGame();
     })
     .addEventHandler(EventType.END_ALL_WAVE, function (data) {
-        BattleManager.getInstance().getBattleLayer().stopGame();
+        // BattleManager.getInstance().getBattleLayer().stopGame();
     })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let tilePos = data.pos;
@@ -40,7 +39,7 @@ EventDispatcher.getInstance()
 
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
         for (let entity of entityList) {
-            if (entity.mode === currentMode && entity.typeID != GameConfig.ENTITY_ID.BAT) {
+            if (entity.mode === currentMode && entity.typeID !== GameConfig.ENTITY_ID.BAT) {
                 let pathComponent = entity.getComponent(PathComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
                 if (positionComponent) {

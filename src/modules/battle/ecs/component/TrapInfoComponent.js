@@ -18,7 +18,7 @@ let TrapInfoComponent = InfoComponent.extend({
 
     setTrigger: function (val) {
         this.isTriggered = true;
-    }
+    },
 });
 TrapInfoComponent.typeID = GameConfig.COMPONENT_ID.TRAP_INFO;
 ComponentManager.getInstance().registerClass(TrapInfoComponent);

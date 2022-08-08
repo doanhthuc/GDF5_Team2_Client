@@ -10,7 +10,7 @@ NodeFactory.createTrapNode = function () {
 
 NodeFactory.createSwordmanNodeAnimation = function () {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/swordsman/monster_swordsman_run_0012.png");
+    let monsterSprite = new cc.Sprite("#monster_swordsman_run_0012.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "")
     let monsterShadow = new cc.Sprite();
 
@@ -33,7 +33,7 @@ NodeFactory.createSwordmanNodeAnimation = function () {
 
 NodeFactory.createAssassinNodeAnimation = function () {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/assassin/monster_assassin_run_0020.png");
+    let monsterSprite = new cc.Sprite("#monster_assassin_run_0020.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
     let monsterShadow = new cc.Sprite();
 
@@ -57,7 +57,7 @@ NodeFactory.createAssassinNodeAnimation = function () {
 
 NodeFactory.createBatNodeAnimation = function () {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/bat/monster_bat_run_0020.png");
+    let monsterSprite = new cc.Sprite("#monster_bat_run_0020.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
     let monsterShadow = new cc.Sprite();
 
@@ -78,7 +78,7 @@ NodeFactory.createBatNodeAnimation = function () {
 
 NodeFactory.createGiantNodeAnimation = function () {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/giant/monster_giant_run_0036.png");
+    let monsterSprite = new cc.Sprite("#monster_giant_run_0036.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
     let monsterShadow = new cc.Sprite();
 
@@ -101,7 +101,7 @@ NodeFactory.createGiantNodeAnimation = function () {
 
 NodeFactory.createNinjaNodeAnimation = function () {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/ninja/monster_ninja_run_0020.png");
+    let monsterSprite = new cc.Sprite("#monster_ninja_run_0020.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
     let monsterShadow = new cc.Sprite();
 
@@ -124,7 +124,7 @@ NodeFactory.createNinjaNodeAnimation = function () {
 
 NodeFactory.createDemonTreeNodeAnimation = function () {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/demon_tree/monster_demon_tree_run_0020.png");
+    let monsterSprite = new cc.Sprite("#monster_demon_tree_run_0020.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
     let monsterShadow = new cc.Sprite();
 
@@ -147,7 +147,7 @@ NodeFactory.createDemonTreeNodeAnimation = function () {
 
 NodeFactory.createDemonTreeMinionNodeAnimation = function () {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/demon_tree_minion/monster_demon_tree_minion_run_0020.png");
+    let monsterSprite = new cc.Sprite("#monster_demon_tree_minion_run_0020.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
     let monsterShadow = new cc.Sprite();
 
@@ -170,7 +170,7 @@ NodeFactory.createDemonTreeMinionNodeAnimation = function () {
 
 NodeFactory.createDarkGiantNodeAnimation = function () {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/dark_giant/monster_dark_giant_run_0020.png");
+    let monsterSprite = new cc.Sprite("#monster_dark_giant_run_0020.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
     let monsterShadow = new cc.Sprite();
 
@@ -193,7 +193,7 @@ NodeFactory.createDarkGiantNodeAnimation = function () {
 
 NodeFactory.createSatyrNodeAnimation = function () {
     let node = new cc.Node();
-    let monsterSprite = new cc.Sprite("res/textures/monster/frame/satyr/monster_satyr_run_0020.png");
+    let monsterSprite = new cc.Sprite("#monster_satyr_run_0020.png");
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "");
     let monsterShadow = new cc.Sprite();
 
@@ -232,8 +232,8 @@ NodeFactory.createOwlNodeAnimation = function (range) {
 NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
-    let towerSprite = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_0_0010.png");
-    let weaponSprite = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_attack_1_0010.png");
+    let towerSprite = new cc.Sprite("#tower_ice_gun_attack_0_0010.png");
+    let weaponSprite = new cc.Sprite("#tower_ice_gun_attack_1_0010.png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
     rangeAttackSprite.setScale(2 * attackRange / 687)
 
@@ -249,8 +249,8 @@ NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange) {
 NodeFactory.createFrogNodeAnimation = function (attackRange) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_steel.png");
-    let towerSprite = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_attack_0_0011.png");
-    let weaponSprite = new cc.Sprite("res/textures/tower/frame/boomerang_1_2/tower_boomerang_attack_1_0011.png");
+    let towerSprite = new cc.Sprite("#tower_boomerang_attack_0_0011.png");
+    let weaponSprite = new cc.Sprite("#tower_boomerang_attack_1_0011.png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
     rangeAttackSprite.setScale(2 * attackRange / 687)
 
@@ -265,8 +265,8 @@ NodeFactory.createFrogNodeAnimation = function (attackRange) {
 NodeFactory.createBunnyNodeAnimation = function (attackRange) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
-    let towerSprite = new cc.Sprite("res/textures/tower/frame/oil_gun_1_2/tower_oil_gun_attack_0_0011.png");
-    let weaponSprite = new cc.Sprite("res/textures/tower/frame/oil_gun_1_2/tower_oil_gun_attack_1_0011.png");
+    let towerSprite = new cc.Sprite("#tower_oil_gun_attack_0_0011.png");
+    let weaponSprite = new cc.Sprite("#tower_oil_gun_attack_1_0011.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
     node.addChild(pedestalSprite, 1, "pedestal");
@@ -278,8 +278,8 @@ NodeFactory.createBunnyNodeAnimation = function (attackRange) {
 NodeFactory.createWizardNodeAnimation = function (attackRange) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_steel.png");
-    let towerSprite = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_attack_0_0000.png");
-    let weaponSprite = new cc.Sprite("res/textures/tower/frame/wizard_1_2/tower_wizard_attack_1_0000.png");
+    let towerSprite = new cc.Sprite("#tower_wizard_attack_0_0000.png");
+    let weaponSprite = new cc.Sprite("#tower_wizard_attack_1_0000.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
     node.addChild(pedestalSprite, 1, "pedestal");
@@ -291,8 +291,8 @@ NodeFactory.createWizardNodeAnimation = function (attackRange) {
 NodeFactory.createSnakeAttackSpeedNodeAnimation = function (attackRange) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
-    let towerSprite = new cc.Sprite("res/textures/tower/frame/attack_speed_1_2/tower_attack_speed_attack_0_0000.png");
-    let weaponSprite = new cc.Sprite("res/textures/tower/frame/attack_speed_1_2/tower_attack_speed_attack_1_0000.png");
+    let towerSprite = new cc.Sprite("#tower_attack_speed_attack_0_0000.png");
+    let weaponSprite = new cc.Sprite("#tower_attack_speed_attack_1_0000.png");
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
     node.addChild(pedestalSprite, 1, "pedestal");
@@ -304,8 +304,8 @@ NodeFactory.createSnakeAttackSpeedNodeAnimation = function (attackRange) {
 NodeFactory.createGoatDamageNodeAnimation = function (attackRange) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
-    let towerSprite = new cc.Sprite("res/textures/tower/frame/damage_1_2/tower_damage_attack_0_0000.png");
-    let weaponSprite = new cc.Sprite("res/textures/tower/frame/damage_1_2/tower_damage_attack_1_0000.png");
+    let towerSprite = new cc.Sprite("#tower_damage_attack_0_0000.png");
+    let weaponSprite = new cc.Sprite("#tower_damage_attack_1_0000.png");
 
     // node.addChild(rangeAttackSprite, 1, "rangeAttack");
     node.addChild(pedestalSprite, 1, "pedestal");
@@ -334,7 +334,10 @@ NodeFactory.createDragTowerNode = function (towerId) {
 NodeFactory.createBuildingTowerTimer = function (tilePos, mode) {
     // create timer
     let mapNode = BattleManager.getInstance().getBattleLayer().getMapNode(mode);
-    let timer = new NormalTimerNode(1);
+
+    let timer = new NormalTimerNode(GameConfig.DELAY_BUILD_TOWER);
+    tickManager.addNormalTimerNodeToContainer(timer);
+
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     timer.setPosition(pixelPos);
     mapNode.addChild(timer);

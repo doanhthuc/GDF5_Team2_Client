@@ -7,7 +7,12 @@ let AttackSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    _run: function (tick) {
+    _run: function (dt) {
+
+    },
+
+    updateData: function () {
+        const dt = tickManager.getTickRate() / 1000;
         let towerList = EntityManager.getInstance()
             .getEntitiesHasComponents(AttackComponent);
         let monsterList = EntityManager.getInstance()
@@ -15,11 +20,12 @@ let AttackSystem = System.extend({
 
         for (let tower of towerList) {
             let attackComponent = tower.getComponent(AttackComponent);
-            // cc.log("[AttackSystem.js line 35] attackComponent.targetStrategy: " + JSON.stringify(attackComponent.effects));
+
             // update count down time
             if (attackComponent.countdown > 0) {
-                attackComponent.countdown -= tick;
+                attackComponent.countdown -= dt;
             }
+
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
@@ -42,13 +48,18 @@ let AttackSystem = System.extend({
                         let monsterPos = targetMonster.getComponent(PositionComponent);
                         this._changeTowerAnimation(tower, targetMonster);
 
+                        let clonedEffects = [];
+                        for (let effect of attackComponent.effects) {
+                            clonedEffects.push(effect.clone());
+                        }
+
                         if (tower.typeID === GameConfig.ENTITY_ID.FROG_TOWER) {
                             let distance = this._distanceFrom(tower, targetMonster);
                             let k = attackComponent.range / distance;
                             let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
-                            EntityFactory.createBullet(tower.typeID, towerPos, destination, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
+                            EntityFactory.createBullet(tower.typeID, towerPos, null, destination, clonedEffects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
                         } else {
-                            EntityFactory.createBullet(tower.typeID, towerPos, monsterPos, attackComponent.effects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
+                            EntityFactory.createBullet(tower.typeID, towerPos, targetMonster, cc.p(monsterPos.x, monsterPos.y), clonedEffects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
                         }
                         attackComponent.countdown = attackComponent.speed;
                     }
@@ -75,7 +86,8 @@ let AttackSystem = System.extend({
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
                // cc.log("[AttackSystem] find target by max hp");
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
-                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    let lifeComponent = cur.getComponent(LifeComponent);
+                    let monsterHP = lifeComponent.hp;
                     return monsterHP > monsterInAttackRange[acc] ? idx : acc;
                 }, 0);
                 targetMonster = monsterInAttackRange[monsterIndex];
@@ -83,7 +95,8 @@ let AttackSystem = System.extend({
             }
             case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP: {
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
-                    let monsterHP = cur.getComponent(LifeComponent).hp;
+                    let lifeComponent = cur.getComponent(LifeComponent);
+                    let monsterHP = lifeComponent.hp;
                     return monsterHP < monsterInAttackRange[acc] ? idx : acc;
                 }, 0);
                 targetMonster = monsterInAttackRange[monsterIndex];
