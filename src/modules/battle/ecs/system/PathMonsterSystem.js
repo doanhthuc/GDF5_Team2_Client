@@ -7,31 +7,36 @@ let PathMonsterSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    _run: function (tick) {
+    _run: function (dt) {
+
+    },
+
+    updateData: function () {
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent, PositionComponent, VelocityComponent);
         for (let entity of entityList) {
-            {
-                let pathComponent = entity.getComponent(PathComponent);
-                let positionComponent = entity.getComponent(PositionComponent);
-                let velocityComponent = entity.getComponent(VelocityComponent);
-                let path = pathComponent.path, currentPathIdx = pathComponent.currentPathIdx;
+            let pathComponent = entity.getComponent(PathComponent);
+            let positionComponent = entity.getComponent(PositionComponent);
+            let velocityComponent = entity.getComponent(VelocityComponent);
 
-                let nextPosIdx = this._findNextPath(path, positionComponent, currentPathIdx);
-                if (nextPosIdx > 1) pathComponent.currentPathIdx = nextPosIdx - 1;
+            let path = pathComponent.path, currentPathIdx = pathComponent.currentPathIdx;
 
-                let nextPos = path[nextPosIdx];
-                let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
-                let newVelocity = Utils.calculateVelocityVector(positionComponent, nextPos, speed)
-                velocityComponent.speedX = newVelocity.speedX;
-                velocityComponent.speedY = newVelocity.speedY;
+            let nextPosIdx = this._findNextPath(path, positionComponent, currentPathIdx);
+            if (nextPosIdx > 1) pathComponent.currentPathIdx = nextPosIdx - 1;
+            // cc.log("currentPathIdx = " + currentPathIdx);
+            // cc.log("nextPoxIdx = " + nextPosIdx);
+            // cc.log("path.length = " + path.length);
+            let nextPos = path[nextPosIdx];
+            let speed = VelocityComponent.calculateSpeed(velocityComponent.speedX, velocityComponent.speedY);
+            let newVelocity = Utils.calculateVelocityVector(positionComponent, nextPos, speed)
+            velocityComponent.speedX = newVelocity.speedX;
+            velocityComponent.speedY = newVelocity.speedY;
 
-                //Update Direction for Monster
-                if (entity._hasComponent(SpriteSheetAnimationComponent) && entity.hasAnyComponent(MonsterInfoComponent)) {
-                    let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
-                    let state = this._getMovingDirection(entity);
-                    if (state !== spriteComponent.getCurrentState()) {
-                        spriteComponent.changeCurrentState(state);
-                    }
+            //Update Direction for Monster
+            if (entity._hasComponent(SpriteSheetAnimationComponent) && entity.hasAnyComponent(MonsterInfoComponent)) {
+                let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
+                let state = this._getMovingDirection(entity);
+                if (state !== spriteComponent.getCurrentState()) {
+                    spriteComponent.changeCurrentState(state);
                 }
             }
         }

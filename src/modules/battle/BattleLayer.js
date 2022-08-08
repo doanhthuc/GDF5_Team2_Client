@@ -68,131 +68,13 @@ let BattleLayer = cc.Layer.extend({
             tickManager.updateData();
         }
 
-        // IMPORTANT: EffectSystem (SlowEffect) < PathSystem
         this.getTimerNode().timer();
-        this.resetSystem.start(dt);
-        this.abilitySystem.start(dt);
-        this.effectSystem.start(dt);
-        this.attackSystem.start(dt);
-        this.renderSystem.start(dt);
-        this.lifeSystem.start(dt);
-        this.collisionSystem.start(dt);
-        this.pathSystem.start(dt);
-        this.spriteSheetAnimationSystem.start(dt);
-        this.spellSystem.start(dt);
-        this.skeletonAnimationSystem.start(dt);
-        this.monsterSystem.start(dt);
-        this.bulletSystem.start(dt);
         this.movementSystem.start(dt);
-
-
-        if (GameConfig.DEBUG) {
-            cc.warn("---------------------------------------")
-            cc.warn("* Entity Manager size = " + Object.keys(EntityManager.getInstance().entities).length);
-            // let entityActive = 0, entityInActive = 0;
-            // for (let key of Object.keys(EntityManager.getInstance().entities)) {
-            //     if (EntityManager.getInstance().entities[key].getActive()) {
-            //         entityActive++;
-            //     } else {
-            //         entityInActive++;
-            //     }
-            // }
-            // cc.warn("   + Active size = " + entityActive);
-            // cc.warn("   + Inactive size = "+ entityInActive);
-
-            cc.warn("* Component Manager size = " + ComponentManager.getInstance()._storeInstance.size);
-
-            let poolSize = 0;
-            let componentActive = 0;
-            let componentInactive = 0;
-            for (let key of Object.keys(ComponentFactory.pool._store)) {
-                poolSize += ComponentFactory.pool._store[key].length;
-                for (let component of ComponentFactory.pool._store[key]) {
-                    if (component.getActive()) {
-                        componentActive++;
-                    } else {
-                        componentInactive++;
-                    }
-                }
-            }
-            cc.warn("* ComponentPool size = " + JSON.stringify(poolSize));
-            cc.warn("   + Active size = " + JSON.stringify(componentActive));
-            cc.warn("   + Inactive size = " + JSON.stringify(componentInactive));
-        }
-
+        this.renderSystem.start(dt);
+        this.spriteSheetAnimationSystem.start(dt);
+        this.skeletonAnimationSystem.start(dt);
     },
 
-    bornMonster: function (tilePos, mode) {
-        let pixelPos;
-        if (!tilePos) {
-            pixelPos = Utils.tile2Pixel(0, 4, mode);
-        } else {
-            pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
-        }
-        EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // setTimeout(function () {
-        //     EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // }, 1000);
-        // setTimeout(function () {
-        //     EntityFactory.createAssassinMonster(pixelPos, mode);
-        // }, 2000);
-        // setTimeout(function () {
-        //     EntityFactory.createNinjaMonster(pixelPos, mode);
-        // }, 3000);
-        // setTimeout(function () {
-        //     EntityFactory.createGiantMonster(pixelPos, mode);
-        // }, 5000);
-        // EntityFactory.createAssassinMonster(pixelPos, mode);
-        // EntityFactory.createGiantMonster(pixelPos, mode);
-        // EntityFactory.createNinjaMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-
-        //EntityFactory.createNinjaMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        // EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        EntityFactory.createBatMonster(pixelPos, mode);
-        // EntityFactory.createSatyrBoss(pixelPos, mode);
-    },
-
-    oneTimeBornMonster: function (tilePos, mode) {
-        let pixelPos;
-        if (!tilePos) {
-            pixelPos = Utils.tile2Pixel(0, 4, mode);
-        } else {
-            pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
-        }
-        EntityFactory.createAssassinMonster(pixelPos, mode);
-        setTimeout(function () {
-            EntityFactory.createSwordsmanMonster(pixelPos, mode);
-        }, 1000);
-        setTimeout(function () {
-            EntityFactory.createAssassinMonster(pixelPos, mode);
-        }, 2000);
-        setTimeout(function () {
-            EntityFactory.createNinjaMonster(pixelPos, mode);
-        }, 3000);
-        setTimeout(function () {
-            EntityFactory.createGiantMonster(pixelPos, mode);
-        }, 5000);
-        setTimeout(function () {
-            EntityFactory.createSatyrBoss(pixelPos, mode);
-        }, 20000);
-        setTimeout(function () {
-            EntityFactory.createDarkGiantBoss(pixelPos, mode);
-        }, 40000);
-        setTimeout(function () {
-            EntityFactory.createDemonTreeBoss(pixelPos, mode);
-        }, 60000);
-
-    },
-    // bornMonsterInWave: function (monsterWave, mode) {
-    //     // let pixelPos = Utils.tile2Pixel(0, 4, mode);
-    //     // // for(let entityID of monsterWave)
-    //     // // {
-    //     // //    // setTimeout(this.createMonster(pixelPos,mode,entityID),time);
-    //     // // )
-    // },
     createMonsterByEntityID: function (mode, entityID) {
         let pixelPos = Utils.tile2Pixel(0, 4, mode);
         switch (entityID) {
@@ -238,11 +120,18 @@ let BattleLayer = cc.Layer.extend({
             return;
         }
 
+        BattleManager.getInstance().getCardDeckNode().handlePutCardIntoMap({
+            cardId: type,
+            mode: mode,
+        });
+
         if (ValidatorECS.isSpell(type)) {
-            this.dropSpell(type, pixelPos, mode)
-            if (GameConfig.NETWORK) BattleNetwork.connector.sendDropSell(type, pixelPos);
+            if (GameConfig.NETWORK) {
+                BattleNetwork.connector.sendDropSpell(type, pixelPos);
+            } else {
+                this.dropSpell(type, pixelPos, mode)
+            }
         } else if (ValidatorECS.isTrap(type)) {
-            EntityFactory.createTrap(tilePos, mode);
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.PUT_TRAP, {cardId: type, tilePos: tilePos, mode: mode});
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTrap(tilePos);
@@ -264,18 +153,20 @@ let BattleLayer = cc.Layer.extend({
         }
 
         if (this.shouldPutNewTower(tilePos)) {
+            this.showTimerBuildTower(tilePos, mode);
             if (GameConfig.NETWORK === 1) BattleNetwork.connector.sendPutTower(type, tilePos);
-            this.buildTower(type, tilePos, mode);
+            // this.buildTower(type, tilePos, mode);
         }
     },
 
-    buildTower: function (towerId, tilePos, mode) {
+    showTimerBuildTower: function (tilePos, mode) {
         NodeFactory.createBuildingTowerTimer(tilePos, mode);
+    },
+
+    buildTower: function (towerId, tilePos, mode) {
+        this._createTower(towerId, tilePos, mode);
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
-        this.scheduleOnce(() => {
-            this._createTower(towerId, tilePos, mode);
-        }, 1);
     },
 
     _createTower: function (towerId, tilePos, mode) {
@@ -369,9 +260,10 @@ let BattleLayer = cc.Layer.extend({
                 if (touches.length <= 0)
                     return;
                 if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
+                    let selectedCardType = BattleManager.getInstance().getBattleLayer().selectedCard
+                    BattleManager.getInstance().getCardDeckNode().removeDragSprite(selectedCardType);
                     let pixelPos = touches[0].getLocation();
                     let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
-                    let selectedCardType = BattleManager.getInstance().getBattleLayer().selectedCard
                     let tilePos = Utils.pixel2Tile(pixelInMap.x, pixelInMap.y, GameConfig.OPPONENT);
                     if (Utils.validateTilePos(tilePos)) {
                         BattleManager.getInstance().getBattleLayer()
@@ -406,7 +298,6 @@ let BattleLayer = cc.Layer.extend({
         //  this.battleLoop.start();
         //this.schedule(this.update,0.1,10000);
         this.uiLayer.startGame();
-        tickManager.setStartTime(Utils.currentTimeMillis());
         this.scheduleUpdate();
         //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
     },
@@ -429,6 +320,7 @@ let BattleLayer = cc.Layer.extend({
         this.addChild(new BattleResultLayer(result, this.battleData, trophyChange), 2);
         delete this._entityManager;
         delete ComponentManager.getInstance();
+        tickManager.clearAndCreateNew();
         // TODO: remove file from sprite frame cache
     },
 

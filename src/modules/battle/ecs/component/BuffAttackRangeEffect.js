@@ -13,7 +13,7 @@ const BuffAttackRangeEffect = EffectComponent.extend({
 
     reset: function (percent) {
         this.percent = percent;
-    }
+    },
 });
 
 BuffAttackRangeEffect.typeID = GameConfig.COMPONENT_ID.BUFF_ATTACK_RANGE;

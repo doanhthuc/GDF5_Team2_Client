@@ -20,21 +20,23 @@ let ComponentManager = ManagerECS.extend({
         }
     },
 
-    add: function (component) {
-        if (this._storeInstance.has(component.id)) {
+    add: function (component, override=false) {
+        if (this._storeInstance.has(component.id) && override === false) {
             throw new Error("Component with typeID = " + component.typeID + ", id = " + component.id + " exists.");
         }
 
+        // tickManager.getTickData().deleteComponentData(component.id);
         this._storeInstance.set(component.id, component);
     },
 
     findByInstanceId: function (instanceId) {
-        this._storeInstance.get(instanceId);
+        return this._storeInstance.get(instanceId);
     },
 
     remove: function (component) {
         component.setActive(false);
         this._storeInstance.delete(component.id);
+        tickManager.getTickData().deleteComponentData(component.id);
     },
 });
 

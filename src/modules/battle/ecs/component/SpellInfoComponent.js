@@ -18,7 +18,7 @@ let SpellInfoComponent = Component.extend({
     clone: function () {
         // TODO: should effect.clone()??
         return ComponentFactory.create(SpellInfoComponent, this.pos, this.effects, this.range, this.delay);
-    }
+    },
 });
 SpellInfoComponent.typeID = GameConfig.COMPONENT_ID.SPELL;
 ComponentManager.getInstance().registerClass(SpellInfoComponent);

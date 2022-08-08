@@ -54,7 +54,10 @@ let MatchingScene = cc.Scene.extend({
 
         // call api
         cc.warn("Send matching")
-        BattleNetwork.connector.sendMatching();
+        this.scheduleOnce(() => {
+            cc.error("schedule send matching after 1s in MatchingScene.sj")
+            BattleNetwork.connector.sendMatching();
+        }, 1);
     },
 
     _updateUI: function (tick) {

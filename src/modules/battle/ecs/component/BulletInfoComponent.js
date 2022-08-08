@@ -17,7 +17,7 @@ let BulletInfoComponent = InfoComponent.extend({
     clone: function () {
         // TODO: should clone effects
         return ComponentFactory.create(BulletInfoComponent, this.effects, this.type, this.radius);
-    }
+    },
 });
 BulletInfoComponent.typeID = GameConfig.COMPONENT_ID.BULLET_INFO;
 ComponentManager.getInstance().registerClass(BulletInfoComponent);

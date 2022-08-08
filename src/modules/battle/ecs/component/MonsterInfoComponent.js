@@ -26,14 +26,14 @@ let MonsterInfoComponent = InfoComponent.extend({
         this.damageEnergy = energy;
         this.gainEnergy = gainEnergy;
         this.ability = ability;
-        this.effects = effects;
+        this.effects = effects || [];
     },
 
     clone: function () {
         // TODO: should use effect.clone()??
         return ComponentFactory.create(MonsterInfoComponent, this.category, this.classs, this.weight, this.energy, this.gainEnergy,
             this.ability, this.effects);
-    }
+    },
 });
 MonsterInfoComponent.typeID = GameConfig.COMPONENT_ID.MONSTER_INFO;
 ComponentManager.getInstance().registerClass(MonsterInfoComponent);
