@@ -81,7 +81,7 @@ EventDispatcher.getInstance()
             return;
         }
 
-        cc.log("Put new tower event data: " + JSON.stringify(data));
+        cc.log("DesTROY_TOWER: " + JSON.stringify(data));
 
         map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.NONE;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);

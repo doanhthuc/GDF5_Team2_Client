@@ -29,6 +29,7 @@ let TickManager = cc.Class.extend({
         // handle input of current tick
         let queueInput = this.inputTick[currentTick];
         if (queueInput && queueInput.length > 0) {
+            cc.log("[TickManager.js line 32] handle input of current tick" + currentTick + ": " + JSON.stringify(queueInput));
             for (let i = 0; i < queueInput.length; i++) {
                 let {cmd, packet} = queueInput[i];
                 this.tickInputHandler.handle(cmd, packet, currentTick);

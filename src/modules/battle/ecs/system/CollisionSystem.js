@@ -139,6 +139,10 @@ let CollisionSystem = System.extend({
             let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
             for (let monster of monsterList) {
                 if (monster.mode === bullet.mode) {
+                    let monsterPos = monster.getComponent(PositionComponent);
+                    if (monsterPos.classs === GameConfig.MONSTER.CLASS.AIR && !bulletInfo.canTargetAirMonster) {
+                        continue;
+                    }
                     if (Utils.euclidDistance(monster.getComponent(PositionComponent), bulletPos) <= bulletInfo.radius) {
                         for (let effect of bulletInfo.effects) {
                             monster.addComponent(effect.clone());

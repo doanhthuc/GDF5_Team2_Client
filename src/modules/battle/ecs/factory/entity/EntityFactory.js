@@ -15,14 +15,14 @@ EntityFactory._createEntity = function (typeID, mode) {
     return entity;
 }
 
-EntityFactory.createBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius) {
+EntityFactory.createBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
     Utils.validateMode(mode);
     if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
 
         let bulletNode = new cc.Sprite("#tower_cannon_bullet_0000.png");
-        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, 0.6);
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "cannon", 0, canTargetAirMonster);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         // let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
@@ -45,8 +45,8 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let typeID = GameConfig.ENTITY_ID.BULLET;
         let entity = this._createEntity(typeID, mode);
 
-        let bulletNode = new cc.Sprite("#tower_ice_gun_bullet_0000.png");
-        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects);
+        let bulletNode = new cc.Sprite("res/textures/tower/frame/ice_gun_1_2/tower_ice_gun_bullet_0000.png");
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "bear", 0, canTargetAirMonster);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         // let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
@@ -71,7 +71,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let node = new cc.Node();
         let bulletNode = new cc.Sprite("#tower_boomerang_bullet_1_0000.png");
         node.addChild(bulletNode, 0, "weapon");
-        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "frog", bulletRadius);
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "frog", bulletRadius, canTargetAirMonster);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, cc.p(startPosition.x, staticPosition.y), 10);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 40, 40, 40, 40);
@@ -114,7 +114,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let node = new cc.Node();
         let bulletNode = new cc.Sprite("#tower_oil_gun_bullet_0000.png");
         node.addChild(bulletNode, 0, "bullet");
-        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "bunny", bulletRadius);
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "bunny", bulletRadius, canTargetAirMonster);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
@@ -148,7 +148,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         // // particle.setScale(1, 1);
         // particle.setPosition(cc.p(0, 0));
 
-        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "wizard", bulletRadius);
+        let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "wizard", bulletRadius, canTargetAirMonster);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
         let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 20, 20);
