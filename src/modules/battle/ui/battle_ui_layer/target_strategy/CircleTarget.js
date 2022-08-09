@@ -10,6 +10,7 @@ let CircleTarget = cc.Node.extend({
         this.maxHp = this.rootNode.getChildByName("max_hp");
         this.minDistance = this.rootNode.getChildByName("min_distance");
         this.maxDistance = this.rootNode.getChildByName("max_distance");
+        this.plusEnergyDestroyTowerValue = this.cancelBtn.getChildByName("val")
 
         this.towerTilepos = null;
 
@@ -45,6 +46,11 @@ let CircleTarget = cc.Node.extend({
 
     setTowerTilePos: function (x, y) {
         this.towerTilepos = cc.p(x, y);
+        let towerEntityId = this._findTowerEntityIdByTilePos(this.towerTilepos);
+        let towerEntity = EntityManager.getInstance().getEntity(towerEntityId);
+        if (towerEntity) {
+            this.plusEnergyDestroyTowerValue.setString(CARD_CONST[towerEntity.typeID].energy / 2);
+        }
     },
 
     destroy: function () {
@@ -54,9 +60,6 @@ let CircleTarget = cc.Node.extend({
     _handlerCancelBtn: function () {
         cc.error("cancel_btn");
         this.destroyTower(this.towerTilepos);
-        let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
-        //Fixme: add energy plus when destroy tower
-        deckEnergyProgress.plusEnergy(6);
         this.destroy();
     },
 

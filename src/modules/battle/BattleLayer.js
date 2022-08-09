@@ -83,6 +83,9 @@ let BattleLayer = cc.Layer.extend({
             case GameConfig.ENTITY_ID.SWORD_MAN:
                 EntityFactory.createSwordsmanMonster(pixelPos, mode);
                 break;
+            case GameConfig.ENTITY_ID.GIANT:
+                EntityFactory.createGiantMonster(pixelPos, mode);
+                break;
             case GameConfig.ENTITY_ID.NINJA:
                 EntityFactory.createNinjaMonster(pixelPos, mode);
                 break;

@@ -49,6 +49,7 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
     let attackSpeed = towerConfig.stat.attackSpeed / 1000;
     let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
     let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
+    let canTargetAirMonster = false;
 
     let frozenDuration = towerConfig.frozenDuration / 1000;
 
@@ -61,7 +62,7 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "support", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, attackDamage, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, attackSpeed, 0, [frozenEffect], bulletSpeed, bulletRadius);
+    let attackComponent = ComponentFactory.create(AttackComponent, attackDamage, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, attackSpeed, 0, [frozenEffect], bulletSpeed, bulletRadius, canTargetAirMonster);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bear.level.A);
 
     entity.addComponent(infoComponent)
@@ -152,6 +153,7 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     let attackSpeed = towerConfig.stat.attackSpeed / 1000;
     let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
     let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
+    let canTargetAirMonster = false;
     let towerEnergy = CARD_CONST[typeID].energy;
     let node = NodeFactory.createWizardNodeAnimation(attackRange);
 
@@ -159,7 +161,7 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, attackDamage, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, attackSpeed, 0, [], bulletSpeed, bulletRadius);
+    let attackComponent = ComponentFactory.create(AttackComponent, attackDamage, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, attackSpeed, 0, [], bulletSpeed, bulletRadius, canTargetAirMonster);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.wizard.level.A);
 
     entity.addComponent(infoComponent)
@@ -340,10 +342,10 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             break;
         }
         case GameConfig.ENTITY_ID.SNAKE_TOWER: {
+            let towerAbilityComponent = towerEntity.getComponent(TowerAbilityComponent);
             let towerConfig = TowerConfig.getAttackSpeedSnakeTowerConfigFromJson(towerLevel);
             let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
             let attackSpeedUpValue = towerConfig.attackSpeedUpValue;
-            let towerAbilityComponent = towerEntity.getComponent(TowerAbilityComponent);
             towerAbilityComponent.reset(buffRange, attackSpeedUpValue);
             if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
                 let snakeBurnHpAuraComponent = ComponentFactory.create(SnakeBurnHpAuraComponent, 0.01, 5, buffRange);

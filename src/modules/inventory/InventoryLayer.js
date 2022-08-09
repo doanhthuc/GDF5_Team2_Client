@@ -71,6 +71,8 @@ const InventoryLayer = cc.Node.extend({
         let cardSize = this.fakeCardImageFromCardCollection.cardBorderImg.getContentSize();
         let posY = cc.winSize.height - (this.headerHeight + this.battleDeckNode.heightNode + cardSize.height / 2 + 10);
         this.fakeCardImageFromCardCollection.setPosition(cc.winSize.width / 2, posY);
+        this.makeAllCardNodeShaking();
+        this.makeCarNodeShaking(this.fakeCardImageFromCardCollection);
     },
 
     onSelectCardInBattleDeckToSwap: function (cardModelFromBattleDeck) {
@@ -89,6 +91,8 @@ const InventoryLayer = cc.Node.extend({
         this.fakeCardImageFromCardCollection.setPosition(cardInCollectionWordPos);
         cardNodeInBattleDeck.setVisible(false);
         cardInCollection.setVisible(false);
+        this.stopAllCardNodeShaking();
+        this.stopCarNodeShaking(this.fakeCardImageFromCardCollection);
         this.fakeCardImageFromBattleDeck.runAction(cc.Sequence(cc.moveTo(0.3, cardInCollectionWordPos), cc.CallFunc(function () {
             this.fakeCardImageFromBattleDeck.setVisible(false);
             cardNodeInBattleDeck.setModel(cardModelFromCardCollection);
@@ -112,6 +116,8 @@ const InventoryLayer = cc.Node.extend({
     onCancelSelectCardBtnClick: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             this.isSelectingCardToBattleDeck = false;
+            this.stopAllCardNodeShaking();
+            this.stopCarNodeShaking(this.fakeCardImageFromCardCollection);
             this.cardCollectionNode.setVisible(true);
             this.fakeCardImageFromCardCollection.setVisible(false);
             this.cancelSelectBtn.setVisible(false);
@@ -122,10 +128,35 @@ const InventoryLayer = cc.Node.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             if (this.isSelectingCardToBattleDeck) {
                 this.isSelectingCardToBattleDeck = false;
+                this.stopAllCardNodeShaking();
+                this.stopCarNodeShaking(this.fakeCardImageFromCardCollection);
                 this.cardCollectionNode.setVisible(true);
                 this.fakeCardImageFromCardCollection.setVisible(false);
                 this.cancelSelectBtn.setVisible(false);
             }
         }
+    },
+
+    makeAllCardNodeShaking: function () {
+        for (let cardNode of this.cardNodeMap.values()) {
+            this.makeCarNodeShaking(cardNode);
+        }
+    },
+
+    stopAllCardNodeShaking: function () {
+        for (let cardNode of this.cardNodeMap.values()) {
+            this.stopCarNodeShaking(cardNode);
+        }
+    },
+
+    makeCarNodeShaking: function (cardNode) {
+        let rotateLeft = cc.RotateTo(0.2, -2, -2);
+        let rotateRight = cc.RotateTo(0.4, 4, 4);
+        cardNode.runAction(cc.Sequence(rotateLeft, rotateRight).repeatForever())
+    },
+
+    stopCarNodeShaking: function (cardNode) {
+        cardNode.stopAllActions();
+        cardNode.setRotation(0);
     }
 });
