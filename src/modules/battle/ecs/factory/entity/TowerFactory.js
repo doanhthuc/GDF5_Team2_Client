@@ -346,7 +346,6 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             let towerConfig = TowerConfig.getAttackSpeedSnakeTowerConfigFromJson(towerLevel);
             let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
             let attackSpeedUpValue = towerConfig.attackSpeedUpValue;
-            let towerAbilityComponent = towerEntity.getComponent(TowerAbilityComponent);
             towerAbilityComponent.reset(buffRange, attackSpeedUpValue);
             if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
                 let snakeBurnHpAuraComponent = ComponentFactory.create(SnakeBurnHpAuraComponent, 0.01, 5, buffRange);
