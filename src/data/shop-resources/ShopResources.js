@@ -8,6 +8,7 @@ const ShopResources = {
 
     BUY_CARD_POPUP_NODE: 'ui/shop/shopCardPopup.json',
     BUY_GOLD_POPUP_NODE: 'ui/shop/shopGoldPopup.json',
+    FAKE_CARD_IMAGE: 'ui/shop/fakeCardImage.json',
 
     SHOP_SECTION_TITLE_LOGIN_TXT: 'textures/lobby/lobby_shop_category_daily.png',
     SHOP_SECTION_TITLE_GOLD_TXT: 'textures/lobby/lobby_shop_category_gold.png',
