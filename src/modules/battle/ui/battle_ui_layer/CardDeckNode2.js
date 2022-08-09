@@ -156,7 +156,6 @@ const CardDeckNode2 = cc.Node.extend({
     _onTouchMoved: function (touch, event) {
         this.isDragging = true;
         let selectedCard = event.getCurrentTarget();
-        // cc.log("CardDeckNode2.js line 100: " + JSON.stringify(selectedCard))
         let touchPos = touch.getLocation();
         touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.PLAYER);
         let cardType = selectedCard.type;
@@ -172,6 +171,10 @@ const CardDeckNode2 = cc.Node.extend({
                 }
             }
         } else if (ValidatorECS.isTower(selectedCard.type) || ValidatorECS.isTrap(selectedCard.type)) {
+            if (ValidatorECS.isTower(selectedCard.type)) {
+                let tilePos = Utils.pixel2Tile(touchPos.x, touchPos.y, GameConfig.PLAYER);
+                BattleManager.getInstance().getBattleLayer().mapLayer.showMonsterPathWhenDragCard(tilePos);
+            }
             if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
                 this._createOrGetSprite(selectedCard, cardType, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(touchPos.x, touchPos.y, GameConfig.PLAYER);

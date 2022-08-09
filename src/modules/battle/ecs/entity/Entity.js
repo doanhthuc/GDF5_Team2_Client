@@ -9,7 +9,7 @@ let EntityECS = cc.Class.extend({
         this._active = true;
 
         this.mode = mode;
-        this.bitmask = 0;
+       // this.bitmask = 0;
     },
 
     addComponent: function (component) {
@@ -18,7 +18,7 @@ let EntityECS = cc.Class.extend({
         }
         component.setActive(true);
         this.components[component.typeID] = component;
-        this.bitmask = this.bitmask | (1 << component.typeID);
+        //this.bitmask = this.bitmask | (1 << component.typeID);
         return this;
     },
 
@@ -27,7 +27,7 @@ let EntityECS = cc.Class.extend({
         if (component) {
             ComponentManager.getInstance().remove(component);
             delete this.components[componentOrCls.typeID];
-            this.bitmask = this.bitmask & (~(1 << componentOrCls.typeID));
+        //    this.bitmask = this.bitmask & (~(1 << componentOrCls.typeID));
         }
         // tickManager.getTickData().deleteComponentData(component.id);
     },
@@ -39,14 +39,14 @@ let EntityECS = cc.Class.extend({
         return this.components[ComponentCls.typeID];
     },
 
-    _hasComponent: function (ComponentCls) {
-        return (this.bitmask & (1 << ComponentCls.typeID)) !== 0;
-    },
+    // _hasComponent: function (ComponentCls) {
+    //     // return (this.bitmask & (1 << ComponentCls.typeID)) !== 0;
+    // },
 
     hasAllComponent: function (...ComponentClss) {
         let c = 0;
         for (let cls of ComponentClss) {
-            if (this._hasComponent(cls)) {
+            if (this.getComponent(cls)) {
                 c++;
             }
         }
@@ -55,7 +55,7 @@ let EntityECS = cc.Class.extend({
 
     hasAnyComponent: function (...ComponentClss) {
         for (let cls of ComponentClss) {
-            if (this._hasComponent(cls)) {
+            if (this.getComponent(cls)) {
                 return true;
             }
         }

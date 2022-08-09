@@ -139,6 +139,7 @@ let CardDeckNode = cc.Node.extend({
     },
 
     _onTouchMoved: function (touch, event) {
+        //cc.log("cardDeckNode line 142")
         let selectedCard = event.getCurrentTarget();
         let touchPos = touch.getLocation();
         touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.PLAYER);
@@ -157,7 +158,6 @@ let CardDeckNode = cc.Node.extend({
         } else if (ValidatorECS.isTower(selectedCard.type) || ValidatorECS.isTrap(selectedCard.type)) {
             if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
                 this._createOrGetSprite(selectedCard, touch, GameConfig.PLAYER);
-                let tilePos = Utils.pixel2Tile(touchPos.x, touchPos.y, GameConfig.PLAYER);
                 let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER);
                 this.spriteDragManager[touch.getID()].setVisible(true);
                 this.spriteDragManager[touch.getID()].setPosition(pixelPos);
