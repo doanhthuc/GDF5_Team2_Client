@@ -60,6 +60,7 @@ let BattleLayer = cc.Layer.extend({
         this.bulletSystem = SystemFactory.create(BulletSystem);
         this.abilitySystem = SystemFactory.create(AbilitySystem);
         this.spriteSheetAnimationSystem = SystemFactory.create(SpriteSheetAnimationSystem);
+        this.towerSpecialSkillSystem = SystemFactory.create(TowerSpecialSkillSystem);
     },
 
     update: function (dt) {

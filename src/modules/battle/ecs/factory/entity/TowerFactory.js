@@ -238,7 +238,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
     let towerInfoComponent = towerEntity.getComponent(TowerInfoComponent);
     towerInfoComponent.level = towerLevel;
     switch (towerEntity.typeID) {
-        case GameConfig.ENTITY_ID.CANNON_TOWER:{
+        case GameConfig.ENTITY_ID.CANNON_TOWER: {
             let attackComponent = towerEntity.getComponent(AttackComponent);
             let towerConfig = TowerConfig.getTowerConfigFromJson(towerEntity.typeID, towerLevel);
             let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
@@ -249,12 +249,13 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             cc.log("[TowerFactory.js line 275 ] attackDamage: " + attackDamage)
             attackComponent.updateAttackStatistic(attackDamage, attackRange, attackSpeed, [], bulletSpeed, bulletRadius);
             //Add BulletSkill
-            let frozenEffect = ComponentFactory.create(FrozenEffect,0.2);
-            attackComponent.addEffect(frozenEffect);
+            if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
+                let frozenEffect = ComponentFactory.create(FrozenEffect, 0.2);
+                attackComponent.addEffect(frozenEffect);
+            }
             break;
         }
-        case GameConfig.ENTITY_ID.WIZARD_TOWER:
-        {
+        case GameConfig.ENTITY_ID.WIZARD_TOWER: {
             let attackComponent = towerEntity.getComponent(AttackComponent);
             let towerConfig = TowerConfig.getTowerConfigFromJson(towerEntity.typeID, towerLevel);
             let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
@@ -265,8 +266,10 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             cc.log("[TowerFactory.js line 275 ] attackDamage: " + attackDamage)
             attackComponent.updateAttackStatistic(attackDamage, attackRange, attackSpeed, [], bulletSpeed, bulletRadius);
             //Add BulletSkill
-            let wizardBulletSkill = ComponentFactory.create(WizardBulletSkillComponent,5);
-            attackComponent.addEffect(wizardBulletSkill);
+            if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
+                let wizardBulletSkill = ComponentFactory.create(WizardBulletSkillComponent, 5);
+                attackComponent.addEffect(wizardBulletSkill);
+            }
             break;
         }
         case GameConfig.ENTITY_ID.FROG_TOWER: {
@@ -280,8 +283,10 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             cc.log("[TowerFactory.js line 275 ] attackDamage: " + attackDamage)
             attackComponent.updateAttackStatistic(attackDamage, attackRange, attackSpeed, [], bulletSpeed, bulletRadius);
             //Add BulletSkill
-            let frogBulletSkill = ComponentFactory.create(FrogBulletSkillComponent);
-            attackComponent.addEffect(frogBulletSkill);
+            if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
+                let frogBulletSkill = ComponentFactory.create(FrogBulletSkillComponent);
+                attackComponent.addEffect(frogBulletSkill);
+            }
             break;
         }
         case GameConfig.ENTITY_ID.BEAR_TOWER: {
@@ -296,8 +301,10 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             let frozenEffect = ComponentFactory.create(FrozenEffect, frozenDuration);
             attackComponent.updateAttackStatistic(attackDamage, attackRange, attackSpeed, [frozenEffect], bulletSpeed, bulletRadius);
             //Add BulletSkill
-            let damageAmplifyComponent = ComponentFactory.create(DamageAmplifyComponent);
-            attackComponent.addEffect(damageAmplifyComponent);
+            if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
+                let damageAmplifyComponent = ComponentFactory.create(DamageAmplifyComponent, 1.5);
+                attackComponent.addEffect(damageAmplifyComponent);
+            }
             break;
         }
         case GameConfig.ENTITY_ID.BUNNY_TOWER: {
@@ -313,8 +320,10 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             let slowEffect = ComponentFactory.create(SlowEffect, slowDuration, slowValue);
             attackComponent.updateAttackStatistic(attackDamage, attackRange, attackSpeed, [slowEffect], bulletSpeed, bulletRadius);
             //Add BulletSkill
-            let poisonEffect = ComponentFactory.create(PoisonEffect,2,3);
-            attackComponent.addEffect(poisonEffect);
+            if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
+                let poisonEffect = ComponentFactory.create(PoisonEffect, 2, 3);
+                attackComponent.addEffect(poisonEffect);
+            }
             break;
         }
         case GameConfig.ENTITY_ID.GOAT_TOWER: {
@@ -324,8 +333,10 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             let damageUpValue = towerConfig.damageUpValue;
             towerAbilityComponent.reset(buffRange, damageUpValue);
             //Add SpecialSkill
-            let snakeBurnHpAuraComponent = ComponentFactory.create(SnakeBurnHpAuraComponent);
-            towerEntity.addEffect(snakeBurnHpAuraComponent);
+            if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
+                let goatSlowAuraComponent = ComponentFactory.create(GoatSlowAuraComponent, 0.2, buffRange);
+                towerEntity.addComponent(goatSlowAuraComponent);
+            }
             break;
         }
         case GameConfig.ENTITY_ID.SNAKE_TOWER: {
@@ -334,8 +345,10 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
             let attackSpeedUpValue = towerConfig.attackSpeedUpValue;
             let towerAbilityComponent = towerEntity.getComponent(TowerAbilityComponent);
             towerAbilityComponent.reset(buffRange, attackSpeedUpValue);
-            let goatSlowAuraComponent = ComponentFactory.create(GoatSlowAuraComponent);
-            towerEntity.addEffect(goatSlowAuraComponent);
+            if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
+                let snakeBurnHpAuraComponent = ComponentFactory.create(SnakeBurnHpAuraComponent, 0.01, 5, buffRange);
+                towerEntity.addComponent(snakeBurnHpAuraComponent);
+            }
             break;
         }
     }

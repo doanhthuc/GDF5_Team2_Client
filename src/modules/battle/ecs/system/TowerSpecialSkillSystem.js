@@ -14,42 +14,40 @@ let TowerSpecialSkillSystem = System.extend({
         updateData: function () {
             const tick = tickManager.getTickRate() / 1000;
             this._handleSnakeSpecialSkill(tick);
-            this._handleSpawnMinionComponent(tick);
-            this._handleHealingAbility(tick);
-            this._handleBuffAbility(tick);
+            this._handleGoatSpecialSkill(tick);
         },
 
-    _handleSnakeSpecialSkill: function () {
-            let entityList = EntityManager.getInstance().getEntitiesHasComponents(UnderGroundComponent);
-            for (let entity of entityList) {
-                let lifeComponent = entity.getComponent(LifeComponent);
-                let underGroundComponent = entity.getComponent(UnderGroundComponent);
-                let positionComponent = entity.getComponent(PositionComponent);
-                let frozenEffect = entity.getComponent(FrozenEffect);
-
-                // frozen monster ==> monster can't exec under ground ability
-                if (frozenEffect && frozenEffect.countdown > 0) {
-                    continue;
-                }
-
-                //check if the Monster have Position Component
-                if (positionComponent) {
-                    if (underGroundComponent.isInGround === false) {
-                        if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
-                            underGroundComponent.trigger += 1;
-                            underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 2;
-                            underGroundComponent.isInGround = true;
-
-                            BattleAnimation.addAnimationUnderGround(entity);
-                        }
-                    } else {
-                        if (underGroundComponent.disableMoveDistance <= positionComponent.moveDistance) {
-                            underGroundComponent.isInGround = false;
-                            BattleAnimation.removeAnimationUnderGround(entity);
-                        }
+        _handleSnakeSpecialSkill: function (tick) {
+            let towerList = EntityManager.getInstance().getEntitiesHasComponents(SnakeBurnHpAuraComponent);
+            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, LifeComponent, PositionComponent);
+            for (let tower of towerList) {
+                let snakeBurnHpAura = tower.getComponent(SnakeBurnHpAuraComponent);
+                for (let monster of monsterList) {
+                    if (monster.mode !== tower.mode) continue;
+                    if (this._distanceFrom(tower, monster) <= snakeBurnHpAura.range) {
+                        let lifeComponent = monster.getComponent(LifeComponent);
+                        let lostHp = Math.min(snakeBurnHpAura.burnRate * lifeComponent.maxHP, snakeBurnHpAura.maxBurnHP) * tick;
+                        lifeComponent.hp -= lostHp;
                     }
                 }
             }
+
+        },
+
+        _handleGoatSpecialSkill: function (tick) {
+            let towerList = EntityManager.getInstance().getEntitiesHasComponents(GoatSlowAuraComponent);
+            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
+            for (let tower of towerList) {
+                let goatSlowAura = tower.getComponent(GoatSlowAuraComponent);
+                for (let monster of monsterList) {
+                    if (monster.mode !== tower.mode) continue;
+                    if (this._distanceFrom(tower, monster) <= goatSlowAura.range) {
+                        let goatSlowEffect = ComponentFactory.create(GoatSlowEffectComponent, goatSlowAura.percent)
+                        monster.addComponent(goatSlowEffect);
+                    }
+                }
+            }
+
         },
 
         _distanceFrom: function (tower, monster) {
@@ -60,5 +58,5 @@ let TowerSpecialSkillSystem = System.extend({
 
     })
 ;
-AbilitySystem.typeID = GameConfig.SYSTEM_ID.ABILITY;
-SystemManager.getInstance().registerClass(AbilitySystem);
+TowerSpecialSkillSystem.typeID = GameConfig.SYSTEM_ID.TOWER_SPECIAL_SKILL;
+SystemManager.getInstance().registerClass(TowerSpecialSkillSystem);

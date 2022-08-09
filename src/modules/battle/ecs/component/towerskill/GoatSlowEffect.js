@@ -8,11 +8,11 @@ let GoatSlowEffectComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(GoatSlowEffectComponent,this.percent);
+        return ComponentFactory.create(GoatSlowEffectComponent, this.percent);
     },
 
     reset: function (percent) {
-        this.slowRate = percent;
+        this.percent = percent;
     },
 });
 GoatSlowEffectComponent.typeID = GameConfig.COMPONENT_ID.GOAT_SLOW_EFFECT;

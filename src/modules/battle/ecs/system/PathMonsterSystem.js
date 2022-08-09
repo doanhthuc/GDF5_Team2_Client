@@ -32,7 +32,7 @@ let PathMonsterSystem = System.extend({
             velocityComponent.speedY = newVelocity.speedY;
 
             //Update Direction for Monster
-            if (entity._hasComponent(SpriteSheetAnimationComponent) && entity.hasAnyComponent(MonsterInfoComponent)) {
+            if (entity.hasAnyComponent(SpriteSheetAnimationComponent) && entity.hasAnyComponent(MonsterInfoComponent)) {
                 let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
                 let state = this._getMovingDirection(entity);
                 if (state !== spriteComponent.getCurrentState()) {

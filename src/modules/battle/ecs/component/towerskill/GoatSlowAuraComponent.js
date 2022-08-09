@@ -1,18 +1,19 @@
 let GoatSlowAuraComponent = Component.extend({
-    name: "PoisonComponent",
+    name: "GoatSlowAura",
     typeID: GameConfig.COMPONENT_ID.GOAT_SLOW_AURA,
 
-    ctor: function (range) {
+    ctor: function (percent, range) {
         this._super();
-        this.reset(range);
+        this.reset(percent, range);
     },
 
     clone: function () {
-        return ComponentFactory.create(GoatSlowAuraComponent,range);
+        return ComponentFactory.create(GoatSlowAuraComponent, this.percent, this.range);
     },
 
-    reset: function (range) {
+    reset: function (percent, range) {
         this.range = range;
+        this.percent = percent;
     },
 });
 GoatSlowAuraComponent.typeID = GameConfig.COMPONENT_ID.GOAT_SLOW_AURA;
