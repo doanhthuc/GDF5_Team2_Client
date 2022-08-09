@@ -147,7 +147,7 @@ Utils.getDirectionOf2Tile = function (currentPos, nextPost) {
     return direction1 + direction2;
 };
 
-    Utils.calculateVelocityVector = function (startPos, targetPos, speed) {
+Utils.calculateVelocityVector = function (startPos, targetPos, speed) {
     let Xa = startPos.x, Ya = startPos.y, Xb = targetPos.x, Yb = targetPos.y;
     if (Xa - Xb === 0)
         return {speedX: 0, speedY: Math.sign(Yb - Ya) * speed};
@@ -450,7 +450,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
                     cellY = (tileArr[i].y - 1) * cellsEachTile + cellsEachTile - 1;
                     beforeCellX = (beforeCellY + magicNumber) % moduleCellRange + cellBound;
 
-                    if (cellArr.length != 0) {
+                    if (cellArr.length !== 0) {
                         let lastCell = cellArr[cellArr.length - 1];
                         let nextCell = Utils.cell2Pixel(cellX, cellY, mode);
                         let divideGapCellPath = Utils.divideCellPath(lastCell, nextCell, divideAmount);
@@ -527,6 +527,7 @@ Utils.tileArray2PixelCellArray = function (tileArr, mode) {
 
         }
     }
+    cellArr.push(Utils.tile2Pixel(GameConfig.HOUSE_POSITION.x, GameConfig.HOUSE_POSITION.y, mode));
     return cellArr;
 }
 Utils.divideCellPath = function (pointA, pointB, divideAmount) {

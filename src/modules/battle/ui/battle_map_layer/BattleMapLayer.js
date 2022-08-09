@@ -130,6 +130,7 @@ let BattleMapLayer = cc.Layer.extend({
         }
     },
     showMonsterPathWhenDragCard: function (tilePos) {
+        if (tilePos.y < 0) return;
         while (this._spriteContainerActive.length > 0) {
             let activeSp = this._spriteContainerActive.pop();
             this._spriteContainerInActive.push(activeSp);
