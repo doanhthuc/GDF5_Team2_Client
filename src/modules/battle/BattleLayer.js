@@ -211,14 +211,6 @@ let BattleLayer = cc.Layer.extend({
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);
         mapObject.getObjectInTileByTilePos(tilePos).setEntityId(entityId);
-        // let tileObject = mapObject[tilePos.x][tilePos.y];
-        // if (tileObject.tower) {
-        //     tileObject.tower.entityId = entityId;
-        // } else {
-        //     tileObject.tower = {
-        //         entityId: entityId,
-        //     }
-        // }
     },
 
     dropSpell: function (spellId, pixelPos, mode) {

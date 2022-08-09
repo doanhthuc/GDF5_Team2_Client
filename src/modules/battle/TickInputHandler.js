@@ -22,7 +22,6 @@ let TickInputHandler = cc.Class.extend({
                 this._handleDropSpell(cmd, packet);
                 break;
             case gv.CMD.OPPONENT_DROP_SPELL:
-
                 this._handleOpponentDropSpell(cmd, packet);
                 break;
             case gv.CMD.CHANGE_TOWER_STRATEGY:
@@ -49,14 +48,9 @@ let TickInputHandler = cc.Class.extend({
     _handlePutTower: function (cmd, packet) {
         let battleData = BattleManager.getInstance().getBattleData();
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
-        playerObjectMap.putTowerIntoMap(-1, packet.towerId, packet.towerLevel, cc.p(packet.x, packet.y));
-        // let cellObject = playerObjectMap[packet.x][packet.y];
-        // cellObject.objectInCellType = ObjectInCellType.TOWER;
-        // if (!cellObject.tower) {
-        //     cellObject.tower = {};
-        // }
-        // cellObject.tower.towerId = packet.towerId;
-        // cellObject.tower.level = packet.towerLevel;
+        let tilePos = cc.p(packet.x, packet.y);
+        playerObjectMap.putTowerIntoMap(-1, packet.towerId, packet.towerLevel, tilePos);
+
         BattleManager.getInstance().getBattleLayer().buildTower(packet.towerId, cc.p(packet.x, packet.y), GameConfig.PLAYER);
     },
 
@@ -64,16 +58,8 @@ let TickInputHandler = cc.Class.extend({
         let tilePos = cc.p(packet.tileX, packet.tileY);
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentMap = battleData.getMapObject(GameConfig.OPPONENT);
+        cc.log("_handleOpponentPutTower: towerType: " + packet.towerId + " level: " + packet.towerLevel + " tilePos: " + JSON.stringify(tilePos));
         opponentMap.putTowerIntoMap(-1, packet.towerId, packet.towerLevel, tilePos);
-        // let cellObject = opponentMap[packet.tileX][packet.tileY];
-        // cellObject.objectInCellType = ObjectInCellType.TOWER;
-        // if (!cellObject.tower) {
-        //     cellObject.tower = {};
-        // }
-        // cellObject.tower = {
-        //     towerId: packet.towerId,
-        //     level: packet.towerLevel,
-        // };
         OpponentAction.getInstance().buildTower(packet.towerId, tilePos);
     },
 
@@ -83,8 +69,6 @@ let TickInputHandler = cc.Class.extend({
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let tower = playerObjectMap.getTowerInTile(tilePos);
         tower.setLevel(packet.towerLevel);
-        // let cellObject = playerObjectMap[packet.tileX][packet.tileY];
-        // cellObject.tower.level = packet.towerLevel;
         EntityFactory.onUpdateTowerLevel(tower.getEntityId(), packet.towerLevel);
     },
 
@@ -94,8 +78,7 @@ let TickInputHandler = cc.Class.extend({
         let tilePos = cc.p(packet.tileX, packet.tileY);
         let tower = opponentObjectMap.getTowerInTile(tilePos);
         tower.setLevel(packet.towerLevel);
-        // let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
-        // cellObject.tower.level = packet.towerLevel;
+
         EntityFactory.onUpdateTowerLevel(tower.getEntityId(), packet.towerLevel);
     },
 
@@ -126,8 +109,8 @@ let TickInputHandler = cc.Class.extend({
         cc.log('[BattleNetwork.js line 197] received change tower strategy packet player: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
-        let tileObject = playerObjectMap[packet.tileX][packet.tileY];
-        let entityId = tileObject.tower.entityId;
+        let tilePos = cc.p(packet.tileX, packet.tileY);
+        let entityId = playerObjectMap.getEntityIdByTilePos(tilePos);
         let tower = EntityManager.getInstance().getEntity(entityId);
         let attackComponent = tower.getComponent(AttackComponent);
         attackComponent.setTargetStrategy(packet.strategyId);
@@ -137,8 +120,8 @@ let TickInputHandler = cc.Class.extend({
         cc.log('[BattleNetwork.js line 201] received change tower strategy packet opponent: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
-        let tileObject = opponentObjectMap[packet.tileX][packet.tileY];
-        let entityId = tileObject.tower.entityId;
+        let tilePos = cc.p(packet.tileX, packet.tileY);
+        let entityId = opponentObjectMap.getEntityIdByTilePos(tilePos);
         let tower = EntityManager.getInstance().getEntity(entityId);
         let attackComponent = tower.getComponent(AttackComponent);
         attackComponent.setTargetStrategy(packet.strategyId);
@@ -149,17 +132,19 @@ let TickInputHandler = cc.Class.extend({
         let battleData = BattleManager.getInstance().getBattleData();
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let tilePos = cc.p(packet.tileX, packet.tileY);
-        let cellObject = playerObjectMap[tilePos.x][tilePos.y];
-        let towerEntityId = cellObject.tower.entityId;
+        let towerInTileObject = playerObjectMap.getTowerInTile(tilePos);
+        let towerEntityId = towerInTileObject.getEntityId();
         let towerEntity = EntityManager.getInstance().getEntity(towerEntityId);
+
         EntityManager.destroy(towerEntity);
+
         let pos = Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER);
-        let plusEnergyValue = CARD_CONST[cellObject.tower.towerId].energy / 2;
+        let plusEnergyValue = CARD_CONST[towerInTileObject.getType()].energy / 2;
         BattleAnimation.animationPlusEnergy(pos, plusEnergyValue, GameConfig.PLAYER);
         let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
         deckEnergyProgress.plusEnergy(plusEnergyValue);
-        cellObject.objectInCellType = ObjectInCellType.NONE;
-        cellObject.tower = null;
+        playerObjectMap.destroyTowerInMapObject(tilePos);
+
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.DESTROY_TOWER, {pos: tilePos, mode: GameConfig.PLAYER});
     },
@@ -169,12 +154,12 @@ let TickInputHandler = cc.Class.extend({
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
         let tilePos = cc.p(packet.tileX, packet.tileY);
-        let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
-        let towerEntityId = cellObject.tower.entityId;
+
+        let towerEntityId = opponentObjectMap.getEntityIdByTilePos(tilePos);
         let towerEntity = EntityManager.getInstance().getEntity(towerEntityId);
         EntityManager.destroy(towerEntity);
-        cellObject.objectInCellType = ObjectInCellType.NONE;
-        cellObject.tower = null;
+
+        opponentObjectMap.destroyTowerInMapObject(tilePos);
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.DESTROY_TOWER, {pos: tilePos, mode: GameConfig.PLAYER});
     },

@@ -9,7 +9,24 @@ const BattleMapObject = cc.Class.extend({
     },
 
     putTowerIntoMap: function (entityId, towerType, towerLevel, tilePos) {
-        return this.battleMap[tilePos.x][tilePos.y].buildTower(entityId, towerType, towerLevel);
+        return this.battleMap[tilePos.x][tilePos.y].buildTower(entityId, towerType, towerLevel, tilePos);
+    },
+
+    destroyTowerInMapObject: function (tilePos) {
+        return this.getTileObjectByTilePos(tilePos).destroyTower();
+    },
+
+    convertBattleMapObjectToSimpleMap: function () {
+        let simpleMap = [];
+        for (let i = 0; i < this.height; i++) {
+            simpleMap[i] = new Array(this.width);
+        }
+        for (let i = 0; i < this.height; i++) {
+            for (let j = 0; j < this.width; j++) {
+                simpleMap[i][j] = this.battleMap[i][j].getObjectInTileType();
+            }
+        }
+        return simpleMap;
     },
 
     isHavingTowerInTile: function (tilePos) {
@@ -17,10 +34,14 @@ const BattleMapObject = cc.Class.extend({
     },
 
     getTowerInTile: function (tilePos) {
-        if (this.objectInTileType === ObjectInCellType.TOWER) {
+        if (this.getObjectInTileByTilePos(tilePos).getObjectInTileType() === ObjectInCellType.TOWER) {
             return this.battleMap[tilePos.x][tilePos.y].getObjectInTile();
         }
         return null;
+    },
+
+    getEntityIdByTilePos: function (tilePos) {
+        return this.battleMap[tilePos.x][tilePos.y].getObjectInTile().getEntityId();
     },
 
     setTileObject: function (x, y, tileObject) {
@@ -29,6 +50,10 @@ const BattleMapObject = cc.Class.extend({
 
     getTileObject: function (x, y) {
         return this.battleMap[x][y];
+    },
+
+    getTileObjectByTilePos: function (tilePos) {
+        return this.battleMap[tilePos.x][tilePos.y];
     },
 
     getBattleMap: function () {

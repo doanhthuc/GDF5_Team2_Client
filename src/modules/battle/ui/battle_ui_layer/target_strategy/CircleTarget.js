@@ -90,8 +90,8 @@ let CircleTarget = cc.Node.extend({
     _findTowerEntityIdByTilePos: function (tilePos, mode = GameConfig.PLAYER) {
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);
-        let tileObject = mapObject[tilePos.x][tilePos.y];
-        return tileObject.tower.entityId;
+        let tower = mapObject.getTowerInTile(tilePos);
+        return tower.getEntityId();
     },
 
     changeTowerTargetStrategy: function (strategy, tilePos = this.towerTilepos) {

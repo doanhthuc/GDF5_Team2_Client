@@ -4,17 +4,16 @@ const TileObject = cc.Class.extend({
         this.tileType = tileType;
         this.objectInTileType = objectInTileType;
         if (!objectInTile) {
-            cc.log("objectInTile is null");
             this.objectInTile = new ObjectInTile(ObjectInCellType.NONE);
         } else {
             this.objectInTile = objectInTile;
         }
     },
 
-    buildTower: function (entityId, towerType, towerLevel) {
+    buildTower: function (entityId, towerType, towerLevel, tilePos) {
         if (this.objectInTile.getObjectInTileType() === ObjectInCellType.NONE) {
             this.objectInTileType = ObjectInCellType.TOWER;
-            this.objectInTile = new Tower(towerType, towerLevel, entityId);
+            this.objectInTile = new Tower(towerType, towerLevel, tilePos, entityId);
         } else {
             cc.log("Can't build tower on this tile");
         }
