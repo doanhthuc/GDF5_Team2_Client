@@ -39,6 +39,7 @@ let TickManager = cc.Class.extend({
         battleLayer.getTimerNode().updateData();
         battleLayer.resetSystem.runUpdateData();
         battleLayer.abilitySystem.runUpdateData();
+        battleLayer.towerSpecialSkillSystem.runUpdateData();
         battleLayer.effectSystem.runUpdateData();
         battleLayer.attackSystem.runUpdateData();
         battleLayer.renderSystem.runUpdateData();
