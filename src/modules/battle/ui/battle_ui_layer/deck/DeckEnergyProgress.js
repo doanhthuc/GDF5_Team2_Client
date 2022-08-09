@@ -31,7 +31,7 @@ let DeckEnergyProgress = cc.Node.extend({
 
     plusEnergy: function (plusEnergy) {
         let energy = this.battleData.getCurrentEnergy(GameConfig.PLAYER) + plusEnergy;
-        if (energy <= this.battleData.getMaxEnergy(GameConfig.PLAYER)) {
+        if (energy > this.battleData.getMaxEnergy(GameConfig.PLAYER)) {
             this.setCurrentEnergy(this.battleData.getMaxEnergy(GameConfig.PLAYER));
         }
     },

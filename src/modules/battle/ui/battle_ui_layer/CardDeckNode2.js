@@ -87,7 +87,7 @@ const CardDeckNode2 = cc.Node.extend({
             this.onCardPutIntoMap(data.cardId);
             let cardEnergy = CARD_CONST[data.cardId].energy;
             let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
-            deckEnergyProgress.minusEnergy(cardEnergy);
+            // deckEnergyProgress.minusEnergy(cardEnergy);
             // this.setNextCardSlotVisible(false);
         }
     },
@@ -156,7 +156,6 @@ const CardDeckNode2 = cc.Node.extend({
     _onTouchMoved: function (touch, event) {
         this.isDragging = true;
         let selectedCard = event.getCurrentTarget();
-        cc.log("CardDeckNode2.js line 100: " + JSON.stringify(selectedCard))
         let touchPos = touch.getLocation();
         touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.PLAYER);
         let cardType = selectedCard.type;

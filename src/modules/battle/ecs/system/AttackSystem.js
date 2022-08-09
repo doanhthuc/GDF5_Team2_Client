@@ -29,6 +29,10 @@ let AttackSystem = System.extend({
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
                 for (let monster of monsterList) {
+                    let monsterInfo = monster.getComponent(MonsterInfoComponent);
+                    if (!attackComponent.canTargetAirMonster && monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) {
+                        continue;
+                    }
                     let underGroundComponent = monster.getComponent(UnderGroundComponent);
                     if ((underGroundComponent == null) || underGroundComponent.isInGround === false) {
                         if (monster.getActive() && monster.mode === tower.mode
@@ -57,9 +61,12 @@ let AttackSystem = System.extend({
                             let distance = this._distanceFrom(tower, targetMonster);
                             let k = attackComponent.range / distance;
                             let destination = new PositionComponent(k * (monsterPos.x - towerPos.x) + towerPos.x, k * (monsterPos.y - towerPos.y) + towerPos.y);
-                            EntityFactory.createBullet(tower.typeID, towerPos, null, destination, clonedEffects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius);
+                            EntityFactory.createBullet(tower.typeID, towerPos, null, destination, clonedEffects,
+                                tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius, attackComponent.canTargetAirMonster);
                         } else {
-                            EntityFactory.createBullet(tower.typeID, towerPos, targetMonster, cc.p(monsterPos.x, monsterPos.y), clonedEffects, tower.mode, attackComponent.bulletSpeed, attackComponent.bulletRadius)
+                            EntityFactory.createBullet(tower.typeID, towerPos, targetMonster,
+                                cc.p(monsterPos.x, monsterPos.y), clonedEffects, tower.mode, attackComponent.bulletSpeed,
+                                attackComponent.bulletRadius, attackComponent.canTargetAirMonster);
                         }
                         attackComponent.countdown = attackComponent.speed;
                     }

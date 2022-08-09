@@ -44,6 +44,7 @@ const CardDeckSlot2 = cc.Node.extend({
         this.setBackground(cardAsset.background);
         this.setCardImg(cardAsset.cardImage);
         this.setEnergy(cardAsset.energy);
+        this.cardBorderImg.setTexture(CARD_RANK[getRankCharacter(this.level)].BORDER);
     },
 
     setCardImg: function (cardImg) {

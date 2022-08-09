@@ -18,6 +18,7 @@ gv.CMD.OPPONENT_DESTROY_TOWER = 5015;
 gv.CMD.GET_BATTLE_INFO = 5016;
 gv.CMD.END_BATTLE = 5017;
 gv.CMD.GET_BATTLE_DECK_IN_BATTLE = 5018;
+gv.CMD.BATTLE_ERROR = 5019;
 BattleNetwork = BattleNetwork || {};
 
 BattleNetwork.packetMap = {};
@@ -221,7 +222,7 @@ BattleNetwork.packetMap[gv.CMD.PUT_TOWER] = fr.InPacket.extend({
     clone: function () {
         let data = {};
         data.error = this.error;
-        data.towerId =this.towerId;
+        data.towerId = this.towerId;
         data.towerLevel = this.towerLevel;
         data.x = this.x;
         data.y = this.y;
@@ -248,7 +249,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TOWER] = fr.InPacket.extend({
         let data = {};
 
         data.towerId = this.towerId;
-        data.towerLevel =this.towerLevel;
+        data.towerLevel = this.towerLevel;
         data.tileX = this.tileX;
         data.tileY = this.tileY;
         data.tickNumber = this.tickNumber;
@@ -263,18 +264,21 @@ BattleNetwork.packetMap[gv.CMD.UPGRADE_TOWER] = fr.InPacket.extend({
     },
 
     readData: function () {
-        this.towerId = this.getInt();
-        this.towerLevel = this.getInt();
-        this.tileX = this.getInt();
-        this.tileY = this.getInt();
-        this.tickNumber = this.getInt();
+        if (this.getError() === 0) {
+            this.towerId = this.getInt();
+            this.towerLevel = this.getInt();
+            this.tileX = this.getInt();
+            this.tileY = this.getInt();
+            this.tickNumber = this.getInt();
+        }
+        else this.error = this.getError();
     },
 
     clone: function () {
         let data = {};
 
         data.towerId = this.towerId;
-        data.towerLevel =this.towerLevel;
+        data.towerLevel = this.towerLevel;
         data.tileX = this.tileX;
         data.tileY = this.tileY;
         data.tickNumber = this.tickNumber;
@@ -300,7 +304,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_UPGRADE_TOWER] = fr.InPacket.extend({
         let data = {};
 
         data.towerId = this.towerId;
-        data.towerLevel =this.towerLevel;
+        data.towerLevel = this.towerLevel;
         data.tileX = this.tileX;
         data.tileY = this.tileY;
         data.tickNumber = this.tickNumber;
@@ -385,7 +389,7 @@ BattleNetwork.packetMap[gv.CMD.DROP_SPELL] = fr.InPacket.extend({
         let data = {};
 
         data.spellId = this.spellId;
-        data.spellLevel =this.spellLevel;
+        data.spellLevel = this.spellLevel;
         data.pixelX = this.pixelX;
         data.pixelY = this.pixelY;
         data.tickNumber = this.tickNumber;
@@ -411,7 +415,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_DROP_SPELL] = fr.InPacket.extend({
         let data = {};
 
         data.spellId = this.spellId;
-        data.spellLevel =this.spellLevel;
+        data.spellLevel = this.spellLevel;
         data.pixelX = this.pixelX;
         data.pixelY = this.pixelY;
         data.tickNumber = this.tickNumber;
@@ -435,7 +439,7 @@ BattleNetwork.packetMap[gv.CMD.PUT_TRAP] = fr.InPacket.extend({
         let data = {};
 
         data.tilePosX = this.tilePosX;
-        data.tilePosY =this.tilePosY;
+        data.tilePosY = this.tilePosY;
         data.tickNumber = this.tickNumber;
 
         return data;
@@ -457,7 +461,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_PUT_TRAP] = fr.InPacket.extend({
         let data = {};
 
         data.tilePosX = this.tilePosX;
-        data.tilePosY =this.tilePosY;
+        data.tilePosY = this.tilePosY;
         data.tickNumber = this.tickNumber;
 
         return data;
@@ -480,7 +484,7 @@ BattleNetwork.packetMap[gv.CMD.CHANGE_TOWER_STRATEGY] = fr.InPacket.extend({
         let data = {};
 
         data.tileX = this.tileX;
-        data.tileY =this.tileY;
+        data.tileY = this.tileY;
         data.strategyId = this.strategyId;
         data.tickNumber = this.tickNumber;
 
@@ -504,7 +508,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONET_CHANGE_TOWER_STRATEGY] = fr.InPacket.exte
         let data = {};
 
         data.tileX = this.tileX;
-        data.tileY =this.tileY;
+        data.tileY = this.tileY;
         data.strategyId = this.strategyId;
         data.tickNumber = this.tickNumber;
 
@@ -527,7 +531,7 @@ BattleNetwork.packetMap[gv.CMD.DESTROY_TOWER] = fr.InPacket.extend({
         let data = {};
 
         data.tileX = this.tileX;
-        data.tileY =this.tileY;
+        data.tileY = this.tileY;
         data.tickNumber = this.tickNumber;
 
         return data;
@@ -549,7 +553,7 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_DESTROY_TOWER] = fr.InPacket.extend({
         let data = {};
 
         data.tileX = this.tileX;
-        data.tileY =this.tileY;
+        data.tileY = this.tileY;
         data.tickNumber = this.tickNumber;
 
         return data;
@@ -615,3 +619,13 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_DECK_IN_BATTLE] = fr.InPacket.extend({
         }
     }
 });
+
+BattleNetwork.packetMap[gv.CMD.BATTLE_ERROR] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.errorMessage= this.getString();
+    }
+})

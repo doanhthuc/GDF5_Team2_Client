@@ -3,6 +3,10 @@ const CardDeckListData = cc.Class.extend({
         this.cardDeckList = battleDeckList || [];
     },
 
+    setCardDeckList: function (cardDeckList) {
+        this.cardDeckList = cardDeckList;
+    },
+
     getNextCardId: function () {
         if (this.cardDeckList.length < 0) {
             return null;
@@ -19,10 +23,6 @@ const CardDeckListData = cc.Class.extend({
 
     pushUsedCardIntoDeck: function (card) {
         this.cardDeckList.push(card);
-    },
-
-    setCardDeckList: function (cardList) {
-        this.cardDeckList = cardList;
     },
 
     getFirst4CardId: function () {
