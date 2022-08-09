@@ -311,10 +311,12 @@ BattleNetwork.packetMap[gv.CMD.OPPONENT_UPGRADE_TOWER] = fr.InPacket.extend({
 
 BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
     ctor: function () {
+        cc.log("44444444444444444444444444444444444444444")
         this._super();
     },
 
     readData: function () {
+        cc.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 11111")
         this.playerBattleMapObject = this._unpackMapObject();
         this.opponentBattleMapObject = this._unpackMapObject();
     },
@@ -322,45 +324,63 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
     _unpackMapObject: function () {
         let mapHeight = this.getInt();
         let mapWidth = this.getInt();
-        let mapObject = new Array(mapHeight);
+        let battleMapObject = new BattleMapObject(mapHeight, mapWidth);
+        let battleMap = battleMapObject.getBattleMap();
+        // let mapObject = new Array(mapHeight);
         for (let i = 0; i < mapHeight; i++) {
-            mapObject[i] = new Array(mapWidth);
+            // mapObject[i] = new Array(mapWidth);
             for (let j = 0; j < mapWidth; j++) {
-                mapObject[i][j] = this._unpackCellObject();
-
+                // mapObject[i][j] = this._unpackTileObject();
+                battleMap[i][j] = this._unpackTileObject();
             }
         }
-        return mapObject;
+        cc.log("battleMapObject: " + JSON.stringify(battleMapObject));
+        return battleMapObject;
     },
 
-    _unpackCellObject: function () {
-        let cellObject = {
-            tilePos: {
-                x: this.getInt(),
-                y: this.getInt()
-            },
-            buffCellType: this.getInt(),
-            objectInCellType: this.getInt(),
+    _unpackTileObject: function () {
+        let tilePos = {
+            x: this.getInt(),
+            y: this.getInt()
         };
-        this._unpackObjectInCell(cellObject);
-        return cellObject;
+        let tileType = this.getInt();
+        let objectInTileType = this.getInt();
+        cc.log("objectInTileType: " + objectInTileType);
+        let tileObject = new TileObject(tilePos, tileType, objectInTileType);
+        // let cellObject = {
+        //     tilePos: tilePos,
+        //     buffCellType: tileType,
+        //     objectInCellType: objectInTileType,
+        // };
+        this._unpackObjectInTile(tileObject);
+        return tileObject;
     },
 
-    _unpackObjectInCell: function (cellObject) {
-        switch (cellObject.objectInCellType) {
+    _unpackObjectInTile: function (tileObject) {
+        switch (tileObject.getObjectInTileType()) {
             case ObjectInCellType.TREE:
-                cellObject.tree = {
-                    hp: this.getDouble()
-                }
+                let hp = this.getDouble();
+                // tileObject.tree = {
+                //     hp: hp
+                // }
+                let tree = new Tree(hp);
+                tileObject.setObjectInTile(tree);
                 break;
             case ObjectInCellType.TOWER:
-                cellObject.tower = {
-                    id: this.getInt(),
-                    level: this.getInt(),
-                }
+                let towerType = this.getInt();
+                let towerLevel = this.getInt();
+                // tileObject.tower = {
+                //     id: this.getInt(),
+                //     level: this.getInt(),
+                // }
+                let tower = new Tower(towerType, towerLevel, tileObject.getTilePos());
+                tileObject.setObjectInTile(tower);
                 break;
             case ObjectInCellType.PIT:
-                cellObject.pit = this.getInt();
+                let pit = this.getInt();
+                // cellObject.pit = this.getInt();
+                let pitObject = new Pit();
+                tileObject.setObjectInTile(pitObject);
                 break;
             default:
                 break;

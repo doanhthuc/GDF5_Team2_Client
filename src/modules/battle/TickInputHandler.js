@@ -49,13 +49,14 @@ let TickInputHandler = cc.Class.extend({
     _handlePutTower: function (cmd, packet) {
         let battleData = BattleManager.getInstance().getBattleData();
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
-        let cellObject = playerObjectMap[packet.x][packet.y];
-        cellObject.objectInCellType = ObjectInCellType.TOWER;
-        if (!cellObject.tower) {
-            cellObject.tower = {};
-        }
-        cellObject.tower.towerId = packet.towerId;
-        cellObject.tower.level = packet.towerLevel;
+        playerObjectMap.putTowerIntoMap(-1, packet.towerId, packet.towerLevel, cc.p(packet.x, packet.y));
+        // let cellObject = playerObjectMap[packet.x][packet.y];
+        // cellObject.objectInCellType = ObjectInCellType.TOWER;
+        // if (!cellObject.tower) {
+        //     cellObject.tower = {};
+        // }
+        // cellObject.tower.towerId = packet.towerId;
+        // cellObject.tower.level = packet.towerLevel;
         BattleManager.getInstance().getBattleLayer().buildTower(packet.towerId, cc.p(packet.x, packet.y), GameConfig.PLAYER);
     },
 
@@ -63,32 +64,39 @@ let TickInputHandler = cc.Class.extend({
         let tilePos = cc.p(packet.tileX, packet.tileY);
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentMap = battleData.getMapObject(GameConfig.OPPONENT);
-        let cellObject = opponentMap[packet.tileX][packet.tileY];
-        cellObject.objectInCellType = ObjectInCellType.TOWER;
-        if (!cellObject.tower) {
-            cellObject.tower = {};
-        }
-        cellObject.tower = {
-            towerId: packet.towerId,
-            level: packet.towerLevel,
-        };
+        opponentMap.putTowerIntoMap(-1, packet.towerId, packet.towerLevel, tilePos);
+        // let cellObject = opponentMap[packet.tileX][packet.tileY];
+        // cellObject.objectInCellType = ObjectInCellType.TOWER;
+        // if (!cellObject.tower) {
+        //     cellObject.tower = {};
+        // }
+        // cellObject.tower = {
+        //     towerId: packet.towerId,
+        //     level: packet.towerLevel,
+        // };
         OpponentAction.getInstance().buildTower(packet.towerId, tilePos);
     },
 
     _handleUpgradeTower: function (cmd, packet) {
+        let tilePos = cc.p(packet.tileX, packet.tileY);
         let battleData = BattleManager.getInstance().getBattleData();
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
-        let cellObject = playerObjectMap[packet.tileX][packet.tileY];
-        cellObject.tower.level = packet.towerLevel;
-        EntityFactory.onUpdateTowerLevel(cellObject.tower.entityId, packet.towerLevel);
+        let tower = playerObjectMap.getTowerInTile(tilePos);
+        tower.setLevel(packet.towerLevel);
+        // let cellObject = playerObjectMap[packet.tileX][packet.tileY];
+        // cellObject.tower.level = packet.towerLevel;
+        EntityFactory.onUpdateTowerLevel(tower.getEntityId(), packet.towerLevel);
     },
 
     _handleOpponentUpgradeTower: function (cmd, packet) {
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
-        let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
-        cellObject.tower.level = packet.towerLevel;
-        EntityFactory.onUpdateTowerLevel(cellObject.tower.entityId, packet.towerLevel);
+        let tilePos = cc.p(packet.tileX, packet.tileY);
+        let tower = opponentObjectMap.getTowerInTile(tilePos);
+        tower.setLevel(packet.towerLevel);
+        // let cellObject = opponentObjectMap[packet.tileX][packet.tileY];
+        // cellObject.tower.level = packet.towerLevel;
+        EntityFactory.onUpdateTowerLevel(tower.getEntityId(), packet.towerLevel);
     },
 
     _handleDropSpell: function (cmd, packet) {

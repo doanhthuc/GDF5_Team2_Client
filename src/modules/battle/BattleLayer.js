@@ -210,14 +210,15 @@ let BattleLayer = cc.Layer.extend({
     setEntityIdForTileObject: function (entityId, tilePos, mode = GameConfig.PLAYER) {
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);
-        let tileObject = mapObject[tilePos.x][tilePos.y];
-        if (tileObject.tower) {
-            tileObject.tower.entityId = entityId;
-        } else {
-            tileObject.tower = {
-                entityId: entityId,
-            }
-        }
+        mapObject.getObjectInTileByTilePos(tilePos).setEntityId(entityId);
+        // let tileObject = mapObject[tilePos.x][tilePos.y];
+        // if (tileObject.tower) {
+        //     tileObject.tower.entityId = entityId;
+        // } else {
+        //     tileObject.tower = {
+        //         entityId: entityId,
+        //     }
+        // }
     },
 
     dropSpell: function (spellId, pixelPos, mode) {
@@ -237,9 +238,10 @@ let BattleLayer = cc.Layer.extend({
 
     shouldUpgradeTower: function (towerId, tilePos) {
         if (GameConfig.NETWORK === 0) return false;
-        let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
-        if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null && cellObject.tower.towerId === towerId) {
-            let tower = cellObject.tower;
+        let objectInTile = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).getObjectInTileByTilePos(tilePos);
+        if (objectInTile.getObjectInTileType() === ObjectInCellType.TOWER && objectInTile.getType() === towerId) {
+            let tower = objectInTile;
+            cc.log("[shouldUpgradeTower] tower: " + JSON.stringify(tower));
             // let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
             // let card = inventoryContext.getCardById(towerId);
             // if (card && card.cardLevel > tower.level) {
@@ -252,8 +254,8 @@ let BattleLayer = cc.Layer.extend({
 
     shouldPutNewTower: function (tilePos) {
         if (GameConfig.NETWORK === 0) return true;
-        let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
-        return cellObject.objectInCellType === ObjectInCellType.NONE;
+        let tileObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).getTileObject(tilePos.x, tilePos.y);
+        return tileObject.getObjectInTileType() === ObjectInCellType.NONE;
     },
 
     _handleEventKey: function () {

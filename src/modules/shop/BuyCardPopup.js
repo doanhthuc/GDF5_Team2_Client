@@ -161,15 +161,14 @@ const BuyCardPopup = cc.Node.extend({
     },
 
     runUpdateProgressAnimation: function (accumulatedCard, additionQuantity) {
-        // if (this.card.cardLevel >= MAX_CARD_LEVEL) {
-        //     return;
-        // }
-        // let scaleXFrom = accumulatedCard / JsonReader.getCardUpgradeConfig()[this.card.cardLevel + 1].fragments;
-        // scaleXFrom = scaleXFrom > 1 ? 1 : scaleXFrom;
-        // let scaleXTo = (accumulatedCard + additionQuantity) / JsonReader.getCardUpgradeConfig()[this.card.cardLevel + 1].fragments;
-        // scaleXTo = scaleXTo > 1 ? 1 : scaleXTo;
-        // let scaleAction = cc.scaleTo(0.5, scaleXTo);
-        // this.progressBackgroundImg.scaleX.runAction(scaleAction);
-        this.setUpgradeProgressBar(accumulatedCard + additionQuantity);
+        if (this.card.cardLevel >= MAX_CARD_LEVEL) {
+            return;
+        }
+        let scaleXFrom = accumulatedCard / JsonReader.getCardUpgradeConfig()[this.card.cardLevel + 1].fragments;
+        scaleXFrom = scaleXFrom > 1 ? 1 : scaleXFrom;
+        let scaleXTo = (accumulatedCard + additionQuantity) / JsonReader.getCardUpgradeConfig()[this.card.cardLevel + 1].fragments;
+        scaleXTo = scaleXTo > 1 ? 1 : scaleXTo;
+        let scaleAction = cc.scaleTo(0.5, scaleXTo, 1);
+        this.progressBackgroundImg.runAction(scaleAction);
     }
 })
