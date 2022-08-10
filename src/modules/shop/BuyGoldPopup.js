@@ -12,8 +12,8 @@ const BuyGoldPopup = cc.Node.extend({
         this.quantityTxt = this.popup.getChildByName("quantity");
         this.imageSprite = this.popup.getChildByName("image");
         this.closeBtn = this.popup.getChildByName('closeBtn');
-        this.buyBtn = this.popup.getChildByName("buy_btn").getChildByName("backgroundBtn");
-        this.popup.getChildByName("buy_btn").getChildByName("unitIconImg").setTexture(ShopResources.GEM_ICON_SMALL);
+        this.buyBtn = this.popup.getChildByName("buy_btn_gold").getChildByName("backgroundBtn");
+        this.popup.getChildByName("buy_btn_gold").getChildByName("unitIconImg").setTexture(ShopResources.GEM_ICON_SMALL);
         this.buyBtn.addTouchEventListener(this._onBuyBtnClick.bind(this), this);
         this.closeBtn.addTouchEventListener(this._onCloseClick.bind(this), this);
         this.blur = this.popup.getChildByName("blur");
