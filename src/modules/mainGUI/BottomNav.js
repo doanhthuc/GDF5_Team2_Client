@@ -93,6 +93,7 @@ const bottomNav = cc.Node.extend({
     },
     extendTabProperties: function (tabName, tabNode) {
         tabNode.name = NavResources.TAB_LIST[tabName].name;
+        tabNode.setName(NavResources.TAB_LIST[tabName].name);
         tabNode.iconImg = tabNode.getChildByName('iconImg');
         tabNode.backgroundBtn = tabNode.getChildByName('backgroundBtn');
         tabNode.nameTxt = tabNode.getChildByName('nameTxt');
