@@ -377,7 +377,7 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "Name": "buy_btn",
+            "Name": "buy_btn_gold",
             "ctype": "ProjectNodeObjectData"
           },
           {
