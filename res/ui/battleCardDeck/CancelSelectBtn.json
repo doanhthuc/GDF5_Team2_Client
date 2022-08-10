@@ -16,16 +16,16 @@
         "Children": [
           {
             "FontSize": 24,
-            "ButtonText": "Huỷ",
+            "ButtonText": "",
             "FontResource": {
-              "Type": "Normal",
-              "Path": "textures/font/SVN-Supercell Magic.ttf",
+              "Type": "Default",
+              "Path": "",
               "Plist": ""
             },
             "TextColor": {},
             "DisabledFileData": {
-              "Type": "Default",
-              "Path": "Default/Button_Disable.png",
+              "Type": "Normal",
+              "Path": "textures/common/common_btn_gray.png",
               "Plist": ""
             },
             "PressedFileData": {
@@ -82,6 +82,107 @@
             "TopMargin": -55.5,
             "BottomMargin": -55.5,
             "Tag": 5,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "textures/common/common_icon_energy.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 155.7704,
+                  "Y": 56.0931
+                },
+                "Scale": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.8029,
+                  "Y": 0.5053
+                },
+                "PreSize": {
+                  "X": 0.3866,
+                  "Y": 0.7658
+                },
+                "LeftMargin": 118.2704,
+                "RightMargin": 0.7296,
+                "TopMargin": 12.4069,
+                "BottomMargin": 13.5931,
+                "Tag": 12,
+                "ActionTag": -1388110384,
+                "Size": {
+                  "X": 75.0,
+                  "Y": 85.0
+                },
+                "Name": "Sprite_1",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FontSize": 20,
+                "LabelText": "Huỷ -5",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "textures/font/SVN-Supercell Magic.ttf",
+                  "Plist": ""
+                },
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 78.0351,
+                  "Y": 56.0931
+                },
+                "Scale": {
+                  "ScaleX": 1.25,
+                  "ScaleY": 1.25
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.4022,
+                  "Y": 0.5053
+                },
+                "PreSize": {
+                  "X": 0.4536,
+                  "Y": 0.2432
+                },
+                "LeftMargin": 34.0351,
+                "RightMargin": 71.9649,
+                "TopMargin": 41.4069,
+                "BottomMargin": 42.5931,
+                "Tag": 13,
+                "ActionTag": -605336691,
+                "Size": {
+                  "X": 88.0,
+                  "Y": 27.0
+                },
+                "Name": "Text_1",
+                "ctype": "TextObjectData"
+              }
+            ],
             "ActionTag": -751167046,
             "Size": {
               "X": 194.0,
@@ -99,8 +200,9 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "../../Default/Button_Disable.png",
+        "../../textures/common/common_btn_gray.png",
         "../../textures/common/common_btn_red.png",
+        "../../textures/common/common_icon_energy.png",
         "../../textures/font/SVN-Supercell Magic.ttf"
       ],
       "ctype": "GameFileData"
