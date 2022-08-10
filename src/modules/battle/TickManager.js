@@ -40,6 +40,7 @@ let TickManager = cc.Class.extend({
         battleLayer.getTimerNode().updateData();
         battleLayer.resetSystem.runUpdateData();
         battleLayer.abilitySystem.runUpdateData();
+        battleLayer.towerSpecialSkillSystem.runUpdateData();
         battleLayer.effectSystem.runUpdateData();
         battleLayer.attackSystem.runUpdateData();
         battleLayer.renderSystem.runUpdateData();
@@ -162,6 +163,13 @@ let TickManager = cc.Class.extend({
             }
         }
         this.normalTimerNodeContainer = remainNode;
+    },
+
+    renderNormalTimerNode: function () {
+        let dt = this.getDeltaFromLatestTickToNow() / 1000;
+        for (let timerNode of this.normalTimerNodeContainer) {
+            timerNode.render(dt);
+        }
     }
 })
 

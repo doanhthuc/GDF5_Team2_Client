@@ -89,12 +89,62 @@ let BattleMapLayer = cc.Layer.extend({
         }
 
         let shortestPathForEachTile = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(GameConfig.PLAYER);
-        let row = GameConfig.MAP_HEIGH - 1 - GameConfig.MONSTER_BORN_POSITION.y, col = GameConfig.MONSTER_BORN_POSITION.x;
+        let row = GameConfig.MAP_HEIGH - 1 - GameConfig.MONSTER_BORN_POSITION.y,
+            col = GameConfig.MONSTER_BORN_POSITION.x;
         let tilePath = shortestPathForEachTile[row][col];
 
         for (let i = 0; i < tilePath.length - 1; i++) {
             let currentTilePos = tilePath[i];
-            let nextTilePos = tilePath[i+1];
+            let nextTilePos = tilePath[i + 1];
+
+            let direction = Utils.getDirectionOf2Tile(currentTilePos, nextTilePos);
+            let currentPixelPos = Utils.tile2Pixel(currentTilePos.x, currentTilePos.y, GameConfig.PLAYER);
+
+            let sp = this._spriteContainerInActive.pop();
+            if (!sp) {
+                sp = new cc.Sprite("res/textures/battle/UI/ui_icon_arrow.png");
+                sp.retain();
+                this.mapNode[GameConfig.PLAYER].addChild(sp, 0);
+            } else {
+                sp.setRotation(0);
+            }
+            this._spriteContainerActive.push(sp);
+
+            sp.setPosition(currentPixelPos);
+            switch (direction) {
+                case GameConfig.DIRECTION.TOP:
+                    sp.setRotation(-90);
+                    break;
+                case GameConfig.DIRECTION.RIGHT:
+                    // default is right direction
+                    break;
+                case GameConfig.DIRECTION.BOTTOM:
+                    sp.setRotation(90);
+                    break;
+                case GameConfig.DIRECTION.LEFT:
+                    sp.setRotation(180);
+                    break;
+                default:
+                    return;
+            }
+        }
+    },
+    showMonsterPathWhenDragCard: function (tilePos) {
+        if (tilePos.y < 0) return;
+        while (this._spriteContainerActive.length > 0) {
+            let activeSp = this._spriteContainerActive.pop();
+            this._spriteContainerInActive.push(activeSp);
+        }
+        let map = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+        let map2 = JSON.parse(JSON.stringify(map))
+        map2[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
+        let row = GameConfig.MONSTER_BORN_POSITION.y,
+            col = GameConfig.MONSTER_BORN_POSITION.x;
+        let tilePath = FindPathUtil.findShortestPath(map2, cc.p(col, row), cc.p(GameConfig.HOUSE_POSITION.x, GameConfig.HOUSE_POSITION.y));
+        if (tilePath == null) return;
+        for (let i = 0; i < tilePath.length - 1; i++) {
+            let currentTilePos = tilePath[i];
+            let nextTilePos = tilePath[i + 1];
 
             let direction = Utils.getDirectionOf2Tile(currentTilePos, nextTilePos);
             let currentPixelPos = Utils.tile2Pixel(currentTilePos.x, currentTilePos.y, GameConfig.PLAYER);
@@ -128,4 +178,5 @@ let BattleMapLayer = cc.Layer.extend({
             }
         }
     }
+
 });

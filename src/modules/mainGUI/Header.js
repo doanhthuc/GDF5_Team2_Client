@@ -62,7 +62,7 @@ const Header = cc.Node.extend({
         this.addChild(this.logoutButtonNode);
         this.logoutButton = this.logoutButtonNode.getChildByName("LogoutButton");
         this.logoutButton.addTouchEventListener(this.onLogoutButtonClicked.bind(this), this);
-        this.logoutButtonNode.setPosition(-(cc.winSize.width / 2 - (this.logoutButton.getSize().width * 0.8) / 2 + 15), this.cheatBtn.getSize().height * 0.2 / 2);
+        this.logoutButtonNode.setPosition(-(cc.winSize.width / 2 - (this.logoutButton.getSize().width * 0.8) / 2-5), this.cheatBtn.getSize().height * 0.2 / 2-5);
     },
 
     onCheatBtnClicked: function (sender, type) {

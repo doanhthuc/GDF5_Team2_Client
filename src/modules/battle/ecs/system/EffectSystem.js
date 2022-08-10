@@ -19,8 +19,10 @@ let EffectSystem = System.extend({
         this._handleDamageEffect(tick);
         // IMPORTANT: SlowEffect < FrozenEffect
         this._handleSlowEffect(tick);
+        this._handleGoatSlowEffect(tick);
         this._handleFrozenEffect(tick);
         this._handleTrapEffect(tick);
+        this._handlePoisonEffect(tick);
     },
 
     _handleBuffAttackSpeedEffect: function (tick) {
@@ -53,11 +55,14 @@ let EffectSystem = System.extend({
 
         for (let entity of entityList) {
             let lifeComponent = entity.getComponent(LifeComponent);
-
             if (lifeComponent) {
                 let damageComponent = entity.getComponent(DamageEffect);
-
-                lifeComponent.hp -= damageComponent.damage;
+                if (entity.hasAllComponent(DamageAmplifyComponent)) {
+                    let damageAmplifyComponent = entity.getComponent(DamageAmplifyComponent);
+                    lifeComponent.hp -= damageComponent.damage * damageAmplifyComponent.amplifyRate;
+                } else {
+                    lifeComponent.hp -= damageComponent.damage;
+                }
                 entity.removeComponent(damageComponent)
             }
         }
@@ -74,6 +79,8 @@ let EffectSystem = System.extend({
             frozenComponent.countdown = frozenComponent.countdown - tick;
 
             if (frozenComponent.countdown <= 0) {
+                let damageAmplifyComponent = entity.getComponent(DamageAmplifyComponent);
+                if (damageAmplifyComponent) entity.removeComponent(damageAmplifyComponent);
                 entity.removeComponent(frozenComponent);
                 this._updateOriginVelocity(velocityComponent);
             } else {
@@ -100,8 +107,11 @@ let EffectSystem = System.extend({
                 this._updateOriginVelocity(velocityComponent);
                 entity.removeComponent(slowComponent);
             } else {
-                velocityComponent.speedX = slowComponent.percent * velocityComponent.originSpeedX;
-                velocityComponent.speedY = slowComponent.percent * velocityComponent.originSpeedY;
+                let percent = slowComponent.percent;
+                let goatSlowEffect = entity.getComponent(GoatSlowEffectComponent);
+                if (goatSlowEffect) percent = goatSlowEffect.percent;
+                velocityComponent.speedX = Math.min(slowComponent.percent * velocityComponent.originSpeedX, velocityComponent.speedX);
+                velocityComponent.speedY = Math.min(slowComponent.percent * velocityComponent.originSpeedY, velocityComponent.speedY);
 
                 // animation
                 if (!slowComponent.addedAnimation) {
@@ -109,6 +119,18 @@ let EffectSystem = System.extend({
                     slowComponent.addedAnimation = true;
                 }
             }
+        }
+    },
+
+    _handleGoatSlowEffect: function (tick) {
+        let entityList = EntityManager.getInstance()
+            .getEntitiesHasComponents(GoatSlowEffectComponent);
+
+        for (let entity of entityList) {
+            let velocityComponent = entity.getComponent(VelocityComponent);
+            let goatSlowEffect = entity.getComponent(GoatSlowEffectComponent);
+            velocityComponent.speedX = Math.min(goatSlowEffect.percent * velocityComponent.originSpeedX, velocityComponent.speedX);
+            velocityComponent.speedY = Math.min(goatSlowEffect.percent * velocityComponent.originSpeedX, velocityComponent.speedY);
         }
     },
 
@@ -168,6 +190,21 @@ let EffectSystem = System.extend({
         }
     },
 
+    _handlePoisonEffect: function (dt) {
+        let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PoisonEffect);
+        for (let monster of monsterList) {
+            let poisonEffect = monster.getComponent(PoisonEffect);
+
+            if (poisonEffect.duration > 0) {
+                cc.log(poisonEffect.duration + " " + dt);
+                poisonEffect.duration -= dt;
+                let lifeComponent = monster.getComponent(LifeComponent);
+                lifeComponent.hp -= poisonEffect.healthPerSecond * dt;
+            } else {
+                monster.removeComponent(PoisonEffect);
+            }
+        }
+    },
     _updateOriginVelocity: function (velocityComponent) {
         velocityComponent.speedX = velocityComponent.originSpeedX;
         velocityComponent.speedY = velocityComponent.originSpeedY;
