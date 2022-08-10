@@ -100,7 +100,7 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
 }
 
 FindPathUtil.findShortestPathForEachTile = function (mode) {
-    let map = BattleManager.getInstance().getBattleData().getMapObject(mode).convertBattleMapObjectToSimpleMap();
+    let map = BattleManager.getInstance().getBattleData().getSimpleMap()[mode];
     let shortestPathForEachTiles = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
 
     // cc.log("^^^^^^^^^")

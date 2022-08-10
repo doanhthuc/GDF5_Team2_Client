@@ -35,13 +35,15 @@ let RenderSystem = System.extend({
 
     updateData: function () {
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(AppearanceComponent, PositionComponent);
+        let battleMap = BattleManager.getInstance().getBattleData().getSimpleMap();
+
         for (let entity of entityList) {
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
 
             if (ValidatorECS.isMonster(entity)) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
-                let map = BattleManager.getInstance().getBattleData().getMapObject(entity.mode).convertBattleMapObjectToSimpleMap();
+                let map =battleMap[entity.mode];
                 if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID!== GameConfig.ENTITY_ID.BAT) {
                     let lifeComponent = entity.getComponent(LifeComponent);
                     lifeComponent.hp = 0;

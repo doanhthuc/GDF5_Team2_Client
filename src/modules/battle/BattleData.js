@@ -159,6 +159,13 @@ let BattleData = cc.Class.extend({
         return this.dataInGame[mode].mapObject;
     },
 
+    getSimpleMap: function () {
+        let battleMap = {}
+        battleMap[GameConfig.PLAYER] = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).convertBattleMapObjectToSimpleMap();
+        battleMap[GameConfig.OPPONENT] = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.OPPONENT).convertBattleMapObjectToSimpleMap();
+        return battleMap;
+    },
+
     setMapObject: function (mapObject, mode) {
         Utils.validateMode(mode);
         return this.dataInGame[mode].mapObject = mapObject;

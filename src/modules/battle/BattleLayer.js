@@ -43,6 +43,10 @@ let BattleLayer = cc.Layer.extend({
         this.mapLayer._genMap(GameConfig.PLAYER);
         this.mapLayer._genMap(GameConfig.OPPONENT);
         this.addChild(this.mapLayer, 1);
+
+        this.fpsText = new ccui.Text("", "textures/font/SVN-Supercell Magic.ttf", 20);
+        this.fpsText.setPosition(cc.p(cc.winSize.width - 50, cc.winSize.height - 30));
+        this.addChild(this.fpsText, 100);
     },
 
     _initSystem: function () {
@@ -64,6 +68,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     update: function (dt) {
+        this.fpsText.setString(cc.director.getFrameRate().toFixed(1));
         let currentTick = tickManager.getCurrentTick();
         while (tickManager.getLatestUpdateTick() < currentTick) {
             tickManager.updateData();
