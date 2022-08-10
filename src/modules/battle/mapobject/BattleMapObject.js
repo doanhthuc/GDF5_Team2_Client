@@ -23,7 +23,7 @@ const BattleMapObject = cc.Class.extend({
         }
         for (let i = 0; i < this.height; i++) {
             for (let j = 0; j < this.width; j++) {
-                simpleMap[i][j] = this.battleMap[i][j].getObjectInTileType();
+                simpleMap[i][j] = this.battleMap[i][j].getTileType();
             }
         }
         return simpleMap;
