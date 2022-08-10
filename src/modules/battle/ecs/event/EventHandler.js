@@ -25,26 +25,17 @@ EventDispatcher.getInstance()
         let tilePos = data.pos;
         let currentMode = data.mode;
         let cardId = data.cardId;
-        let map = BattleManager.getInstance().getBattleData().getMap(currentMode);
-
-
+        let map = BattleManager.getInstance().getBattleData().getMapObject(currentMode).convertBattleMapObjectToSimpleMap();
 
         if (!Utils.validateTilePos(tilePos)) {
             return;
         }
 
+        cc.log("Put new tower event data: " + JSON.stringify(data));
+
         map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
         BattleManager.getInstance().getBattleData().setShortestPathForEachTile(shortestPathForEachTile, currentMode);
-
-        let map22 = BattleManager.getInstance().getBattleData().getMapObject(currentMode).convertBattleMapObjectToSimpleMap();
-        cc.log("@@@-----------")
-        cc.log("oldmap: " + JSON.stringify(map))
-        cc.log("newmap: " + JSON.stringify(map22))
-        cc.log("@@@-----------")
-        cc.log(map22)
-
-        cc.log("Put new tower event data: " + JSON.stringify(data));
 
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
         for (let entity of entityList) {
@@ -84,7 +75,7 @@ EventDispatcher.getInstance()
         let tilePos = data.pos;
         let currentMode = data.mode;
 
-        let map = BattleManager.getInstance().getBattleData().getMap(currentMode);
+        let map = BattleManager.getInstance().getBattleData().getMapObject(currentMode).convertBattleMapObjectToSimpleMap();
 
         if (!Utils.validateTilePos(tilePos)) {
             return;

@@ -41,7 +41,7 @@ let RenderSystem = System.extend({
 
             if (ValidatorECS.isMonster(entity)) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
-                let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
+                let map = BattleManager.getInstance().getBattleData().getMapObject(entity.mode).convertBattleMapObjectToSimpleMap();
                 if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID!== GameConfig.ENTITY_ID.BAT) {
                     let lifeComponent = entity.getComponent(LifeComponent);
                     lifeComponent.hp = 0;

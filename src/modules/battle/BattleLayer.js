@@ -282,7 +282,7 @@ let BattleLayer = cc.Layer.extend({
                 let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
                 if (Utils.validateTilePos(tilePos)) {
-                    let playerMapMatrix = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+                    let playerMapMatrix = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).convertBattleMapObjectToSimpleMap();
                     if (playerMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
                         BattleManager.getInstance().getBattleLayer()
                             .uiLayer.showTargetCircle(tilePos.x, tilePos.y);

@@ -100,7 +100,7 @@ ValidatorECS.validatePositionPutCard = function (type, pixelPos, mode) {
 
         let row = GameConfig.MAP_HEIGH - 1 - tilePos.y;
         let col = tilePos.x;
-        let map = BattleManager.getInstance().getBattleData().getMap(mode);
+        let map = BattleManager.getInstance().getBattleData().getMapObject(mode).convertBattleMapObjectToSimpleMap();
         if (map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
             || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
             || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
@@ -172,7 +172,7 @@ ValidatorECS.validatePositionPutCard = function (type, pixelPos, mode) {
 
         let row = GameConfig.MAP_HEIGH - 1 - tilePos.y;
         let col = tilePos.x;
-        let map = BattleManager.getInstance().getBattleData().getMap(mode);
+        let map = BattleManager.getInstance().getBattleData().getMapObject(mode).convertBattleMapObjectToSimpleMap();
         if (map[row][col] === GameConfig.MAP.TOWER || map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
             || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
             || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {

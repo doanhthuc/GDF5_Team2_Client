@@ -42,7 +42,7 @@ let BattleMapLayer = cc.Layer.extend({
         this.houseSprite[mode].setAnchorPoint(cc.p(0.5, 0.2));
         this.houseSprite[mode].setPosition(Utils.tile2Pixel(6, 0, mode));
 
-        let map = this.battleData.getMap(mode);
+        let map = BattleManager.getInstance().getBattleData().getMapObject(mode).convertBattleMapObjectToSimpleMap();
         for (let r = 0; r < map.length; r++) {
             for (let c = 0; c < map[0].length; c++) {
                 let tilePos = cc.p(c, GameConfig.MAP_HEIGH - 1 - r);
@@ -135,7 +135,7 @@ let BattleMapLayer = cc.Layer.extend({
             let activeSp = this._spriteContainerActive.pop();
             this._spriteContainerInActive.push(activeSp);
         }
-        let map = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+        let map = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).convertBattleMapObjectToSimpleMap();
         let map2 = JSON.parse(JSON.stringify(map))
         map2[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
         let row = GameConfig.MONSTER_BORN_POSITION.y,

@@ -100,7 +100,7 @@ FindPathUtil.findShortestPath = function (map, startt, destt) {
 }
 
 FindPathUtil.findShortestPathForEachTile = function (mode) {
-    let map = BattleManager.getInstance().getBattleData().getMap(mode);
+    let map = BattleManager.getInstance().getBattleData().getMapObject(mode).convertBattleMapObjectToSimpleMap();
     let shortestPathForEachTiles = FindPathUtil.create2DMatrix(map.length, map[0].length, null);
 
     // cc.log("^^^^^^^^^")
@@ -115,7 +115,6 @@ FindPathUtil.findShortestPathForEachTile = function (mode) {
     function findPathAble(x) {
         return (x === GameConfig.MAP.NONE || x === GameConfig.MAP.ATTACK_DAMAGE || x === GameConfig.MAP.ATTACK_RANGE || x === GameConfig.MAP.ATTACK_SPEED);
     }
-
     for (let row = 0; row < map.length; row++) {
         for (let col = 0; col < map[0].length; col++) {
             if (findPathAble(map[row][col])) {

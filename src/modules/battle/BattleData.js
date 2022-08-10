@@ -141,17 +141,9 @@ let BattleData = cc.Class.extend({
         this.dataInGame.currentWave = currentWave;
         return this.dataInGame.currentWave;
     },
-    getCurrentMonsterWave: function () {
-        return this.dataInGame.monsterWave[this.dataInGame.currentWave];
-    },
-
-    getMap: function (mode) {
-        Utils.validateMode(mode);
-        return this.dataInGame[mode].map;
-    },
 
     cloneMap: function (mode) {
-        let map = this.getMap(mode);
+        let map = this.getMapObject(mode).convertBattleMapObjectToSimpleMap();
         let cloneMap = FindPathUtil.create2DMatrix(map.length, map[0].length);
         for (let row = 0; row < map.length; row++) {
             for (let col = 0; col < map[0].length; col++) {
@@ -161,13 +153,6 @@ let BattleData = cc.Class.extend({
         return cloneMap;
     },
 
-    setMap: function (map, mode) {
-        Utils.validateMode(mode);
-        if (GameConfig.MAP_HEIGH !== map.length && GameConfig.MAP_WIDTH !== map[0].length) {
-            throw new Error("Map size is invalid")
-        }
-        return this.dataInGame[mode].map = map;
-    },
 
     getMapObject: function (mode) {
         Utils.validateMode(mode);
@@ -297,8 +282,7 @@ BattleData.fakeData = function () {
     let battleData = new BattleData();
     battleData.setMonsterWave(monsterWave);
     BattleManager.getInstance().registerBattleData(battleData);
-    battleData.setMap(map, GameConfig.PLAYER);
-    battleData.setMap(JSON.parse(JSON.stringify(map)), GameConfig.OPPONENT);
+
     battleData.setLongestPath(path, GameConfig.PLAYER);
     battleData.setLongestPath(JSON.parse(JSON.stringify(path)), GameConfig.OPPONENT);
     battleData.setBattleWave(monsterWave);

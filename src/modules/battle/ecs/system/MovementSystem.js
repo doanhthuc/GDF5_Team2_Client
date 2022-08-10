@@ -30,7 +30,7 @@ let MovementSystem = System.extend({
                 if (ValidatorECS.isMonster(entity) && entity.getComponent(FireBallEffect)) {
                     let currentTilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                     let futureTilePos = Utils.pixel2Tile(tmpPos.x, tmpPos.y, entity.mode);
-                    let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
+                    let map = BattleManager.getInstance().getBattleData().getMapObject(entity.mode).convertBattleMapObjectToSimpleMap();
                     if (Utils.validateTilePos(currentTilePos, entity.mode)
                         && (
                             !Utils.validateTilePos(futureTilePos, entity.mode)
@@ -89,7 +89,7 @@ let MovementSystem = System.extend({
                         if (monsterPos) {
                             let tilePos = Utils.pixel2Tile(monsterPos.x, monsterPos.y, entity.mode);
                             if (!Utils.validateTilePos(tilePos)) continue;
-                            let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
+                            let map = BattleManager.getInstance().getBattleData().getMapObject(entity.mode).convertBattleMapObjectToSimpleMap();
                             if (map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.HOLE && entity.typeID !== GameConfig.ENTITY_ID.BAT) {
                                 let lifeComponent = entity.getComponent(LifeComponent);
                                 lifeComponent.hp = 0;
@@ -120,7 +120,7 @@ let MovementSystem = System.extend({
                 if (ValidatorECS.isMonster(entity) && entity.getComponent(FireBallEffect)) {
                     let currentTilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
                     let futureTilePos = Utils.pixel2Tile(tmpPos.x, tmpPos.y, entity.mode);
-                    let map = BattleManager.getInstance().getBattleData().getMap(entity.mode);
+                    let map = BattleManager.getInstance().getBattleData().getMapObject(entity.mode).convertBattleMapObjectToSimpleMap();
                     if (Utils.validateTilePos(currentTilePos, entity.mode)
                         && (
                             !Utils.validateTilePos(futureTilePos, entity.mode)
