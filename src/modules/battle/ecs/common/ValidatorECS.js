@@ -106,11 +106,12 @@ ValidatorECS.validatePositionPutCard = function (type, pixelPos, mode) {
             || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
             return {error: true, msg: MSG_INVALID_TOWER};
         }
-        
+
         let mapObject = BattleManager.getInstance().getBattleData().getMapObject(mode);
-        if (mapObject[tilePos.x][tilePos.y].objectInCellType === ObjectInCellType.TOWER) {
-            let tower = mapObject[tilePos.x][tilePos.y].tower;
-            if (tower.towerId !== type || tower.level >= 3) {
+        let tileObject = mapObject.getTileObject(tilePos.x, tilePos.y);
+        if (tileObject.getObjectInTileType() === ObjectInCellType.TOWER) {
+            let tower = tileObject.getObjectInTile();
+            if (tower.getType() !== type || tower.getLevel() >= 3) {
                 return {error: true, msg: MSG_INVALID_TOWER};
             }
         }
