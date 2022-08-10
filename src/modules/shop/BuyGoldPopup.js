@@ -57,9 +57,9 @@ const BuyGoldPopup = cc.Node.extend({
 
     setPrice: function (price) {
         this.price = price;
-        cc.log(this.popup.getChildByName("buy_btn").getChildByName("priceTxt"))
+        cc.log(this.popup.getChildByName("buy_btn_gold").getChildByName("priceTxt"))
         cc.log(this.price)
-        this.popup.getChildByName("buy_btn").getChildByName("priceTxt").setString(this.price);
+        this.popup.getChildByName("buy_btn_gold").getChildByName("priceTxt").setString(this.price);
     },
 
 
