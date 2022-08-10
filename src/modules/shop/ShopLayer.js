@@ -12,13 +12,13 @@ const ShopLayer = cc.Node.extend({
         let startY = 820;
 
         // Daily section
-        this.dailySection = new ShopSection("treasure");
+        this.dailySection = new ShopSection("treasure", "treasure_section");
         this.addChild(this.dailySection);
         this.dailySection.setPosition(cc.winSize.width / 2, cc.winSize.height - this.headerHeight - this.dailySection._height / 2);
         this.shopSectionList.push(this.dailySection);
 
         // Buy gold section
-        this.goldSection = new ShopSection("gold");
+        this.goldSection = new ShopSection("gold", "gold_section");
         // this.goldSection.setPosition(startX, startY
         //     - (ShopResources.SHOP_SECTION_NODE_HEIGHT + ShopResources.SHOP_SECTION_MARGIN_BOTTOM))
         this.addChild(this.goldSection);
