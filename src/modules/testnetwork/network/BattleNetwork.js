@@ -189,7 +189,7 @@ BattleNetwork.Connector = cc.Class.extend({
         let battleData = BattleManager.getInstance().getBattleData();
         battleData.setMapObject(packet.playerBattleMapObject, GameConfig.PLAYER);
         battleData.setMapObject(packet.opponentBattleMapObject, GameConfig.OPPONENT);
-        let battleMapObject = battleData.getMapObject(GameConfig.PLAYER);
+        let battleMapObject = battleData.getMapObject(GameConfig.PLAYER).getBattleMap();
         // for (let i = 0; i < battleMapObject.length; i++) {
         //     for (let j = 0; j < battleMapObject[i].length; j++) {
         //         cc.log('[BattleNetwork.js line 102] battleMapObject: ' + JSON.stringify(battleMapObject[i][j]));

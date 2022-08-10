@@ -60,6 +60,7 @@
             "ctype": "ImageViewObjectData"
           },
           {
+            "IsCustomSize": true,
             "FontSize": 14,
             "LabelText": "15h 32m",
             "FontResource": {
@@ -108,14 +109,14 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -39.0,
-            "RightMargin": -39.0,
+            "LeftMargin": -50.0,
+            "RightMargin": -50.0,
             "TopMargin": -12.1289,
             "BottomMargin": -8.8711,
             "Tag": 196,
             "ActionTag": -228975168,
             "Size": {
-              "X": 78.0,
+              "X": 100.0,
               "Y": 21.0
             },
             "Name": "countdownTxt",
