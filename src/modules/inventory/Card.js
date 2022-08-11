@@ -7,7 +7,7 @@ const CardNode = cc.Node.extend({
 
     setModel: function (cardModel) {
         this.cardModel = cardModel
-        this.setName("card_type_" + cardModel);
+        this.setName("card_type_" + cardModel.id);
         this.updateCardNodeUI(this.cardModel.accumulated);
     },
 
