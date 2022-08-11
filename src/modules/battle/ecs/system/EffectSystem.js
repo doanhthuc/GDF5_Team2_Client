@@ -13,9 +13,9 @@ let EffectSystem = System.extend({
 
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
-        this._handleBuffAttackRangeEffect(tick);
-        this._handleBuffAttackSpeedEffect(tick);
-        this._handleBuffAttackDamageEffect(tick);
+        // this._handleBuffAttackRangeEffect(tick);
+        // this._handleBuffAttackSpeedEffect(tick);
+        // this._handleBuffAttackDamageEffect(tick);
         this._handleDamageEffect(tick);
         // IMPORTANT: SlowEffect < FrozenEffect
         this._handleSlowEffect(tick);

@@ -11,8 +11,8 @@ const ResetSystem = System.extend({
     },
 
     updateData: function () {
-        this.handleResetDamageEffect();
-        this.handleResetGoatSlowEffect();
+        // this.handleResetDamageEffect();
+        // this.handleResetGoatSlowEffect();
     },
 
     handleResetDamageEffect: function () {
