@@ -7,13 +7,13 @@ const CardNode = cc.Node.extend({
 
     setModel: function (cardModel) {
         this.cardModel = cardModel
+        this.setName("card_type_" + cardModel);
         this.updateCardNodeUI(this.cardModel.accumulated);
     },
 
     onUpgradeCard: function (cardLevel, accumulatedCard) {
         this.cardModel.upgradeCardModel(cardLevel, accumulatedCard);
         this.updateCardNodeUI(this.cardModel.accumulated);
-
     },
 
     onUpdateCard: function (accumulatedCardChange) {

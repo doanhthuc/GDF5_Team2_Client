@@ -20,6 +20,7 @@ const ShopItemSlotNode = cc.Node.extend({
 
     setType: function (type) {
         this.type = type;
+        this.setName("item_slot_" + this.type);
 
         if (type === ItemDefine.CHESTYPE) {
             this.itemNode = ccs.load(ShopResources.SHOP_TREASURE_SLOT_NODE, "").node;

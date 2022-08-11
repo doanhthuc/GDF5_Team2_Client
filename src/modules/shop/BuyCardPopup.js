@@ -6,6 +6,7 @@ const BuyCardPopup = cc.Node.extend({
 
     _setupUI: function () {
         this.name = CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD;
+        this.setName(this.name);
         this.popupNode = ccs.load(ShopResources.BUY_CARD_POPUP_NODE, '').node;
         this.addChild(this.popupNode);
 
