@@ -14,10 +14,11 @@ let EntityECS = cc.Class.extend({
 
     addComponent: function (component) {
         if (this.components[component.typeID]) {
-            // ComponentManager.getInstance().remove(component);
+            ComponentManager.getInstance().remove(component);
         }
         component.setActive(true);
         this.components[component.typeID] = component;
+        ComponentManager.getInstance().add(component);
         //this.bitmask = this.bitmask | (1 << component.typeID);
         return this;
     },

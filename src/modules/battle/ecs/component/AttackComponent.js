@@ -54,7 +54,7 @@ let AttackComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(AttackComponent, this.damage, this.targetStrategy, this.range,
+        return ComponentFactory.create(AttackComponent, this._damage, this.targetStrategy, this.range,
             this.speed, this.countdown, this.effects, this.bulletSpeed, this.bulletRadius, this.canTargetAirMonster);
     },
 

@@ -11,21 +11,24 @@ let ComponentPool = ObjectPoolECS.extend({
             return null;
         }
 
-        for (let component of this._store[ComponentCls.typeID]) {
-            if (component.getActive() === false) {
-                return component;
-            }
+        if (this._store[ComponentCls.typeID].length > 0) {
+            let component = this._store[ComponentCls.typeID].pop();
+            component.setActive(true);
+            // cc.log("Checkout pool component " + component.name + "#id=" + component.id);
+            return component;
         }
 
         return null;
     },
 
     checkIn: function (component) {
+        component.setActive(false);
         if (!this._store[component.typeID]) {
             this._store[component.typeID] = [];
         }
 
         // if (component.typeID === AppearanceComponent.typeID) return;
+        // cc.log("Checkin pool component " + component.name + "#id=" + component.id);
 
         this._store[component.typeID].push(component);
     }
