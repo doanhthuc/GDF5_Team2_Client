@@ -67,6 +67,7 @@ const ShopItemSlotNode = cc.Node.extend({
         } else {
             this.buyBtn.removeAllChildren();
             let label = new ccui.Text("Đã mua", ShopResources.FONT_SUPERCELL, 20);
+            this.label.setName("label");
             this.buyBtn.addChild(label);
         }
     },
