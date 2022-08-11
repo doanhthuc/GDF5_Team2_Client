@@ -49,6 +49,7 @@ const CardNode = cc.Node.extend({
         this.upgradeReadyAnimation.setAnimation(0, 'card_upgrade_ready', true);
         this.addChild(this.upgradeReadyAnimation, 4);
         this.upgradeReadyAnimationTxt = new ccui.Text("", "res/textures/font/SVN-Supercell Magic.ttf", 17);
+        this.upgradeReadyAnimationTxt.setName("accumulateTxt");
         this.upgradeReadyAnimation.addChild(this.upgradeReadyAnimationTxt);
         this.upgradeReadyAnimation.setVisible(false);
 
