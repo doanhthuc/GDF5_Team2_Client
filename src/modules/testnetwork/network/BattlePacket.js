@@ -18,6 +18,7 @@ gv.CMD.OPPONENT_DESTROY_TOWER = 5015;
 gv.CMD.GET_BATTLE_INFO = 5016;
 gv.CMD.END_BATTLE = 5017;
 gv.CMD.GET_BATTLE_DECK_IN_BATTLE = 5018;
+gv.CMD.BATTLE_ERROR = 5019;
 BattleNetwork = BattleNetwork || {};
 
 BattleNetwork.packetMap = {};
@@ -638,3 +639,13 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_DECK_IN_BATTLE] = fr.InPacket.extend({
         }
     }
 });
+
+BattleNetwork.packetMap[gv.CMD.BATTLE_ERROR] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.errorMessage= this.getString();
+    }
+})
