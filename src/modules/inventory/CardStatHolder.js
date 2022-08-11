@@ -17,6 +17,6 @@ const CardStatHolder = cc.Node.extend({
         this.statIconImg.setTexture(cardStat.icon);
         this.statNameTxt.setString(cardStat.name);
         this.statValueTxt.setString(cardStat.value);
-        this.setName(cardStat.nameField);
+        this.setName("card_holder_" + cardStat.nameField);
     }
 })
