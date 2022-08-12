@@ -36,6 +36,7 @@ const lobbyLayer = cc.Node.extend({
             let treasureSlotNode = new TreasureSlot(i);
             this.treasureSlotNodeList.push(treasureSlotNode);
             this.lobbyNode.addChild(treasureSlotNode);
+            treasureSlotNode.setName("treasureSlotNode" + i);
         }
     },
 
