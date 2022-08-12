@@ -107,12 +107,8 @@ let EffectSystem = System.extend({
                 this._updateOriginVelocity(velocityComponent);
                 entity.removeComponent(slowComponent);
             } else {
-                let percent = slowComponent.percent;
-                let goatSlowEffect = entity.getComponent(GoatSlowEffectComponent);
-                if (goatSlowEffect) percent = goatSlowEffect.percent;
                 velocityComponent.speedX = Math.min(slowComponent.percent * velocityComponent.originSpeedX, velocityComponent.speedX);
                 velocityComponent.speedY = Math.min(slowComponent.percent * velocityComponent.originSpeedY, velocityComponent.speedY);
-
                 // animation
                 if (!slowComponent.addedAnimation) {
                     BattleAnimation.addAnimationHitSlowEffect(entity);
@@ -191,12 +187,11 @@ let EffectSystem = System.extend({
     },
 
     _handlePoisonEffect: function (dt) {
-        let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PoisonEffect);
+        let monsterList = EntityManager.getInstance().getEntitiesHasComponents(PoisonEffect, LifeComponent);
         for (let monster of monsterList) {
             let poisonEffect = monster.getComponent(PoisonEffect);
 
             if (poisonEffect.duration > 0) {
-                cc.log(poisonEffect.duration + " " + dt);
                 poisonEffect.duration -= dt;
                 let lifeComponent = monster.getComponent(LifeComponent);
                 lifeComponent.hp -= poisonEffect.healthPerSecond * dt;
