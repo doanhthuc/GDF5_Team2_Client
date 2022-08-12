@@ -262,12 +262,17 @@ const CardDeckNode2 = cc.Node.extend({
 
     removeDragSprite: function (cardType) {
         // cc.error("Remove drag sprite: " + cardType);
-        if (!this.spriteDragManager[cardType]) {
-            return;
+        for (let [key, value] of Object.entries(this.spriteDragManager)) {
+            value.setVisible(false);
+            BattleManager.getInstance().getBattleLayer().removeChild(value);
+            // this.spriteDragManager[cardType] = null;
         }
-        this.spriteDragManager[cardType].setVisible(false);
-        BattleManager.getInstance().getBattleLayer().removeChild(this.spriteDragManager[cardType]);
-        this.spriteDragManager[cardType] = null;
+        // if (!this.spriteDragManager[cardType]) {
+        //     return;
+        // }
+        // this.spriteDragManager[cardType].setVisible(false);
+        // BattleManager.getInstance().getBattleLayer().removeChild(this.spriteDragManager[cardType]);
+        // this.spriteDragManager[cardType] = null;
     },
 
     onPutCardIntoInvalidPosition: function () {
