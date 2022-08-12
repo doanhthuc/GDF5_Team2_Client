@@ -25,7 +25,7 @@ EventDispatcher.getInstance()
         let tilePos = data.pos;
         let currentMode = data.mode;
         let cardId = data.cardId;
-        let map = BattleManager.getInstance().getBattleData().getMap(currentMode);
+        let map = BattleManager.getInstance().getBattleData().getMapObject(currentMode).convertBattleMapObjectToSimpleMap();
 
         if (!Utils.validateTilePos(tilePos)) {
             return;
@@ -75,7 +75,7 @@ EventDispatcher.getInstance()
         let tilePos = data.pos;
         let currentMode = data.mode;
 
-        let map = BattleManager.getInstance().getBattleData().getMap(currentMode);
+        let map = BattleManager.getInstance().getBattleData().getMapObject(currentMode).convertBattleMapObjectToSimpleMap();
 
         if (!Utils.validateTilePos(tilePos)) {
             return;

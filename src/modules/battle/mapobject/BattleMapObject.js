@@ -23,10 +23,39 @@ const BattleMapObject = cc.Class.extend({
         }
         for (let i = 0; i < this.height; i++) {
             for (let j = 0; j < this.width; j++) {
-                simpleMap[i][j] = this.battleMap[i][j].getTileType();
+                // let row = GameConfig.MAP_HEIGH - 1 - i;
+                let row = i;
+                let objectInTileType = this.battleMap[i][j].getObjectInTileType();
+                let tileType = this.battleMap[i][j].getTileType();
+                if (objectInTileType === ObjectInCellType.TOWER) {
+                    simpleMap[row][j] = GameConfig.MAP.TOWER;
+                } else if (objectInTileType === ObjectInCellType.PIT){
+                    simpleMap[row][j] = GameConfig.MAP.HOLE;
+                } else if (objectInTileType === ObjectInCellType.TREE) {
+                    simpleMap[row][j] = GameConfig.MAP.TREE;
+                }
+                else if (tileType === TileType.ATTACK_SPEED_UP) {
+                    simpleMap[row][j] = GameConfig.MAP.ATTACK_SPEED
+                } else if (tileType === TileType.ATTACK_RANGE_UP) {
+                    simpleMap[row][j] = GameConfig.MAP.ATTACK_RANGE
+                } else if (tileType === TileType.DAMAGE_UP) {
+                    simpleMap[row][j] = GameConfig.MAP.ATTACK_DAMAGE
+                } else {
+                    simpleMap[row][j] = GameConfig.MAP.NONE;
+                }
             }
         }
-        return simpleMap;
+        let transposeMatrix = [];
+        for (let i = 0; i < this.width; i++) {
+            transposeMatrix[i] = new Array(this.height);
+        }
+        for (let i = 0; i < this.height; i++) {
+            for (let j = 0; j < this.width; j++) {
+                transposeMatrix[j][i] = simpleMap[i][j];
+            }
+        }
+
+        return transposeMatrix.reverse();
     },
 
     isHavingTowerInTile: function (tilePos) {

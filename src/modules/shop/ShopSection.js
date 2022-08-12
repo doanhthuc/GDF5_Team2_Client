@@ -1,9 +1,12 @@
 const ShopSection = cc.Node.extend({
-    ctor: function (type) {
+    ctor: function (type, name) {
         this.dailyItemSlot = new Map();
         this.type = type;
         this._super();
         this._setupUI();
+        if (name) {
+            this.setName(name);
+        }
     },
 
     _setupUI: function () {

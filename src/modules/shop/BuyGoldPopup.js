@@ -6,6 +6,7 @@ const BuyGoldPopup = cc.Node.extend({
 
     _setupUI: function () {
         this.name = CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_GOLD;
+        this.setName(this.name);
         this.popup = ccs.load(ShopResources.BUY_GOLD_POPUP_NODE, '').node;
         this.addChild(this.popup);
 
@@ -57,9 +58,9 @@ const BuyGoldPopup = cc.Node.extend({
 
     setPrice: function (price) {
         this.price = price;
-        cc.log(this.popup.getChildByName("buy_btn").getChildByName("priceTxt"))
+        cc.log(this.popup.getChildByName("buy_btn_gold").getChildByName("priceTxt"))
         cc.log(this.price)
-        this.popup.getChildByName("buy_btn").getChildByName("priceTxt").setString(this.price);
+        this.popup.getChildByName("buy_btn_gold").getChildByName("priceTxt").setString(this.price);
     },
 
 

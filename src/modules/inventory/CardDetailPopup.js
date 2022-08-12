@@ -86,7 +86,8 @@ const CardDetailPopup = cc.Node.extend({
             let cardStat = {
                 icon: CARD_STAT_ICON[key],
                 name: CARD_STAT_NAME[key],
-                value: value
+                value: value,
+                nameField: key
             }
             this.cardStatHolders[index].setCardStatHolderTexture(cardStat);
             this.cardStatHolders[index].setVisible(true);

@@ -43,6 +43,10 @@ let BattleLayer = cc.Layer.extend({
         this.mapLayer._genMap(GameConfig.PLAYER);
         this.mapLayer._genMap(GameConfig.OPPONENT);
         this.addChild(this.mapLayer, 1);
+
+        this.fpsText = new ccui.Text("", "textures/font/SVN-Supercell Magic.ttf", 20);
+        this.fpsText.setPosition(cc.p(cc.winSize.width - 50, cc.winSize.height - 30));
+        this.addChild(this.fpsText, 100);
     },
 
     _initSystem: function () {
@@ -64,6 +68,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     update: function (dt) {
+        this.fpsText.setString(cc.director.getFrameRate().toFixed(1));
         let currentTick = tickManager.getCurrentTick();
         while (tickManager.getLatestUpdateTick() < currentTick) {
             tickManager.updateData();
@@ -282,7 +287,7 @@ let BattleLayer = cc.Layer.extend({
                 let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
                 if (Utils.validateTilePos(tilePos)) {
-                    let playerMapMatrix = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+                    let playerMapMatrix = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).convertBattleMapObjectToSimpleMap();
                     if (playerMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
                         BattleManager.getInstance().getBattleLayer()
                             .uiLayer.showTargetCircle(tilePos.x, tilePos.y);
