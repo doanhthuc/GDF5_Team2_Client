@@ -57,7 +57,7 @@ let BattleMapLayer = cc.Layer.extend({
                 switch (map[r][c]) {
                     case GameConfig.MAP.ATTACK_SPEED:
                         sp.setTexture(BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG);
-                        sp.setName("AttackSpeedBuffTile")
+                        sp.setName("AttackSpeedBuff")
                         break;
                     case GameConfig.MAP.ATTACK_RANGE:
                         sp.setTexture(BattleResource.ITEM_BUFF_RANGE_IMG);
