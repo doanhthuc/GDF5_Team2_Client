@@ -226,7 +226,7 @@ NodeFactory.createOwlNodeAnimation = function (range) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("owlTower")
+    node.setName("Tower_0")
     return node;
 }
 
@@ -244,7 +244,7 @@ NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("bearTower")
+    node.setName("Tower_4")
     return node;
 }
 
@@ -261,7 +261,7 @@ NodeFactory.createFrogNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("frogTower")
+    node.setName("Tower_2")
 
     return node;
 }
@@ -276,7 +276,7 @@ NodeFactory.createBunnyNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("bunnyTower")
+    node.setName("Tower_3")
 
     return node;
 }
@@ -291,7 +291,7 @@ NodeFactory.createWizardNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("wizardTower")
+    node.setName("Tower_1")
 
     return node;
 }
@@ -306,7 +306,7 @@ NodeFactory.createSnakeAttackSpeedNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("snakeTower")
+    node.setName("Tower_6")
 
     return node;
 }
@@ -321,7 +321,7 @@ NodeFactory.createGoatDamageNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("goatTower")
+    node.setName("Tower_5")
 
     return node;
 }
