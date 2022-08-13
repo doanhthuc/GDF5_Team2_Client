@@ -22,16 +22,27 @@ let AttackComponent = Component.extend({
     },
 
     setSpeed: function (speed) {
-        this.speed = speed;
+        this._speed = speed;
     },
 
     getDamage: function () {
         let latestUpdateTick = tickManager.getLatestUpdateTick();
         if (latestUpdateTick !== this._latestTick) {
             this._latestTick = latestUpdateTick;
+            this._speed = this.originSpeed;
             this._damage = this.originDamage;
         }
         return this._damage;
+    },
+
+    getSpeed: function () {
+        let latestUpdateTick = tickManager.getLatestUpdateTick();
+        if (latestUpdateTick !== this._latestTick) {
+            this._latestTick = latestUpdateTick;
+            this._speed = this.originSpeed;
+            this._damage = this.originDamage;
+        }
+        return this._speed;
     },
 
     getTargetStrategy: function () {
@@ -49,7 +60,7 @@ let AttackComponent = Component.extend({
         this.originRange = range;
         this.range = range;
         this.originSpeed = speed;
-        this.speed = speed;
+        this._speed = speed;
         this.countdown = countdown;
         this.effects = effects || [];
         this.bulletSpeed = bulletSpeed;
@@ -61,7 +72,7 @@ let AttackComponent = Component.extend({
 
     clone: function () {
         return ComponentFactory.create(AttackComponent, this._damage, this.targetStrategy, this.range,
-            this.speed, this.countdown, this.effects, this.bulletSpeed, this.bulletRadius, this.canTargetAirMonster);
+            this._speed, this.countdown, this.effects, this.bulletSpeed, this.bulletRadius, this.canTargetAirMonster);
     },
 
     updateAttackStatistic: function (damage, range, speed, effects, bulletSpeed, bulletRadius) {
@@ -70,7 +81,7 @@ let AttackComponent = Component.extend({
         this.originSpeed = speed;
         this.range = range;
         this.originRange = range;
-        this.speed = speed;
+        this._speed = speed;
         this.effects = effects;
         this.bulletSpeed = bulletSpeed;
         this.bulletRadius = bulletRadius;

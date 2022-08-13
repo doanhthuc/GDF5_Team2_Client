@@ -19,7 +19,7 @@ let EffectSystem = System.extend({
         this._handleDamageEffect(tick);
         // IMPORTANT: SlowEffect < FrozenEffect
         this._handleSlowEffect(tick);
-        this._handleGoatSlowEffect(tick);
+        // this._handleGoatSlowEffect(tick);
         this._handleFrozenEffect(tick);
         this._handleTrapEffect(tick);
         this._handlePoisonEffect(tick);
@@ -33,7 +33,7 @@ let EffectSystem = System.extend({
             let attackComponent = entity.getComponent(AttackComponent);
             let buffAttackSpeedComponent = entity.getComponent(BuffAttackSpeedEffect);
 
-            attackComponent.speed = attackComponent.originSpeed * (1 - (buffAttackSpeedComponent.percent - 1));
+            attackComponent.setSpeed(attackComponent.originSpeed * (1 - (buffAttackSpeedComponent.percent - 1)));
         }
     },
 
@@ -200,6 +200,7 @@ let EffectSystem = System.extend({
             }
         }
     },
+
     _updateOriginVelocity: function (velocityComponent) {
         velocityComponent.speedX = velocityComponent.originSpeedX;
         velocityComponent.speedY = velocityComponent.originSpeedY;
