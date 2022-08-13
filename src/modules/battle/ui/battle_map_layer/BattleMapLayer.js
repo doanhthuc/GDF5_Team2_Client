@@ -55,6 +55,7 @@ let BattleMapLayer = cc.Layer.extend({
                 });
                 let str = null;
                 if (mode === GameConfig.PLAYER) str = "Player"
+                else str="Opponent"
                 switch (map[r][c]) {
                     case GameConfig.MAP.ATTACK_SPEED:
                         sp.setTexture(BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG);
