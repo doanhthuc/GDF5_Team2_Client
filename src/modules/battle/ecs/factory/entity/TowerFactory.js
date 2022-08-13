@@ -55,7 +55,7 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
 
     let towerEnergy = CARD_CONST[typeID].energy;
 
-    let node = NodeFactory.createBearNodeAnimation(attackRange,mode);
+    let node = NodeFactory.createBearNodeAnimation(attackRange,false,mode);
     let frozenEffect = ComponentFactory.create(FrozenEffect, frozenDuration);
 
     // NOTE: get component from pool
