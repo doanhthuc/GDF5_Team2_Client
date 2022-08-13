@@ -53,19 +53,20 @@ let BattleMapLayer = cc.Layer.extend({
                     x: pos.x,
                     y: pos.y
                 });
-
+                let str = null;
+                if (mode === GameConfig.PLAYER) str = "Player"
                 switch (map[r][c]) {
                     case GameConfig.MAP.ATTACK_SPEED:
                         sp.setTexture(BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG);
-                        sp.setName("AttackSpeedBuffTile")
+                        sp.setName(str + "AttackSpeedBuff")
                         break;
                     case GameConfig.MAP.ATTACK_RANGE:
                         sp.setTexture(BattleResource.ITEM_BUFF_RANGE_IMG);
-                        sp.setName("AttackRangeBuff")
+                        sp.setName(str+"AttackRangeBuff")
                         break;
                     case GameConfig.MAP.ATTACK_DAMAGE:
                         sp.setTexture(BattleResource.ITEM_BUFF_DAMAGE_IMG);
-                        sp.setName("AttackDamageBuff")
+                        sp.setName(str+"AttackDamageBuff")
                         break;
                     case GameConfig.MAP.TREE:
                         EntityFactory.createTree(tilePos, mode);
