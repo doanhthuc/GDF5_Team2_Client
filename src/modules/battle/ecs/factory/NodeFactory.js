@@ -214,7 +214,7 @@ NodeFactory.createSatyrNodeAnimation = function () {
     return node;
 }
 
-NodeFactory.createOwlNodeAnimation = function (range) {
+NodeFactory.createOwlNodeAnimation = function (range, mode) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_wood.png");
     let towerSprite = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
@@ -226,11 +226,13 @@ NodeFactory.createOwlNodeAnimation = function (range) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("Tower_0")
+    if (mode === GameConfig.PLAYER)
+        node.setName("PlayerTower_0")
+    else node.setName("OpponentTower_0")
     return node;
 }
 
-NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange) {
+NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange,mode) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
     let towerSprite = new cc.Sprite("#tower_ice_gun_attack_0_0010.png");
@@ -244,11 +246,14 @@ NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("Tower_4")
+    if (mode === GameConfig.PLAYER)
+        node.setName("PlayerTower_4")
+    else node.setName("OpponentTower_4")
+
     return node;
 }
 
-NodeFactory.createFrogNodeAnimation = function (attackRange) {
+NodeFactory.createFrogNodeAnimation = function (attackRange,mode) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_steel.png");
     let towerSprite = new cc.Sprite("#tower_boomerang_attack_0_0011.png");
@@ -261,12 +266,14 @@ NodeFactory.createFrogNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("Tower_2")
+    if (mode === GameConfig.PLAYER)
+        node.setName("PlayerTower_2")
+    else node.setName("OpponentTower_2")
 
     return node;
 }
 
-NodeFactory.createBunnyNodeAnimation = function (attackRange) {
+NodeFactory.createBunnyNodeAnimation = function (attackRange,mode) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
     let towerSprite = new cc.Sprite("#tower_oil_gun_attack_0_0011.png");
@@ -276,12 +283,14 @@ NodeFactory.createBunnyNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("Tower_3")
+    if (mode === GameConfig.PLAYER)
+        node.setName("PlayerTower_3")
+    else node.setName("OpponentTower_3")
 
     return node;
 }
 
-NodeFactory.createWizardNodeAnimation = function (attackRange) {
+NodeFactory.createWizardNodeAnimation = function (attackRange,mode) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_steel.png");
     let towerSprite = new cc.Sprite("#tower_wizard_attack_0_0000.png");
@@ -291,12 +300,14 @@ NodeFactory.createWizardNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("Tower_1")
+    if (mode === GameConfig.PLAYER)
+        node.setName("PlayerTower_1")
+    else node.setName("OpponentTower_1")
 
     return node;
 }
 
-NodeFactory.createSnakeAttackSpeedNodeAnimation = function (attackRange) {
+NodeFactory.createSnakeAttackSpeedNodeAnimation = function (attackRange,mode) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
     let towerSprite = new cc.Sprite("#tower_attack_speed_attack_0_0000.png");
@@ -307,11 +318,13 @@ NodeFactory.createSnakeAttackSpeedNodeAnimation = function (attackRange) {
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
     node.setName("Tower_6")
-
+    if (mode === GameConfig.PLAYER)
+        node.setName("PlayerTower_6")
+    else node.setName("OpponentTower_6")
     return node;
 }
 
-NodeFactory.createGoatDamageNodeAnimation = function (attackRange) {
+NodeFactory.createGoatDamageNodeAnimation = function (attackRange,mode) {
     let node = new cc.Node();
     let pedestalSprite = new cc.Sprite("res/textures/battle/battle_tower_pedestal_rock.png");
     let towerSprite = new cc.Sprite("#tower_damage_attack_0_0000.png");
@@ -321,8 +334,9 @@ NodeFactory.createGoatDamageNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
-    node.setName("Tower_5")
-
+    if (mode === GameConfig.PLAYER)
+        node.setName("PlayerTower_5")
+    else node.setName("OpponentTower_5")
     return node;
 }
 
