@@ -179,7 +179,7 @@ EntityFactory.createTree = function (tilePos, mode) {
     hpBarNode.setPosition(cc.p(0, 50));
     node.addChild(sp, 1, "tree");
     node.addChild(hpBarNode, 1, "hp");
-
+   // node.setName("tree" + entity.id);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let lifeComponent = ComponentFactory.create(LifeComponent, 100, 100);

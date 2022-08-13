@@ -26,6 +26,11 @@ let AttackComponent = Component.extend({
     },
 
     getDamage: function () {
+        let latestUpdateTick = tickManager.getLatestUpdateTick();
+        if (latestUpdateTick !== this._latestTick) {
+            this._latestTick = latestUpdateTick;
+            this._damage = this.originDamage;
+        }
         return this._damage;
     },
 
@@ -51,6 +56,7 @@ let AttackComponent = Component.extend({
         this.bulletRadius = bulletRadius;
         this.canTargetAirMonster = canTargetAirMonster;
         this.effects.push(new DamageEffect(this._damage));
+        this._latestTick = -1;
     },
 
     clone: function () {
