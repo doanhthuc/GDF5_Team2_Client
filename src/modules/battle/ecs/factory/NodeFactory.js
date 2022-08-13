@@ -226,6 +226,7 @@ NodeFactory.createOwlNodeAnimation = function (range) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
+    node.setName("owlTower")
     return node;
 }
 
@@ -243,6 +244,7 @@ NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
+    node.setName("bearTower")
     return node;
 }
 
@@ -259,6 +261,8 @@ NodeFactory.createFrogNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
+    node.setName("frogTower")
+
     return node;
 }
 
@@ -272,6 +276,8 @@ NodeFactory.createBunnyNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
+    node.setName("bunnyTower")
+
     return node;
 }
 
@@ -285,6 +291,8 @@ NodeFactory.createWizardNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
+    node.setName("wizardTower")
+
     return node;
 }
 
@@ -298,6 +306,8 @@ NodeFactory.createSnakeAttackSpeedNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
+    node.setName("snakeTower")
+
     return node;
 }
 
@@ -311,6 +321,8 @@ NodeFactory.createGoatDamageNodeAnimation = function (attackRange) {
     node.addChild(pedestalSprite, 1, "pedestal");
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
+    node.setName("goatTower")
+
     return node;
 }
 
