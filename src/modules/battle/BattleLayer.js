@@ -263,6 +263,7 @@ let BattleLayer = cc.Layer.extend({
             onTouchesEnded: function (touches, event) {
                 if (touches.length <= 0)
                     return;
+                BattleManager.getInstance().getCardDeckNode().removeDragSprite(BattleManager.getInstance().getBattleLayer().selectedCard);
                 if (BattleManager.getInstance().getBattleLayer().selectedCard !== null) {
                     let selectedCardType = BattleManager.getInstance().getBattleLayer().selectedCard
                     BattleManager.getInstance().getCardDeckNode().removeDragSprite(selectedCardType);

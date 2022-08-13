@@ -37,6 +37,7 @@ let BattleMapLayer = cc.Layer.extend({
     },
 
     _genMap: function (mode) {
+
         this.houseSprite[mode] = new cc.Sprite(BattleResource.HOUSE_IMG);
         this.mapNode[mode].addChild(this.houseSprite[mode], 15000);
         this.houseSprite[mode].setAnchorPoint(cc.p(0.5, 0.2));
@@ -47,17 +48,24 @@ let BattleMapLayer = cc.Layer.extend({
             for (let c = 0; c < map[0].length; c++) {
                 let tilePos = cc.p(c, GameConfig.MAP_HEIGH - 1 - r);
                 let pos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
-                let texture = null;
+                let sp = new cc.Sprite();
+                sp.attr({
+                    x: pos.x,
+                    y: pos.y
+                });
 
                 switch (map[r][c]) {
                     case GameConfig.MAP.ATTACK_SPEED:
-                        texture = BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG;
+                        sp.setTexture(BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG);
+                        sp.setName("AttackSpeedBuff")
                         break;
                     case GameConfig.MAP.ATTACK_RANGE:
-                        texture = BattleResource.ITEM_BUFF_RANGE_IMG;
+                        sp.setTexture(BattleResource.ITEM_BUFF_RANGE_IMG);
+                        sp.setName("AttackRangeBuff")
                         break;
                     case GameConfig.MAP.ATTACK_DAMAGE:
-                        texture = BattleResource.ITEM_BUFF_DAMAGE_IMG;
+                        sp.setTexture(BattleResource.ITEM_BUFF_DAMAGE_IMG);
+                        sp.setName("AttackDamageBuff")
                         break;
                     case GameConfig.MAP.TREE:
                         EntityFactory.createTree(tilePos, mode);
@@ -66,15 +74,10 @@ let BattleMapLayer = cc.Layer.extend({
                         EntityFactory.createHole(tilePos, mode);
                         continue;
                     default:
-                        continue;
+                        sp.setName("tile " + tilePos.x + " " + tilePos.y);
+                        break;
+
                 }
-
-                let sp = new cc.Sprite(texture);
-                sp.attr({
-                    x: pos.x,
-                    y: pos.y
-                });
-
                 this.mapNode[mode].addChild(sp, 1);
             }
         }

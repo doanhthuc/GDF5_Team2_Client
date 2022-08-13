@@ -179,7 +179,9 @@ EntityFactory.createTree = function (tilePos, mode) {
     hpBarNode.setPosition(cc.p(0, 50));
     node.addChild(sp, 1, "tree");
     node.addChild(hpBarNode, 1, "hp");
-   // node.setName("tree" + entity.id);
+    if (mode === GameConfig.PLAYER)
+        node.setName("PlayerTree");
+    else node.setName("OpponentTree");
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let lifeComponent = ComponentFactory.create(LifeComponent, 100, 100);
@@ -200,7 +202,9 @@ EntityFactory.createHole = function (tilePos, mode) {
     let node = new cc.Node();
     let sp = new cc.Sprite(BattleResource.HOLE_IMG);
     node.addChild(sp, 1, "hole");
-
+    if (mode === GameConfig.PLAYER)
+        node.setName("PlayerHole");
+    else node.setName("OpponentHole");
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
 
