@@ -13,7 +13,7 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
     let towerEnergy = CARD_CONST[typeID].energy;
 
-    let node = NodeFactory.createOwlNodeAnimation(attackRange);
+    let node = NodeFactory.createOwlNodeAnimation(attackRange, mode);
 
     // let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
     // let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
@@ -55,7 +55,7 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
 
     let towerEnergy = CARD_CONST[typeID].energy;
 
-    let node = NodeFactory.createBearNodeAnimation(attackRange);
+    let node = NodeFactory.createBearNodeAnimation(attackRange,false,mode);
     let frozenEffect = ComponentFactory.create(FrozenEffect, frozenDuration);
 
     // NOTE: get component from pool
@@ -88,7 +88,7 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     let towerEnergy = CARD_CONST[typeID].energy;
 
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
-    let node = NodeFactory.createFrogNodeAnimation(attackRange);
+    let node = NodeFactory.createFrogNodeAnimation(attackRange,mode);
 
     let damageEffect = ComponentFactory.create(DamageEffect, 3);
     // NOTE: get component from pool
@@ -122,7 +122,7 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
     let slowDuration = towerConfig.slowDuration / 1000;
     let slowValue = towerConfig.slowValue * -1;
     let towerEnergy = CARD_CONST[typeID].energy;
-    let node = NodeFactory.createBunnyNodeAnimation(attackRange);
+    let node = NodeFactory.createBunnyNodeAnimation(attackRange,mode);
 
     let slowEffect = ComponentFactory.create(SlowEffect, slowDuration, slowValue);
     // NOTE: get component from pool
@@ -155,7 +155,7 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
     let canTargetAirMonster = false;
     let towerEnergy = CARD_CONST[typeID].energy;
-    let node = NodeFactory.createWizardNodeAnimation(attackRange);
+    let node = NodeFactory.createWizardNodeAnimation(attackRange,mode);
 
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
@@ -183,7 +183,7 @@ EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode) {
     let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
     let attackSpeedUpValue = towerConfig.attackSpeedUpValue;
     let towerEnergy = CARD_CONST[typeID].energy;
-    let node = NodeFactory.createSnakeAttackSpeedNodeAnimation(buffRange);
+    let node = NodeFactory.createSnakeAttackSpeedNodeAnimation(buffRange,mode);
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
@@ -211,7 +211,7 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
     let towerConfig = TowerConfig.getDamageGoatTowerConfigFromJson(1);
     let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
     let damageUpValue = towerConfig.damageUpValue;
-    let node = NodeFactory.createGoatDamageNodeAnimation(buffRange);
+    let node = NodeFactory.createGoatDamageNodeAnimation(buffRange,mode);
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
