@@ -36,6 +36,11 @@ const CardDeckNode2 = cc.Node.extend({
         this.deckEnergyProgress.setPosition(this.rootNode.convertToNodeSpace(progressPos));
         this.rootNode.addChild(this.deckEnergyProgress);
 
+        this.cancelSelectBtnNode = ccs.load("ui/battleCardDeck/CancelSelectBtn.json", "").node;
+        this.cancelSelectBtn = this.cancelSelectBtnNode.getChildByName("cancelSelectBtnNode");
+        this.rootNode.addChild(this.cancelSelectBtnNode, 10);
+        this.cancelSelectBtn.addTouchEventListener(this.onCancelSelectCardBtnClick.bind(this), this);
+
         this.initNextCardSlot();
 
         for (let i = 0; i < this.selectableCardIdList.length; i++) {
@@ -55,7 +60,6 @@ const CardDeckNode2 = cc.Node.extend({
                 onTouchEnded: this._onTouchEnded.bind(this),
             }, cardSlot);
         }
-
     },
 
     handleInvalidPutCardPosition: function (data) {
@@ -94,8 +98,11 @@ const CardDeckNode2 = cc.Node.extend({
 
     _moveCardUp: function (card) {
         let index = this.cardSlotNodeList.indexOf(card);
-        let moveY = this.cardSlotNodeFixedPosList[index].y + 30;
+        let posY = this.cardSlotNodeFixedPosList[index].y;
+        let moveY = posY + 50;
         let posX = this.cardSlotNodeFixedPosList[index].x;
+        this.cancelSelectBtnNode.setPosition(posX, posY - card.height / 2 + 20);
+        this.cancelSelectBtnNode.setVisible(true);
         let moveTop = cc.moveTo(1, cc.p(posX, moveY)).easing(cc.easeElasticOut());
         card.stopAllActions();
         card.runAction(moveTop);
@@ -108,6 +115,7 @@ const CardDeckNode2 = cc.Node.extend({
         let moveDown = cc.moveTo(1, pos).easing(cc.easeElasticOut());
         card.stopAllActions();
         card.runAction(moveDown);
+        this.cancelSelectBtnNode.setVisible(false);
         card.isUp = false;
     },
 
@@ -248,6 +256,7 @@ const CardDeckNode2 = cc.Node.extend({
             BattleManager.getInstance().getBattleLayer().selectedCard = null;
             this.setSelectedCardType(null, null);
             this.isCardPuttedIntoMap = false;
+            this.cancelSelectBtnNode.setVisible(false);
         }
     },
 
@@ -272,5 +281,27 @@ const CardDeckNode2 = cc.Node.extend({
         let cardEnergy = CARD_CONST[cardType].energy;
         let playerEnergy = BattleManager.getInstance().getBattleData().getCurrentEnergy(GameConfig.PLAYER);
         return playerEnergy >= cardEnergy;
-    }
+    },
+
+    onCancelSelectCardBtnClick: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            this.removeDragSprite(this.selectedCardType);
+            let cardSlotNode = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
+            if (cardSlotNode) {
+                let index = this.cardSlotNodeList.indexOf(cardSlotNode);
+                cardSlotNode.setPosition(this.nextCardPosition);
+                cardSlotNode.setScale(0.6449, 0.6449);
+                let prevCardLevel = this.selectedCardLevel;
+                cardSlotNode.setCardTypeAndLevel(this.nextCardSlot.type, this.nextCardSlot.level);
+                cardSlotNode.runAction(cc.spawn(cc.moveTo(0.15, this.cardSlotNodeFixedPosList[index]), cc.scaleTo(0.15, 1)));
+                let nextCard = this.cardDeckListData.getNextCard();
+                this.nextCardSlot.setCardTypeAndLevel(nextCard.id, nextCard.level);
+                this.cardDeckListData.pushUsedCardIntoDeck({id: this.selectedCardType, level: prevCardLevel});
+                this.deckEnergyProgress.minusEnergy(-5);
+            }
+
+            this.setSelectedCardType(null, null);
+            this.cancelSelectBtnNode.setVisible(false);
+        }
+    },
 });

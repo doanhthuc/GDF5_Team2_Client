@@ -93,18 +93,13 @@ BattleNetwork.Connector = cc.Class.extend({
         let battleData = new BattleData();
         BattleManager.getInstance().registerBattleData(battleData, true);
         battleData.setRoomId(packet.roomId)
-        battleData.setMap(packet.playerMap, GameConfig.PLAYER);
-        battleData.setMap(packet.opponentMap, GameConfig.OPPONENT);
+        // IMPORTANT: remove send simple map from battle
+        // battleData.setMap(packet.playerMap, GameConfig.PLAYER);
+        // battleData.setMap(packet.opponentMap, GameConfig.OPPONENT);
         // battleData.setMapObject(packet.playerMap, GameConfig.PLAYER);
         // battleData.setMapObject(packet.playerMap, GameConfig.OPPONENT);
         battleData.setLongestPath(packet.playerLongestPath, GameConfig.PLAYER);
         battleData.setLongestPath(packet.opponentLongestPath, GameConfig.OPPONENT);
-
-        let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
-        let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
-        battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
-        battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
-
 
         let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
         battleData.setUsername(userContext.getUsername(), GameConfig.PLAYER);
@@ -189,12 +184,11 @@ BattleNetwork.Connector = cc.Class.extend({
         let battleData = BattleManager.getInstance().getBattleData();
         battleData.setMapObject(packet.playerBattleMapObject, GameConfig.PLAYER);
         battleData.setMapObject(packet.opponentBattleMapObject, GameConfig.OPPONENT);
-        let battleMapObject = battleData.getMapObject(GameConfig.PLAYER);
-        // for (let i = 0; i < battleMapObject.length; i++) {
-        //     for (let j = 0; j < battleMapObject[i].length; j++) {
-        //         cc.log('[BattleNetwork.js line 102] battleMapObject: ' + JSON.stringify(battleMapObject[i][j]));
-        //     }
-        // }
+
+        let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
+        let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
+        battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
+        battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
     },
 
     _handleGetCellObject: function (cmd, packet) {

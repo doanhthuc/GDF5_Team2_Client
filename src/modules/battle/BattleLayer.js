@@ -43,6 +43,10 @@ let BattleLayer = cc.Layer.extend({
         this.mapLayer._genMap(GameConfig.PLAYER);
         this.mapLayer._genMap(GameConfig.OPPONENT);
         this.addChild(this.mapLayer, 1);
+
+        this.fpsText = new ccui.Text("", "textures/font/SVN-Supercell Magic.ttf", 20);
+        this.fpsText.setPosition(cc.p(cc.winSize.width - 50, cc.winSize.height - 30));
+        this.addChild(this.fpsText, 100);
     },
 
     _initSystem: function () {
@@ -64,6 +68,7 @@ let BattleLayer = cc.Layer.extend({
     },
 
     update: function (dt) {
+        this.fpsText.setString(cc.director.getFrameRate().toFixed(1));
         let currentTick = tickManager.getCurrentTick();
         while (tickManager.getLatestUpdateTick() < currentTick) {
             tickManager.updateData();
@@ -212,14 +217,7 @@ let BattleLayer = cc.Layer.extend({
     setEntityIdForTileObject: function (entityId, tilePos, mode = GameConfig.PLAYER) {
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);
-        let tileObject = mapObject[tilePos.x][tilePos.y];
-        if (tileObject.tower) {
-            tileObject.tower.entityId = entityId;
-        } else {
-            tileObject.tower = {
-                entityId: entityId,
-            }
-        }
+        mapObject.getObjectInTileByTilePos(tilePos).setEntityId(entityId);
     },
 
     dropSpell: function (spellId, pixelPos, mode) {
@@ -239,9 +237,10 @@ let BattleLayer = cc.Layer.extend({
 
     shouldUpgradeTower: function (towerId, tilePos) {
         if (GameConfig.NETWORK === 0) return false;
-        let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
-        if (cellObject.objectInCellType === ObjectInCellType.TOWER && cellObject.tower !== null && cellObject.tower.towerId === towerId) {
-            let tower = cellObject.tower;
+        let objectInTile = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).getObjectInTileByTilePos(tilePos);
+        if (objectInTile.getObjectInTileType() === ObjectInCellType.TOWER && objectInTile.getType() === towerId) {
+            let tower = objectInTile;
+            cc.log("[shouldUpgradeTower] tower: " + JSON.stringify(tower));
             // let inventoryContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT);
             // let card = inventoryContext.getCardById(towerId);
             // if (card && card.cardLevel > tower.level) {
@@ -254,8 +253,8 @@ let BattleLayer = cc.Layer.extend({
 
     shouldPutNewTower: function (tilePos) {
         if (GameConfig.NETWORK === 0) return true;
-        let cellObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER)[tilePos.x][tilePos.y];
-        return cellObject.objectInCellType === ObjectInCellType.NONE;
+        let tileObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).getTileObject(tilePos.x, tilePos.y);
+        return tileObject.getObjectInTileType() === ObjectInCellType.NONE;
     },
 
     _handleEventKey: function () {
@@ -288,7 +287,7 @@ let BattleLayer = cc.Layer.extend({
                 let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
                 if (Utils.validateTilePos(tilePos)) {
-                    let playerMapMatrix = BattleManager.getInstance().getBattleData().getMap(GameConfig.PLAYER);
+                    let playerMapMatrix = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).convertBattleMapObjectToSimpleMap();
                     if (playerMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
                         BattleManager.getInstance().getBattleLayer()
                             .uiLayer.showTargetCircle(tilePos.x, tilePos.y);

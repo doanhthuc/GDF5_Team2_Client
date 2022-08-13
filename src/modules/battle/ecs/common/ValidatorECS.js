@@ -100,17 +100,18 @@ ValidatorECS.validatePositionPutCard = function (type, pixelPos, mode) {
 
         let row = GameConfig.MAP_HEIGH - 1 - tilePos.y;
         let col = tilePos.x;
-        let map = BattleManager.getInstance().getBattleData().getMap(mode);
+        let map = BattleManager.getInstance().getBattleData().getMapObject(mode).convertBattleMapObjectToSimpleMap();
         if (map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
             || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
             || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {
             return {error: true, msg: MSG_INVALID_TOWER};
         }
-        
+
         let mapObject = BattleManager.getInstance().getBattleData().getMapObject(mode);
-        if (mapObject[tilePos.x][tilePos.y].objectInCellType === ObjectInCellType.TOWER) {
-            let tower = mapObject[tilePos.x][tilePos.y].tower;
-            if (tower.towerId !== type || tower.level >= 3) {
+        let tileObject = mapObject.getTileObject(tilePos.x, tilePos.y);
+        if (tileObject.getObjectInTileType() === ObjectInCellType.TOWER) {
+            let tower = tileObject.getObjectInTile();
+            if (tower.getType() !== type || tower.getLevel() >= 3) {
                 return {error: true, msg: MSG_INVALID_TOWER};
             }
         }
@@ -171,7 +172,7 @@ ValidatorECS.validatePositionPutCard = function (type, pixelPos, mode) {
 
         let row = GameConfig.MAP_HEIGH - 1 - tilePos.y;
         let col = tilePos.x;
-        let map = BattleManager.getInstance().getBattleData().getMap(mode);
+        let map = BattleManager.getInstance().getBattleData().getMapObject(mode).convertBattleMapObjectToSimpleMap();
         if (map[row][col] === GameConfig.MAP.TOWER || map[row][col] === GameConfig.MAP.TREE || map[row][col] === GameConfig.MAP.HOLE
             || (tilePos.x === GameConfig.HOUSE_POSITION.x && tilePos.y === GameConfig.HOUSE_POSITION.y)
             || (tilePos.x === GameConfig.MONSTER_BORN_POSITION.x && tilePos.y === GameConfig.MONSTER_BORN_POSITION.y)) {

@@ -6,6 +6,7 @@ const BuyCardPopup = cc.Node.extend({
 
     _setupUI: function () {
         this.name = CLIENT_UI_CONST.POPUPS_NAME.GUI_BUY_CARD;
+        this.setName(this.name);
         this.popupNode = ccs.load(ShopResources.BUY_CARD_POPUP_NODE, '').node;
         this.addChild(this.popupNode);
 
@@ -34,6 +35,14 @@ const BuyCardPopup = cc.Node.extend({
         this.upgradeReadyAnimationTxt = new cc.LabelTTF("", "font/SVN-Supercell Magic.ttf");
         this.upgradeReadyAnimation.addChild(this.upgradeReadyAnimationTxt);
         this.upgradeReadyAnimation.setVisible(false);
+
+        this.fakeCardImage = ccs.load(ShopResources.FAKE_CARD_IMAGE, '').node;
+        this.fakeCardBoder = this.fakeCardImage.getChildByName('borderImg');
+        this.fakeCardBackground = this.fakeCardImage.getChildByName('backgroundImg');
+        this.fakeTowerImg = this.fakeCardImage.getChildByName('towerImg');
+        this.popupNode.addChild(this.fakeCardImage);
+        this.fakeCardImage.setVisible(false);
+        this.fakeCardImage.setPosition(this.cardImageNode.getPosition());
     },
 
     setId: function (id) {
@@ -81,6 +90,7 @@ const BuyCardPopup = cc.Node.extend({
     },
 
     setQuantity: function (quantity) {
+        this.quantity = quantity;
         this.popupNode.getChildByName("quantity").setString("x" + quantity);
     },
 
@@ -110,7 +120,7 @@ const BuyCardPopup = cc.Node.extend({
                 notify.showNotify();
                 return;
             }
-            ShopNetwork.connector.sendBuyDailyShop(this.id)
+            this.runBuyCardAnimation(this.card.cardType);
         }
     },
 
@@ -122,5 +132,44 @@ const BuyCardPopup = cc.Node.extend({
             PopupUIManager.getInstance().getUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL).setCardModel(cardNode.cardModel);
             PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_CARD_DETAIL);
         }
+    },
+
+    setFakeCardImageTexture: function (cardId) {
+        // this.fakeCardBackground.setTexture(CARD_CONST[cardId].background);
+        this.fakeTowerImg.setTexture(CARD_CONST[cardId].cardImage);
+        this.fakeCardImage.setScale(1);
+    },
+
+    runBuyCardAnimation: function (cardId) {
+        this.setFakeCardImageTexture(cardId);
+        this.fakeCardImage.setPosition(this.cardImageNode.getPosition());
+        this.fakeCardImage.setVisible(true);
+        cc.log("[BuyCardPopup.js] run buy card animation: " + JSON.stringify(this.progressBorderImg.getContentSize().width));
+        let destinationPos = cc.p(
+            this.upgradeProgressNode.getPosition().x - this.progressBorderImg.getContentSize().width / 2,
+            this.upgradeProgressNode.getPosition().y
+        );
+        let moveTo = cc.moveTo(0.5, destinationPos);
+        let scaleTo = cc.scaleTo(0.5, 0.3);
+        this.fakeCardImage.runAction(cc.sequence(moveTo, scaleTo, cc.callFunc(function () {
+                this.fakeCardImage.setVisible(false);
+                this.runUpdateProgressAnimation(this.card.amount, this.quantity);
+            }.bind(this)),
+            cc.callFunc(function () {
+                    ShopNetwork.connector.sendBuyDailyShop(this.id)
+                }.bind(this)
+            )));
+    },
+
+    runUpdateProgressAnimation: function (accumulatedCard, additionQuantity) {
+        if (this.card.cardLevel >= MAX_CARD_LEVEL) {
+            return;
+        }
+        let scaleXFrom = accumulatedCard / JsonReader.getCardUpgradeConfig()[this.card.cardLevel + 1].fragments;
+        scaleXFrom = scaleXFrom > 1 ? 1 : scaleXFrom;
+        let scaleXTo = (accumulatedCard + additionQuantity) / JsonReader.getCardUpgradeConfig()[this.card.cardLevel + 1].fragments;
+        scaleXTo = scaleXTo > 1 ? 1 : scaleXTo;
+        let scaleAction = cc.scaleTo(0.5, scaleXTo, 1);
+        this.progressBackgroundImg.runAction(scaleAction);
     }
 })

@@ -7,13 +7,13 @@ const CardNode = cc.Node.extend({
 
     setModel: function (cardModel) {
         this.cardModel = cardModel
+        this.setName("card_type_" + cardModel.id);
         this.updateCardNodeUI(this.cardModel.accumulated);
     },
 
     onUpgradeCard: function (cardLevel, accumulatedCard) {
         this.cardModel.upgradeCardModel(cardLevel, accumulatedCard);
         this.updateCardNodeUI(this.cardModel.accumulated);
-
     },
 
     onUpdateCard: function (accumulatedCardChange) {
@@ -49,6 +49,7 @@ const CardNode = cc.Node.extend({
         this.upgradeReadyAnimation.setAnimation(0, 'card_upgrade_ready', true);
         this.addChild(this.upgradeReadyAnimation, 4);
         this.upgradeReadyAnimationTxt = new ccui.Text("", "res/textures/font/SVN-Supercell Magic.ttf", 17);
+        this.upgradeReadyAnimationTxt.setName("accumulateTxt");
         this.upgradeReadyAnimation.addChild(this.upgradeReadyAnimationTxt);
         this.upgradeReadyAnimation.setVisible(false);
 
