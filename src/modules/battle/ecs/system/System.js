@@ -16,14 +16,10 @@ let System = cc.Class.extend({
 
     runUpdateData: function () {
         if (GameConfig.DEBUG) {
-            cc.warn(this.name);
             let startTime = Date.now();
-
             this.updateData();
-
             let endTime = Date.now();
-            cc.warn("==> Execution time = " + (endTime - startTime));
-            cc.warn("---------------------------------------")
+            measurePerformance.add(endTime - startTime, this.name);
         } else {
             this.updateData();
         }

@@ -68,7 +68,7 @@ let AttackSystem = System.extend({
                                 cc.p(monsterPos.x, monsterPos.y), clonedEffects, tower.mode, attackComponent.bulletSpeed,
                                 attackComponent.bulletRadius, attackComponent.canTargetAirMonster);
                         }
-                        attackComponent.countdown = attackComponent.speed;
+                        attackComponent.countdown = attackComponent.getSpeed();
                     }
                 }
             }

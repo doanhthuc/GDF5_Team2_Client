@@ -19,7 +19,7 @@ let TowerSpecialSkillSystem = System.extend({
 
         _handleSnakeSpecialSkill: function (tick) {
             let towerList = EntityManager.getInstance().getEntitiesHasComponents(SnakeBurnHpAuraComponent);
-            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, LifeComponent, PositionComponent);
+            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, LifeComponent);
             for (let tower of towerList) {
                 let snakeBurnHpAura = tower.getComponent(SnakeBurnHpAuraComponent);
                 for (let monster of monsterList) {
@@ -36,7 +36,7 @@ let TowerSpecialSkillSystem = System.extend({
 
         _handleGoatSpecialSkill: function (tick) {
             let towerList = EntityManager.getInstance().getEntitiesHasComponents(GoatSlowAuraComponent);
-            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
+            let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent);
             for (let tower of towerList) {
                 let goatSlowAura = tower.getComponent(GoatSlowAuraComponent);
                 for (let monster of monsterList) {

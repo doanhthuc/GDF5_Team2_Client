@@ -13,21 +13,7 @@ let RenderSystem = System.extend({
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
 
-            if (ValidatorECS.isMonster(entity)) {
-                appearanceComponent.sprite.setLocalZOrder(1000 - positionComponent.__y);
-            }
-
-            if (ValidatorECS.isTower(entity)) {
-                let tilePos = Utils.pixel2Tile(positionComponent.__x, positionComponent.__y, entity.mode);
-                if (entity.mode === GameConfig.PLAYER) {
-                    appearanceComponent.sprite.setLocalZOrder(GameConfig.MAP_HEIGH - tilePos.y);
-                } else {
-                    appearanceComponent.sprite.setLocalZOrder(tilePos.y);
-                }
-            }
-
             appearanceComponent.sprite.setPosition(positionComponent.__x, positionComponent.__y);
-
         }
 
         this._updateSkeletonComponentPosition();
