@@ -211,6 +211,7 @@
         "src/modules/battle/mapobject/tileObject/objectintile/Tree.js",
         "src/modules/battle/mapobject/tileObject/TileObject.js",
         "src/modules/battle/MeasurePerformance.js",
+        "src/modules/battle/SoundManager.js",
         "src/modules/battle/TestLayer.js",
         "src/modules/battle/TickData.js",
         "src/modules/battle/TickInputHandler.js",

@@ -17,6 +17,7 @@ let TwoPlayerInfoLayer = cc.Layer.extend({
         this.setAvatar(opponentAvatar, GameConfig.OPPONENT);
         this.setUsername(playerName, GameConfig.PLAYER);
         this.setUsername(opponentName, GameConfig.OPPONENT);
+        soundManager.stopThemeLobby();
     },
 
     setAvatar: function (avatarPath, type) {

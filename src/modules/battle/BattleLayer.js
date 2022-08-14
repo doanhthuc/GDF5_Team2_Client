@@ -177,6 +177,7 @@ let BattleLayer = cc.Layer.extend({
         this._createTower(towerId, tilePos, mode);
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
+        if (mode === GameConfig.PLAYER) soundManager.playPutNewTower();
     },
 
     _createTower: function (towerId, tilePos, mode) {

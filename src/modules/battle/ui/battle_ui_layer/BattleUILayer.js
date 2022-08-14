@@ -77,6 +77,7 @@ let BattleUILayer = cc.Layer.extend({
     startGame: function () {
         this.removeChild(this.twoPlayerInfoLayer, true);
         this._setupUI();
+        soundManager.playThemeBattle();
     },
 
     stopTimer: function () {
@@ -115,6 +116,7 @@ let BattleUILayer = cc.Layer.extend({
     _backToLobby: function () {
         BattleManager.getInstance().getBattleLayer().stopGame();
         fr.view(MainScreen);
+        soundManager.stopThemeBattle();
     }
 });
 

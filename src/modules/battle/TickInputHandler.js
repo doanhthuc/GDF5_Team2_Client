@@ -70,6 +70,7 @@ let TickInputHandler = cc.Class.extend({
         let tower = playerObjectMap.getTowerInTile(tilePos);
         tower.setLevel(packet.towerLevel);
         EntityFactory.onUpdateTowerLevel(tower.getEntityId(), packet.towerLevel, tilePos, GameConfig.PLAYER);
+        soundManager.playUpgradeTower();
     },
 
     _handleOpponentUpgradeTower: function (cmd, packet) {

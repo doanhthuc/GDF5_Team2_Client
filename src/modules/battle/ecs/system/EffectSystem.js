@@ -94,6 +94,8 @@ let EffectSystem = System.extend({
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(SlowEffect);
 
+        let needAddSound = false;
+
         for (let entity of entityList) {
             let velocityComponent = entity.getComponent(VelocityComponent);
             let slowComponent = entity.getComponent(SlowEffect);
@@ -113,8 +115,13 @@ let EffectSystem = System.extend({
                 if (!slowComponent.addedAnimation) {
                     BattleAnimation.addAnimationHitSlowEffect(entity);
                     slowComponent.addedAnimation = true;
+                    if (entity.mode === GameConfig.PLAYER) needAddSound = true;
                 }
             }
+        }
+
+        if (needAddSound) {
+            soundManager.playSnailHit();
         }
     },
 
