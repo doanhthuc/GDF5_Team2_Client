@@ -359,6 +359,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
     let mapObject = BattleManager.getInstance().getBattleData().getMapObject(mode);
     let buffType = mapObject.getBuffType(tilePos);
     EntityFactory.buffTower(towerEntity, buffType);
+    BattleAnimation.upgradeTower(towerEntity);
 }
 
 EntityFactory.buffTower = function (towerEntity, buffType) {
