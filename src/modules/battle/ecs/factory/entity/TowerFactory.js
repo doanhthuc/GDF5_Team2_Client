@@ -230,7 +230,7 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
     return entity;
 }
 
-EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
+EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode) {
     let towerEntity = EntityManager.getInstance().getEntity(entityId);
     cc.log("[TowerFactory.js line 233]: ======================== " + JSON.stringify(towerEntity));
     let towerRank = ReadConfigUtils.getTowerCharRankByLevel(towerLevel);
@@ -352,6 +352,34 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
                 towerEntity.addComponent(snakeBurnHpAuraComponent);
             }
             break;
+        }
+    }
+
+
+    let mapObject = BattleManager.getInstance().getBattleData().getMapObject(mode);
+    let buffType = mapObject.getBuffType(tilePos);
+    EntityFactory.buffTower(towerEntity, buffType);
+}
+
+EntityFactory.buffTower = function (towerEntity, buffType) {
+    let attackComponent = towerEntity.getComponent(AttackComponent);
+    if (attackComponent) {
+        switch (buffType) {
+            case TileType.ATTACK_RANGE_UP: {
+                attackComponent.originRange += attackComponent.originRange * 1;
+                attackComponent.range = Math.max(attackComponent.originRange, attackComponent.range)
+                break;
+            }
+            case TileType.ATTACK_SPEED_UP: {
+                attackComponent.originSpeed -= attackComponent.originSpeed * 0.7;
+                attackComponent.setSpeed(Math.min(attackComponent.originSpeed, attackComponent.getSpeed()));
+                break;
+            }
+            case TileType.DAMAGE_UP: {
+                attackComponent.originDamage += attackComponent.originDamage * 10;
+                attackComponent.setDamage(Math.max(attackComponent.getDamage(), attackComponent.originDamage));
+                break;
+            }
         }
     }
 }

@@ -103,8 +103,8 @@ let BattleUILayer = cc.Layer.extend({
      * @param x tile pos of player map
      * @param y tile pos of player map
      */
-    showTargetCircle: function (x, y) {
-        let circleNode = new CircleTarget();
+    showTargetCircle: function (x, y, range) {
+        let circleNode = new CircleTarget(range);
         let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
         pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
         circleNode.setPosition(pixelPos);

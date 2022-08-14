@@ -211,6 +211,9 @@ let BattleLayer = cc.Layer.extend({
             this.setEntityIdForTileObject(tower.id, tilePos, mode);
         }
 
+        let mapObject = BattleManager.getInstance().getBattleData().getMapObject(mode);
+        let buffType = mapObject.getBuffType(tilePos);
+        EntityFactory.buffTower(tower, buffType)
         return tower;
     },
 
@@ -288,10 +291,22 @@ let BattleLayer = cc.Layer.extend({
                 let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
                 let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
                 if (Utils.validateTilePos(tilePos)) {
-                    let playerMapMatrix = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).convertBattleMapObjectToSimpleMap();
+                    let mapObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER);
+                    let playerMapMatrix = mapObject.convertBattleMapObjectToSimpleMap();
                     if (playerMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
+                        let towerId = mapObject.getEntityIdByTilePos(tilePos)
+                        let towerEntity = EntityManager.getInstance().getEntity(towerId);
+
+                        let attackComponent = towerEntity.getComponent(AttackComponent);
+                        let towerAbility = towerEntity.getComponent(TowerAbilityComponent);
+                        let range;
+                        if (towerAbility) {
+                            range = towerAbility.range;
+                        } else if (attackComponent) {
+                            range = attackComponent.range;
+                        }
                         BattleManager.getInstance().getBattleLayer()
-                            .uiLayer.showTargetCircle(tilePos.x, tilePos.y);
+                            .uiLayer.showTargetCircle(tilePos.x, tilePos.y, range);
                     }
                 }
                 return false;
