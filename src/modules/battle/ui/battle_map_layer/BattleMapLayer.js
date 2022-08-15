@@ -39,6 +39,8 @@ let BattleMapLayer = cc.Layer.extend({
     _genMap: function (mode) {
 
         this.houseSprite[mode] = new cc.Sprite(BattleResource.HOUSE_IMG);
+        if (mode=== GameConfig.PLAYER) this.houseSprite[mode].setName("player_house")
+        else this.houseSprite[mode].setName("opponent_house")
         this.mapNode[mode].addChild(this.houseSprite[mode], 15000);
         this.houseSprite[mode].setAnchorPoint(cc.p(0.5, 0.2));
         this.houseSprite[mode].setPosition(Utils.tile2Pixel(6, 0, mode));
