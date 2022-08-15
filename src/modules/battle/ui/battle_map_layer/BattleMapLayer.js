@@ -78,7 +78,7 @@ let BattleMapLayer = cc.Layer.extend({
                         EntityFactory.createHole(tilePos, mode);
                         continue;
                     default:
-                        sp.setName("tile " + tilePos.x + " " + tilePos.y);
+                        sp.setName(str+"tile " + tilePos.x + " " + tilePos.y);
                         break;
 
                 }
