@@ -9,7 +9,7 @@ EntityFactory._createEntity = function (typeID, mode) {
     let entity = null;
     if (entity === null) {
         entity = new EntityECS(typeID, mode);
-        this.pool.push(entity);
+        // this.pool.push(entity);
         EntityManager.getInstance().addEntity(entity);
     }
     return entity;

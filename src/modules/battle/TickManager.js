@@ -78,6 +78,8 @@ let TickManager = cc.Class.extend({
             cc.warn("   + Active size = " + JSON.stringify(componentActive));
             cc.warn("   + Inactive size = " + JSON.stringify(componentInactive));
 
+            measurePerformance.report();
+
             cc.warn("---------------------------------------")
             cc.warn("---------------------------------------")
         }

@@ -120,19 +120,21 @@ let AbilitySystem = System.extend({
             for (let buffTower of buffTowerList) {
                 let towerAbilityComponent = buffTower.getComponent(TowerAbilityComponent);
                 for (let damageTower of damageTowerList) {
-                    if (this._distanceFrom(buffTower, damageTower) < towerAbilityComponent.range) {
-                        switch (towerAbilityComponent.effect.typeID) {
-                            case BuffAttackDamageEffect.typeID: {
-                                let attackComponent = damageTower.getComponent(AttackComponent);
-                                attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
-                                BattleAnimation.addBuffDamageAnimation(damageTower);
-                                break;
-                            }
-                            case BuffAttackSpeedEffect.typeID: {
-                                let attackComponent = damageTower.getComponent(AttackComponent);
-                                attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
-                                BattleAnimation.addBuffSpeedAnimation(damageTower);
-                                break;
+                    if (damageTower.mode === buffTower.mode) {
+                        if (this._distanceFrom(buffTower, damageTower) < towerAbilityComponent.range) {
+                            switch (towerAbilityComponent.effect.typeID) {
+                                case BuffAttackDamageEffect.typeID: {
+                                    let attackComponent = damageTower.getComponent(AttackComponent);
+                                    attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
+                                    BattleAnimation.addBuffDamageAnimation(damageTower);
+                                    break;
+                                }
+                                case BuffAttackSpeedEffect.typeID: {
+                                    let attackComponent = damageTower.getComponent(AttackComponent);
+                                    attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
+                                    BattleAnimation.addBuffSpeedAnimation(damageTower);
+                                    break;
+                                }
                             }
                         }
                     }

@@ -3,6 +3,7 @@ let GameConfig = GameConfig || {};
 // 0: disable, 1: enable
 GameConfig.DEBUG = 0;
 GameConfig.NETWORK = 1;
+GameConfig.SOUND = 0;
 GameConfig.PLAYER = "player";
 GameConfig.OPPONENT = "opponent";
 
@@ -168,6 +169,3 @@ GameConfig.ANIMATION_TYPE = {
 
 GameConfig.DELAY_BUILD_TOWER = 1;
 GameConfig.TOWER_MAX_LEVEL = 3;
-GameConfig.BATTLE = {
-    MAX_WAVE: 20
-}

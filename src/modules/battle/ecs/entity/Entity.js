@@ -10,15 +10,18 @@ let EntityECS = cc.Class.extend({
 
         this.mode = mode;
        // this.bitmask = 0;
+        this.bitmask = [];
     },
 
     addComponent: function (component) {
         if (this.components[component.typeID]) {
-            // ComponentManager.getInstance().remove(component);
+            ComponentManager.getInstance().remove(component);
         }
         component.setActive(true);
         this.components[component.typeID] = component;
+        ComponentManager.getInstance().add(component);
         //this.bitmask = this.bitmask | (1 << component.typeID);
+        this.bitmask[component.typeID] = 1;
         return this;
     },
 
@@ -28,6 +31,7 @@ let EntityECS = cc.Class.extend({
             ComponentManager.getInstance().remove(component);
             delete this.components[componentOrCls.typeID];
         //    this.bitmask = this.bitmask & (~(1 << componentOrCls.typeID));
+            this.bitmask[component.typeID] = 0;
         }
         // tickManager.getTickData().deleteComponentData(component.id);
     },
@@ -39,15 +43,18 @@ let EntityECS = cc.Class.extend({
         return this.components[ComponentCls.typeID];
     },
 
-    // _hasComponent: function (ComponentCls) {
-    //     // return (this.bitmask & (1 << ComponentCls.typeID)) !== 0;
-    // },
+    _hasComponent: function (ComponentCls) {
+        // return (this.bitmask & (1 << ComponentCls.typeID)) !== 0;
+        return this.bitmask[ComponentCls.typeID] === 1;
+    },
 
     hasAllComponent: function (...ComponentClss) {
         let c = 0;
         for (let cls of ComponentClss) {
-            if (this.getComponent(cls)) {
+            if (this._hasComponent(cls)) {
                 c++;
+            } else {
+                return false;
             }
         }
         return c === ComponentClss.length;

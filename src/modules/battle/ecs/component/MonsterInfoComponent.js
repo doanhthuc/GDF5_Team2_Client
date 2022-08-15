@@ -31,7 +31,7 @@ let MonsterInfoComponent = InfoComponent.extend({
 
     clone: function () {
         // TODO: should use effect.clone()??
-        return ComponentFactory.create(MonsterInfoComponent, this.category, this.classs, this.weight, this.energy, this.gainEnergy,
+        return ComponentFactory.create(MonsterInfoComponent, this.category, this.classs, this.weight, this.damageEnergy, this.gainEnergy,
             this.ability, this.effects);
     },
 });

@@ -39,6 +39,8 @@ let BattleMapLayer = cc.Layer.extend({
     _genMap: function (mode) {
 
         this.houseSprite[mode] = new cc.Sprite(BattleResource.HOUSE_IMG);
+        if (mode=== GameConfig.PLAYER) this.houseSprite[mode].setName("player_house")
+        else this.houseSprite[mode].setName("opponent_house")
         this.mapNode[mode].addChild(this.houseSprite[mode], 15000);
         this.houseSprite[mode].setAnchorPoint(cc.p(0.5, 0.2));
         this.houseSprite[mode].setPosition(Utils.tile2Pixel(6, 0, mode));
@@ -53,19 +55,21 @@ let BattleMapLayer = cc.Layer.extend({
                     x: pos.x,
                     y: pos.y
                 });
-
+                let str = null;
+                if (mode === GameConfig.PLAYER) str = "Player"
+                else str="Opponent"
                 switch (map[r][c]) {
                     case GameConfig.MAP.ATTACK_SPEED:
                         sp.setTexture(BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG);
-                        sp.setName("AttackSpeedBuffTile")
+                        sp.setName(str + "AttackSpeedBuff")
                         break;
                     case GameConfig.MAP.ATTACK_RANGE:
                         sp.setTexture(BattleResource.ITEM_BUFF_RANGE_IMG);
-                        sp.setName("AttackRangeBuff")
+                        sp.setName(str+"AttackRangeBuff")
                         break;
                     case GameConfig.MAP.ATTACK_DAMAGE:
                         sp.setTexture(BattleResource.ITEM_BUFF_DAMAGE_IMG);
-                        sp.setName("AttackDamageBuff")
+                        sp.setName(str+"AttackDamageBuff")
                         break;
                     case GameConfig.MAP.TREE:
                         EntityFactory.createTree(tilePos, mode);
@@ -74,7 +78,7 @@ let BattleMapLayer = cc.Layer.extend({
                         EntityFactory.createHole(tilePos, mode);
                         continue;
                     default:
-                        sp.setName("tile " + tilePos.x + " " + tilePos.y);
+                        sp.setName(str+"tile " + tilePos.x + " " + tilePos.y);
                         break;
 
                 }

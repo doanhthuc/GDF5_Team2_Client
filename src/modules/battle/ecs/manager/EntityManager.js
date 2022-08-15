@@ -58,6 +58,7 @@ EntityManager.destroy = function (entity) {
 
     for (let key of Object.keys(entity.components)) {
         ComponentManager.getInstance().remove(entity.components[key]);
+        ComponentFactory.pool.checkIn(entity.components[key]);
     }
     EntityManager.getInstance().remove(entity);
 }
