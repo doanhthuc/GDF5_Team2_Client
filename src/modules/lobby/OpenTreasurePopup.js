@@ -42,9 +42,11 @@ const OpenTreasurePopup = cc.Node.extend({
             if (cardId === 11) {
                 this.itemNodeList[i].cardImg.setTexture('textures/common/common_icon_gold.png');
                 this.itemNodeList[i].cardQuantityTxt.setString('x' + packet.itemQuantity[i]);
+                this.itemNodeList[i].setName("item_slot_" + cardId);
             } else {
                 this.itemNodeList[i].cardImg.setTexture(CARD_CONST[cardId].cardImage);
                 this.itemNodeList[i].cardQuantityTxt.setString('x' + packet.itemQuantity[i]);
+                this.itemNodeList[i].setName("item_slot_" + cardId);
             }
             this.itemNodeList[i].setVisible(false);
             if (i === 0) {
