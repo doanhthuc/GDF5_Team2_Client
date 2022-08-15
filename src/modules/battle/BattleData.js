@@ -6,7 +6,6 @@ let BattleData = cc.Class.extend({
             currentWave: 0,
             waveAmount: 0,
             monsterWave: null,
-            maxWave: GameConfig.BATTLE.MAX_WAVE,
             timer: 20,
             trophyChange: 0,
             player: {
@@ -64,8 +63,12 @@ let BattleData = cc.Class.extend({
         this.roomId = roomId;
     },
 
-    setWaveAmount: function (waveAmount) {
+    setMaxWave: function (waveAmount) {
         this.dataInGame.waveAmount = waveAmount;
+    },
+
+    getMaxWave: function () {
+        return this.dataInGame.waveAmount;
     },
 
     setMonsterWave: function (monsterWave) {
@@ -85,10 +88,6 @@ let BattleData = cc.Class.extend({
     },
     getTimer: function () {
         return this.dataInGame.timer;
-    },
-
-    getMaxWave: function () {
-        return this.dataInGame.maxWave;
     },
 
     getCurrentWave: function () {

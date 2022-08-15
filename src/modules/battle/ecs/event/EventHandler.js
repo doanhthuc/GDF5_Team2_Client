@@ -1,7 +1,9 @@
 EventDispatcher.getInstance()
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
-        uiLayer.waveNode.increaseWave();
+        let battleData = BattleManager.getInstance().getBattleData();
+        battleData.setCurrentWave(battleData.getCurrentWave() + 1);
+        uiLayer.waveNode.renderUI();
         soundManager.playNextWave();
         // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.PLAYER);
         // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.OPPONENT);
