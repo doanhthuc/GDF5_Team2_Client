@@ -30,14 +30,14 @@ const CardDeckSlot2 = cc.Node.extend({
         this.type = card.id;
         this.level = card.level;
         this.setCardTexture(card.id);
-        this.setName("card_slot_" + card.id);
+        this.setName("card_type_" + card.id);
     },
 
     setCardTypeAndLevel: function (cardType, cardLevel) {
         this.type = cardType;
         this.level = cardLevel;
         this.setCardTexture(cardType);
-        this.setName("card_slot_" + cardType);
+        this.setName("card_type_" + cardType);
 
     },
 
@@ -52,18 +52,18 @@ const CardDeckSlot2 = cc.Node.extend({
 
     setCardImg: function (cardImg,cardId) {
         this.cardImage.setTexture(cardImg);
-        this.cardImage.setName("card_"+cardId);
+        this.cardImage.setName("img_card_"+cardId);
     },
 
     setBackground: function (cardBackground, cardId) {
         this.cardBackgroundBtn.loadTextures(cardBackground, cardBackground);
-        this.cardBackgroundBtn.setName("card_" + cardId);
+        this.cardBackgroundBtn.setName("background_card_" + cardId);
     },
 
     setEnergy: function (energy, cardId) {
         if (energy < 0)
             return;
         this.energyTxt.setString(energy);
-        this.energyTxt.setName("card_" + cardId);
+        this.energyTxt.setName("energy_card_" + cardId);
     },
 });

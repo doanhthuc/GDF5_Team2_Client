@@ -7,7 +7,7 @@ let NotificationNode = cc.Sprite.extend({
 
         this.backgroundImg = rootNode.getChildByName("background");
         this.text = rootNode.getChildByName("text");
-
+        this.setName("Notification");
         this.active = false;
         if (width) {
             this.setWidth(width);
