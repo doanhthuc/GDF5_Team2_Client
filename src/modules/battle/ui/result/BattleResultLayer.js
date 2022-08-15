@@ -110,5 +110,6 @@ let BattleResultLayer = cc.Layer.extend({
 
     _backToLobby: function () {
         fr.view(MainScreen);
+        soundManager.stopThemeBattle();
     },
 });

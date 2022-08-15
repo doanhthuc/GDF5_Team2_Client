@@ -426,3 +426,17 @@ BattleAnimation.createBearBullet = function (startPosition, targetPosition, bull
 
     bulletNode.runAction(cc.sequence(attackAnimFunc, jumpAction, cleanFunc));
 }
+
+BattleAnimation.upgradeTower = function (entity) {
+    let appearanceComponent = entity.getComponent(AppearanceComponent);
+    if (appearanceComponent && appearanceComponent.sprite) {
+        // FIXME: hardcode sprite name
+        let childSprite = appearanceComponent.sprite.getChildByName("tower");
+        if (childSprite) {
+            let spine = new sp.SkeletonAnimation("textures/monster/fx/fx_boss_demon_tree.json", "textures/monster/fx/fx_boss_demon_tree.atlas");
+            childSprite.addChild(spine);
+            spine.setPosition(cc.p(childSprite.width / 2, childSprite.height / 2));
+            spine.setAnimation(0, "fx_cover", false);
+        }
+    }
+}

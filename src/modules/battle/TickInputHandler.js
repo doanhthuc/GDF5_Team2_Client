@@ -69,7 +69,8 @@ let TickInputHandler = cc.Class.extend({
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let tower = playerObjectMap.getTowerInTile(tilePos);
         tower.setLevel(packet.towerLevel);
-        EntityFactory.onUpdateTowerLevel(tower.getEntityId(), packet.towerLevel);
+        EntityFactory.onUpdateTowerLevel(tower.getEntityId(), packet.towerLevel, tilePos, GameConfig.PLAYER);
+        soundManager.playUpgradeTower();
     },
 
     _handleOpponentUpgradeTower: function (cmd, packet) {
@@ -79,7 +80,7 @@ let TickInputHandler = cc.Class.extend({
         let tower = opponentObjectMap.getTowerInTile(tilePos);
         tower.setLevel(packet.towerLevel);
 
-        EntityFactory.onUpdateTowerLevel(tower.getEntityId(), packet.towerLevel);
+        EntityFactory.onUpdateTowerLevel(tower.getEntityId(), packet.towerLevel, tilePos, GameConfig.OPPONENT);
     },
 
     _handleDropSpell: function (cmd, packet) {
