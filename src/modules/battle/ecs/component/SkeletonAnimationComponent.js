@@ -17,7 +17,7 @@ let SkeletonAnimationComponent = Component.extend({
         this.currentIdx = 0;
 
         this.spine = new sp.SkeletonAnimation(this.fileJson, this.fileAtlas);
-        parent.addChild(this.spine, 4);
+        parent.addChild(this.spine, 0);
     },
 
     clone: function () {

@@ -85,6 +85,11 @@ const BattleMapObject = cc.Class.extend({
         return this.battleMap[tilePos.x][tilePos.y];
     },
 
+    getBuffType: function (tilePos) {
+        let tileObject = this.getTileObjectByTilePos(tilePos);
+        return tileObject.getTileType();
+    },
+
     getBattleMap: function () {
         return this.battleMap;
     },

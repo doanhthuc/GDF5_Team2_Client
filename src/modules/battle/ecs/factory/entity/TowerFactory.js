@@ -55,7 +55,7 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
 
     let towerEnergy = CARD_CONST[typeID].energy;
 
-    let node = NodeFactory.createBearNodeAnimation(attackRange,false,mode);
+    let node = NodeFactory.createBearNodeAnimation(attackRange, false, mode);
     let frozenEffect = ComponentFactory.create(FrozenEffect, frozenDuration);
 
     // NOTE: get component from pool
@@ -88,7 +88,7 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     let towerEnergy = CARD_CONST[typeID].energy;
 
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
-    let node = NodeFactory.createFrogNodeAnimation(attackRange,mode);
+    let node = NodeFactory.createFrogNodeAnimation(attackRange, mode);
 
     let damageEffect = ComponentFactory.create(DamageEffect, 3);
     // NOTE: get component from pool
@@ -122,7 +122,7 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
     let slowDuration = towerConfig.slowDuration / 1000;
     let slowValue = towerConfig.slowValue * -1;
     let towerEnergy = CARD_CONST[typeID].energy;
-    let node = NodeFactory.createBunnyNodeAnimation(attackRange,mode);
+    let node = NodeFactory.createBunnyNodeAnimation(attackRange, mode);
 
     let slowEffect = ComponentFactory.create(SlowEffect, slowDuration, slowValue);
     // NOTE: get component from pool
@@ -155,7 +155,7 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
     let canTargetAirMonster = false;
     let towerEnergy = CARD_CONST[typeID].energy;
-    let node = NodeFactory.createWizardNodeAnimation(attackRange,mode);
+    let node = NodeFactory.createWizardNodeAnimation(attackRange, mode);
 
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
@@ -183,7 +183,7 @@ EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode) {
     let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
     let attackSpeedUpValue = towerConfig.attackSpeedUpValue;
     let towerEnergy = CARD_CONST[typeID].energy;
-    let node = NodeFactory.createSnakeAttackSpeedNodeAnimation(buffRange,mode);
+    let node = NodeFactory.createSnakeAttackSpeedNodeAnimation(buffRange, mode);
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
@@ -211,7 +211,7 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
     let towerConfig = TowerConfig.getDamageGoatTowerConfigFromJson(1);
     let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
     let damageUpValue = towerConfig.damageUpValue;
-    let node = NodeFactory.createGoatDamageNodeAnimation(buffRange,mode);
+    let node = NodeFactory.createGoatDamageNodeAnimation(buffRange, mode);
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, 10, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
@@ -230,11 +230,13 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
     return entity;
 }
 
-EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
+EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode) {
     let towerEntity = EntityManager.getInstance().getEntity(entityId);
     cc.log("[TowerFactory.js line 233]: ======================== " + JSON.stringify(towerEntity));
     let towerRank = ReadConfigUtils.getTowerCharRankByLevel(towerLevel);
     let animationConfig = towerEntity.getComponent(SpriteSheetAnimationComponent);
+    let appearanceComponent = towerEntity.getComponent(AppearanceComponent);
+    let node = appearanceComponent.sprite;
     let towerName = TOWER_NAME[towerEntity.typeID];
     animationConfig.reset(TowerAnimationConfig[towerName].level[towerRank]);
     let towerInfoComponent = towerEntity.getComponent(TowerInfoComponent);
@@ -255,6 +257,10 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
                 let frozenEffect = ComponentFactory.create(FrozenEffect, 0.2);
                 attackComponent.addEffect(frozenEffect);
             }
+            // change Node name
+            if (mode === GameConfig.PLAYER)
+                node.setName("PlayerTower_0_level_" + towerLevel);
+            else node.setName("OpponentTower_0_level_" + towerLevel);
             break;
         }
         case GameConfig.ENTITY_ID.WIZARD_TOWER: {
@@ -272,6 +278,9 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
                 let wizardBulletSkill = ComponentFactory.create(WizardBulletSkillComponent, 5);
                 attackComponent.addEffect(wizardBulletSkill);
             }
+            if (mode === GameConfig.PLAYER)
+                node.setName("PlayerTower_1_level_" + towerLevel);
+            else node.setName("OpponentTower_1_level_" + towerLevel);
             break;
         }
         case GameConfig.ENTITY_ID.FROG_TOWER: {
@@ -289,6 +298,9 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
                 let frogBulletSkill = ComponentFactory.create(FrogBulletSkillComponent);
                 attackComponent.addEffect(frogBulletSkill);
             }
+            if (mode === GameConfig.PLAYER)
+                node.setName("PlayerTower_2_level_" + towerLevel);
+            else node.setName("OpponentTower_2_level_" + towerLevel);
             break;
         }
         case GameConfig.ENTITY_ID.BEAR_TOWER: {
@@ -307,6 +319,9 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
                 let damageAmplifyComponent = ComponentFactory.create(DamageAmplifyComponent, 1.5);
                 attackComponent.addEffect(damageAmplifyComponent);
             }
+            if (mode === GameConfig.PLAYER)
+                node.setName("PlayerTower_3_level_" + towerLevel);
+            else node.setName("OpponentTower_3_level_" + towerLevel);
             break;
         }
         case GameConfig.ENTITY_ID.BUNNY_TOWER: {
@@ -326,6 +341,9 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
                 let poisonEffect = ComponentFactory.create(PoisonEffect, 2, 3);
                 attackComponent.addEffect(poisonEffect);
             }
+            if (mode === GameConfig.PLAYER)
+                node.setName("PlayerTower_4_level_" + towerLevel);
+            else node.setName("OpponentTower_4_level_" + towerLevel);
             break;
         }
         case GameConfig.ENTITY_ID.GOAT_TOWER: {
@@ -339,6 +357,9 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
                 let goatSlowAuraComponent = ComponentFactory.create(GoatSlowAuraComponent, 0.2, buffRange);
                 towerEntity.addComponent(goatSlowAuraComponent);
             }
+            if (mode === GameConfig.PLAYER)
+                node.setName("PlayerTower_5_level_" + towerLevel);
+            else node.setName("OpponentTower_5_level_" + towerLevel);
             break;
         }
         case GameConfig.ENTITY_ID.SNAKE_TOWER: {
@@ -351,7 +372,39 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel) {
                 let snakeBurnHpAuraComponent = ComponentFactory.create(SnakeBurnHpAuraComponent, 0.01, 5, buffRange);
                 towerEntity.addComponent(snakeBurnHpAuraComponent);
             }
+            if (mode === GameConfig.PLAYER)
+                node.setName("PlayerTower_6_level_" + towerLevel);
+            else node.setName("OpponentTower_6_level_" + towerLevel);
             break;
+        }
+    }
+
+
+    let mapObject = BattleManager.getInstance().getBattleData().getMapObject(mode);
+    let buffType = mapObject.getBuffType(tilePos);
+    EntityFactory.buffTower(towerEntity, buffType);
+    BattleAnimation.upgradeTower(towerEntity);
+}
+
+EntityFactory.buffTower = function (towerEntity, buffType) {
+    let attackComponent = towerEntity.getComponent(AttackComponent);
+    if (attackComponent) {
+        switch (buffType) {
+            case TileType.ATTACK_RANGE_UP: {
+                attackComponent.originRange += attackComponent.originRange * 1;
+                attackComponent.range = Math.max(attackComponent.originRange, attackComponent.range)
+                break;
+            }
+            case TileType.ATTACK_SPEED_UP: {
+                attackComponent.originSpeed -= attackComponent.originSpeed * 0.7;
+                attackComponent.setSpeed(Math.min(attackComponent.originSpeed, attackComponent.getSpeed()));
+                break;
+            }
+            case TileType.DAMAGE_UP: {
+                attackComponent.originDamage += attackComponent.originDamage * 10;
+                attackComponent.setDamage(Math.max(attackComponent.getDamage(), attackComponent.originDamage));
+                break;
+            }
         }
     }
 }

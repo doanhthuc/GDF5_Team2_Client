@@ -18,7 +18,7 @@ let PositionComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(PositionComponent, this.x, this.y);
+        return ComponentFactory.create(PositionComponent, this.x, this.y, this.moveDistance);
     },
 });
 PositionComponent.typeID = GameConfig.COMPONENT_ID.POSITION;

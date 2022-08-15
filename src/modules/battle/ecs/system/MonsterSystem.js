@@ -30,6 +30,7 @@ let MonsterSystem = System.extend({
                 if (monster.mode === GameConfig.PLAYER) {
                     let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
                     deckEnergyProgress.plusEnergy(10);
+                    soundManager.playMainTowerHit();
                 }
 
                 EntityManager.destroy(monster);

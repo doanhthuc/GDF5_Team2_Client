@@ -45,7 +45,7 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _showWave: function () {
-        this.waveNode = new WaveNode(this.battleData.getCurrentWave(), this.battleData.getMaxWave());
+        this.waveNode = new WaveNode();
         this.waveNode.x = this.waveNode.width / 2;
         this.waveNode.y = (cc.winSize.height - this.cardDeckNode.height) / 2 + this.cardDeckNode.height;
         this.addChild(this.waveNode);
@@ -77,6 +77,7 @@ let BattleUILayer = cc.Layer.extend({
     startGame: function () {
         this.removeChild(this.twoPlayerInfoLayer, true);
         this._setupUI();
+        soundManager.playThemeBattle();
     },
 
     stopTimer: function () {
@@ -103,8 +104,8 @@ let BattleUILayer = cc.Layer.extend({
      * @param x tile pos of player map
      * @param y tile pos of player map
      */
-    showTargetCircle: function (x, y) {
-        let circleNode = new CircleTarget();
+    showTargetCircle: function (x, y, range) {
+        let circleNode = new CircleTarget(range);
         let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
         pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
         circleNode.setPosition(pixelPos);
@@ -115,6 +116,7 @@ let BattleUILayer = cc.Layer.extend({
     _backToLobby: function () {
         BattleManager.getInstance().getBattleLayer().stopGame();
         fr.view(MainScreen);
+        soundManager.stopThemeBattle();
     }
 });
 
