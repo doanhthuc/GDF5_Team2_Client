@@ -46,8 +46,11 @@ let BattleTimerNode = cc.Node.extend({
         tickManager.getTickData().setBattleTimerData(countDownLatestTick);
 
         let battleData = BattleManager.getInstance().getBattleData();
+        let monsterWave = battleData.getMonsterWave();
+        let currentWave = battleData.getCurrentWave();
+        let currentIndexMonsterWave = battleData.getCurrentIndexMonsterWave();
         if (battleData.getCurrentWave() === 0) return;
-        if (this._monsterSpawmTime <= 0 && battleData.dataInGame.monsterWave[battleData.dataInGame.currentWave].length > 0) {
+        if (this._monsterSpawmTime <= 0 && currentIndexMonsterWave < monsterWave[currentWave].length) {
             this._monsterSpawmTime = 1;
             EventDispatcher.getInstance().dispatchEvent(EventType.SPAWN_MONSTER);
         } else {

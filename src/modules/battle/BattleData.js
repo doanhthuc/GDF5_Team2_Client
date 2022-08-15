@@ -4,6 +4,7 @@ let BattleData = cc.Class.extend({
         this.battleStartTime = 0;
         this.dataInGame = {
             currentWave: 0,
+            currentIndexMonsterWave: 0,
             waveAmount: 0,
             monsterWave: null,
             timer: 20,
@@ -77,6 +78,14 @@ let BattleData = cc.Class.extend({
 
     getMonsterWave: function () {
         return this.dataInGame.monsterWave;
+    },
+
+    getCurrentIndexMonsterWave: function () {
+        return this.dataInGame.currentIndexMonsterWave;
+    },
+
+    setCurrentIndexMonsterWave: function (idx) {
+        this.dataInGame.currentIndexMonsterWave = idx;
     },
 
     setBattleStartTime: function (battleStartTime) {
