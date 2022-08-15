@@ -45,7 +45,7 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _showWave: function () {
-        this.waveNode = new WaveNode(this.battleData.getCurrentWave(), this.battleData.getMaxWave());
+        this.waveNode = new WaveNode();
         this.waveNode.x = this.waveNode.width / 2;
         this.waveNode.y = (cc.winSize.height - this.cardDeckNode.height) / 2 + this.cardDeckNode.height;
         this.addChild(this.waveNode);

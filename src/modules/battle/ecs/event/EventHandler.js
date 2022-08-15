@@ -1,7 +1,10 @@
 EventDispatcher.getInstance()
     .addEventHandler(EventType.END_ONE_TIMER, function (data) {
         let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
-        uiLayer.waveNode.increaseWave();
+        let battleData = BattleManager.getInstance().getBattleData();
+        battleData.setCurrentWave(battleData.getCurrentWave() + 1);
+        battleData.setCurrentIndexMonsterWave(0);
+        uiLayer.waveNode.renderUI();
         soundManager.playNextWave();
         // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.PLAYER);
         // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.OPPONENT);
@@ -10,8 +13,10 @@ EventDispatcher.getInstance()
         let battleData = BattleManager.getInstance().getBattleData();
         let currentWave = battleData.getCurrentWave();
         let monsterWave = battleData.getMonsterWave();
-        if (monsterWave[currentWave].length > 0) {
-            let monsterTypeID = monsterWave[currentWave].pop();
+        let currentIndexMonsterWave = battleData.getCurrentIndexMonsterWave();
+        if (currentIndexMonsterWave < monsterWave[currentWave].length) {
+            let monsterTypeID = monsterWave[currentWave][currentIndexMonsterWave];
+            battleData.setCurrentIndexMonsterWave(currentIndexMonsterWave + 1);
             BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, monsterTypeID);
             BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.OPPONENT, monsterTypeID);
         }
