@@ -227,8 +227,8 @@ NodeFactory.createOwlNodeAnimation = function (range, mode) {
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
     if (mode === GameConfig.PLAYER)
-        node.setName("PlayerTower_0")
-    else node.setName("OpponentTower_0")
+        node.setName("PlayerTower_0_level_1")
+    else node.setName("OpponentTower_0_level_1")
     return node;
 }
 
@@ -247,8 +247,8 @@ NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange,mode) {
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
     if (mode === GameConfig.PLAYER)
-        node.setName("PlayerTower_4")
-    else node.setName("OpponentTower_4")
+        node.setName("PlayerTower_4_level_1")
+    else node.setName("OpponentTower_4_level_1")
 
     return node;
 }
@@ -267,8 +267,8 @@ NodeFactory.createFrogNodeAnimation = function (attackRange,mode) {
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
     if (mode === GameConfig.PLAYER)
-        node.setName("PlayerTower_2")
-    else node.setName("OpponentTower_2")
+        node.setName("PlayerTower_2_level_1")
+    else node.setName("OpponentTower_2_level_1")
 
     return node;
 }
@@ -284,8 +284,8 @@ NodeFactory.createBunnyNodeAnimation = function (attackRange,mode) {
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
     if (mode === GameConfig.PLAYER)
-        node.setName("PlayerTower_3")
-    else node.setName("OpponentTower_3")
+        node.setName("PlayerTower_3_level_1")
+    else node.setName("OpponentTower_3_level_1")
 
     return node;
 }
@@ -301,8 +301,8 @@ NodeFactory.createWizardNodeAnimation = function (attackRange,mode) {
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
     if (mode === GameConfig.PLAYER)
-        node.setName("PlayerTower_1")
-    else node.setName("OpponentTower_1")
+        node.setName("PlayerTower_1_level_1")
+    else node.setName("OpponentTower_1_level_1")
 
     return node;
 }
@@ -319,8 +319,8 @@ NodeFactory.createSnakeAttackSpeedNodeAnimation = function (attackRange,mode) {
     node.addChild(weaponSprite, 1, "weapon");
     node.setName("Tower_6")
     if (mode === GameConfig.PLAYER)
-        node.setName("PlayerTower_6")
-    else node.setName("OpponentTower_6")
+        node.setName("PlayerTower_6_level_1")
+    else node.setName("OpponentTower_6_level_1")
     return node;
 }
 
@@ -335,8 +335,8 @@ NodeFactory.createGoatDamageNodeAnimation = function (attackRange,mode) {
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
     if (mode === GameConfig.PLAYER)
-        node.setName("PlayerTower_5")
-    else node.setName("OpponentTower_5")
+        node.setName("PlayerTower_5_level_1")
+    else node.setName("OpponentTower_5_level_1")
     return node;
 }
 
