@@ -1,8 +1,13 @@
 let CircleTarget = cc.Node.extend({
-    ctor: function () {
+    ctor: function (range) {
         this._super();
 
         this.rootNode = ccs.load("ui/battle/battle_ui_layer/target_strategy/CircleTarget.json", "").node;
+
+        let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
+        rangeAttackSprite.setScale(2 * range / 687)
+
+        this.addChild(rangeAttackSprite);
         this.addChild(this.rootNode);
 
         this.cancelBtn = this.rootNode.getChildByName("cancel_button");
@@ -11,6 +16,7 @@ let CircleTarget = cc.Node.extend({
         this.minDistance = this.rootNode.getChildByName("min_distance");
         this.maxDistance = this.rootNode.getChildByName("max_distance");
         this.plusEnergyDestroyTowerValue = this.cancelBtn.getChildByName("val")
+
 
         this.towerTilepos = null;
 

@@ -68,6 +68,8 @@ let AttackSystem = System.extend({
                                 cc.p(monsterPos.x, monsterPos.y), clonedEffects, tower.mode, attackComponent.bulletSpeed,
                                 attackComponent.bulletRadius, attackComponent.canTargetAirMonster);
                         }
+                        
+                        if (tower.mode === GameConfig.PLAYER) soundManager.playAttack(tower.typeID);
                         attackComponent.countdown = attackComponent.getSpeed();
                     }
                 }

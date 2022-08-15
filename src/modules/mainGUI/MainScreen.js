@@ -71,6 +71,7 @@ const MainScreen = cc.Layer.extend({
         this.initPopups();
 
         this.initListViewEventListener();
+        soundManager.playThemeLoby();
     },
 
     onEnter: function () {
@@ -79,6 +80,7 @@ const MainScreen = cc.Layer.extend({
         this.shopLayer.renderDailySection(shopContext.dailyShopData);
         PopupUIManager.getInstance().setAllPopupVisible(false);
         testnetwork.connector.sendGetUserInfo()
+        soundManager.playThemeLoby();
     },
 
     scrollToDefaultPage: function () {

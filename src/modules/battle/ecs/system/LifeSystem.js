@@ -28,6 +28,7 @@ let LifeSystem = System.extend({
                     deckEnergyProgress.plusEnergy(monsterInfo.gainEnergy);
                 }
 
+                if (entity.mode === GameConfig.PLAYER) soundManager.playMonsterDie(entity.typeID);
                 EntityManager.destroy(entity);
             }
         }

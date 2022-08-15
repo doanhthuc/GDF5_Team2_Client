@@ -208,6 +208,7 @@ let CollisionSystem = System.extend({
                         }
                     }
 
+                    if (trapEntity.mode === GameConfig.PLAYER) soundManager.playTrap();
                     EntityManager.destroy(trapEntity);
                 }
             } else {

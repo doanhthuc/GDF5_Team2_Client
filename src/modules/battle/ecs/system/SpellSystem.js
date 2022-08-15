@@ -84,6 +84,13 @@ let SpellSystem = System.extend({
                 spellEntity.removeComponent(VelocityComponent);
                 spellEntity.removeComponent(PositionComponent);
                 spellEntity.removeComponent(SpellInfoComponent);
+
+                if (spellEntity.mode === GameConfig.PLAYER && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
+                    soundManager.playFireballExplosion();
+                }
+                if (spellEntity.mode === GameConfig.PLAYER && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
+                    soundManager.playFrozenExplosion();
+                }
             }
         }
     },
