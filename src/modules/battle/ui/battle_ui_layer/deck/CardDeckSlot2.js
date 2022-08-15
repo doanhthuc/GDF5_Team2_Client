@@ -33,12 +33,18 @@ const CardDeckSlot2 = cc.Node.extend({
         this.setName("card_type_" + card.id);
     },
 
-    setCardTypeAndLevel: function (cardType, cardLevel) {
+    setNextCardTypeAndLevel: function (cardType, cardLevel) {
         this.type = cardType;
         this.level = cardLevel;
         this.setCardTexture(cardType);
-        this.setName("card_type_" + cardType);
+        this.cardBackgroundBtn.setName("next_card_" + cardType);
+    },
 
+    setCardSlotTypeAndLevel: function (cardType, cardLevel) {
+        this.type = cardType;
+        this.level = cardLevel;
+        this.setCardTexture(cardType);
+        this.cardBackgroundBtn.setName("background_card_" + cardType);
     },
 
     setCardTexture: function (cardId) {

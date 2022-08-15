@@ -247,10 +247,10 @@ const CardDeckNode2 = cc.Node.extend({
                 cardSlotNode.setPosition(this.nextCardPosition);
                 cardSlotNode.setScale(0.6449, 0.6449);
                 let prevCardLevel = this.selectedCardLevel;
-                cardSlotNode.setCardTypeAndLevel(this.nextCardSlot.type, this.nextCardSlot.level);
+                cardSlotNode.setCardSlotTypeAndLevel(this.nextCardSlot.type, this.nextCardSlot.level);
                 cardSlotNode.runAction(cc.spawn(cc.moveTo(0.15, this.cardSlotNodeFixedPosList[index]), cc.scaleTo(0.15, 1)));
                 let nextCard = this.cardDeckListData.getNextCard();
-                this.nextCardSlot.setCardTypeAndLevel(nextCard.id, nextCard.level);
+                this.nextCardSlot.setNextCardTypeAndLevel(nextCard.id, nextCard.level);
                 this.cardDeckListData.pushUsedCardIntoDeck({id: cardType, level: prevCardLevel});
             }
             BattleManager.getInstance().getBattleLayer().selectedCard = null;
