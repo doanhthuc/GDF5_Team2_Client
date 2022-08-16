@@ -156,7 +156,7 @@ GameConfig.MONSTER = {
     },
     CLASS: {
         LAND: "land",
-        AIR: "air",
+        AIR: "aerial",
     }
 }
 
