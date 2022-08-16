@@ -1,6 +1,6 @@
 const CardDeckListData = cc.Class.extend({
-    ctor: function (battleDeckList) {
-        this.cardDeckList = battleDeckList || [];
+    ctor: function (cardDeckList) {
+        this.cardDeckList = cardDeckList || [];
     },
 
     setCardDeckList: function (cardDeckList) {
@@ -12,13 +12,6 @@ const CardDeckListData = cc.Class.extend({
             return null;
         }
         return this.cardDeckList.shift().id;
-    },
-
-    getNextCard: function () {
-        if (this.cardDeckList.length < 0) {
-            return null;
-        }
-        return this.cardDeckList.shift();
     },
 
     pushUsedCardIntoDeck: function (card) {
@@ -42,8 +35,25 @@ const CardDeckListData = cc.Class.extend({
         }
         let cardList = [];
         for (let i = 0; i < 4; i++) {
-            cardList.push(this.getNextCard());
+            // cardList.push(this.getNextCard());
+            cardList.push(this.cardDeckList[i]);
         }
         return cardList;
-    }
+    },
+
+    onCardUsed: function (card) {
+        const index = this.cardDeckList.findIndex(item => item.id === card.id);
+        if (index !== -1) {
+            this.cardDeckList.splice(index, 1);
+        }
+        this.pushUsedCardIntoDeck(card);
+        cc.log("[CardDeckListData] onCardUsed: ", JSON.stringify(this.cardDeckList));
+    },
+
+    getNextCard: function () {
+        if (this.cardDeckList.length < 1) {
+            throw new Error("Card Deck is not enough");
+        }
+        return this.cardDeckList[4];
+    },
 })

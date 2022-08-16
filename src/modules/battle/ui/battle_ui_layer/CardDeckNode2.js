@@ -249,9 +249,10 @@ const CardDeckNode2 = cc.Node.extend({
                 let prevCardLevel = this.selectedCardLevel;
                 cardSlotNode.setCardSlotTypeAndLevel(this.nextCardSlot.type, this.nextCardSlot.level);
                 cardSlotNode.runAction(cc.spawn(cc.moveTo(0.15, this.cardSlotNodeFixedPosList[index]), cc.scaleTo(0.15, 1)));
+                this.cardDeckListData.onCardUsed({id: cardType, level: prevCardLevel});
                 let nextCard = this.cardDeckListData.getNextCard();
                 this.nextCardSlot.setNextCardTypeAndLevel(nextCard.id, nextCard.level);
-                this.cardDeckListData.pushUsedCardIntoDeck({id: cardType, level: prevCardLevel});
+                // this.cardDeckListData.pushUsedCardIntoDeck({id: cardType, level: prevCardLevel});
             }
             BattleManager.getInstance().getBattleLayer().selectedCard = null;
             this.setSelectedCardType(null, null);
@@ -299,9 +300,10 @@ const CardDeckNode2 = cc.Node.extend({
                 let prevCardLevel = this.selectedCardLevel;
                 cardSlotNode.setCardSlotTypeAndLevel(this.nextCardSlot.type, this.nextCardSlot.level);
                 cardSlotNode.runAction(cc.spawn(cc.moveTo(0.15, this.cardSlotNodeFixedPosList[index]), cc.scaleTo(0.15, 1)));
+                this.cardDeckListData.onCardUsed({id: this.selectedCardType, level: prevCardLevel});
                 let nextCard = this.cardDeckListData.getNextCard();
                 this.nextCardSlot.setNextCardTypeAndLevel(nextCard.id, nextCard.level);
-                this.cardDeckListData.pushUsedCardIntoDeck({id: this.selectedCardType, level: prevCardLevel});
+                // this.cardDeckListData.pushUsedCardIntoDeck({id: this.selectedCardType, level: prevCardLevel});
                 this.deckEnergyProgress.minusEnergy(-5);
             }
 
@@ -309,4 +311,14 @@ const CardDeckNode2 = cc.Node.extend({
             this.cancelSelectBtnNode.setVisible(false);
         }
     },
+
+    loadCardDeckList: function () {
+        let cardDeckList = this.cardDeckListData.getFirst4Card();
+        for (let i = 0; i < cardDeckList.length; i++) {
+            let cardSlotNode = this.cardSlotNodeList[i];
+            cardSlotNode.setCardSlotTypeAndLevel(cardDeckList[i].id, cardDeckList[i].level);
+        }
+        let nextCard = this.cardDeckListData.getNextCard();
+        this.nextCardSlot.setNextCardTypeAndLevel(nextCard.id, nextCard.level);
+    }
 });
