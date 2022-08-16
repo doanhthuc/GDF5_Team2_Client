@@ -50,7 +50,7 @@ let BattleTimerNode = cc.Node.extend({
         let currentWave = battleData.getCurrentWave();
         let currentIndexMonsterWave = battleData.getCurrentIndexMonsterWave();
         if (battleData.getCurrentWave() === 0) return;
-        if (this._monsterSpawmTime <= 0 && currentIndexMonsterWave < monsterWave[currentWave].length) {
+        if (monsterWave[currentWave] && this._monsterSpawmTime <= 0 && currentIndexMonsterWave < monsterWave[currentWave].length) {
             this._monsterSpawmTime = 1;
             EventDispatcher.getInstance().dispatchEvent(EventType.SPAWN_MONSTER);
         } else {

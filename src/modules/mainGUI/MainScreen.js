@@ -80,6 +80,8 @@ const MainScreen = cc.Layer.extend({
         this.shopLayer.renderDailySection(shopContext.dailyShopData);
         PopupUIManager.getInstance().setAllPopupVisible(false);
         testnetwork.connector.sendGetUserInfo()
+        testnetwork.connector.sendGetUserLobbyChest()
+
         soundManager.playThemeLoby();
     },
 

@@ -18,7 +18,7 @@ let VelocityComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(VelocityComponent, this.speedX, this.speedY, this.dynamicEntityId);
+        return ComponentFactory.create(VelocityComponent, this.speedX, this.speedY, this.dynamicEntityId, this.staticPosition);
     },
 
     getDynamicPosition: function () {
