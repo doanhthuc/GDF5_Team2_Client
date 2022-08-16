@@ -34,6 +34,13 @@ const TileObject = cc.Class.extend({
         return this.objectInTileType === ObjectInCellType.TOWER;
     },
 
+    getTower: function () {
+        if (this.isHavingTower()) {
+            return this.getObjectInTile();
+        }
+        return null;
+    },
+
     getObjectInTileType: function () {
         return this.objectInTileType;
     },

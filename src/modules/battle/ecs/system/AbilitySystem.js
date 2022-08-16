@@ -16,7 +16,7 @@ let AbilitySystem = System.extend({
             this._handleUnderGroundComponent();
             this._handleSpawnMinionComponent(tick);
             this._handleHealingAbility(tick);
-            this._handleBuffAbility(tick);
+            this._handleBuffAbility1(tick);
         },
 
         _handleUnderGroundComponent: function () {
@@ -134,6 +134,45 @@ let AbilitySystem = System.extend({
                                     attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
                                     BattleAnimation.addBuffSpeedAnimation(damageTower);
                                     break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        _handleBuffAbility1: function () {
+            let buffTowerList = EntityManager.getInstance().getEntitiesHasComponents(TowerAbilityComponent);
+            if (!buffTowerList || buffTowerList.length === 0) {
+                return;
+            }
+
+            for (let buffTower of buffTowerList) {
+                let towerAbilityComponent = buffTower.getComponent(TowerAbilityComponent);
+                let towerPosition = buffTower.getComponent(PositionComponent);
+                let tilePos = Utils.pixel2Tile(towerPosition.x, towerPosition.y, buffTower.mode);
+                let battleMapObject = BattleManager.getInstance().getBattleData().getMapObject(buffTower.mode)
+                let direction = [0, -1, 0, 1, 0]
+                for (let i = 0; i < direction.length - 1; i++) {
+                    let tile = battleMapObject.getTileObject(tilePos.x + direction[i], tilePos.y + direction[i + 1]);
+                    if (tile) {
+                        let towerInTileObject = tile.getTower();
+                        if (towerInTileObject) {
+                            let towerEntity = EntityManager.getInstance().getEntity(towerInTileObject.getEntityId());
+                            let attackComponent = towerEntity.getComponent(AttackComponent);
+                            if (attackComponent) {
+                                switch (towerAbilityComponent.effect.typeID) {
+                                    case BuffAttackDamageEffect.typeID: {
+                                        attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
+                                        BattleAnimation.addBuffDamageAnimation(towerEntity);
+                                        break;
+                                    }
+                                    case BuffAttackSpeedEffect.typeID: {
+                                        attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
+                                        BattleAnimation.addBuffSpeedAnimation(towerEntity);
+                                        break;
+                                    }
                                 }
                             }
                         }

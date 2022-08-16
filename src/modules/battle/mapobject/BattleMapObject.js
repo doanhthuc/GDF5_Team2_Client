@@ -29,12 +29,11 @@ const BattleMapObject = cc.Class.extend({
                 let tileType = this.battleMap[i][j].getTileType();
                 if (objectInTileType === ObjectInCellType.TOWER) {
                     simpleMap[row][j] = GameConfig.MAP.TOWER;
-                } else if (objectInTileType === ObjectInCellType.PIT){
+                } else if (objectInTileType === ObjectInCellType.PIT) {
                     simpleMap[row][j] = GameConfig.MAP.HOLE;
                 } else if (objectInTileType === ObjectInCellType.TREE) {
                     simpleMap[row][j] = GameConfig.MAP.TREE;
-                }
-                else if (tileType === TileType.ATTACK_SPEED_UP) {
+                } else if (tileType === TileType.ATTACK_SPEED_UP) {
                     simpleMap[row][j] = GameConfig.MAP.ATTACK_SPEED
                 } else if (tileType === TileType.ATTACK_RANGE_UP) {
                     simpleMap[row][j] = GameConfig.MAP.ATTACK_RANGE
@@ -78,6 +77,9 @@ const BattleMapObject = cc.Class.extend({
     },
 
     getTileObject: function (x, y) {
+        if (x < 0 || x >= this.height || y < 0 || y >= this.width) {
+            return null;
+        }
         return this.battleMap[x][y];
     },
 
