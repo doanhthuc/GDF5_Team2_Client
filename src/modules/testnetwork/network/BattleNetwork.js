@@ -156,6 +156,13 @@ BattleNetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
+    sendCheckSum: function (checkSum) {
+        cc.log("sendCheckSum-----------------------" + JSON.stringify(checkSum));
+        let pk = this.gameClient.getOutPacket(CMDSendCheckSum);
+        pk.pack(checkSum);
+        this.gameClient.sendPacket(pk);
+    },
+
     _handleGetBattleInfo: function (cmd, packet) {
         cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
 
@@ -169,6 +176,16 @@ BattleNetwork.Connector = cc.Class.extend({
         tickManager.getTickData().setBattleTimerData(battleData.getTimer());
         BattleManager.getInstance().getBattleData().setMaxWave(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
+        battleData = BattleManager.getInstance().getBattleData();
+        for (let waveIdx = 0; waveIdx < packet.waveAmount; waveIdx++) {
+            for (let monsterIdx = 0; monsterIdx < packet.monsterWave[waveIdx].length; monsterIdx++)
+            {
+                let tickNumber =(((waveIdx) * battleData.getTimer() + monsterIdx) * 1000) / tickManager.getTickRate();
+                cc.log(tickNumber)
+                tickManager.addInput(tickNumber, gv.CMD.BORN_MONSTER, packet.monsterWave[waveIdx][monsterIdx]);
+            }
+        }
+
         //let battleData = BattleManager.getInstance().getBattleData();
         // cc.log(battleData.battleStartTime);
         // cc.log(TimeUtil.getServerTime());
@@ -208,6 +225,7 @@ BattleNetwork.Connector = cc.Class.extend({
         BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.OPPONENT);
         BattleManager.getInstance().getBattleData().setTrophyChange(packet.trophyChange);
         contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).setTrophy(packet.trophyAfterBattle);
+        this.sendCheckSum(tickManager.checkSumContainer);
         BattleManager.getInstance().getBattleLayer().stopGame();
     },
 

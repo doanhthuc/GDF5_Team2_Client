@@ -2,7 +2,7 @@ let BattleTimerNode = cc.Node.extend({
     ctor: function (countdown, duration) {
         this._super();
         this._duration = duration || 20;
-		this._monsterSpawmTime = 0;
+		this._monsterSpawmTime = 1;
 
         this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
         this.addChild(this.node);
@@ -41,6 +41,12 @@ let BattleTimerNode = cc.Node.extend({
             countDownLatestTick = this._duration;
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.END_ONE_TIMER);
+            // let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
+            // let battleData = BattleManager.getInstance().getBattleData();
+            // battleData.setCurrentWave(battleData.getCurrentWave() + 1);
+            // battleData.setCurrentIndexMonsterWave(0);
+            // uiLayer.waveNode.renderUI();
+            // soundManager.playNextWave();
         }
         countDownLatestTick = countDownLatestTick - tickManager.getTickRate() / 1000;
         tickManager.getTickData().setBattleTimerData(countDownLatestTick);
@@ -53,6 +59,16 @@ let BattleTimerNode = cc.Node.extend({
         if (monsterWave[currentWave] && this._monsterSpawmTime <= 0 && currentIndexMonsterWave < monsterWave[currentWave].length) {
             this._monsterSpawmTime = 1;
             EventDispatcher.getInstance().dispatchEvent(EventType.SPAWN_MONSTER);
+            // let battleData = BattleManager.getInstance().getBattleData();
+            // let currentWave = battleData.getCurrentWave();
+            // let monsterWave = battleData.getMonsterWave();
+            // let currentIndexMonsterWave = battleData.getCurrentIndexMonsterWave();
+            // if (monsterWave[currentWave] && currentIndexMonsterWave < monsterWave[currentWave].length) {
+            //     let monsterTypeID = monsterWave[currentWave][currentIndexMonsterWave];
+            //     battleData.setCurrentIndexMonsterWave(currentIndexMonsterWave + 1);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, monsterTypeID);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.OPPONENT, monsterTypeID);
+            //}
         } else {
             this._monsterSpawmTime -= tickManager.getTickRate() / 1000;
         }

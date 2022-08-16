@@ -19,6 +19,9 @@ gv.CMD.GET_BATTLE_INFO = 5016;
 gv.CMD.END_BATTLE = 5017;
 gv.CMD.GET_BATTLE_DECK_IN_BATTLE = 5018;
 gv.CMD.BATTLE_ERROR = 5019;
+gv.CMD.SEND_CHECK_SUM = 5020;
+gv.CMD.BORN_MONSTER = 5021;
+
 BattleNetwork = BattleNetwork || {};
 
 BattleNetwork.packetMap = {};
@@ -129,6 +132,25 @@ CMDDestroyTower = fr.OutPacket.extend({
         this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
         this.putInt(tilePos.x);
         this.putInt(tilePos.y);
+        this.updateSize();
+    }
+})
+
+CMDSendCheckSum = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.SEND_CHECK_SUM);
+    },
+
+    pack: function (checksum) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(checksum.length)
+        for (let i = 0; i < checksum.length; i++) {
+            cc.log(checksum[i])
+            this.putDouble(checksum[i])
+        }
         this.updateSize();
     }
 })
@@ -270,8 +292,7 @@ BattleNetwork.packetMap[gv.CMD.UPGRADE_TOWER] = fr.InPacket.extend({
             this.tileX = this.getInt();
             this.tileY = this.getInt();
             this.tickNumber = this.getInt();
-        }
-        else this.error = this.getError();
+        } else this.error = this.getError();
     },
 
     clone: function () {
@@ -628,6 +649,6 @@ BattleNetwork.packetMap[gv.CMD.BATTLE_ERROR] = fr.InPacket.extend({
     },
 
     readData: function () {
-        this.errorMessage= this.getString();
+        this.errorMessage = this.getString();
     }
 })
