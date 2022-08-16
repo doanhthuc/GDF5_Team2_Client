@@ -9,6 +9,7 @@ let TickManager = cc.Class.extend({
         this.inputTick = {}
 
         this.normalTimerNodeContainer = [];
+        this.checkSumContainer = [];
     },
 
     addInput: function (tickNumber, cmd, packet) {
@@ -52,6 +53,7 @@ let TickManager = cc.Class.extend({
         battleLayer.monsterSystem.runUpdateData();
         battleLayer.bulletSystem.runUpdateData();
         battleLayer.movementSystem.runUpdateData();
+        this.calcCheckSum(currentTick);
         let endTime = Utils.currentTimeMillis();
         if (GameConfig.DEBUG) {
             cc.error("Update time = " + (endTime - startTime));
@@ -172,6 +174,16 @@ let TickManager = cc.Class.extend({
         for (let timerNode of this.normalTimerNodeContainer) {
             timerNode.render(dt);
         }
+    },
+
+    calcCheckSum: function (currentTick) {
+        let sumHp = 0;
+        let entityList = EntityManager.getInstance().getEntitiesHasComponents(LifeComponent);
+        for (let entity of entityList) {
+            let lifeComponent = entity.getComponent(LifeComponent);
+            sumHp += lifeComponent.hp;
+        }
+        this.checkSumContainer[currentTick] = sumHp;
     }
 })
 

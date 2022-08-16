@@ -22,6 +22,7 @@ let MeasurePerformance = cc.Class.extend({
         }
     },
 
+
     report: function () {
         cc.warn("=== Report Performance ===")
         for (let systemName of Object.keys(this.store)) {

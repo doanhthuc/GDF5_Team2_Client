@@ -19,7 +19,11 @@ let System = cc.Class.extend({
             let startTime = Date.now();
             this.updateData();
             let endTime = Date.now();
-            measurePerformance.add(endTime - startTime, this.name);
+            let execTime = endTime - startTime;
+            measurePerformance.add(execTime, this.name);
+            if (GameConfig.DEBUG) {
+                cc.log(this.name + "===> Execution Time: " + execTime)
+            }
         } else {
             this.updateData();
         }
