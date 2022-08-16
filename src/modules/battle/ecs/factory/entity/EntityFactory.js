@@ -175,14 +175,36 @@ EntityFactory.createTree = function (tilePos, mode) {
 
     let node = new cc.Node();
     let sp = new cc.Sprite(BattleResource.OBSTACLE_IMG_2);
+    sp.setAnchorPoint(cc.p(0.5, 0.2));
+
+    let treeShadow = new cc.Sprite(BattleResource.OBSTACLE_IMG_2);
+
+    treeShadow.setColor(cc.color.BLACK);
+    treeShadow.setOpacity(80);
+    treeShadow.setScale(0.7, 0.7);
+    treeShadow.setSkewX(-140);
+    // treeShadow.setSkewY(0);
+    treeShadow.setAnchorPoint(cc.p(0.3, 0.2))
+
+
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "").node;
     hpBarNode.setPosition(cc.p(0, 50));
-    node.addChild(sp, 1, "tree");
-    node.addChild(hpBarNode, 1, "hp");
+
+    let zOrder = 1;
+    if (mode === GameConfig.PLAYER) {
+        zOrder = GameConfig.MAP_HEIGH - tilePos.y;
+    } else {
+        zOrder = tilePos.y;
+    }
+
+    node.addChild(treeShadow, zOrder, "tree_shadow");
+    node.addChild(sp, zOrder, "tree");
+    node.addChild(hpBarNode, zOrder, "hp");
+
     if (mode === GameConfig.PLAYER)
         node.setName("PlayerTree");
     else node.setName("OpponentTree");
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos, zOrder);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let lifeComponent = ComponentFactory.create(LifeComponent, 100, 100);
 

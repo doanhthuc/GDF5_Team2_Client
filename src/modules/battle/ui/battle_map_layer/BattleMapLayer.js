@@ -58,6 +58,8 @@ let BattleMapLayer = cc.Layer.extend({
                 let str = null;
                 if (mode === GameConfig.PLAYER) str = "Player"
                 else str = "Opponent"
+
+                let zOrder = 1;
                 switch (map[r][c]) {
                     case GameConfig.MAP.ATTACK_SPEED:
                         sp.setTexture(BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG);
@@ -82,7 +84,7 @@ let BattleMapLayer = cc.Layer.extend({
                         break;
 
                 }
-                this.mapNode[mode].addChild(sp, 1);
+                this.mapNode[mode].addChild(sp, zOrder);
             }
         }
 
