@@ -35,6 +35,9 @@ let BulletSystem = System.extend({
                 continue;
             }
 
+            // destroy bullet when target monsters is underground
+
+
             if (bulletVelocity.getDynamicPosition()) {
                 if (Math.abs(bulletVelocity.getDynamicPosition().x - bulletPos.x) <= 10 || Math.abs(bulletVelocity.getDynamicPosition().y - bulletPos.y) <= 10) {
                     // bullet.removeComponent(VelocityComponent);
