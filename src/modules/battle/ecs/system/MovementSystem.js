@@ -8,7 +8,7 @@ let MovementSystem = System.extend({
     },
 
     _run: function () {
-        const dt = tickManager.getDeltaFromLatestTickToNow() / 1000;
+       /* const dt = tickManager.getDeltaFromLatestTickToNow() / 1000;
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(VelocityComponent, PositionComponent);
 
@@ -54,7 +54,7 @@ let MovementSystem = System.extend({
                     positionComponent.moveDistance += moveDistance;
                 }
             }
-        }
+        }*/
     },
 
     updateData: function () {
