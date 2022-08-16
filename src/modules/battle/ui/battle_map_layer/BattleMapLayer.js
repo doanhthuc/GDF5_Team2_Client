@@ -39,7 +39,7 @@ let BattleMapLayer = cc.Layer.extend({
     _genMap: function (mode) {
 
         this.houseSprite[mode] = new cc.Sprite(BattleResource.HOUSE_IMG);
-        if (mode=== GameConfig.PLAYER) this.houseSprite[mode].setName("player_house")
+        if (mode === GameConfig.PLAYER) this.houseSprite[mode].setName("player_house")
         else this.houseSprite[mode].setName("opponent_house")
         this.mapNode[mode].addChild(this.houseSprite[mode], 15000);
         this.houseSprite[mode].setAnchorPoint(cc.p(0.5, 0.2));
@@ -57,7 +57,7 @@ let BattleMapLayer = cc.Layer.extend({
                 });
                 let str = null;
                 if (mode === GameConfig.PLAYER) str = "Player"
-                else str="Opponent"
+                else str = "Opponent"
                 switch (map[r][c]) {
                     case GameConfig.MAP.ATTACK_SPEED:
                         sp.setTexture(BattleResource.ITEM_BUFF_ATTACK_SPEED_IMG);
@@ -65,11 +65,11 @@ let BattleMapLayer = cc.Layer.extend({
                         break;
                     case GameConfig.MAP.ATTACK_RANGE:
                         sp.setTexture(BattleResource.ITEM_BUFF_RANGE_IMG);
-                        sp.setName(str+"AttackRangeBuff")
+                        sp.setName(str + "AttackRangeBuff")
                         break;
                     case GameConfig.MAP.ATTACK_DAMAGE:
                         sp.setTexture(BattleResource.ITEM_BUFF_DAMAGE_IMG);
-                        sp.setName(str+"AttackDamageBuff")
+                        sp.setName(str + "AttackDamageBuff")
                         break;
                     case GameConfig.MAP.TREE:
                         EntityFactory.createTree(tilePos, mode);
@@ -78,7 +78,7 @@ let BattleMapLayer = cc.Layer.extend({
                         EntityFactory.createHole(tilePos, mode);
                         continue;
                     default:
-                        sp.setName(str+"tile " + tilePos.x + " " + tilePos.y);
+                        sp.setName(str + "tile " + tilePos.x + " " + tilePos.y);
                         break;
 
                 }
@@ -137,7 +137,7 @@ let BattleMapLayer = cc.Layer.extend({
         }
     },
     showMonsterPathWhenDragCard: function (tilePos) {
-        if (tilePos.y < 0) return;
+        if (tilePos.y >= GameConfig.MAP_HEIGH || tilePos.y < 0 || tilePos.x < 0 || tilePos.x >= GameConfig.MAP_WIDTH) return;
         while (this._spriteContainerActive.length > 0) {
             let activeSp = this._spriteContainerActive.pop();
             this._spriteContainerInActive.push(activeSp);
