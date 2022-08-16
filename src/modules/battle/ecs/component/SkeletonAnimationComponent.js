@@ -7,7 +7,7 @@ let SkeletonAnimationComponent = Component.extend({
         this.reset(fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, position, mode);
     },
 
-    reset: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, parent) {
+    reset: function (fileJson, fileAtlas, timeLine, sequenceAnim, sequenceAnimLoop, parent, addChild=true) {
         this.fileJson = fileJson;
         this.fileAtlas = fileAtlas;
         this.timeLine = timeLine;
@@ -17,11 +17,14 @@ let SkeletonAnimationComponent = Component.extend({
         this.currentIdx = 0;
 
         this.spine = new sp.SkeletonAnimation(this.fileJson, this.fileAtlas);
-        parent.addChild(this.spine, 0);
+        this.spine.retain();
+        if (addChild) {
+            parent.addChild(this.spine, 0);
+        }
     },
 
     clone: function () {
-        return ComponentFactory.create(SkeletonAnimationComponent, this.fileJson, this.fileAtlas, this.timeLine, this.sequenceAnim, this.sequenceAnimLoop);
+        return ComponentFactory.create(SkeletonAnimationComponent, this.fileJson, this.fileAtlas, this.timeLine, this.sequenceAnim, this.sequenceAnimLoop, null, false);
     },
 });
 SkeletonAnimationComponent.typeID = GameConfig.COMPONENT_ID.SKELETON;
