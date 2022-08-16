@@ -4,13 +4,15 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     let typeID = GameConfig.ENTITY_ID.SWORD_MAN;
     let entity = this._createEntity(typeID, mode);
 
+    let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
+
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 30, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, monsterConfig.monsterCategory, monsterConfig.monsterClass, monsterConfig.weight, monsterConfig.energy, monsterConfig.gainEnergy, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createSwordmanNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 50);
+    let lifeComponent = ComponentFactory.create(LifeComponent, monsterConfig.hp);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.sword_man);
 
     // let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
@@ -40,13 +42,15 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
     let typeID = GameConfig.ENTITY_ID.ASSASSIN;
     let entity = this._createEntity(typeID, mode);
 
+    let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
+
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 15, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, monsterConfig.monsterCategory, monsterConfig.monsterClass, monsterConfig.weight, monsterConfig.energy, monsterConfig.gainEnergy, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 1.4 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createAssassinNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 15);
+    let lifeComponent = ComponentFactory.create(LifeComponent, monsterConfig.hp);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.assasin);
 
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
@@ -73,13 +77,15 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
     let typeID = GameConfig.ENTITY_ID.BAT;
     let entity = this._createEntity(typeID, mode);
 
+    let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
+
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.AIR, 25, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, monsterConfig.monsterCategory, monsterConfig.monsterClass, monsterConfig.weight, monsterConfig.energy, monsterConfig.gainEnergy, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.7 * GameConfig.TILE_WIDTH, 0.7 * GameConfig.TILE_WIDTH);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createBatNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 25);
+    let lifeComponent = ComponentFactory.create(LifeComponent, monsterConfig.hp);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.bat);
     let path = []
 
@@ -109,13 +115,15 @@ EntityFactory.createGiantMonster = function (pixelPos, mode) {
     let typeID = GameConfig.ENTITY_ID.GIANT;
     let entity = this._createEntity(typeID, mode);
 
+    let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
+
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 200, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, monsterConfig.monsterCategory, monsterConfig.monsterClass, monsterConfig.weight, monsterConfig.energy, monsterConfig.gainEnergy, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.5 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createGiantNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 200);
+    let lifeComponent = ComponentFactory.create(LifeComponent, monsterConfig.hp);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.giant);
 
 
@@ -143,13 +151,15 @@ EntityFactory.createNinjaMonster = function (pixelPos, mode) {
     let typeID = GameConfig.ENTITY_ID.NINJA;
     let entity = this._createEntity(typeID, mode);
 
+    let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
+
     // NOTE: get component from pool
-    let infoComponent = ComponentFactory.create(MonsterInfoComponent, GameConfig.MONSTER.CATEGORY.NORMAL, GameConfig.MONSTER.CLASS.LAND, 30, 1, 1, undefined);
+    let infoComponent = ComponentFactory.create(MonsterInfoComponent, monsterConfig.monsterCategory, monsterConfig.monsterClass, monsterConfig.weight, monsterConfig.energy, monsterConfig.gainEnergy, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createNinjaNodeAnimation(), mode, pixelPos);
     let collisionComponent = ComponentFactory.create(CollisionComponent, 20, 30);
-    let lifeComponent = ComponentFactory.create(LifeComponent, 30);
+    let lifeComponent = ComponentFactory.create(LifeComponent, monsterConfig.hp);
     let underGroundComponent = ComponentFactory.create(UnderGroundComponent);
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, MonsterAnimationConfig.ninja)
 
@@ -171,4 +181,27 @@ EntityFactory.createNinjaMonster = function (pixelPos, mode) {
 
     //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
     return entity;
+}
+
+EntityFactory.getMonsterConfigByEntityTypeID = function (entityTypeID) {
+    let monsterIdInConfig = MonsterEntityTypeIdToIdInJSONConfig[entityTypeID];
+    let monsterConfigData = JsonReader.getMonsterConfig()[monsterIdInConfig]
+    let monsterCategory = monsterConfigData.category;
+    let monsterClass = monsterConfigData.class
+    let hp = monsterConfigData.hp;
+    let speed = monsterConfigData.speed;
+    let hitRadius = monsterConfigData.hitRadius;
+    let weight = monsterConfigData.weight;
+    let energy = +monsterConfigData.energy;
+    let gainEnergy = +monsterConfigData.gainEnergy;
+    return {
+        monsterCategory: monsterCategory,
+        monsterClass: monsterClass,
+        hp: hp,
+        speed: speed,
+        hitRadius: hitRadius,
+        weight: weight,
+        energy: energy,
+        gainEnergy: gainEnergy
+    };
 }
