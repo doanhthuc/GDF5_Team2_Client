@@ -17,8 +17,6 @@ let MovementSystem = System.extend({
         for (let entity of entityList) {
             let positionComponent = entity.getComponent(PositionComponent);
             let velocityComponent = entity.getComponent(VelocityComponent);
-            let appearanceComponent = entity.getComponent(AppearanceComponent);
-            let fireballEffect = entity.getComponent(FireBallEffect);
 
             if (velocityComponent.getActive()) {
                 let moveDistanceX = velocityComponent.speedX * dt;
@@ -50,8 +48,6 @@ let MovementSystem = System.extend({
                 } else {
                     positionComponent.__x = tmpPos.x;
                     positionComponent.__y = tmpPos.y;
-                    let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
-                    positionComponent.moveDistance += moveDistance;
                 }
             }
         }

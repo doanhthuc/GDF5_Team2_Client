@@ -1,9 +1,0 @@
-{
-	"packageUrl" : "http://zingthai-poker.static.g6.zing.vn/apk/poker/high/",
-	"remoteManifestUrl" : "http://zingthai-poker.static.g6.zing.vn/apk/poker/high/project.manifest",
-	"remoteVersionUrl" : "http://zingthai-poker.static.g6.zing.vn/apk/poker/high/version.manifest",
-	"version" : "34",
-	"engineVersion" : "3.9.0",
-	"assets" : {},
-    "searchPaths" : []
-}

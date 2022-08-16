@@ -7,7 +7,7 @@ let PositionComponent = Component.extend({
         this.reset(x, y, 0);
     },
 
-    reset: function (x, y, moveDistance) {
+    reset: function (x, y, moveDistance=0) {
         this.x = x;
         this.y = y;
         this.moveDistance = moveDistance;
