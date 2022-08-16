@@ -194,6 +194,7 @@
         "src/modules/battle/ecs/common/Utils.js",
         "src/modules/battle/ecs/common/UUIDGeneratorECS.js",
         "src/modules/battle/ecs/common/ValidatorECS.js",
+        "src/modules/battle/ecs/config/MonsterConfig.js",
         "src/modules/battle/ecs/config/ReadConfigUtils.js",
         "src/modules/battle/ecs/config/TowerConfig.js",
         "src/modules/battle/ecs/entity/Entity.js",

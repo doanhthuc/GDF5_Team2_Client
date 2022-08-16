@@ -4,6 +4,7 @@ const JsonReader = {
     targetBuffConfigData: null,
     potionConfigData: null,
     treasureConfigData: null,
+    monsterConfigData: null,
 
     getTowerConfig: function () {
         if (this.towerConfigData) {
@@ -75,5 +76,15 @@ const JsonReader = {
             this.treasureConfigData = data;
         });
         return this.treasureConfigData;
+    },
+
+    getMonsterConfig: function () {
+        if (this.monsterConfigData) {
+            return this.monsterConfigData;
+        }
+        cc.loader.loadJson("config/Monster.json", (error, data) => {
+            this.monsterConfigData = data.monster;
+        } );
+        return this.monsterConfigData;
     }
 }
