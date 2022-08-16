@@ -1,0 +1,2623 @@
+{
+	"packageUrl": "http://zingthai-poker.static.g6.zing.vn/apk/poker/high/",
+	"remoteManifestUrl": "http://zingthai-poker.static.g6.zing.vn/apk/poker/high/project.manifest",
+	"remoteVersionUrl": "http://zingthai-poker.static.g6.zing.vn/apk/poker/high/version.manifest",
+	"version": "34",
+	"engineVersion": "3.9.0",
+	"assets": {
+		"config.json": {
+			"md5": "d90a8ef5a709aa52a5c1b9f5ba297728"
+		},
+		"main.js": {
+			"md5": "e9dfeaa3ff117de99ef9a5e270983c6f"
+		},
+		"project.json": {
+			"md5": "a79a81366dd5d3d5423f7a1f63eb8ff8"
+		},
+		"res/animations/betting_1/skeleton.xml": {
+			"md5": "c9682d0005318b48f411ace538434228"
+		},
+		"res/animations/betting_1/texture.plist": {
+			"md5": "bb88a2d1f0afab30e6c0f648ec5dc6be"
+		},
+		"res/animations/betting_1/texture.png": {
+			"md5": "1238d6d5c24b3f8c8f33034c7c3e746c"
+		},
+		"res/animations/betting_2001/skeleton.xml": {
+			"md5": "851fd74b1db79a1d3e2b3e3f1df15e7a"
+		},
+		"res/animations/betting_2001/texture.plist": {
+			"md5": "bb88a2d1f0afab30e6c0f648ec5dc6be"
+		},
+		"res/animations/betting_2001/texture.png": {
+			"md5": "cc27d2f2c21640e90ca2fc469ee27f6d"
+		},
+		"res/animations/betting_all_in/skeleton.xml": {
+			"md5": "dd51539740a4dabfae926d5a47259cf3"
+		},
+		"res/animations/betting_all_in/texture.plist": {
+			"md5": "bb88a2d1f0afab30e6c0f648ec5dc6be"
+		},
+		"res/animations/betting_all_in/texture.png": {
+			"md5": "1238d6d5c24b3f8c8f33034c7c3e746c"
+		},
+		"res/animations/btn_pick_table/skeleton.xml": {
+			"md5": "29971b265b79584a571fa63ff187d039"
+		},
+		"res/animations/btn_pick_table/texture.plist": {
+			"md5": "9f7634b735fff0377b45698138a31f0e"
+		},
+		"res/animations/btn_pick_table/texture.png": {
+			"md5": "dadd0c3a398457d5e4f0070cb64521fd"
+		},
+		"res/animations/btn_quick_play/skeleton.xml": {
+			"md5": "3dcc54d5d6d2b086603c053ae64f26c0"
+		},
+		"res/animations/btn_quick_play/texture.plist": {
+			"md5": "d62e30463206a62ce0b6e86889128b15"
+		},
+		"res/animations/btn_quick_play/texture.png": {
+			"md5": "8f357ada38fa929077a331cebe799d67"
+		},
+		"res/animations/btn_tournament/skeleton.xml": {
+			"md5": "af0984c927f0232e2d90089030a53f2d"
+		},
+		"res/animations/btn_tournament/texture.plist": {
+			"md5": "593c137bfdeba950fdcc705664d17e26"
+		},
+		"res/animations/btn_tournament/texture.png": {
+			"md5": "e8e0172078756ce0d42fe9e4be9cf202"
+		},
+		"res/animations/dealer_normal/skeleton.xml": {
+			"md5": "1ea31ac3cde5e2ed24c478412453f1dc"
+		},
+		"res/animations/dealer_normal/texture.plist": {
+			"md5": "885edd8c70d6f5def3be8849af46b6c2"
+		},
+		"res/animations/dealer_normal/texture.png": {
+			"md5": "5b7ff28094ad481305f71dea10bbdb82"
+		},
+		"res/animations/firework/skeleton.xml": {
+			"md5": "186df7a2864612832aab419b860c6625"
+		},
+		"res/animations/firework/texture.plist": {
+			"md5": "c720cf10b84f4443b44d78684d2db5b9"
+		},
+		"res/animations/firework/texture.png": {
+			"md5": "96ec7a22d440be7b36c92bafe5799cf0"
+		},
+		"res/animations/firework_1/skeleton.xml": {
+			"md5": "8534da6020d7cc08638daa22e0f827e9"
+		},
+		"res/animations/firework_1/texture.plist": {
+			"md5": "c720cf10b84f4443b44d78684d2db5b9"
+		},
+		"res/animations/firework_1/texture.png": {
+			"md5": "96ec7a22d440be7b36c92bafe5799cf0"
+		},
+		"res/animations/firework_2/skeleton.xml": {
+			"md5": "899a5fa0a9dd15b126a4c819e24974b9"
+		},
+		"res/animations/firework_2/texture.plist": {
+			"md5": "c720cf10b84f4443b44d78684d2db5b9"
+		},
+		"res/animations/firework_2/texture.png": {
+			"md5": "96ec7a22d440be7b36c92bafe5799cf0"
+		},
+		"res/animations/firework_3/skeleton.xml": {
+			"md5": "5f53f7bca219755a23d60395c228d340"
+		},
+		"res/animations/firework_3/texture.plist": {
+			"md5": "c720cf10b84f4443b44d78684d2db5b9"
+		},
+		"res/animations/firework_3/texture.png": {
+			"md5": "96ec7a22d440be7b36c92bafe5799cf0"
+		},
+		"res/animations/lobby_girl/skeleton.xml": {
+			"md5": "79c20ca5557894965707924dee4b9601"
+		},
+		"res/animations/lobby_girl/texture.plist": {
+			"md5": "b7c6164eaee1ddc1fd14724ad16f4af4"
+		},
+		"res/animations/lobby_girl/texture.png": {
+			"md5": "faf0b319727e6e319cdeae51230f5da3"
+		},
+		"res/animations/pack_gold/skeleton.xml": {
+			"md5": "498139c05129cb27ffff2fdd8a15e930"
+		},
+		"res/animations/pack_gold/texture.plist": {
+			"md5": "552a815fec31bc74bb5bb60abfcaf55a"
+		},
+		"res/animations/pack_gold/texture.png": {
+			"md5": "1ba686cff651ad7cc53ca9dbcb5480a3"
+		},
+		"res/animations/tip_chips/skeleton.xml": {
+			"md5": "535bf9bd5f77dcbf69b46e4c6f4be2a1"
+		},
+		"res/animations/tip_chips/texture.plist": {
+			"md5": "b267ed86fa477fe8259bde55a1982d6f"
+		},
+		"res/animations/tip_chips/texture.png": {
+			"md5": "d9a6b6ef6c9bfee07235329534152f03"
+		},
+		"res/animations/touch_btn_chanel/skeleton.xml": {
+			"md5": "c127201d1a74cf652f125abae4f86abd"
+		},
+		"res/animations/touch_btn_chanel/texture.plist": {
+			"md5": "934da326631d33a7d9ae0b62d753ca4c"
+		},
+		"res/animations/touch_btn_chanel/texture.png": {
+			"md5": "dcfd9f43a92383bd4c1b4b136c81a98a"
+		},
+		"res/animations/touch_btn_pick_table/skeleton.xml": {
+			"md5": "a9e0a45c9cb4475dc56abad07451695e"
+		},
+		"res/animations/touch_btn_pick_table/texture.plist": {
+			"md5": "96bcc3b03e662dd970cc0761ac8561fc"
+		},
+		"res/animations/touch_btn_pick_table/texture.png": {
+			"md5": "053770c5ea1b7a8140683b254a36bb8a"
+		},
+		"res/animations/touch_btn_quick_play/skeleton.xml": {
+			"md5": "ce4433c06bd42df4befa6d3d9d0b9aeb"
+		},
+		"res/animations/touch_btn_quick_play/texture.plist": {
+			"md5": "d4a6eacd05fe04ac954c77bdd7a6cfc6"
+		},
+		"res/animations/touch_btn_quick_play/texture.png": {
+			"md5": "7e78b72465a0c7d6fd7c4175d48c8cd8"
+		},
+		"res/animations/vip_card/skeleton.xml": {
+			"md5": "8592e1564f41d0a789946ee8afe2fd61"
+		},
+		"res/animations/vip_card/texture.plist": {
+			"md5": "a03f98b3e82a548509c0f33db34d6942"
+		},
+		"res/animations/vip_card/texture.png": {
+			"md5": "d82afff6a3cb4b44d14ddaa18af86746"
+		},
+		"res/animations/vip_icon/skeleton.xml": {
+			"md5": "b33b269cd96c1179ccd2b59a947a1d2b"
+		},
+		"res/animations/vip_icon/texture.plist": {
+			"md5": "af35fb753c880a0d70ca00e4c241902f"
+		},
+		"res/animations/vip_icon/texture.png": {
+			"md5": "a0042f9aea6248f2a3102b90bdbb66b6"
+		},
+		"res/audio/common/all_in.mp3": {
+			"md5": "a448a8f83808fade8fb52b716c0add7c"
+		},
+		"res/audio/common/button_click.mp3": {
+			"md5": "7e47d6b3f45c5945b7343df7f1dc92b5"
+		},
+		"res/audio/common/button_raise_click.mp3": {
+			"md5": "93ca45a4d608517512416d46e8a0c5bd"
+		},
+		"res/audio/common/card_deal_1.mp3": {
+			"md5": "ceb2548dc880d9b5b70e66b13b8a27ff"
+		},
+		"res/audio/common/card_deal_2.mp3": {
+			"md5": "805d9f86cc9ce7147f82e45511d866c1"
+		},
+		"res/audio/common/card_deal_3.mp3": {
+			"md5": "f06e1e595f961df47bd0caf7793f975c"
+		},
+		"res/audio/common/card_deal_4.mp3": {
+			"md5": "67aff77affdec47ab1ce8573bb6d678e"
+		},
+		"res/audio/common/card_deal_5.mp3": {
+			"md5": "8ee6f988d6d9ffce260a410003751568"
+		},
+		"res/audio/common/checking_knock.mp3": {
+			"md5": "4fe81b7c2be1d9a80a8f960c57a8d268"
+		},
+		"res/audio/common/chips_moving_to_winner.mp3": {
+			"md5": "2637e0fbae96b2b4f785ac358d151b66"
+		},
+		"res/audio/common/chips_on_table.mp3": {
+			"md5": "72876626dad13a95c17777f22d9d2711"
+		},
+		"res/audio/common/coinGain.mp3": {
+			"md5": "772f823c1488b11fc4e3fcca150a27ed"
+		},
+		"res/audio/common/collect_chips.mp3": {
+			"md5": "79d54a9e1747f02f41ef23d5158ea39b"
+		},
+		"res/audio/common/compare_cards.mp3": {
+			"md5": "d5dee571b07c850e3617cebf7bf1b8ae"
+		},
+		"res/audio/common/count_down.mp3": {
+			"md5": "761207674a9e04c12a52ab4844814864"
+		},
+		"res/audio/common/crowd_suspense.mp3": {
+			"md5": "806f5cc3600a6503e031c86eb9624de0"
+		},
+		"res/audio/common/deal_card.mp3": {
+			"md5": "69a54ab4d0b7aa1fde978698ccd15b6d"
+		},
+		"res/audio/common/deal_cards.mp3": {
+			"md5": "2a8d92d83d7c9078d4a90a5f4095448a"
+		},
+		"res/audio/common/fold_swoosh.mp3": {
+			"md5": "d0afec3f6f7f5154874057f399632c90"
+		},
+		"res/audio/common/Jackpot.mp3": {
+			"md5": "34d57a2f1baf6f51da0df6f3e16bf38b"
+		},
+		"res/audio/common/join_room.mp3": {
+			"md5": "f3175308f89f0678c3a35e3de86f20a9"
+		},
+		"res/audio/common/leave_room.mp3": {
+			"md5": "1e9ae8881b897a6fb598ecf077a12a28"
+		},
+		"res/audio/common/lose.mp3": {
+			"md5": "84d4bdc75d6ce6eab5fed1b92b9bd4df"
+		},
+		"res/audio/common/MauBinh.mp3": {
+			"md5": "9a364c8ad547d1e551f0713c9a5764fb"
+		},
+		"res/audio/common/music_ingame.mp3": {
+			"md5": "fbb3a973353c4358398e29808cb80d1e"
+		},
+		"res/audio/common/music_lobby.mp3": {
+			"md5": "dc437b69f66affcab06a7810efe04b40"
+		},
+		"res/audio/common/music_start_game.mp3": {
+			"md5": "407d34a0d47f04b4eb2eb802eeb4494e"
+		},
+		"res/audio/common/open_window.mp3": {
+			"md5": "30b938563659d79451918de458ffe098"
+		},
+		"res/audio/common/player_bing.mp3": {
+			"md5": "6878f94191a2e8bc402208379b42ed8a"
+		},
+		"res/audio/common/player_menu_appear.mp3": {
+			"md5": "cefde05a9ca986001b714df398bfb848"
+		},
+		"res/audio/common/player_menu_disappear.mp3": {
+			"md5": "1ea2b4f2992620586cc9d50a69d76183"
+		},
+		"res/audio/common/screen_appear.mp3": {
+			"md5": "b255cc6fb8c1c572dabc95f2940089fd"
+		},
+		"res/audio/common/screen_disappear.mp3": {
+			"md5": "e6cf64a9fd560f270ffcef65720a0e59"
+		},
+		"res/audio/common/scroll.mp3": {
+			"md5": "b7fb9ebc7d9f61fd0f26a0b865e59fa3"
+		},
+		"res/audio/common/sort_cards.mp3": {
+			"md5": "74cb14b766c75f8f7b401199584d7d9d"
+		},
+		"res/audio/common/win.mp3": {
+			"md5": "2c577a4c7c60016c9cac9b0b46739cad"
+		},
+		"res/audio/common/winner_applause.mp3": {
+			"md5": "dc271ca3966e2dd0b1353b8e2145fee4"
+		},
+		"res/audio/vie/bluff_ah.mp3": {
+			"md5": "41a2e2dc990076b53379e4dbf410c3a4"
+		},
+		"res/audio/vie/good_luck.mp3": {
+			"md5": "fa6553d29add95030545b94243aff36a"
+		},
+		"res/audio/vie/go_go.mp3": {
+			"md5": "081ebab80651d6bd51c3d3c5285f413f"
+		},
+		"res/audio/vie/haha_troll.mp3": {
+			"md5": "f076f977be62078855b1245c51b62eba"
+		},
+		"res/audio/vie/have_a_nice_day.mp3": {
+			"md5": "9e936bee9fe0fa9c4f0910eb408962e2"
+		},
+		"res/audio/vie/i_bluff.mp3": {
+			"md5": "4772c9a8b1e10d23ac306d14f4f86a64"
+		},
+		"res/audio/vie/i_got_a_lucky.mp3": {
+			"md5": "5407582783574aa0a124e806e1e73b4e"
+		},
+		"res/audio/vie/i_should_fold.mp3": {
+			"md5": "e9d8ea0c3b540fda541890a43101b81a"
+		},
+		"res/audio/vie/nice_hole_cards.mp3": {
+			"md5": "e74d34ee2960448653de390a8444572f"
+		},
+		"res/audio/vie/nice_try.mp3": {
+			"md5": "cc777505d60352f510547e191761eed7"
+		},
+		"res/audio/vie/player_action_all_in.mp3": {
+			"md5": "a2f1e54e25e3dcf1b3c05fdcaf6a1a55"
+		},
+		"res/audio/vie/player_action_check.mp3": {
+			"md5": "a75165d7ce7bf4118ef9e9044442f0b3"
+		},
+		"res/audio/vie/player_action_fold.mp3": {
+			"md5": "315ef44cfbe3a39d8278fface9ba4650"
+		},
+		"res/audio/vie/player_action_raise.mp3": {
+			"md5": "2fe251f183945918fd8d96491ff3bbe4"
+		},
+		"res/audio/vie/quick_quick.mp3": {
+			"md5": "4ae5da7b3152230e4a9a907480e84a46"
+		},
+		"res/audio/vie/thanks.mp3": {
+			"md5": "0edd89d0733f7d1ac7d1396d2029223d"
+		},
+		"res/audio/vie/thank_you.mp3": {
+			"md5": "1804281be2e92d98a330acee30b8d84a"
+		},
+		"res/audio/vie/trick_ah.mp3": {
+			"md5": "57978236d23d5a2eaa3f88dbe1f90a18"
+		},
+		"res/audio/vie/u_got_a_lucky.mp3": {
+			"md5": "10383931e501157806d6b53d383fe6be"
+		},
+		"res/audio/vie/wait_some_minutes.mp3": {
+			"md5": "5a4cae411ced5170dd5977b66f251070"
+		},
+		"res/audio/vie/win_by_flush.mp3": {
+			"md5": "93f736ff3a44bc73dda9493db4cdb232"
+		},
+		"res/audio/vie/win_by_four_of_a_kind.mp3": {
+			"md5": "d6d439dc5ed53d70c80592214a4dff55"
+		},
+		"res/audio/vie/win_by_full_house.mp3": {
+			"md5": "cf3877fa109845a36f69c721feca8381"
+		},
+		"res/audio/vie/win_by_high_card.mp3": {
+			"md5": "e34d90e61245407b4061ed256c1388e5"
+		},
+		"res/audio/vie/win_by_pair.mp3": {
+			"md5": "7a9b380881cd122d0f0620c189330ccd"
+		},
+		"res/audio/vie/win_by_royal_flush.mp3": {
+			"md5": "016f8129ac51da3837d98764678ff046"
+		},
+		"res/audio/vie/win_by_straight.mp3": {
+			"md5": "3376ef6aed611f9863d8444d5e79bb15"
+		},
+		"res/audio/vie/win_by_three_of_a_kind.mp3": {
+			"md5": "e282b2244b6dac8e7591e790ee3ade63"
+		},
+		"res/audio/vie/win_by_two_pair.mp3": {
+			"md5": "70adfcdd614d460dd1e6c6c3f210c1e7"
+		},
+		"res/audio/vie/wth_slow.mp3": {
+			"md5": "62ed0e8b8caf77dd7cea76f2b16fadae"
+		},
+		"res/audio/vie/yesssssssss.mp3": {
+			"md5": "e54f47e0baeb172d28a50b7e7e9b4a00"
+		},
+		"res/audio/vie/your_turn.mp3": {
+			"md5": "45167b3ef013391911d1a818c43469e1"
+		},
+		"res/config.json": {
+			"md5": "8a53c164f6099a0e1bf417fb6eb9f3bd"
+		},
+		"res/Default/Button_Disable.png": {
+			"md5": "c9019ad4de0adfb7fe2b26ea367ce7c2"
+		},
+		"res/Default/Button_Normal.png": {
+			"md5": "1606ab4264517f8db6610759c62448ff"
+		},
+		"res/Default/Button_Press.png": {
+			"md5": "aee1fbac691d44c1c5aa1f883bf68ef8"
+		},
+		"res/Default/CheckBoxNode_Disable.png": {
+			"md5": "baabfcc9e60b792bb994ff6d9fadca71"
+		},
+		"res/Default/CheckBoxNode_Normal.png": {
+			"md5": "66d3ada34260dcf0b8741a968d605829"
+		},
+		"res/Default/CheckBox_Disable.png": {
+			"md5": "1046bf91c7efefa5f4fc6087856144fa"
+		},
+		"res/Default/CheckBox_Normal.png": {
+			"md5": "916af8888c90632024b8cdfc5275493b"
+		},
+		"res/Default/CheckBox_Press.png": {
+			"md5": "94b0af17444eefc26b8e687a1822b4e1"
+		},
+		"res/Default/ImageFile.png": {
+			"md5": "7c976fe707bdea4a8bd1af794c066deb"
+		},
+		"res/Default/LoadingBarFile.png": {
+			"md5": "0a4e4247f9834b4a2fee09f146547018"
+		},
+		"res/Default/SliderNode_Disable.png": {
+			"md5": "8fcc230de8ad362ca9eec1790ad41770"
+		},
+		"res/Default/SliderNode_Normal.png": {
+			"md5": "5b6797a9184ad913e7de9fd2e9834bce"
+		},
+		"res/Default/SliderNode_Press.png": {
+			"md5": "f565d63af269a9505aba73e9ce2b692b"
+		},
+		"res/Default/Slider_Back.png": {
+			"md5": "c3aa36ce74fe2ed40784f1d3fe1e6701"
+		},
+		"res/Default/Slider_PressBar.png": {
+			"md5": "8700c87dbce14619675250f2395865ce"
+		},
+		"res/Default/Sprite.png": {
+			"md5": "60f6c4bfe2ea028748c86a5a0a621581"
+		},
+		"res/favicon.ico": {
+			"md5": "e4d0098f9d2dfbd2c9002364963f6b50"
+		},
+		"res/fonts/HTRANSIS.TTF": {
+			"md5": "39a5159bbe0d11b9dc5e4c3713405fdd"
+		},
+		"res/fonts/number_bipmap10.fnt": {
+			"md5": "ead0d31669346a4ba996d42e713fb000"
+		},
+		"res/fonts/number_bipmap10.png": {
+			"md5": "7dd8fe7d2661e61328ea83daadf1c0a2"
+		},
+		"res/fonts/number_bipmap16.fnt": {
+			"md5": "1dd5e1e1479028bb3cdd0979e293409b"
+		},
+		"res/fonts/number_bipmap16.png": {
+			"md5": "e93dfd9860344d0941b7d6cbcefc26f9"
+		},
+		"res/fonts/number_bipmap5.fnt": {
+			"md5": "18b540f85fa794d943aa09b7d9c39cb3"
+		},
+		"res/fonts/number_bipmap5.png": {
+			"md5": "c2c06775a4c76ef07b24227c99998118"
+		},
+		"res/fonts/number_bipmap_10.fnt": {
+			"md5": "5d83906a22c7d7daf42d911d17eff226"
+		},
+		"res/fonts/number_bipmap_10.png": {
+			"md5": "f8a29db9a8d45f6a11a9f4cc6e0a2cd7"
+		},
+		"res/fonts/number_bipmap_16.fnt": {
+			"md5": "81f2bb5c21aa8f75ea856d621c159371"
+		},
+		"res/fonts/number_bipmap_16.png": {
+			"md5": "50b71d0ee4f74753adb7531591bc5667"
+		},
+		"res/fonts/number_bipmap_18.fnt": {
+			"md5": "848358a8d45868d598fbe9385d0d127c"
+		},
+		"res/fonts/number_bipmap_18.png": {
+			"md5": "b1ecdae5baa97b9ba5085dba0b308757"
+		},
+		"res/fonts/number_bipmap_20.fnt": {
+			"md5": "4f0cf228673d61e52c0578e4fe75951d"
+		},
+		"res/fonts/number_bipmap_20.png": {
+			"md5": "fe329cc10593792c8c80f05d8c2c90b0"
+		},
+		"res/fonts/number_bipmap_6.fnt": {
+			"md5": "b48e98fac4ebd2fbe8326638c28351cf"
+		},
+		"res/fonts/number_bipmap_6.png": {
+			"md5": "44601187ba59d390853512a63650e33d"
+		},
+		"res/fonts/number_bipmap_8.fnt": {
+			"md5": "4aba8ca42398ea7a33fd03b34e1dbb14"
+		},
+		"res/fonts/number_bipmap_8.png": {
+			"md5": "a9745d0e9b858592f7fe8503a4ebdde2"
+		},
+		"res/fonts/number_bitmap_bonus_rate.fnt": {
+			"md5": "9fa53c3b1e0d741fd52e992cea35f969"
+		},
+		"res/fonts/number_bitmap_bonus_rate.png": {
+			"md5": "f13d4ed580134d27540a26c391904ab6"
+		},
+		"res/fonts/number_bmp.fnt": {
+			"md5": "f51d2137a29ffc3dc54fd48657630f9b"
+		},
+		"res/fonts/number_bmp.png": {
+			"md5": "27f51d0609b35f3b1024aa355786f59d"
+		},
+		"res/fonts/UTM_Alexander.ttf": {
+			"md5": "9211e296e1403b395abceed20cd10eae"
+		},
+		"res/fonts/UTM_Swiss_721_Black_Condensed.ttf": {
+			"md5": "6036813ab84c242a0fcaa380891da3d6"
+		},
+		"res/fonts/UTM_Swiss_CondensedBold.ttf": {
+			"md5": "acdee77b7b507e642cef27a99dad68f7"
+		},
+		"res/ipConfig.json": {
+			"md5": "b27a28a10a35c21a3c9c1adb82e686ea"
+		},
+		"res/jsons/Channel.json": {
+			"md5": "902770968080c42bb5006e4ca3fc0cfc"
+		},
+		"res/jsons/Event.json": {
+			"md5": "a4d04522b49c2142066014eaee917325"
+		},
+		"res/jsons/GoldPack.json": {
+			"md5": "eed8c595a5173c6ad0562c67f512a655"
+		},
+		"res/jsons/jsonList.json": {
+			"md5": "087ed3b0d2347d097eb2852b3b5874a8"
+		},
+		"res/jsons/Level.json": {
+			"md5": "f92c1d0762732942cf052fbc686529e0"
+		},
+		"res/jsons/Tables.json": {
+			"md5": "c4597815e24fe0ea08dc20db9a00610f"
+		},
+		"res/jsons/Tournament.json": {
+			"md5": "f53cd6b6cab8085cbf3b3cc2c5dc6ef3"
+		},
+		"res/jsons/Tutorials.json": {
+			"md5": "c66a00b1b3b3d3be72aa54a01f840137"
+		},
+		"res/jsons/VIP.json": {
+			"md5": "23a9e0d10c4aa44d2ba84f85edf17325"
+		},
+		"res/localize/config.json": {
+			"md5": "25696d51344a4b1e1efdc4b1fbaa3f3d"
+		},
+		"res/localize/en": {
+			"md5": "8d25a3d30e7953d58c3e9d8f9e589130"
+		},
+		"res/localize/eng/img/pack_eng.plist": {
+			"md5": "8d20cc43aefcb73a78f5ca19be61b3ce"
+		},
+		"res/localize/eng/img/pack_eng.png": {
+			"md5": "20e4f052aa3e3abe12eb4354e4a67dca"
+		},
+		"res/localize/eng/lang_eng.txt": {
+			"md5": "2a6cd8e04afa31ef7d1f9e10dccd1c61"
+		},
+		"res/localize/id": {
+			"md5": "1231711d39c0357875ce5a5dc2702307"
+		},
+		"res/localize/note": {
+			"md5": "98bb30fb662968bc7b3b3140d1d14de3"
+		},
+		"res/localize/tha/img/pack_tha.plist": {
+			"md5": "803c563e89641e65a71f4a9fdbe6cad4"
+		},
+		"res/localize/tha/img/pack_tha.png": {
+			"md5": "ded8f11b273485fb844b9baf62385a8a"
+		},
+		"res/localize/tha/lang_tha.txt": {
+			"md5": "492d30e9c68803f245d3c5333ba79635"
+		},
+		"res/localize/vi": {
+			"md5": "4353a178c84beb51ed5c2459a33b2f2b"
+		},
+		"res/localize/vie/img/pack_vie.plist": {
+			"md5": "0134ed77ebbc0666212b55787e1ac135"
+		},
+		"res/localize/vie/img/pack_vie.png": {
+			"md5": "65d39a667ab2ec82381ce4ac23e5bf29"
+		},
+		"res/localize/vie/lang_vie.txt": {
+			"md5": "9af46cde18608169f948fb68d25c991c"
+		},
+		"res/shaders/change_color.fsh": {
+			"md5": "b6904a24fe3ecc3b5b8fb938ce7f18a8"
+		},
+		"res/texture/avatars/avatar_1.png": {
+			"md5": "830f01a8fd1f06749ac3fff08901045e"
+		},
+		"res/texture/avatars/avatar_2.png": {
+			"md5": "1da6ce43f56d6e4f6d2cd97b30bee010"
+		},
+		"res/texture/avatars/avatar_3.png": {
+			"md5": "7372a1bd6150cd9403acf166544e94c3"
+		},
+		"res/texture/avatars/avatar_4.png": {
+			"md5": "be6d5a2e117612d2dbf0037cf284e0e1"
+		},
+		"res/texture/avatars/avatar_5.png": {
+			"md5": "c068c22cf36162d33f75cfa3dd4fbaf4"
+		},
+		"res/texture/avatars/avatar_6.png": {
+			"md5": "cdecf311fafbf7e5902450b467e56bc3"
+		},
+		"res/texture/avatars/avatar_7.png": {
+			"md5": "2eb7de7218de177eb77eb3c3b633f797"
+		},
+		"res/texture/avatars/avatar_8.png": {
+			"md5": "8dbcdefcaa4c140f32d7d512c190b881"
+		},
+		"res/texture/avatars/avatar_9.png": {
+			"md5": "169053e25b40fe58fcefb2eb330bd877"
+		},
+		"res/texture/avatars/avatar_default.png": {
+			"md5": "2913d596de7d2cabeae41c4c71ba6b13"
+		},
+		"res/texture/buttons_bg/btn_back.png": {
+			"md5": "e825e7e19ec393c37c025df589859bb4"
+		},
+		"res/texture/buttons_bg/btn_back_2.png": {
+			"md5": "40c0ff1b4c0e44bfaa01906f4d9d0441"
+		},
+		"res/texture/buttons_bg/btn_bg_169x71.png": {
+			"md5": "42eb4c9cbb216da909bd3c76c75fae2f"
+		},
+		"res/texture/buttons_bg/btn_bg_orange.png": {
+			"md5": "af3a7ce8d6958803a746a20ba7085183"
+		},
+		"res/texture/buttons_bg/btn_bg_orange_2.png": {
+			"md5": "b3d3376c17fbd061bbb3c4405168e4f5"
+		},
+		"res/texture/buttons_bg/btn_bg_violet.png": {
+			"md5": "0bfe776886b5f5296784b2f0ea7efe77"
+		},
+		"res/texture/buttons_bg/btn_bg_violet_2.png": {
+			"md5": "f2a9339f10aeeba8f7043ddf1fab91f6"
+		},
+		"res/texture/buttons_bg/btn_buy_in_tournament.png": {
+			"md5": "b867ff5e50cb1f592377de5049881b8c"
+		},
+		"res/texture/buttons_bg/btn_close.png": {
+			"md5": "d60d3d782c76ba45266aaf206017588b"
+		},
+		"res/texture/buttons_bg/btn_close_x.png": {
+			"md5": "59be4f34fab8b60b3d4c1680954ed647"
+		},
+		"res/texture/buttons_bg/btn_orange_133x45.png": {
+			"md5": "e6890f0662dbe53647a76e7fdb194697"
+		},
+		"res/texture/buttons_bg/btn_ranking_tournament.png": {
+			"md5": "d3996c8bf2da327dc555ec7cd8b29f34"
+		},
+		"res/texture/common/avatar_mask.png": {
+			"md5": "d79a63b0863bef55cc0eba3f2663d731"
+		},
+		"res/texture/common/bg_big_tooltip.png": {
+			"md5": "07473879e2bf4e7f31ea9cc05cc504f3"
+		},
+		"res/texture/common/bg_gui_505x292.png": {
+			"md5": "aed3455f736dc07aecf4d62ca79ac55d"
+		},
+		"res/texture/common/bg_gui_668x495.png": {
+			"md5": "00528fdf16579e12b897e54ae516b986"
+		},
+		"res/texture/common/bg_gui_774x573.png": {
+			"md5": "9dc1d86570e17f336e571e8ac0cb3f4d"
+		},
+		"res/texture/common/bg_notification.png": {
+			"md5": "79ab8ca6c51c6e6dfff23b481a21222c"
+		},
+		"res/texture/common/bg_signal_strength.png": {
+			"md5": "a78ef28f710d1a270dacb5ea26483f56"
+		},
+		"res/texture/common/bg_tooltip.png": {
+			"md5": "952161c8bbbd6a94c4f4ce933743d20f"
+		},
+		"res/texture/common/bg_waiting_progress.png": {
+			"md5": "1b16e93c9f5b597efd5c46e7266a7e92"
+		},
+		"res/texture/common/btn_next.png": {
+			"md5": "550d31c7b263bb7d4c43499c7b39a6d0"
+		},
+		"res/texture/common/btn_prev.png": {
+			"md5": "a005132e8483fd9d6bf339c68949803a"
+		},
+		"res/texture/common/gui_line.png": {
+			"md5": "7bef036f5312cb459fe4f428c85e5788"
+		},
+		"res/texture/common/icon_gold_state_0.png": {
+			"md5": "a2ec65a243760fb80d039ee51c3d2543"
+		},
+		"res/texture/common/icon_gold_state_1.png": {
+			"md5": "b78fcc3d0323ed467a69931e3d10744b"
+		},
+		"res/texture/common/icon_gold_state_2.png": {
+			"md5": "019d94475f64e33d1389dee932eab878"
+		},
+		"res/texture/common/icon_gold_state_3.png": {
+			"md5": "fddf42d136dc24311d7ae1fe2a142265"
+		},
+		"res/texture/common/img_annotation_line.png": {
+			"md5": "4afbeed6a5516eef67a065abacd8cfb8"
+		},
+		"res/texture/common/img_bg_annotation.png": {
+			"md5": "636550ce05c2792b3eafd3fd3aa23a73"
+		},
+		"res/texture/common/img_slide_point.png": {
+			"md5": "517b9303b1424c1f31401ca1037c855a"
+		},
+		"res/texture/common/img_slide_point_highlight.png": {
+			"md5": "8b720527951d8bb60707da7d8167c3a3"
+		},
+		"res/texture/common/img_waiting_chip.png": {
+			"md5": "1daf56d19c33417a1af412faa6c4aacf"
+		},
+		"res/texture/common/img_waiting_progress.png": {
+			"md5": "9a344a1dadaed7f6c76c63e1012782a3"
+		},
+		"res/texture/common/signal_strength_1.png": {
+			"md5": "e4c8fcc4fe6d416ea50fc6f7f94005af"
+		},
+		"res/texture/common/signal_strength_2.png": {
+			"md5": "a1a6c3371f9cf97535e694693fcabf7e"
+		},
+		"res/texture/common/signal_strength_3.png": {
+			"md5": "a84c830c5a88b8f68ca2d18dd1309133"
+		},
+		"res/texture/common/signal_strength_4.png": {
+			"md5": "c702f05b2960311eca1884c17f6633b8"
+		},
+		"res/texture/common/signal_strength_5.png": {
+			"md5": "de388f33ee475aec475027d25352c01f"
+		},
+		"res/texture/event/first_time/bg_first_time_card.png": {
+			"md5": "5a6b345269fbd5a98cb07ecad8ee039a"
+		},
+		"res/texture/event/first_time/bg_first_time_popup_sms.png": {
+			"md5": "42fa1df756cca04a8a1bf78e60f409f6"
+		},
+		"res/texture/event/first_time/icon_gift.png": {
+			"md5": "771f802c53d35a3406556b5d1919ac0b"
+		},
+		"res/texture/event/first_time/img_bonus_gold.png": {
+			"md5": "f020f5215e775dd8bc782065b2798ca3"
+		},
+		"res/texture/event/first_time/img_bonus_gold_sms.png": {
+			"md5": "fb40e55c26d976dc99c2d314a38204ce"
+		},
+		"res/texture/event/first_time/text_sms.png": {
+			"md5": "c803cf88ae6c92bafcdfbca90b5da24b"
+		},
+		"res/texture/event/invite_friends/icon_gold_in_invite_friend.png": {
+			"md5": "4dc8267e206898625abd324e5a8f4b9a"
+		},
+		"res/texture/event/invite_friends/icon_man.png": {
+			"md5": "66a1c650a0b6545356b2f97d6260f891"
+		},
+		"res/texture/event/invite_friends/img_bg_invite_friend.png": {
+			"md5": "28ad8104d9905b6236c8499c49cdf063"
+		},
+		"res/texture/event/invite_friends/img_item_pack_1.png": {
+			"md5": "3596dfb33dcafa6a33d7fb3e31c24894"
+		},
+		"res/texture/event/invite_friends/img_item_pack_2.png": {
+			"md5": "8fe4d3319de19b7a8506a27974e20dc7"
+		},
+		"res/texture/event/invite_friends/img_item_pack_3.png": {
+			"md5": "c1399290a889abbd19df2aa3dd18a106"
+		},
+		"res/texture/event/rate_game/img_bg_rate_game.png": {
+			"md5": "1f2cc41501bc697d34c565f072500e65"
+		},
+		"res/texture/event/seven_days/bg_event_seven_days.png": {
+			"md5": "8a02688d31e287562c34913cfe86849a"
+		},
+		"res/texture/event/seven_days/img_gold_day_1.png": {
+			"md5": "08050fe2debe8d2862f0915371555c34"
+		},
+		"res/texture/event/seven_days/img_gold_day_2.png": {
+			"md5": "778d459f3598488dda95c5331849f4af"
+		},
+		"res/texture/event/seven_days/img_gold_day_3.png": {
+			"md5": "2d7b349a9bc0ec6fa0ee2261f34992ae"
+		},
+		"res/texture/event/seven_days/img_gold_day_4.png": {
+			"md5": "4a40a5880c7becbe6f7f823ba4e37710"
+		},
+		"res/texture/event/seven_days/img_gold_day_5.png": {
+			"md5": "084cb731021c052e84264a66de63fd2d"
+		},
+		"res/texture/event/seven_days/img_gold_day_6.png": {
+			"md5": "bce1ad137bb9bcc6659d4512d24f86ed"
+		},
+		"res/texture/event/seven_days/img_gold_day_7.png": {
+			"md5": "3faa1f91af0b6e9736471437efd1092d"
+		},
+		"res/texture/event/seven_days/img_item_1.png": {
+			"md5": "6429ffb03de8a6b67e1ad1945d2b8aac"
+		},
+		"res/texture/event/seven_days/img_item_2.png": {
+			"md5": "59cfa69490da5cc977d6bd95e49711b9"
+		},
+		"res/texture/event/seven_days/img_item_3.png": {
+			"md5": "40ea3a3d4802a0d2a9038c8a1c9d24d9"
+		},
+		"res/texture/event/seven_days/img_item_fog.png": {
+			"md5": "f3f4ef5aa585c212ba3953ea70f58d0c"
+		},
+		"res/texture/event/seven_days/img_received.png": {
+			"md5": "9bd8084bc84880de7147e4d7f4990977"
+		},
+		"res/texture/flags/flag_eng_25x23.png": {
+			"md5": "1ac399832e7b6de496184c46af14a31e"
+		},
+		"res/texture/flags/flag_tha_25x23.png": {
+			"md5": "53b642ad27bcd2f3ef5399f9e99a88f3"
+		},
+		"res/texture/flags/flag_vie_25x23.png": {
+			"md5": "8c7c3bb438f635b438d47b3c3b45572a"
+		},
+		"res/texture/guide/btn_1.png": {
+			"md5": "9d158979ed589d45992de866744ae7d9"
+		},
+		"res/texture/guide/btn_2.png": {
+			"md5": "98a68ac00cc55e1844d2ad20b1b1fe7b"
+		},
+		"res/texture/guide/btn_transparent.png": {
+			"md5": "277b9bceb418c5ec097ba370c8aa974c"
+		},
+		"res/texture/guide/format_cards.png": {
+			"md5": "65ceb89d7d521ea2fed23fbede6c0593"
+		},
+		"res/texture/guide/group_flush.png": {
+			"md5": "4daa5edb2e93971299661b1f63f7b27a"
+		},
+		"res/texture/guide/group_four_a_kind.png": {
+			"md5": "cc5646b832fc664dba22e75c412e1d81"
+		},
+		"res/texture/guide/group_full_house.png": {
+			"md5": "9768ffda5567eef0180dafcef96d77c0"
+		},
+		"res/texture/guide/group_high_card.png": {
+			"md5": "7b8740efc4c98803288c731b771b071d"
+		},
+		"res/texture/guide/group_pair.png": {
+			"md5": "349cba23a1e13bce8b615c33932fbec3"
+		},
+		"res/texture/guide/group_royal_flush.png": {
+			"md5": "0fa940315b84baa91d9213420217aca7"
+		},
+		"res/texture/guide/group_straight.png": {
+			"md5": "1a9785f944a69a91755e7ef0899037f1"
+		},
+		"res/texture/guide/group_straight_flush.png": {
+			"md5": "11b9a91422f134543b2869065c39657c"
+		},
+		"res/texture/guide/group_three_a_kind.png": {
+			"md5": "bbc0752af53152d360d2c213a5e3e5c3"
+		},
+		"res/texture/guide/group_two_pair.png": {
+			"md5": "ef6265e776a52eaf4f9f06226c35b619"
+		},
+		"res/texture/guide/icon_diamond.png": {
+			"md5": "7083bd99cbf59f3c31a337ea3d5cdd4b"
+		},
+		"res/texture/guide/img_betting_1.png": {
+			"md5": "8648b351b16b4eb558f170c35cf4c893"
+		},
+		"res/texture/guide/img_betting_2.png": {
+			"md5": "ff189b7bc22b99b44c75a4cb06e406e6"
+		},
+		"res/texture/guide/img_bg_buttons.png": {
+			"md5": "4ea9aa1e90713f3a56bf02dfa675a4cc"
+		},
+		"res/texture/guide/img_bg_guide.png": {
+			"md5": "9dc1d86570e17f336e571e8ac0cb3f4d"
+		},
+		"res/texture/guide/img_page_1.png": {
+			"md5": "0834e5d59d911ea4bfb0cba196959dc9"
+		},
+		"res/texture/guide/img_page_2.png": {
+			"md5": "603189f0f8d908fbed2cb533a46ad39e"
+		},
+		"res/texture/guide/img_page_3.png": {
+			"md5": "dcbede45e1b6370c71de1a2520fa65fd"
+		},
+		"res/texture/guide/img_page_4.png": {
+			"md5": "3b3965bb2403b16b868304e3f5cbe7e5"
+		},
+		"res/texture/guide/img_phase_1.png": {
+			"md5": "f2c29296970577c6d20cca5492643b7d"
+		},
+		"res/texture/guide/img_phase_2.png": {
+			"md5": "776ada1386819c5dbcbf51c37f4097e5"
+		},
+		"res/texture/guide/img_phase_3.png": {
+			"md5": "845359c1c8fe207c714ffa21be5a4031"
+		},
+		"res/texture/guide/img_phase_4.png": {
+			"md5": "440f1d5191ab32a939b6b23526c96258"
+		},
+		"res/texture/loading/bg_loading.png": {
+			"md5": "1d2314fdaa4f33cd83b5188a76f4c104"
+		},
+		"res/texture/loading/bg_progress_bar.png": {
+			"md5": "4cf9c09f6a8efdffd0fa8d22a15c530e"
+		},
+		"res/texture/loading/img_progress_bar_header.png": {
+			"md5": "0a888c8ab818179f90ba2e662f76f43c"
+		},
+		"res/texture/loading/logo_zingplay.png": {
+			"md5": "b2493ab61bcde2dab679dffa87f1eccc"
+		},
+		"res/texture/loading/progress_bar.png": {
+			"md5": "14b85cb255e7c9ec5b77445ae3e8f515"
+		},
+		"res/texture/lobby/bg_bottom_menu.png": {
+			"md5": "e05ca71cfb1bbba41266b244382673b9"
+		},
+		"res/texture/lobby/bg_gold_support_newbie.png": {
+			"md5": "f8e2cada94a2defaeaad5ca8b853bc38"
+		},
+		"res/texture/lobby/bg_item_table.png": {
+			"md5": "da559d22c5c4a0815e39b08c6c090501"
+		},
+		"res/texture/lobby/bg_languages.png": {
+			"md5": "5e235b06f33a14ef20041ef92d76ab44"
+		},
+		"res/texture/lobby/bg_leader_board.png": {
+			"md5": "d97dbc83d1b18fd72d94ffe585774df7"
+		},
+		"res/texture/lobby/bg_level_up.png": {
+			"md5": "bcd7db7a2048de9dbf1b8a74972478e5"
+		},
+		"res/texture/lobby/bg_list_languages.png": {
+			"md5": "7b40284417710fb9e9a5da8ca31ad022"
+		},
+		"res/texture/lobby/bg_list_table.png": {
+			"md5": "b0a58f244dcf5f581eb8c37148f674ce"
+		},
+		"res/texture/lobby/bg_lobby.png": {
+			"md5": "1ea1377dd1ba8951e8d3023129c8286d"
+		},
+		"res/texture/lobby/bg_money.png": {
+			"md5": "1363fce324684c9c5135e02a0a364e2b"
+		},
+		"res/texture/lobby/bg_num_players.png": {
+			"md5": "e7779c0ed96b57804608677727224d0b"
+		},
+		"res/texture/lobby/bg_search.png": {
+			"md5": "01607953324e87cb5f6b8f22913b7966"
+		},
+		"res/texture/lobby/bg_setting.png": {
+			"md5": "ee4d706cd12a5e342affd9c5073ca451"
+		},
+		"res/texture/lobby/bg_setting_mini.png": {
+			"md5": "b71efaaa6c1f95df2efdab2ed00b0b33"
+		},
+		"res/texture/lobby/bg_vip.png": {
+			"md5": "32287630244ce822b73d0281202f8fd2"
+		},
+		"res/texture/lobby/bg_vip_progress.png": {
+			"md5": "378fc478b80a54b3af6a632f5f3ca4af"
+		},
+		"res/texture/lobby/btn_add_gold.png": {
+			"md5": "652cb6f8b7e381dc63e4a7fa52d4eb6f"
+		},
+		"res/texture/lobby/btn_camera.png": {
+			"md5": "f51fa0ffbe201ac7e96fb23dd2183f55"
+		},
+		"res/texture/lobby/btn_chanel_1.png": {
+			"md5": "0b7bc7af09407a7726907ed978ea319f"
+		},
+		"res/texture/lobby/btn_chanel_2.png": {
+			"md5": "d76af73a0881168f548cfbf75b82d248"
+		},
+		"res/texture/lobby/btn_chanel_3.png": {
+			"md5": "03e2b5758707bc0378a90215f81a2e7a"
+		},
+		"res/texture/lobby/btn_chanel_4.png": {
+			"md5": "fa5dca78b3af216d7e96c92719a0c172"
+		},
+		"res/texture/lobby/btn_chanel_5.png": {
+			"md5": "b0e50aa5be94134354a09e7675438bc9"
+		},
+		"res/texture/lobby/btn_clean_table_id.png": {
+			"md5": "0e010c99f4511f1d4bd43ddc7de7f328"
+		},
+		"res/texture/lobby/btn_gift.png": {
+			"md5": "d1293bbe48f79d44d9feabaf763316bf"
+		},
+		"res/texture/lobby/btn_invite_friend.png": {
+			"md5": "2fe2b309cb6a035e8d4f10666b35a958"
+		},
+		"res/texture/lobby/btn_list_languages.png": {
+			"md5": "32c329b790c67cf5d223c25f129fc44e"
+		},
+		"res/texture/lobby/btn_logout.png": {
+			"md5": "db362070d096c5a4635e05c89d274908"
+		},
+		"res/texture/lobby/btn_mini_game.png": {
+			"md5": "f2d9b16d8c94e1b354284e5dca09c287"
+		},
+		"res/texture/lobby/btn_more_chips.png": {
+			"md5": "bf7f3b03aaded2bfc145e58822c4d3e8"
+		},
+		"res/texture/lobby/btn_more_gold.png": {
+			"md5": "91bef560e44208bdafeced8d235e10e7"
+		},
+		"res/texture/lobby/btn_off.png": {
+			"md5": "73c5f69dd8af5d6976d4c60b8ee8f156"
+		},
+		"res/texture/lobby/btn_on.png": {
+			"md5": "fa0abcaf446e1d99e5a00fa24da530b1"
+		},
+		"res/texture/lobby/btn_pick_table.png": {
+			"md5": "4cebd2ef102e20449d58886832eece30"
+		},
+		"res/texture/lobby/btn_quick_play.png": {
+			"md5": "b9aa444355f2f294f0a36a92a55f4d85"
+		},
+		"res/texture/lobby/btn_receive_gold_support.png": {
+			"md5": "38f39fc6bc2d422d21dd20e956e16146"
+		},
+		"res/texture/lobby/btn_refresh.png": {
+			"md5": "bab375a63fa67dd6c6a1d481c579d65e"
+		},
+		"res/texture/lobby/btn_tournament.png": {
+			"md5": "dd586cf4ac7dae5e243bd0bf7157d280"
+		},
+		"res/texture/lobby/btn_upgrade_vip.png": {
+			"md5": "4849be7933ad3c442160037955a648f6"
+		},
+		"res/texture/lobby/btn_vip.png": {
+			"md5": "53a5e58f7c493959598e6a6d50371216"
+		},
+		"res/texture/lobby/frame_highlight.png": {
+			"md5": "57da05467cf3024fe50e97dd86251558"
+		},
+		"res/texture/lobby/header_list_table.png": {
+			"md5": "94a15186bec0f3c5d4cdd60138297015"
+		},
+		"res/texture/lobby/icon_account.png": {
+			"md5": "be770e65dfe4c2321bc68fa32d3cf90a"
+		},
+		"res/texture/lobby/icon_add_money.png": {
+			"md5": "1855b4c5b024ee057922718c80e0205c"
+		},
+		"res/texture/lobby/icon_card.png": {
+			"md5": "ebc2f99b93fcb2a1298da187ea3037f5"
+		},
+		"res/texture/lobby/icon_chip.png": {
+			"md5": "c9b5c2c3ad3e45fb81072dcc2d6816a3"
+		},
+		"res/texture/lobby/icon_diamond_in_join_table.png": {
+			"md5": "14fbddcb943bc48f7e88b2942d115d8e"
+		},
+		"res/texture/lobby/icon_edit.png": {
+			"md5": "ef49f90929a0c3357aa1f6403b237b03"
+		},
+		"res/texture/lobby/icon_gift_2.png": {
+			"md5": "2d3b498eb5286c0ed147ee8ca49787d9"
+		},
+		"res/texture/lobby/icon_gold.png": {
+			"md5": "cfba94341bb647d9609fc829fcdcbca2"
+		},
+		"res/texture/lobby/icon_gold_23x23.png": {
+			"md5": "92c91c6c4a6ab6d6f293ad12b5feaee7"
+		},
+		"res/texture/lobby/icon_gold_27x27.png": {
+			"md5": "b6676d7177e3723e41eba19a8f638bc2"
+		},
+		"res/texture/lobby/icon_gold_42x42.png": {
+			"md5": "bcba3b5d24bd8e2ce0cada9533b40129"
+		},
+		"res/texture/lobby/icon_gold_57x57.png": {
+			"md5": "7dd6a1409cd715c10425091df4b38ab8"
+		},
+		"res/texture/lobby/icon_gold_in_ranking.png": {
+			"md5": "d4c98c4bece4ac5a1689144b78d9fc98"
+		},
+		"res/texture/lobby/icon_hot.png": {
+			"md5": "2118fcadbe70eba1cab4b1a2484f5511"
+		},
+		"res/texture/lobby/icon_money.png": {
+			"md5": "35199d0e1cd139e6a0e66fd846d779e0"
+		},
+		"res/texture/lobby/icon_music.png": {
+			"md5": "6e31a1ac1a4e1799525bfe18b77ea318"
+		},
+		"res/texture/lobby/icon_notice.png": {
+			"md5": "5f2d2ccdabdd04e796f987ed1388bc4d"
+		},
+		"res/texture/lobby/icon_notifi.png": {
+			"md5": "b3b436036c5c89007fb91f39edfcddd7"
+		},
+		"res/texture/lobby/icon_player.png": {
+			"md5": "6f18744af04d79a32eaad67588a084d6"
+		},
+		"res/texture/lobby/icon_players.png": {
+			"md5": "c12aa8a02c332f005d363a926fba3110"
+		},
+		"res/texture/lobby/icon_search.png": {
+			"md5": "1bdfe43766534ede142c166975df16a5"
+		},
+		"res/texture/lobby/icon_setting_lobby.png": {
+			"md5": "fdf1b7240e33853c70d2365dba4753fd"
+		},
+		"res/texture/lobby/icon_sound.png": {
+			"md5": "93217d8a9671f29ee597af4cf61391a4"
+		},
+		"res/texture/lobby/icon_star.png": {
+			"md5": "348649b4ceda986112f0e88dd7153434"
+		},
+		"res/texture/lobby/icon_support.png": {
+			"md5": "1add433c58910a21fb30d1ce5fc16e43"
+		},
+		"res/texture/lobby/img_bg_bank_1.png": {
+			"md5": "1b10b618339aaaf365285b539091df48"
+		},
+		"res/texture/lobby/img_bg_chips.png": {
+			"md5": "edbeebebb0d51435f6f10cc2897712bf"
+		},
+		"res/texture/lobby/img_bg_home.png": {
+			"md5": "96fafa8fb4526ce325973f559ab55155"
+		},
+		"res/texture/lobby/img_bg_level.png": {
+			"md5": "54714bfb2d05933744d9752956d2a8fd"
+		},
+		"res/texture/lobby/img_bg_rank.png": {
+			"md5": "d9163ac4a7a2b58307257639d8a04ee1"
+		},
+		"res/texture/lobby/img_deco_1.png": {
+			"md5": "8d8df57b600026422ab9d71015920dc5"
+		},
+		"res/texture/lobby/img_divide_bar_1.png": {
+			"md5": "d64c6023c808ab18f44a74c1c21216fb"
+		},
+		"res/texture/lobby/img_divide_bar_2.png": {
+			"md5": "d1d06e8f585e8da5014e9bacf56a777b"
+		},
+		"res/texture/lobby/img_girl.png": {
+			"md5": "c823242d642a44191ae1e9524480a7b6"
+		},
+		"res/texture/lobby/img_languages.png": {
+			"md5": "3880df7e60e85fbc950669816b11ae2b"
+		},
+		"res/texture/lobby/img_light_1.png": {
+			"md5": "e90661bab003378c138b1c5d1567c5a1"
+		},
+		"res/texture/lobby/img_light_2.png": {
+			"md5": "40882433efce8c9bcf68179d93bca7b4"
+		},
+		"res/texture/lobby/img_light_3.png": {
+			"md5": "5c66d31de191ed4f858712cf2211cca1"
+		},
+		"res/texture/lobby/img_light_4.png": {
+			"md5": "8c2279b30c4381397c22e35150579a1e"
+		},
+		"res/texture/lobby/img_light_avatar.png": {
+			"md5": "2afac2820dd3c7a87b6f1814298c4362"
+		},
+		"res/texture/lobby/img_light_chanel_1.png": {
+			"md5": "9fafa0649c0bb25776ae42ef256c78cd"
+		},
+		"res/texture/lobby/img_light_chanel_2.png": {
+			"md5": "35b0ce11ebffd8e880a25f90073e651d"
+		},
+		"res/texture/lobby/img_light_chanel_3.png": {
+			"md5": "c5750ae7967012cf75d4b7fd7082a2d7"
+		},
+		"res/texture/lobby/img_light_chanel_4.png": {
+			"md5": "f55f934125ef9c6405cee914cd16cda2"
+		},
+		"res/texture/lobby/img_light_chanel_5.png": {
+			"md5": "f148fab9be4ed778a42948554664ab1c"
+		},
+		"res/texture/lobby/img_line_break.png": {
+			"md5": "4f7d7161d6c71143f3d6fe082ef1eca6"
+		},
+		"res/texture/lobby/img_lock.png": {
+			"md5": "2355dc9f8d5ac4b855d426f101218844"
+		},
+		"res/texture/lobby/img_logo.png": {
+			"md5": "4242aebae250432f168ad318d540d267"
+		},
+		"res/texture/lobby/img_social_logged_in.png": {
+			"md5": "912f78ee959d2bacfd31e89f9b0119f2"
+		},
+		"res/texture/lobby/img_sort_arrow.png": {
+			"md5": "47f74bf8a87a9b22ee95aacd7b80ebd4"
+		},
+		"res/texture/lobby/img_vip_progress.png": {
+			"md5": "0c204a5ee5371f7fae716b3a0791b15a"
+		},
+		"res/texture/lobby/number_1.png": {
+			"md5": "ac56958403bfde053817288c2dea2606"
+		},
+		"res/texture/lobby/number_10.png": {
+			"md5": "b158574531989536829b4b32a2bea374"
+		},
+		"res/texture/lobby/number_2.png": {
+			"md5": "e8538edf15f9a7d1f9961c56fe936810"
+		},
+		"res/texture/lobby/number_3.png": {
+			"md5": "3afc4c58eff83f493fe3db3399eea0f4"
+		},
+		"res/texture/lobby/number_4.png": {
+			"md5": "c427fc906dae885e2403d81bc06cdb99"
+		},
+		"res/texture/lobby/number_5.png": {
+			"md5": "a1353acf82d7087473a6183c73c44035"
+		},
+		"res/texture/lobby/number_6.png": {
+			"md5": "9bf6d9401c20959c61f5284d645a03bc"
+		},
+		"res/texture/lobby/number_7.png": {
+			"md5": "818a913e2da9159ac6a728465e3bc987"
+		},
+		"res/texture/lobby/number_8.png": {
+			"md5": "ee90992bbfa6ca9d483a86f854959603"
+		},
+		"res/texture/lobby/number_9.png": {
+			"md5": "b569c647aa7728488ae2952b945c6600"
+		},
+		"res/texture/lobby/sflash.png": {
+			"md5": "650b4580991ebce90640ecff48a67e66"
+		},
+		"res/texture/lobby/slider_pointer_2.png": {
+			"md5": "f0d33f0fcf165eacd19373e36bc37483"
+		},
+		"res/texture/lobby/s_flash.png": {
+			"md5": "650b4580991ebce90640ecff48a67e66"
+		},
+		"res/texture/login/bg_login.png": {
+			"md5": "bb5af4d761cdff691b9bf6f1d14ac5a7"
+		},
+		"res/texture/login/bg_login_by_zingme.png": {
+			"md5": "2dce19f4a78c170b4e44d68e74515774"
+		},
+		"res/texture/login/bg_maintain.png": {
+			"md5": "12217f48e4b55407b9c8a91dba680a11"
+		},
+		"res/texture/login/bg_popup_login.png": {
+			"md5": "8b36774d8d4117ef2d46bef004cda13a"
+		},
+		"res/texture/login/bg_register_by_zingme.png": {
+			"md5": "dea71a16cefe6efde28678ae619c8274"
+		},
+		"res/texture/login/bg_text.png": {
+			"md5": "964376573b97732d19f788aaba8e41d4"
+		},
+		"res/texture/login/icon_fb_146x147.png": {
+			"md5": "9562075b10008c0f2d16f11b0b36a950"
+		},
+		"res/texture/login/icon_fb_81x82.png": {
+			"md5": "1d2f3aec90a87456afade3ccbf1a44f4"
+		},
+		"res/texture/login/icon_gplus_146x147.png": {
+			"md5": "092f33185ed971f9741b7cdb1e14b742"
+		},
+		"res/texture/login/icon_gplus_81x82.png": {
+			"md5": "57f8dc0bc140de768f4678c42e9e1b2a"
+		},
+		"res/texture/login/icon_line_146x147.png": {
+			"md5": "546f7e6b7bcdf96d77f7a541c58c15d1"
+		},
+		"res/texture/login/icon_line_81x82.png": {
+			"md5": "1e5429baf6403b2afc8ac138f620c21f"
+		},
+		"res/texture/login/icon_zalo_146x147.png": {
+			"md5": "a978329a96664d5dc4bfb2125c13ac0a"
+		},
+		"res/texture/login/icon_zalo_81x82.png": {
+			"md5": "8c7c416f8ff600f5c35afd6483b4e8d2"
+		},
+		"res/texture/login/icon_zingme_146x147.png": {
+			"md5": "723500a45f0b7ff926367db85ec1620a"
+		},
+		"res/texture/login/icon_zingme_81x82.png": {
+			"md5": "151535d30a0863618d5d45911ff04785"
+		},
+		"res/texture/login/line.png": {
+			"md5": "7bef036f5312cb459fe4f428c85e5788"
+		},
+		"res/texture/payment/bg_first_time_sms.png": {
+			"md5": "ed86e4f41d9853d9f5a90d9f248dcaea"
+		},
+		"res/texture/payment/bg_item_exchange_by_g.png": {
+			"md5": "69a84231f6ce621c9d6eb61a74d1186c"
+		},
+		"res/texture/payment/bg_item_exchange_by_sms.png": {
+			"md5": "55a95d1afdfe9e64a3370df23ed36650"
+		},
+		"res/texture/payment/bg_list_packages.png": {
+			"md5": "7051dc9d89c7a98293947b4cf171ec1f"
+		},
+		"res/texture/payment/bg_list_sms.png": {
+			"md5": "5b3b1b660d454180f3109436bcfbf932"
+		},
+		"res/texture/payment/btn_exchange_gold.png": {
+			"md5": "40b6a970f30a1cadc9281fca3ab19095"
+		},
+		"res/texture/payment/btn_sms.png": {
+			"md5": "6cf55966a40301b370ecc4e30d30e143"
+		},
+		"res/texture/payment/icon_g.png": {
+			"md5": "22b4cc09ad0d4580fc3dc9f54d828a8f"
+		},
+		"res/texture/payment/icon_gold_1.png": {
+			"md5": "7ecc7b558f039c732c86004524eccf92"
+		},
+		"res/texture/payment/icon_gold_2.png": {
+			"md5": "ce247523174a37ed00bffea061b9f787"
+		},
+		"res/texture/payment/icon_gold_3.png": {
+			"md5": "05d31d321620b34f69bdd23fae92afcd"
+		},
+		"res/texture/payment/icon_gold_4.png": {
+			"md5": "92cef80814c141ca637cf6657f7a880d"
+		},
+		"res/texture/payment/icon_gold_5.png": {
+			"md5": "089b582241798bb72d07b415e89d2388"
+		},
+		"res/texture/payment/icon_gold_6.png": {
+			"md5": "b70fb1ae343621a5f5c10724dc26b681"
+		},
+		"res/texture/payment/img_strip.png": {
+			"md5": "40cd87cae3b79cdd4b887a856554d954"
+		},
+		"res/texture/player/bg_item.png": {
+			"md5": "eb0bec1cd440af6852d764c77be9df54"
+		},
+		"res/texture/player/bg_table_vip_benefit.png": {
+			"md5": "59bd81def09495339db52aea5c7a9a13"
+		},
+		"res/texture/player/bg_vip_level_up.png": {
+			"md5": "9f9168f9f727551657444f4d46673068"
+		},
+		"res/texture/player/btn_back_vip_info.png": {
+			"md5": "0f0e4481e84b2362e421b6ef78f5044e"
+		},
+		"res/texture/player/btn_tab.png": {
+			"md5": "38df612934a2377dfa5fa1ca0fa85dd7"
+		},
+		"res/texture/player/btn_vip_benefit.png": {
+			"md5": "ee6ba38ac934b4de486758a9305dffd1"
+		},
+		"res/texture/player/icon_add_vip_point.png": {
+			"md5": "ede690395b34ea923fc7eba68fe9c322"
+		},
+		"res/texture/player/icon_vip.png": {
+			"md5": "13f81a223c14dfd5f55ea7d002a41437"
+		},
+		"res/texture/player/icon_vip_point.png": {
+			"md5": "76ece056659ce7eb360097ed4009c18b"
+		},
+		"res/texture/player/img_bg_my_vip.png": {
+			"md5": "aa6c040135589cdf10c61c07ac387413"
+		},
+		"res/texture/player/img_bg_ring_info.png": {
+			"md5": "05f594f3fb20a7702a97dbd9394acbb7"
+		},
+		"res/texture/player/img_cur_tab.png": {
+			"md5": "6cb3f2efe39caee45c7990d86a045093"
+		},
+		"res/texture/player/img_progress_bar_vip_point.png": {
+			"md5": "f983cf23004d3da02fb16285530fd26b"
+		},
+		"res/texture/player/img_progress_bar_vip_point_header.png": {
+			"md5": "441ce703295beb2c2ebf59f3c419e7b3"
+		},
+		"res/texture/player/img_vip_card_shadow.png": {
+			"md5": "efe9ddd70e459d0f4b77c9d1a56f1b2b"
+		},
+		"res/texture/poker/avatar_border.png": {
+			"md5": "d67ab8a771885bb86cf089a48308acb3"
+		},
+		"res/texture/poker/avatar_border_gold.png": {
+			"md5": "22d791e7f523025b9c7c0bb81770f42e"
+		},
+		"res/texture/poker/avatar_border_silver.png": {
+			"md5": "8c5e00a13fffa7f95b742b2cf4c02e1e"
+		},
+		"res/texture/poker/bg_blind_level_up.png": {
+			"md5": "113135201f59963e4c5f29eb5d772163"
+		},
+		"res/texture/poker/bg_buttons_func.png": {
+			"md5": "5080b736a23be64e45a8bfcf93b567a6"
+		},
+		"res/texture/poker/bg_chat_full.png": {
+			"md5": "c59311e5684399c40ed8693ddd6fae6a"
+		},
+		"res/texture/poker/bg_chat_small.png": {
+			"md5": "494e90c3bad33c1bdf0fc54c19a616ed"
+		},
+		"res/texture/poker/bg_clock.png": {
+			"md5": "03dfb548871f15dbc8c505195a1d8cd9"
+		},
+		"res/texture/poker/bg_emoticons.png": {
+			"md5": "36391421738ebe84f27c4303db5fa867"
+		},
+		"res/texture/poker/bg_hand_strength.png": {
+			"md5": "d5344d79c813a82b60d63b66065a6de4"
+		},
+		"res/texture/poker/bg_hint_chat.png": {
+			"md5": "e50eb9a1cb74e22b47bbb7b44d466037"
+		},
+		"res/texture/poker/bg_item_suggest_get_gold.png": {
+			"md5": "ab3fdd3f6472d97ba7f1301c89d7c9a3"
+		},
+		"res/texture/poker/bg_popup_setting.png": {
+			"md5": "05cb5b997e3fa1ed2acdb41ab1ae3d9d"
+		},
+		"res/texture/poker/bg_suggest_get_gold.png": {
+			"md5": "8d8d0f13d4998c742a00715826c3ba7c"
+		},
+		"res/texture/poker/btn_cheat_1.png": {
+			"md5": "33d5a5da2acd6a692029e1aeb6dc9264"
+		},
+		"res/texture/poker/btn_cheat_2.png": {
+			"md5": "c49508b0b3aa33422810c8189d620084"
+		},
+		"res/texture/poker/btn_emoticon.png": {
+			"md5": "08b8f2c99d354bf11462a9207d902dee"
+		},
+		"res/texture/poker/btn_func.png": {
+			"md5": "7df6c0226d75fd21be2d92cb9c3024aa"
+		},
+		"res/texture/poker/btn_func_press.png": {
+			"md5": "cdbf4269eacddec9a68d0b6f51b69217"
+		},
+		"res/texture/poker/btn_help_2.png": {
+			"md5": "aae5ee0652aebade816777ddf031a153"
+		},
+		"res/texture/poker/btn_lobby.png": {
+			"md5": "d0938c960f2f7d1c0bb1addaa692d8f0"
+		},
+		"res/texture/poker/btn_quick_raise.png": {
+			"md5": "1b5ec89fc2dfe3212e9f5c2e57005fc1"
+		},
+		"res/texture/poker/btn_quick_raise_pressed.png": {
+			"md5": "33a927627dec33ff448d686eab2087ce"
+		},
+		"res/texture/poker/btn_setting.png": {
+			"md5": "9d2510a7c6fc6256e4b5c9b489160311"
+		},
+		"res/texture/poker/btn_slider_decrease.png": {
+			"md5": "ad33444a525a7c8d78cb3513a8bfdfba"
+		},
+		"res/texture/poker/btn_slider_increase.png": {
+			"md5": "7c6178189eda769f753941b30674532e"
+		},
+		"res/texture/poker/cards_chips.plist": {
+			"md5": "3136429f978659d46d30d22d59a8da51"
+		},
+		"res/texture/poker/cards_chips.png": {
+			"md5": "8b8d9895a786521dd2cc364c6c3d08a4"
+		},
+		"res/texture/poker/chat_break_line.png": {
+			"md5": "1bc075c5e1387439db65c4b61b557478"
+		},
+		"res/texture/poker/emoticons.plist": {
+			"md5": "5d7eb85b71a61f36280894f0994afd79"
+		},
+		"res/texture/poker/emoticons.png": {
+			"md5": "bb8874adff36d748a3d6f87f6e55089b"
+		},
+		"res/texture/poker/frame_info.png": {
+			"md5": "1c67d0b4e2014ab2719e33742577b3ac"
+		},
+		"res/texture/poker/frame_my_info.png": {
+			"md5": "6a66d84379c0cdabffe7eca23256cbdb"
+		},
+		"res/texture/poker/icon_all_in.png": {
+			"md5": "f8969c5333f033a29eebf68297063995"
+		},
+		"res/texture/poker/icon_bb.png": {
+			"md5": "525c5bb16a10997143653d8a45885e2d"
+		},
+		"res/texture/poker/icon_bet.png": {
+			"md5": "58ab1665381fcf2a3e86d1e5c8abea0d"
+		},
+		"res/texture/poker/icon_call.png": {
+			"md5": "9eb1e774474107c4f9b3b3ac3e0d3756"
+		},
+		"res/texture/poker/icon_check.png": {
+			"md5": "561d14bb5ca7466cbfca4603e914952f"
+		},
+		"res/texture/poker/icon_dealer.png": {
+			"md5": "2d100ba56c9f2c492db21abee82d6ae4"
+		},
+		"res/texture/poker/icon_emotion.png": {
+			"md5": "fd212b7559c985b604315d884aa4bd0f"
+		},
+		"res/texture/poker/icon_raise.png": {
+			"md5": "ed7363774f315744383847f58ba294bf"
+		},
+		"res/texture/poker/icon_red_selected.png": {
+			"md5": "550eb23c9f15ed78b53b5ff5391be419"
+		},
+		"res/texture/poker/icon_red_unselected.png": {
+			"md5": "71eeb6b0d214bdc65e17fd671330db53"
+		},
+		"res/texture/poker/icon_sb.png": {
+			"md5": "b6bbe9a72cb6c3ae2beb45f6b76df7e6"
+		},
+		"res/texture/poker/icon_selected.png": {
+			"md5": "7486d454721fa1ce711cb7d75a70d6f2"
+		},
+		"res/texture/poker/icon_setting.png": {
+			"md5": "c44b869126a86a98d03f7e597911e385"
+		},
+		"res/texture/poker/icon_unselected.png": {
+			"md5": "dbb7dd456232e2c91c960ccf60418589"
+		},
+		"res/texture/poker/icon_winner.png": {
+			"md5": "084f222b0dbecd9bc1a802b76e431208"
+		},
+		"res/texture/poker/icon_you_win.png": {
+			"md5": "8c86394e8858600a8e3b7ac9a85aad40"
+		},
+		"res/texture/poker/img_all_in.png": {
+			"md5": "dde483112a203787f728075a2a463fa4"
+		},
+		"res/texture/poker/img_bg_bet_number.png": {
+			"md5": "adc35ea8f61ea3133362c423e684da74"
+		},
+		"res/texture/poker/img_bg_my_options.png": {
+			"md5": "66eb8f434675ef798caf8658e4291be2"
+		},
+		"res/texture/poker/img_bg_slider_layer_1.png": {
+			"md5": "b93c66a0695eed2e5d997bcf71ee6097"
+		},
+		"res/texture/poker/img_bg_slider_layer_2.png": {
+			"md5": "492f07611c28d70b157bf5c2980b24f6"
+		},
+		"res/texture/poker/img_bg_slider_layer_3.png": {
+			"md5": "2276625fcecd6855e4dbf869da66db20"
+		},
+		"res/texture/poker/img_btn_func_highlight.png": {
+			"md5": "f48a8c7aabbace0f45486be59a752a57"
+		},
+		"res/texture/poker/img_direction_arrow_2.png": {
+			"md5": "9858087fcd76c51faec3dcc3f2b2f5d4"
+		},
+		"res/texture/poker/img_hand_strength.png": {
+			"md5": "ff8a4daa8e883bd25a5a7d5a6ec7b101"
+		},
+		"res/texture/poker/img_hour_needle.png": {
+			"md5": "33a159a92a7d2ce20b69ac7b32ce0e1c"
+		},
+		"res/texture/poker/img_minute_needle.png": {
+			"md5": "51a3017f266567d4552bec9637a90dd7"
+		},
+		"res/texture/poker/img_my_progress.png": {
+			"md5": "e8ea246b5deb13a332f9cb8b9acb0223"
+		},
+		"res/texture/poker/img_progress.png": {
+			"md5": "a43b730e96f2597372f91fdac2be2e05"
+		},
+		"res/texture/poker/img_sorting_arrow.png": {
+			"md5": "47f74bf8a87a9b22ee95aacd7b80ebd4"
+		},
+		"res/texture/poker/popup_chat.png": {
+			"md5": "10fdc881bd9236b5449c4126903c57a5"
+		},
+		"res/texture/poker/scroll_chat.png": {
+			"md5": "9a67e78da84e8495eee2c1d75cd8bbbf"
+		},
+		"res/texture/poker/slider_bg_progress_transparent.png": {
+			"md5": "6ecd3c52c1236ab5bb19c5a35d927e1b"
+		},
+		"res/texture/poker/slider_pointer.png": {
+			"md5": "69f564687a8a9f654e894c7b4a28743c"
+		},
+		"res/texture/poker/slider_progress.png": {
+			"md5": "ee26bcdd7e290e5308cb6beb1d03e870"
+		},
+		"res/texture/poker/tables/table_1.plist": {
+			"md5": "be72b8c90ae3a715baf7b16e22e0ef50"
+		},
+		"res/texture/poker/tables/table_1.png": {
+			"md5": "8fc1135fe3069f11c84c968fa1acc7b2"
+		},
+		"res/texture/poker/tables/table_2001.plist": {
+			"md5": "9d8417b201dc9fec289d39e8ef6d0965"
+		},
+		"res/texture/poker/tables/table_2001.png": {
+			"md5": "6db776b4813e4c7d0a094e5f419d55a9"
+		},
+		"res/texture/poker/type_to_chat.png": {
+			"md5": "5074d2a08b209db202683c3210365b43"
+		},
+		"res/texture/poker/vip_texture.plist": {
+			"md5": "74f66337be68fb908ff81c7a30716adc"
+		},
+		"res/texture/poker/vip_texture.png": {
+			"md5": "92e2c8b5f7ef57fb9701304a80e3d20e"
+		},
+		"res/texture/popup/bg_chips.png": {
+			"md5": "4fac90f4fbcce7b3e6648e3b3d5fef49"
+		},
+		"res/texture/popup/bg_my_money.png": {
+			"md5": "b0c7be2f3a05d3ccdba4f82048fed387"
+		},
+		"res/texture/popup/bg_popup.png": {
+			"md5": "00528fdf16579e12b897e54ae516b986"
+		},
+		"res/texture/popup/bg_table_name.png": {
+			"md5": "b2e733b931befff27f11f41a980b87b7"
+		},
+		"res/texture/popup/btn_add.png": {
+			"md5": "c13263470b388d58bbbcc1a02fb91a37"
+		},
+		"res/texture/popup/btn_help.png": {
+			"md5": "6cc4d117bdfe9d940f03169e25f24e8f"
+		},
+		"res/texture/popup/btn_ok.png": {
+			"md5": "72e2f278bd3b48a8e9371bb172e58b2b"
+		},
+		"res/texture/popup/btn_sub.png": {
+			"md5": "34262d4d87cbe1896f8d9d21c4bca755"
+		},
+		"res/texture/popup/checkbox_bg.png": {
+			"md5": "2f959a503dc4231786e774e6a704e554"
+		},
+		"res/texture/popup/checkbox_tick.png": {
+			"md5": "e9c6196fc3d4de0bf50606592cdc91e1"
+		},
+		"res/texture/popup/slider_bg.png": {
+			"md5": "dfa3292929dcc5e0adea8a0e2e6451bf"
+		},
+		"res/texture/popup/slider_btn.png": {
+			"md5": "2d99b70b8306772dafc0a0e29a312ac5"
+		},
+		"res/texture/popup/slider_main.png": {
+			"md5": "b5fb3a5d19a88af21a364f4086870b55"
+		},
+		"res/texture/popup/text_create_table.png": {
+			"md5": "1f76f5f9f5e4caab5c37a401d5dfdc1d"
+		},
+		"res/texture/popup/text_join_table.png": {
+			"md5": "788c07967a6748ac56bd24375b7b63ca"
+		},
+		"res/texture/popup/top_line.png": {
+			"md5": "a5dbb09e6e47d018a93970a2d4488704"
+		},
+		"res/texture/tournament/bg_center.png": {
+			"md5": "5f07990f41c8aea43352725871e4afe9"
+		},
+		"res/texture/tournament/bg_frame.png": {
+			"md5": "2eb869071f0488f48ce62b585f5b73ce"
+		},
+		"res/texture/tournament/bg_item_prize.png": {
+			"md5": "2819d136d9282768cb72b4b682c0e220"
+		},
+		"res/texture/tournament/bg_item_top_player.png": {
+			"md5": "71516969da1fbe73a9b2db8e673e7cb2"
+		},
+		"res/texture/tournament/bg_my_item_top_player.png": {
+			"md5": "1b57b7a08d13db10bac0db7026fd11fe"
+		},
+		"res/texture/tournament/bg_popup_join_game.png": {
+			"md5": "599ed89abd874925f155edd5fe34e203"
+		},
+		"res/texture/tournament/bg_progress_ring.png": {
+			"md5": "8033cb92063969feebf717072c993504"
+		},
+		"res/texture/tournament/bg_result_tournament.png": {
+			"md5": "796dd6e22bf08d99f2eb6ca54be6562b"
+		},
+		"res/texture/tournament/bg_time.png": {
+			"md5": "07473879e2bf4e7f31ea9cc05cc504f3"
+		},
+		"res/texture/tournament/bg_top_players.png": {
+			"md5": "0ea3c6aa6b1224ddf7cfda6fb75ca4b2"
+		},
+		"res/texture/tournament/bg_tournament_guide.png": {
+			"md5": "9274a4893ba056e7dcc49a4fb6ca8c21"
+		},
+		"res/texture/tournament/icon_gold_in_tour.png": {
+			"md5": "225154d99775a7bcec15c5d7b6d33cba"
+		},
+		"res/texture/tournament/img_bg_decoration.png": {
+			"md5": "2cf3b5e2059eaf35be27f447209bd9ea"
+		},
+		"res/texture/tournament/img_direction_arrow.png": {
+			"md5": "022c1acaf3d52c9b821e1175fda841d2"
+		},
+		"res/texture/tournament/img_frame_player_tournament.png": {
+			"md5": "7c82553e89c1aae56a9fa33789481059"
+		},
+		"res/texture/tournament/img_frame_round.png": {
+			"md5": "c80173a8b101729351433e879dd047cd"
+		},
+		"res/texture/tournament/img_frame_round_highlight.png": {
+			"md5": "2a69e8b3baba75a629525bb750207b66"
+		},
+		"res/texture/tournament/img_frame_top_tournament.png": {
+			"md5": "7c82553e89c1aae56a9fa33789481059"
+		},
+		"res/texture/tournament/img_icon_ring.png": {
+			"md5": "dd06430d3e219b02c93bbf604939dced"
+		},
+		"res/texture/tournament/img_icon_star.png": {
+			"md5": "c840233a2c20de668bb23ce91dec6e60"
+		},
+		"res/texture/tournament/img_option.png": {
+			"md5": "3248d2c13682fd02336e9dc69626b444"
+		},
+		"res/texture/tournament/img_point_light.png": {
+			"md5": "3e37e7afd6f9d685117ac6bde1850f16"
+		},
+		"res/texture/tournament/img_progress_bar_tour_point.png": {
+			"md5": "b5c983ca48c2b2320080ddb2a97587f1"
+		},
+		"res/texture/tournament/img_progress_bar_tour_point_header.png": {
+			"md5": "63c69ac2df7d8da8205e6ea71af29913"
+		},
+		"res/texture/tournament/img_selected_tab.png": {
+			"md5": "bbbdc502a92fe3b5a4aa618afe354121"
+		},
+		"res/texture/tournament/img_shadown.png": {
+			"md5": "3811aab719f235888259e9710dcc8fae"
+		},
+		"res/texture/tournament/img_unselected_tab.png": {
+			"md5": "6da560d46cfd60291d4c8c9a613664b3"
+		},
+		"res/texture/tournament/img_win_round.png": {
+			"md5": "db6346af5b417456d76c207da98b1f83"
+		},
+		"res/texture/tournament/tournament_name.plist": {
+			"md5": "5d090a738580f852dcc4954ce59bee1e"
+		},
+		"res/texture/tournament/tournament_name.png": {
+			"md5": "60c416b58c58b703a3f36dd8efd42e3b"
+		},
+		"res/texture/tournament/tournament_rings.plist": {
+			"md5": "fd22ef171ad8223a488214be3c784a42"
+		},
+		"res/texture/tournament/tournament_rings.png": {
+			"md5": "598b9e47b27ae1bb359a6853b5ffff97"
+		},
+		"res/texture/tutorials/img_avatar_bot_1.png": {
+			"md5": "e85b38eae12c20d82c8084fcce14431e"
+		},
+		"res/texture/tutorials/img_avatar_bot_2.png": {
+			"md5": "9fc8de081045257e72f3f9e31f9b9d81"
+		},
+		"res/texture/tutorials/img_avatar_bot_3.png": {
+			"md5": "bb7eb5e52cab03716d5b4b347e295ad1"
+		},
+		"res/texture/tutorials/img_bg_tutorial.png": {
+			"md5": "095c73012dc352a0caf560f2449a9ff1"
+		},
+		"res/texture/tutorials/img_frame_slide.png": {
+			"md5": "28c8f01f0670707e48ad79a19ab649b1"
+		},
+		"res/texture/tutorials/img_my_avatar.png": {
+			"md5": "699eefdace959dc66b8f0f358930f0f0"
+		},
+		"res/ui/node_cheat_cards.json": {
+			"md5": "44a4c18a284959c2b83e07139f2e8af9"
+		},
+		"res/ui/node_cheat_player_attribute.json": {
+			"md5": "be193bcbc6f61be73d164d4a8728c335"
+		},
+		"res/ui/node_dialog_update_resource.csb": {
+			"md5": "167dc1d6eb6e0654d3c08713f7785ec4"
+		},
+		"res/ui/node_dialog_update_resource.json": {
+			"md5": "25209d70da2287d364c2ad647b773c71"
+		},
+		"res/ui/node_event_first_time_item_sms.json": {
+			"md5": "d7bf1bc631ef0079b81b6879948f66a8"
+		},
+		"res/ui/node_event_first_time_popup_card.json": {
+			"md5": "ec6bd123dfc7bbdbd35ed3219406db7c"
+		},
+		"res/ui/node_event_first_time_popup_sms.json": {
+			"md5": "6763915314a15f3a0401b14c93628525"
+		},
+		"res/ui/node_event_invite_friends.json": {
+			"md5": "6c1bb8c8472479b0f93b491d708b3291"
+		},
+		"res/ui/node_event_invite_friend_pack_gold.json": {
+			"md5": "b5f278083f0e6ca67fff48e132bde998"
+		},
+		"res/ui/node_event_item_invite_friend.json": {
+			"md5": "a211c27d4855cff1e7ce867a3c7fd970"
+		},
+		"res/ui/node_event_rate_game.json": {
+			"md5": "de76098c6c857b50707db4b192967e80"
+		},
+		"res/ui/node_event_seven_days_main.json": {
+			"md5": "c21449b30a054929e84c4b98dff70ac4"
+		},
+		"res/ui/node_guide_static.json": {
+			"md5": "65af365b6cf72b90ab51abc53c9a66e3"
+		},
+		"res/ui/node_lobby_create_join_table.json": {
+			"md5": "2c629f67088f076e9b5490e7690ea81d"
+		},
+		"res/ui/node_lobby_exchange_gold.json": {
+			"md5": "f84258b9a32ee32e46baf58763062912"
+		},
+		"res/ui/node_lobby_item_ranking.json": {
+			"md5": "bad998be75de6571fb067433365828fe"
+		},
+		"res/ui/node_lobby_item_table.json": {
+			"md5": "1a48d19b7f6a40ef9b97f014e59f20f7"
+		},
+		"res/ui/node_lobby_item_tournament_round.json": {
+			"md5": "1406b1a2ca5851e03cb0a48799d51e3a"
+		},
+		"res/ui/node_lobby_news.json": {
+			"md5": "4dd724e996fe4f0c5d7e5686f0003862"
+		},
+		"res/ui/node_lobby_ranking_table.json": {
+			"md5": "5a08b149ffba4fda7c3b684f411bd472"
+		},
+		"res/ui/node_lobby_setting.json": {
+			"md5": "94bec3c56867849e7cfab5e53088873b"
+		},
+		"res/ui/node_lobby_support_gold.json": {
+			"md5": "e6ae1d7ff4de1d09fca04347ff626ad5"
+		},
+		"res/ui/node_payment_in_app_purchase.json": {
+			"md5": "d77628ad2cb351e3a138eec258f08987"
+		},
+		"res/ui/node_payment_item_exchange_money_by_g.json": {
+			"md5": "281044090ff47c2a2a6eacc754e52d9c"
+		},
+		"res/ui/node_payment_item_exchange_money_by_sms.json": {
+			"md5": "ced6f9fbcc0d579f25f4429380521110"
+		},
+		"res/ui/node_player_detail_info.json": {
+			"md5": "cfc90686ff33b701687b7ccc4b82cde8"
+		},
+		"res/ui/node_player_item_ring_info.json": {
+			"md5": "5c6368e295529954a3bea8ad8f70818c"
+		},
+		"res/ui/node_player_item_vip_benefit.json": {
+			"md5": "e5874391c5785f68e694f74d8bd66db8"
+		},
+		"res/ui/node_player_level_up.json": {
+			"md5": "947b8c13206618370115d0e706636ab7"
+		},
+		"res/ui/node_player_vip.json": {
+			"md5": "d830f5bc90d23665f65fbba818de7721"
+		},
+		"res/ui/node_player_vip_level_up.json": {
+			"md5": "5dded5b8acf0536f4f88533eded75564"
+		},
+		"res/ui/node_ring_info.json": {
+			"md5": "bd9b1324a76fc47a8fb3e4fd28205048"
+		},
+		"res/ui/node_table_chat.json": {
+			"md5": "8ac6f89929afc6cc07d00f35ebcaddc6"
+		},
+		"res/ui/node_table_my_slot.json": {
+			"md5": "440511fb50b9a59876f426e1531ac07a"
+		},
+		"res/ui/node_table_popup_cash_game_info.json": {
+			"md5": "0a3502da35ef82e965477cb4e50669c9"
+		},
+		"res/ui/node_table_popup_join_tournament.json": {
+			"md5": "00776db44dd6c0f7d4b372153b3bb278"
+		},
+		"res/ui/node_table_popup_tournament_game_info.json": {
+			"md5": "234cfe5310c9d77ea0c46a77fd104337"
+		},
+		"res/ui/node_table_result_tournament.json": {
+			"md5": "44a8ac8b91176117953da729ce7cdac5"
+		},
+		"res/ui/node_table_setting.json": {
+			"md5": "85fffbf92de59d59379dbe97df5bff05"
+		},
+		"res/ui/node_table_slot.json": {
+			"md5": "c884c079052799c31a01c74190140978"
+		},
+		"res/ui/node_table_suggest_get_gold.json": {
+			"md5": "50cbefcd5600e25df9bf86df7083d380"
+		},
+		"res/ui/node_tournament_guide.json": {
+			"md5": "b43b0e016aff4075490b3af867729146"
+		},
+		"res/ui/node_tournament_item_ranking.json": {
+			"md5": "e76fcc03c3bd93bbeac3bf6a9ab31ffb"
+		},
+		"res/ui/node_tournament_item_round.json": {
+			"md5": "6c5e443d63109ab54bb2822e260364ea"
+		},
+		"res/ui/node_tournament_item_round_guide.json": {
+			"md5": "eba343f99405738ff96bc68c2f7bdd88"
+		},
+		"res/ui/node_tournament_slot_top.json": {
+			"md5": "0d4bab443664ea0f889abfabe70c9eed"
+		},
+		"res/ui/node_tournament_top_players.json": {
+			"md5": "eb599cff31c764bf3a6b8c3f25d1e2a6"
+		},
+		"res/ui/node_tutorial_slide_show.json": {
+			"md5": "e64196f900bb8275cf3fe4f40b4d20fa"
+		},
+		"res/ui/node_waiting.json": {
+			"md5": "257b4542b1a98c14585420ca3036994c"
+		},
+		"res/ui/scene_game.json": {
+			"md5": "927892a97a7be84d3825f88d4a5d152b"
+		},
+		"res/ui/scene_list_tables.json": {
+			"md5": "1c2096939ca24ad54f593bfc95d8a9a0"
+		},
+		"res/ui/scene_list_tournaments.json": {
+			"md5": "8687212efef071d1507979f2ffaaaf1f"
+		},
+		"res/ui/scene_loading.csb": {
+			"md5": "1d175cdf1cee05cb7539088df396a5cf"
+		},
+		"res/ui/scene_loading.json": {
+			"md5": "1ccd29c3e80e7671c16b8bf26b74840c"
+		},
+		"res/ui/scene_lobby.json": {
+			"md5": "c4abd9019244532c98bc69a9b92c9a3a"
+		},
+		"res/ui/scene_login.json": {
+			"md5": "b99447a5995f09a75db24aafbd910aae"
+		},
+		"res/ui/scene_maintain.json": {
+			"md5": "ce6f2f8f2a695d924bf09fc037fe7db3"
+		},
+		"res/ui/scene_top_players_tournament.json": {
+			"md5": "f33f5f478973620434c8f8b8bd64f351"
+		},
+		"res/ui/scene_tournament.json": {
+			"md5": "9d87dfb4403346194be881dfa49b8b61"
+		},
+		"res/ui/scene_tournament_top_players.json": {
+			"md5": "ca18e7ab4f35ec01bc5718be214d5e08"
+		},
+		"script/3d/jsb_cocos2d_3d.js": {
+			"md5": "b8e0f21179e5fde1e3af17b1793e4647"
+		},
+		"script/3d/jsb_cocos2d_3d_ext.js": {
+			"md5": "355c0afe66a079e88f65f70fa7ce6af3"
+		},
+		"script/ccui/jsb_ccui_create_apis.js": {
+			"md5": "f00b9f5c5dfbdffef04486b7d94b9415"
+		},
+		"script/ccui/jsb_ccui_deprecated.js": {
+			"md5": "56d933c90c11a64b7f851c68f2c80a10"
+		},
+		"script/ccui/jsb_ccui_property_apis.js": {
+			"md5": "2e3f639c41ede6b80362c2883ae51c4c"
+		},
+		"script/ccui/jsb_ccui_property_impls.js": {
+			"md5": "b02f22d59138404195c6867db33a7f33"
+		},
+		"script/ccui/jsb_cocos2d_ui.js": {
+			"md5": "f77dc561a47c080d5dd1c079a1ba232a"
+		},
+		"script/chipmunk/jsb_chipmunk.js": {
+			"md5": "295232f6d865f0947331556bae88c74b"
+		},
+		"script/chipmunk/jsb_chipmunk_constants.js": {
+			"md5": "4e334b55c369adbe5f5b777d2077e14f"
+		},
+		"script/debugger/actors/root.js": {
+			"md5": "7784e39ee23a448b7d6daec148d21998"
+		},
+		"script/debugger/actors/script.js": {
+			"md5": "ffe6039fabada2bf51adef746bad3896"
+		},
+		"script/debugger/core/promise.js": {
+			"md5": "92aa8fc8a830359cad24c9f9a01fa16e"
+		},
+		"script/debugger/DevToolsUtils.js": {
+			"md5": "083ab0d1f4ed9b8fd611d272ec2198cb"
+		},
+		"script/debugger/main.js": {
+			"md5": "a9f0cc8e8d6e1e152f6720f5ce87039a"
+		},
+		"script/debugger/README.md": {
+			"md5": "9b80e8d29d03860a4c584b4358731476"
+		},
+		"script/debugger/transport.js": {
+			"md5": "be5d3aebec0d561c8fa56883420473f1"
+		},
+		"script/extension/jsb_cocos2d_extension.js": {
+			"md5": "faa442e18636376a6b67c45b291edc46"
+		},
+		"script/extension/jsb_ext_create_apis.js": {
+			"md5": "95e1983598a3ab7cb8b62555accc7907"
+		},
+		"script/extension/jsb_ext_property_apis.js": {
+			"md5": "c61718fd7df691b7f01ef020f838eae2"
+		},
+		"script/jsb.js": {
+			"md5": "7eeb57dd8b6dfe81e46cc2236a3101a7"
+		},
+		"script/jsb_audioengine.js": {
+			"md5": "1f38cbf7fde72e062b82149ba1b157e0"
+		},
+		"script/jsb_boot.js": {
+			"md5": "601f56e3f22acc6d78da70e909606ae3"
+		},
+		"script/jsb_cocos2d.js": {
+			"md5": "4ab25f8dc5770375412938c97e7f83da"
+		},
+		"script/jsb_cocos2d_constants.js": {
+			"md5": "8a013446446e45e804719fbffc5f1ab8"
+		},
+		"script/jsb_cocosbuilder.js": {
+			"md5": "507666e609f21a7771356c113eec0e27"
+		},
+		"script/jsb_common.js": {
+			"md5": "182f5fd13a6f628c96799ac9a0340167"
+		},
+		"script/jsb_create_apis.js": {
+			"md5": "e253bd25b76eec362ae49f5747c250be"
+		},
+		"script/jsb_debugger.js": {
+			"md5": "3a481473f9b3c8130f46dd84a988a92d"
+		},
+		"script/jsb_deprecated.js": {
+			"md5": "90be9318a836952a5ff0c555830978f5"
+		},
+		"script/jsb_loaders.js": {
+			"md5": "6a77fd36dac1e22992735c7624f0e15c"
+		},
+		"script/jsb_opengl.js": {
+			"md5": "af49891ff0724a33b587808fe4004913"
+		},
+		"script/jsb_opengl_constants.js": {
+			"md5": "1c423f0a80b119c3e0a43406168119cf"
+		},
+		"script/jsb_pool.js": {
+			"md5": "c87cc1e22b476001d2ca1efa038154df"
+		},
+		"script/jsb_prepare.js": {
+			"md5": "2fd89d8ee5dc2ced5901173705f76cd1"
+		},
+		"script/jsb_property_apis.js": {
+			"md5": "a3c044bd9ab66de55049c040df9a4be2"
+		},
+		"script/jsb_property_impls.js": {
+			"md5": "e8b93747622fbc4c9f4ba5d924f34104"
+		},
+		"script/jsb_spine.js": {
+			"md5": "df6eafc9aa9bc7a01ba9d3fa05bb933a"
+		},
+		"script/navmesh/jsb_navmesh.js": {
+			"md5": "f9d949d149ad94c3b4d2bdf2a237c597"
+		},
+		"script/physics3d/jsb_physics3d.js": {
+			"md5": "b673a11fc1464b4828a264f61354e6f0"
+		},
+		"script/physicsSprite/jsb_physicsSprite.js": {
+			"md5": "0cebce18dd14e4961e710540b6c88555"
+		},
+		"script/studio/jsb_cocos2d_studio.js": {
+			"md5": "8986d1ca5cb7f2962387085b5de3e43f"
+		},
+		"script/studio/jsb_studio_boot.js": {
+			"md5": "b0830f0b5fe79d19aec6aab6a0edfbba"
+		},
+		"script/studio/jsb_studio_create_apis.js": {
+			"md5": "c6048b7e509b8e2da4017e8478bf09c7"
+		},
+		"script/studio/jsb_studio_load.js": {
+			"md5": "3a32d57bad54a86f6194a8bd5fadc409"
+		},
+		"script/studio/jsb_studio_property_apis.js": {
+			"md5": "6bf43e47fcd0c0f6f09b0ef04f3e1ef5"
+		},
+		"script/studio/parsers/action-1.x.js": {
+			"md5": "4d2eb061cf1ee148a7aa8015d9dc3c43"
+		},
+		"script/studio/parsers/action-2.x.js": {
+			"md5": "a16c41be7d6d37d41ea7cbb3082885d5"
+		},
+		"script/studio/parsers/compatible.js": {
+			"md5": "dbb76d495c232b2b0f2b46036947abad"
+		},
+		"script/studio/parsers/scene-1.x.js": {
+			"md5": "1e156d50390d96450a2aa5e74c48eeb0"
+		},
+		"script/studio/parsers/timelineParser-1.x.js": {
+			"md5": "cfee24f7a572d388fb8b70196fdd45e0"
+		},
+		"script/studio/parsers/timelineParser-2.x.js": {
+			"md5": "3fbd05df3108b4df6727ff6affbfceeb"
+		},
+		"script/studio/parsers/uiParser-1.x.js": {
+			"md5": "e528a393af02d801bf9a29454f12d435"
+		},
+		"src/dialogs/Anotation.js": {
+			"md5": "cac0fb725d00446dbc0bfa8719497518"
+		},
+		"src/dialogs/BigTooltip.js": {
+			"md5": "26bfb0a4eb8ca241be6fc3aa277d11bc"
+		},
+		"src/dialogs/GUIWaiting.js": {
+			"md5": "e14fa44d369dbedf2b27d2e6d5242130"
+		},
+		"src/dialogs/Notifications.js": {
+			"md5": "76d5cec0ac3beeb03a9e5622a03aa578"
+		},
+		"src/dialogs/Popups.js": {
+			"md5": "455d31615749eaea903965e40a9e397f"
+		},
+		"src/dialogs/Tooltip.js": {
+			"md5": "b4081878e326dccc03eb3819097d5412"
+		},
+		"src/framework/AnimationMgr.js": {
+			"md5": "7d6d320ecf12e524f64891b79b9d6713"
+		},
+		"src/framework/animations/Character.js": {
+			"md5": "8307f91d2cf201e8d10c0bb3f63387f3"
+		},
+		"src/framework/animations/FBFAnimation.js": {
+			"md5": "5aca01721c1d003c911b1a9d586bc5c4"
+		},
+		"src/framework/async_tasks/AsyncTaskMgr.js": {
+			"md5": "fb84dc66d70f7cf97e3fcdda62c82ae2"
+		},
+		"src/framework/async_tasks/BaseTask.js": {
+			"md5": "eb398666773dd36eb092affd25fb0817"
+		},
+		"src/framework/async_tasks/ParallelTask.js": {
+			"md5": "3b81214499384caccccad5036ba350f2"
+		},
+		"src/framework/async_tasks/SequenceTask.js": {
+			"md5": "55e6d17747917a19d3b1f9eb93e4c386"
+		},
+		"src/framework/async_tasks/TaskContainer.js": {
+			"md5": "04f34400e899bac9b85852b028683c48"
+		},
+		"src/framework/Audio.js": {
+			"md5": "6c715a8f90d58d11578296e53484d084"
+		},
+		"src/framework/AutoAttachScene.js": {
+			"md5": "873abebc8f34a5cf4a5fb548b40773fb"
+		},
+		"src/framework/ClientConfig.js": {
+			"md5": "66b6f028aad6945d90eb93072af01f14"
+		},
+		"src/framework/EasyRichText.js": {
+			"md5": "3ac128cb057c7902066e1623a0bb01ca"
+		},
+		"src/framework/effects/EffectMgr.js": {
+			"md5": "b3f8242660426efe4a037b89427fff07"
+		},
+		"src/framework/Framework.js": {
+			"md5": "54f3fab22b1afd5743ab6e64c1ab936b"
+		},
+		"src/framework/GameLoop.js": {
+			"md5": "7acd279874cb00adf9726cca87b4b6dc"
+		},
+		"src/framework/HotNewsMgr.js": {
+			"md5": "f13ce1b4ea5d09d53f2608efc2c814dc"
+		},
+		"src/framework/LanguageMgr.js": {
+			"md5": "f7d3b40c22753ca38c40cbd1fc7b4656"
+		},
+		"src/framework/Localization.js": {
+			"md5": "cc6bb68242d92b37ffd06342649b0161"
+		},
+		"src/framework/platforms/NotificationMgr.js": {
+			"md5": "aac4d50b9134d77f5b170ba469b4bec9"
+		},
+		"src/framework/platforms/PlatformUtils.js": {
+			"md5": "b78d005ec73e58b9afd854d32f724faf"
+		},
+		"src/framework/PlayerAvatar.js": {
+			"md5": "7b9064d24fa2722c8affbf78286b9661"
+		},
+		"src/framework/plugins/Facebook.js": {
+			"md5": "c63782f1a7f782fad9f35927268dd871"
+		},
+		"src/framework/plugins/Google.js": {
+			"md5": "87234bbae5f2ae2e97a0c7776444e8ba"
+		},
+		"src/framework/plugins/IAP.js": {
+			"md5": "8c552b423dc7999badab163ca12b3511"
+		},
+		"src/framework/plugins/PlatformWrapper.js": {
+			"md5": "6adb7df8312a19491f107abde34a029a"
+		},
+		"src/framework/plugins/Portal.js": {
+			"md5": "de67d4382428325e32de1a12113c4615"
+		},
+		"src/framework/plugins/Zalo.js": {
+			"md5": "b8ce2341731b76b7c9be130c5f47caa7"
+		},
+		"src/framework/plugins/ZingMe.js": {
+			"md5": "5ac6b0c20b3b66c70b31898e2ac973d8"
+		},
+		"src/framework/PoolObject.js": {
+			"md5": "b652bae130b800f73a323e7f61e37658"
+		},
+		"src/framework/pools/Pool.js": {
+			"md5": "e73960c91c66971913eb6520e53e0640"
+		},
+		"src/framework/scenes/BaseGUI.js": {
+			"md5": "cac68026c46657a25da9036d975e07cf"
+		},
+		"src/framework/scenes/BaseScene.js": {
+			"md5": "a1a0230f400908aa95632058992fe78e"
+		},
+		"src/framework/scenes/BaseUINode.js": {
+			"md5": "afb59fe5a1d3bda5da8e1f74184136dd"
+		},
+		"src/framework/scenes/SceneFactory.js": {
+			"md5": "63065492d666a2da277514f3598f7d3b"
+		},
+		"src/framework/scenes/SceneMgr.js": {
+			"md5": "492ff5c856970f3d5235d5573389bc54"
+		},
+		"src/framework/UserData.js": {
+			"md5": "053e8c173c4d753f205e5f14f9172122"
+		},
+		"src/framework/Vibrator.js": {
+			"md5": "c580728c2138a362c7454b44c0520d72"
+		},
+		"src/framework/webService/ServicesMgr.js": {
+			"md5": "6f0cb7e6ea9ea41a545720b4aaf3fd0d"
+		},
+		"src/framework/webService/WebDataObject.js": {
+			"md5": "fcbcb31b229a2d2536af19044c5e41bb"
+		},
+		"src/GlobalVar.js": {
+			"md5": "4e1b1538af799a4a7af49488ecbf9e49"
+		},
+		"src/libs/aes.js": {
+			"md5": "2d159c19db94a9aa78b033ea3de8bcc4"
+		},
+		"src/libs/jsb_pluginx.js": {
+			"md5": "35cc628590ba188a4804681569ea1df6"
+		},
+		"src/libs/underscore.js": {
+			"md5": "caaaea413917fd148004d0d25b1c76c5"
+		},
+		"src/modules/BaseModule.js": {
+			"md5": "bc2ac344dda64423df629842acf8e0a2"
+		},
+		"src/modules/events/BaseEvent.js": {
+			"md5": "9dc88f3859bbfce7cb47e8b195e30171"
+		},
+		"src/modules/events/EventModule.js": {
+			"md5": "fa1aebe7e76bf932ef6582befad632b6"
+		},
+		"src/modules/events/firstTime/EventFirstTime.js": {
+			"md5": "b1ea3ad7f7b475e00237c667e35c9fe8"
+		},
+		"src/modules/events/firstTime/GUIFirstTimePurchaseCard.js": {
+			"md5": "7fb239a071e00075c2a8317e53757cd5"
+		},
+		"src/modules/events/firstTime/GUIFirstTimePurchaseSMS.js": {
+			"md5": "3ad04ada791f36a9f6538f0921272938"
+		},
+		"src/modules/events/firstTime/ItemFirstTimePurchaseSMS.js": {
+			"md5": "3eb7762080c1ef1f19c4cef62e85ce86"
+		},
+		"src/modules/events/inviteFriends/EventInviteFriends.js": {
+			"md5": "7d49e0aa36e0f4ab6018bb3d56541d32"
+		},
+		"src/modules/events/inviteFriends/GUIInviteFriends.js": {
+			"md5": "c482913030ac66716f52a0660b897146"
+		},
+		"src/modules/events/inviteFriends/ItemInviteFriend.js": {
+			"md5": "088f9d6e495189056334038a816dc3e6"
+		},
+		"src/modules/events/inviteFriends/ItemPackGold.js": {
+			"md5": "64123d841313e9cd0af80a690a6d5a9a"
+		},
+		"src/modules/events/network/EventReceive.js": {
+			"md5": "aa1e66e13b118d615aacae46afc61a33"
+		},
+		"src/modules/events/network/EventSend.js": {
+			"md5": "d4deaf52b9d814352f4d8ef3805247ae"
+		},
+		"src/modules/events/rateGame/GUIRateGame.js": {
+			"md5": "55236b1052dcdc6d5958778f13205b9e"
+		},
+		"src/modules/events/sevenDays/EventSevenDays.js": {
+			"md5": "b3a66df0b36cf6f81b0cf2ebd88a0e91"
+		},
+		"src/modules/events/sevenDays/GUISevenDaysMain.js": {
+			"md5": "c9c0910ad5d1e8255e4446bd5210d83f"
+		},
+		"src/modules/loading/SceneLoading.js": {
+			"md5": "feedd58305374d49fa42738bf5731748"
+		},
+		"src/modules/lobby/data/ConfigChanelCashGame.js": {
+			"md5": "434ad73a98cf6e700a473dd738ab5def"
+		},
+		"src/modules/lobby/data/ConfigTableCashGame.js": {
+			"md5": "21d10cc3023bdd9f926d53b6dd1a5926"
+		},
+		"src/modules/lobby/data/DataTable.js": {
+			"md5": "c8b8f80b5e05afa7f20dcecd07469fe5"
+		},
+		"src/modules/lobby/data/DataTournament.js": {
+			"md5": "5ce8e38d4516daef67ab9567b12193bb"
+		},
+		"src/modules/lobby/graphics/GUICheatPlayerAttribute.js": {
+			"md5": "4d64b5f8d712c0e12af9a4784d1a317d"
+		},
+		"src/modules/lobby/graphics/GUICreateJoinTable.js": {
+			"md5": "b517f4bc3a6a4bf45f476a96b81a0e96"
+		},
+		"src/modules/lobby/graphics/GUIExchangeGold.js": {
+			"md5": "16c177105dc92a143463be1fde61799e"
+		},
+		"src/modules/lobby/graphics/GUINews.js": {
+			"md5": "c188c9253e9fc99b203ab08186ec5a98"
+		},
+		"src/modules/lobby/graphics/GUISetting.js": {
+			"md5": "8f7c9c4a89956f5439ed914e73923317"
+		},
+		"src/modules/lobby/graphics/GUISupportGold.js": {
+			"md5": "57e38fac3640599460ac7d2524017a4b"
+		},
+		"src/modules/lobby/graphics/GUITournamentGuide.js": {
+			"md5": "f8c7f2ba5db725a6162189681692dfd2"
+		},
+		"src/modules/lobby/graphics/GUITournamentTopPlayers.js": {
+			"md5": "662811ff56506d19366359f29abce41a"
+		},
+		"src/modules/lobby/graphics/ItemRankingTable.js": {
+			"md5": "d85637e3cdc790fbaa4f1c77dc50d1d1"
+		},
+		"src/modules/lobby/graphics/ItemTableInfo.js": {
+			"md5": "a791a36f041cc77dc367f285473b4181"
+		},
+		"src/modules/lobby/graphics/ItemTournamentRanking.js": {
+			"md5": "828d7effded2a771c4a054dc4d5d8408"
+		},
+		"src/modules/lobby/graphics/ItemTournamentRound.js": {
+			"md5": "c6a3bdd26b4ab3e55ce4dafeaa19e0f2"
+		},
+		"src/modules/lobby/graphics/ItemTournamentSlotTop.js": {
+			"md5": "547f439a95bf5bbd75e3f9f1ee37a05c"
+		},
+		"src/modules/lobby/graphics/SceneListTables.js": {
+			"md5": "0a9a86e5c62b1a7c728672c3922e6683"
+		},
+		"src/modules/lobby/graphics/SceneListTournaments.js": {
+			"md5": "34d8ba3d169b7ab34644b1e26fab851a"
+		},
+		"src/modules/lobby/graphics/SceneLobby.js": {
+			"md5": "31bbc005374164ebe05922bb41609703"
+		},
+		"src/modules/lobby/graphics/SceneTournament.js": {
+			"md5": "88fbe69246a74465b71985d74a1c2bb3"
+		},
+		"src/modules/lobby/LobbyModule.js": {
+			"md5": "a936fff316aa541a206e07f85cad5130"
+		},
+		"src/modules/lobby/network/LobbyReceive.js": {
+			"md5": "699c82e929938bdcde2fa8a6df8f45af"
+		},
+		"src/modules/lobby/network/LobbySend.js": {
+			"md5": "dca47c4a2a7c11887a89da1ea14587eb"
+		},
+		"src/modules/login/graphics/SceneLogin.js": {
+			"md5": "60e001b4945175edda51b1daaddda1bb"
+		},
+		"src/modules/login/graphics/SceneMaintain.js": {
+			"md5": "c2a64b098db795c200811c88993f55d7"
+		},
+		"src/modules/login/LoginModule.js": {
+			"md5": "8c4087062ffecf9f5640273535d6f420"
+		},
+		"src/modules/login/network/LoginReceive.js": {
+			"md5": "a6aa0309ed6f485f30f94407f1d49d1c"
+		},
+		"src/modules/login/network/LoginSend.js": {
+			"md5": "a84200cd9676cc55ee346668de44d736"
+		},
+		"src/modules/ModuleMgr.js": {
+			"md5": "0627ac2e84e4d1bc2dfe25d3bad946d4"
+		},
+		"src/modules/payment/data/ConfigGPack.js": {
+			"md5": "d61fdf83b36d10cbcd332d2240172844"
+		},
+		"src/modules/payment/graphics/GUIInAppPurchase.js": {
+			"md5": "089216ff1e5da7ea2bb9eef70917d253"
+		},
+		"src/modules/payment/graphics/ItemExchangeGoldBySms.js": {
+			"md5": "ccd52ba81176fae91e0cec309374ccbd"
+		},
+		"src/modules/payment/graphics/ItemExchangeGoldByXu.js": {
+			"md5": "3f224ee5cdf97771987b88a7d71b5b3b"
+		},
+		"src/modules/payment/graphics/SceneExchangeMoney.js": {
+			"md5": "6e032beb601d8e155120aa7cbb8ed034"
+		},
+		"src/modules/payment/network/PaymentReceive.js": {
+			"md5": "8902cc254d23b989a7f1d18f1d05a3ae"
+		},
+		"src/modules/payment/network/PaymentSend.js": {
+			"md5": "e21dce39a1175ba68ec4645e65f8043b"
+		},
+		"src/modules/payment/PaymentModule.js": {
+			"md5": "960eea88187c30f3318164aff135f1c0"
+		},
+		"src/modules/PingModule.js": {
+			"md5": "4eaecfeb134267fc0b55498ba800963b"
+		},
+		"src/modules/player/data/DataFriendInfo.js": {
+			"md5": "cd487f85476a837d28a0d30cae7512b9"
+		},
+		"src/modules/player/data/DataPlayer.js": {
+			"md5": "97fde69e891a6f4b4edd414094f1807c"
+		},
+		"src/modules/player/graphics/GUIGuideStatic.js": {
+			"md5": "007ec759ba37353588079261b2d3a87a"
+		},
+		"src/modules/player/graphics/GUILevelUp.js": {
+			"md5": "4f5f0ebd798a09c9c8ef3f0d4683a270"
+		},
+		"src/modules/player/graphics/GUIPlayerInfoDetail.js": {
+			"md5": "43465e5f56232b8ab735556f1fb116a6"
+		},
+		"src/modules/player/graphics/GUIVipInfo.js": {
+			"md5": "da6d8e848b772a08f527fb97655cedd1"
+		},
+		"src/modules/player/graphics/GUIVipLevelUp.js": {
+			"md5": "fd448f72652170285fa32c63b27dea4d"
+		},
+		"src/modules/player/graphics/ItemRingInfo.js": {
+			"md5": "0237193fd1c066cc932fd591f0a86237"
+		},
+		"src/modules/player/graphics/ItemVipBenefit.js": {
+			"md5": "93bd5d0b2011da56bb9187bdd98dc92e"
+		},
+		"src/modules/player/network/PlayerReceive.js": {
+			"md5": "8d3b3668bedf9c3b71d24b1ece05bbb3"
+		},
+		"src/modules/player/network/PlayerSend.js": {
+			"md5": "6a25809d9b1fd893f0e8708534ae3e5f"
+		},
+		"src/modules/player/PlayerModule.js": {
+			"md5": "dfbff27b62fa351501dcdf1b604a69a0"
+		},
+		"src/modules/table/data/DataCard.js": {
+			"md5": "751ea079574cfe6c8a0c3cba27299ae1"
+		},
+		"src/modules/table/data/DataPlayerInGame.js": {
+			"md5": "8f4a91744a3a2431cf57bfbbd0b7ca59"
+		},
+		"src/modules/table/data/DataPokerGame.js": {
+			"md5": "666d48be8256d916eb9b8b2e1c224f9c"
+		},
+		"src/modules/table/graphics/GUIChat.js": {
+			"md5": "dd85f0b4fab42fd19bd06d35c7cbde6e"
+		},
+		"src/modules/table/graphics/GUICheatCards.js": {
+			"md5": "0a39d6ac6daf7fce52a2e81f2298d766"
+		},
+		"src/modules/table/graphics/GUIPopupCashGameInfo.js": {
+			"md5": "dfd7e580b0eb9f3f0ad5305148c24949"
+		},
+		"src/modules/table/graphics/GUIPopupTournamentGameInfo.js": {
+			"md5": "4a718d56b541358e41e25f42672f7e31"
+		},
+		"src/modules/table/graphics/GUIResultTournament.js": {
+			"md5": "ae2095e8967d2c1d16cc40647b641ed1"
+		},
+		"src/modules/table/graphics/GUISettingMini.js": {
+			"md5": "3992eded445406af8501515297b69f07"
+		},
+		"src/modules/table/graphics/GUISuggestGetGold.js": {
+			"md5": "adce6e0743d2422483b0e3bf97798915"
+		},
+		"src/modules/table/graphics/MultiFunctionButtons.js": {
+			"md5": "0ac337102a2f0a5140705e98fe8e5acb"
+		},
+		"src/modules/table/graphics/SceneTable.js": {
+			"md5": "f309c7b01d6feb7e64138d6cc55d8a2d"
+		},
+		"src/modules/table/graphics/SignalStrength.js": {
+			"md5": "40b6d3e66e9cb15185728df8c344b48d"
+		},
+		"src/modules/table/graphics/WaitingClock.js": {
+			"md5": "ece17c7542c941ebc781b1a0141ea0a6"
+		},
+		"src/modules/table/logic/ai_poker/AI.js": {
+			"md5": "e9da31640f6a834a1fcdc0d3182f9c66"
+		},
+		"src/modules/table/logic/ai_poker/AIController.js": {
+			"md5": "e33e8cc0b5fc262852db3387e7c387bb"
+		},
+		"src/modules/table/logic/Card.js": {
+			"md5": "4862f640fc767f42be48b89274b2d842"
+		},
+		"src/modules/table/logic/CardGroup.js": {
+			"md5": "c8befbf286531a2ab40c038696371da0"
+		},
+		"src/modules/table/logic/Chip.js": {
+			"md5": "d25c04612e1a1cbd28ecf9779c0fbbe6"
+		},
+		"src/modules/table/logic/ChipMgr.js": {
+			"md5": "b5b3a74d764ef70f8f0374ce05033cf8"
+		},
+		"src/modules/table/logic/Deck.js": {
+			"md5": "098229f1cc6e0e8412fad29301b52bac"
+		},
+		"src/modules/table/logic/GamePoker.js": {
+			"md5": "b9f895cf41187709c26981455fea4562"
+		},
+		"src/modules/table/logic/HandStrengthEvaluator.js": {
+			"md5": "1a8cabcac02698a9fe987282bf305166"
+		},
+		"src/modules/table/logic/PlayerAction.js": {
+			"md5": "845a818b1e6fc53391a73630f17a7157"
+		},
+		"src/modules/table/logic/Pot.js": {
+			"md5": "bb388b89530ba2a297459e6e876c0b62"
+		},
+		"src/modules/table/logic/Rules.js": {
+			"md5": "4a54f34205551164eb2500a31d3ab225"
+		},
+		"src/modules/table/logic/Slot.js": {
+			"md5": "2ebdfe4195ebe84d06685e12c82946cd"
+		},
+		"src/modules/table/logic/TournamentGamePoker.js": {
+			"md5": "3c72fbd43dcc22884d3ef7966b931871"
+		},
+		"src/modules/table/network/TableReceive.js": {
+			"md5": "7929b3b01f87a310e0307c118389061d"
+		},
+		"src/modules/table/network/TableSend.js": {
+			"md5": "684db6e89fa552114d7bce82b61bd85d"
+		},
+		"src/modules/table/TableConst.js": {
+			"md5": "ec7cf613aa1180146076a4da79546d5d"
+		},
+		"src/modules/table/TableModule.js": {
+			"md5": "f5f3bfeb9f2a3b13d34fc54fc1c31de4"
+		},
+		"src/modules/tutorials/BaseSlideGamePlay.js": {
+			"md5": "772ee5805a2bc7500883112bac250c13"
+		},
+		"src/modules/tutorials/BaseSlideTournament.js": {
+			"md5": "f4b2450ba5b6af6a78840da1e700f55d"
+		},
+		"src/modules/tutorials/GUITutorialCoreGamePlay.js": {
+			"md5": "748a237a4e9493448ab0ee3780aada92"
+		},
+		"src/modules/tutorials/GUITutorialTournament.js": {
+			"md5": "5eb76c6aebdf16eb1e71fe043f8f2b8d"
+		},
+		"src/modules/tutorials/SceneTournamentTutorial.js": {
+			"md5": "416210da6021777b21e1de51f1a48b45"
+		},
+		"src/modules/tutorials/TutorialModule.js": {
+			"md5": "06464ecf1b8957a0dae267e15bf20c33"
+		},
+		"src/network/CmdDefine.js": {
+			"md5": "899cbb9bd7f5e1b35d6b2f05b5d8b41c"
+		},
+		"src/network/Connector.js": {
+			"md5": "0d37447876d3d5e3b07b55cfc8f45a72"
+		},
+		"src/network/ConnectorListener.js": {
+			"md5": "4f92b677b24ae183a3b1f68d46f8b8f8"
+		},
+		"src/network/ErrorCode.js": {
+			"md5": "aa220191c1b94a2c1859c51f5d84e86d"
+		},
+		"src/network/Packet.js": {
+			"md5": "2c2c853ca8c4a1b7cb221a5648688734"
+		},
+		"src/resources/auto_generate_all_textures.js": {
+			"md5": "d4d4ca6fb7e29916ac1efdb55e4990fe"
+		},
+		"src/resources/Resource.js": {
+			"md5": "1af4c7dce4d20ff93eb48e4dd1b03894"
+		},
+		"src/resources/ResourcesMgr.js": {
+			"md5": "b9e51ef2f873d6926d835326a196fd44"
+		},
+		"src/Test.js": {
+			"md5": "3b0d9a39f3398e41d94b60aac825cc74"
+		},
+		"src/utils/GameUtils.js": {
+			"md5": "e0a186e2941d2991680a177cf12b0f8f"
+		},
+		"src/utils/LogUtils.js": {
+			"md5": "96ed7e20caf8fe0bcc99cfc6f2bd6982"
+		},
+		"src/utils/Random.js": {
+			"md5": "12b2c4a1b26020c297a3b990d8a6f270"
+		},
+		"src/utils/Sort.js": {
+			"md5": "642680b4ac2fd642f8c49eba4b37384c"
+		},
+		"src/utils/Utility.js": {
+			"md5": "e449085551e94cbac14cb2e559a266c9"
+		}
+	},
+	"searchPaths": []
+}
