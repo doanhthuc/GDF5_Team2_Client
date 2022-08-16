@@ -17,6 +17,10 @@ let CollisionSystem = System.extend({
 
         },
 
+        checkEntityCondition: function (entity) {
+            return entity._hasComponent(CollisionComponent);
+        },
+
         updateData: function () {
             const dt = tickManager.getTickRate() / 1000;
             let entityList = EntityManager.getInstance()
@@ -42,6 +46,8 @@ let CollisionSystem = System.extend({
 
             for (let i = 0; i < entityList.length; i++) {
                 if (ValidatorECS.isBullet(entityList[i])) {
+                    cc.log("bulletinfo")
+                    cc.log(JSON.stringify(entityList[i]));
                     let bulletInfoComponent = entityList[i].getComponent(BulletInfoComponent);
 
                     if (bulletInfoComponent.radius) {

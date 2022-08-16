@@ -11,6 +11,10 @@ let SkeletonAnimationSystem = System.extend({
 
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(SkeletonAnimationComponent);
+    },
+
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
         let entityList = EntityManager.getInstance()

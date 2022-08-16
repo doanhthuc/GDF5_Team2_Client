@@ -11,6 +11,10 @@ let SpellSystem = System.extend({
 
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(SpellInfoComponent);
+    },
+
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
         let spellList = EntityManager.getInstance()

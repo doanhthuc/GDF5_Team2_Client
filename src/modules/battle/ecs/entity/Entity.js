@@ -11,6 +11,7 @@ let EntityECS = cc.Class.extend({
         this.mode = mode;
        // this.bitmask = 0;
         this.bitmask = [];
+        cc.log("&New entity id = " + this.id);
     },
 
     addComponent: function (component) {
@@ -22,13 +23,18 @@ let EntityECS = cc.Class.extend({
         ComponentManager.getInstance().add(component);
         //this.bitmask = this.bitmask | (1 << component.typeID);
         this.bitmask[component.typeID] = 1;
+        SystemManager.getInstance().addEntityIntoSystem(this);
         return this;
     },
 
     removeComponent: function (componentOrCls) {
         let component = this.components[componentOrCls.typeID];
         if (component) {
+            SystemManager.getInstance().removeEntityFromSystem(this);
             ComponentManager.getInstance().remove(component);
+            if (componentOrCls.typeID === VelocityComponent.typeID) {
+                cc.log("remove velocity component from entity id = " + this.id);
+            }
             delete this.components[componentOrCls.typeID];
         //    this.bitmask = this.bitmask & (~(1 << componentOrCls.typeID));
             this.bitmask[component.typeID] = 0;

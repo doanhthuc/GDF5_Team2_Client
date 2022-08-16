@@ -11,14 +11,18 @@ let AttackSystem = System.extend({
 
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(AttackComponent);
+    },
+
     updateData: function () {
         const dt = tickManager.getTickRate() / 1000;
-        let towerList = EntityManager.getInstance()
-            .getEntitiesHasComponents(AttackComponent);
+
         let monsterList = EntityManager.getInstance()
             .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
 
-        for (let tower of towerList) {
+        for (let entityId in this.getEntityStore()) {
+            let tower = this.getEntityStore()[entityId];
             let attackComponent = tower.getComponent(AttackComponent);
 
             // update count down time
@@ -28,7 +32,11 @@ let AttackSystem = System.extend({
 
             if (attackComponent.countdown <= 0) {
                 let monsterInAttackRange = []
-                for (let monster of monsterList) {
+
+                let abilitySystem = SystemManager.getInstance().getSystemByTypeID(AbilitySystem);
+                for (let monsterId in abilitySystem.getEntityStore()) {
+                    let monster = abilitySystem.getEntityStore()[monsterId];
+                    if (!monster._hasComponent(PositionComponent)) continue;
                     let monsterInfo = monster.getComponent(MonsterInfoComponent);
                     if (!attackComponent.canTargetAirMonster && monsterInfo.classs === GameConfig.MONSTER.CLASS.AIR) {
                         continue;
@@ -91,10 +99,14 @@ let AttackSystem = System.extend({
         // return monsterInAttackRange[0];
         let targetMonster = null;
         let monsterIndex = -1;
+        cc.log("monster in attack range")
+        cc.log(JSON.stringify(monsterInAttackRange))
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
                // cc.log("[AttackSystem] find target by max hp");
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
+                    cc.log("Cur")
+                    cc.log(JSON.stringify(cur))
                     let lifeComponent = cur.getComponent(LifeComponent);
                     let monsterHP = lifeComponent.hp;
                     return monsterHP > monsterInAttackRange[acc] ? idx : acc;

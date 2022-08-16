@@ -11,6 +11,10 @@ let MonsterSystem = System.extend({
 
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(MonsterInfoComponent);
+    },
+
     updateData: function () {
         let monsterList = EntityManager.getInstance()
             .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);

@@ -7,6 +7,10 @@ let MovementSystem = System.extend({
         cc.log("new " + this.name);
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(VelocityComponent);
+    },
+
     _run: function () {
         const dt = tickManager.getDeltaFromLatestTickToNow() / 1000;
         let entityList = EntityManager.getInstance()

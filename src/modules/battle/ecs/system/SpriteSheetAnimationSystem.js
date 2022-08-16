@@ -7,6 +7,10 @@ let SpriteSheetAnimationSystem = System.extend({
         cc.log("new " + this.name);
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(SpriteSheetAnimationComponent);
+    },
+
     _run: function (tick) {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(SpriteSheetAnimationComponent);

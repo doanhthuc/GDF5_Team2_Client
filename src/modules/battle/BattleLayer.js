@@ -21,9 +21,9 @@ let BattleLayer = cc.Layer.extend({
 
         // this.battleLoop = new BattleLoop();
 
-        this._setupUI();
-
+        // _initSystem() must be call before _setupUI
         this._initSystem();
+        this._setupUI();
 
         // this._initTower();
         this._handleEventKey();

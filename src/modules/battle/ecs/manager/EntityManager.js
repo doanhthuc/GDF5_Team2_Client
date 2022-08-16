@@ -53,12 +53,14 @@ EntityManager.destroy = function (entity) {
     if (appearanceComponent) {
         let sprite = appearanceComponent.sprite;
         sprite.setVisible(false);
+        entity.removeComponent(appearanceComponent);
         ComponentManager.getInstance().remove(appearanceComponent);
     }
 
     for (let key of Object.keys(entity.components)) {
         ComponentManager.getInstance().remove(entity.components[key]);
-        ComponentFactory.pool.checkIn(entity.components[key]);
+        entity.removeComponent(entity.components[key]);
+        // ComponentFactory.pool.checkIn(entity.components[key]);
     }
     EntityManager.getInstance().remove(entity);
 }

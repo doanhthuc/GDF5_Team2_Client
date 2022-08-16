@@ -11,6 +11,10 @@ let PathMonsterSystem = System.extend({
 
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(PathComponent);
+    },
+
     updateData: function () {
         let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent, PositionComponent, VelocityComponent);
         for (let entity of entityList) {

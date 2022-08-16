@@ -11,6 +11,10 @@ let LifeSystem = System.extend({
 
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(LifeComponent);
+    },
+
     updateData: function () {
         let entityList = EntityManager.getInstance()
             .getEntitiesHasComponents(LifeComponent);

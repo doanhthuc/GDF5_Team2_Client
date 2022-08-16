@@ -11,6 +11,10 @@ let BulletSystem = System.extend({
 
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(BulletInfoComponent);
+    },
+
     updateData: function () {
         let bulletList = EntityManager.getInstance()
             .getEntitiesHasComponents(VelocityComponent, PositionComponent, BulletInfoComponent);

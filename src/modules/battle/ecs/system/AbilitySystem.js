@@ -1,5 +1,5 @@
 let AbilitySystem = System.extend({
-        id: GameConfig.SYSTEM_ID.ABILITY,
+        typeID: GameConfig.SYSTEM_ID.ABILITY,
         name: "AbilitySystem",
 
         ctor: function () {
@@ -11,17 +11,22 @@ let AbilitySystem = System.extend({
 
         },
 
+        checkEntityCondition: function (entity, component) {
+            return entity._hasComponent(MonsterInfoComponent);
+        },
+
         updateData: function () {
             const tick = tickManager.getTickRate() / 1000;
             this._handleUnderGroundComponent();
             this._handleSpawnMinionComponent(tick);
             this._handleHealingAbility(tick);
-            this._handleBuffAbility(tick);
         },
 
         _handleUnderGroundComponent: function () {
-            let entityList = EntityManager.getInstance().getEntitiesHasComponents(UnderGroundComponent);
-            for (let entity of entityList) {
+            for (let entityId in this.getEntityStore()) {
+                let entity = this.getEntityStore()[entityId];
+                if (!entity._hasComponent(UnderGroundComponent)) continue;
+
                 let lifeComponent = entity.getComponent(LifeComponent);
                 let underGroundComponent = entity.getComponent(UnderGroundComponent);
                 let positionComponent = entity.getComponent(PositionComponent);
@@ -52,9 +57,10 @@ let AbilitySystem = System.extend({
         },
 
         _handleSpawnMinionComponent: function (tick) {
-            let entityList = EntityManager.getInstance().getEntitiesHasComponents(SpawnMinionComponent);
+            for (let entityId in this.getEntityStore()) {
+                let entity = this.getEntityStore()[entityId];
+                if (!entity._hasComponent(SpawnMinionComponent)) continue;
 
-            for (let entity of entityList) {
                 let spawnMinionComponent = entity.getComponent(SpawnMinionComponent);
 
                 if (spawnMinionComponent.period >= 0) {
@@ -78,19 +84,23 @@ let AbilitySystem = System.extend({
         _handleHealingAbility: function (tick) {
             let entityList = EntityManager.getInstance().getEntitiesHasComponents(HealingAbility, PositionComponent);
 
-            let monsterList = null;
-            if (entityList) {
-                monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
-            }
+            for (let entityId in this.getEntityStore()) {
+                let satyr = this.getEntityStore()[entityId];
 
-            for (let satyr of entityList) {
+                if (!satyr._hasComponent(HealingAbility)) continue;
+                if (!satyr._hasComponent(PositionComponent)) continue;
+
                 let healingAbility = satyr.getComponent(HealingAbility);
 
                 if (healingAbility.countdown > 0) {
                     healingAbility.countdown -= tick;
                 } else {
                     healingAbility.countdown = 1;
-                    for (let monster of monsterList) {
+                    for (let monsterId in this.getEntityStore()) {
+                        let monster = this.getEntityStore()[monsterId];
+
+                        if (!monster._hasComponent(PositionComponent)) continue;
+
                         if (monster.getActive() && monster.mode === satyr.mode) {
                             let monsterPos = monster.getComponent(PositionComponent);
 
@@ -107,39 +117,6 @@ let AbilitySystem = System.extend({
                 }
             }
 
-        },
-
-        _handleBuffAbility: function () {
-            let buffTowerList = EntityManager.getInstance().getEntitiesHasComponents(TowerAbilityComponent);
-            let damageTowerList = null;
-
-            if (buffTowerList) {
-                damageTowerList = EntityManager.getInstance().getEntitiesHasComponents(AttackComponent);
-            }
-
-            for (let buffTower of buffTowerList) {
-                let towerAbilityComponent = buffTower.getComponent(TowerAbilityComponent);
-                for (let damageTower of damageTowerList) {
-                    if (damageTower.mode === buffTower.mode) {
-                        if (this._distanceFrom(buffTower, damageTower) < towerAbilityComponent.range) {
-                            switch (towerAbilityComponent.effect.typeID) {
-                                case BuffAttackDamageEffect.typeID: {
-                                    let attackComponent = damageTower.getComponent(AttackComponent);
-                                    attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
-                                    BattleAnimation.addBuffDamageAnimation(damageTower);
-                                    break;
-                                }
-                                case BuffAttackSpeedEffect.typeID: {
-                                    let attackComponent = damageTower.getComponent(AttackComponent);
-                                    attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
-                                    BattleAnimation.addBuffSpeedAnimation(damageTower);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         },
 
         _distanceFrom: function (tower, monster) {

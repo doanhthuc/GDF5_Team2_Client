@@ -11,6 +11,10 @@ let EffectSystem = System.extend({
 
     },
 
+    checkEntityCondition: function (entity) {
+        return entity._hasComponent(MonsterInfoComponent);
+    },
+
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
         // this._handleBuffAttackRangeEffect(tick);
