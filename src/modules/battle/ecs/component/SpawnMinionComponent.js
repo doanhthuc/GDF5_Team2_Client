@@ -10,6 +10,7 @@ let SpawnMinionComponent = Component.extend({
     reset: function (period) {
         this.period = period;
         this.spawnAmount = 0;
+        this.maxAmount = 5;
     },
 
     clone: function () {

@@ -69,7 +69,7 @@ let AbilitySystem = System.extend({
                 spawnMinionComponent.period = 2;
                 let positionComponent = entity.getComponent(PositionComponent);
 
-                if (spawnMinionComponent.spawnAmount < 5) {
+                if (spawnMinionComponent.spawnAmount < spawnMinionComponent.maxAmount) {
                     EntityFactory.createDemonTreeMinion({
                         x: positionComponent.x,
                         y: positionComponent.y
