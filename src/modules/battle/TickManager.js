@@ -85,12 +85,12 @@ let TickManager = cc.Class.extend({
 
             measurePerformance.report();
 
-            // let startTime2 = Date.now();
+            // let startTime22 = Date.now();
             // for (let i = 0; i <= 50; i++) {
-            //     EntityManager.getInstance().getEntitiesHasComponents(AppearanceComponent, CollisionComponent);
+            //     EntityManager.getInstance().getEntitiesHasComponents(AppearanceComponent);
             // }
-            // let endTime2 = Date.now();
-            // cc.log("Time getEntitiesHasComponents(): " + (endTime2 - startTime2));
+            // let endTime22 = Date.now();
+            // cc.log("Time getEntitiesHasComponents(): " + (endTime22 - startTime22));
 
 
             cc.warn("---------------------------------------")

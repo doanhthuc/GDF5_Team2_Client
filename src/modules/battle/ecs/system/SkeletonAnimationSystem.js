@@ -11,8 +11,8 @@ let SkeletonAnimationSystem = System.extend({
 
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(SkeletonAnimationComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === SkeletonAnimationComponent.typeID;
     },
 
     updateData: function () {

@@ -11,8 +11,8 @@ let PathMonsterSystem = System.extend({
 
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(PathComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === PathComponent.typeID;
     },
 
     updateData: function () {
@@ -75,8 +75,6 @@ let PathMonsterSystem = System.extend({
                 minDeg = key;
             }
         }
-        //cc.log(JSON.stringify(Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode)));
-        //cc.log(movingDeg + " " + directionDegree.get(minDeg));
         return directionDegree.get(minDeg);
     },
     _findNextPath: function (path, position, currentPathIdx) {

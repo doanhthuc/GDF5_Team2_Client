@@ -11,8 +11,8 @@ let TowerSpecialSkillSystem = System.extend({
 
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(TowerInfoComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === TowerInfoComponent.typeID;
     },
 
     updateData: function () {

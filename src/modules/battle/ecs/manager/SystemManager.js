@@ -38,17 +38,17 @@ let SystemManager = ManagerECS.extend({
         this._storeInstance.delete(system.id);
     },
 
-    addEntityIntoSystem: function (entity) {
+    addEntityIntoSystem: function (entity, componentOrCls) {
         for (let systemTypeID in this._storeInstance) {
             let system = this._storeInstance[systemTypeID];
-            system.addEntity(entity);
+            system.addEntity(entity, componentOrCls);
         }
     },
 
-    removeEntityFromSystem: function (entity) {
+    removeEntityFromSystem: function (entity, componentOrCls) {
         for (let systemTypeID in this._storeInstance) {
             let system = this._storeInstance[systemTypeID];
-            system.removeEntity(entity);
+            system.removeEntity(entity, componentOrCls);
         }
     }
 });

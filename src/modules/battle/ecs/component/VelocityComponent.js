@@ -4,6 +4,7 @@ let VelocityComponent = Component.extend({
 
     ctor: function (speedX, speedY, dynamicEntityId, staticPosition) {
         this._super();
+        this.typeID = 6;
         this.reset(speedX, speedY, dynamicEntityId, staticPosition);
     },
 

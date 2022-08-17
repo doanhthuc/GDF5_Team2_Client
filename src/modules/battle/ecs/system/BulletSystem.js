@@ -11,15 +11,14 @@ let BulletSystem = System.extend({
 
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(BulletInfoComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === BulletInfoComponent.typeID;
     },
 
     updateData: function () {
-        let bulletList = EntityManager.getInstance()
-            .getEntitiesHasComponents(VelocityComponent, PositionComponent, BulletInfoComponent);
+        for (let bulletID in this.getEntityStore()) {
+            let bullet = this.getEntityStore()[bulletID];
 
-        for (let bullet of bulletList) {
             let bulletPos = bullet.getComponent(PositionComponent);
             let bulletVelocity = bullet.getComponent(VelocityComponent);
             let pathComponent = bullet.getComponent(PathComponent);

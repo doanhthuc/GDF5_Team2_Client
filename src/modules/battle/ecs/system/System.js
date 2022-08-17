@@ -34,29 +34,26 @@ let System = cc.Class.extend({
 
     },
 
-    checkEntityCondition: function (entity) {
+    checkEntityCondition: function (entity, componentOrCls) {
         return false;
     },
 
-    addEntity: function (entity) {
+    addEntity: function (entity, componentOrCls) {
         // if (this._entityStore[entity.id]) {
         //     throw new Error("Entity id = " + entity.id + " exists");
         // }
-        if (this.checkEntityCondition(entity)) {
+        if (this.checkEntityCondition(entity, componentOrCls)) {
             this._entityStore[entity.id] = entity;
             cc.log("&Add entity id = " + entity.id + " into system: " + this.name);
         }
     },
 
-    removeEntity: function (entity) {
-        if (!this.checkEntityCondition(entity)) {
+    removeEntity: function (entity, componentOrCls) {
+        if (!this.checkEntityCondition(entity, componentOrCls)) {
             return;
         }
 
         if (!this._entityStore[entity.id]) {
-            cc.log("ABC")
-            cc.log(JSON.stringify(entity))
-            cc.log(JSON.stringify(entity.getComponent(VelocityComponent)))
             throw new Error("Entity id = " + entity.id + " doesn't exist - " + this.name);
         }
 

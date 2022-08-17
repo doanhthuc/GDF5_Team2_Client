@@ -9,7 +9,6 @@ let EntityECS = cc.Class.extend({
         this._active = true;
 
         this.mode = mode;
-       // this.bitmask = 0;
         this.bitmask = [];
         cc.log("&New entity id = " + this.id);
     },
@@ -21,25 +20,19 @@ let EntityECS = cc.Class.extend({
         component.setActive(true);
         this.components[component.typeID] = component;
         ComponentManager.getInstance().add(component);
-        //this.bitmask = this.bitmask | (1 << component.typeID);
         this.bitmask[component.typeID] = 1;
-        SystemManager.getInstance().addEntityIntoSystem(this);
+        SystemManager.getInstance().addEntityIntoSystem(this, component);
         return this;
     },
 
     removeComponent: function (componentOrCls) {
         let component = this.components[componentOrCls.typeID];
         if (component) {
-            SystemManager.getInstance().removeEntityFromSystem(this);
+            SystemManager.getInstance().removeEntityFromSystem(this, componentOrCls);
             ComponentManager.getInstance().remove(component);
-            if (componentOrCls.typeID === VelocityComponent.typeID) {
-                cc.log("remove velocity component from entity id = " + this.id);
-            }
             delete this.components[componentOrCls.typeID];
-        //    this.bitmask = this.bitmask & (~(1 << componentOrCls.typeID));
             this.bitmask[component.typeID] = 0;
         }
-        // tickManager.getTickData().deleteComponentData(component.id);
     },
 
     getComponent: function (ComponentCls) {
@@ -50,7 +43,6 @@ let EntityECS = cc.Class.extend({
     },
 
     _hasComponent: function (ComponentCls) {
-        // return (this.bitmask & (1 << ComponentCls.typeID)) !== 0;
         return this.bitmask[ComponentCls.typeID] === 1;
     },
 

@@ -11,8 +11,8 @@ let SpellSystem = System.extend({
 
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(SpellInfoComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === SpellInfoComponent.typeID;
     },
 
     updateData: function () {

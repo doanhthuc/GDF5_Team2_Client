@@ -11,8 +11,8 @@ let MonsterSystem = System.extend({
 
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(MonsterInfoComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === MonsterInfoComponent.typeID;
     },
 
     updateData: function () {

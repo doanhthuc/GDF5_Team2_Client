@@ -7,8 +7,8 @@ let SpriteSheetAnimationSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(SpriteSheetAnimationComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === SpriteSheetAnimationComponent.typeID;
     },
 
     _run: function (tick) {

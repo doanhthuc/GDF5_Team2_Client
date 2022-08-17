@@ -7,8 +7,8 @@ let RenderSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(AppearanceComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === AppearanceComponent.typeID;
     },
 
     _run: function (tick) {

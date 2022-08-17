@@ -11,15 +11,12 @@ let AttackSystem = System.extend({
 
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(AttackComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === AttackComponent.typeID;
     },
 
     updateData: function () {
         const dt = tickManager.getTickRate() / 1000;
-
-        let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
 
         for (let entityId in this.getEntityStore()) {
             let tower = this.getEntityStore()[entityId];
@@ -99,14 +96,10 @@ let AttackSystem = System.extend({
         // return monsterInAttackRange[0];
         let targetMonster = null;
         let monsterIndex = -1;
-        cc.log("monster in attack range")
-        cc.log(JSON.stringify(monsterInAttackRange))
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
                // cc.log("[AttackSystem] find target by max hp");
                 monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
-                    cc.log("Cur")
-                    cc.log(JSON.stringify(cur))
                     let lifeComponent = cur.getComponent(LifeComponent);
                     let monsterHP = lifeComponent.hp;
                     return monsterHP > monsterInAttackRange[acc] ? idx : acc;

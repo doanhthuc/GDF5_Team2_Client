@@ -11,8 +11,8 @@ let LifeSystem = System.extend({
 
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(LifeComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === LifeComponent.typeID;
     },
 
     updateData: function () {

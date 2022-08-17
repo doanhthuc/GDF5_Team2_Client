@@ -7,8 +7,8 @@ let MovementSystem = System.extend({
         cc.log("new " + this.name);
     },
 
-    checkEntityCondition: function (entity) {
-        return entity._hasComponent(VelocityComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === VelocityComponent.typeID;
     },
 
     _run: function () {
