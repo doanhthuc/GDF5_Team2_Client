@@ -50,16 +50,16 @@ let CollisionSystem = System.extend({
                 if (!entity.getActive()) continue;
                 if (!entity._hasComponent(PositionComponent)) continue;
 
-                if (ValidatorECS.isBullet(entityId)) {
-                    let bulletInfoComponent = entityId.getComponent(BulletInfoComponent);
+                if (ValidatorECS.isBullet(entity)) {
+                    let bulletInfoComponent = entity.getComponent(BulletInfoComponent);
                     if (bulletInfoComponent.radius) {
-                        this._handleRadiusBullet(entityId);
+                        this._handleRadiusBullet(entity);
                     } else {
-                        this._handleCollisionBullet(entityId);
+                        this._handleCollisionBullet(entity);
                     }
 
-                } else if (ValidatorECS.isTrap(entityId)) {
-                    this._handleCollisionTrap(entityId, dt);
+                } else if (ValidatorECS.isTrap(entity)) {
+                    this._handleCollisionTrap(entity, dt);
                 }
             }
         },
