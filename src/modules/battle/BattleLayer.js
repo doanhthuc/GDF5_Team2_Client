@@ -1,5 +1,4 @@
 let BattleLayer = cc.Layer.extend({
-
     ctor: function () {
         this._super();
         BattleManager.getInstance().registerBattleLayer(this);
@@ -21,9 +20,9 @@ let BattleLayer = cc.Layer.extend({
 
         // this.battleLoop = new BattleLoop();
 
-        this._setupUI();
-
+        // _initSystem() must be call before _setupUI
         this._initSystem();
+        this._setupUI();
 
         // this._initTower();
         this._handleEventKey();
@@ -339,10 +338,14 @@ let BattleLayer = cc.Layer.extend({
 
         const trophyChange = this.battleData.getTrophyChange();
         this.addChild(new BattleResultLayer(result, this.battleData, trophyChange), 2);
-        delete this._entityManager;
-        delete ComponentManager.getInstance();
-        tickManager.clearAndCreateNew();
+
         // TODO: remove file from sprite frame cache
+        this._entityManager.clear();
+        this._entityManager = null;
+        ComponentManager.resetInstance();
+        tickManager.clearAndCreateNew();
+        SystemManager.resetInstance();
+        BattleManager.resetInstance();
     },
 
     getPlayerMapNode: function () {

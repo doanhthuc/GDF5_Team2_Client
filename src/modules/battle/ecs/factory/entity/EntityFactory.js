@@ -25,7 +25,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "cannon", 0, canTargetAirMonster);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         // let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
-        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 10, 10);
 
         // let bulletSpeed = 5 * GameConfig.TILE_WIDTH;
         let chasingPosition = targetEntity.getComponent(PositionComponent);
@@ -49,7 +49,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "bear", 0, canTargetAirMonster);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         // let appearanceComponent = ComponentFactory.create(AppearanceComponent, bulletNode, mode);
-        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 10, 10);
 
         // let bulletSpeed = 4 * GameConfig.TILE_WIDTH;
         let chasingPosition = targetEntity.getComponent(PositionComponent);
@@ -117,7 +117,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "bunny", bulletRadius, canTargetAirMonster);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
         let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 1, 1);
+        let collisionComponent = ComponentFactory.create(CollisionComponent, 0, 0, 10, 10);
 
         let speed = Utils.calculateVelocityVector(startPosition, staticPosition, bulletSpeed);
         let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY, null, staticPosition);
@@ -135,18 +135,8 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
         let entity = this._createEntity(typeID, mode);
 
         let node = new cc.Node();
-        // let particle = new cc.ParticleSystem("res/textures/tower/fx/wizard_particle_1.plist");
         let bulletNode = new cc.Sprite("#tower_wizard_bullet_0000.png");
         node.addChild(bulletNode, 1);
-        // node.addChild(particle, 22);
-
-        // particle.resetSystem();
-        // particle.setDuration(10)
-        // particle.setSpeed(200)
-        // particle.setBlendAdditive(true)
-        // particle.setPositionType(cc.ParticleSystem.TYPE_FREE);
-        // // particle.setScale(1, 1);
-        // particle.setPosition(cc.p(0, 0));
 
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "wizard", bulletRadius, canTargetAirMonster);
         let positionComponent = ComponentFactory.create(PositionComponent, startPosition.x, startPosition.y);
@@ -175,14 +165,36 @@ EntityFactory.createTree = function (tilePos, mode) {
 
     let node = new cc.Node();
     let sp = new cc.Sprite(BattleResource.OBSTACLE_IMG_2);
+    sp.setAnchorPoint(cc.p(0.5, 0.2));
+
+    let treeShadow = new cc.Sprite(BattleResource.OBSTACLE_IMG_2);
+
+    treeShadow.setColor(cc.color.BLACK);
+    treeShadow.setOpacity(80);
+    treeShadow.setScale(0.7, 0.7);
+    treeShadow.setSkewX(-140);
+    // treeShadow.setSkewY(0);
+    treeShadow.setAnchorPoint(cc.p(0.3, 0.2))
+
+
     let hpBarNode = ccs.load(BattleResource.HP_BAR_NODE, "").node;
     hpBarNode.setPosition(cc.p(0, 50));
-    node.addChild(sp, 1, "tree");
-    node.addChild(hpBarNode, 1, "hp");
+
+    let zOrder = 1;
+    if (mode === GameConfig.PLAYER) {
+        zOrder = GameConfig.MAP_HEIGH - tilePos.y;
+    } else {
+        zOrder = tilePos.y;
+    }
+
+    node.addChild(treeShadow, zOrder, "tree_shadow");
+    node.addChild(sp, zOrder, "tree");
+    node.addChild(hpBarNode, zOrder, "hp");
+
     if (mode === GameConfig.PLAYER)
         node.setName("PlayerTree");
     else node.setName("OpponentTree");
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);
+    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos, zOrder);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let lifeComponent = ComponentFactory.create(LifeComponent, 100, 100);
 

@@ -10,48 +10,55 @@ let CollisionSystem = System.extend({
 
         ctor: function () {
             this._super();
-            cc.log("new " + this.name);
         },
 
         _run: function (tick) {
 
         },
 
+        checkEntityCondition: function (entity, componentOrCls) {
+            return componentOrCls.typeID === CollisionComponent.typeID;
+        },
+
         updateData: function () {
             const dt = tickManager.getTickRate() / 1000;
-            let entityList = EntityManager.getInstance()
-                .getEntitiesHasComponents(CollisionComponent, PositionComponent)
 
             // construct quad tree
             quadTreePlayer.clear();
             quadTreeOpponent.clear();
-            for (let i = 0; i < entityList.length - 1; i++) {
-                let pos = entityList[i].getComponent(PositionComponent);
-                let collisionComponent = entityList[i].getComponent(CollisionComponent);
+            for (let entityId in this.getEntityStore()) {
+                let entity = this.getEntityStore()[entityId];
+
+                if (!entity._hasComponent(PositionComponent)) continue;
+                let pos = entity.getComponent(PositionComponent);
+                let collisionComponent = entity.getComponent(CollisionComponent);
 
                 let w = collisionComponent.width, h = collisionComponent.height;
 
                 let rect = cc.rect(pos.x - w / 2, pos.y - h / 2, w, h);
 
-                if (entityList[i].mode === GameConfig.PLAYER) {
-                    quadTreePlayer.insert(new QuadTreeData(rect, entityList[i]));
+                if (entity.mode === GameConfig.PLAYER) {
+                    quadTreePlayer.insert(new QuadTreeData(rect, entity));
                 } else {
-                    quadTreeOpponent.insert(new QuadTreeData(rect, entityList[i]));
+                    quadTreeOpponent.insert(new QuadTreeData(rect, entity));
                 }
             }
 
-            for (let i = 0; i < entityList.length; i++) {
-                if (ValidatorECS.isBullet(entityList[i])) {
-                    let bulletInfoComponent = entityList[i].getComponent(BulletInfoComponent);
+            for (let entityId in this.getEntityStore()) {
+                let entity = this.getEntityStore()[entityId];
+                if (!entity.getActive()) continue;
+                if (!entity._hasComponent(PositionComponent)) continue;
 
+                if (ValidatorECS.isBullet(entity)) {
+                    let bulletInfoComponent = entity.getComponent(BulletInfoComponent);
                     if (bulletInfoComponent.radius) {
-                        this._handleRadiusBullet(entityList[i]);
+                        this._handleRadiusBullet(entity);
                     } else {
-                        this._handleCollisionBullet(entityList[i]);
+                        this._handleCollisionBullet(entity);
                     }
 
-                } else if (ValidatorECS.isTrap(entityList[i])) {
-                    this._handleCollisionTrap(entityList[i], dt);
+                } else if (ValidatorECS.isTrap(entity)) {
+                    this._handleCollisionTrap(entity, dt);
                 }
             }
         },
@@ -71,7 +78,10 @@ let CollisionSystem = System.extend({
 
             for (let j = 0; j < returnObjects.length; j++) {
                 let entity1 = bulletEntity, entity2 = returnObjects[j].entity;
-                if (entity1 !== entity2 && entity1.mode === entity2.mode && this._isCollide(entity1, entity2)) {
+                if (entity1 !== entity2 && entity1.mode === entity2.mode
+                    && entity1.getActive() && entity2.getActive()
+                    && this._isCollide(entity1, entity2)) {
+
                     let data = this._isMonsterAndBullet(entity1, entity2)
                     if (data) {
                         let monster = data.monster, bullet = data.bullet;
@@ -142,9 +152,12 @@ let CollisionSystem = System.extend({
             if ((Math.abs(bulletVelocity.staticPosition.x - bulletPos.x) <= 10)
                 && (Math.abs(bulletVelocity.staticPosition.y - bulletPos.y) <= 10)) {
                 //getMonsterInRadius
+
                 let monsterInBulletRadius = [];
-                let monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
-                for (let monster of monsterList) {
+                let abilitySystem = SystemManager.getInstance().getSystemByTypeID(AbilitySystem);
+                for (let monsterId in abilitySystem.getEntityStore()) {
+                    let monster = abilitySystem.getEntityStore()[monsterId];
+                    if (!monster._hasComponent(PositionComponent)) continue;
                     if (monster.mode === bullet.mode) {
                         if (Utils.euclidDistance(monster.getComponent(PositionComponent), bulletPos) <= bulletInfo.radius) {
                             monsterInBulletRadius.push(monster);
@@ -193,6 +206,7 @@ let CollisionSystem = System.extend({
                         let entity1 = trapEntity, entity2 = returnObjects[j].entity;
                         if (entity1 !== entity2
                             && entity1.mode === entity2.mode
+                            && entity1.getActive() && entity2.getActive()
                             && ValidatorECS.isMonster(entity2)
                             && this._isCollide(entity1, entity2)) {
 
@@ -228,6 +242,7 @@ let CollisionSystem = System.extend({
                     let entity1 = trapEntity, entity2 = returnObjects[j].entity;
                     if (entity1 !== entity2
                         && entity1.mode === entity2.mode
+                        && entity1.getActive() && entity2.getActive()
                         && ValidatorECS.isMonster(entity2)
                         && this._isCollide(entity1, entity2)) {
 

@@ -8,14 +8,6 @@ let MonsterInfoComponent = InfoComponent.extend({
     },
 
     setCategory: function (category) {
-        if (typeof category !== "string") {
-            throw new InvalidArgumentTypeError(category, "string")
-        }
-
-        if (category !== "normal" && category !== "boss") {
-            throw new Error("Category must be any in [normal, boss]")
-        }
-
         this.category = category;
     },
 

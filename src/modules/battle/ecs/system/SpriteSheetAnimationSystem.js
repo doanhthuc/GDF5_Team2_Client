@@ -4,14 +4,16 @@ let SpriteSheetAnimationSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
+    },
+
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === SpriteSheetAnimationComponent.typeID;
     },
 
     _run: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SpriteSheetAnimationComponent);
-
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(SpriteSheetAnimationComponent)) continue;
             let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
 
             if (spriteComponent.currentStateIsRendered === false) {

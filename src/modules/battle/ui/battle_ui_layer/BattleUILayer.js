@@ -121,5 +121,7 @@ let BattleUILayer = cc.Layer.extend({
 });
 
 BattleUILayer.minusHouseEnergy = function (energy, mode) {
-    BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.minusEnergyHouse(energy, mode);
+    let battleData = BattleManager.getInstance().getBattleData();
+    battleData.setEnergyHouse(battleData.getEnergyHouse(mode) - energy, mode);
+    BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.renderEnergyHouse();
 }

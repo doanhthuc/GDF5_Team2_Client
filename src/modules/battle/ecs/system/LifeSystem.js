@@ -4,18 +4,21 @@ let LifeSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
     },
 
     _run: function (dt) {
 
     },
 
-    updateData: function () {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(LifeComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === LifeComponent.typeID;
+    },
 
-        for (let entity of entityList) {
+    updateData: function () {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(LifeComponent)) continue;
+            
             let lifeComponent = entity.getComponent(LifeComponent);
 
             if (lifeComponent.hp <= 0) {

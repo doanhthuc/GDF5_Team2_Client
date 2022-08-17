@@ -114,6 +114,7 @@ GameConfig.FROG_BULLET = {
     HIT_SECOND_TIME: 2,
     HIT_BOTH_TIME: 3,
 }
+GameConfig.RANGE_SIZE = 687;
 GameConfig.HOUSE_POSITION = {x: 6, y: 0};
 GameConfig.MONSTER_BORN_POSITION = {x: 0, y: 4};
 GameConfig.TILE_WIDTH = 77;
@@ -156,7 +157,7 @@ GameConfig.MONSTER = {
     },
     CLASS: {
         LAND: "land",
-        AIR: "air",
+        AIR: "aerial",
     }
 }
 

@@ -1,7 +1,7 @@
 let SystemManager = ManagerECS.extend({
     ctor: function () {
         this._super();
-        this._storeInstance = new Map();
+        this._storeInstance = [];
         this._storeCls = new Map();
     },
 
@@ -19,24 +19,42 @@ let SystemManager = ManagerECS.extend({
     },
 
     add: function (system) {
-        if (this._storeInstance.has(system.id)) {
+        if (this._storeInstance[system.typeID]) {
             throw new Error("System with typeID = " + system.typeID + ", id = " + system.id + ", name = " + system.name + " exists.");
         }
 
-        this._storeInstance.set(system.id, system);
+        this._storeInstance[system.typeID] = system;
     },
 
-    findByInstanceId: function (instanceId) {
-        this._storeInstance.get(instanceId);
+    getSystemByTypeID: function (SystemCls) {
+        if (!this._storeInstance[SystemCls.typeID]) {
+            throw new Error("System name = " + SystemCls.name + " not found")
+        }
+        return this._storeInstance[SystemCls.typeID];
     },
 
     remove: function (system) {
         this._storeInstance.delete(system.id);
     },
+
+    addEntityIntoSystem: function (entity, componentOrCls) {
+        for (let systemTypeID in this._storeInstance) {
+            let system = this._storeInstance[systemTypeID];
+            system.addEntity(entity, componentOrCls);
+        }
+    },
+
+    removeEntityFromSystem: function (entity, componentOrCls) {
+        for (let systemTypeID in this._storeInstance) {
+            let system = this._storeInstance[systemTypeID];
+            system.removeEntity(entity, componentOrCls);
+        }
+    },
 });
 
 let _instanceBuilder = (function () {
     let _instance = null;
+
     return {
         getInstance: function () {
             if (_instance === null) {
@@ -44,7 +62,10 @@ let _instanceBuilder = (function () {
             }
             return _instance;
         },
+
         resetInstance: function () {
+            _instance._storeInstance = null;
+            _instance._storeCls = null;
             _instance = null;
         }
     }
