@@ -4,7 +4,6 @@ let SpriteSheetAnimationSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
     },
 
     checkEntityCondition: function (entity, componentOrCls) {

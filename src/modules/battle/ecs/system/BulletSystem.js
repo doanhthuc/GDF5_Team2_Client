@@ -4,7 +4,6 @@ let BulletSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
     },
 
     _run: function (tick) {
@@ -57,21 +56,3 @@ let BulletSystem = System.extend({
 })
 BulletSystem.typeID = GameConfig.SYSTEM_ID.BULLET;
 SystemManager.getInstance().registerClass(BulletSystem);
-
-// FIXME: when dynamic position is not active ==> remove velocity and destroy entity???
-// if (velocityComponent.getDynamicPosition() && velocityComponent.getDynamicPosition().getActive() === false) {
-//     velocityComponent.getDynamicPosition() = null;
-//     entity.setActive(false);
-//     // set sprite false
-// }
-
-// // FIXME: what is this?
-// if (entity.hasAllComponent(BulletInfoComponent)) {
-//     let bulletInfoComponent = entity.getComponent(BulletInfoComponent);
-//     if (bulletInfoComponent.type === "frog") {
-//         let appearanceComponent = entity.getComponent(AppearanceComponent)
-//         if (appearanceComponent) {
-//             appearanceComponent.sprite.setVisible(false);
-//         }
-//     }
-// }

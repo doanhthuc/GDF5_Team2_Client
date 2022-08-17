@@ -1,4 +1,3 @@
-// Create Boss
 EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.DEMON_TREE;

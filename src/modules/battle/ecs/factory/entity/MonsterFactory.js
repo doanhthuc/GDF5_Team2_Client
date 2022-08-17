@@ -1,4 +1,3 @@
-// Create Monster
 EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.SWORD_MAN;

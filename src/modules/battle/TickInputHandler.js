@@ -58,7 +58,6 @@ let TickInputHandler = cc.Class.extend({
         let tilePos = cc.p(packet.tileX, packet.tileY);
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentMap = battleData.getMapObject(GameConfig.OPPONENT);
-        cc.log("_handleOpponentPutTower: towerType: " + packet.towerId + " level: " + packet.towerLevel + " tilePos: " + JSON.stringify(tilePos));
         opponentMap.putTowerIntoMap(-1, packet.towerId, packet.towerLevel, tilePos);
         OpponentAction.getInstance().buildTower(packet.towerId, tilePos);
     },
@@ -96,18 +95,15 @@ let TickInputHandler = cc.Class.extend({
 
     _handlePutTrap: function (cmd, packet) {
         let tilePos = cc.p(packet.tilePosX, packet.tilePosY);
-        cc.log("[BattleNetwork.js line 206: _handlePutTrap packet: " + JSON.stringify(packet));
         EntityFactory.createTrap(tilePos, GameConfig.PLAYER);
     },
 
     _handleOpponentPutTrap: function (cmd, packet) {
-        cc.log("[BattleNetwork.js line 210: _handleOpponentPutTrap packet: " + JSON.stringify(packet));
         let tilePos = cc.p(packet.tilePosX, packet.tilePosY);
         OpponentAction.getInstance().putTrap(tilePos);
     },
 
     _handleChangeTowerStrategy: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 197] received change tower strategy packet player: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let tilePos = cc.p(packet.tileX, packet.tileY);
@@ -118,7 +114,6 @@ let TickInputHandler = cc.Class.extend({
     },
 
     _handleOpponentChangeTowerStrategy: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 201] received change tower strategy packet opponent: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
         let tilePos = cc.p(packet.tileX, packet.tileY);
@@ -129,7 +124,6 @@ let TickInputHandler = cc.Class.extend({
     },
 
     _handleDestroyTower: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 244] received destroy tower packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let playerObjectMap = battleData.getMapObject(GameConfig.PLAYER);
         let tilePos = cc.p(packet.tileX, packet.tileY);
@@ -151,7 +145,6 @@ let TickInputHandler = cc.Class.extend({
     },
 
     _handleOpponentDestroyTower: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 253] received destroy tower packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         let opponentObjectMap = battleData.getMapObject(GameConfig.OPPONENT);
         let tilePos = cc.p(packet.tileX, packet.tileY);

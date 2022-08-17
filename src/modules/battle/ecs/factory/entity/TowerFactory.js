@@ -51,7 +51,6 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
     let node = NodeFactory.createBearNodeAnimation(attackRange, false, mode);
     let frozenEffect = ComponentFactory.create(FrozenEffect, frozenDuration);
 
-    // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "support", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
@@ -83,8 +82,6 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let node = NodeFactory.createFrogNodeAnimation(attackRange, mode);
 
-    let damageEffect = ComponentFactory.create(DamageEffect, 3);
-    // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
@@ -118,7 +115,6 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
     let node = NodeFactory.createBunnyNodeAnimation(attackRange, mode);
 
     let slowEffect = ComponentFactory.create(SlowEffect, slowDuration, slowValue);
-    // NOTE: get component from pool
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
@@ -340,7 +336,8 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
             let towerConfig = TowerConfig.getDamageGoatTowerConfigFromJson(towerLevel);
             let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
             let damageUpValue = towerConfig.damageUpValue;
-            towerAbilityComponent.reset(buffRange, damageUpValue);
+            let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, damageUpValue);
+            towerAbilityComponent.reset(buffRange, buffAttackDamageEffect);
             //Add SpecialSkill
             if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
                 let goatSlowAuraComponent = ComponentFactory.create(GoatSlowAuraComponent, 0.2, buffRange);
@@ -356,7 +353,8 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
             let towerConfig = TowerConfig.getAttackSpeedSnakeTowerConfigFromJson(towerLevel);
             let buffRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
             let attackSpeedUpValue = towerConfig.attackSpeedUpValue;
-            towerAbilityComponent.reset(buffRange, attackSpeedUpValue);
+            let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, attackSpeedUpValue);
+            towerAbilityComponent.reset(buffRange, buffAttackSpeedEffect);
             if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
                 let snakeBurnHpAuraComponent = ComponentFactory.create(SnakeBurnHpAuraComponent, 0.01, 5, buffRange);
                 towerEntity.addComponent(snakeBurnHpAuraComponent);

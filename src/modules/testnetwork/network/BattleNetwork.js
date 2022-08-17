@@ -89,15 +89,10 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleMatching: function (cmd, packet) {
-        cc.log("[ShopNetwork.js] received matching packet: " + JSON.stringify(packet));
         let battleData = new BattleData();
         BattleManager.getInstance().registerBattleData(battleData, true);
         battleData.setRoomId(packet.roomId)
-        // IMPORTANT: remove send simple map from battle
-        // battleData.setMap(packet.playerMap, GameConfig.PLAYER);
-        // battleData.setMap(packet.opponentMap, GameConfig.OPPONENT);
-        // battleData.setMapObject(packet.playerMap, GameConfig.PLAYER);
-        // battleData.setMapObject(packet.playerMap, GameConfig.OPPONENT);
+
         battleData.setLongestPath(packet.playerLongestPath, GameConfig.PLAYER);
         battleData.setLongestPath(packet.opponentLongestPath, GameConfig.OPPONENT);
 
@@ -157,22 +152,15 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleGetBattleInfo: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 154] received battleInfo: ' + JSON.stringify(packet));
-
-        // IMPORTANT: remove battle data save battle start time
         let battleData = BattleManager.getInstance().getBattleData();
         battleData.setBattleStartTime(packet.battleStartTime);
         tickManager.setStartTime(packet.battleStartTime);
 
-        cc.warn("packet.battleStartTime = " + packet.battleStartTime);
-        cc.log("time server = " + TimeUtil.getServerTime());
+
         tickManager.getTickData().setBattleTimerData(battleData.getTimer());
         BattleManager.getInstance().getBattleData().setMaxWave(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
-        //let battleData = BattleManager.getInstance().getBattleData();
-        // cc.log(battleData.battleStartTime);
-        // cc.log(TimeUtil.getServerTime());
-        // cc.log(TimeUtil.getDeltaTime())
+
         setTimeout(function () {
             fr.view(BattleLayer, 0.5, true)
             cc.log("===> Switch to Game Layer Scene !!!")
@@ -180,7 +168,6 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleGetBattleMapObject: function (cmd, packet) {
-        //  cc.log('[BattleNetwork.js line 95] received get battle map object packet: ' + JSON.stringify(packet));
         let battleData = BattleManager.getInstance().getBattleData();
         battleData.setMapObject(packet.playerBattleMapObject, GameConfig.PLAYER);
         battleData.setMapObject(packet.opponentBattleMapObject, GameConfig.OPPONENT);
@@ -192,18 +179,15 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleGetCellObject: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 113] received get cell object packet: ' + JSON.stringify(packet));
     },
 
     _handleGetBattleDeckInBattle: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 117] received get battle deck in battle packet: ' + JSON.stringify(packet));
         let battleDeck = packet.battleDeck;
         let battleData = BattleManager.getInstance().getBattleData();
         battleData.setCards(battleDeck, GameConfig.PLAYER);
     },
 
     _handleEndBattle: function (cmd, packet) {
-        cc.log('[BattleNetwork.js line 303] received end battle packet: ' + JSON.stringify(packet));
         BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.PLAYER);
         BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.OPPONENT);
         BattleManager.getInstance().getBattleData().setTrophyChange(packet.trophyChange);

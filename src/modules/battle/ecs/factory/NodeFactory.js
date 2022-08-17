@@ -220,7 +220,7 @@ NodeFactory.createOwlNodeAnimation = function (range, mode) {
     let towerSprite = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_attack_0_0009.png");
     let weaponSprite = new cc.Sprite("res/textures/tower/frame/cannon_1_2/tower_cannon_attack_2_0009.png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2 * range / 687)
+    rangeAttackSprite.setScale(2 * range / GameConfig.RANGE_SIZE)
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
     node.addChild(pedestalSprite, 1, "pedestal");
@@ -238,7 +238,7 @@ NodeFactory.createBearNodeAnimation = function (attackRange, isShowRange,mode) {
     let towerSprite = new cc.Sprite("#tower_ice_gun_attack_0_0010.png");
     let weaponSprite = new cc.Sprite("#tower_ice_gun_attack_1_0010.png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2 * attackRange / 687)
+    rangeAttackSprite.setScale(2 * attackRange / GameConfig.RANGE_SIZE)
 
     if (isShowRange) {
         node.addChild(rangeAttackSprite, 0, "rangeAttack");
@@ -259,7 +259,7 @@ NodeFactory.createFrogNodeAnimation = function (attackRange,mode) {
     let towerSprite = new cc.Sprite("#tower_boomerang_attack_0_0011.png");
     let weaponSprite = new cc.Sprite("#tower_boomerang_attack_1_0011.png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2 * attackRange / 687)
+    rangeAttackSprite.setScale(2 * attackRange / GameConfig.RANGE_SIZE)
 
 
     // node.addChild(rangeAttackSprite, 0, "rangeAttack");
@@ -350,7 +350,7 @@ NodeFactory.createDragTowerNode = function (towerId) {
     let towerSprite = new cc.Sprite("#" + animationConfig.tower.prefix + "0".repeat(4 - numberDigits) + animationConfig.tower.start + ".png");
     let weaponSprite = new cc.Sprite("#" + animationConfig.weapon.prefix + "0".repeat(4 - numberDigits) + animationConfig.weapon.start + ".png");
     let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
-    rangeAttackSprite.setScale(2 * attackRange / 687)
+    rangeAttackSprite.setScale(2 * attackRange / GameConfig.RANGE_SIZE)
     node.addChild(towerSprite, 1, "tower");
     node.addChild(weaponSprite, 1, "weapon");
     node.addChild(rangeAttackSprite, 1, "rangeAttack");

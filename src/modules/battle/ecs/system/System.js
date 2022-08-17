@@ -44,7 +44,6 @@ let System = cc.Class.extend({
         // }
         if (this.checkEntityCondition(entity, componentOrCls)) {
             this._entityStore[entity.id] = entity;
-            cc.log("&Add entity id = " + entity.id + " into system: " + this.name);
         }
     },
 
@@ -58,7 +57,6 @@ let System = cc.Class.extend({
         }
 
         delete this._entityStore[entity.id];
-        cc.log("&Remove entity id = " + entity.id + " from system: " + this.name);
     },
 
     getEntityStore: function () {

@@ -10,7 +10,6 @@ let EntityECS = cc.Class.extend({
 
         this.mode = mode;
         this.bitmask = [];
-        cc.log("&New entity id = " + this.id);
     },
 
     addComponent: function (component) {

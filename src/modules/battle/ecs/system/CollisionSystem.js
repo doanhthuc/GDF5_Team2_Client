@@ -10,7 +10,6 @@ let CollisionSystem = System.extend({
 
         ctor: function () {
             this._super();
-            cc.log("new " + this.name);
         },
 
         _run: function (tick) {
