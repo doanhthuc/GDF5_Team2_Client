@@ -143,12 +143,11 @@ CMDSendCheckSum = fr.OutPacket.extend({
         this.setCmdId(gv.CMD.SEND_CHECK_SUM);
     },
 
-    pack: function (checksum) {
+    pack: function (checksum, serverEndBattleTick) {
         this.packHeader();
         this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
         this.putInt(checksum.length)
-        for (let i = 0; i < checksum.length; i++) {
-            cc.log(checksum[i])
+        for (let i = 0; i < Math.min(serverEndBattleTick,checksum.length); i++) {
             this.putDouble(checksum[i])
         }
         this.updateSize();
@@ -618,6 +617,7 @@ BattleNetwork.packetMap[gv.CMD.END_BATTLE] = fr.InPacket.extend({
         this.trophyAfterBattle = this.getInt();
         this.trophyChange = this.getInt();
         this.hasChest = false;
+        this.serverEndBattleTick = this.getInt();
         if (this.result === GameConfig.BATTLE_RESULT.WIN) {
             this.hasChest = this.getInt();
         }

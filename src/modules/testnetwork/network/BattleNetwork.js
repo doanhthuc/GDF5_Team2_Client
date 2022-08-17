@@ -156,10 +156,10 @@ BattleNetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
-    sendCheckSum: function (checkSum) {
-        cc.log("sendCheckSum-----------------------" + JSON.stringify(checkSum));
+    sendCheckSum: function (checkSum, serverEndBattleTick) {
+        cc.log("sendCheckSum-----------------------" + JSON.stringify(checkSum) + serverEndBattleTick);
         let pk = this.gameClient.getOutPacket(CMDSendCheckSum);
-        pk.pack(checkSum);
+        pk.pack(checkSum,serverEndBattleTick);
         this.gameClient.sendPacket(pk);
     },
 
@@ -225,7 +225,7 @@ BattleNetwork.Connector = cc.Class.extend({
         BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.OPPONENT);
         BattleManager.getInstance().getBattleData().setTrophyChange(packet.trophyChange);
         contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).setTrophy(packet.trophyAfterBattle);
-        this.sendCheckSum(tickManager.checkSumContainer);
+        this.sendCheckSum(tickManager.checkSumContainer, packet.serverEndBattleTick);
         BattleManager.getInstance().getBattleLayer().stopGame();
     },
 
