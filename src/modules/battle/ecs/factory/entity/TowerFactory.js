@@ -378,17 +378,17 @@ EntityFactory.buffTower = function (towerEntity, buffType) {
     if (attackComponent) {
         switch (buffType) {
             case TileType.ATTACK_RANGE_UP: {
-                attackComponent.originRange += attackComponent.originRange * 1;
+                attackComponent.originRange += attackComponent.originRange * 0.25;
                 attackComponent.range = Math.max(attackComponent.originRange, attackComponent.range)
                 break;
             }
             case TileType.ATTACK_SPEED_UP: {
-                attackComponent.originSpeed -= attackComponent.originSpeed * 0.7;
+                attackComponent.originSpeed -= attackComponent.originSpeed * 0.25;
                 attackComponent.setSpeed(Math.min(attackComponent.originSpeed, attackComponent.getSpeed()));
                 break;
             }
             case TileType.DAMAGE_UP: {
-                attackComponent.originDamage += attackComponent.originDamage * 10;
+                attackComponent.originDamage += attackComponent.originDamage * 0.25;
                 attackComponent.setDamage(Math.max(attackComponent.getDamage(), attackComponent.originDamage));
                 break;
             }
