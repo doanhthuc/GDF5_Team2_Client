@@ -2,7 +2,7 @@ let BattleTimerNode = cc.Node.extend({
     ctor: function (countdown, duration) {
         this._super();
         this._duration = duration || 20;
-		this._monsterSpawmTime = 1;
+        this._monsterSpawmTime = 1;
 
         this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
         this.addChild(this.node);
@@ -13,6 +13,10 @@ let BattleTimerNode = cc.Node.extend({
         this.node.getChildByName("time").setLocalZOrder(3);
         this.node.getChildByName("battle_timer_border").setLocalZOrder(3);
 
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            onTouchBegan: this._onTouchBegan.bind(this),
+        }, this)
         this.startTimer();
     },
 
@@ -33,6 +37,10 @@ let BattleTimerNode = cc.Node.extend({
         let time = this.node.getChildByName("time")
         // time.setString(countDown.toFixed(2));
         time.setString(Math.floor(countDown));
+    },
+
+    onClickSpeedUpNextWave: function () {
+        BattleNetwork.connector.sendSpeedUpNextWave();
     },
 
     updateData: function () {
@@ -72,5 +80,17 @@ let BattleTimerNode = cc.Node.extend({
         } else {
             this._monsterSpawmTime -= tickManager.getTickRate() / 1000;
         }
+    },
+
+    _onTouchBegan: function (touch, event) {
+        let globalPos = touch.getLocation();
+        let localPos = this.progress.convertToNodeSpace(globalPos);
+        cc.log(JSON.stringify(globalPos) + " " + JSON.stringify(localPos));
+        let progressBoundingBox = cc.rect(0, 0, this.progress.width, this.progress.height);
+        let isTouched = cc.rectContainsPoint(progressBoundingBox, localPos) === true;
+        if (isTouched) {
+            BattleNetwork.connector.sendSpeedUpNextWave();
+        }
+        return false;
     }
 });

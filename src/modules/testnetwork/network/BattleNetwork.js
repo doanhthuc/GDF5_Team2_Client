@@ -71,6 +71,9 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.GET_BATTLE_DECK_IN_BATTLE:
                 this._handleGetBattleDeckInBattle(cmd, packet);
                 break;
+            case gv.CMD.NEXT_WAVE:
+                this._handleNextWave(packet);
+                break;
         }
     },
 
@@ -86,6 +89,21 @@ BattleNetwork.Connector = cc.Class.extend({
         pk.pack();
         this.gameClient.sendPacket(pk);
         this.logSendCommand(gv.CMD.SEND_CANCEL_MATCHING);
+    },
+
+    _handleNextWave: function (packet) {
+        for (let monsterIdx = 0; monsterIdx < packet.monsterWave.length; monsterIdx++) {
+            let tickNumber = (monsterIdx * 1000) / tickManager.getTickRate() + packet.tickNumber;
+            tickManager.addInput(tickNumber, gv.CMD.BORN_MONSTER, packet.monsterWave[monsterIdx]);
+        }
+        let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
+        let battleData = BattleManager.getInstance().getBattleData();
+        battleData.setCurrentWave(battleData.getCurrentWave() + 1);
+        battleData.setCurrentIndexMonsterWave(0);
+        uiLayer.waveNode.renderUI();
+        soundManager.playNextWave();
+        uiLayer.waveNode.renderUI();
+        tickManager.getTickData().setBattleTimerData(20);
     },
 
     _handleMatching: function (cmd, packet) {
@@ -159,7 +177,14 @@ BattleNetwork.Connector = cc.Class.extend({
     sendCheckSum: function (checkSum, serverEndBattleTick) {
         cc.log("sendCheckSum-----------------------" + JSON.stringify(checkSum) + serverEndBattleTick);
         let pk = this.gameClient.getOutPacket(CMDSendCheckSum);
-        pk.pack(checkSum,serverEndBattleTick);
+        pk.pack(checkSum, serverEndBattleTick);
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendSpeedUpNextWave: function () {
+        cc.log("sendSpeedUpNextWave-----------------------");
+        let pk = this.gameClient.getOutPacket(CMDSendSpeedUpNextWave);
+        pk.pack();
         this.gameClient.sendPacket(pk);
     },
 
@@ -176,16 +201,6 @@ BattleNetwork.Connector = cc.Class.extend({
         tickManager.getTickData().setBattleTimerData(battleData.getTimer());
         BattleManager.getInstance().getBattleData().setMaxWave(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
-        battleData = BattleManager.getInstance().getBattleData();
-        for (let waveIdx = 0; waveIdx < packet.waveAmount; waveIdx++) {
-            for (let monsterIdx = 0; monsterIdx < packet.monsterWave[waveIdx].length; monsterIdx++)
-            {
-                let tickNumber =(((waveIdx) * battleData.getTimer() + monsterIdx) * 1000) / tickManager.getTickRate();
-                cc.log(tickNumber)
-                tickManager.addInput(tickNumber, gv.CMD.BORN_MONSTER, packet.monsterWave[waveIdx][monsterIdx]);
-            }
-        }
-
         //let battleData = BattleManager.getInstance().getBattleData();
         // cc.log(battleData.battleStartTime);
         // cc.log(TimeUtil.getServerTime());

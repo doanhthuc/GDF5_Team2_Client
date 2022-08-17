@@ -21,6 +21,8 @@ gv.CMD.GET_BATTLE_DECK_IN_BATTLE = 5018;
 gv.CMD.BATTLE_ERROR = 5019;
 gv.CMD.SEND_CHECK_SUM = 5020;
 gv.CMD.BORN_MONSTER = 5021;
+gv.CMD.NEXT_WAVE = 5022;
+gv.CMD.SPEEDUP_NEXT_WAVE = 5023;
 
 BattleNetwork = BattleNetwork || {};
 
@@ -147,9 +149,23 @@ CMDSendCheckSum = fr.OutPacket.extend({
         this.packHeader();
         this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
         this.putInt(checksum.length)
-        for (let i = 0; i < Math.min(serverEndBattleTick,checksum.length); i++) {
+        for (let i = 0; i < Math.min(serverEndBattleTick, checksum.length); i++) {
             this.putDouble(checksum[i])
         }
+        this.updateSize();
+    }
+})
+
+CMDSendSpeedUpNextWave = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.SPEEDUP_NEXT_WAVE);
+    },
+
+    pack: function () {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
         this.updateSize();
     }
 })
@@ -601,6 +617,21 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_INFO] = fr.InPacket.extend({
                 wave.push(this.getInt());
             }
             this.monsterWave.push(wave);
+        }
+    }
+});
+
+BattleNetwork.packetMap[gv.CMD.NEXT_WAVE] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tickNumber = this.getInt();
+        this.monsterAmount = this.getInt();
+        this.monsterWave = [];
+        for (let i = 0; i < this.monsterAmount; i++) {
+            this.monsterWave.push(this.getInt());
         }
     }
 });
