@@ -11,6 +11,10 @@ let EffectSystem = System.extend({
 
     },
 
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === MonsterInfoComponent.typeID;
+    },
+
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
         // this._handleBuffAttackRangeEffect(tick);
@@ -25,35 +29,35 @@ let EffectSystem = System.extend({
         this._handlePoisonEffect(tick);
     },
 
-    _handleBuffAttackSpeedEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(BuffAttackSpeedEffect, AttackComponent);
-
-        for (let entity of entityList) {
-            let attackComponent = entity.getComponent(AttackComponent);
-            let buffAttackSpeedComponent = entity.getComponent(BuffAttackSpeedEffect);
-
-            attackComponent.setSpeed(attackComponent.originSpeed * (1 - (buffAttackSpeedComponent.percent - 1)));
-        }
-    },
-
-    _handleBuffAttackDamageEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(BuffAttackDamageEffect, AttackComponent);
-
-        for (let entity of entityList) {
-            let attackComponent = entity.getComponent(AttackComponent);
-            let buffAttackDamageComponent = entity.getComponent(BuffAttackDamageEffect);
-
-            attackComponent.setDamage(attackComponent.damage + attackComponent.originDamage * buffAttackDamageComponent.percent);
-        }
-    },
+    // _handleBuffAttackSpeedEffect: function (tick) {
+    //     let entityList = EntityManager.getInstance()
+    //         .getEntitiesHasComponents(BuffAttackSpeedEffect, AttackComponent);
+    //
+    //     for (let entity of entityList) {
+    //         let attackComponent = entity.getComponent(AttackComponent);
+    //         let buffAttackSpeedComponent = entity.getComponent(BuffAttackSpeedEffect);
+    //
+    //         attackComponent.setSpeed(attackComponent.originSpeed * (1 - (buffAttackSpeedComponent.percent - 1)));
+    //     }
+    // },
+    //
+    // _handleBuffAttackDamageEffect: function (tick) {
+    //     let entityList = EntityManager.getInstance()
+    //         .getEntitiesHasComponents(BuffAttackDamageEffect, AttackComponent);
+    //
+    //     for (let entity of entityList) {
+    //         let attackComponent = entity.getComponent(AttackComponent);
+    //         let buffAttackDamageComponent = entity.getComponent(BuffAttackDamageEffect);
+    //
+    //         attackComponent.setDamage(attackComponent.damage + attackComponent.originDamage * buffAttackDamageComponent.percent);
+    //     }
+    // },
 
     _handleDamageEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(DamageEffect);
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(DamageEffect)) continue;
 
-        for (let entity of entityList) {
             let lifeComponent = entity.getComponent(LifeComponent);
             if (lifeComponent) {
                 let damageComponent = entity.getComponent(DamageEffect);
@@ -69,10 +73,10 @@ let EffectSystem = System.extend({
     },
 
     _handleFrozenEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(FrozenEffect)
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(FrozenEffect)) continue;
 
-        for (let entity of entityList) {
             let velocityComponent = entity.getComponent(VelocityComponent);
             let frozenComponent = entity.getComponent(FrozenEffect);
 
@@ -91,12 +95,12 @@ let EffectSystem = System.extend({
     },
 
     _handleSlowEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SlowEffect);
-
         let needAddSound = false;
 
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(SlowEffect)) continue;
+
             let velocityComponent = entity.getComponent(VelocityComponent);
             let slowComponent = entity.getComponent(SlowEffect);
 
@@ -125,35 +129,35 @@ let EffectSystem = System.extend({
         }
     },
 
-    _handleGoatSlowEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(GoatSlowEffectComponent);
-
-        for (let entity of entityList) {
-            let velocityComponent = entity.getComponent(VelocityComponent);
-            let goatSlowEffect = entity.getComponent(GoatSlowEffectComponent);
-            velocityComponent.speedX = Math.min(goatSlowEffect.percent * velocityComponent.originSpeedX, velocityComponent.speedX);
-            velocityComponent.speedY = Math.min(goatSlowEffect.percent * velocityComponent.originSpeedX, velocityComponent.speedY);
-        }
-    },
-
-    _handleBuffAttackRangeEffect: function () {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(BuffAttackRangeEffect, AttackComponent);
-
-        for (let entity of entityList) {
-            let attackComponent = entity.getComponent(AttackComponent);
-            let buffAttackRangeComponent = entity.getComponent(BuffAttackRangeEffect);
-
-            attackComponent.range = attackComponent.originRange + attackComponent.originRange * buffAttackRangeComponent.percent;
-        }
-    },
+    // _handleGoatSlowEffect: function (tick) {
+    //     let entityList = EntityManager.getInstance()
+    //         .getEntitiesHasComponents(GoatSlowEffectComponent);
+    //
+    //     for (let entity of entityList) {
+    //         let velocityComponent = entity.getComponent(VelocityComponent);
+    //         let goatSlowEffect = entity.getComponent(GoatSlowEffectComponent);
+    //         velocityComponent.speedX = Math.min(goatSlowEffect.percent * velocityComponent.originSpeedX, velocityComponent.speedX);
+    //         velocityComponent.speedY = Math.min(goatSlowEffect.percent * velocityComponent.originSpeedX, velocityComponent.speedY);
+    //     }
+    // },
+    //
+    // _handleBuffAttackRangeEffect: function () {
+    //     let entityList = EntityManager.getInstance()
+    //         .getEntitiesHasComponents(BuffAttackRangeEffect, AttackComponent);
+    //
+    //     for (let entity of entityList) {
+    //         let attackComponent = entity.getComponent(AttackComponent);
+    //         let buffAttackRangeComponent = entity.getComponent(BuffAttackRangeEffect);
+    //
+    //         attackComponent.range = attackComponent.originRange + attackComponent.originRange * buffAttackRangeComponent.percent;
+    //     }
+    // },
 
     _handleTrapEffect: function (dt) {
-        let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(TrapEffect);
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(TrapEffect)) continue;
 
-        for (let entity of monsterList) {
             let trapEffect = entity.getComponent(TrapEffect);
 
             if (trapEffect.isExecuted) {
@@ -194,8 +198,11 @@ let EffectSystem = System.extend({
     },
 
     _handlePoisonEffect: function (dt) {
-        let monsterList = EntityManager.getInstance().getEntitiesHasComponents(PoisonEffect, LifeComponent);
-        for (let monster of monsterList) {
+        for (let entityID in this.getEntityStore()) {
+            let monster = this.getEntityStore()[entityID];
+            if (!monster._hasComponent(PoisonEffect)) continue;
+            if (!monster._hasComponent(LifeComponent)) continue;
+
             let poisonEffect = monster.getComponent(PoisonEffect);
 
             if (poisonEffect.duration > 0) {

@@ -7,14 +7,18 @@ let MovementSystem = System.extend({
         cc.log("new " + this.name);
     },
 
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === VelocityComponent.typeID;
+    },
+
     _run: function () {
         const dt = tickManager.getDeltaFromLatestTickToNow() / 1000;
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(VelocityComponent, PositionComponent);
-
         let battleMap = BattleManager.getInstance().getBattleData().getSimpleMap();
 
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(PositionComponent)) continue;
+
             let positionComponent = entity.getComponent(PositionComponent);
             let velocityComponent = entity.getComponent(VelocityComponent);
 
@@ -55,11 +59,12 @@ let MovementSystem = System.extend({
 
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(VelocityComponent, PositionComponent);
         let battleMap = BattleManager.getInstance().getBattleData().getSimpleMap();
 
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(PositionComponent)) continue;
+
             let positionComponent = entity.getComponent(PositionComponent);
             let velocityComponent = entity.getComponent(VelocityComponent);
             let appearanceComponent = entity.getComponent(AppearanceComponent);

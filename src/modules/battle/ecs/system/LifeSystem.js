@@ -11,11 +11,15 @@ let LifeSystem = System.extend({
 
     },
 
-    updateData: function () {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(LifeComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === LifeComponent.typeID;
+    },
 
-        for (let entity of entityList) {
+    updateData: function () {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(LifeComponent)) continue;
+            
             let lifeComponent = entity.getComponent(LifeComponent);
 
             if (lifeComponent.hp <= 0) {

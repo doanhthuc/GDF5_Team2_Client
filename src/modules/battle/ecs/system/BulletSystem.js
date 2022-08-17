@@ -11,11 +11,14 @@ let BulletSystem = System.extend({
 
     },
 
-    updateData: function () {
-        let bulletList = EntityManager.getInstance()
-            .getEntitiesHasComponents(VelocityComponent, PositionComponent, BulletInfoComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === BulletInfoComponent.typeID;
+    },
 
-        for (let bullet of bulletList) {
+    updateData: function () {
+        for (let bulletID in this.getEntityStore()) {
+            let bullet = this.getEntityStore()[bulletID];
+
             let bulletPos = bullet.getComponent(PositionComponent);
             let bulletVelocity = bullet.getComponent(VelocityComponent);
             let pathComponent = bullet.getComponent(PathComponent);
@@ -34,6 +37,9 @@ let BulletSystem = System.extend({
                 EntityManager.destroy(bullet);
                 continue;
             }
+
+            // destroy bullet when target monsters is underground
+
 
             if (bulletVelocity.getDynamicPosition()) {
                 if (Math.abs(bulletVelocity.getDynamicPosition().x - bulletPos.x) <= 10 || Math.abs(bulletVelocity.getDynamicPosition().y - bulletPos.y) <= 10) {
