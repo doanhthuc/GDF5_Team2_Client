@@ -46,6 +46,10 @@ let EntityManager = ManagerECS.extend({
         entity.setActive(false);
         delete this.entities[entity.id];
     },
+
+    clear: function () {
+        this.entities = null;
+    }
 });
 
 EntityManager.destroy = function (entity) {

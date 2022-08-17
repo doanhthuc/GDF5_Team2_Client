@@ -30,6 +30,12 @@ let VelocityComponent = Component.extend({
         let entity = EntityManager.getInstance().getEntity(this.dynamicEntityId);
 
         if (entity && entity.getActive()) {
+            if (entity._hasComponent(UnderGroundComponent)) {
+                let underGroundComponent = entity.getComponent(UnderGroundComponent)
+                if (underGroundComponent.isInGround) {
+                    return null;
+                }
+            }
             return entity.getComponent(PositionComponent);
         }
         

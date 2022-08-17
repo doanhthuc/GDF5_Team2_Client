@@ -16,8 +16,12 @@ let PathMonsterSystem = System.extend({
     },
 
     updateData: function () {
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent, PositionComponent, VelocityComponent);
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(PositionComponent)) continue;
+            if (!entity._hasComponent(VelocityComponent)) continue;
+
+
             let pathComponent = entity.getComponent(PathComponent);
             let positionComponent = entity.getComponent(PositionComponent);
             let velocityComponent = entity.getComponent(VelocityComponent);

@@ -50,11 +50,12 @@ let SystemManager = ManagerECS.extend({
             let system = this._storeInstance[systemTypeID];
             system.removeEntity(entity, componentOrCls);
         }
-    }
+    },
 });
 
 let _instanceBuilder = (function () {
     let _instance = null;
+
     return {
         getInstance: function () {
             if (_instance === null) {
@@ -62,7 +63,10 @@ let _instanceBuilder = (function () {
             }
             return _instance;
         },
+
         resetInstance: function () {
+            _instance._storeInstance = null;
+            _instance._storeCls = null;
             _instance = null;
         }
     }

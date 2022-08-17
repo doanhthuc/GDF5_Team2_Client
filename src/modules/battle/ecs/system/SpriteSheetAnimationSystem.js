@@ -12,10 +12,9 @@ let SpriteSheetAnimationSystem = System.extend({
     },
 
     _run: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SpriteSheetAnimationComponent);
-
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(SpriteSheetAnimationComponent)) continue;
             let spriteComponent = entity.getComponent(SpriteSheetAnimationComponent);
 
             if (spriteComponent.currentStateIsRendered === false) {
