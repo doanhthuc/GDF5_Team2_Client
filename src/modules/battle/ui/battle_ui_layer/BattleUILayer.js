@@ -11,7 +11,7 @@ let BattleUILayer = cc.Layer.extend({
             {id: 5, level: 1}, {id: 6, level: 1}, {id: 7, level: 1}, {id: 8, level: 1}, {id: 9, level: 1}
         ];
         this.cardDeckListData = new CardDeckListData(this.battleData.getCards(GameConfig.PLAYER));
-        // this.battleData.setCards(this.cardDeckListData.getFirst4CardId(), GameConfig.PLAYER);
+        this.battleData.setCardDeckListData(this.cardDeckListData, GameConfig.PLAYER);
 
         this.twoPlayerInfoLayer = new TwoPlayerInfoLayer(BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.PLAYER)
             , BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.OPPONENT));

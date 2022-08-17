@@ -41,7 +41,8 @@ let BattleData = cc.Class.extend({
                         id: 4,
                         type: GameConfig.ENTITY_ID.FROZEN_SPELL,
                     }
-                ]
+                ],
+                cardDeckListData: null,
             },
             opponent: {
                 username: "OPPONENT333",
@@ -235,6 +236,16 @@ let BattleData = cc.Class.extend({
     getCards: function (mode) {
         Utils.validateMode(mode);
         return this.dataInGame[mode].cards;
+    },
+
+    setCardDeckListData: function (cardDeckListData, mode = GameConfig.PLAYER) {
+        Utils.validateMode(mode);
+        this.dataInGame[mode].cardDeckListData = cardDeckListData;
+    },
+
+    getCardDeckListData: function (mode = GameConfig.PLAYER) {
+        Utils.validateMode(mode);
+        return this.dataInGame[mode].cardDeckListData;
     },
 
     setTrophyChange: function (trophyChange) {
