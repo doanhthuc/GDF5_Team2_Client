@@ -189,8 +189,11 @@ let TickManager = cc.Class.extend({
 
     calcCheckSum: function (currentTick) {
         let sumHp = 0;
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(LifeComponent);
-        for (let entity of entityList) {
+        let lifeSystem = SystemManager.getInstance().getSystemByTypeID(LifeSystem);
+        for (let entityID in lifeSystem.getEntityStore()) {
+            let entity = lifeSystem.getEntityStore()[entityID];
+            if (!entity.getActive() || !entity._hasComponent(LifeComponent)) continue;
+
             let lifeComponent = entity.getComponent(LifeComponent);
             sumHp += lifeComponent.hp;
         }

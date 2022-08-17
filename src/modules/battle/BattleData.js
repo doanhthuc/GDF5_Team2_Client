@@ -123,6 +123,9 @@ let BattleData = cc.Class.extend({
 
     setEnergyHouse: function (val, mode) {
         Utils.validateMode(mode);
+        if (val === null || val === undefined || Number.isNaN(val)) {
+            throw new Error("val = " + val + " is not validate");
+        }
         if (val < 0) {
             val = 0;
         }
