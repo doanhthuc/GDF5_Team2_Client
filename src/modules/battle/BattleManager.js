@@ -46,6 +46,9 @@ let _instanceBuilder = (function () {
             return _instance;
         },
         resetInstance: function () {
+            _instance.battleData = null;
+            _instance.battleLayer = null;
+            _instance.cardDeckNode = null;
             _instance = null;
         }
     }

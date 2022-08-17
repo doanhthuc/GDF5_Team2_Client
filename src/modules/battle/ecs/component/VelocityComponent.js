@@ -4,6 +4,7 @@ let VelocityComponent = Component.extend({
 
     ctor: function (speedX, speedY, dynamicEntityId, staticPosition) {
         this._super();
+        this.typeID = 6;
         this.reset(speedX, speedY, dynamicEntityId, staticPosition);
     },
 
@@ -29,6 +30,12 @@ let VelocityComponent = Component.extend({
         let entity = EntityManager.getInstance().getEntity(this.dynamicEntityId);
 
         if (entity && entity.getActive()) {
+            if (entity._hasComponent(UnderGroundComponent)) {
+                let underGroundComponent = entity.getComponent(UnderGroundComponent)
+                if (underGroundComponent.isInGround) {
+                    return null;
+                }
+            }
             return entity.getComponent(PositionComponent);
         }
         

@@ -5,7 +5,7 @@ let CircleTarget = cc.Node.extend({
         this.rootNode = ccs.load("ui/battle/battle_ui_layer/target_strategy/CircleTarget.json", "").node;
 
         let rangeAttackSprite = new cc.Sprite("res/textures/battle/battle_tower_range_player.png");
-        rangeAttackSprite.setScale(2 * range / 687)
+        rangeAttackSprite.setScale(2 * range / GameConfig.RANGE_SIZE)
 
         this.addChild(rangeAttackSprite);
         this.addChild(this.rootNode);

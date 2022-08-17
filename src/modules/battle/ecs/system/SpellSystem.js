@@ -4,26 +4,33 @@ let SpellSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
     },
 
     _run: function (dt) {
 
     },
 
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === SpellInfoComponent.typeID || componentOrCls.typeID === MonsterInfoComponent.typeID;
+    },
+
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
-        let spellList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SpellInfoComponent);
+        for (let entityID in this.getEntityStore()) {
+            let spellEntity = this.getEntityStore()[entityID];
+            if (!spellEntity._hasComponent(SpellInfoComponent)) continue;
 
-        for (let spellEntity of spellList) {
             let spellComponent = spellEntity.getComponent(SpellInfoComponent);
 
             spellComponent.delay = spellComponent.delay - tick;
 
             if (spellComponent.delay <= 0) {
-                let monsters = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
-                for (let monster of monsters) {
+                for (let monsterId in this.getEntityStore()) {
+                    let monster = this.getEntityStore()[monsterId];
+
+                    if (monster === spellEntity) continue;
+                    if (!monster._hasComponent(MonsterInfoComponent)) continue;
+                    if (!monster._hasComponent(PositionComponent)) continue;
 
                     // The spell can't reach the under ground monsters
                     let underGroundComponent = monster.getComponent(UnderGroundComponent);

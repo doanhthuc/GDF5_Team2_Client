@@ -13,7 +13,6 @@ TowerConfig.getBunnyOilGunTowerConfigFromJson = (level) => {
     let towerRank = ReadConfigUtils.getTowerRankByLevel(level);
     let towerConfig = TowerConfig.getTowerConfigFromJson(towerId, level);
     let targetBuffConfigData = JsonReader.getTargetBuffConfig()[towerConfig.bulletTargetBuffType]
-    cc.log("targetBuffConfigData line 15:  ", JSON.stringify(towerConfig));
     let cloneConfig = _.clone(towerConfig);
     cloneConfig.slowDuration = targetBuffConfigData.duration[towerRank];
     cloneConfig.slowValue = targetBuffConfigData.effects[towerRank][0].value;
@@ -35,7 +34,6 @@ TowerConfig.getDamageGoatTowerConfigFromJson = (level) => {
     let towerRank = ReadConfigUtils.getTowerRankByLevel(level);
     let towerConfig = TowerConfig.getTowerConfigFromJson(towerId, level);
     let towerBuffConfigData = JsonReader.getTowerBuffConfig()[towerConfig.auraTowerBuffType]
-    // let cloneConfig = _.clone(towerConfig);
     towerConfig.damageUpValue = towerBuffConfigData.effects[towerRank][0].value;
     return towerConfig;
 }
@@ -45,7 +43,6 @@ TowerConfig.getAttackSpeedSnakeTowerConfigFromJson = (level) => {
     let towerRank = ReadConfigUtils.getTowerRankByLevel(level);
     let towerConfig = TowerConfig.getTowerConfigFromJson(towerId, level);
     let towerBuffConfigData = JsonReader.getTowerBuffConfig()[towerConfig.auraTowerBuffType]
-    // let cloneConfig = _.clone(towerConfig);
     towerConfig.attackSpeedUpValue = towerBuffConfigData.effects[towerRank][0].value;
     return towerConfig;
 }

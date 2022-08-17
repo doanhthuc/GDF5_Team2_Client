@@ -13,12 +13,9 @@ let AttackComponent = Component.extend({
         for (let i = 0; i < this.effects.length; i++) {
             effect = this.effects[i];
             if (effect.typeID === GameConfig.COMPONENT_ID.DAMAGE_EFFECT) {
-                // this.effects.splice(i, 1);
                 effect.damage = this._damage;
             }
         }
-        // QUESTION: create new or change damage value of DamageEffect
-        // this.effects.push(new DamageEffect(this._damage));
     },
 
     setSpeed: function (speed) {

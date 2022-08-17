@@ -4,12 +4,17 @@ let RenderSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
+    },
+
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === AppearanceComponent.typeID;
     },
 
     _run: function (tick) {
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(AppearanceComponent, PositionComponent);
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(PositionComponent)) continue;
+
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
 
@@ -20,10 +25,12 @@ let RenderSystem = System.extend({
     },
 
     updateData: function () {
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(AppearanceComponent, PositionComponent);
         let battleMap = BattleManager.getInstance().getBattleData().getSimpleMap();
 
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(PositionComponent)) continue;
+
             let appearanceComponent = entity.getComponent(AppearanceComponent);
             let positionComponent = entity.getComponent(PositionComponent);
 
@@ -57,9 +64,11 @@ let RenderSystem = System.extend({
     },
 
     _updateSkeletonComponentPosition: function () {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SkeletonAnimationComponent, PositionComponent);
-        for (let entity of entityList) {
+        let skeletonSystem = SystemManager.getInstance().getSystemByTypeID(SkeletonAnimationSystem);
+        for (let entityID in skeletonSystem.getEntityStore()) {
+            let entity = skeletonSystem.getEntityStore()[entityID];
+            if (!entity.getActive() || !entity._hasComponent(PositionComponent)) continue;
+
             let skeletonComponent = entity.getComponent(SkeletonAnimationComponent);
             let positionComponent = entity.getComponent(PositionComponent);
             skeletonComponent.spine.setPosition(positionComponent.__x, positionComponent.__y);
@@ -67,9 +76,11 @@ let RenderSystem = System.extend({
     },
 
     _updateSkeletonComponentPosition2: function () {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SkeletonAnimationComponent, PositionComponent);
-        for (let entity of entityList) {
+        let skeletonSystem = SystemManager.getInstance().getSystemByTypeID(SkeletonAnimationSystem);
+        for (let entityID in skeletonSystem.getEntityStore()) {
+            let entity = skeletonSystem.getEntityStore()[entityID];
+            if (!entity.getActive() || !entity._hasComponent(PositionComponent)) continue;
+
             let skeletonComponent = entity.getComponent(SkeletonAnimationComponent);
             let positionComponent = entity.getComponent(PositionComponent);
             skeletonComponent.spine.setPosition(positionComponent.x, positionComponent.y);

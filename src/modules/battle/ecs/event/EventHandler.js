@@ -6,8 +6,6 @@ EventDispatcher.getInstance()
         battleData.setCurrentIndexMonsterWave(0);
         uiLayer.waveNode.renderUI();
         soundManager.playNextWave();
-        // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.PLAYER);
-        // BattleManager.getInstance().getBattleLayer().bornMonsterInWave(BattleManager.getInstance().getBattleData().getCurrentMonsterWave(),GameConfig.OPPONENT);
     })
     .addEventHandler(EventType.SPAWN_MONSTER, function (data) {
         let battleData = BattleManager.getInstance().getBattleData();
@@ -22,12 +20,6 @@ EventDispatcher.getInstance()
             //
         }
     })
-    .addEventHandler(EventType.ZERO_ENERGY_HOUSE, function (data) {
-        // BattleManager.getInstance().getBattleLayer().stopGame();
-    })
-    .addEventHandler(EventType.END_ALL_WAVE, function (data) {
-        // BattleManager.getInstance().getBattleLayer().stopGame();
-    })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
         let tilePos = data.pos;
         let currentMode = data.mode;
@@ -37,8 +29,6 @@ EventDispatcher.getInstance()
         if (!Utils.validateTilePos(tilePos)) {
             return;
         }
-
-        cc.log("Put new tower event data: " + JSON.stringify(data));
 
         map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
@@ -54,12 +44,7 @@ EventDispatcher.getInstance()
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
                     if (path) {
                         if (path.length > 0) {
-                            // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
-                            // newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
                             let newPath = Utils.tileArray2PixelCellArray(path, currentMode);
-                            //newPath = newPath.slice(1, newPath.length);
-                            //newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
-                            //cc.log(JSON.stringify(newPath))
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
                         }
@@ -76,7 +61,6 @@ EventDispatcher.getInstance()
         let towerId = data.cardId;
         let tilePos = data.pos;
         BattleNetwork.connector.sendUpgradeTower(towerId, tilePos);
-        cc.log('[EventHandler.js line 52 ]Upgrade tower event data: ' + JSON.stringify(data));
     })
     .addEventHandler(EventType.DESTROY_TOWER, function (data) {
         let tilePos = data.pos;
@@ -87,8 +71,6 @@ EventDispatcher.getInstance()
         if (!Utils.validateTilePos(tilePos)) {
             return;
         }
-
-        cc.log("DesTROY_TOWER: " + JSON.stringify(data));
 
         map[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.NONE;
         let shortestPathForEachTile = FindPathUtil.findShortestPathForEachTile(currentMode);
@@ -104,12 +86,7 @@ EventDispatcher.getInstance()
                     let path = shortestPathForEachTile[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
                     if (path) {
                         if (path.length > 0) {
-                            // let newPath = [{x: positionComponent.x, y: positionComponent.y}]
-                            // newPath = [...newPath, ...Utils.tileArray2PixelArray(path, currentMode)]
                             let newPath = Utils.tileArray2PixelCellArray(path, currentMode);
-                            //newPath = newPath.slice(1, newPath.length);
-                            //newPath.unshift(cc.p(positionComponent.x, positionComponent.y));
-                            //cc.log(JSON.stringify(newPath))
                             pathComponent.path = newPath;
                             pathComponent.currentPathIdx = 0;
                         }

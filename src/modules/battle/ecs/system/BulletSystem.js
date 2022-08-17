@@ -4,18 +4,20 @@ let BulletSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
     },
 
     _run: function (tick) {
 
     },
 
-    updateData: function () {
-        let bulletList = EntityManager.getInstance()
-            .getEntitiesHasComponents(VelocityComponent, PositionComponent, BulletInfoComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === BulletInfoComponent.typeID;
+    },
 
-        for (let bullet of bulletList) {
+    updateData: function () {
+        for (let bulletID in this.getEntityStore()) {
+            let bullet = this.getEntityStore()[bulletID];
+
             let bulletPos = bullet.getComponent(PositionComponent);
             let bulletVelocity = bullet.getComponent(VelocityComponent);
             let pathComponent = bullet.getComponent(PathComponent);
@@ -54,21 +56,3 @@ let BulletSystem = System.extend({
 })
 BulletSystem.typeID = GameConfig.SYSTEM_ID.BULLET;
 SystemManager.getInstance().registerClass(BulletSystem);
-
-// FIXME: when dynamic position is not active ==> remove velocity and destroy entity???
-// if (velocityComponent.getDynamicPosition() && velocityComponent.getDynamicPosition().getActive() === false) {
-//     velocityComponent.getDynamicPosition() = null;
-//     entity.setActive(false);
-//     // set sprite false
-// }
-
-// // FIXME: what is this?
-// if (entity.hasAllComponent(BulletInfoComponent)) {
-//     let bulletInfoComponent = entity.getComponent(BulletInfoComponent);
-//     if (bulletInfoComponent.type === "frog") {
-//         let appearanceComponent = entity.getComponent(AppearanceComponent)
-//         if (appearanceComponent) {
-//             appearanceComponent.sprite.setVisible(false);
-//         }
-//     }
-// }

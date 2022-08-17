@@ -20,8 +20,12 @@ let TickManager = cc.Class.extend({
     },
 
     updateData: function () {
-        const battleLayer = this.getBattleLayer();
+        if (GameConfig.DEBUG) {
+            cc.warn("---------------------------------------")
+            cc.warn("---------------------------------------")
+        }
 
+        const battleLayer = this.getBattleLayer();
         const currentTick = this.getLatestUpdateTick();
         // cc.log("# latest tick = " + currentTick);
         // cc.log("# current tick = " + this.getCurrentTick());
@@ -30,7 +34,6 @@ let TickManager = cc.Class.extend({
         // handle input of current tick
         let queueInput = this.inputTick[currentTick];
         if (queueInput && queueInput.length > 0) {
-            cc.log("[TickManager.js line 32] handle input of current tick" + currentTick + ": " + JSON.stringify(queueInput));
             for (let i = 0; i < queueInput.length; i++) {
                 let {cmd, packet} = queueInput[i];
                 this.tickInputHandler.handle(cmd, packet, currentTick);
@@ -56,7 +59,7 @@ let TickManager = cc.Class.extend({
         this.calcCheckSum(currentTick);
         let endTime = Utils.currentTimeMillis();
         if (GameConfig.DEBUG) {
-            cc.error("Update time = " + (endTime - startTime));
+            cc.error("*** Update time = " + (endTime - startTime));
             cc.warn("* Entity Manager size = " + Object.keys(EntityManager.getInstance().entities).length);
             cc.warn("* Tick size = " + Object.keys(tickManager.getTickData().data.componentData).length);
             cc.warn("* Current id of component = " + UUIDGeneratorECS.genComponentID());
@@ -81,6 +84,14 @@ let TickManager = cc.Class.extend({
             cc.warn("   + Inactive size = " + JSON.stringify(componentInactive));
 
             measurePerformance.report();
+
+            // let startTime22 = Date.now();
+            // for (let i = 0; i <= 50; i++) {
+            //     EntityManager.getInstance().getEntitiesHasComponents(AppearanceComponent);
+            // }
+            // let endTime22 = Date.now();
+            // cc.log("Time getEntitiesHasComponents(): " + (endTime22 - startTime22));
+
 
             cc.warn("---------------------------------------")
             cc.warn("---------------------------------------")
@@ -178,8 +189,11 @@ let TickManager = cc.Class.extend({
 
     calcCheckSum: function (currentTick) {
         let sumHp = 0;
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(LifeComponent);
-        for (let entity of entityList) {
+        let lifeSystem = SystemManager.getInstance().getSystemByTypeID(LifeSystem);
+        for (let entityID in lifeSystem.getEntityStore()) {
+            let entity = lifeSystem.getEntityStore()[entityID];
+            if (!entity.getActive() || !entity._hasComponent(LifeComponent)) continue;
+
             let lifeComponent = entity.getComponent(LifeComponent);
             sumHp += lifeComponent.hp;
         }

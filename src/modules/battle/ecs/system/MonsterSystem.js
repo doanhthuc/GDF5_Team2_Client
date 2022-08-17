@@ -4,18 +4,20 @@ let MonsterSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
     },
 
     _run: function (tick) {
 
     },
 
-    updateData: function () {
-        let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === MonsterInfoComponent.typeID;
+    },
 
-        for (let monster of monsterList) {
+    updateData: function () {
+        for (let entityID in this.getEntityStore()) {
+            let monster = this.getEntityStore()[entityID];
+            if (!monster._hasComponent(PositionComponent)) continue;
             let monsterPos = monster.getComponent(PositionComponent);
 
             let posTile = Utils.pixel2Tile(monsterPos.x, monsterPos.y, monster.mode);
@@ -25,11 +27,11 @@ let MonsterSystem = System.extend({
 
                 BattleUILayer.minusHouseEnergy(monsterInfo.damageEnergy, monster.mode);
                 BattleAnimation.animationHouse(monster.mode);
-                BattleAnimation.animationPlusEnergy(monsterPos, 10, monster.mode);
+                BattleAnimation.animationPlusEnergy(monsterPos, monsterInfo.damageEnergy, monster.mode);
 
                 if (monster.mode === GameConfig.PLAYER) {
                     let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
-                    deckEnergyProgress.plusEnergy(10);
+                    deckEnergyProgress.plusEnergy(monsterInfo.damageEnergy);
                     soundManager.playMainTowerHit();
                 }
 

@@ -4,19 +4,23 @@ let SkeletonAnimationSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
     },
 
     _run: function (tick) {
 
     },
 
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === SkeletonAnimationComponent.typeID;
+    },
+
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SkeletonAnimationComponent);
 
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(SkeletonAnimationComponent)) continue;
+
             let skeletonComponent = entity.getComponent(SkeletonAnimationComponent);
             if (skeletonComponent.accTime >= skeletonComponent.timeLine[skeletonComponent.currentIdx]) {
                 skeletonComponent.spine.setAnimation(0, skeletonComponent.sequenceAnim[skeletonComponent.currentIdx], skeletonComponent.sequenceAnimLoop[skeletonComponent.currentIdx]);

@@ -1,154 +1,132 @@
 let AbilitySystem = System.extend({
-        id: GameConfig.SYSTEM_ID.ABILITY,
-        name: "AbilitySystem",
+    typeID: GameConfig.SYSTEM_ID.ABILITY,
+    name: "AbilitySystem",
 
-        ctor: function () {
-            this._super();
-            cc.log("new " + this.name);
-        },
+    ctor: function () {
+        this._super();
+    },
 
-        _run: function (tick) {
+    _run: function (tick) {
 
-        },
+    },
 
-        updateData: function () {
-            const tick = tickManager.getTickRate() / 1000;
-            this._handleUnderGroundComponent();
-            this._handleSpawnMinionComponent(tick);
-            this._handleHealingAbility(tick);
-            this._handleBuffAbility(tick);
-        },
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === MonsterInfoComponent.typeID;
+    },
 
-        _handleUnderGroundComponent: function () {
-            let entityList = EntityManager.getInstance().getEntitiesHasComponents(UnderGroundComponent);
-            for (let entity of entityList) {
-                let lifeComponent = entity.getComponent(LifeComponent);
-                let underGroundComponent = entity.getComponent(UnderGroundComponent);
+    updateData: function () {
+        const tick = tickManager.getTickRate() / 1000;
+        this._handleUnderGroundComponent();
+        this._handleSpawnMinionComponent(tick);
+        this._handleHealingAbility(tick);
+    },
+
+    _handleUnderGroundComponent: function () {
+        for (let entityId in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityId];
+            if (!entity._hasComponent(UnderGroundComponent)) continue;
+
+            let lifeComponent = entity.getComponent(LifeComponent);
+            let underGroundComponent = entity.getComponent(UnderGroundComponent);
+
+            let positionComponent = entity.getComponent(PositionComponent);
+            let frozenEffect = entity.getComponent(FrozenEffect);
+
+            // frozen monster ==> monster can't exec under ground ability
+            if (frozenEffect && frozenEffect.countdown > 0) {
+                continue;
+            }
+
+            //check if the Monster have Position Component
+            if (positionComponent) {
+                if (underGroundComponent.isInGround === false) {
+                    if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
+                        underGroundComponent.trigger += 1;
+                        underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 3;
+                        underGroundComponent.isInGround = true;
+                        BattleAnimation.addAnimationUnderGround(entity);
+                    }
+                } else {
+                    if (underGroundComponent.disableMoveDistance <= positionComponent.moveDistance) {
+                        underGroundComponent.isInGround = false;
+                        BattleAnimation.removeAnimationUnderGround(entity);
+                    }
+                }
+            }
+        }
+    },
+
+    _handleSpawnMinionComponent: function (tick) {
+        for (let entityId in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityId];
+            if (!entity._hasComponent(SpawnMinionComponent)) continue;
+
+            let spawnMinionComponent = entity.getComponent(SpawnMinionComponent);
+
+            if (spawnMinionComponent.period >= 0) {
+                spawnMinionComponent.period = spawnMinionComponent.period - tick;
+            } else {
+                spawnMinionComponent.period = 2;
                 let positionComponent = entity.getComponent(PositionComponent);
-                let frozenEffect = entity.getComponent(FrozenEffect);
 
-                // frozen monster ==> monster can't exec under ground ability
-                if (frozenEffect && frozenEffect.countdown > 0) {
-                    continue;
-                }
+                if (spawnMinionComponent.spawnAmount < 5) {
+                    EntityFactory.createDemonTreeMinion({
+                        x: positionComponent.x,
+                        y: positionComponent.y
+                    }, entity.mode);
 
-                //check if the Monster have Position Component
-                if (positionComponent) {
-                    if (underGroundComponent.isInGround === false) {
-                        if (((lifeComponent.hp / lifeComponent.maxHP) <= 0.7 - 0.3 * underGroundComponent.trigger)) {
-                            underGroundComponent.trigger += 1;
-                            underGroundComponent.disableMoveDistance = positionComponent.moveDistance + GameConfig.TILE_WIDTH * 3;
-                            underGroundComponent.isInGround = true;
-                            BattleAnimation.addAnimationUnderGround(entity);
-                        }
-                    } else {
-                        if (underGroundComponent.disableMoveDistance <= positionComponent.moveDistance) {
-                            underGroundComponent.isInGround = false;
-                            BattleAnimation.removeAnimationUnderGround(entity);
-                        }
-                    }
+                    BattleAnimation.animationBornMonster(entity);
                 }
             }
-        },
+        }
+    },
 
-        _handleSpawnMinionComponent: function (tick) {
-            let entityList = EntityManager.getInstance().getEntitiesHasComponents(SpawnMinionComponent);
+    _handleHealingAbility: function (tick) {
+        for (let entityId in this.getEntityStore()) {
+            let satyr = this.getEntityStore()[entityId];
 
-            for (let entity of entityList) {
-                let spawnMinionComponent = entity.getComponent(SpawnMinionComponent);
+            if (!satyr._hasComponent(HealingAbility)) continue;
+            if (!satyr._hasComponent(PositionComponent)) continue;
 
-                if (spawnMinionComponent.period >= 0) {
-                    spawnMinionComponent.period = spawnMinionComponent.period - tick;
-                } else {
-                    spawnMinionComponent.period = 2;
-                    let positionComponent = entity.getComponent(PositionComponent);
+            let healingAbility = satyr.getComponent(HealingAbility);
 
-                    if (spawnMinionComponent.spawnAmount < 5) {
-                        EntityFactory.createDemonTreeMinion({
-                            x: positionComponent.x,
-                            y: positionComponent.y
-                        }, entity.mode);
+            if (healingAbility.countdown > 0) {
+                healingAbility.countdown -= tick;
+            } else {
+                healingAbility.countdown = 1;
+                for (let monsterId in this.getEntityStore()) {
+                    let monster = this.getEntityStore()[monsterId];
 
-                        BattleAnimation.animationBornMonster(entity);
-                    }
-                }
-            }
-        },
+                    if (!monster._hasComponent(PositionComponent)) continue;
 
-        _handleHealingAbility: function (tick) {
-            let entityList = EntityManager.getInstance().getEntitiesHasComponents(HealingAbility, PositionComponent);
+                    if (monster.getActive() && monster.mode === satyr.mode) {
+                        let monsterPos = monster.getComponent(PositionComponent);
 
-            let monsterList = null;
-            if (entityList) {
-                monsterList = EntityManager.getInstance().getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
-            }
+                        if (monsterPos) {
+                            let distance = this._distanceFrom(satyr, monster);
 
-            for (let satyr of entityList) {
-                let healingAbility = satyr.getComponent(HealingAbility);
-
-                if (healingAbility.countdown > 0) {
-                    healingAbility.countdown -= tick;
-                } else {
-                    healingAbility.countdown = 1;
-                    for (let monster of monsterList) {
-                        if (monster.getActive() && monster.mode === satyr.mode) {
-                            let monsterPos = monster.getComponent(PositionComponent);
-
-                            if (monsterPos) {
-                                let distance = this._distanceFrom(satyr, monster);
-
-                                if (distance <= healingAbility.range) {
-                                    let lifeComponent = monster.getComponent(LifeComponent);
-                                    lifeComponent.hp = Math.min(lifeComponent.hp + lifeComponent.maxHP * healingAbility.healingRate, lifeComponent.maxHP);
-                                }
+                            if (distance <= healingAbility.range) {
+                                let lifeComponent = monster.getComponent(LifeComponent);
+                                lifeComponent.hp = Math.min(lifeComponent.hp + lifeComponent.maxHP * healingAbility.healingRate, lifeComponent.maxHP);
                             }
                         }
                     }
                 }
             }
+        }
 
-        },
+    },
 
-        _handleBuffAbility: function () {
-            let buffTowerList = EntityManager.getInstance().getEntitiesHasComponents(TowerAbilityComponent);
-            let damageTowerList = null;
+    _distanceFrom: function (tower, monster) {
+        let towerPos = tower.getComponent(PositionComponent);
+        let monsterPos = monster.getComponent(PositionComponent);
+        return Utils.euclidDistance(towerPos, monsterPos);
+    },
 
-            if (buffTowerList) {
-                damageTowerList = EntityManager.getInstance().getEntitiesHasComponents(AttackComponent);
-            }
+    getMonsterList: function () {
+        return this.getEntityStore();
+    }
 
-            for (let buffTower of buffTowerList) {
-                let towerAbilityComponent = buffTower.getComponent(TowerAbilityComponent);
-                for (let damageTower of damageTowerList) {
-                    if (damageTower.mode === buffTower.mode) {
-                        if (this._distanceFrom(buffTower, damageTower) < towerAbilityComponent.range) {
-                            switch (towerAbilityComponent.effect.typeID) {
-                                case BuffAttackDamageEffect.typeID: {
-                                    let attackComponent = damageTower.getComponent(AttackComponent);
-                                    attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
-                                    BattleAnimation.addBuffDamageAnimation(damageTower);
-                                    break;
-                                }
-                                case BuffAttackSpeedEffect.typeID: {
-                                    let attackComponent = damageTower.getComponent(AttackComponent);
-                                    attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
-                                    BattleAnimation.addBuffSpeedAnimation(damageTower);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-
-        _distanceFrom: function (tower, monster) {
-            let towerPos = tower.getComponent(PositionComponent);
-            let monsterPos = monster.getComponent(PositionComponent);
-            return Utils.euclidDistance(towerPos, monsterPos);
-        },
-
-    })
-;
+});
 AbilitySystem.typeID = GameConfig.SYSTEM_ID.ABILITY;
 SystemManager.getInstance().registerClass(AbilitySystem);

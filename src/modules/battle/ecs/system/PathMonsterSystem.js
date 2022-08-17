@@ -4,16 +4,23 @@ let PathMonsterSystem = System.extend({
 
     ctor: function () {
         this._super();
-        cc.log("new " + this.name);
     },
 
     _run: function (dt) {
 
     },
 
+    checkEntityCondition: function (entity, componentOrCls) {
+        return componentOrCls.typeID === PathComponent.typeID;
+    },
+
     updateData: function () {
-        let entityList = EntityManager.getInstance().getEntitiesHasComponents(PathComponent, PositionComponent, VelocityComponent);
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(PositionComponent)) continue;
+            if (!entity._hasComponent(VelocityComponent)) continue;
+
+
             let pathComponent = entity.getComponent(PathComponent);
             let positionComponent = entity.getComponent(PositionComponent);
             let velocityComponent = entity.getComponent(VelocityComponent);
@@ -71,8 +78,6 @@ let PathMonsterSystem = System.extend({
                 minDeg = key;
             }
         }
-        //cc.log(JSON.stringify(Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode)));
-        //cc.log(movingDeg + " " + directionDegree.get(minDeg));
         return directionDegree.get(minDeg);
     },
     _findNextPath: function (path, position, currentPathIdx) {

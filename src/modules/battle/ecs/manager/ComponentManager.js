@@ -50,6 +50,8 @@ let _instanceBuilder = (function () {
             return _instance;
         },
         resetInstance: function () {
+            _instance._storeInstance = null;
+            _instance._storeCls = null;
             _instance = null;
         }
     }
