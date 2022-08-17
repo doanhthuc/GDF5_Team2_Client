@@ -54,10 +54,10 @@ let EffectSystem = System.extend({
     },
 
     _handleDamageEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(DamageEffect);
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(DamageEffect)) continue;
 
-        for (let entity of entityList) {
             let lifeComponent = entity.getComponent(LifeComponent);
             if (lifeComponent) {
                 let damageComponent = entity.getComponent(DamageEffect);
@@ -73,10 +73,10 @@ let EffectSystem = System.extend({
     },
 
     _handleFrozenEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(FrozenEffect)
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(FrozenEffect)) continue;
 
-        for (let entity of entityList) {
             let velocityComponent = entity.getComponent(VelocityComponent);
             let frozenComponent = entity.getComponent(FrozenEffect);
 
@@ -95,12 +95,12 @@ let EffectSystem = System.extend({
     },
 
     _handleSlowEffect: function (tick) {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(SlowEffect);
-
         let needAddSound = false;
 
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(SlowEffect)) continue;
+
             let velocityComponent = entity.getComponent(VelocityComponent);
             let slowComponent = entity.getComponent(SlowEffect);
 
@@ -154,10 +154,10 @@ let EffectSystem = System.extend({
     },
 
     _handleTrapEffect: function (dt) {
-        let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(TrapEffect);
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(TrapEffect)) continue;
 
-        for (let entity of monsterList) {
             let trapEffect = entity.getComponent(TrapEffect);
 
             if (trapEffect.isExecuted) {
@@ -198,8 +198,11 @@ let EffectSystem = System.extend({
     },
 
     _handlePoisonEffect: function (dt) {
-        let monsterList = EntityManager.getInstance().getEntitiesHasComponents(PoisonEffect, LifeComponent);
-        for (let monster of monsterList) {
+        for (let entityID in this.getEntityStore()) {
+            let monster = this.getEntityStore()[entityID];
+            if (!monster._hasComponent(PoisonEffect)) continue;
+            if (!monster._hasComponent(LifeComponent)) continue;
+
             let poisonEffect = monster.getComponent(PoisonEffect);
 
             if (poisonEffect.duration > 0) {

@@ -16,10 +16,9 @@ let MonsterSystem = System.extend({
     },
 
     updateData: function () {
-        let monsterList = EntityManager.getInstance()
-            .getEntitiesHasComponents(MonsterInfoComponent, PositionComponent);
-
-        for (let monster of monsterList) {
+        for (let entityID in this.getEntityStore()) {
+            let monster = this.getEntityStore()[entityID];
+            if (!monster._hasComponent(PositionComponent)) continue;
             let monsterPos = monster.getComponent(PositionComponent);
 
             let posTile = Utils.pixel2Tile(monsterPos.x, monsterPos.y, monster.mode);

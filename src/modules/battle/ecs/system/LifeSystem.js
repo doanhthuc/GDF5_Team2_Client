@@ -16,10 +16,10 @@ let LifeSystem = System.extend({
     },
 
     updateData: function () {
-        let entityList = EntityManager.getInstance()
-            .getEntitiesHasComponents(LifeComponent);
-
-        for (let entity of entityList) {
+        for (let entityID in this.getEntityStore()) {
+            let entity = this.getEntityStore()[entityID];
+            if (!entity._hasComponent(LifeComponent)) continue;
+            
             let lifeComponent = entity.getComponent(LifeComponent);
 
             if (lifeComponent.hp <= 0) {
