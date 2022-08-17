@@ -14,14 +14,13 @@ const MonsterIdInJSONConfig = {
     DEMON_TREE_MINION: 12,
 }
 
-const MonsterEntityTypeIdToIdInJSONConfig = {
-    11: MonsterIdInJSONConfig.ASSASSIN,
-    12: MonsterIdInJSONConfig.BAT,
-    13: MonsterIdInJSONConfig.GIANT,
-    14: MonsterIdInJSONConfig.NINJA,
-    15: MonsterIdInJSONConfig.DEMON_TREE,
-    16: MonsterIdInJSONConfig.DEMON_TREE_MINION,
-    17: MonsterIdInJSONConfig.DARK_GIANT,
-    18: MonsterIdInJSONConfig.SATYR,
-    19: MonsterIdInJSONConfig.SWORD_MAN,
-}
+const MonsterEntityTypeIdToIdInJSONConfig = {}
+MonsterEntityTypeIdToIdInJSONConfig[GameConfig.ENTITY_ID.ASSASSIN] = MonsterIdInJSONConfig.ASSASSIN;
+MonsterEntityTypeIdToIdInJSONConfig[GameConfig.ENTITY_ID.BAT] = MonsterIdInJSONConfig.BAT;
+MonsterEntityTypeIdToIdInJSONConfig[GameConfig.ENTITY_ID.GIANT] = MonsterIdInJSONConfig.GIANT;
+MonsterEntityTypeIdToIdInJSONConfig[GameConfig.ENTITY_ID.NINJA] = MonsterIdInJSONConfig.NINJA;
+MonsterEntityTypeIdToIdInJSONConfig[GameConfig.ENTITY_ID.DEMON_TREE] = MonsterIdInJSONConfig.DEMON_TREE;
+MonsterEntityTypeIdToIdInJSONConfig[GameConfig.ENTITY_ID.DEMON_TREE_MINION] = MonsterIdInJSONConfig.DEMON_TREE_MINION;
+MonsterEntityTypeIdToIdInJSONConfig[GameConfig.ENTITY_ID.DARK_GIANT] = MonsterIdInJSONConfig.DARK_GIANT;
+MonsterEntityTypeIdToIdInJSONConfig[GameConfig.ENTITY_ID.SATYR] = MonsterIdInJSONConfig.SATYR;
+MonsterEntityTypeIdToIdInJSONConfig[GameConfig.ENTITY_ID.SWORD_MAN] = MonsterIdInJSONConfig.SWORD_MAN;

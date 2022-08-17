@@ -344,7 +344,6 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
         };
         let tileType = this.getInt();
         let objectInTileType = this.getInt();
-        cc.log("objectInTileType: " + objectInTileType);
         let tileObject = new TileObject(tilePos, tileType, objectInTileType);
         this._unpackObjectInTile(tileObject);
         return tileObject;

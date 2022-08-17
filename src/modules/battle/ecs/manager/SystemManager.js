@@ -19,7 +19,6 @@ let SystemManager = ManagerECS.extend({
     },
 
     add: function (system) {
-        cc.log("system.add = " + system.typeID);
         if (this._storeInstance[system.typeID]) {
             throw new Error("System with typeID = " + system.typeID + ", id = " + system.id + ", name = " + system.name + " exists.");
         }

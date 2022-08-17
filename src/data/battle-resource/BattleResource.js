@@ -57,4 +57,6 @@ const BattleResource = {
 
     // Trap
     TRAP_IMG: "textures/potion/fx_trap/image0000.png",
+
+    PLUS_ENERGY_ICON: "ui/battle/battle_ui_layer/energy/PlusEnergyIcon.json",
 }

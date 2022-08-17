@@ -3,7 +3,6 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID, mode);
     let towerConfig = TowerConfig.getTowerConfigFromJson(typeID, 1);
-    cc.log("[EntityFactory line 458] create cannon tower: " + JSON.stringify(towerConfig));
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     // let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
     let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
@@ -15,10 +14,6 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
 
     let node = NodeFactory.createOwlNodeAnimation(attackRange, mode);
 
-    // let frozenEffect = ComponentFactory.create(FrozenEffect, 1.5);
-    // let slowEffect = ComponentFactory.create(SlowEffect, 3, 0.3);
-    // let buffAttackDamageEffect = ComponentFactory.create(BuffAttackDamageEffect, 10);
-    // let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, 1.3);
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
@@ -32,8 +27,6 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
         .addComponent(attackComponent)
         .addComponent(spriteComponent);
 
-    // .addComponent(buffAttackDamageEffect)
-    // .addComponent(buffAttackSpeedEffect)
     return entity;
 };
 
@@ -232,7 +225,6 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
 
 EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode) {
     let towerEntity = EntityManager.getInstance().getEntity(entityId);
-    cc.log("[TowerFactory.js line 233]: ======================== " + JSON.stringify(towerEntity));
     let towerRank = ReadConfigUtils.getTowerCharRankByLevel(towerLevel);
     let animationConfig = towerEntity.getComponent(SpriteSheetAnimationComponent);
     let appearanceComponent = towerEntity.getComponent(AppearanceComponent);
@@ -250,7 +242,6 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
             let attackSpeed = towerConfig.stat.attackSpeed / 1000;
             let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
             let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
-            cc.log("[TowerFactory.js line 275 ] attackDamage: " + attackDamage)
             attackComponent.updateAttackStatistic(attackDamage, attackRange, attackSpeed, [], bulletSpeed, bulletRadius);
             //Add BulletSkill
             if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
@@ -271,7 +262,6 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
             let attackSpeed = towerConfig.stat.attackSpeed / 1000;
             let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
             let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
-            cc.log("[TowerFactory.js line 275 ] attackDamage: " + attackDamage)
             attackComponent.updateAttackStatistic(attackDamage, attackRange, attackSpeed, [], bulletSpeed, bulletRadius);
             //Add BulletSkill
             if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {
@@ -291,7 +281,6 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
             let attackSpeed = towerConfig.stat.attackSpeed / 1000;
             let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
             let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
-            cc.log("[TowerFactory.js line 275 ] attackDamage: " + attackDamage)
             attackComponent.updateAttackStatistic(attackDamage, attackRange, attackSpeed, [], bulletSpeed, bulletRadius);
             //Add BulletSkill
             if (towerLevel === GameConfig.TOWER_MAX_LEVEL) {

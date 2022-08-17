@@ -9,8 +9,7 @@ BattleAnimation.animationPlusEnergy = function (position, value, mode) {
 
     globalPos.x += (-10 + Math.random() * 10);
 
-    // FIXME: hardcode
-    let sp = ccs.load("ui/battle/battle_ui_layer/energy/PlusEnergyIcon.json", "").node;
+    let sp = ccs.load(BattleResource.PLUS_ENERGY_ICON, "").node;
     sp.setPosition(globalPos);
     sp.getChildByName("text").setString(value);
     uiLayer.addChild(sp)

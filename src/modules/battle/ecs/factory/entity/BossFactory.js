@@ -6,10 +6,10 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
-    // NOTE: get component from pool
+    let speed = monsterConfig.speed * GameConfig.TILE_WIDTH;
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, monsterConfig.monsterCategory, monsterConfig.monsterClass, monsterConfig.weight, monsterConfig.energy, monsterConfig.gainEnergy, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, speed, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createDemonTreeNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, monsterConfig.hitRadius * GameConfig.TILE_WIDTH, monsterConfig.hitRadius * GameConfig.TILE_WIDTH);
     let lifeComponent = ComponentFactory.create(LifeComponent, monsterConfig.hp);
@@ -29,10 +29,7 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
         .addComponent(lifeComponent)
         .addComponent(spawnMinionComponent)
         .addComponent(spriteComponent)
-    // .addComponent(slowEffect)
-    // .addComponent(frozenEffect)
 
-    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
     return entity;
 }
 
@@ -43,10 +40,10 @@ EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
-    // NOTE: get component from pool
+    let speed = monsterConfig.speed * GameConfig.TILE_WIDTH;
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, monsterConfig.monsterCategory, monsterConfig.monsterClass, monsterConfig.weight, monsterConfig.energy, monsterConfig.gainEnergy, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.8 * GameConfig.TILE_WIDTH, 0);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, speed, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createDemonTreeMinionNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, monsterConfig.hitRadius * GameConfig.TILE_WIDTH, monsterConfig.hitRadius * GameConfig.TILE_WIDTH);
     let lifeComponent = ComponentFactory.create(LifeComponent, monsterConfig.hp);
@@ -64,10 +61,7 @@ EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
         .addComponent(spriteComponent)
-    // .addComponent(slowEffect)
-    // .addComponent(frozenEffect)
 
-    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
     return entity;
 }
 
@@ -78,10 +72,10 @@ EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
-    // NOTE: get component from pool
+    let speed = monsterConfig.speed * GameConfig.TILE_WIDTH;
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, monsterConfig.monsterCategory, monsterConfig.monsterClass, monsterConfig.weight, monsterConfig.energy, monsterConfig.gainEnergy, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, speed, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createDarkGiantNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, monsterConfig.hitRadius * GameConfig.TILE_WIDTH, monsterConfig.hitRadius * GameConfig.TILE_WIDTH);
     let lifeComponent = ComponentFactory.create(LifeComponent, monsterConfig.hp);
@@ -99,10 +93,7 @@ EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
         .addComponent(spriteComponent)
-    // .addComponent(slowEffect)
-    // .addComponent(frozenEffect)
 
-    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
     return entity;
 }
 
@@ -113,10 +104,10 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
-    // NOTE: get component from pool
+    let speed = monsterConfig.speed * GameConfig.TILE_WIDTH;
     let infoComponent = ComponentFactory.create(MonsterInfoComponent, monsterConfig.monsterCategory, monsterConfig.monsterClass, monsterConfig.weight, monsterConfig.energy, monsterConfig.gainEnergy, undefined);
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let velocityComponent = ComponentFactory.create(VelocityComponent, 0.4 * GameConfig.TILE_WIDTH, 0);
+    let velocityComponent = ComponentFactory.create(VelocityComponent, speed, 0);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, NodeFactory.createSatyrNodeAnimation(), mode);
     let collisionComponent = ComponentFactory.create(CollisionComponent, monsterConfig.hitRadius * GameConfig.TILE_WIDTH, monsterConfig.hitRadius * GameConfig.TILE_WIDTH);
     let lifeComponent = ComponentFactory.create(LifeComponent, monsterConfig.hp);
@@ -136,10 +127,7 @@ EntityFactory.createSatyrBoss = function (pixelPos, mode) {
         .addComponent(lifeComponent)
         .addComponent(healingAbilityComponent)
         .addComponent(spriteComponent)
-    // .addComponent(slowEffect)
-    // .addComponent(frozenEffect)
 
-    //AnimationMap.changeMonsterDirectionAnimation(entity, path[0], path[1]);
     BattleAnimation.addAnimationHealing(entity);
     return entity;
 }
