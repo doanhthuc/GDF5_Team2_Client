@@ -74,6 +74,9 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.NEXT_WAVE:
                 this._handleNextWave(packet);
                 break;
+            case gv.CMD.SNAPSHOT:
+                this._handleSnapshot(cmd, packet);
+                break;
         }
     },
 
@@ -226,6 +229,11 @@ BattleNetwork.Connector = cc.Class.extend({
         contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).setTrophy(packet.trophyAfterBattle);
         this.sendCheckSum(tickManager.checkSumContainer, packet.serverEndBattleTick);
         BattleManager.getInstance().getBattleLayer().stopGame();
+    },
+
+    _handleSnapshot: function (cmd, packet) {
+        cc.error("READSNAPSHOT")
+        cc.log(JSON.stringify(packet));
     },
 
     logSendCommand: function (commandID, packet) {

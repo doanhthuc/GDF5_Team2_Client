@@ -80,3 +80,24 @@ let EntityECS = cc.Class.extend({
         }
     }
 });
+
+EntityECS.prototype.readSnapshot = function (inPacket) {
+    let newEntity = new EntityECS();
+    newEntity.typeID = inPacket.getInt();
+    newEntity.id = inPacket.getLong();
+    newEntity._active = inPacket.getShort();
+
+    let componentSize = inPacket.getInt();
+
+    for (let j = 1; j <= componentSize; j++) {
+        let componentTypeID = inPacket.getInt();
+
+        let ComponentCls = ComponentManager.getInstance().getClass(componentTypeID);
+        let component = ComponentCls.readSnapshot(inPacket);
+        component.typeID = componentTypeID;
+
+        newEntity.components[component.id] = component;
+    }
+
+    return newEntity;
+}

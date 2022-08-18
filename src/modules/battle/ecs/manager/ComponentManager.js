@@ -18,6 +18,7 @@ let ComponentManager = ManagerECS.extend({
         if (this._storeCls.has(typeID)) {
             throw new Error("Component Class with typeID = " + typeID + " doesn't exist");
         }
+        return this._storeCls.get(typeID);
     },
 
     add: function (component, override=false) {

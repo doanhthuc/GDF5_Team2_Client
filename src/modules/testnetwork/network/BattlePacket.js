@@ -23,6 +23,7 @@ gv.CMD.SEND_CHECK_SUM = 5020;
 gv.CMD.BORN_MONSTER = 5021;
 gv.CMD.NEXT_WAVE = 5022;
 gv.CMD.SPEEDUP_NEXT_WAVE = 5023;
+gv.CMD.SNAPSHOT = 5025;
 
 BattleNetwork = BattleNetwork || {};
 
@@ -680,5 +681,21 @@ BattleNetwork.packetMap[gv.CMD.BATTLE_ERROR] = fr.InPacket.extend({
 
     readData: function () {
         this.errorMessage = this.getString();
+    }
+})
+
+BattleNetwork.packetMap[gv.CMD.SNAPSHOT] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.entityStore = {};
+
+        let entitySize = this.getInt();
+        // for (let i = 1; i <= entitySize; i++) {
+        //     let entity = EntityECS.readSnapshot(this);
+        //     this.entityStore[entity.id] = entity;
+        // }
     }
 })

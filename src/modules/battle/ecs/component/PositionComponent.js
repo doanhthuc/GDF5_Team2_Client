@@ -23,3 +23,12 @@ let PositionComponent = Component.extend({
 });
 PositionComponent.typeID = GameConfig.COMPONENT_ID.POSITION;
 ComponentManager.getInstance().registerClass(PositionComponent);
+
+PositionComponent.prototype.readSnapshot = function (inPacket) {
+    cc.log("PositionComponent.readSnapshot()")
+    let component = Component.readSnapshot(inPacket);
+    component.x = inPacket.getDouble();
+    component.y = inPacket.getDouble();
+    component.moveDistance = inPacket.getDouble();
+    return component;
+}
