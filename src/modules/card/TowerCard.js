@@ -6,8 +6,9 @@ const TowerCard = ICard.extend({
         this.range = this.getRangeFromJson();
     },
 
-    getRangeFromJson: function () {
-        return JsonReader.getTowerConfig()[this.id].stat[this.rank].range;
+    getRangeFromJson: function (level) {
+        let rank = this.levelToRank(level);
+        return JsonReader.getTowerConfig()[this.id].stat[rank].range;
     },
 
     getEnergyFromJson: function () {
@@ -22,6 +23,6 @@ const TowerCard = ICard.extend({
 
     upgradeCardModel: function (level, accumulated) {
         this._super(level, accumulated);
-        this.range = this.getRangeFromJson();
+        this.range = this.getRangeFromJson(level);
     }
 })

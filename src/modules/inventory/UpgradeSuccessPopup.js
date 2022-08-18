@@ -78,7 +78,18 @@ const UpgradeSuccessPopup = cc.Node.extend({
         this.acctionArray = [];
         let showUp = cc.sequence(cc.show(), cc.moveBy(0.3, cc.p(0, 20)));
         this.setAllCardStatHoldersVisible(false);
-        for (let [key, value] of Object.entries(this.cardModel.getCardStat())) {
+        for (let [key, value] of Object.entries(this.cardModel.getCardStatByLevel(this.cardModel.level))) {
+            if (typeof value === 'number') {
+                value = value.toFixed(2)
+            }
+            if (key === 'attackSpeed') {
+                value = value + 's';
+            } else if (key === 'slowPercent') {
+                value = value + '%';
+            } else if (key === 'frozenTime') {
+                value = value / 1000 + 's';
+            }
+
             let cardStat = {
                 icon: CARD_STAT_ICON[key],
                 name: CARD_STAT_NAME[key],
