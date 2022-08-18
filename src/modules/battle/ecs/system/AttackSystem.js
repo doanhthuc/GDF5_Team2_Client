@@ -107,6 +107,9 @@ let AttackSystem = System.extend({
                             maxHP = hp;
                             maxHPIndex = i;
                         }
+                        if (hp === maxHP && i < maxHPIndex) {
+                            maxHPIndex = i;
+                        }
                     }
                     if (maxHPIndex !== -1) targetMonster = monsterInAttackRange[maxHPIndex];
                     break;
@@ -120,6 +123,9 @@ let AttackSystem = System.extend({
                     if (hp < minHP) {
                         minHP = hp;
                         minHPIndex = i;
+                        if (hp === minHP && i < minHPIndex) {
+                            minHPIndex = i;
+                        }
                     }
                 }
                 if (minHPIndex !== -1) targetMonster = monsterInAttackRange[minHPIndex];
@@ -134,6 +140,9 @@ let AttackSystem = System.extend({
                         maxDistance = distance;
                         maxDistanceIndex = i;
                     }
+                    if (distance === maxDistance && i < maxDistanceIndex) {
+                        maxDistanceIndex = i;
+                    }
                 }
                 if (maxDistanceIndex !== -1) targetMonster = monsterInAttackRange[maxDistanceIndex];
                 break;
@@ -145,6 +154,9 @@ let AttackSystem = System.extend({
                     let distance = this._distanceFrom(monsterInAttackRange[i], towerPos);
                     if (distance < minDistance) {
                         minDistance = distance;
+                        minDistanceIndex = i;
+                    }
+                    if (distance === minDistance && i < minDistanceIndex) {
                         minDistanceIndex = i;
                     }
                 }
