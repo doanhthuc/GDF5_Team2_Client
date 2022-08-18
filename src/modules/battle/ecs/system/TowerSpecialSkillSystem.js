@@ -17,7 +17,7 @@ let TowerSpecialSkillSystem = System.extend({
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
         this._handleSnakeSpecialSkill(tick);
-        this._handleGoatSpecialSkill(tick);
+        // this._handleGoatSpecialSkill(tick);
         this._handleBuffAbility(tick);
     },
 
