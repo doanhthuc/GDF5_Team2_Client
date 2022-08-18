@@ -74,7 +74,7 @@ let AbilitySystem = System.extend({
                         x: positionComponent.x,
                         y: positionComponent.y
                     }, entity.mode);
-
+                    spawnMinionComponent.spawnAmount += 1;
                     BattleAnimation.animationBornMonster(entity);
                 }
             }
@@ -99,7 +99,7 @@ let AbilitySystem = System.extend({
 
                     if (!monster._hasComponent(PositionComponent)) continue;
 
-                    if (monster.getActive() && monster.mode === satyr.mode) {
+                    if (monster.getActive() && monster.mode === satyr.mode && monster.id !== satyr.id) {
                         let monsterPos = monster.getComponent(PositionComponent);
 
                         if (monsterPos) {
