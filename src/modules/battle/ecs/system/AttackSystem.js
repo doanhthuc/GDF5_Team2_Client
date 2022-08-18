@@ -73,7 +73,7 @@ let AttackSystem = System.extend({
                                 cc.p(monsterPos.x, monsterPos.y), clonedEffects, tower.mode, attackComponent.bulletSpeed,
                                 attackComponent.bulletRadius, attackComponent.canTargetAirMonster);
                         }
-                        
+
                         if (tower.mode === GameConfig.PLAYER) soundManager.playAttack(tower.typeID);
                         attackComponent.countdown = attackComponent.getSpeed();
                     }
@@ -98,39 +98,69 @@ let AttackSystem = System.extend({
         let monsterIndex = -1;
         switch (strategy) {
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
-                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
-                    let lifeComponent = cur.getComponent(LifeComponent);
-                    let monsterHP = lifeComponent.hp;
-                    return monsterHP > monsterInAttackRange[acc] ? idx : acc;
-                }, 0);
-                targetMonster = monsterInAttackRange[monsterIndex];
-                break;
+                let maxHP = -1;
+                let maxHPIndex = -1;
+                    for (let  i = 0; i < monsterInAttackRange.length; i++) {
+                        let monsterLife = monsterInAttackRange[i].getComponent(LifeComponent);
+                        let hp = monsterLife.hp;
+                        if (hp > maxHP) {
+                            maxHP = hp;
+                            maxHPIndex = i;
+                        }
+                        if (hp === maxHP && monsterInAttackRange[i].id < monsterInAttackRange[maxHPIndex].id) {
+                            maxHPIndex = i;
+                        }
+                    }
+                    if (maxHPIndex !== -1) targetMonster = monsterInAttackRange[maxHPIndex];
+                    break;
             }
             case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP: {
-                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
-                    let lifeComponent = cur.getComponent(LifeComponent);
-                    let monsterHP = lifeComponent.hp;
-                    return monsterHP < monsterInAttackRange[acc] ? idx : acc;
-                }, 0);
-                targetMonster = monsterInAttackRange[monsterIndex];
+                let minHP = -1;
+                let minHPIndex = -1;
+                for (let  i = 0; i < monsterInAttackRange.length; i++) {
+                    let monsterLife = monsterInAttackRange[i].getComponent(LifeComponent);
+                    let hp = monsterLife.hp;
+                    if (hp < minHP) {
+                        minHP = hp;
+                        minHPIndex = i;
+                    }
+                    if (hp === minHP && monsterInAttackRange[i].id < monsterInAttackRange[minHPIndex].id) {
+                        minHPIndex = i;
+                    }
+                }
+                if (minHPIndex !== -1) targetMonster = monsterInAttackRange[minHPIndex];
                 break;
             }
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE: {
-                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
-                    let monsterPos = cur.getComponent(PositionComponent);
-                    let distance = Utils.euclidDistance(towerPos, monsterPos);
-                    return distance > monsterInAttackRange[acc] ? idx : acc;
-                }, 0);
-                targetMonster = monsterInAttackRange[monsterIndex];
+                let maxDistance = -1;
+                let maxDistanceIndex = -1;
+                for (let  i = 0; i < monsterInAttackRange.length; i++) {
+                     let distance = this._distanceFrom(monsterInAttackRange[i], towerPos);
+                    if (distance > maxDistance) {
+                        maxDistance = distance;
+                        maxDistanceIndex = i;
+                    }
+                    if (distance === maxDistance && monsterInAttackRange[i].id < monsterInAttackRange[maxDistanceIndex].id) {
+                        maxDistanceIndex = i;
+                    }
+                }
+                if (maxDistanceIndex !== -1) targetMonster = monsterInAttackRange[maxDistanceIndex];
                 break;
             }
             case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE: {
-                monsterIndex = monsterInAttackRange.reduce((acc, cur, idx) => {
-                    let monsterPos = cur.getComponent(PositionComponent);
-                    let distance = Utils.euclidDistance(towerPos, monsterPos);
-                    return distance < monsterInAttackRange[acc] ? idx : acc;
-                }, 0);
-                targetMonster = monsterInAttackRange[monsterIndex];
+                let minDistance = -1;
+                let minDistanceIndex = -1;
+                for (let  i = 0; i < monsterInAttackRange.length; i++) {
+                    let distance = this._distanceFrom(monsterInAttackRange[i], towerPos);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        minDistanceIndex = i;
+                    }
+                    if (distance === minDistance && monsterInAttackRange[i].id < monsterInAttackRange[minDistanceIndex].id) {
+                        minDistanceIndex = i;
+                    }
+                }
+                if (minDistanceIndex !== -1) targetMonster = monsterInAttackRange[minDistanceIndex];
                 break;
             }
             default:

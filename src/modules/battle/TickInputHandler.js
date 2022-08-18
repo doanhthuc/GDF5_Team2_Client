@@ -42,6 +42,10 @@ let TickInputHandler = cc.Class.extend({
             case gv.CMD.OPPONENT_DESTROY_TOWER:
                 this._handleOpponentDestroyTower(cmd, packet);
                 break;
+            case gv.CMD.BORN_MONSTER:
+                BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, packet);
+                BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.OPPONENT, packet);
+                break;
         }
     },
 

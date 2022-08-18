@@ -19,6 +19,11 @@ gv.CMD.GET_BATTLE_INFO = 5016;
 gv.CMD.END_BATTLE = 5017;
 gv.CMD.GET_BATTLE_DECK_IN_BATTLE = 5018;
 gv.CMD.BATTLE_ERROR = 5019;
+gv.CMD.SEND_CHECK_SUM = 5020;
+gv.CMD.BORN_MONSTER = 5021;
+gv.CMD.NEXT_WAVE = 5022;
+gv.CMD.SPEEDUP_NEXT_WAVE = 5023;
+
 BattleNetwork = BattleNetwork || {};
 
 BattleNetwork.packetMap = {};
@@ -129,6 +134,38 @@ CMDDestroyTower = fr.OutPacket.extend({
         this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
         this.putInt(tilePos.x);
         this.putInt(tilePos.y);
+        this.updateSize();
+    }
+})
+
+CMDSendCheckSum = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.SEND_CHECK_SUM);
+    },
+
+    pack: function (checksum, serverEndBattleTick) {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
+        this.putInt(checksum.length)
+        for (let i = 0; i < Math.min(serverEndBattleTick, checksum.length); i++) {
+            this.putDouble(checksum[i])
+        }
+        this.updateSize();
+    }
+})
+
+CMDSendSpeedUpNextWave = fr.OutPacket.extend({
+    ctor: function () {
+        this._super();
+        this.initData(100);
+        this.setCmdId(gv.CMD.SPEEDUP_NEXT_WAVE);
+    },
+
+    pack: function () {
+        this.packHeader();
+        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
         this.updateSize();
     }
 })
@@ -270,8 +307,7 @@ BattleNetwork.packetMap[gv.CMD.UPGRADE_TOWER] = fr.InPacket.extend({
             this.tileX = this.getInt();
             this.tileY = this.getInt();
             this.tickNumber = this.getInt();
-        }
-        else this.error = this.getError();
+        } else this.error = this.getError();
     },
 
     clone: function () {
@@ -584,6 +620,21 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_INFO] = fr.InPacket.extend({
     }
 });
 
+BattleNetwork.packetMap[gv.CMD.NEXT_WAVE] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.tickNumber = this.getInt();
+        this.monsterAmount = this.getInt();
+        this.monsterWave = [];
+        for (let i = 0; i < this.monsterAmount; i++) {
+            this.monsterWave.push(this.getInt());
+        }
+    }
+});
+
 BattleNetwork.packetMap[gv.CMD.END_BATTLE] = fr.InPacket.extend({
     ctor: function () {
         this._super();
@@ -596,6 +647,7 @@ BattleNetwork.packetMap[gv.CMD.END_BATTLE] = fr.InPacket.extend({
         this.trophyAfterBattle = this.getInt();
         this.trophyChange = this.getInt();
         this.hasChest = false;
+        this.serverEndBattleTick = this.getInt();
         if (this.result === GameConfig.BATTLE_RESULT.WIN) {
             this.hasChest = this.getInt();
         }
@@ -627,6 +679,6 @@ BattleNetwork.packetMap[gv.CMD.BATTLE_ERROR] = fr.InPacket.extend({
     },
 
     readData: function () {
-        this.errorMessage= this.getString();
+        this.errorMessage = this.getString();
     }
 })
