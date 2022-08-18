@@ -64,13 +64,12 @@ let TowerSpecialSkillSystem = System.extend({
     },
 
     _handleBuffAbility: function () {
-        let buffTowerList = EntityManager.getInstance().getEntitiesHasComponents(TowerAbilityComponent);
-        if (!buffTowerList || buffTowerList.length === 0) {
-            return;
-        }
+        for (let buffTowerID in this.getEntityStore()) {
+            let buffTower = this.getEntityStore()[buffTowerID];
+            if (!buffTower._hasComponent(TowerAbilityComponent)) continue;
 
-        for (let buffTower of buffTowerList) {
             let towerAbilityComponent = buffTower.getComponent(TowerAbilityComponent);
+
             let towerPosition = buffTower.getComponent(PositionComponent);
             let tilePos = Utils.pixel2Tile(towerPosition.x, towerPosition.y, buffTower.mode);
             let battleMapObject = BattleManager.getInstance().getBattleData().getMapObject(buffTower.mode)
