@@ -120,6 +120,12 @@ let BattleLayer = cc.Layer.extend({
     putCardAt: function (type, pixelPos, mode) {
         BattleManager.getInstance().getCardDeckNode().removeDragSprite(type);
         let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
+        if (!BattleManager.getInstance().getCardDeckNode().validateEnoughEnergySelectCard(type)) {
+            BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lượng");
+            EventDispatcher.getInstance()
+                .dispatchEvent(EventType.INVALID_PUT_CARD_POSITION, {cardId: type, mode: mode})
+            return;
+        }
 
         let {error, msg} = ValidatorECS.validatePositionPutCard(type, pixelPos, mode);
         if (error) {

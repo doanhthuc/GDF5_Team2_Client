@@ -24,6 +24,8 @@ const CardDeckSlot2 = cc.Node.extend({
         this.addChild(rootNode);
 
         this.cardBackgroundBtn.setSwallowTouches(false);
+        this._defaultColor = this.getColor();
+        this._disabledColor = new cc.Color(137, 133, 134, 1);
     },
 
     setCardType: function (card) {
@@ -72,4 +74,19 @@ const CardDeckSlot2 = cc.Node.extend({
         this.energyTxt.setString(energy);
         this.energyTxt.setName("energy_card_" + cardId);
     },
+
+    setColor: function (color) {
+        this._super(color);
+        this.cardBorderImg.setColor(color);
+        this.cardImage.setColor(color);
+        this.cardBackgroundBtn.setColor(color);
+    },
+
+    setColorByDisableState: function (isDisabled) {
+        if (isDisabled) {
+            this.setColor(this._disabledColor);
+        } else {
+            this.setColor(this._defaultColor);
+        }
+    }
 });

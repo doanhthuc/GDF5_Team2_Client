@@ -36,6 +36,7 @@ let DeckEnergyProgress = cc.Node.extend({
         } else {
             this.setCurrentEnergy(energy);
         }
+        BattleManager.getInstance().getCardDeckNode().updateCardDeckSlotState();
     },
 
     minusEnergy: function (minusEnergy) {
@@ -45,5 +46,6 @@ let DeckEnergyProgress = cc.Node.extend({
         } else {
             this.setCurrentEnergy(0);
         }
+        BattleManager.getInstance().getCardDeckNode().updateCardDeckSlotState();
     }
 })
