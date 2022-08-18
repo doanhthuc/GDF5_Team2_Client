@@ -17,7 +17,7 @@ let TowerSpecialSkillSystem = System.extend({
     updateData: function () {
         const tick = tickManager.getTickRate() / 1000;
         this._handleSnakeSpecialSkill(tick);
-        this._handleGoatSpecialSkill(tick);
+        // this._handleGoatSpecialSkill(tick);
         this._handleBuffAbility(tick);
     },
 
@@ -70,24 +70,30 @@ let TowerSpecialSkillSystem = System.extend({
 
             let towerAbilityComponent = buffTower.getComponent(TowerAbilityComponent);
 
-            for (let damageTowerID in this.getEntityStore()) {
-                let damageTower = this.getEntityStore()[damageTowerID];
-                if (!damageTower._hasComponent(AttackComponent)) continue;
-                if (damageTower === buffTower || damageTower.mode !== buffTower.mode) continue;
-
-                if (this._distanceFrom(buffTower, damageTower) < towerAbilityComponent.range) {
-                    switch (towerAbilityComponent.effect.typeID) {
-                        case BuffAttackDamageEffect.typeID: {
-                            let attackComponent = damageTower.getComponent(AttackComponent);
-                            attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
-                            BattleAnimation.addBuffDamageAnimation(damageTower);
-                            break;
-                        }
-                        case BuffAttackSpeedEffect.typeID: {
-                            let attackComponent = damageTower.getComponent(AttackComponent);
-                            attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
-                            BattleAnimation.addBuffSpeedAnimation(damageTower);
-                            break;
+            let towerPosition = buffTower.getComponent(PositionComponent);
+            let tilePos = Utils.pixel2Tile(towerPosition.x, towerPosition.y, buffTower.mode);
+            let battleMapObject = BattleManager.getInstance().getBattleData().getMapObject(buffTower.mode)
+            let direction = [0, -1, 0, 1, 0]
+            for (let i = 0; i < direction.length - 1; i++) {
+                let tile = battleMapObject.getTileObject(tilePos.x + direction[i], tilePos.y + direction[i + 1]);
+                if (tile) {
+                    let towerInTileObject = tile.getTower();
+                    if (towerInTileObject) {
+                        let towerEntity = EntityManager.getInstance().getEntity(towerInTileObject.getEntityId());
+                        let attackComponent = towerEntity.getComponent(AttackComponent);
+                        if (attackComponent) {
+                            switch (towerAbilityComponent.effect.typeID) {
+                                case BuffAttackDamageEffect.typeID: {
+                                    attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
+                                    BattleAnimation.addBuffDamageAnimation(towerEntity);
+                                    break;
+                                }
+                                case BuffAttackSpeedEffect.typeID: {
+                                    attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
+                                    BattleAnimation.addBuffSpeedAnimation(towerEntity);
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
