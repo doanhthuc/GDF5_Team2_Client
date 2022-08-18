@@ -4,6 +4,7 @@ let TowerSpecialSkillSystem = System.extend({
 
     ctor: function () {
         this._super();
+        this.direction = [0, -1, 0, 1, 0]
     },
 
     _run: function (tick) {
@@ -74,29 +75,26 @@ let TowerSpecialSkillSystem = System.extend({
             let towerPosition = buffTower.getComponent(PositionComponent);
             let tilePos = Utils.pixel2Tile(towerPosition.x, towerPosition.y, buffTower.mode);
             let battleMapObject = BattleManager.getInstance().getBattleData().getMapObject(buffTower.mode)
-            let direction = [0, -1, 0, 1, 0]
-            for (let i = 0; i < direction.length - 1; i++) {
-                let tile = battleMapObject.getTileObject(tilePos.x + direction[i], tilePos.y + direction[i + 1]);
-                if (tile) {
-                    let towerInTileObject = tile.getTower();
-                    if (towerInTileObject) {
-                        let towerEntity = EntityManager.getInstance().getEntity(towerInTileObject.getEntityId());
-                        let attackComponent = towerEntity.getComponent(AttackComponent);
-                        if (attackComponent) {
-                            switch (towerAbilityComponent.effect.typeID) {
-                                case BuffAttackDamageEffect.typeID: {
-                                    attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
-                                    BattleAnimation.addBuffDamageAnimation(towerEntity);
-                                    break;
-                                }
-                                case BuffAttackSpeedEffect.typeID: {
-                                    attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
-                                    BattleAnimation.addBuffSpeedAnimation(towerEntity);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+
+            for (let i = 0; i < this.direction.length - 1; i++) {
+                let tile = battleMapObject.getTileObject(tilePos.x + this.direction[i], tilePos.y + this.direction[i + 1]);
+                if (tile === null) continue;
+
+                let towerInTileObject = tile.getTower();
+                if (towerInTileObject === null) continue;
+
+                let towerEntity = EntityManager.getInstance().getEntity(towerInTileObject.getEntityId());
+                let attackComponent = towerEntity.getComponent(AttackComponent);
+
+                if (attackComponent === null) continue;
+
+                let effectTypeId = towerAbilityComponent.effect.typeID;
+                if (effectTypeId === BuffAttackDamageEffect.typeID) {
+                    attackComponent.setDamage(attackComponent.getDamage() + attackComponent.originDamage * towerAbilityComponent.effect.percent);
+                    BattleAnimation.addBuffDamageAnimation(towerEntity);
+                } else if (effectTypeId === BuffAttackSpeedEffect.typeID) {
+                    attackComponent.setSpeed(attackComponent.speed - (attackComponent.originSpeed * towerAbilityComponent.effect.percent));
+                    BattleAnimation.addBuffSpeedAnimation(towerEntity);
                 }
             }
         }
