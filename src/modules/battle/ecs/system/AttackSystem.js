@@ -107,7 +107,7 @@ let AttackSystem = System.extend({
                             maxHP = hp;
                             maxHPIndex = i;
                         }
-                        if (hp === maxHP && i < maxHPIndex) {
+                        if (hp === maxHP && monsterInAttackRange[i].id < monsterInAttackRange[maxHPIndex].id) {
                             maxHPIndex = i;
                         }
                     }
@@ -123,9 +123,9 @@ let AttackSystem = System.extend({
                     if (hp < minHP) {
                         minHP = hp;
                         minHPIndex = i;
-                        if (hp === minHP && i < minHPIndex) {
-                            minHPIndex = i;
-                        }
+                    }
+                    if (hp === minHP && monsterInAttackRange[i].id < monsterInAttackRange[minHPIndex].id) {
+                        minHPIndex = i;
                     }
                 }
                 if (minHPIndex !== -1) targetMonster = monsterInAttackRange[minHPIndex];
@@ -140,7 +140,7 @@ let AttackSystem = System.extend({
                         maxDistance = distance;
                         maxDistanceIndex = i;
                     }
-                    if (distance === maxDistance && i < maxDistanceIndex) {
+                    if (distance === maxDistance && monsterInAttackRange[i].id < monsterInAttackRange[maxDistanceIndex].id) {
                         maxDistanceIndex = i;
                     }
                 }
@@ -156,7 +156,7 @@ let AttackSystem = System.extend({
                         minDistance = distance;
                         minDistanceIndex = i;
                     }
-                    if (distance === minDistance && i < minDistanceIndex) {
+                    if (distance === minDistance && monsterInAttackRange[i].id < monsterInAttackRange[minDistanceIndex].id) {
                         minDistanceIndex = i;
                     }
                 }
