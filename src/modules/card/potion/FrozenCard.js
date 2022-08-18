@@ -14,6 +14,12 @@ const FrozenCard = PotionCard.extend({
         return stat;
     },
 
+    getCardStatByLevel: function (level) {
+        let stat = this._super(level);
+        stat.frozenTime = this.frozenTime;
+        return stat;
+    },
+
     upgradeCardModel: function (level, accumulated) {
         this._super(level, accumulated);
         this.frozenTime = JsonReader.getTargetBuffConfig()[this.targetBuffType].duration[1];

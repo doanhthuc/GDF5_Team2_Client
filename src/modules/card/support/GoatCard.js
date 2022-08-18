@@ -1,7 +1,7 @@
 const GoatCard = SupportTowerCard.extend({
     ctor: function (id, level, accumulated, isBattleDeck = false) {
         this._super(id, level, accumulated, isBattleDeck);
-        this.damageUp = this.getDamageUpFromJson();
+        this.damageUp = this.getDamageUpFromJson(level);
     },
 
     getCardStat: function () {
@@ -10,12 +10,19 @@ const GoatCard = SupportTowerCard.extend({
         return stat;
     },
 
-    getDamageUpFromJson: function () {
-        return JsonReader.getTowerBuffConfig()[this.auraTowerBuffType].effects[this.rank][0].value;
+    getCardStatByLevel: function (level) {
+        let stat = this._super();
+        stat.damageUp = this.getDamageUpFromJson(level);
+        return stat;
+    },
+
+    getDamageUpFromJson: function (level) {
+        let rank = this.levelToRank(level);
+        return JsonReader.getTowerBuffConfig()[this.auraTowerBuffType].effects[rank][0].value;
     },
 
     upgradeCardModel: function (level, accumulated) {
         this._super(level, accumulated);
-        this.damageUp = this.getDamageUpFromJson();
+        this.damageUp = this.getDamageUpFromJson(level);
     }
 })

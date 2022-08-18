@@ -11,13 +11,19 @@ const ICard = cc.Class.extend({
     },
 
     setCardRankByLevel: function (level) {
+        this.rank = this.levelToRank(level);
+    },
+
+    levelToRank: function (level) {
+        let rank = 1;
         if (level <= 1) {
-            this.rank = 1;
+            rank = 1;
         } else if (level > 1 && level <= 3) {
-            this.rank = 2;
+            rank = 2;
         } else if (level >= 4) {
-            this.rank = 3;
+            rank = 3;
         }
+        return rank;
     },
 
     upgradeCardModel: function (level, accumulated) {
@@ -26,7 +32,15 @@ const ICard = cc.Class.extend({
         this.setCardRankByLevel(this.level);
     },
 
+    calculateCardStatByLevel: function (statValue, level) {
+        return statValue * Math.pow(1.1, level - 1);
+    },
+
     getCardStat: function () {
+        return {}
+    },
+
+    getCardStatByLevel: function (level) {
         return {}
     }
 });

@@ -63,6 +63,9 @@ const CardDeckNode2 = cc.Node.extend({
     },
 
     handleInvalidPutCardPosition: function (data) {
+        if (data.mode !== GameConfig.PLAYER) {
+            return;
+        }
         let cardId = data.cardId;
         let cardSlot = this.cardSlotNodeList.find((cardSlot) => cardSlot.type === cardId);
         if (cardSlot) {
@@ -91,7 +94,7 @@ const CardDeckNode2 = cc.Node.extend({
             this.onCardPutIntoMap(data.cardId);
             let cardEnergy = CARD_CONST[data.cardId].energy;
             let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
-            // deckEnergyProgress.minusEnergy(cardEnergy);
+            deckEnergyProgress.minusEnergy(cardEnergy);
             // this.setNextCardSlotVisible(false);
         }
     },
@@ -145,12 +148,12 @@ const CardDeckNode2 = cc.Node.extend({
                     let prevSelectedCard = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
                     this._moveCardDown(prevSelectedCard);
                 }
-                if (!this.validateEnoughEnergySelectCard(selectedCard.type)) {
-                    BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lượng");
-                    this.setSelectedCardType(null, null);
-                    this.setShouldBeginTouch(true);
-                    return false;
-                }
+                // if (!this.validateEnoughEnergySelectCard(selectedCard.type)) {
+                //     BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lượng");
+                //     this.setSelectedCardType(null, null);
+                //     this.setShouldBeginTouch(true);
+                //     return false;
+                // }
                 let card = selectedCard;
                 this.setSelectedCardType(card.type, card.level);
                 this._moveCardUp(card);
@@ -294,6 +297,13 @@ const CardDeckNode2 = cc.Node.extend({
             this.removeDragSprite(this.selectedCardType);
             let cardSlotNode = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
             if (cardSlotNode) {
+                if (BattleManager.getInstance().getBattleData().getCurrentEnergy(GameConfig.PLAYER) < 5) {
+                    BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lượng");
+                    this._moveCardDown(cardSlotNode);
+                    this.setSelectedCardType(null, null);
+                    this.cancelSelectBtnNode.setVisible(false);
+                    return;
+                }
                 let index = this.cardSlotNodeList.indexOf(cardSlotNode);
                 cardSlotNode.setPosition(this.nextCardPosition);
                 cardSlotNode.setScale(0.6449, 0.6449);
@@ -304,7 +314,7 @@ const CardDeckNode2 = cc.Node.extend({
                 let nextCard = this.cardDeckListData.getNextCard();
                 this.nextCardSlot.setNextCardTypeAndLevel(nextCard.id, nextCard.level);
                 // this.cardDeckListData.pushUsedCardIntoDeck({id: this.selectedCardType, level: prevCardLevel});
-                this.deckEnergyProgress.minusEnergy(-5);
+                this.deckEnergyProgress.minusEnergy(5);
             }
 
             this.setSelectedCardType(null, null);
@@ -320,5 +330,16 @@ const CardDeckNode2 = cc.Node.extend({
         }
         let nextCard = this.cardDeckListData.getNextCard();
         this.nextCardSlot.setNextCardTypeAndLevel(nextCard.id, nextCard.level);
+    },
+
+    updateCardDeckSlotState: function () {
+        for (let i = 0; i < this.cardSlotNodeList.length; i++) {
+            let cardSlotNode = this.cardSlotNodeList[i];
+            if (this.validateEnoughEnergySelectCard(cardSlotNode.type)) {
+                cardSlotNode.setColorByDisableState(false);
+            } else {
+                cardSlotNode.setColorByDisableState(true);
+            }
+        }
     }
 });

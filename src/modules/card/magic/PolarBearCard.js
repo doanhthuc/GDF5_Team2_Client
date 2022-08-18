@@ -2,7 +2,7 @@ const PolarBearCard = MagicTowerCard.extend({
     ctor: function (id, level, accumulated, isBattleDeck = false) {
         this._super(id, level, accumulated, isBattleDeck);
         this.skill = null;
-        this.frozenTime = this.getFrozenTimeFromJson();
+        this.frozenTime = this.getFrozenTimeFromJson(level);
     },
 
     getCardStat: function () {
@@ -11,12 +11,20 @@ const PolarBearCard = MagicTowerCard.extend({
         return stat;
     },
 
-    getFrozenTimeFromJson: function () {
-        return JsonReader.getTargetBuffConfig()[this.bulletTargetBuffType].duration[this.rank];
+    getCardStatByLevel: function (level) {
+        let stat = this._super();
+        let frozenTime = this.getFrozenTimeFromJson(level);
+        stat.frozenTime = this.calculateCardStatByLevel(frozenTime, level);
+        return stat;
+    },
+
+    getFrozenTimeFromJson: function (level) {
+        let rank = this.levelToRank(level);
+        return JsonReader.getTargetBuffConfig()[this.bulletTargetBuffType].duration[rank];
     },
 
     upgradeCardModel: function (level, accumulated) {
         this._super(level, accumulated);
-        this.frozenTime = this.getFrozenTimeFromJson();
+        this.frozenTime = this.getFrozenTimeFromJson(level);
     }
 });

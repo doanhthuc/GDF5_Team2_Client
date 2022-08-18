@@ -75,9 +75,12 @@ const CardDetailPopup = cc.Node.extend({
     setCardStat: function () {
         let index = 0;
         this.setAllCardStatHoldersVisible(false);
-        for (let [key, value] of Object.entries(this.cardModel.getCardStat())) {
+        for (let [key, value] of Object.entries(this.cardModel.getCardStatByLevel(this.cardModel.level))) {
+            if (typeof value === 'number') {
+                value = value.toFixed(2)
+            }
             if (key === 'attackSpeed') {
-                value = value / 1000 + 's';
+                value = value + 's';
             } else if (key === 'slowPercent') {
                 value = value + '%';
             } else if (key === 'frozenTime') {

@@ -2,7 +2,7 @@ const BunnyOilCard = MagicTowerCard.extend({
     ctor: function (id, level, accumulated, isBattleDeck = false) {
         this._super(id, level, accumulated, isBattleDeck);
         this.skill = null;
-        this.slowPercent = this.getSlowPercentFromJson();
+        this.slowPercent = this.getSlowPercentFromJson(level);
     },
 
     getCardStat: function () {
@@ -11,12 +11,20 @@ const BunnyOilCard = MagicTowerCard.extend({
         return stat;
     },
 
-    getSlowPercentFromJson: function () {
-        return JsonReader.getTargetBuffConfig()['0'].effects[this.rank][0].value * -100;
+    getCardStatByLevel: function (level) {
+        let stat = this._super();
+        let slowPercent = this.getSlowPercentFromJson(level);
+        stat.slowPercent = this.calculateCardStatByLevel(slowPercent, level);
+        return stat;
+    },
+
+    getSlowPercentFromJson: function (level) {
+        let rank = this.levelToRank(level);
+        return JsonReader.getTargetBuffConfig()['0'].effects[rank][0].value * -100;
     },
 
     upgradeCardModel: function (level, accumulated) {
         this._super(level, accumulated);
-        this.slowPercent = this.getSlowPercentFromJson();
+        this.slowPercent = this.getSlowPercentFromJson(level);
     }
 });

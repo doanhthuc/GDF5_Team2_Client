@@ -14,6 +14,13 @@ const FireBallCard = PotionCard.extend({
         return stat;
     },
 
+    getCardStatByLevel: function (level) {
+        let stat = this._super(level);
+        stat.radius = this.radius;
+        stat.damage = this.damage;
+        return stat;
+    },
+
     upgradeCardModel: function (level, accumulated) {
         this._super(level, accumulated);
         this.radius = JsonReader.getPotionConfig()[this.idConfig].radius;

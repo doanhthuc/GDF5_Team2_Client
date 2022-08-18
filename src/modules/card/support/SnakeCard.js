@@ -10,12 +10,19 @@ const SnakeCard = SupportTowerCard.extend({
         return stat;
     },
 
-    getAttackSpeedUpFromJson: function () {
-        return JsonReader.getTowerBuffConfig()[this.auraTowerBuffType].effects[this.rank][0].value;
+    getCardStatByLevel: function (level) {
+        let stat = this._super();
+        stat.attackSpeedUp = this.getAttackSpeedUpFromJson(level);
+        return stat;
+    },
+
+    getAttackSpeedUpFromJson: function (level) {
+        let rank = this.levelToRank(level);
+        return JsonReader.getTowerBuffConfig()[this.auraTowerBuffType].effects[rank][0].value;
     },
 
     upgradeCardModel: function (level, accumulated) {
         this._super(level, accumulated);
-        this.attackSpeedUp = this.getAttackSpeedUpFromJson();
+        this.attackSpeedUp = this.getAttackSpeedUpFromJson(level);
     }
 });
