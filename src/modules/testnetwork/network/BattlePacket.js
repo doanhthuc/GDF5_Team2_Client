@@ -617,6 +617,8 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_INFO] = fr.InPacket.extend({
             }
             this.monsterWave.push(wave);
         }
+        this.playerStartEntityID = this.getLong();
+        this.opponentStartEntityID = this.getLong();
     }
 });
 

@@ -5,7 +5,7 @@ let EntityECS = cc.Class.extend({
     ctor: function (typeID, mode) {
         this.typeID = typeID;
         this.components = {};
-        this.id = UUIDGeneratorECS.genEntityID();
+        this.id = UUIDGeneratorECS.genEntityID(mode);
         this._active = true;
 
         this.mode = mode;

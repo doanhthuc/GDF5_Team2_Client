@@ -192,7 +192,7 @@ BattleNetwork.Connector = cc.Class.extend({
         tickManager.getTickData().setBattleTimerData(battleData.getTimer());
         BattleManager.getInstance().getBattleData().setMaxWave(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
-
+        UUIDGeneratorECS.setStartEntityID(packet.playerStartEntityID,packet.opponentStartEntityID);
         setTimeout(function () {
             fr.view(BattleLayer, 0.5, true)
             cc.log("===> Switch to Game Layer Scene !!!")
