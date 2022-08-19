@@ -19,7 +19,7 @@ EntityFactory.createBullet = function (towerType, startPosition, targetEntity, s
     Utils.validateMode(mode);
     switch (towerType) {
         case GameConfig.ENTITY_ID.CANNON_TOWER:
-            return this.createCannonBullet(startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster);
+            return this.createCannonOwlBullet(startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster);
         case GameConfig.ENTITY_ID.BEAR_TOWER:
             return this.createBearBullet(startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster);
         case GameConfig.ENTITY_ID.FROG_TOWER:

@@ -19,15 +19,11 @@ InventoryNetwork.Connector = cc.Class.extend({
                 ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.CARD_COLLECTION_NODE).updateCardCollection(inventoryContext.cardCollectionList);
 
                 userCardCollection.getItemList(packet);
-                cc.log("GetInventory");
-                // userCardCollection.show();
                 break;
             case gv.CMD.UPGRADE_CARD:
-                cc.log(packet.goldChange + " " + packet.cardType + " " + packet.fragmentChange);
                 contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).onUpgradeCardSuccess(packet);
                 break;
             case gv.CMD.SWAP_CARD:
-                cc.log("asdgdsbgdbdbdbdfbdfbdfsbdfb: " + JSON.stringify(packet));
                 this.handleSwapCard(cmd, packet);
                 break;
         }
@@ -35,14 +31,24 @@ InventoryNetwork.Connector = cc.Class.extend({
 
     sendGetUserInventory: function () {
         cc.log("sendGetuserInventory");
-        var pk = this.gameClient.getOutPacket(CMDSendGetUserInventory);
+        let pk = this.gameClient.getOutPacket(CMDSendGetUserInventory);
         pk.pack();
         this.gameClient.sendPacket(pk);
     },
     sendUpgradeCard: function (cardType) {
         cc.log("sendUpgradeCard");
-        var pk = this.gameClient.getOutPacket(CMDSendUpgradeCard);
+        let pk = this.gameClient.getOutPacket(CMDSendUpgradeCard);
         pk.pack(cardType);
         this.gameClient.sendPacket(pk);
     },
+
+    sendSwapCard:function (cardInId, cardOutId){
+        let pk= this.gameClient.getOutPacket(CMDSendSwapCard);
+        pk.pack(cardOutId,cardInId);
+        this.gameClient.sendPacket(pk);
+    },
+
+    handleSwapCard:function (cmd, packet){
+        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).onSwapCardSuccess(packet.cardInID, packet.cardOutID);
+    }
 });

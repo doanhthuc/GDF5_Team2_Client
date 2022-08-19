@@ -1,4 +1,4 @@
-EntityFactory.createCannonOwlBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
+EntityFactory.createCannonOwlBullet = function (startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
     let typeID = GameConfig.ENTITY_ID.BULLET;
     let entity = this._createEntity(typeID, mode);
 
@@ -24,7 +24,7 @@ EntityFactory.createCannonOwlBullet = function (towerType, startPosition, target
     return entity;
 }
 
-EntityFactory.createBearBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
+EntityFactory.createBearBullet = function (startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
     let typeID = GameConfig.ENTITY_ID.BULLET;
     let entity = this._createEntity(typeID, mode);
 
@@ -49,7 +49,7 @@ EntityFactory.createBearBullet = function (towerType, startPosition, targetEntit
     return entity;
 }
 
-EntityFactory.createBoomerangFrogBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
+EntityFactory.createBoomerangFrogBullet = function (startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
     let typeID = GameConfig.ENTITY_ID.BULLET;
     let entity = this._createEntity(typeID, mode);
 
@@ -94,7 +94,7 @@ EntityFactory.createBoomerangFrogBullet = function (towerType, startPosition, ta
     return entity;
 }
 
-EntityFactory.createBunnyOilGunBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
+EntityFactory.createBunnyOilGunBullet = function (startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
     let typeID = GameConfig.ENTITY_ID.SLOW_BULLET;
     let entity = this._createEntity(typeID, mode);
 
@@ -119,7 +119,7 @@ EntityFactory.createBunnyOilGunBullet = function (towerType, startPosition, targ
     return entity;
 }
 
-EntityFactory.createWizardBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
+EntityFactory.createWizardBullet = function (startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
     let typeID = GameConfig.ENTITY_ID.WIZARD_BULLET;
     let entity = this._createEntity(typeID, mode);
 

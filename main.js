@@ -37,9 +37,12 @@ cc.game.onStart = function () {
         gv.gameClient = new GameClient();
         gv.poolObjects = new PoolObject();
         //modules
+        AuthNetwork.connector = new AuthNetwork.Connector(gv.gameClient);
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
         ShopNetwork.connector = new ShopNetwork.Connector(gv.gameClient);
         BattleNetwork.connector = new BattleNetwork.Connector(gv.gameClient);
+        InventoryNetwork.connector = new InventoryNetwork.Connector(gv.gameClient);
+        LobbyNetwork.connector = new LobbyNetwork.Connector(gv.gameClient);
 
         // fr.view(MainScreen);
         if (GameConfig.NETWORK)

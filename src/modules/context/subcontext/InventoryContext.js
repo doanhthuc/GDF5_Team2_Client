@@ -44,7 +44,7 @@ const InventoryContext = cc.Class.extend({
                 if (card.amount >= JsonReader.getCardUpgradeConfig()[card.cardLevel + 1].fragments &&
                     contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).user.gold >=
                     JsonReader.getCardUpgradeConfig()[card.cardLevel + 1].gold) {
-                    testnetwork.connector.sendUpgradeCard(cardId);
+                    InventoryNetwork.connector.sendUpgradeCard(cardId);
                     return;
                 }
             }
@@ -76,7 +76,6 @@ const InventoryContext = cc.Class.extend({
 
     getCardById: function (cardId) {
         for (let card of this.cardCollectionList) {
-            cc.log(JSON.stringify(card))
             if (card.cardType === cardId) {
                 return card;
             }
@@ -98,6 +97,18 @@ const InventoryContext = cc.Class.extend({
         this.battleDeckIdList = [];
         this.battleDeckList = [];
         this.cardCollectionList = [];
+    },
+
+    /**
+     * @param {number} cardIdInCollection - the id of card will be added to the battle deck
+     * @param {number} cardIdInBattleDeck - the id of card will be removed from the battle deck and added to the collection
+     */
+    swapCardFromCollectionToBattleDeck: function (cardIdInCollection, cardIdInBattleDeck) {
+        let cardInCollection = this.getCardById(cardIdInCollection);
+        let cardInBattleDeck = this.battleDeckList.find(card => (card.cardType === cardIdInBattleDeck));
+        if (cardInCollection && cardInBattleDeck) {
+            InventoryNetwork.connector.sendSwapCard(cardIdInCollection, cardIdInBattleDeck);
+        }
     },
 
     onSwapCardSuccess: function (newCardIdInBattleDeck, newCardIdInCollection) {
