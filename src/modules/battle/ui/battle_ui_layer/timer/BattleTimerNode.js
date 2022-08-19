@@ -2,7 +2,7 @@ let BattleTimerNode = cc.Node.extend({
     ctor: function (countdown, duration) {
         this._super();
         this._duration = duration || 20;
-		this._monsterSpawmTime = 0;
+        this._monsterSpawmTime = 1;
 
         this.node = ccs.load(BattleResource.TIMER_NODE, "").node;
         this.addChild(this.node);
@@ -13,6 +13,10 @@ let BattleTimerNode = cc.Node.extend({
         this.node.getChildByName("time").setLocalZOrder(3);
         this.node.getChildByName("battle_timer_border").setLocalZOrder(3);
 
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            onTouchBegan: this._onTouchBegan.bind(this),
+        }, this)
         this.startTimer();
     },
 
@@ -35,12 +39,22 @@ let BattleTimerNode = cc.Node.extend({
         time.setString(Math.floor(countDown));
     },
 
+    onClickSpeedUpNextWave: function () {
+        BattleNetwork.connector.sendSpeedUpNextWave();
+    },
+
     updateData: function () {
         let countDownLatestTick = tickManager.getTickData().getBattleTimerCountDown();
         if (countDownLatestTick <= 0) {
             countDownLatestTick = this._duration;
             EventDispatcher.getInstance()
                 .dispatchEvent(EventType.END_ONE_TIMER);
+            // let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
+            // let battleData = BattleManager.getInstance().getBattleData();
+            // battleData.setCurrentWave(battleData.getCurrentWave() + 1);
+            // battleData.setCurrentIndexMonsterWave(0);
+            // uiLayer.waveNode.renderUI();
+            // soundManager.playNextWave();
         }
         countDownLatestTick = countDownLatestTick - tickManager.getTickRate() / 1000;
         tickManager.getTickData().setBattleTimerData(countDownLatestTick);
@@ -53,8 +67,30 @@ let BattleTimerNode = cc.Node.extend({
         if (monsterWave[currentWave] && this._monsterSpawmTime <= 0 && currentIndexMonsterWave < monsterWave[currentWave].length) {
             this._monsterSpawmTime = 1;
             EventDispatcher.getInstance().dispatchEvent(EventType.SPAWN_MONSTER);
+            // let battleData = BattleManager.getInstance().getBattleData();
+            // let currentWave = battleData.getCurrentWave();
+            // let monsterWave = battleData.getMonsterWave();
+            // let currentIndexMonsterWave = battleData.getCurrentIndexMonsterWave();
+            // if (monsterWave[currentWave] && currentIndexMonsterWave < monsterWave[currentWave].length) {
+            //     let monsterTypeID = monsterWave[currentWave][currentIndexMonsterWave];
+            //     battleData.setCurrentIndexMonsterWave(currentIndexMonsterWave + 1);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, monsterTypeID);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.OPPONENT, monsterTypeID);
+            //}
         } else {
             this._monsterSpawmTime -= tickManager.getTickRate() / 1000;
         }
+    },
+
+    _onTouchBegan: function (touch, event) {
+        let globalPos = touch.getLocation();
+        let localPos = this.progress.convertToNodeSpace(globalPos);
+        cc.log(JSON.stringify(globalPos) + " " + JSON.stringify(localPos));
+        let progressBoundingBox = cc.rect(0, 0, this.progress.width, this.progress.height);
+        let isTouched = cc.rectContainsPoint(progressBoundingBox, localPos) === true;
+        if (isTouched) {
+            BattleNetwork.connector.sendSpeedUpNextWave();
+        }
+        return false;
     }
 });

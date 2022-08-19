@@ -15,8 +15,9 @@ EventDispatcher.getInstance()
         if (monsterWave[currentWave] && currentIndexMonsterWave < monsterWave[currentWave].length) {
             let monsterTypeID = monsterWave[currentWave][currentIndexMonsterWave];
             battleData.setCurrentIndexMonsterWave(currentIndexMonsterWave + 1);
-            BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, monsterTypeID);
-            BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.OPPONENT, monsterTypeID);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, monsterTypeID);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.OPPONENT, monsterTypeID);
+            //
         }
     })
     .addEventHandler(EventType.PUT_NEW_TOWER, function (data) {
