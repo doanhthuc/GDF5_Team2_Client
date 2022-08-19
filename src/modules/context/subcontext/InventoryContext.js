@@ -16,7 +16,6 @@ const InventoryContext = cc.Class.extend({
 
     mapIdListToBattleDeckList: function () {
         this.battleDeckIdList.forEach((id) => {
-            //TODO: add spell
             for (let i = 0; i < this.cardCollectionList.length; i++) {
                 if (this.cardCollectionList[i].cardType === id) {
                     this.cardCollectionList[i].isBattleDeck = true;

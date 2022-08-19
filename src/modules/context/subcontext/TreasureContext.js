@@ -67,7 +67,6 @@ const TreasureContext = cc.Class.extend({
     },
 
     onClaimChestSuccess: function (packet) {
-        // TODO: define a cardCollection in 1 place (InventoryLayer or InventoryContext)
         if (packet.lobbyChestid) {
             ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).onClaimChestSuccess(packet);
             this.treasureList[packet.lobbyChestid].claimTime = 0;
