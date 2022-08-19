@@ -15,17 +15,17 @@ const TreasureContext = cc.Class.extend({
 
     openChest: function (treasureId) {
         cc.log("openChest: " + treasureId);
-        testnetwork.connector.sendUnlockLobbyChest(treasureId);
+        LobbyNetwork.connector.sendUnlockLobbyChest(treasureId);
     },
 
     speedUpChest: function (treasureId) {
         cc.log("speedUpChest: " + treasureId);
-        testnetwork.connector.sendSpeedUpLobbyChest(treasureId);
+        LobbyNetwork.connector.sendSpeedUpLobbyChest(treasureId);
     },
 
     claimChest: function (treasureId) {
         cc.log("claimChest: " + treasureId);
-        testnetwork.connector.sendClaimLobbyChest(treasureId);
+        LobbyNetwork.connector.sendClaimLobbyChest(treasureId);
     },
 
     onUnlockChestSuccess: function (packet) {
@@ -67,7 +67,6 @@ const TreasureContext = cc.Class.extend({
     },
 
     onClaimChestSuccess: function (packet) {
-        // TODO: define a cardCollection in 1 place (InventoryLayer or InventoryContext)
         if (packet.lobbyChestid) {
             ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.HOME_NODE).onClaimChestSuccess(packet);
             this.treasureList[packet.lobbyChestid].claimTime = 0;

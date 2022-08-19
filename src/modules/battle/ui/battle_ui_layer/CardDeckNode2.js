@@ -170,7 +170,7 @@ const CardDeckNode2 = cc.Node.extend({
         let touchPos = touch.getLocation();
         touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.PLAYER);
         let cardType = selectedCard.type;
-        // FIXME: hardcode
+
         if (ValidatorECS.isSpell(cardType)) {
             if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
                 this._createOrGetSprite(selectedCard, cardType, GameConfig.PLAYER);
@@ -219,7 +219,7 @@ const CardDeckNode2 = cc.Node.extend({
         const battleLayer = BattleManager.getInstance().getBattleLayer();
         Utils.validateMode(mode);
         if (!this.spriteDragManager[cardType]) {
-            // FIXME: hardcode sprite, use map to cache
+
             let mapNode = mode === GameConfig.PLAYER ? battleLayer.getPlayerMapNode()
                 : battleLayer.getOpponentMapNode();
             if (ValidatorECS.isSpell(selectedCard.type)) {

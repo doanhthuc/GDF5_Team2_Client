@@ -66,7 +66,6 @@ const BuyCardPopup = cc.Node.extend({
     },
 
     setUpgradeProgressBar: function (accumulatedCard) {
-        //TODO: exception when max level
         if (this.card.cardLevel >= MAX_CARD_LEVEL) {
             this.progressBorderImg.setVisible(true);
             this.upgradeReadyAnimation.setVisible(false);
