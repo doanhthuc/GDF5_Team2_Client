@@ -17,3 +17,8 @@ let BuffAttackSpeedEffect = EffectComponent.extend({
 });
 BuffAttackSpeedEffect.typeID = GameConfig.COMPONENT_ID.BUFF_ATTACK_SPEED;
 ComponentManager.getInstance().registerClass(BuffAttackSpeedEffect);
+
+BuffAttackSpeedEffect.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

@@ -691,11 +691,11 @@ BattleNetwork.packetMap[gv.CMD.SNAPSHOT] = fr.InPacket.extend({
 
     readData: function () {
         this.entityStore = {};
-            this.entitySize = this.getInt();
-            cc.log("snapshot entitySize=" + this.entitySize)
-            // for (let i = 1; i <= entitySize; i++) {
-        //     let entity = EntityECS.readSnapshot(this);
-        //     this.entityStore[entity.id] = entity;
-        // }
+        let entitySize = this.getInt();
+
+        for (let i = 1; i <= entitySize; i++) {
+            let entity = EntityECS.readSnapshot(this);
+            this.entityStore[entity.id] = entity;
+        }
     }
 })

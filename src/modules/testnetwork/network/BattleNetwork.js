@@ -232,8 +232,7 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleSnapshot: function (cmd, packet) {
-        cc.error("READSNAPSHOT")
-        cc.log(JSON.stringify(packet));
+
     },
 
     logSendCommand: function (commandID, packet) {

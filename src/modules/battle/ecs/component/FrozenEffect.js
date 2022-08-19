@@ -18,3 +18,8 @@ let FrozenEffect = EffectComponent.extend({
 });
 FrozenEffect.typeID = GameConfig.COMPONENT_ID.FROZEN_EFFECT;
 ComponentManager.getInstance().registerClass(FrozenEffect);
+
+FrozenEffect.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

@@ -18,3 +18,8 @@ let PoisonEffect = EffectComponent.extend({
 });
 PoisonEffect.typeID = GameConfig.COMPONENT_ID.POISON;
 ComponentManager.getInstance().registerClass(PoisonEffect);
+
+PoisonEffect.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

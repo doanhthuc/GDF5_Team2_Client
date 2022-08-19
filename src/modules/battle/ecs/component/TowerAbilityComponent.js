@@ -18,3 +18,8 @@ let TowerAbilityComponent = Component.extend({
 });
 TowerAbilityComponent.typeID = GameConfig.COMPONENT_ID.TOWER_ABILITY;
 ComponentManager.getInstance().registerClass(TowerAbilityComponent);
+
+TowerAbilityComponent.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

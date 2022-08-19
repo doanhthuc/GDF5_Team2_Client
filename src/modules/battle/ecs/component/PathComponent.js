@@ -25,19 +25,18 @@ let PathComponent = Component.extend({
 PathComponent.typeID = GameConfig.COMPONENT_ID.PATH;
 ComponentManager.getInstance().registerClass(PathComponent);
 
-PathComponent.prototype.readSnapshot = function (inPacket) {
-    // cc.log("PathComponent.readSnapshot()")
-    // let component = Component.readSnapshot(inPacket);
-    //
-    // component.mode = inPacket.getShort() === 1 ? GameConfig.PLAYER : GameConfig.OPPONENT;
-    // component.currentPathIdx = inPacket.getInt();
-    //
-    // let pathSize = inPacket.getInt();
-    // let path = [];
-    // for (let i = 1; i <= pathSize; i++) {
-    //     path.push(cc.p(inPacket.getDouble(), inPacket.getDouble()));
-    // }
-    // component.path = path;
-    //
-    // return component;
+PathComponent.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+
+    component.mode = inPacket.getShort() === 1 ? GameConfig.PLAYER : GameConfig.OPPONENT;
+    component.currentPathIdx = inPacket.getInt();
+
+    let pathSize = inPacket.getInt();
+    let path = [];
+    for (let i = 1; i <= pathSize; i++) {
+        path.push(cc.p(inPacket.getDouble(), inPacket.getDouble()));
+    }
+    component.path = path;
+
+    return component;
 }

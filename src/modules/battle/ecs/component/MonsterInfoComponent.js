@@ -29,3 +29,8 @@ let MonsterInfoComponent = InfoComponent.extend({
 });
 MonsterInfoComponent.typeID = GameConfig.COMPONENT_ID.MONSTER_INFO;
 ComponentManager.getInstance().registerClass(MonsterInfoComponent);
+
+MonsterInfoComponent.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

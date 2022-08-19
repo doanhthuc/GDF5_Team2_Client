@@ -48,3 +48,8 @@ ComponentManager.getInstance().registerClass(VelocityComponent);
 VelocityComponent.calculateSpeed = function (speedX, speedY) {
     return Math.sqrt(Math.pow(speedX, 2) + Math.pow(speedY, 2));
 }
+
+VelocityComponent.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

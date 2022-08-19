@@ -27,8 +27,7 @@ let LifeComponent = InfoComponent.extend({
 LifeComponent.typeID = GameConfig.COMPONENT_ID.LIFE;
 ComponentManager.getInstance().registerClass(LifeComponent);
 
-LifeComponent.prototype.readSnapshot = function (inPacket) {
-    cc.log("LifeComponent.readSnapshot()")
+LifeComponent.readSnapshot = function (inPacket) {
     let component = Component.readSnapshot(inPacket);
     component.hp = inPacket.getDouble();
     component.maxHP = inPacket.getDouble();

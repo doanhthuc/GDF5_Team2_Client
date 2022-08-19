@@ -18,3 +18,8 @@ const BuffAttackRangeEffect = EffectComponent.extend({
 
 BuffAttackRangeEffect.typeID = GameConfig.COMPONENT_ID.BUFF_ATTACK_RANGE;
 ComponentManager.getInstance().registerClass(BuffAttackRangeEffect);
+
+BuffAttackRangeEffect.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

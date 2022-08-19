@@ -17,3 +17,8 @@ let BuffAttackDamageEffect = EffectComponent.extend({
 });
 BuffAttackDamageEffect.typeID = GameConfig.COMPONENT_ID.BUFF_ATTACK_DAMAGE;
 ComponentManager.getInstance().registerClass(BuffAttackDamageEffect);
+
+BuffAttackDamageEffect.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

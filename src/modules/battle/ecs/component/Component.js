@@ -31,8 +31,7 @@ let Component = cc.Class.extend({
 });
 Component.typeID = 0;
 
-Component.prototype.readSnapshot = function (inPacket) {
-    cc.log("Component.readSnapshot()")
+Component.readSnapshot = function (inPacket) {
     let newComponent = new Component();
 
     newComponent.id = inPacket.getLong();

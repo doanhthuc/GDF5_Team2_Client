@@ -32,3 +32,8 @@ ComponentManager.getInstance().registerClass(FireBallEffect);
 FireBallEffect.calculateSpeed = function (speedX, speedY) {
     return Math.sqrt(Math.pow(speedX, 2) + Math.pow(speedY, 2));
 }
+
+FireBallEffect.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

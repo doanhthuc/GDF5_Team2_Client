@@ -19,3 +19,8 @@ let HealingAbility = Component.extend({
 });
 HealingAbility.typeID = GameConfig.COMPONENT_ID.HEALING_ABILITY;
 ComponentManager.getInstance().registerClass(HealingAbility);
+
+HealingAbility.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

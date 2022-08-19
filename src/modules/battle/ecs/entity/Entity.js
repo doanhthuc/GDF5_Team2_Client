@@ -81,7 +81,7 @@ let EntityECS = cc.Class.extend({
     }
 });
 
-EntityECS.prototype.readSnapshot = function (inPacket) {
+EntityECS.readSnapshot = function (inPacket) {
     let newEntity = new EntityECS();
     newEntity.typeID = inPacket.getInt();
     newEntity.id = inPacket.getLong();

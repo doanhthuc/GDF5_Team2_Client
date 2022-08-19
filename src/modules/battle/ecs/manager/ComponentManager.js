@@ -15,7 +15,9 @@ let ComponentManager = ManagerECS.extend({
     },
 
     getClass: function (typeID) {
-        if (this._storeCls.has(typeID)) {
+        if (!this._storeCls.has(typeID)) {
+            cc.error("all class")
+            cc.log(JSON.stringify(this._storeCls));
             throw new Error("Component Class with typeID = " + typeID + " doesn't exist");
         }
         return this._storeCls.get(typeID);

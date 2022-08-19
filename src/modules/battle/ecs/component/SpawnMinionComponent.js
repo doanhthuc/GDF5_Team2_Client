@@ -19,3 +19,8 @@ let SpawnMinionComponent = Component.extend({
 });
 SpawnMinionComponent.typeID = GameConfig.COMPONENT_ID.SPAWN_MINION;
 ComponentManager.getInstance().registerClass(SpawnMinionComponent);
+
+SpawnMinionComponent.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

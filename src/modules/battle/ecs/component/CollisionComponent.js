@@ -20,3 +20,8 @@ let CollisionComponent = Component.extend({
 });
 CollisionComponent.typeID = GameConfig.COMPONENT_ID.COLLISION;
 ComponentManager.getInstance().registerClass(CollisionComponent);
+
+CollisionComponent.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

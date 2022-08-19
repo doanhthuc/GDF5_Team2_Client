@@ -19,3 +19,8 @@ let SlowEffect = EffectComponent.extend({
 });
 SlowEffect.typeID = GameConfig.COMPONENT_ID.SLOW_EFFECT;
 ComponentManager.getInstance().registerClass(SlowEffect);
+
+SlowEffect.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}

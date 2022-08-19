@@ -22,3 +22,8 @@ let SpellInfoComponent = Component.extend({
 });
 SpellInfoComponent.typeID = GameConfig.COMPONENT_ID.SPELL;
 ComponentManager.getInstance().registerClass(SpellInfoComponent);
+
+SpellInfoComponent.readSnapshot = function (inPacket) {
+    let component = Component.readSnapshot(inPacket);
+    return component;
+}
