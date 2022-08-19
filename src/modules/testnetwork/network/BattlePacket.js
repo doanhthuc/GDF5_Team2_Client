@@ -693,15 +693,16 @@ BattleNetwork.packetMap[gv.CMD.SNAPSHOT] = fr.InPacket.extend({
 
     readData: function () {
         this.dataEntity = {};
-        this.tickNumber = this.getInt();
         let entitySize = this.getInt();
         cc.log("EntitySize = " + entitySize);
         for (let i = 1; i <= entitySize; i++) {
             let entity = EntityECS.unpackData(this);
             this.dataEntity[entity.id] = entity;
         }
-        // this.playerHp = this.getInt();
-        // this.opponentHp = this.getInt();
-        // this.serverTick = this.getInt();
+        this.playerEnergyHouse = this.getInt();
+        this.opponentEnergyHouse = this.getInt();
+        this.serverTick = this.getInt();
+        this.playerEntityUUID = this.getLong();
+        this.opponentEntityUUID = this.getLong();
     }
 })

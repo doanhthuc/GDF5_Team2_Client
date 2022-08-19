@@ -162,6 +162,7 @@ let TickInputHandler = cc.Class.extend({
             .dispatchEvent(EventType.DESTROY_TOWER, {pos: tilePos, mode: GameConfig.PLAYER});
     },
 
+
     logTickHandler: function (commandID, packet, tickNumber) {
         cc.warn("[tick input handle] #" + commandID + " | tickNumber = " + tickNumber + " : " + JSON.stringify(packet));
     }

@@ -257,6 +257,9 @@ BattleNetwork.Connector = cc.Class.extend({
                 }
             }
         }
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse,GameConfig.PLAYER);
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse,GameConfig.OPPONENT);
+        BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.renderEnergyHouse();
     },
 
 
