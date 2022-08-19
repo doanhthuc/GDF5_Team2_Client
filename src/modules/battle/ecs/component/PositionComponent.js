@@ -20,14 +20,23 @@ let PositionComponent = Component.extend({
     clone: function () {
         return ComponentFactory.create(PositionComponent, this.x, this.y, this.moveDistance);
     },
+
+    readData: function (data) {
+        this._super(data);
+        this.x = data.x;
+        this.y = data.y;
+        this.moveDistance = data.moveDistance;
+    }
 });
 PositionComponent.typeID = GameConfig.COMPONENT_ID.POSITION;
 ComponentManager.getInstance().registerClass(PositionComponent);
 
-PositionComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    component.x = inPacket.getDouble();
-    component.y = inPacket.getDouble();
-    component.moveDistance = inPacket.getDouble();
-    return component;
+PositionComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+
+    data.x = inPacket.getDouble();
+    data.y = inPacket.getDouble();
+    data.moveDistance = inPacket.getDouble();
+
+    return data;
 }

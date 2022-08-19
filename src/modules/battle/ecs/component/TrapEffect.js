@@ -24,7 +24,7 @@ let TrapEffect = EffectComponent.extend({
 TrapEffect.typeID = GameConfig.COMPONENT_ID.TRAP_EFFECT;
 ComponentManager.getInstance().registerClass(TrapEffect);
 
-TrapEffect.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+TrapEffect.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

@@ -17,7 +17,7 @@ let FrogBulletSkillComponent = Component.extend({
 FrogBulletSkillComponent.typeID = GameConfig.COMPONENT_ID.FROG_BULLET_SKILL;
 ComponentManager.getInstance().registerClass(FrogBulletSkillComponent);
 
-FrogBulletSkillComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+FrogBulletSkillComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

@@ -18,7 +18,8 @@ let DamageAmplifyComponent = Component.extend({
 DamageAmplifyComponent.typeID = GameConfig.COMPONENT_ID.DAMAGE_AMPLIFY_COMPONENT;
 ComponentManager.getInstance().registerClass(DamageAmplifyComponent);
 
-DamageAmplifyComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+
+DamageAmplifyComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

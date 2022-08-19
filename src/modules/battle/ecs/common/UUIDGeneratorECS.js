@@ -14,6 +14,7 @@ let UUIDGeneratorECS = (function () {
         },
 
         genEntityID: function (mode) {
+            Utils.validateMode(mode);
             if (mode === GameConfig.PLAYER)
                 return ++_playerStartEntityID;
             else return ++_opponentStartEntityID;

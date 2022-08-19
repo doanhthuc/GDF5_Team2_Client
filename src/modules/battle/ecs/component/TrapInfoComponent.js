@@ -23,7 +23,7 @@ let TrapInfoComponent = InfoComponent.extend({
 TrapInfoComponent.typeID = GameConfig.COMPONENT_ID.TRAP_INFO;
 ComponentManager.getInstance().registerClass(TrapInfoComponent);
 
-TrapInfoComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+TrapInfoComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

@@ -232,7 +232,24 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleSnapshot: function (cmd, packet) {
+        let entityManager = EntityManager.getInstance();
+        cc.log("data packet");
+        cc.log(JSON.stringify(packet.dataEntity))
 
+        for (let entityId in packet.dataEntity) {
+            let dataEntity = packet.dataEntity[entityId];
+            let existEntityInGame = entityManager.getEntity(entityId);
+
+            if (!existEntityInGame) continue;
+
+            let dataComponents = dataEntity.components;
+            for (let componentTypeID in dataComponents) {
+                if (existEntityInGame._hasComponent(componentTypeID)) {
+                    let component = existEntityInGame.getComponent(componentTypeID);
+                    component.readData(dataComponents[componentTypeID]);
+                }
+            }
+        }
     },
 
     logSendCommand: function (commandID, packet) {

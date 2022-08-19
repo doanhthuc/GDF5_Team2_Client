@@ -21,22 +21,29 @@ let PathComponent = Component.extend({
     clone: function () {
         return ComponentFactory.create(PathComponent, this.path, this.mode, false);
     },
+
+    readData: function (data) {
+        this._super(data);
+        this.mode = data.mode;
+        this.path = data.path;
+        this.currentPathIdx = data.currentPathIdx;
+    },
 });
 PathComponent.typeID = GameConfig.COMPONENT_ID.PATH;
 ComponentManager.getInstance().registerClass(PathComponent);
 
-PathComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
+PathComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
 
-    component.mode = inPacket.getShort() === 1 ? GameConfig.PLAYER : GameConfig.OPPONENT;
-    component.currentPathIdx = inPacket.getInt();
+    data.mode = Utils.convertShortToMode(inPacket.getShort());
+    data.currentPathIdx = inPacket.getInt();
 
     let pathSize = inPacket.getInt();
     let path = [];
     for (let i = 1; i <= pathSize; i++) {
         path.push(cc.p(inPacket.getDouble(), inPacket.getDouble()));
     }
-    component.path = path;
+    data.path = path;
 
-    return component;
+    return data;
 }

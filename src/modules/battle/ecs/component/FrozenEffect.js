@@ -19,7 +19,7 @@ let FrozenEffect = EffectComponent.extend({
 FrozenEffect.typeID = GameConfig.COMPONENT_ID.FROZEN_EFFECT;
 ComponentManager.getInstance().registerClass(FrozenEffect);
 
-FrozenEffect.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+FrozenEffect.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

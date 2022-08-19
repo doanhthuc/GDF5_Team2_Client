@@ -18,7 +18,7 @@ let DamageEffect = EffectComponent.extend({
 DamageEffect.typeID = GameConfig.COMPONENT_ID.DAMAGE_EFFECT;
 ComponentManager.getInstance().registerClass(DamageEffect);
 
-DamageEffect.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+DamageEffect.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

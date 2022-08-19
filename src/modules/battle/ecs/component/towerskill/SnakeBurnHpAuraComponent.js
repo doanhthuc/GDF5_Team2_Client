@@ -20,7 +20,7 @@ let SnakeBurnHpAuraComponent = Component.extend({
 SnakeBurnHpAuraComponent.typeID = GameConfig.COMPONENT_ID.SNAKE_BURN_HP_AURA;
 ComponentManager.getInstance().registerClass(SnakeBurnHpAuraComponent);
 
-SnakeBurnHpAuraComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+SnakeBurnHpAuraComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

@@ -401,3 +401,11 @@ Utils.divideCellPath = function (pointA, pointB, divideAmount) {
 Utils.currentTimeMillis = function () {
     return Date.now();
 }
+
+Utils.convertShortToMode = function (shortVar) {
+    return shortVar === 1 ? GameConfig.PLAYER : GameConfig.OPPONENT;
+}
+
+Utils.convertShortToBoolean = function (booleanVal) {
+    return booleanVal === 1;
+}

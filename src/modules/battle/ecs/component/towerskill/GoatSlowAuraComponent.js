@@ -19,7 +19,7 @@ let GoatSlowAuraComponent = Component.extend({
 GoatSlowAuraComponent.typeID = GameConfig.COMPONENT_ID.GOAT_SLOW_AURA;
 ComponentManager.getInstance().registerClass(GoatSlowAuraComponent);
 
-GoatSlowAuraComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+GoatSlowAuraComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

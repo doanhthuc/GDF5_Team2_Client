@@ -41,6 +41,17 @@ let VelocityComponent = Component.extend({
         
         return null;
     },
+
+    readData: function (data) {
+        this._super(data);
+        this.speedX = data.speedX;
+        this.speedY = data.speedY;
+        this.originSpeedX = data.originSpeedX;
+        this.originSpeedY = data.originSpeedY;
+        this.originSpeed = data.originSpeed;
+        this.staticPosition = data.staticPosition;
+        this.dynamicEntityId = data.dynamicEntityId;
+    }
 });
 VelocityComponent.typeID = GameConfig.COMPONENT_ID.VELOCITY;
 ComponentManager.getInstance().registerClass(VelocityComponent);
@@ -49,7 +60,22 @@ VelocityComponent.calculateSpeed = function (speedX, speedY) {
     return Math.sqrt(Math.pow(speedX, 2) + Math.pow(speedY, 2));
 }
 
-VelocityComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+VelocityComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+
+    data.speedX = inPacket.getDouble();
+    data.speedY = inPacket.getDouble();
+    data.originSpeedX = inPacket.getDouble();
+    data.originSpeedY = inPacket.getDouble();
+    data.originSpeed = inPacket.getDouble();
+
+    if (Utils.convertShortToBoolean(inPacket.getShort())) {
+        data.staticPosition = cc.p(inPacket.getDouble(), inPacket.getDouble());
+    }
+
+    if (Utils.convertShortToBoolean(inPacket.getShort())) {
+        data.dynamicEntityId = inPacket.getLong();
+    }
+
+    return data;
 }

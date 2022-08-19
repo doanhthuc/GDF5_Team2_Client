@@ -22,7 +22,7 @@ let TowerInfoComponent = InfoComponent.extend({
 TowerInfoComponent.typeID = GameConfig.COMPONENT_ID.TOWER_INFO;
 ComponentManager.getInstance().registerClass(TowerInfoComponent);
 
-TowerInfoComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+TowerInfoComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

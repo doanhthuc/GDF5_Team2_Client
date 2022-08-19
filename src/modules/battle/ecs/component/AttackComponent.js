@@ -91,8 +91,7 @@ let AttackComponent = Component.extend({
 AttackComponent.typeID = GameConfig.COMPONENT_ID.ATTACK;
 ComponentManager.getInstance().registerClass(AttackComponent);
 
-
-AttackComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+AttackComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }

@@ -20,7 +20,7 @@ let UnderGroundComponent = Component.extend({
 UnderGroundComponent.typeID = GameConfig.COMPONENT_ID.UNDER_GROUND;
 ComponentManager.getInstance().registerClass(UnderGroundComponent);
 
-UnderGroundComponent.readSnapshot = function (inPacket) {
-    let component = Component.readSnapshot(inPacket);
-    return component;
+UnderGroundComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
 }
