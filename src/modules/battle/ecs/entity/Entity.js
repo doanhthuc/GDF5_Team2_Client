@@ -8,7 +8,7 @@ let EntityECS = cc.Class.extend({
         if (id) {
             this.id = id;
         } else {
-            this.id = UUIDGeneratorECS.genEntityID(mode);
+            this.id = UUIDGeneratorECS.genEntityID(mode, typeID);
         }
         this._active = true;
 

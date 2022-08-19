@@ -100,31 +100,29 @@ let AttackSystem = System.extend({
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_HP: {
                 let maxHP = -1;
                 let maxHPIndex = -1;
-                    for (let  i = 0; i < monsterInAttackRange.length; i++) {
-                        let monsterLife = monsterInAttackRange[i].getComponent(LifeComponent);
-                        let hp = monsterLife.hp;
-                        if (hp > maxHP) {
-                            maxHP = hp;
-                            maxHPIndex = i;
-                        }
-                        if (hp === maxHP && monsterInAttackRange[i].id < monsterInAttackRange[maxHPIndex].id) {
-                            maxHPIndex = i;
-                        }
+                for (let i = 0; i < monsterInAttackRange.length; i++) {
+                    let monsterLife = monsterInAttackRange[i].getComponent(LifeComponent);
+                    let hp = monsterLife.hp;
+                    if (hp > maxHP) {
+                        maxHP = hp;
+                        maxHPIndex = i;
+                    } else if (maxHPIndex !== -1 && hp === maxHP && monsterInAttackRange[i].id < monsterInAttackRange[maxHPIndex].id) {
+                        maxHPIndex = i;
                     }
-                    if (maxHPIndex !== -1) targetMonster = monsterInAttackRange[maxHPIndex];
-                    break;
+                }
+                if (maxHPIndex !== -1) targetMonster = monsterInAttackRange[maxHPIndex];
+                break;
             }
             case GameConfig.TOWER_TARGET_STRATEGY.MIN_HP: {
                 let minHP = -1;
                 let minHPIndex = -1;
-                for (let  i = 0; i < monsterInAttackRange.length; i++) {
+                for (let i = 0; i < monsterInAttackRange.length; i++) {
                     let monsterLife = monsterInAttackRange[i].getComponent(LifeComponent);
                     let hp = monsterLife.hp;
                     if (hp < minHP) {
                         minHP = hp;
                         minHPIndex = i;
-                    }
-                    if (hp === minHP && monsterInAttackRange[i].id < monsterInAttackRange[minHPIndex].id) {
+                    } else if (hp === minHP && monsterInAttackRange[i].id < monsterInAttackRange[minHPIndex].id) {
                         minHPIndex = i;
                     }
                 }
@@ -134,13 +132,12 @@ let AttackSystem = System.extend({
             case GameConfig.TOWER_TARGET_STRATEGY.MAX_DISTANCE: {
                 let maxDistance = -1;
                 let maxDistanceIndex = -1;
-                for (let  i = 0; i < monsterInAttackRange.length; i++) {
-                     let distance = this._distanceFrom(monsterInAttackRange[i], towerPos);
+                for (let i = 0; i < monsterInAttackRange.length; i++) {
+                    let distance = this._distanceFrom(monsterInAttackRange[i], towerPos);
                     if (distance > maxDistance) {
                         maxDistance = distance;
                         maxDistanceIndex = i;
-                    }
-                    if (distance === maxDistance && monsterInAttackRange[i].id < monsterInAttackRange[maxDistanceIndex].id) {
+                    } else if (distance === maxDistance && monsterInAttackRange[i].id < monsterInAttackRange[maxDistanceIndex].id) {
                         maxDistanceIndex = i;
                     }
                 }
@@ -150,13 +147,12 @@ let AttackSystem = System.extend({
             case GameConfig.TOWER_TARGET_STRATEGY.MIN_DISTANCE: {
                 let minDistance = -1;
                 let minDistanceIndex = -1;
-                for (let  i = 0; i < monsterInAttackRange.length; i++) {
+                for (let i = 0; i < monsterInAttackRange.length; i++) {
                     let distance = this._distanceFrom(monsterInAttackRange[i], towerPos);
                     if (distance < minDistance) {
                         minDistance = distance;
                         minDistanceIndex = i;
-                    }
-                    if (distance === minDistance && monsterInAttackRange[i].id < monsterInAttackRange[minDistanceIndex].id) {
+                    } else if (distance === minDistance && monsterInAttackRange[i].id < monsterInAttackRange[minDistanceIndex].id) {
                         minDistanceIndex = i;
                     }
                 }

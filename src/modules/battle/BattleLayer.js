@@ -81,32 +81,32 @@ let BattleLayer = cc.Layer.extend({
         tickManager.renderNormalTimerNode();
     },
 
-    createMonsterByEntityID: function (mode, entityID) {
+    createMonsterByEntityTypeID: function (mode, entityTypeID, entityId) {
         let pixelPos = Utils.tile2Pixel(0, 4, mode);
-        switch (entityID) {
+        switch (entityTypeID) {
             case GameConfig.ENTITY_ID.SWORD_MAN:
-                EntityFactory.createSwordsmanMonster(pixelPos, mode);
+                EntityFactory.createSwordsmanMonster(pixelPos, mode, entityId);
                 break;
             case GameConfig.ENTITY_ID.GIANT:
-                EntityFactory.createGiantMonster(pixelPos, mode);
+                EntityFactory.createGiantMonster(pixelPos, mode, entityId);
                 break;
             case GameConfig.ENTITY_ID.NINJA:
-                EntityFactory.createNinjaMonster(pixelPos, mode);
+                EntityFactory.createNinjaMonster(pixelPos, mode, entityId);
                 break;
             case GameConfig.ENTITY_ID.BAT:
-                EntityFactory.createBatMonster(pixelPos, mode);
+                EntityFactory.createBatMonster(pixelPos, mode, entityId);
                 break;
             case GameConfig.ENTITY_ID.ASSASSIN:
-                EntityFactory.createAssassinMonster(pixelPos, mode);
+                EntityFactory.createAssassinMonster(pixelPos, mode, entityId);
                 break;
             case GameConfig.ENTITY_ID.DEMON_TREE:
-                EntityFactory.createDemonTreeBoss(pixelPos, mode);
+                EntityFactory.createDemonTreeBoss(pixelPos, mode, entityId);
                 break;
             case GameConfig.ENTITY_ID.DARK_GIANT:
-                EntityFactory.createDarkGiantBoss(pixelPos, mode);
+                EntityFactory.createDarkGiantBoss(pixelPos, mode, entityId);
                 break;
             case GameConfig.ENTITY_ID.SATYR:
-                EntityFactory.createSatyrBoss(pixelPos, mode);
+                EntityFactory.createSatyrBoss(pixelPos, mode, entityId);
                 break;
         }
     },

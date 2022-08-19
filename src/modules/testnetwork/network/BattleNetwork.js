@@ -195,7 +195,7 @@ BattleNetwork.Connector = cc.Class.extend({
         tickManager.getTickData().setBattleTimerData(battleData.getTimer());
         BattleManager.getInstance().getBattleData().setMaxWave(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
-        UUIDGeneratorECS.setStartEntityID(packet.playerStartEntityID,packet.opponentStartEntityID);
+        UUIDGeneratorECS.setStartEntityID(packet.playerStartEntityID, packet.opponentStartEntityID);
         setTimeout(function () {
             fr.view(BattleLayer, 0.5, true)
             cc.log("===> Switch to Game Layer Scene !!!")
@@ -235,13 +235,20 @@ BattleNetwork.Connector = cc.Class.extend({
         let entityManager = EntityManager.getInstance();
         cc.log("data packet");
         cc.log(JSON.stringify(packet.dataEntity))
-
+        cc.log("Tick receive SnapShot = "+ tickManager.getCurrentTick());
         for (let entityId in packet.dataEntity) {
             let dataEntity = packet.dataEntity[entityId];
             let existEntityInGame = entityManager.getEntity(entityId);
 
-            if (!existEntityInGame) continue;
-
+            if (!existEntityInGame) {
+                cc.log("create new entity");
+                BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityId);
+            }
+            existEntityInGame = entityManager.getEntity(entityId);
+            if (!existEntityInGame) {
+                cc.log("Entity Does not Exist");
+            }
+            cc.log("Exist Entity");
             let dataComponents = dataEntity.components;
             for (let componentTypeID in dataComponents) {
                 if (existEntityInGame._hasComponent(componentTypeID)) {
@@ -251,6 +258,7 @@ BattleNetwork.Connector = cc.Class.extend({
             }
         }
     },
+
 
     logSendCommand: function (commandID, packet) {
         cc.warn("[send command] #" + commandID + ": " + JSON.stringify(packet));

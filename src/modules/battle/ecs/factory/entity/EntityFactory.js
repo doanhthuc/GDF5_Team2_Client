@@ -2,24 +2,24 @@ let EntityFactory = cc.Class.extend({});
 
 EntityFactory.pool = new EntityPool()
 
-EntityFactory._createEntity = function (typeID, mode) {
+EntityFactory._createEntity = function (typeID, mode, entityId) {
     Utils.validateMode(mode);
     // TODO: create pool object for each type bullet
     // let entity = this.pool.getInActiveEntity(typeID);
     let entity = null;
     if (entity === null) {
-        entity = new EntityECS(typeID, mode);
+        entity = new EntityECS(typeID, mode, entityId);
         // this.pool.push(entity);
         EntityManager.getInstance().addEntity(entity);
     }
     return entity;
 }
 
-EntityFactory.createBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
+EntityFactory.createBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster , entityId) {
     Utils.validateMode(mode);
     if (towerType === GameConfig.ENTITY_ID.CANNON_TOWER) {
         let typeID = GameConfig.ENTITY_ID.BULLET;
-        let entity = this._createEntity(typeID, mode);
+        let entity = this._createEntity(typeID, mode, entityId);
 
         let bulletNode = new cc.Sprite("#tower_cannon_bullet_0000.png");
         let infoComponent = ComponentFactory.create(BulletInfoComponent, effects, "cannon", 0, canTargetAirMonster);

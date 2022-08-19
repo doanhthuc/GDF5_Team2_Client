@@ -1,7 +1,7 @@
-EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
+EntityFactory.createDemonTreeBoss = function (pixelPos, mode, id) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.DEMON_TREE;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, id);
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
@@ -32,10 +32,10 @@ EntityFactory.createDemonTreeBoss = function (pixelPos, mode) {
     return entity;
 }
 
-EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
+EntityFactory.createDemonTreeMinion = function (pixelPos, mode, id) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.DEMON_TREE_MINION;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, id);
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
@@ -64,10 +64,10 @@ EntityFactory.createDemonTreeMinion = function (pixelPos, mode) {
     return entity;
 }
 
-EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
+EntityFactory.createDarkGiantBoss = function (pixelPos, mode, id) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.DARK_GIANT;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, id);
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
@@ -96,10 +96,10 @@ EntityFactory.createDarkGiantBoss = function (pixelPos, mode) {
     return entity;
 }
 
-EntityFactory.createSatyrBoss = function (pixelPos, mode) {
+EntityFactory.createSatyrBoss = function (pixelPos, mode, id) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.SATYR;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, id);
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 

@@ -1,7 +1,7 @@
-EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
+EntityFactory.createSwordsmanMonster = function (pixelPos, mode, id) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.SWORD_MAN;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, id);
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
@@ -31,10 +31,10 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode) {
     return entity;
 };
 
-EntityFactory.createAssassinMonster = function (pixelPos, mode) {
+EntityFactory.createAssassinMonster = function (pixelPos, mode, id) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.ASSASSIN;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, id);
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
@@ -63,10 +63,10 @@ EntityFactory.createAssassinMonster = function (pixelPos, mode) {
     return entity;
 };
 
-EntityFactory.createBatMonster = function (pixelPos, mode) {
+EntityFactory.createBatMonster = function (pixelPos, mode, id) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.BAT;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, id);
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
@@ -100,10 +100,10 @@ EntityFactory.createBatMonster = function (pixelPos, mode) {
     return entity;
 }
 
-EntityFactory.createGiantMonster = function (pixelPos, mode) {
+EntityFactory.createGiantMonster = function (pixelPos, mode, id) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.GIANT;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, id);
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
@@ -133,10 +133,10 @@ EntityFactory.createGiantMonster = function (pixelPos, mode) {
     return entity;
 }
 
-EntityFactory.createNinjaMonster = function (pixelPos, mode) {
+EntityFactory.createNinjaMonster = function (pixelPos, mode, id) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.NINJA;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, id);
 
     let monsterConfig = this.getMonsterConfigByEntityTypeID(typeID);
 
