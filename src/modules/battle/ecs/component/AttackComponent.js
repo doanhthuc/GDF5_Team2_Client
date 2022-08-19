@@ -93,5 +93,30 @@ ComponentManager.getInstance().registerClass(AttackComponent);
 
 AttackComponent.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
+
+    data.originDamage = inPacket.getDouble();
+    data.damage = inPacket.getDouble();
+    data.targetStrategy = inPacket.getInt();
+    data.originRange = inPacket.getDouble();
+    data.range = inPacket.getDouble();
+    data.originSpeed = inPacket.getDouble();
+    data.speed = inPacket.getDouble();
+    data.countdown = inPacket.getDouble();
+    data.bulletSpeed = inPacket.getDouble();
+    data.bulletRadius = inPacket.getDouble();
+    data.canTargetAirMonster = Utils.convertShortToBoolean(inPacket.getShort());
+    data._latestTick = inPacket.getInt();
+
+    data.effects = [];
+    let effectSize = inPacket.getShort();
+
+    for (let i = 1; i <= effectSize; i++) {
+        let effectType = inPacket.getInt();
+        ComponentCls = ComponentManager.getInstance().getClass(effectType);
+        let componentData = ComponentCls.unpackData(inPacket);
+        componentData.typeID = effectType;
+        data.effects.push(componentData);
+    }
+
     return data;
 }
