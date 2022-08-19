@@ -235,30 +235,39 @@ BattleNetwork.Connector = cc.Class.extend({
         let entityManager = EntityManager.getInstance();
         cc.log("data packet");
         cc.log(JSON.stringify(packet.dataEntity))
-        cc.log("Tick receive SnapShot = "+ tickManager.getCurrentTick());
+        let checkEntity = {};
         for (let entityId in packet.dataEntity) {
             let dataEntity = packet.dataEntity[entityId];
             let existEntityInGame = entityManager.getEntity(entityId);
 
             if (!existEntityInGame) {
-                cc.log("create new entity");
+                cc.log("Entity does not Exist : create new entity");
                 BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityId);
             }
             existEntityInGame = entityManager.getEntity(entityId);
-            if (!existEntityInGame) {
-                cc.log("Entity Does not Exist");
-            }
             cc.log("Exist Entity");
             let dataComponents = dataEntity.components;
             for (let componentTypeID in dataComponents) {
-                if (existEntityInGame._hasComponent(componentTypeID)) {
-                    let component = existEntityInGame.getComponent(componentTypeID);
+                let typeID = Number(componentTypeID);
+                if (existEntityInGame._hasComponent((typeID))) {
+                    let component = existEntityInGame.getComponent(typeID);
                     component.readData(dataComponents[componentTypeID]);
+                } else {
+                    cc.log("entity does not have component")
                 }
             }
+            checkEntity[entityId] = 1;
         }
-        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse,GameConfig.PLAYER);
-        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse,GameConfig.OPPONENT);
+
+
+        let abilitySystem = SystemManager.getInstance().getSystemByTypeID(AbilitySystem);
+        for (let monsterId in abilitySystem.getEntityStore()) {
+            let monsterEntity = abilitySystem.getEntityStore()[monsterId];
+            if (checkEntity[monsterEntity.id] !== 1) EntityManager.destroy(monsterEntity);
+        }
+        UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.PLAYER);
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.OPPONENT);
         BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.renderEnergyHouse();
     },
 
