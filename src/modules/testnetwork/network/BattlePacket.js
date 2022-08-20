@@ -702,7 +702,17 @@ BattleNetwork.packetMap[gv.CMD.SNAPSHOT] = fr.InPacket.extend({
         this.playerEnergyHouse = this.getInt();
         this.opponentEnergyHouse = this.getInt();
         this.serverTick = this.getInt();
-        this.playerEntityUUID = this.getLong();
-        this.opponentEntityUUID = this.getLong();
-    }
+        this.playerMonsterEntityID = this.getLong();
+        this.opponentMonsterEntityID = this.getLong();
+        this.playerStartEntityID = this.getLong();
+        if (UUIDGeneratorECS.getPlayerStartEntityID() !== Number(this.playerStartEntityID)) {
+            let temp = this.playerEnergyHouse;
+            this.playerEnergyHouse = this.opponentEnergyHouse;
+            this.opponentEnergyHouse = temp;
+            temp = this.playerMonsterEntityID;
+            this.playerMonsterEntityID = this.opponentMonsterEntityID;
+            this.opponentMonsterEntityID = temp;
+        }
+    },
+
 })

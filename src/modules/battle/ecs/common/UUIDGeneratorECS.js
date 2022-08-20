@@ -69,6 +69,11 @@ let UUIDGeneratorECS = (function () {
             else return ++_opponentObstacleEntityId;
         },
 
+        setMonsterEntityID: function (playerMonsterEntityId, opponentMonsterEntityId) {
+            _playerMonsterEntityId = playerMonsterEntityId;
+            _opponentMonsterEntityId = opponentMonsterEntityId;
+        },
+
         setStartEntityID: function (playerStartEntityID, opponentStartEntityID) {
             _playerStartEntityID = playerStartEntityID;
             _opponentStartEntityID = opponentStartEntityID;
@@ -84,6 +89,10 @@ let UUIDGeneratorECS = (function () {
             _opponentSpellEntityId = Number(opponentStartEntityID) + SPELL_START_ENTITY_ID;
             _opponentMonsterEntityId = Number(opponentStartEntityID) + MONSTER_START_ENTITY_ID;
             _opponentBulletEntityId = Number(opponentStartEntityID) + BULLET_START_ENTITY_ID;
+        },
+
+        getPlayerStartEntityID: function (){
+            return Number(_playerStartEntityID);
         }
     }
 })();

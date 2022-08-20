@@ -51,6 +51,7 @@ let VelocityComponent = Component.extend({
         this.originSpeed = data.originSpeed;
         this.staticPosition = data.staticPosition;
         this.dynamicEntityId = data.dynamicEntityId;
+        cc.log("Read Data VelocityComponent")
     }
 });
 VelocityComponent.typeID = GameConfig.COMPONENT_ID.VELOCITY;
