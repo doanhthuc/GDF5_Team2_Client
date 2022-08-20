@@ -47,7 +47,6 @@ let TickManager = cc.Class.extend({
         battleLayer.towerSpecialSkillSystem.runUpdateData();
         battleLayer.effectSystem.runUpdateData();
         battleLayer.attackSystem.runUpdateData();
-        battleLayer.renderSystem.runUpdateData();
         battleLayer.lifeSystem.runUpdateData();
         battleLayer.collisionSystem.runUpdateData();
         battleLayer.pathSystem.runUpdateData();
@@ -56,6 +55,7 @@ let TickManager = cc.Class.extend({
         battleLayer.monsterSystem.runUpdateData();
         battleLayer.bulletSystem.runUpdateData();
         battleLayer.movementSystem.runUpdateData();
+        battleLayer.renderSystem.runUpdateData();
         let endTime = Utils.currentTimeMillis();
         if (GameConfig.DEBUG) {
             cc.error("*** Update time = " + (endTime - startTime));
@@ -200,7 +200,7 @@ let TickManager = cc.Class.extend({
         let entityManager = EntityManager.getInstance();
         cc.log("data packet");
         cc.log(JSON.stringify(packet.dataEntity))
-        let checkEntity = {};
+        let entityInSnapshot = {};
         for (let entityId in packet.dataEntity) {
             let dataEntity = packet.dataEntity[entityId];
             let existEntityInGame = entityManager.getEntity(entityId);
@@ -223,14 +223,14 @@ let TickManager = cc.Class.extend({
                 let component = existEntityInGame.getComponent(typeID);
                 component.readData(dataComponents[componentTypeID]);
             }
-            checkEntity[entityId] = 1;
+            entityInSnapshot[entityId] = true;
         }
 
 
-        let abilitySystem = SystemManager.getInstance().getSystemByTypeID(AbilitySystem);
+        let abilitySystem = SystemManager.getInstance().getSystemByTypeID(TowerSpecialSkillSystem);
         for (let monsterId in abilitySystem.getEntityStore()) {
             let monsterEntity = abilitySystem.getEntityStore()[monsterId];
-            if (checkEntity[monsterEntity.id] !== 1) EntityManager.destroy(monsterEntity);
+            if (!entityInSnapshot[monsterEntity.id]) EntityManager.destroy(monsterEntity);
         }
         UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);
         BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());

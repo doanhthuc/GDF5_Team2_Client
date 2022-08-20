@@ -403,7 +403,14 @@ Utils.currentTimeMillis = function () {
 }
 
 Utils.convertShortToMode = function (shortVar) {
-    return shortVar === 1 ? GameConfig.USER1() : GameConfig.USER2();
+    let result = shortVar === 1 ? "player" : "opponent";
+    if (GameConfig.USER1() === "opponent") {
+        if (result === "player")
+            result = "opponent"
+        else
+            result = "player";
+    }
+    return result;
 }
 
 Utils.convertShortToBoolean = function (booleanVal) {
