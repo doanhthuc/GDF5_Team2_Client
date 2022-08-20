@@ -196,7 +196,6 @@ let TickManager = cc.Class.extend({
     },
 
 
-
     handleSnapshot: function (packet) {
         let entityManager = EntityManager.getInstance();
         cc.log("data packet");
@@ -224,12 +223,14 @@ let TickManager = cc.Class.extend({
             let dataComponents = dataEntity.components;
             for (let componentTypeID in dataComponents) {
                 let typeID = Number(componentTypeID);
-                if (existEntityInGame._hasComponent((typeID))) {
-                    let component = existEntityInGame.getComponent(typeID);
-                    component.readData(dataComponents[componentTypeID]);
-                } else {
-                    cc.log("entity does not have component")
+                //If entity does not have Component => create New Component with component TypeID
+                if (!existEntityInGame._hasComponent((typeID))) {
+                    let componentCls = ComponentManager.getInstance().getClass(typeID);
+                    let component = ComponentFactory.create(componentCls);
+                    existEntityInGame.addComponent(component);
                 }
+                let component = existEntityInGame.getComponent(typeID);
+                component.readData(dataComponents[componentTypeID]);
             }
             entityInSnapshot[entityId] = true;
         }
