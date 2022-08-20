@@ -201,24 +201,22 @@ let TickManager = cc.Class.extend({
         cc.log(JSON.stringify(packet.dataEntity))
         let entityInSnapshot = {};
         for (let entityId in packet.dataEntity) {
-            entityId = parseInt(entityId);
+            let entityID = Number(entityId);
             let dataEntity = packet.dataEntity[entityId];
-            let existEntityInGame = entityManager.getEntity(entityId);
+            let existEntityInGame = entityManager.getEntity(entityID);
 
             if (!existEntityInGame) {
                 cc.log("Entity does not Exist : create new entity");
                 if (ValidatorECS.isMonster(dataEntity.typeID)) {
-                    BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityId);
+                    BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityID);
                 } else if (ValidatorECS.isTower(dataEntity.typeID)) {
                     let pos = dataEntity.components[PositionComponent.typeID];
                     let tilePos = Utils.pixel2Tile(pos.x, pos.y, dataEntity.mode);
-                    cc.error("mode new tower")
                     cc.log(dataEntity.mode);
-                    BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos,dataEntity.mode);
+                    BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos, dataEntity.mode);
                 }
             }
-            existEntityInGame = entityManager.getEntity(entityId);
-            cc.log("Exist Entity");
+            existEntityInGame = entityManager.getEntity(entityID);
             let dataComponents = dataEntity.components;
             for (let componentTypeID in dataComponents) {
                 let typeID = Number(componentTypeID);
