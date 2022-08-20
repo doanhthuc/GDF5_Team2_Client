@@ -214,7 +214,6 @@ BattleNetwork.Connector = cc.Class.extend({
         }, 2000);
     },
 
-
     _handleEndBattle: function (cmd, packet) {
         BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());
         BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.USER2());

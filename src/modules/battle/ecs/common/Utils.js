@@ -60,6 +60,10 @@ Utils.pixel2Tile = function (xx, yy, mode) {
 
 Utils.validateMode = function (mode) {
     if (mode !== GameConfig.USER1() && mode !== GameConfig.USER2()) {
+        cc.log("============")
+        cc.log(mode)
+        cc.log(GameConfig.USER1())
+        cc.log(GameConfig.USER2());
         throw new Error("mode is invalid");
     }
 }
@@ -404,12 +408,12 @@ Utils.currentTimeMillis = function () {
 
 Utils.convertShortToMode = function (shortVar) {
     let result = shortVar === 1 ? "player" : "opponent";
-    if (GameConfig.USER1() === "opponent") {
-        if (result === "player")
-            result = "opponent"
-        else
-            result = "player";
-    }
+    // if (GameConfig.USER1() === "opponent") {
+    //     if (result === "player")
+    //         result = "opponent"
+    //     else
+    //         result = "player";
+    // }
     return result;
 }
 

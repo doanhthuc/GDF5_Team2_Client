@@ -203,12 +203,21 @@ let TickManager = cc.Class.extend({
         cc.log(JSON.stringify(packet.dataEntity))
         let entityInSnapshot = {};
         for (let entityId in packet.dataEntity) {
+            entityId = parseInt(entityId);
             let dataEntity = packet.dataEntity[entityId];
             let existEntityInGame = entityManager.getEntity(entityId);
 
             if (!existEntityInGame) {
                 cc.log("Entity does not Exist : create new entity");
-                BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityId);
+                if (ValidatorECS.isMonster(dataEntity.typeID)) {
+                    BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityId);
+                } else if (ValidatorECS.isTower(dataEntity.typeID)) {
+                    let pos = dataEntity.components[PositionComponent.typeID];
+                    let tilePos = Utils.pixel2Tile(pos.x, pos.y, dataEntity.mode);
+                    cc.error("mode new tower")
+                    cc.log(dataEntity.mode);
+                    BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos,dataEntity.mode);
+                }
             }
             existEntityInGame = entityManager.getEntity(entityId);
             cc.log("Exist Entity");
@@ -226,9 +235,9 @@ let TickManager = cc.Class.extend({
         }
 
 
-        let abilitySystem = SystemManager.getInstance().getSystemByTypeID(TowerSpecialSkillSystem);
-        for (let monsterId in abilitySystem.getEntityStore()) {
-            let monsterEntity = abilitySystem.getEntityStore()[monsterId];
+        let towerSystem = SystemManager.getInstance().getSystemByTypeID(TowerSpecialSkillSystem);
+        for (let entityID in towerSystem.getEntityStore()) {
+            let monsterEntity = towerSystem.getEntityStore()[entityID];
             if (!entityInSnapshot[monsterEntity.id]) EntityManager.destroy(monsterEntity);
         }
         UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);

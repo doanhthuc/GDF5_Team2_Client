@@ -178,10 +178,10 @@ let BattleLayer = cc.Layer.extend({
         NodeFactory.createBuildingTowerTimer(tilePos, mode);
     },
 
-    buildTower: function (towerId, tilePos, mode) {
-        this._createTower(towerId, tilePos, mode);
+    buildTower: function (towerTypeID, tilePos, mode) {
+        this._createTower(towerTypeID, tilePos, mode);
         EventDispatcher.getInstance()
-            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
+            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerTypeID, pos: tilePos, mode: mode});
         if (mode === GameConfig.USER1()) soundManager.playPutNewTower();
     },
 
