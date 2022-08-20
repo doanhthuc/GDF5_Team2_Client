@@ -67,20 +67,20 @@ let SpellSystem = System.extend({
                                     const mass = monsterInfo.weight;
                                     let A =  40 + force / mass;
                                     let T = 1;
-                                    const V0 = Math.abs(A * T);
+                                    const velocityStart = Math.abs(A * T);
 
 
                                     let newVectorVelocity = Utils.calculateVelocityVector(
                                         spellPos,
                                         monsterPos,
-                                        V0
+                                        velocityStart
                                     );
                                     oldVelocity.speedX = newVectorVelocity.speedX;
                                     oldVelocity.speedY = newVectorVelocity.speedY;
 
 
                                     let fireballEffect = ComponentFactory.create(FireBallEffect,
-                                        A, T, cc.p(spellPos.x, spellPos.y), cc.p(monsterPos.x, monsterPos.y), V0);
+                                        A, T, cc.p(spellPos.x, spellPos.y), cc.p(monsterPos.x, monsterPos.y), velocityStart);
 
                                     monster.addComponent(fireballEffect);
                                     monster.removeComponent(PathComponent);
