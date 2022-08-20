@@ -10,6 +10,7 @@ let TickManager = cc.Class.extend({
 
         this.normalTimerNodeContainer = [];
         this.checkSumContainer = [];
+        this.waitingSnapshot = [];
     },
 
     addInput: function (tickNumber, cmd, packet) {
@@ -100,6 +101,11 @@ let TickManager = cc.Class.extend({
         this.updateNormalTimerNode();
 
         this.increaseUpdateTick();
+
+        while (this.waitingSnapshot.length > 0) {
+            let packet = this.waitingSnapshot.shift();
+            this.handleSnapshot(packet);
+        }
     },
 
     setStartTime: function (millisecond) {
@@ -124,6 +130,10 @@ let TickManager = cc.Class.extend({
 
     getLatestUpdateTick: function () {
         return this.lastedTick;
+    },
+
+    setLatestUpdateTick: function (latestTick) {
+        this.lastedTick = latestTick;
     },
 
     increaseUpdateTick: function () {
@@ -198,6 +208,49 @@ let TickManager = cc.Class.extend({
             sumHp += lifeComponent.hp;
         }
         this.checkSumContainer[currentTick] = sumHp;
+    },
+
+    handleSnapshot: function (packet) {
+        let entityManager = EntityManager.getInstance();
+        cc.log("data packet");
+        cc.log(JSON.stringify(packet.dataEntity))
+        let checkEntity = {};
+        for (let entityId in packet.dataEntity) {
+            let dataEntity = packet.dataEntity[entityId];
+            let existEntityInGame = entityManager.getEntity(entityId);
+
+            if (!existEntityInGame) {
+                cc.log("Entity does not Exist : create new entity");
+                BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityId);
+            }
+            existEntityInGame = entityManager.getEntity(entityId);
+            cc.log("Exist Entity");
+            let dataComponents = dataEntity.components;
+            for (let componentTypeID in dataComponents) {
+                let typeID = Number(componentTypeID);
+                if (existEntityInGame._hasComponent((typeID))) {
+                    let component = existEntityInGame.getComponent(typeID);
+                    component.readData(dataComponents[componentTypeID]);
+                } else {
+                    cc.log("entity does not have component")
+                }
+            }
+            checkEntity[entityId] = 1;
+        }
+
+
+        let abilitySystem = SystemManager.getInstance().getSystemByTypeID(AbilitySystem);
+        for (let monsterId in abilitySystem.getEntityStore()) {
+            let monsterEntity = abilitySystem.getEntityStore()[monsterId];
+            if (checkEntity[monsterEntity.id] !== 1) EntityManager.destroy(monsterEntity);
+        }
+        UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.USER2());
+        BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.renderEnergyHouse();
+
+        // Reset latest tick to the snapshot tick
+        this.setLatestUpdateTick(packet.serverTick);
     }
 })
 
