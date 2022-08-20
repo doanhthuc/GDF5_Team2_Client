@@ -181,7 +181,7 @@ EntityFactory.createTree = function (tilePos, mode) {
     hpBarNode.setPosition(cc.p(0, 50));
 
     let zOrder = 1;
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         zOrder = GameConfig.MAP_HEIGH - tilePos.y;
     } else {
         zOrder = tilePos.y;
@@ -191,7 +191,7 @@ EntityFactory.createTree = function (tilePos, mode) {
     node.addChild(sp, zOrder, "tree");
     node.addChild(hpBarNode, zOrder, "hp");
 
-    if (mode === GameConfig.PLAYER)
+    if (mode === GameConfig.USER1())
         node.setName("PlayerTree");
     else node.setName("OpponentTree");
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos, zOrder);
@@ -214,7 +214,7 @@ EntityFactory.createHole = function (tilePos, mode) {
     let node = new cc.Node();
     let sp = new cc.Sprite(BattleResource.HOLE_IMG);
     node.addChild(sp, 1, "hole");
-    if (mode === GameConfig.PLAYER)
+    if (mode === GameConfig.USER1())
         node.setName("PlayerHole");
     else node.setName("OpponentHole");
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);

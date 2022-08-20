@@ -47,7 +47,7 @@ let RenderSystem = System.extend({
 
             if (ValidatorECS.isTower(entity)) {
                 let tilePos = Utils.pixel2Tile(positionComponent.x, positionComponent.y, entity.mode);
-                if (entity.mode === GameConfig.PLAYER) {
+                if (entity.mode === GameConfig.USER1()) {
                     appearanceComponent.sprite.setLocalZOrder(GameConfig.MAP_HEIGH - tilePos.y);
                 } else {
                     appearanceComponent.sprite.setLocalZOrder(tilePos.y);

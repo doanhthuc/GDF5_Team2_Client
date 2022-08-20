@@ -31,16 +31,16 @@ let BattleLayer = cc.Layer.extend({
         cc.error("start time = " + tickManager.getStartTime());
         cc.error("delay time = " + delayTime);
         this.scheduleOnce(this.startGame, delayTime);
-        // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
-        // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.OPPONENT);
+        // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.USER1());
+        // this.oneTimeBornMonster({x: 0, y: 4}, GameConfig.USER2());
     },
 
     _setupUI: function () {
         this.uiLayer = new BattleUILayer(this.battleData);
         this.addChild(this.uiLayer, 2);
         this.mapLayer = new BattleMapLayer(this.battleData);
-        this.mapLayer._genMap(GameConfig.PLAYER);
-        this.mapLayer._genMap(GameConfig.OPPONENT);
+        this.mapLayer._genMap(GameConfig.USER1());
+        this.mapLayer._genMap(GameConfig.USER2());
         this.addChild(this.mapLayer, 1);
 
         this.fpsText = new ccui.Text("", "textures/font/SVN-Supercell Magic.ttf", 20);
@@ -75,9 +75,9 @@ let BattleLayer = cc.Layer.extend({
 
         this.getTimerNode().timer();
         this.movementSystem.start(dt);
-        this.renderSystem.start(dt);
         this.spriteSheetAnimationSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
+        this.renderSystem.start(dt);
         tickManager.renderNormalTimerNode();
     },
 
@@ -178,11 +178,11 @@ let BattleLayer = cc.Layer.extend({
         NodeFactory.createBuildingTowerTimer(tilePos, mode);
     },
 
-    buildTower: function (towerId, tilePos, mode) {
-        this._createTower(towerId, tilePos, mode);
+    buildTower: function (towerTypeID, tilePos, mode) {
+        this._createTower(towerTypeID, tilePos, mode);
         EventDispatcher.getInstance()
-            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerId, pos: tilePos, mode: mode});
-        if (mode === GameConfig.PLAYER) soundManager.playPutNewTower();
+            .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerTypeID, pos: tilePos, mode: mode});
+        if (mode === GameConfig.USER1()) soundManager.playPutNewTower();
     },
 
     _createTower: function (towerId, tilePos, mode) {
@@ -223,7 +223,7 @@ let BattleLayer = cc.Layer.extend({
         return tower;
     },
 
-    setEntityIdForTileObject: function (entityId, tilePos, mode = GameConfig.PLAYER) {
+    setEntityIdForTileObject: function (entityId, tilePos, mode = GameConfig.USER1()) {
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);
         mapObject.getObjectInTileByTilePos(tilePos).setEntityId(entityId);
@@ -246,7 +246,7 @@ let BattleLayer = cc.Layer.extend({
 
     shouldUpgradeTower: function (towerId, tilePos) {
         if (GameConfig.NETWORK === 0) return false;
-        let objectInTile = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).getObjectInTileByTilePos(tilePos);
+        let objectInTile = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.USER1()).getObjectInTileByTilePos(tilePos);
         if (objectInTile.getObjectInTileType() === ObjectInCellType.TOWER && objectInTile.getType() === towerId) {
             let tower = objectInTile;
             cc.log("[shouldUpgradeTower] tower: " + JSON.stringify(tower));
@@ -262,7 +262,7 @@ let BattleLayer = cc.Layer.extend({
 
     shouldPutNewTower: function (tilePos) {
         if (GameConfig.NETWORK === 0) return true;
-        let tileObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).getTileObject(tilePos.x, tilePos.y);
+        let tileObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.USER1()).getTileObject(tilePos.x, tilePos.y);
         return tileObject.getObjectInTileType() === ObjectInCellType.NONE;
     },
 
@@ -277,11 +277,11 @@ let BattleLayer = cc.Layer.extend({
                     let selectedCardType = BattleManager.getInstance().getBattleLayer().selectedCard
                     BattleManager.getInstance().getCardDeckNode().removeDragSprite(selectedCardType);
                     let pixelPos = touches[0].getLocation();
-                    let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.PLAYER);
-                    let tilePos = Utils.pixel2Tile(pixelInMap.x, pixelInMap.y, GameConfig.OPPONENT);
+                    let pixelInMap = Utils.convertWorldSpace2MapNodeSpace(pixelPos, GameConfig.USER1());
+                    let tilePos = Utils.pixel2Tile(pixelInMap.x, pixelInMap.y, GameConfig.USER2());
                     if (Utils.validateTilePos(tilePos)) {
                         BattleManager.getInstance().getBattleLayer()
-                            .putCardAt(selectedCardType, pixelInMap, GameConfig.PLAYER);
+                            .putCardAt(selectedCardType, pixelInMap, GameConfig.USER1());
                     }
                 }
             }
@@ -294,10 +294,10 @@ let BattleLayer = cc.Layer.extend({
                     return false;
                 }
                 let globalPos = touch.getLocation();
-                let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.PLAYER);
-                let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.PLAYER);
+                let localPos = Utils.convertWorldSpace2MapNodeSpace(globalPos, GameConfig.USER1());
+                let tilePos = Utils.pixel2Tile(localPos.x, localPos.y, GameConfig.USER1());
                 if (Utils.validateTilePos(tilePos)) {
-                    let mapObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER);
+                    let mapObject = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.USER1());
                     let playerMapMatrix = mapObject.convertBattleMapObjectToSimpleMap();
                     if (playerMapMatrix[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] === GameConfig.MAP.TOWER) {
                         let towerId = mapObject.getEntityIdByTilePos(tilePos)
@@ -325,15 +325,15 @@ let BattleLayer = cc.Layer.extend({
         //this.schedule(this.update,0.1,10000);
         this.uiLayer.startGame();
         this.scheduleUpdate();
-        //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.PLAYER);
+        //BattleManager.getInstance().getBattleLayer().oneTimeBornMonster({x: 0, y: 4}, GameConfig.USER1());
     },
 
     stopGame: function () {
         this.unscheduleUpdate();
         this.uiLayer.stopTimer();
 
-        let playerEnergyHouse = this.battleData.getEnergyHouse(GameConfig.PLAYER);
-        let opponentEnergyHouse = this.battleData.getEnergyHouse(GameConfig.OPPONENT);
+        let playerEnergyHouse = this.battleData.getEnergyHouse(GameConfig.USER1());
+        let opponentEnergyHouse = this.battleData.getEnergyHouse(GameConfig.USER2());
 
         let result = GameConfig.BATTLE_RESULT.DRAW;
         if (playerEnergyHouse > opponentEnergyHouse) {
@@ -355,11 +355,11 @@ let BattleLayer = cc.Layer.extend({
     },
 
     getPlayerMapNode: function () {
-        return this.mapLayer.mapNode[GameConfig.PLAYER];
+        return this.mapLayer.mapNode[GameConfig.USER1()];
     },
 
     getOpponentMapNode: function () {
-        return this.mapLayer.mapNode[GameConfig.OPPONENT];
+        return this.mapLayer.mapNode[GameConfig.USER2()];
     },
 
     getMapNode: function (mode) {

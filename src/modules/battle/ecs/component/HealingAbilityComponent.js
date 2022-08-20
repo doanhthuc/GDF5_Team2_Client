@@ -16,11 +16,18 @@ let HealingAbility = Component.extend({
     clone: function () {
         return ComponentFactory.create(HealingAbility, this.range, this.healingRate);
     },
+
+    readData: function (data) {
+        this._super(data);
+        this.countdown = data.countdown;
+    }
+
 });
 HealingAbility.typeID = GameConfig.COMPONENT_ID.HEALING_ABILITY;
 ComponentManager.getInstance().registerClass(HealingAbility);
 
 HealingAbility.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
+    data.countdown = inPacket.getDouble();
     return data;
 }

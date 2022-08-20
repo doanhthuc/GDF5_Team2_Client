@@ -5,20 +5,20 @@ let OpponentAction = cc.Class.extend({
 
     // putCardAt: function (pixelPos, towerType) {
     //     cc.log('[OpponentAction line 8] putCardAt: '  + JSON.stringify(pixelPos) + '  towerId: ' + towerType);
-    //     BattleManager.getInstance().getBattleLayer().putCardAt(towerType, pixelPos, GameConfig.OPPONENT);
+    //     BattleManager.getInstance().getBattleLayer().putCardAt(towerType, pixelPos, GameConfig.USER2());
     // },
 
     buildTower: function (towerId, tilePos) {
         cc.log('[OpponentAction line 12] buildTower: ' + JSON.stringify(tilePos) + '  towerId: ' + towerId);
-        BattleManager.getInstance().getBattleLayer().buildTower(towerId, tilePos, GameConfig.OPPONENT);
+        BattleManager.getInstance().getBattleLayer().buildTower(towerId, tilePos, GameConfig.USER2());
     },
 
     dropSpell: function (spellId, pixelPos) {
-        BattleManager.getInstance().getBattleLayer().dropSpell(spellId, pixelPos, GameConfig.OPPONENT);
+        BattleManager.getInstance().getBattleLayer().dropSpell(spellId, pixelPos, GameConfig.USER2());
     },
 
     putTrap: function (tilePos) {
-        EntityFactory.createTrap(tilePos, GameConfig.OPPONENT);
+        EntityFactory.createTrap(tilePos, GameConfig.USER2());
     }
 });
 

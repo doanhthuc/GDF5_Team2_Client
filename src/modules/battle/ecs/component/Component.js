@@ -38,7 +38,6 @@ Component.typeID = 0;
 
 Component.unpackData = function (inPacket) {
     let data = {};
-
     data.id = inPacket.getLong();
     data._active = Utils.convertShortToBoolean(inPacket.getShort());
 

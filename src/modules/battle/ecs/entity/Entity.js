@@ -107,6 +107,7 @@ EntityECS.unpackData = function (inPacket) {
     data.id = inPacket.getLong();
     data._active = Utils.convertShortToBoolean(inPacket.getShort());
     data.mode = Utils.convertShortToMode(inPacket.getShort());
+    Utils.validateMode(data.mode);
 
     data.components = {};
 

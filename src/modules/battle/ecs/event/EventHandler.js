@@ -15,8 +15,8 @@ EventDispatcher.getInstance()
         if (monsterWave[currentWave] && currentIndexMonsterWave < monsterWave[currentWave].length) {
             let monsterTypeID = monsterWave[currentWave][currentIndexMonsterWave];
             battleData.setCurrentIndexMonsterWave(currentIndexMonsterWave + 1);
-            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, monsterTypeID);
-            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.OPPONENT, monsterTypeID);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.USER1(), monsterTypeID);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.USER2(), monsterTypeID);
             //
         }
     })
@@ -53,7 +53,7 @@ EventDispatcher.getInstance()
             }
         }
 
-        if (currentMode === GameConfig.PLAYER) {
+        if (currentMode === GameConfig.USER1()) {
             BattleManager.getInstance().getBattleLayer().mapLayer.showPlayerMonsterPath();
         }
     })
@@ -95,7 +95,7 @@ EventDispatcher.getInstance()
             }
         }
 
-        if (currentMode === GameConfig.PLAYER) {
+        if (currentMode === GameConfig.USER1()) {
             BattleManager.getInstance().getBattleLayer().mapLayer.showPlayerMonsterPath();
         }
     })

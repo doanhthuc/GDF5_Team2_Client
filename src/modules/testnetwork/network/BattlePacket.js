@@ -139,24 +139,6 @@ CMDDestroyTower = fr.OutPacket.extend({
     }
 })
 
-CMDSendCheckSum = fr.OutPacket.extend({
-    ctor: function () {
-        this._super();
-        this.initData(100);
-        this.setCmdId(gv.CMD.SEND_CHECK_SUM);
-    },
-
-    pack: function (checksum, serverEndBattleTick) {
-        this.packHeader();
-        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
-        this.putInt(checksum.length)
-        for (let i = 0; i < Math.min(serverEndBattleTick, checksum.length); i++) {
-            this.putDouble(checksum[i])
-        }
-        this.updateSize();
-    }
-})
-
 CMDSendSpeedUpNextWave = fr.OutPacket.extend({
     ctor: function () {
         this._super();
@@ -196,6 +178,7 @@ BattleNetwork.packetMap[gv.CMD.SEND_MATCHING] = fr.InPacket.extend({
     readData: function () {
         this.error = this.getShort();
         this.roomId = this.getInt();
+        this.entityMode = Utils.convertShortToMode(this.getShort());
         let result = this._unpackMap();
         this.playerMap = result.map;
         this.playerLongestPath = result.path;

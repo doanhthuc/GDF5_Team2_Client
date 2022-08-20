@@ -37,7 +37,7 @@ let CollisionSystem = System.extend({
 
                 let rect = cc.rect(pos.x - w / 2, pos.y - h / 2, w, h);
 
-                if (entity.mode === GameConfig.PLAYER) {
+                if (entity.mode === GameConfig.USER1()) {
                     quadTreePlayer.insert(new QuadTreeData(rect, entity));
                 } else {
                     quadTreeOpponent.insert(new QuadTreeData(rect, entity));
@@ -70,7 +70,7 @@ let CollisionSystem = System.extend({
             let w = collisionComponent.width, h = collisionComponent.height;
 
             let returnObjects = null;
-            if (bulletEntity.mode === GameConfig.PLAYER) {
+            if (bulletEntity.mode === GameConfig.USER1()) {
                 returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
             } else {
                 returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
@@ -196,7 +196,7 @@ let CollisionSystem = System.extend({
                     let w = collisionComponent.width, h = collisionComponent.height;
 
                     let returnObjects = null;
-                    if (trapEntity.mode === GameConfig.PLAYER) {
+                    if (trapEntity.mode === GameConfig.USER1()) {
                         returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
                     } else {
                         returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
@@ -222,7 +222,7 @@ let CollisionSystem = System.extend({
                         }
                     }
 
-                    if (trapEntity.mode === GameConfig.PLAYER) soundManager.playTrap();
+                    if (trapEntity.mode === GameConfig.USER1()) soundManager.playTrap();
                     EntityManager.destroy(trapEntity);
                 }
             } else {
@@ -232,7 +232,7 @@ let CollisionSystem = System.extend({
                 let w = collisionComponent.width, h = collisionComponent.height;
 
                 let returnObjects = null;
-                if (trapEntity.mode === GameConfig.PLAYER) {
+                if (trapEntity.mode === GameConfig.USER1()) {
                     returnObjects = quadTreePlayer.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));
                 } else {
                     returnObjects = quadTreeOpponent.retrieve(cc.rect(pos.x - w / 2, pos.y - h / 2, w, h));

@@ -12,28 +12,16 @@ BattleNetwork.Connector = cc.Class.extend({
         cc.log("# Current Tick = " + tickManager.getLatestUpdateTick());
         this.logReceiveCommand(cmd, packet);
         switch (cmd) {
-            case gv.CMD.SEND_MATCHING:
-                this._handleMatching(cmd, packet);
-                break;
-            case gv.CMD.SEND_CANCEL_MATCHING:
-                this._handleCancelMatching(cmd, packet);
-                break;
-            case gv.CMD.GET_BATTLE_INFO:
-                this._handleGetBattleInfo(cmd, packet);
-                break;
             case gv.CMD.PUT_TOWER:
                 tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
             case gv.CMD.OPPONENT_PUT_TOWER:
                 tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 // show timer build tower
-                BattleManager.getInstance().getBattleLayer().showTimerBuildTower(cc.p(packet.tileX, packet.tileY), GameConfig.OPPONENT);
+                BattleManager.getInstance().getBattleLayer().showTimerBuildTower(cc.p(packet.tileX, packet.tileY), GameConfig.USER2());
                 break;
             case gv.CMD.GET_BATTLE_MAP_OBJECT:
                 this._handleGetBattleMapObject(cmd, packet);
-                break;
-            case gv.CMD.GET_CELL_OBJECT:
-                this._handleGetCellObject(cmd, packet);
                 break;
             case gv.CMD.UPGRADE_TOWER:
                 tickManager.addInput(packet.tickNumber, cmd, packet.clone());
@@ -65,11 +53,20 @@ BattleNetwork.Connector = cc.Class.extend({
             case gv.CMD.OPPONENT_DESTROY_TOWER:
                 tickManager.addInput(packet.tickNumber, cmd, packet.clone());
                 break;
-            case gv.CMD.END_BATTLE:
-                this._handleEndBattle(cmd, packet);
+            case gv.CMD.SEND_MATCHING:
+                this._handleMatching(cmd, packet);
+                break;
+            case gv.CMD.SEND_CANCEL_MATCHING:
+                this._handleCancelMatching(cmd, packet);
                 break;
             case gv.CMD.GET_BATTLE_DECK_IN_BATTLE:
                 this._handleGetBattleDeckInBattle(cmd, packet);
+                break;
+            case gv.CMD.GET_BATTLE_INFO:
+                this._handleGetBattleInfo(cmd, packet);
+                break;
+            case gv.CMD.END_BATTLE:
+                this._handleEndBattle(cmd, packet);
                 break;
             case gv.CMD.NEXT_WAVE:
                 this._handleNextWave(packet);
@@ -80,6 +77,7 @@ BattleNetwork.Connector = cc.Class.extend({
         }
     },
 
+    /** SEND COMMAND **/
     sendMatching: function () {
         let pk = this.gameClient.getOutPacket(CMDSendMatching);
         pk.pack();
@@ -92,41 +90,6 @@ BattleNetwork.Connector = cc.Class.extend({
         pk.pack();
         this.gameClient.sendPacket(pk);
         this.logSendCommand(gv.CMD.SEND_CANCEL_MATCHING);
-    },
-
-    _handleNextWave: function (packet) {
-        for (let monsterIdx = 0; monsterIdx < packet.monsterWave.length; monsterIdx++) {
-            let tickNumber = (monsterIdx * 1000) / tickManager.getTickRate() + packet.tickNumber;
-            tickManager.addInput(tickNumber, gv.CMD.BORN_MONSTER, packet.monsterWave[monsterIdx]);
-        }
-        let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
-        let battleData = BattleManager.getInstance().getBattleData();
-        battleData.setCurrentWave(battleData.getCurrentWave() + 1);
-        battleData.setCurrentIndexMonsterWave(0);
-        uiLayer.waveNode.renderUI();
-        soundManager.playNextWave();
-        uiLayer.waveNode.renderUI();
-        tickManager.getTickData().setBattleTimerData(20);
-    },
-
-    _handleMatching: function (cmd, packet) {
-        let battleData = new BattleData();
-        BattleManager.getInstance().registerBattleData(battleData, true);
-        battleData.setRoomId(packet.roomId)
-
-        battleData.setLongestPath(packet.playerLongestPath, GameConfig.PLAYER);
-        battleData.setLongestPath(packet.opponentLongestPath, GameConfig.OPPONENT);
-
-        let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
-        battleData.setUsername(userContext.getUsername(), GameConfig.PLAYER);
-        battleData.setTrophy(userContext.getTrophy(), GameConfig.PLAYER);
-        battleData.setUsername(packet.opponentInfo.username, GameConfig.OPPONENT);
-        battleData.setTrophy(packet.opponentInfo.trophy, GameConfig.OPPONENT);
-    },
-
-    _handleCancelMatching: function (cmd, packet) {
-        cc.warn("Canceled matching")
-        fr.view(MainScreen);
     },
 
     sendPutTower: function (towerId, tilePos) {
@@ -172,12 +135,6 @@ BattleNetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
-    sendCheckSum: function (checkSum, serverEndBattleTick) {
-        cc.log("sendCheckSum-----------------------" + JSON.stringify(checkSum) + serverEndBattleTick);
-        let pk = this.gameClient.getOutPacket(CMDSendCheckSum);
-        pk.pack(checkSum, serverEndBattleTick);
-        this.gameClient.sendPacket(pk);
-    },
 
     sendSpeedUpNextWave: function () {
         cc.log("sendSpeedUpNextWave-----------------------");
@@ -186,97 +143,95 @@ BattleNetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
-    _handleGetBattleInfo: function (cmd, packet) {
+    /** HANDLE RECEIVE COMMAND **/
+    _handleNextWave: function (packet) {
+        for (let monsterIdx = 0; monsterIdx < packet.monsterWave.length; monsterIdx++) {
+            let tickNumber = (monsterIdx * 1000) / tickManager.getTickRate() + packet.tickNumber;
+            tickManager.addInput(tickNumber, gv.CMD.BORN_MONSTER, packet.monsterWave[monsterIdx]);
+        }
+        let uiLayer = BattleManager.getInstance().getBattleLayer().uiLayer;
         let battleData = BattleManager.getInstance().getBattleData();
-        battleData.setBattleStartTime(packet.battleStartTime);
-        tickManager.setStartTime(packet.battleStartTime);
-
-
-        tickManager.getTickData().setBattleTimerData(battleData.getTimer());
-        BattleManager.getInstance().getBattleData().setMaxWave(packet.waveAmount);
-        BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
-        UUIDGeneratorECS.setStartEntityID(packet.playerStartEntityID, packet.opponentStartEntityID);
-        setTimeout(function () {
-            fr.view(BattleLayer, 0.5, true)
-            cc.log("===> Switch to Game Layer Scene !!!")
-        }, 2000);
+        battleData.setCurrentWave(battleData.getCurrentWave() + 1);
+        battleData.setCurrentIndexMonsterWave(0);
+        uiLayer.waveNode.renderUI();
+        soundManager.playNextWave();
+        uiLayer.waveNode.renderUI();
+        tickManager.getTickData().setBattleTimerData(20);
     },
 
-    _handleGetBattleMapObject: function (cmd, packet) {
-        let battleData = BattleManager.getInstance().getBattleData();
-        battleData.setMapObject(packet.playerBattleMapObject, GameConfig.PLAYER);
-        battleData.setMapObject(packet.opponentBattleMapObject, GameConfig.OPPONENT);
+    _handleMatching: function (cmd, packet) {
+        if (packet.entityMode === GameConfig.USER2()) {
+            GameConfig.swapPlayerInfo();
+        }
 
-        let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
-        let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
-        battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
-        battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
+        let battleData = new BattleData();
+        BattleManager.getInstance().registerBattleData(battleData, true);
+        battleData.setRoomId(packet.roomId)
+
+        battleData.setLongestPath(packet.playerLongestPath, GameConfig.USER1());
+        battleData.setLongestPath(packet.opponentLongestPath, GameConfig.USER2());
+
+        let userContext = contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT);
+        battleData.setUsername(userContext.getUsername(), GameConfig.USER1());
+        battleData.setTrophy(userContext.getTrophy(), GameConfig.USER1());
+        battleData.setUsername(packet.opponentInfo.username, GameConfig.USER2());
+        battleData.setTrophy(packet.opponentInfo.trophy, GameConfig.USER2());
     },
 
-    _handleGetCellObject: function (cmd, packet) {
+    _handleCancelMatching: function (cmd, packet) {
+        cc.warn("Canceled matching")
+        fr.view(MainScreen);
     },
 
     _handleGetBattleDeckInBattle: function (cmd, packet) {
         let battleDeck = packet.battleDeck;
         let battleData = BattleManager.getInstance().getBattleData();
-        battleData.setCards(battleDeck, GameConfig.PLAYER);
+        battleData.setCards(battleDeck, GameConfig.USER1());
+    },
+
+    _handleGetBattleMapObject: function (cmd, packet) {
+        let battleData = BattleManager.getInstance().getBattleData();
+        battleData.setMapObject(packet.playerBattleMapObject, GameConfig.USER1());
+        battleData.setMapObject(packet.opponentBattleMapObject, GameConfig.USER2());
+
+        let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.USER1());
+        let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.USER2());
+        battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.USER1());
+        battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.USER2());
+    },
+
+    _handleGetBattleInfo: function (cmd, packet) {
+        let battleData = BattleManager.getInstance().getBattleData();
+        battleData.setBattleStartTime(packet.battleStartTime);
+        tickManager.setStartTime(packet.battleStartTime);
+
+        tickManager.getTickData().setBattleTimerData(battleData.getTimer());
+        BattleManager.getInstance().getBattleData().setMaxWave(packet.waveAmount);
+        BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
+        UUIDGeneratorECS.setStartEntityID(packet.playerStartEntityID, packet.opponentStartEntityID);
+        setTimeout(() => {
+            fr.view(BattleLayer, 0.5, true)
+        }, 2000);
     },
 
     _handleEndBattle: function (cmd, packet) {
-        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.PLAYER);
-        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.OPPONENT);
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.USER2());
         BattleManager.getInstance().getBattleData().setTrophyChange(packet.trophyChange);
         contextManager.getContext(ContextManagerConst.CONTEXT_NAME.USER_CONTEXT).setTrophy(packet.trophyAfterBattle);
-        this.sendCheckSum(tickManager.checkSumContainer, packet.serverEndBattleTick);
         BattleManager.getInstance().getBattleLayer().stopGame();
     },
 
     _handleSnapshot: function (cmd, packet) {
-        let entityManager = EntityManager.getInstance();
-        cc.log("data packet");
-        cc.log(JSON.stringify(packet.dataEntity))
-        let checkEntity = {};
-        for (let entityId in packet.dataEntity) {
-            let dataEntity = packet.dataEntity[entityId];
-            let existEntityInGame = entityManager.getEntity(entityId);
-
-            if (!existEntityInGame) {
-                cc.log("Entity does not Exist : create new entity");
-                BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityId);
-            }
-            existEntityInGame = entityManager.getEntity(entityId);
-            cc.log("Exist Entity");
-            let dataComponents = dataEntity.components;
-            for (let componentTypeID in dataComponents) {
-                let typeID = Number(componentTypeID);
-                if (existEntityInGame._hasComponent((typeID))) {
-                    let component = existEntityInGame.getComponent(typeID);
-                    component.readData(dataComponents[componentTypeID]);
-                } else {
-                    cc.log("entity does not have component")
-                }
-            }
-            checkEntity[entityId] = 1;
-        }
-
-
-        let abilitySystem = SystemManager.getInstance().getSystemByTypeID(AbilitySystem);
-        for (let monsterId in abilitySystem.getEntityStore()) {
-            let monsterEntity = abilitySystem.getEntityStore()[monsterId];
-            if (checkEntity[monsterEntity.id] !== 1) EntityManager.destroy(monsterEntity);
-        }
-        UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);
-        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.PLAYER);
-        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.OPPONENT);
-        BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.renderEnergyHouse();
+        tickManager.waitingSnapshot.push(packet);
     },
 
-
+    /** Log section **/
     logSendCommand: function (commandID, packet) {
         cc.warn("[send command] #" + commandID + ": " + JSON.stringify(packet));
     },
 
     logReceiveCommand: function (commandID, packet) {
-        cc.warn("[receive command] #" + commandID + ": " + JSON.stringify(packet));
+            cc.warn("[receive command] #" + commandID + ": " + JSON.stringify(packet));
     }
 })

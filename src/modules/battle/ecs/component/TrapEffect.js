@@ -20,11 +20,21 @@ let TrapEffect = EffectComponent.extend({
         this.countdown = countDownTime;
         this.isExecuted = true
     },
+
+    readData: function (data) {
+        this._super(data);
+        this.countdown = data.countdown;
+        this.isExecuted = data.isExecuted;
+    }
 });
 TrapEffect.typeID = GameConfig.COMPONENT_ID.TRAP_EFFECT;
 ComponentManager.getInstance().registerClass(TrapEffect);
 
 TrapEffect.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
+
+    data.countdown = inPacket.getDouble();
+    data.isExecuted = Utils.convertShortToBoolean(inPacket.getShort());
+
     return data;
 }

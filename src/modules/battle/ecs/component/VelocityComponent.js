@@ -64,14 +64,25 @@ VelocityComponent.calculateSpeed = function (speedX, speedY) {
 VelocityComponent.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
 
-    data.speedX = inPacket.getDouble();
-    data.speedY = inPacket.getDouble();
-    data.originSpeedX = inPacket.getDouble();
-    data.originSpeedY = inPacket.getDouble();
+    if (GameConfig.USER1() === "opponent") {
+        data.speedX = (-1) * inPacket.getDouble();
+        data.speedY = (-1) * inPacket.getDouble();
+        data.originSpeedX = (-1) * inPacket.getDouble();
+        data.originSpeedY = (-1) * inPacket.getDouble();
+    } else {
+        data.speedX = inPacket.getDouble();
+        data.speedY = inPacket.getDouble();
+        data.originSpeedX = inPacket.getDouble();
+        data.originSpeedY = inPacket.getDouble();
+    }
     data.originSpeed = inPacket.getDouble();
 
     if (Utils.convertShortToBoolean(inPacket.getShort())) {
-        data.staticPosition = cc.p(inPacket.getDouble(), inPacket.getDouble());
+        if (GameConfig.USER1() === "opponent") {
+            data.staticPosition = cc.p((-1) * inPacket.getDouble(), (-1) * inPacket.getDouble());
+        } else {
+            data.staticPosition = cc.p(inPacket.getDouble(), inPacket.getDouble());
+        }
     }
 
     if (Utils.convertShortToBoolean(inPacket.getShort())) {

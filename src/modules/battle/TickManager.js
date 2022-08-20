@@ -9,7 +9,7 @@ let TickManager = cc.Class.extend({
         this.inputTick = {}
 
         this.normalTimerNodeContainer = [];
-        this.checkSumContainer = [];
+        this.waitingSnapshot = [];
     },
 
     addInput: function (tickNumber, cmd, packet) {
@@ -47,7 +47,6 @@ let TickManager = cc.Class.extend({
         battleLayer.towerSpecialSkillSystem.runUpdateData();
         battleLayer.effectSystem.runUpdateData();
         battleLayer.attackSystem.runUpdateData();
-        battleLayer.renderSystem.runUpdateData();
         battleLayer.lifeSystem.runUpdateData();
         battleLayer.collisionSystem.runUpdateData();
         battleLayer.pathSystem.runUpdateData();
@@ -56,7 +55,7 @@ let TickManager = cc.Class.extend({
         battleLayer.monsterSystem.runUpdateData();
         battleLayer.bulletSystem.runUpdateData();
         battleLayer.movementSystem.runUpdateData();
-        this.calcCheckSum(currentTick);
+        battleLayer.renderSystem.runUpdateData();
         let endTime = Utils.currentTimeMillis();
         if (GameConfig.DEBUG) {
             cc.error("*** Update time = " + (endTime - startTime));
@@ -100,6 +99,11 @@ let TickManager = cc.Class.extend({
         this.updateNormalTimerNode();
 
         this.increaseUpdateTick();
+
+        while (this.waitingSnapshot.length > 0) {
+            let packet = this.waitingSnapshot.shift();
+            this.handleSnapshot(packet);
+        }
     },
 
     setStartTime: function (millisecond) {
@@ -124,6 +128,10 @@ let TickManager = cc.Class.extend({
 
     getLatestUpdateTick: function () {
         return this.lastedTick;
+    },
+
+    setLatestUpdateTick: function (latestTick) {
+        this.lastedTick = latestTick;
     },
 
     increaseUpdateTick: function () {
@@ -187,17 +195,59 @@ let TickManager = cc.Class.extend({
         }
     },
 
-    calcCheckSum: function (currentTick) {
-        let sumHp = 0;
-        let lifeSystem = SystemManager.getInstance().getSystemByTypeID(LifeSystem);
-        for (let entityID in lifeSystem.getEntityStore()) {
-            let entity = lifeSystem.getEntityStore()[entityID];
-            if (!entity.getActive() || !entity._hasComponent(LifeComponent)) continue;
 
-            let lifeComponent = entity.getComponent(LifeComponent);
-            sumHp += lifeComponent.hp;
+    handleSnapshot: function (packet) {
+        let entityManager = EntityManager.getInstance();
+        cc.log("data packet");
+        cc.log(JSON.stringify(packet.dataEntity))
+        let entityInSnapshot = {};
+        for (let entityId in packet.dataEntity) {
+            entityId = parseInt(entityId);
+            let dataEntity = packet.dataEntity[entityId];
+            let existEntityInGame = entityManager.getEntity(entityId);
+
+            if (!existEntityInGame) {
+                cc.log("Entity does not Exist : create new entity");
+                if (ValidatorECS.isMonster(dataEntity.typeID)) {
+                    BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityId);
+                } else if (ValidatorECS.isTower(dataEntity.typeID)) {
+                    let pos = dataEntity.components[PositionComponent.typeID];
+                    let tilePos = Utils.pixel2Tile(pos.x, pos.y, dataEntity.mode);
+                    cc.error("mode new tower")
+                    cc.log(dataEntity.mode);
+                    BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos,dataEntity.mode);
+                }
+            }
+            existEntityInGame = entityManager.getEntity(entityId);
+            cc.log("Exist Entity");
+            let dataComponents = dataEntity.components;
+            for (let componentTypeID in dataComponents) {
+                let typeID = Number(componentTypeID);
+                //If entity does not have Component => create New Component with component TypeID
+                if (!existEntityInGame._hasComponent((typeID))) {
+                    let componentCls = ComponentManager.getInstance().getClass(typeID);
+                    let component = ComponentFactory.create(componentCls);
+                    existEntityInGame.addComponent(component);
+                }
+                let component = existEntityInGame.getComponent(typeID);
+                component.readData(dataComponents[componentTypeID]);
+            }
+            entityInSnapshot[entityId] = true;
         }
-        this.checkSumContainer[currentTick] = sumHp;
+
+
+        let towerSystem = SystemManager.getInstance().getSystemByTypeID(TowerSpecialSkillSystem);
+        for (let entityID in towerSystem.getEntityStore()) {
+            let monsterEntity = towerSystem.getEntityStore()[entityID];
+            if (!entityInSnapshot[monsterEntity.id]) EntityManager.destroy(monsterEntity);
+        }
+        UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());
+        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.USER2());
+        BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.renderEnergyHouse();
+
+        // Reset latest tick to the snapshot tick
+        this.setLatestUpdateTick(packet.serverTick);
     }
 })
 

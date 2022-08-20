@@ -14,11 +14,17 @@ let DamageEffect = EffectComponent.extend({
     reset: function (damage) {
         this.damage = damage;
     },
+
+    readData: function (data) {
+        this._super(data);
+        this.damage = data.damage;
+    }
 });
 DamageEffect.typeID = GameConfig.COMPONENT_ID.DAMAGE_EFFECT;
 ComponentManager.getInstance().registerClass(DamageEffect);
 
 DamageEffect.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
+    data.damage = inPacket.getDouble();
     return data;
 }

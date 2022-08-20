@@ -8,52 +8,54 @@ let BattleData = cc.Class.extend({
             waveAmount: 0,
             monsterWave: null,
             timer: 20,
-            trophyChange: 0,
-            player: {
-                username: "HOVANVYDUT",
-                clanName: "GDF5_DN_TEAM_2",
-                trophy: 30,
-                energyHouse: 20,
-                map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
-                mapObject: null,
-                longestPath: null,
-                shortestPathForEachTile: null,
-                currentEnergy: 30,
-                maxEnergy: 30,
-                cards: [
-                    {
-                        id: 0,
-                        type: GameConfig.ENTITY_ID.CANNON_TOWER,
-                    },
-                    {
-                        id: 1,
-                        type: GameConfig.ENTITY_ID.BEAR_TOWER,
-                    },
-                    {
-                        id: 2,
-                        type: GameConfig.ENTITY_ID.FROG_TOWER,
-                    },
-                    {
-                        id: 3,
-                        type: GameConfig.ENTITY_ID.FIRE_SPELL,
-                    },
-                    {
-                        id: 4,
-                        type: GameConfig.ENTITY_ID.FROZEN_SPELL,
-                    }
-                ],
-                cardDeckListData: null,
-            },
-            opponent: {
-                username: "OPPONENT333",
-                clanName: "HIHI",
-                trophy: 5,
-                energyHouse: 20,
-                map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
-                mapObject: null,
-                longestPath: null,
-                shortestPathForEachTile: null,
-            }
+            trophyChange: 0
+        }
+        this.dataInGame[GameConfig.USER1()] = {
+            username: "HOVANVYDUT",
+            clanName: "GDF5_DN_TEAM_2",
+            trophy: 30,
+            energyHouse: 20,
+            map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
+            mapObject: null,
+            longestPath: null,
+            shortestPathForEachTile: null,
+            currentEnergy: 30,
+            maxEnergy: 30,
+            cards: [
+                {
+                    id: 0,
+                    type: GameConfig.ENTITY_ID.CANNON_TOWER,
+                },
+                {
+                    id: 1,
+                    type: GameConfig.ENTITY_ID.BEAR_TOWER,
+                },
+                {
+                    id: 2,
+                    type: GameConfig.ENTITY_ID.FROG_TOWER,
+                },
+                {
+                    id: 3,
+                    type: GameConfig.ENTITY_ID.FIRE_SPELL,
+                },
+                {
+                    id: 4,
+                    type: GameConfig.ENTITY_ID.FROZEN_SPELL,
+                }
+            ],
+            cardDeckListData: null,
+        }
+        this.dataInGame[GameConfig.USER2()] = {
+            username: "OPPONENT333",
+            clanName: "HIHI",
+            trophy: 5,
+            energyHouse: 20,
+            map: FindPathUtil.create2DMatrix(GameConfig.MAP_HEIGH, GameConfig.MAP_WIDTH),
+            mapObject: null,
+            longestPath: null,
+            shortestPathForEachTile: null,
+            currentEnergy: 30,
+            maxEnergy: 30,
         }
     },
 
@@ -173,8 +175,8 @@ let BattleData = cc.Class.extend({
 
     getSimpleMap: function () {
         let battleMap = {}
-        battleMap[GameConfig.PLAYER] = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).convertBattleMapObjectToSimpleMap();
-        battleMap[GameConfig.OPPONENT] = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.OPPONENT).convertBattleMapObjectToSimpleMap();
+        battleMap[GameConfig.USER1()] = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.USER1()).convertBattleMapObjectToSimpleMap();
+        battleMap[GameConfig.USER2()] = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.USER2()).convertBattleMapObjectToSimpleMap();
         return battleMap;
     },
 
@@ -238,12 +240,12 @@ let BattleData = cc.Class.extend({
         return this.dataInGame[mode].cards;
     },
 
-    setCardDeckListData: function (cardDeckListData, mode = GameConfig.PLAYER) {
+    setCardDeckListData: function (cardDeckListData, mode = GameConfig.USER1()) {
         Utils.validateMode(mode);
         this.dataInGame[mode].cardDeckListData = cardDeckListData;
     },
 
-    getCardDeckListData: function (mode = GameConfig.PLAYER) {
+    getCardDeckListData: function (mode = GameConfig.USER1()) {
         Utils.validateMode(mode);
         return this.dataInGame[mode].cardDeckListData;
     },
@@ -312,12 +314,12 @@ BattleData.fakeData = function () {
     battleData.setMonsterWave(monsterWave);
     BattleManager.getInstance().registerBattleData(battleData);
 
-    battleData.setLongestPath(path, GameConfig.PLAYER);
-    battleData.setLongestPath(JSON.parse(JSON.stringify(path)), GameConfig.OPPONENT);
+    battleData.setLongestPath(path, GameConfig.USER1());
+    battleData.setLongestPath(JSON.parse(JSON.stringify(path)), GameConfig.USER2());
     battleData.setBattleWave(monsterWave);
-    let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.PLAYER);
-    let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.OPPONENT);
+    let shortestPathForEachTilePlayer = FindPathUtil.findShortestPathForEachTile(GameConfig.USER1());
+    let shortestPathForEachTileOpponent = FindPathUtil.findShortestPathForEachTile(GameConfig.USER2());
 
-    battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.PLAYER);
-    battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.OPPONENT);
+    battleData.setShortestPathForEachTile(shortestPathForEachTilePlayer, GameConfig.USER1());
+    battleData.setShortestPathForEachTile(shortestPathForEachTileOpponent, GameConfig.USER2());
 }
