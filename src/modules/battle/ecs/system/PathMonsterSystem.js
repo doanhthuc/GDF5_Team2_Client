@@ -81,7 +81,7 @@ let PathMonsterSystem = System.extend({
         return directionDegree.get(minDeg);
     },
     _findNextPath: function (path, position, currentPathIdx) {
-        let minDisIdx = null;
+        let minDisIdx = 0;
         let minDistance = 99999999;
         for (let i = currentPathIdx; i < path.length - 1; i++) {
             let distance = Utils.euclidDistance(path[i], position);

@@ -211,7 +211,6 @@ BattleNetwork.Connector = cc.Class.extend({
         battleData.setBattleStartTime(packet.battleStartTime);
         tickManager.setStartTime(packet.battleStartTime);
 
-
         tickManager.getTickData().setBattleTimerData(battleData.getTimer());
         BattleManager.getInstance().getBattleData().setMaxWave(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
