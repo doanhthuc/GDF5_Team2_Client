@@ -42,7 +42,6 @@ PathComponent.unpackData = function (inPacket) {
     let path = [];
     for (let i = 1; i <= pathSize; i++) {
         if (GameConfig.USER1() === "opponent") {
-            if (data.mode === "player") cc.error("dfalfjlasfjasjflajflds");
             path.push(cc.p((-1) * inPacket.getDouble(), (-1) * inPacket.getDouble()));
 
         } else {
