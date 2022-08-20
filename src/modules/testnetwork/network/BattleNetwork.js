@@ -232,43 +232,7 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     _handleSnapshot: function (cmd, packet) {
-            let entityManager = EntityManager.getInstance();
-            cc.log("data packet");
-            cc.log(JSON.stringify(packet.dataEntity))
-            let checkEntity = {};
-            for (let entityId in packet.dataEntity) {
-                let dataEntity = packet.dataEntity[entityId];
-                let existEntityInGame = entityManager.getEntity(entityId);
-
-                if (!existEntityInGame) {
-                    cc.log("Entity does not Exist : create new entity");
-                    BattleManager.getInstance().getBattleLayer().createMonsterByEntityTypeID(dataEntity.mode, dataEntity.typeID, entityId);
-                }
-                existEntityInGame = entityManager.getEntity(entityId);
-                cc.log("Exist Entity");
-                let dataComponents = dataEntity.components;
-                for (let componentTypeID in dataComponents) {
-                    let typeID = Number(componentTypeID);
-                    if (existEntityInGame._hasComponent((typeID))) {
-                        let component = existEntityInGame.getComponent(typeID);
-                        component.readData(dataComponents[componentTypeID]);
-                    } else {
-                        cc.log("entity does not have component")
-                    }
-                }
-                checkEntity[entityId] = 1;
-            }
-
-
-            let abilitySystem = SystemManager.getInstance().getSystemByTypeID(AbilitySystem);
-            for (let monsterId in abilitySystem.getEntityStore()) {
-                let monsterEntity = abilitySystem.getEntityStore()[monsterId];
-                if (checkEntity[monsterEntity.id] !== 1) EntityManager.destroy(monsterEntity);
-            }
-            UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);
-            BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());
-            BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.USER2());
-            BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.renderEnergyHouse();
+        tickManager.waitingSnapshot.push(packet);
     },
 
 
