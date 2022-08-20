@@ -56,7 +56,6 @@ let TickManager = cc.Class.extend({
         battleLayer.monsterSystem.runUpdateData();
         battleLayer.bulletSystem.runUpdateData();
         battleLayer.movementSystem.runUpdateData();
-        this.calcCheckSum(currentTick);
         let endTime = Utils.currentTimeMillis();
         if (GameConfig.DEBUG) {
             cc.error("*** Update time = " + (endTime - startTime));
