@@ -227,12 +227,12 @@ BattleNetwork.Connector = cc.Class.extend({
         tickManager.waitingSnapshot.push(packet);
     },
 
-
+    /** Log section **/
     logSendCommand: function (commandID, packet) {
         cc.warn("[send command] #" + commandID + ": " + JSON.stringify(packet));
     },
 
     logReceiveCommand: function (commandID, packet) {
-        cc.warn("[receive command] #" + commandID + ": " + JSON.stringify(packet));
+            cc.warn("[receive command] #" + commandID + ": " + JSON.stringify(packet));
     }
 })

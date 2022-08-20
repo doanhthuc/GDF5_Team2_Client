@@ -27,7 +27,7 @@ let PathMonsterSystem = System.extend({
 
             let path = pathComponent.path, currentPathIdx = pathComponent.currentPathIdx;
 
-            let nextPosIdx = this._findNextPath(path, positionComponent, currentPathIdx);
+            let nextPosIdx = Math.min(this._findNextPath(path, positionComponent, currentPathIdx),path.length);
             if (nextPosIdx > 1) pathComponent.currentPathIdx = nextPosIdx - 1;
             // cc.log("currentPathIdx = " + currentPathIdx);
             // cc.log("nextPoxIdx = " + nextPosIdx);

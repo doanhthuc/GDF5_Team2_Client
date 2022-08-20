@@ -28,11 +28,14 @@ ComponentManager.getInstance().registerClass(TowerAbilityComponent);
 TowerAbilityComponent.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
     data.range = inPacket.getDouble();
+
     //Unpack Effect component of tower ability Component
     let componentTypeID = inPacket.getInt();
     let ComponentCls = ComponentManager.getInstance().getClass(componentTypeID);
     let component = ComponentCls.unpackData(inPacket);
+
     component.typeID = componentTypeID;
     data.effect = component;
+
     return data;
 }
