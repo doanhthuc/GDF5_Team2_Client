@@ -18,7 +18,6 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode, id) {
     let tilePos = Utils.pixel2Tile(pixelPos.x, pixelPos.y, mode);
     let path = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(mode)[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x];
     let pathComponent = ComponentFactory.create(PathComponent, path, mode);
-
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(velocityComponent)
@@ -27,7 +26,6 @@ EntityFactory.createSwordsmanMonster = function (pixelPos, mode, id) {
         .addComponent(collisionComponent)
         .addComponent(lifeComponent)
         .addComponent(spriteComponent)
-
     return entity;
 };
 
