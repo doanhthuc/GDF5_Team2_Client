@@ -195,7 +195,6 @@ let TickManager = cc.Class.extend({
         }
     },
 
-
     handleSnapshot: function (packet) {
         let entityManager = EntityManager.getInstance();
         cc.log("data packet");
@@ -242,9 +241,15 @@ let TickManager = cc.Class.extend({
             if (!entityInSnapshot[monsterEntity.id]) EntityManager.destroy(monsterEntity);
         }
         UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);
-        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());
-        BattleManager.getInstance().getBattleData().setEnergyHouse(packet.opponentEnergyHouse, GameConfig.USER2());
+
+        let battleData = BattleManager.getInstance().getBattleData()
+        battleData.setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());
+        battleData.setEnergyHouse(packet.opponentEnergyHouse, GameConfig.USER2());
         BattleManager.getInstance().getBattleLayer().uiLayer.houseEnergyNode.renderEnergyHouse();
+
+        // reset battle map object
+        battleData.setMapObject(packet.battleMapObject[GameConfig.USER1()], GameConfig.USER1());
+        battleData.setMapObject(packet.battleMapObject[GameConfig.USER2()], GameConfig.USER2());
 
         // Reset latest tick to the snapshot tick
         this.setLatestUpdateTick(packet.serverTick);
