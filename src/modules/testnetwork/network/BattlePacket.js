@@ -139,24 +139,6 @@ CMDDestroyTower = fr.OutPacket.extend({
     }
 })
 
-CMDSendCheckSum = fr.OutPacket.extend({
-    ctor: function () {
-        this._super();
-        this.initData(100);
-        this.setCmdId(gv.CMD.SEND_CHECK_SUM);
-    },
-
-    pack: function (checksum, serverEndBattleTick) {
-        this.packHeader();
-        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
-        this.putInt(checksum.length)
-        for (let i = 0; i < Math.min(serverEndBattleTick, checksum.length); i++) {
-            this.putDouble(checksum[i])
-        }
-        this.updateSize();
-    }
-})
-
 CMDSendSpeedUpNextWave = fr.OutPacket.extend({
     ctor: function () {
         this._super();

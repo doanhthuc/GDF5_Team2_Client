@@ -9,7 +9,6 @@ let TickManager = cc.Class.extend({
         this.inputTick = {}
 
         this.normalTimerNodeContainer = [];
-        this.checkSumContainer = [];
         this.waitingSnapshot = [];
     },
 
@@ -197,18 +196,7 @@ let TickManager = cc.Class.extend({
         }
     },
 
-    calcCheckSum: function (currentTick) {
-        let sumHp = 0;
-        let lifeSystem = SystemManager.getInstance().getSystemByTypeID(LifeSystem);
-        for (let entityID in lifeSystem.getEntityStore()) {
-            let entity = lifeSystem.getEntityStore()[entityID];
-            if (!entity.getActive() || !entity._hasComponent(LifeComponent)) continue;
 
-            let lifeComponent = entity.getComponent(LifeComponent);
-            sumHp += lifeComponent.hp;
-        }
-        this.checkSumContainer[currentTick] = sumHp;
-    },
 
     handleSnapshot: function (packet) {
         let entityManager = EntityManager.getInstance();
