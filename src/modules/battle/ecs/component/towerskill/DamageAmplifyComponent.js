@@ -8,12 +8,17 @@ let DamageAmplifyComponent = Component.extend({
     },
 
     clone: function () {
-        return ComponentFactory.create(DamageAmplifyComponent,this.amplifyRate);
+        return ComponentFactory.create(DamageAmplifyComponent, this.amplifyRate);
     },
 
     reset: function (amplifyRate) {
         this.amplifyRate = amplifyRate;
     },
+
+    readData: function (data) {
+        this._super(data);
+        this.amplifyRate = data.amplifyRate;
+    }
 });
 DamageAmplifyComponent.typeID = GameConfig.COMPONENT_ID.DAMAGE_AMPLIFY_COMPONENT;
 ComponentManager.getInstance().registerClass(DamageAmplifyComponent);
@@ -21,5 +26,6 @@ ComponentManager.getInstance().registerClass(DamageAmplifyComponent);
 
 DamageAmplifyComponent.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
+    data.amplifyRate = inPacket.getDouble();
     return data;
 }
