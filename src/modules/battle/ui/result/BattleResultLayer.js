@@ -64,16 +64,16 @@ let BattleResultLayer = cc.Layer.extend({
     },
 
     _showResult: function () {
-        let playerInfoNode = new BattleResultPlayerInfo(this.battleData.getUsername(GameConfig.PLAYER), this.battleData.getTrophy(GameConfig.PLAYER),
-            BattleResource.AVATAR_IMAGE, this.battleData.getEnergyHouse(GameConfig.PLAYER));
+        let playerInfoNode = new BattleResultPlayerInfo(this.battleData.getUsername(GameConfig.USER1()), this.battleData.getTrophy(GameConfig.USER1()),
+            BattleResource.AVATAR_IMAGE, this.battleData.getEnergyHouse(GameConfig.USER1()));
         playerInfoNode.attr({
             y: cc.winSize.height / 2,
             x: cc.winSize.width / 4
         });
         this.addChild(playerInfoNode);
 
-        let opponentInfoNode = new BattleResultPlayerInfo(this.battleData.getUsername(GameConfig.OPPONENT), this.battleData.getTrophy(GameConfig.OPPONENT),
-            BattleResource.AVATAR_IMAGE, this.battleData.getEnergyHouse(GameConfig.OPPONENT));
+        let opponentInfoNode = new BattleResultPlayerInfo(this.battleData.getUsername(GameConfig.USER2()), this.battleData.getTrophy(GameConfig.USER2()),
+            BattleResource.AVATAR_IMAGE, this.battleData.getEnergyHouse(GameConfig.USER2()));
         opponentInfoNode.attr({
             y: cc.winSize.height / 2,
             x: 3 * cc.winSize.width / 4

@@ -3,8 +3,8 @@ let HouseEnergyNode = cc.Node.extend({
         this._super();
         this._setupUI();
 
-        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.PLAYER), GameConfig.PLAYER);
-        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.OPPONENT), GameConfig.OPPONENT);
+        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.USER1()), GameConfig.USER1());
+        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.USER2()), GameConfig.USER2());
     },
 
     _setupUI: function () {
@@ -21,8 +21,8 @@ let HouseEnergyNode = cc.Node.extend({
     },
 
     renderEnergyHouse: function () {
-        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.PLAYER), GameConfig.PLAYER);
-        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.OPPONENT), GameConfig.OPPONENT);
+        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.USER1()), GameConfig.USER1());
+        this.setEnergyString(this.battleData.getEnergyHouse(GameConfig.USER2()), GameConfig.USER2());
         // if (this.battleData.getEnergyHouse(mode) <= 0) {
         //     EventDispatcher.getInstance()
         //         .dispatchEvent(EventType.ZERO_ENERGY_HOUSE);
@@ -31,10 +31,10 @@ let HouseEnergyNode = cc.Node.extend({
 
     setEnergyString: function (energy, mode) {
         switch (mode) {
-            case GameConfig.PLAYER:
+            case GameConfig.USER1():
                 this.playerEnergy.setString(energy);
                 break;
-            case GameConfig.OPPONENT:
+            case GameConfig.USER2():
                 this.opponentEnergy.setString(energy)
                 break;
             default:

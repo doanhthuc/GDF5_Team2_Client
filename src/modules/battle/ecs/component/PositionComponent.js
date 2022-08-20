@@ -34,8 +34,13 @@ ComponentManager.getInstance().registerClass(PositionComponent);
 PositionComponent.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
 
-    data.x = inPacket.getDouble();
-    data.y = inPacket.getDouble();
+    if (GameConfig.USER1() === "opponent") {
+        data.x = (-1) * inPacket.getDouble();
+        data.y = (-1) * inPacket.getDouble();
+    } else {
+        data.x = inPacket.getDouble();
+        data.y = inPacket.getDouble();
+    }
     data.moveDistance = inPacket.getDouble();
 
     return data;

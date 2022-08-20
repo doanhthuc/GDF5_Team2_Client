@@ -13,9 +13,9 @@ EntityFactory.createFrozenSpell = function (pixelPos, mode) {
     let frozenEffect = ComponentFactory.create(FrozenEffect, 5);
 
     let parent;
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         parent = BattleManager.getInstance().getBattleLayer().getPlayerMapNode();
-    } else if (mode === GameConfig.OPPONENT) {
+    } else if (mode === GameConfig.USER2()) {
         parent = BattleManager.getInstance().getBattleLayer().getOpponentMapNode();
     }
     let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent,
@@ -45,9 +45,9 @@ EntityFactory.createFireSpell = function (pixelPos, mode) {
     let damageEffect = ComponentFactory.create(DamageEffect, 50);
 
     let parent;
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         parent = BattleManager.getInstance().getBattleLayer().getPlayerMapNode();
-    } else if (mode === GameConfig.OPPONENT) {
+    } else if (mode === GameConfig.USER2()) {
         parent = BattleManager.getInstance().getBattleLayer().getOpponentMapNode();
     }
     let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent, BattleResource.FIRE_SKELETON_JSON, BattleResource.FIRE_SKELETON_ATLAS, [0, T], ["animation_fireball", "animation_full"], [true, false], parent);

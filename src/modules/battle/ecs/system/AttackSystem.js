@@ -74,7 +74,7 @@ let AttackSystem = System.extend({
                                 attackComponent.bulletRadius, attackComponent.canTargetAirMonster);
                         }
 
-                        if (tower.mode === GameConfig.PLAYER) soundManager.playAttack(tower.typeID);
+                        if (tower.mode === GameConfig.USER1()) soundManager.playAttack(tower.typeID);
                         attackComponent.countdown = attackComponent.getSpeed();
                     }
                 }

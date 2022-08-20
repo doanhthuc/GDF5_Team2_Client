@@ -4,8 +4,8 @@ let DeckEnergyProgress = cc.Node.extend({
         this.battleData = BattleManager.getInstance().getBattleData();
 
         this._setupUI();
-        this.setMaxEnergy(this.battleData.getMaxEnergy(GameConfig.PLAYER));
-        this.setCurrentEnergy(this.battleData.getCurrentEnergy(GameConfig.PLAYER));
+        this.setMaxEnergy(this.battleData.getMaxEnergy(GameConfig.USER1()));
+        this.setCurrentEnergy(this.battleData.getCurrentEnergy(GameConfig.USER1()));
     },
 
     _setupUI: function () {
@@ -17,22 +17,22 @@ let DeckEnergyProgress = cc.Node.extend({
     },
 
     setMaxEnergy: function (maxEnergy) {
-        let mode = GameConfig.PLAYER;
+        let mode = GameConfig.USER1();
         this.battleData.setMaxEnergy(maxEnergy, mode);
         this.progressBar.setPercent(this.battleData.getCurrentEnergy(mode) / this.battleData.getMaxEnergy(mode) * 100);
     },
 
     setCurrentEnergy: function (currentEnergy) {
-        let mode = GameConfig.PLAYER;
+        let mode = GameConfig.USER1();
         this.battleData.setCurrentEnergy(currentEnergy, mode);
         this.currentEnergyNode.getChildByName("value").setString(currentEnergy);
         this.progressBar.setPercent(this.battleData.getCurrentEnergy(mode) / this.battleData.getMaxEnergy(mode) * 100);
     },
 
     plusEnergy: function (plusEnergy) {
-        let energy = this.battleData.getCurrentEnergy(GameConfig.PLAYER) + plusEnergy;
-        if (energy > this.battleData.getMaxEnergy(GameConfig.PLAYER)) {
-            this.setCurrentEnergy(this.battleData.getMaxEnergy(GameConfig.PLAYER));
+        let energy = this.battleData.getCurrentEnergy(GameConfig.USER1()) + plusEnergy;
+        if (energy > this.battleData.getMaxEnergy(GameConfig.USER1())) {
+            this.setCurrentEnergy(this.battleData.getMaxEnergy(GameConfig.USER1()));
         } else {
             this.setCurrentEnergy(energy);
         }
@@ -40,7 +40,7 @@ let DeckEnergyProgress = cc.Node.extend({
     },
 
     minusEnergy: function (minusEnergy) {
-        let energy = this.battleData.getCurrentEnergy(GameConfig.PLAYER) - minusEnergy;
+        let energy = this.battleData.getCurrentEnergy(GameConfig.USER1()) - minusEnergy;
         if (energy >= 0) {
             this.setCurrentEnergy(energy);
         } else {

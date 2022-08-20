@@ -6,8 +6,8 @@ let BattleMapLayer = cc.Layer.extend({
         this.addChild(rootNode);
 
         this.mapNode = {};
-        this.mapNode[GameConfig.PLAYER] = rootNode.getChildByName("player_map");
-        this.mapNode[GameConfig.OPPONENT] = rootNode.getChildByName("opponent_map");
+        this.mapNode[GameConfig.USER1()] = rootNode.getChildByName("player_map");
+        this.mapNode[GameConfig.USER2()] = rootNode.getChildByName("opponent_map");
 
         // river
         // FIXME: hardcode
@@ -39,7 +39,7 @@ let BattleMapLayer = cc.Layer.extend({
     _genMap: function (mode) {
 
         this.houseSprite[mode] = new cc.Sprite(BattleResource.HOUSE_IMG);
-        if (mode === GameConfig.PLAYER) this.houseSprite[mode].setName("player_house")
+        if (mode === GameConfig.USER1()) this.houseSprite[mode].setName("player_house")
         else this.houseSprite[mode].setName("opponent_house")
         this.mapNode[mode].addChild(this.houseSprite[mode], 15000);
         this.houseSprite[mode].setAnchorPoint(cc.p(0.5, 0.2));
@@ -56,7 +56,7 @@ let BattleMapLayer = cc.Layer.extend({
                     y: pos.y
                 });
                 let str = null;
-                if (mode === GameConfig.PLAYER) str = "Player"
+                if (mode === GameConfig.USER1()) str = "Player"
                 else str = "Opponent"
 
                 let zOrder = 1;
@@ -97,7 +97,7 @@ let BattleMapLayer = cc.Layer.extend({
             this._spriteContainerInActive.push(activeSp);
         }
 
-        let shortestPathForEachTile = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(GameConfig.PLAYER);
+        let shortestPathForEachTile = BattleManager.getInstance().getBattleData().getShortestPathForEachTile(GameConfig.USER1());
         let row = GameConfig.MAP_HEIGH - 1 - GameConfig.MONSTER_BORN_POSITION.y,
             col = GameConfig.MONSTER_BORN_POSITION.x;
         let tilePath = shortestPathForEachTile[row][col];
@@ -107,13 +107,13 @@ let BattleMapLayer = cc.Layer.extend({
             let nextTilePos = tilePath[i + 1];
 
             let direction = Utils.getDirectionOf2Tile(currentTilePos, nextTilePos);
-            let currentPixelPos = Utils.tile2Pixel(currentTilePos.x, currentTilePos.y, GameConfig.PLAYER);
+            let currentPixelPos = Utils.tile2Pixel(currentTilePos.x, currentTilePos.y, GameConfig.USER1());
 
             let sp = this._spriteContainerInActive.pop();
             if (!sp) {
                 sp = new cc.Sprite("res/textures/battle/UI/ui_icon_arrow.png");
                 sp.retain();
-                this.mapNode[GameConfig.PLAYER].addChild(sp, 0);
+                this.mapNode[GameConfig.USER1()].addChild(sp, 0);
             } else {
                 sp.setRotation(0);
             }
@@ -144,7 +144,7 @@ let BattleMapLayer = cc.Layer.extend({
             let activeSp = this._spriteContainerActive.pop();
             this._spriteContainerInActive.push(activeSp);
         }
-        let map = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.PLAYER).convertBattleMapObjectToSimpleMap();
+        let map = BattleManager.getInstance().getBattleData().getMapObject(GameConfig.USER1()).convertBattleMapObjectToSimpleMap();
         let map2 = JSON.parse(JSON.stringify(map))
         map2[GameConfig.MAP_HEIGH - 1 - tilePos.y][tilePos.x] = GameConfig.MAP.TOWER;
         let row = GameConfig.MONSTER_BORN_POSITION.y,
@@ -156,13 +156,13 @@ let BattleMapLayer = cc.Layer.extend({
             let nextTilePos = tilePath[i + 1];
 
             let direction = Utils.getDirectionOf2Tile(currentTilePos, nextTilePos);
-            let currentPixelPos = Utils.tile2Pixel(currentTilePos.x, currentTilePos.y, GameConfig.PLAYER);
+            let currentPixelPos = Utils.tile2Pixel(currentTilePos.x, currentTilePos.y, GameConfig.USER1());
 
             let sp = this._spriteContainerInActive.pop();
             if (!sp) {
                 sp = new cc.Sprite("res/textures/battle/UI/ui_icon_arrow.png");
                 sp.retain();
-                this.mapNode[GameConfig.PLAYER].addChild(sp, 0);
+                this.mapNode[GameConfig.USER1()].addChild(sp, 0);
             } else {
                 sp.setRotation(0);
             }

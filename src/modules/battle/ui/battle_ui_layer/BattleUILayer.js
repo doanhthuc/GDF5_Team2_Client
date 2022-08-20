@@ -10,11 +10,11 @@ let BattleUILayer = cc.Layer.extend({
         },
             {id: 5, level: 1}, {id: 6, level: 1}, {id: 7, level: 1}, {id: 8, level: 1}, {id: 9, level: 1}
         ];
-        this.cardDeckListData = new CardDeckListData(this.battleData.getCards(GameConfig.PLAYER));
-        this.battleData.setCardDeckListData(this.cardDeckListData, GameConfig.PLAYER);
+        this.cardDeckListData = new CardDeckListData(this.battleData.getCards(GameConfig.USER1()));
+        this.battleData.setCardDeckListData(this.cardDeckListData, GameConfig.USER1());
 
-        this.twoPlayerInfoLayer = new TwoPlayerInfoLayer(BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.PLAYER)
-            , BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.OPPONENT));
+        this.twoPlayerInfoLayer = new TwoPlayerInfoLayer(BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.USER1())
+            , BattleResource.AVATAR_IMAGE, this.battleData.getUsername(GameConfig.USER2()));
         this.addChild(this.twoPlayerInfoLayer);
     },
 
@@ -52,16 +52,16 @@ let BattleUILayer = cc.Layer.extend({
     },
 
     _showHouseEnergy: function () {
-        this.houseEnergyNode = new HouseEnergyNode(this.battleData.getEnergyHouse(GameConfig.PLAYER),
-            this.battleData.getEnergyHouse(GameConfig.OPPONENT));
+        this.houseEnergyNode = new HouseEnergyNode(this.battleData.getEnergyHouse(GameConfig.USER1()),
+            this.battleData.getEnergyHouse(GameConfig.USER2()));
         this.houseEnergyNode.x = this.width - this.houseEnergyNode.width / 2;
         this.houseEnergyNode.y = (cc.winSize.height - 200) / 2 + 200;
         this.addChild(this.houseEnergyNode);
     },
 
     _showPlayerInfo: function () {
-        this.playerInfoNode = new PlayerInfoNode(this.battleData.getUsername(GameConfig.OPPONENT),
-            this.battleData.getClanName(GameConfig.OPPONENT));
+        this.playerInfoNode = new PlayerInfoNode(this.battleData.getUsername(GameConfig.USER2()),
+            this.battleData.getClanName(GameConfig.USER2()));
         this.playerInfoNode.x = this.playerInfoNode.width / 2;
         this.playerInfoNode.y = this.height - this.playerInfoNode.height / 2;
         this.addChild(this.playerInfoNode);
@@ -106,8 +106,8 @@ let BattleUILayer = cc.Layer.extend({
      */
     showTargetCircle: function (x, y, range) {
         let circleNode = new CircleTarget(range);
-        let pixelPos = Utils.tile2Pixel(x, y, GameConfig.PLAYER);
-        pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.PLAYER);
+        let pixelPos = Utils.tile2Pixel(x, y, GameConfig.USER1());
+        pixelPos = Utils.convertMapNodeSpace2WorldSpace(pixelPos, GameConfig.USER1());
         circleNode.setPosition(pixelPos);
         circleNode.setTowerTilePos(x, y);
         this.addChild(circleNode, 100);

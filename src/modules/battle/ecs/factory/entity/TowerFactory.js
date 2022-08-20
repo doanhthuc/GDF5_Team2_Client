@@ -245,7 +245,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
                 attackComponent.addEffect(frozenEffect);
             }
             // change Node name
-            if (mode === GameConfig.PLAYER)
+            if (mode === GameConfig.USER1())
                 node.setName("PlayerTower_0_level_" + towerLevel);
             else node.setName("OpponentTower_0_level_" + towerLevel);
             break;
@@ -264,7 +264,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
                 let wizardBulletSkill = ComponentFactory.create(WizardBulletSkillComponent, 5);
                 attackComponent.addEffect(wizardBulletSkill);
             }
-            if (mode === GameConfig.PLAYER)
+            if (mode === GameConfig.USER1())
                 node.setName("PlayerTower_1_level_" + towerLevel);
             else node.setName("OpponentTower_1_level_" + towerLevel);
             break;
@@ -283,7 +283,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
                 let frogBulletSkill = ComponentFactory.create(FrogBulletSkillComponent);
                 attackComponent.addEffect(frogBulletSkill);
             }
-            if (mode === GameConfig.PLAYER)
+            if (mode === GameConfig.USER1())
                 node.setName("PlayerTower_2_level_" + towerLevel);
             else node.setName("OpponentTower_2_level_" + towerLevel);
             break;
@@ -304,7 +304,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
                 let damageAmplifyComponent = ComponentFactory.create(DamageAmplifyComponent, 1.5);
                 attackComponent.addEffect(damageAmplifyComponent);
             }
-            if (mode === GameConfig.PLAYER)
+            if (mode === GameConfig.USER1())
                 node.setName("PlayerTower_3_level_" + towerLevel);
             else node.setName("OpponentTower_3_level_" + towerLevel);
             break;
@@ -326,7 +326,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
                 let poisonEffect = ComponentFactory.create(PoisonEffect, 2, 3);
                 attackComponent.addEffect(poisonEffect);
             }
-            if (mode === GameConfig.PLAYER)
+            if (mode === GameConfig.USER1())
                 node.setName("PlayerTower_4_level_" + towerLevel);
             else node.setName("OpponentTower_4_level_" + towerLevel);
             break;
@@ -343,7 +343,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
                 let goatSlowAuraComponent = ComponentFactory.create(GoatSlowAuraComponent, 0.2, buffRange);
                 towerEntity.addComponent(goatSlowAuraComponent);
             }
-            if (mode === GameConfig.PLAYER)
+            if (mode === GameConfig.USER1())
                 node.setName("PlayerTower_5_level_" + towerLevel);
             else node.setName("OpponentTower_5_level_" + towerLevel);
             break;
@@ -359,7 +359,7 @@ EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode
                 let snakeBurnHpAuraComponent = ComponentFactory.create(SnakeBurnHpAuraComponent, 0.01, 5, buffRange);
                 towerEntity.addComponent(snakeBurnHpAuraComponent);
             }
-            if (mode === GameConfig.PLAYER)
+            if (mode === GameConfig.USER1())
                 node.setName("PlayerTower_6_level_" + towerLevel);
             else node.setName("OpponentTower_6_level_" + towerLevel);
             break;

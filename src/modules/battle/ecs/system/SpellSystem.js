@@ -93,10 +93,10 @@ let SpellSystem = System.extend({
                 spellEntity.removeComponent(PositionComponent);
                 spellEntity.removeComponent(SpellInfoComponent);
 
-                if (spellEntity.mode === GameConfig.PLAYER && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
+                if (spellEntity.mode === GameConfig.USER1() && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
                     soundManager.playFireballExplosion();
                 }
-                if (spellEntity.mode === GameConfig.PLAYER && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
+                if (spellEntity.mode === GameConfig.USER1() && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
                     soundManager.playFrozenExplosion();
                 }
             }

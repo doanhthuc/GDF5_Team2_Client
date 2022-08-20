@@ -45,27 +45,27 @@ let UUIDGeneratorECS = (function () {
         },
 
         genTowerEntityIdByMode: function (mode) {
-            if (mode === GameConfig.PLAYER) return ++_playerTowerEntityId;
+            if (mode === GameConfig.USER1()) return ++_playerTowerEntityId;
             else return ++_opponentTowerEntityId;
         },
 
         genSpellEntityIdByMode: function (mode) {
-            if (mode === GameConfig.PLAYER) return ++_playerSpellEntityId;
+            if (mode === GameConfig.USER1()) return ++_playerSpellEntityId;
             else return (++_opponentSpellEntityId);
         },
 
         genMonsterEntityIdByMode: function (mode) {
-            if (mode === GameConfig.PLAYER) return ++_playerMonsterEntityId;
+            if (mode === GameConfig.USER1()) return ++_playerMonsterEntityId;
             else return ++_opponentMonsterEntityId;
         },
 
         genBulletEntityIdByMode: function (mode) {
-            if (mode === GameConfig.PLAYER) return ++_playerBulletEntityId;
+            if (mode === GameConfig.USER1()) return ++_playerBulletEntityId;
             else return ++_opponentBulletEntityId;
         },
 
         genObstacleEntityIdByMode: function (mode) {
-            if (mode === GameConfig.PLAYER) return ++_playerObstacleEntityId;
+            if (mode === GameConfig.USER1()) return ++_playerObstacleEntityId;
             else return ++_opponentObstacleEntityId;
         },
 

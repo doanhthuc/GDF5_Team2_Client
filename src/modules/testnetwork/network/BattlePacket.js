@@ -196,6 +196,7 @@ BattleNetwork.packetMap[gv.CMD.SEND_MATCHING] = fr.InPacket.extend({
     readData: function () {
         this.error = this.getShort();
         this.roomId = this.getInt();
+        this.entityMode = Utils.convertShortToMode(this.getShort());
         let result = this._unpackMap();
         this.playerMap = result.map;
         this.playerLongestPath = result.path;

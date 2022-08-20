@@ -4,8 +4,22 @@ let GameConfig = GameConfig || {};
 GameConfig.DEBUG = 0;
 GameConfig.NETWORK = 1;
 GameConfig.SOUND = 0;
-GameConfig.PLAYER = "player";
-GameConfig.OPPONENT = "opponent";
+
+let _playerInfo = {
+    user1: "player",
+    user2: "opponent",
+}
+GameConfig.swapPlayerInfo = function () {
+    let tmp = _playerInfo.user1;
+    _playerInfo.user1 = _playerInfo.user2;
+    _playerInfo.user2 = tmp;
+}
+GameConfig.USER1 = function () {
+    return _playerInfo.user1;
+}
+GameConfig.USER2 = function () {
+    return  _playerInfo.user2;
+}
 
 GameConfig.COMPONENT_ID = {
     MONSTER_INFO: 1,
