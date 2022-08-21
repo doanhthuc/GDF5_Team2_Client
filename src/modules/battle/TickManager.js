@@ -47,6 +47,7 @@ let TickManager = cc.Class.extend({
         battleLayer.towerSpecialSkillSystem.runUpdateData();
         battleLayer.effectSystem.runUpdateData();
         battleLayer.attackSystem.runUpdateData();
+        battleLayer.renderSystem.runUpdateData();
         battleLayer.lifeSystem.runUpdateData();
         battleLayer.collisionSystem.runUpdateData();
         battleLayer.pathSystem.runUpdateData();
@@ -55,7 +56,6 @@ let TickManager = cc.Class.extend({
         battleLayer.monsterSystem.runUpdateData();
         battleLayer.bulletSystem.runUpdateData();
         battleLayer.movementSystem.runUpdateData();
-        battleLayer.renderSystem.runUpdateData();
         let endTime = Utils.currentTimeMillis();
         if (GameConfig.DEBUG) {
             cc.error("*** Update time = " + (endTime - startTime));

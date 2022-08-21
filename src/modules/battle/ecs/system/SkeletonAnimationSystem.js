@@ -22,7 +22,11 @@ let SkeletonAnimationSystem = System.extend({
             if (!entity._hasComponent(SkeletonAnimationComponent)) continue;
 
             let skeletonComponent = entity.getComponent(SkeletonAnimationComponent);
-            if (skeletonComponent.accTime >= skeletonComponent.timeLine[skeletonComponent.currentIdx]) {
+            if (entity._hasComponent(PositionComponent)) {
+                cc.log(entity.getComponent(PositionComponent));
+            }
+            if (skeletonComponent.currentIdx < skeletonComponent.sequenceAnim.length
+                && skeletonComponent.accTime >= skeletonComponent.timeLine[skeletonComponent.currentIdx]) {
                 skeletonComponent.spine.setAnimation(0, skeletonComponent.sequenceAnim[skeletonComponent.currentIdx], skeletonComponent.sequenceAnimLoop[skeletonComponent.currentIdx]);
                 skeletonComponent.currentIdx++;
             }

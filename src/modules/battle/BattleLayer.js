@@ -75,9 +75,9 @@ let BattleLayer = cc.Layer.extend({
 
         this.getTimerNode().timer();
         this.movementSystem.start(dt);
+        this.renderSystem.start(dt);
         this.spriteSheetAnimationSystem.start(dt);
         this.skeletonAnimationSystem.start(dt);
-        this.renderSystem.start(dt);
         tickManager.renderNormalTimerNode();
     },
 
