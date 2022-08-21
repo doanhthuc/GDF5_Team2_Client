@@ -23,7 +23,6 @@ let SpellSystem = System.extend({
 
             let spellComponent = spellEntity.getComponent(SpellInfoComponent);
 
-            spellComponent.delay = spellComponent.delay - tick;
             spellComponent.delayDestroy = spellComponent.delayDestroy - tick;
 
             if (spellComponent.delayDestroy <= 0) {
@@ -31,7 +30,9 @@ let SpellSystem = System.extend({
                 continue;
             }
 
-            if (spellComponent.delay <= 0 && !spellComponent.isTriggered    ) {
+            spellComponent.delay = spellComponent.delay - tick;
+
+            if (spellComponent.delay <= 0 && !spellComponent.isTriggered) {
                 for (let monsterId in this.getEntityStore()) {
                     let monster = this.getEntityStore()[monsterId];
 

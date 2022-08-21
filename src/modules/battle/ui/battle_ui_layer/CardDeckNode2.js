@@ -170,7 +170,7 @@ const CardDeckNode2 = cc.Node.extend({
         let touchPos = touch.getLocation();
         touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.USER1());
         let cardType = selectedCard.type;
-        // FIXME: hardcode
+
         if (ValidatorECS.isSpell(cardType)) {
             if (Utils.isPixelPositionInMap(touchPos, GameConfig.USER1())) {
                 this._createOrGetSprite(selectedCard, cardType, GameConfig.USER1());

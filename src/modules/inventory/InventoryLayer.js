@@ -98,13 +98,13 @@ const InventoryLayer = cc.Node.extend({
             cardNodeInBattleDeck.setModel(cardModelFromCardCollection);
             cardNodeInBattleDeck.setVisible(true);
         }.bind(this))));
-        // this.fakeCardImageFromCardCollection.runAction(cc.moveTo(1, wordPos));
+
         this.fakeCardImageFromCardCollection.runAction(cc.Sequence(cc.moveTo(0.3, wordPos), cc.CallFunc(function () {
             this.fakeCardImageFromCardCollection.setVisible(false);
             cardInCollection.setModel(cardModelFromBattleDeck);
             cardInCollection.setVisible(true);
         }.bind(this))));
-        testnetwork.connector.sendSwapCard(cardModelFromCardCollection.id, cardModelFromBattleDeck.id);
+        contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).swapCardFromCollectionToBattleDeck(cardModelFromCardCollection.id, cardModelFromBattleDeck.id);
         cardModelFromCardCollection.isBattleDeck = true;
         cardModelFromBattleDeck.isBattleDeck = false;
         ClientUIManager.getInstance().getUI(CLIENT_UI_CONST.NODE_NAME.INVENTORY_NODE).cardNodeMap.set(cardModelFromCardCollection.id, cardNodeInBattleDeck);
