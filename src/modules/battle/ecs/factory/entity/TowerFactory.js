@@ -105,7 +105,7 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode, entityID) {
 
     let slowEffect = ComponentFactory.create(SlowEffect, slowDuration, slowValue);
 
-    let spriteAnimationConfig = TowerAnimationConfig.cannon.level.A;
+    let spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.A;
     let effectList = [slowEffect];
     let initialLevel = 1;
 
