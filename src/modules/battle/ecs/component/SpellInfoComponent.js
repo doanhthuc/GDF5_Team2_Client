@@ -30,11 +30,20 @@ let SpellInfoComponent = Component.extend({
 
     readData: function (data) {
         this._super(data);
-        this.position = data;
+        this.position = data.position;
         this.delay = data.delay;
         this.delayDestroy = data.delayDestroy;
         this.isTriggered = data.isTriggered;
-        this.effects = data.effects;
+        this.effects = [];
+
+        for (let effectData of data.effects) {
+            let effectType = effectData.typeID;
+            ComponentCls = ComponentManager.getInstance().getClass(effectType);
+            let component = new ComponentCls();
+            component.typeID = effectType;
+            component.readData(effectData);
+            this.effects.push(component);
+        }
     }
 });
 SpellInfoComponent.typeID = GameConfig.COMPONENT_ID.SPELL;
@@ -42,7 +51,13 @@ ComponentManager.getInstance().registerClass(SpellInfoComponent);
 
 SpellInfoComponent.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
-    data.position = cc.p(inPacket.getDouble(), inPacket.getDouble())
+
+    if (GameConfig.USER1() === "opponent") {
+        data.position = cc.p((-1) * inPacket.getDouble(), (-1) * inPacket.getDouble());
+    } else {
+        data.position = cc.p(inPacket.getDouble(), inPacket.getDouble())
+    }
+
     data.delay = inPacket.getDouble();
     data.delayDestroy = inPacket.getDouble();
     data.isTriggered = Utils.convertShortToBoolean(inPacket.getShort());

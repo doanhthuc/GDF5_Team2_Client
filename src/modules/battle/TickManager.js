@@ -218,6 +218,7 @@ let TickManager = cc.Class.extend({
                     BattleManager.getInstance().getBattleLayer().dropSpell(dataEntity.typeID, spellInfoComponent.position, dataEntity.mode, entityID);
                 }
             }
+
             existEntityInGame = entityManager.getEntity(entityID);
             let dataComponents = dataEntity.components;
             for (let componentTypeID in dataComponents) {
@@ -231,6 +232,31 @@ let TickManager = cc.Class.extend({
                 let component = existEntityInGame.getComponent(typeID);
                 component.readData(dataComponents[componentTypeID]);
             }
+
+            if (ValidatorECS.isSpell(existEntityInGame.typeID)) {
+                if (existEntityInGame._hasComponent(SkeletonAnimationComponent) && existEntityInGame._hasComponent(SpellInfoComponent)) {
+                    let skeletonAnimComponent = existEntityInGame.getComponent(SkeletonAnimationComponent);
+                    let spellInfoComponent = existEntityInGame.getComponent(SpellInfoComponent);
+                    skeletonAnimComponent.accTime = (GameConfig.DELAY_SPELL - spellInfoComponent.delay);
+
+                    if (GameConfig.USER1() === "opponent") {
+                        let pos = existEntityInGame.getComponent(PositionComponent);
+                        if (pos) {
+                            let distance = Utils.euclidDistance(pos, spellInfoComponent.position);
+                            pos.y = spellInfoComponent.position.y + distance;
+                        }
+
+                        let velocity = existEntityInGame.getComponent(VelocityComponent);
+                        if (velocity) {
+                            velocity.speedX *= (-1);
+                            velocity.speedY *= (-1);
+                            velocity.originSpeedX *= (-1);
+                            velocity.originSpeedY *= (-1);
+                        }
+                    }
+                }
+            }
+
             entityInSnapshot[entityId] = true;
         }
 
