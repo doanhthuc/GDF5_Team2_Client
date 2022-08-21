@@ -215,7 +215,8 @@ let TickManager = cc.Class.extend({
                     cc.log(dataEntity.mode);
                     BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos, dataEntity.mode);
                 } else if (ValidatorECS.isSpell(dataEntity.typeID)) {
-                  //  BattleManager.getInstance().getBattleLayer().dropSpell(dataEntity.typeID, cc.p(0,0), dataEntity.mode);
+                    let spellInfoComponent = dataEntity.components[SpellInfoComponent.typeID];
+                    BattleManager.getInstance().getBattleLayer().dropSpell(dataEntity.typeID, spellInfoComponent.position, dataEntity.mode);
                 }
             }
             existEntityInGame = entityManager.getEntity(entityID);
