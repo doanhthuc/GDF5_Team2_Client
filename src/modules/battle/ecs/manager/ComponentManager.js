@@ -44,17 +44,21 @@ let ComponentManager = ManagerECS.extend({
 });
 
 let _instanceBuilder = (function () {
+    let _storeClassCache = null;
     let _instance = null;
     return {
         getInstance: function () {
             if (_instance === null) {
                 _instance = new ComponentManager();
+                if (_storeClassCache) {
+                    _instance._storeCls = _storeClassCache;
+                }
             }
             return _instance;
         },
         resetInstance: function () {
             _instance._storeInstance = null;
-            _instance._storeCls = null;
+            _storeClassCache = _instance._storeCls;
             _instance = null;
         }
     }
