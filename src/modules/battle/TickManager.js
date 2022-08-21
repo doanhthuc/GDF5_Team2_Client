@@ -198,7 +198,7 @@ let TickManager = cc.Class.extend({
     handleSnapshot: function (packet) {
         let entityManager = EntityManager.getInstance();
         cc.log("data packet");
-        cc.log(JSON.stringify(packet.dataEntity))
+        // cc.log(JSON.stringify(packet.dataEntity))
         let entityInSnapshot = {};
         for (let entityId in packet.dataEntity) {
             let entityID = Number(entityId);
@@ -212,7 +212,6 @@ let TickManager = cc.Class.extend({
                 } else if (ValidatorECS.isTower(dataEntity.typeID)) {
                     let pos = dataEntity.components[PositionComponent.typeID];
                     let tilePos = Utils.pixel2Tile(pos.x, pos.y, dataEntity.mode);
-                    cc.log(dataEntity.mode);
                     BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos, dataEntity.mode, entityID);
                 }
             }

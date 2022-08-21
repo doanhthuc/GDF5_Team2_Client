@@ -13,6 +13,11 @@ let TowerInfoComponent = InfoComponent.extend({
 
     clone: function () {
         return ComponentFactory.create(TowerInfoComponent);
+    },
+
+    readData: function (data) {
+        this._super(data)
+        this.level = data.level;
     }
 });
 TowerInfoComponent.typeID = GameConfig.COMPONENT_ID.TOWER_INFO;
@@ -20,5 +25,6 @@ ComponentManager.getInstance().registerClass(TowerInfoComponent);
 
 TowerInfoComponent.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
+    data.level = inPacket.getShort();
     return data;
 }

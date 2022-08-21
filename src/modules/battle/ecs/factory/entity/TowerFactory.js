@@ -39,12 +39,22 @@ EntityFactory.addBasicTowerComponentToEntity = function (entity, basicTowerCompo
         .addComponent(spriteComponent);
 }
 
-EntityFactory.createCannonOwlTower = function (tilePos, mode, entityID) {
+EntityFactory.createCannonOwlTower = function (tilePos, mode, entityID, animationLevel = 1) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID, mode, entityID);
-
     let spriteAnimationConfig = TowerAnimationConfig.cannon.level.A;
+    switch (animationLevel) {
+        case 1:
+            spriteAnimationConfig = TowerAnimationConfig.cannon.level.A;
+            break;
+        case 2:
+            spriteAnimationConfig = TowerAnimationConfig.cannon.level.B;
+            break;
+        case 3:
+            spriteAnimationConfig = TowerAnimationConfig.cannon.level.C;
+            break;
+    }
     let effectList = [];
     let initialLevel = 1;
 
@@ -55,7 +65,7 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode, entityID) {
     return entity;
 };
 
-EntityFactory.createIceGunPolarBearTower = function (tilePos, mode, entityID) {
+EntityFactory.createIceGunPolarBearTower = function (tilePos, mode, entityID, animationLevel = 1) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.BEAR_TOWER;
     let entity = this._createEntity(typeID, mode, entityID);
@@ -69,6 +79,17 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode, entityID) {
     let canTargetAirMonster = false;
 
     let spriteAnimationConfig = TowerAnimationConfig.bear.level.A;
+    switch (animationLevel) {
+        case 1:
+            spriteAnimationConfig = TowerAnimationConfig.bear.level.A;
+            break;
+        case 2:
+            spriteAnimationConfig = TowerAnimationConfig.bear.level.B;
+            break;
+        case 3:
+            spriteAnimationConfig = TowerAnimationConfig.bear.level.C;
+            break;
+    }
     let effectList = [frozenEffect];
 
     let basicTowerComponent = this.createAttackTowerBasicComponent(typeID, initialLevel, tilePos, mode, effectList, spriteAnimationConfig, canTargetAirMonster);
@@ -78,12 +99,23 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode, entityID) {
     return entity;
 }
 
-EntityFactory.createBoomerangFrogTower = function (tilePos, mode, entityID) {
+EntityFactory.createBoomerangFrogTower = function (tilePos, mode, entityID, animationLevel = 1) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.FROG_TOWER;
     let entity = this._createEntity(typeID, mode, entityID);
 
     let spriteAnimationConfig = TowerAnimationConfig.boomerang.level.A;
+    switch (animationLevel) {
+        case 1:
+            spriteAnimationConfig = TowerAnimationConfig.boomerang.level.A;
+            break;
+        case 2:
+            spriteAnimationConfig = TowerAnimationConfig.boomerang.level.B;
+            break;
+        case 3:
+            spriteAnimationConfig = TowerAnimationConfig.boomerang.level.C;
+            break;
+    }
     let effectList = [];
     let initialLevel = 1;
 
@@ -94,7 +126,7 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode, entityID) {
     return entity;
 }
 
-EntityFactory.createBunnyOilGunTower = function (tilePos, mode, entityID) {
+EntityFactory.createBunnyOilGunTower = function (tilePos, mode, entityID, animationLevel) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.BUNNY_TOWER;
     let entity = this._createEntity(typeID, mode, entityID);
@@ -106,6 +138,17 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode, entityID) {
     let slowEffect = ComponentFactory.create(SlowEffect, slowDuration, slowValue);
 
     let spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.A;
+    switch (animationLevel) {
+        case 1:
+            spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.A;
+            break;
+        case 2:
+            spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.B;
+            break;
+        case 3:
+            spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.C;
+            break;
+    }
     let effectList = [slowEffect];
     let initialLevel = 1;
 
@@ -116,13 +159,24 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode, entityID) {
     return entity;
 }
 
-EntityFactory.createWizardTower = function (tilePos, mode, entityID) {
+EntityFactory.createWizardTower = function (tilePos, mode, entityID, animationLevel = 1) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.WIZARD_TOWER;
     let entity = this._createEntity(typeID, mode, entityID);
 
     let canTargetAirMonster = false;
     let spriteAnimationConfig = TowerAnimationConfig.wizard.level.A;
+    switch (animationLevel) {
+        case 1:
+            spriteAnimationConfig = TowerAnimationConfig.wizard.level.A;
+            break;
+        case 2:
+            spriteAnimationConfig = TowerAnimationConfig.wizard.level.B;
+            break;
+        case 3:
+            spriteAnimationConfig = TowerAnimationConfig.wizard.level.C;
+            break;
+    }
     let effectList = [];
     let initialLevel = 1;
 
@@ -133,7 +187,7 @@ EntityFactory.createWizardTower = function (tilePos, mode, entityID) {
     return entity;
 }
 
-EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode, entityID) {
+EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode, entityID, animationLevel = 1) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.SNAKE_TOWER;
     let entity = this._createEntity(typeID, mode, entityID);
@@ -145,13 +199,26 @@ EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode, entityID) {
     let towerEnergy = CARD_CONST[typeID].energy;
     let node = NodeFactory.createSnakeAttackSpeedNodeAnimation(buffRange, mode);
 
+    let spriteAnimationConfig = TowerAnimationConfig.snake.level.A;
+    switch (animationLevel) {
+        case 1:
+            spriteAnimationConfig = TowerAnimationConfig.snake.level.A;
+            break;
+        case 2:
+            spriteAnimationConfig = TowerAnimationConfig.snake.level.B;
+            break;
+        case 3:
+            spriteAnimationConfig = TowerAnimationConfig.snake.level.C;
+            break;
+    }
+
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
     let buffAttackSpeedEffect = ComponentFactory.create(BuffAttackSpeedEffect, attackSpeedUpValue);
     let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, buffRange, buffAttackSpeedEffect);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
 
-    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.snake.level.A);
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, spriteAnimationConfig);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
@@ -162,7 +229,7 @@ EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode, entityID) {
     return entity;
 }
 
-EntityFactory.createGoatDamageTower = function (tilePos, mode, entityID) {
+EntityFactory.createGoatDamageTower = function (tilePos, mode, entityID, animationLevel = 1) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.GOAT_TOWER;
     let entity = this._createEntity(typeID, mode, entityID);
@@ -179,7 +246,20 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode, entityID) {
     let towerAbilityComponent = ComponentFactory.create(TowerAbilityComponent, buffRange, buffAttackDamageEffect);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
 
-    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.goat.level.A);
+    let spriteAnimationConfig = TowerAnimationConfig.goat.level.A;
+    switch (animationLevel) {
+        case 1:
+            spriteAnimationConfig = TowerAnimationConfig.goat.level.A;
+            break;
+        case 2:
+            spriteAnimationConfig = TowerAnimationConfig.goat.level.B;
+            break;
+        case 3:
+            spriteAnimationConfig = TowerAnimationConfig.goat.level.C;
+            break;
+    }
+
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, spriteAnimationConfig);
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
