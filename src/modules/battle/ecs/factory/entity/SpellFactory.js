@@ -1,6 +1,6 @@
-EntityFactory.createFrozenSpell = function (pixelPos, mode) {
+EntityFactory.createFrozenSpell = function (pixelPos, mode, entityID) {
     let typeID = GameConfig.ENTITY_ID.FROZEN_SPELL;
-    let entity = EntityFactory._createEntity(typeID, mode);
+    let entity = EntityFactory._createEntity(typeID, mode, entityID);
 
     let S = 300, V = 1000;
     let T = S / V;
@@ -34,9 +34,9 @@ EntityFactory.createFrozenSpell = function (pixelPos, mode) {
     return entity;
 }
 
-EntityFactory.createFireSpell = function (pixelPos, mode) {
+EntityFactory.createFireSpell = function (pixelPos, mode, entityID) {
     let typeID = GameConfig.ENTITY_ID.FIRE_SPELL;
-    let entity = EntityFactory._createEntity(typeID, mode);
+    let entity = EntityFactory._createEntity(typeID, mode, entityID);
 
     let S = GameConfig.DELAY_SPELL * 1000, V = 1000;
     let T = S / V;
