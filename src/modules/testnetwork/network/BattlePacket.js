@@ -639,6 +639,10 @@ BattleNetwork.packetMap[gv.CMD.SNAPSHOT] = fr.InPacket.extend({
         this.serverTick = this.getInt();
         this.playerMonsterEntityID = this.getLong();
         this.opponentMonsterEntityID = this.getLong();
+        this.playerTowerEntityID = this.getLong();
+        this.opponentTowerEntityID = this.getLong();
+        this.playerSpellEnttiyID = this.getLong();
+        this.opponentSpellEntityID = this.getLong();
         this.playerStartEntityID = this.getLong();
         if (UUIDGeneratorECS.getPlayerStartEntityID() !== Number(this.playerStartEntityID)) {
             let temp = this.playerEnergyHouse;

@@ -2,7 +2,7 @@ EntityFactory.createFrozenSpell = function (pixelPos, mode, entityID) {
     let typeID = GameConfig.ENTITY_ID.FROZEN_SPELL;
     let entity = EntityFactory._createEntity(typeID, mode, entityID);
 
-    let S = 300, V = 1000;
+    let S = GameConfig.DELAY_SPELL * 1000, V = 1000;
     let T = S / V;
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y + S);
 

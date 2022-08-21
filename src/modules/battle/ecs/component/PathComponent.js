@@ -8,7 +8,7 @@ let PathComponent = Component.extend({
     },
 
     reset: function (pathTile, mode, isConvert = true) {
-        if (isConvert === true) {
+        if (pathTile && isConvert === true) {
             let pathTile2 = Utils.tileArray2PixelCellArray(pathTile, mode);
             this.path = pathTile2;
         } else {

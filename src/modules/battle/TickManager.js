@@ -214,9 +214,6 @@ let TickManager = cc.Class.extend({
                     let tilePos = Utils.pixel2Tile(pos.x, pos.y, dataEntity.mode);
                     cc.log(dataEntity.mode);
                     BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos, dataEntity.mode, entityID);
-                } else if (ValidatorECS.isSpell(dataEntity.typeID)) {
-                    let spellInfoComponent = dataEntity.components[SpellInfoComponent.typeID];
-                    BattleManager.getInstance().getBattleLayer().dropSpell(dataEntity.typeID, spellInfoComponent.position, dataEntity.mode, entityID);
                 }
             }
 
@@ -234,29 +231,7 @@ let TickManager = cc.Class.extend({
                 component.readData(dataComponents[componentTypeID]);
             }
 
-            if (ValidatorECS.isSpell(existEntityInGame.typeID)) {
-                if (existEntityInGame._hasComponent(SkeletonAnimationComponent) && existEntityInGame._hasComponent(SpellInfoComponent)) {
-                    let skeletonAnimComponent = existEntityInGame.getComponent(SkeletonAnimationComponent);
-                    let spellInfoComponent = existEntityInGame.getComponent(SpellInfoComponent);
-                    skeletonAnimComponent.accTime = (GameConfig.DELAY_SPELL - spellInfoComponent.delay);
 
-                    if (GameConfig.USER1() === "opponent") {
-                        let pos = existEntityInGame.getComponent(PositionComponent);
-                        if (pos) {
-                            let distance = Utils.euclidDistance(pos, spellInfoComponent.position);
-                            pos.y = spellInfoComponent.position.y + distance;
-                        }
-
-                        let velocity = existEntityInGame.getComponent(VelocityComponent);
-                        if (velocity) {
-                            velocity.speedX *= (-1);
-                            velocity.speedY *= (-1);
-                            velocity.originSpeedX *= (-1);
-                            velocity.originSpeedY *= (-1);
-                        }
-                    }
-                }
-            }
 
             entityInSnapshot[entityId] = true;
         }
@@ -267,7 +242,11 @@ let TickManager = cc.Class.extend({
             let monsterEntity = towerSystem.getEntityStore()[entityID];
             if (!entityInSnapshot[monsterEntity.id]) EntityManager.destroy(monsterEntity);
         }
+        
+        // snapshot entity id
         UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);
+        UUIDGeneratorECS.setTowerEntityID(packet.playerTowerEntityID, packet.opponentTowerEntityID);
+        UUIDGeneratorECS.setSpellEntityID(packet.playerSpellEnttiyID, packet.opponentSpellEntityID);
 
         let battleData = BattleManager.getInstance().getBattleData()
         battleData.setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());
