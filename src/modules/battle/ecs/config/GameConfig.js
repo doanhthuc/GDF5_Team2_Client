@@ -186,3 +186,4 @@ GameConfig.ANIMATION_TYPE = {
 
 GameConfig.DELAY_BUILD_TOWER = 1;
 GameConfig.TOWER_MAX_LEVEL = 3;
+GameConfig.DELAY_SPELL = 0.3; // seconds
