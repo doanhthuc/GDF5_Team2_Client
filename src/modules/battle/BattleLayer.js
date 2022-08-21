@@ -178,36 +178,36 @@ let BattleLayer = cc.Layer.extend({
         NodeFactory.createBuildingTowerTimer(tilePos, mode);
     },
 
-    buildTower: function (towerTypeID, tilePos, mode) {
-        this._createTower(towerTypeID, tilePos, mode);
+    buildTower: function (towerTypeID, tilePos, mode, entityID) {
+        this._createTower(towerTypeID, tilePos, mode, entityID);
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerTypeID, pos: tilePos, mode: mode});
         if (mode === GameConfig.USER1()) soundManager.playPutNewTower();
     },
 
-    _createTower: function (towerId, tilePos, mode) {
+    _createTower: function (towerId, tilePos, mode, entityID) {
         let tower = null;
         switch (towerId) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
-                tower = EntityFactory.createCannonOwlTower(tilePos, mode);
+                tower = EntityFactory.createCannonOwlTower(tilePos, mode, entityID);
                 break;
             case GameConfig.ENTITY_ID.FROG_TOWER:
-                tower = EntityFactory.createBoomerangFrogTower(tilePos, mode);
+                tower = EntityFactory.createBoomerangFrogTower(tilePos, mode, entityID);
                 break;
             case GameConfig.ENTITY_ID.BEAR_TOWER:
-                tower = EntityFactory.createIceGunPolarBearTower(tilePos, mode);
+                tower = EntityFactory.createIceGunPolarBearTower(tilePos, mode, entityID);
                 break;
             case GameConfig.ENTITY_ID.BUNNY_TOWER:
-                tower = EntityFactory.createBunnyOilGunTower(tilePos, mode);
+                tower = EntityFactory.createBunnyOilGunTower(tilePos, mode, entityID);
                 break;
             case GameConfig.ENTITY_ID.WIZARD_TOWER:
-                tower = EntityFactory.createWizardTower(tilePos, mode);
+                tower = EntityFactory.createWizardTower(tilePos, mode, entityID);
                 break;
             case GameConfig.ENTITY_ID.SNAKE_TOWER:
-                tower = EntityFactory.createSnakeAttackSpeedTower(tilePos, mode);
+                tower = EntityFactory.createSnakeAttackSpeedTower(tilePos, mode, entityID);
                 break;
             case GameConfig.ENTITY_ID.GOAT_TOWER:
-                tower = EntityFactory.createGoatDamageTower(tilePos, mode);
+                tower = EntityFactory.createGoatDamageTower(tilePos, mode, entityID);
                 break;
             default:
                 return;
@@ -229,13 +229,13 @@ let BattleLayer = cc.Layer.extend({
         mapObject.getObjectInTileByTilePos(tilePos).setEntityId(entityId);
     },
 
-    dropSpell: function (spellId, pixelPos, mode) {
+    dropSpell: function (spellId, pixelPos, mode, entityID) {
         switch (spellId) {
             case GameConfig.ENTITY_ID.FIRE_SPELL:
-                EntityFactory.createFireSpell(pixelPos, mode);
+                EntityFactory.createFireSpell(pixelPos, mode, entityID);
                 break;
             case GameConfig.ENTITY_ID.FROZEN_SPELL:
-                EntityFactory.createFrozenSpell(pixelPos, mode);
+                EntityFactory.createFrozenSpell(pixelPos, mode, entityID);
                 break;
             default:
                 return;

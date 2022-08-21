@@ -213,10 +213,10 @@ let TickManager = cc.Class.extend({
                     let pos = dataEntity.components[PositionComponent.typeID];
                     let tilePos = Utils.pixel2Tile(pos.x, pos.y, dataEntity.mode);
                     cc.log(dataEntity.mode);
-                    BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos, dataEntity.mode);
+                    BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos, dataEntity.mode, entityID);
                 } else if (ValidatorECS.isSpell(dataEntity.typeID)) {
                     let spellInfoComponent = dataEntity.components[SpellInfoComponent.typeID];
-                    BattleManager.getInstance().getBattleLayer().dropSpell(dataEntity.typeID, spellInfoComponent.position, dataEntity.mode);
+                    BattleManager.getInstance().getBattleLayer().dropSpell(dataEntity.typeID, spellInfoComponent.position, dataEntity.mode, entityID);
                 }
             }
             existEntityInGame = entityManager.getEntity(entityID);
