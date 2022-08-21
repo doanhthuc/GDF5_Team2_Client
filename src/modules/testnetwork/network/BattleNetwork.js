@@ -208,7 +208,11 @@ BattleNetwork.Connector = cc.Class.extend({
         tickManager.getTickData().setBattleTimerData(battleData.getTimer());
         BattleManager.getInstance().getBattleData().setMaxWave(packet.waveAmount);
         BattleManager.getInstance().getBattleData().setMonsterWave(packet.monsterWave);
+        BattleManager.getInstance().getBattleData().setCurrentWave(packet.currentWave);
+
         UUIDGeneratorECS.setStartEntityID(packet.playerStartEntityID, packet.opponentStartEntityID);
+
+
         setTimeout(() => {
             fr.view(BattleLayer, 0.5, true)
         }, 2000);
@@ -232,6 +236,6 @@ BattleNetwork.Connector = cc.Class.extend({
     },
 
     logReceiveCommand: function (commandID, packet) {
-            cc.warn("[receive command] #" + commandID + ": " + JSON.stringify(packet));
+        cc.warn("[receive command] #" + commandID + ": " + JSON.stringify(packet));
     }
 })
