@@ -214,6 +214,8 @@ let TickManager = cc.Class.extend({
                     let tilePos = Utils.pixel2Tile(pos.x, pos.y, dataEntity.mode);
                     cc.log(dataEntity.mode);
                     BattleManager.getInstance().getBattleLayer().buildTower(dataEntity.typeID, tilePos, dataEntity.mode);
+                } else if (ValidatorECS.isSpell(dataEntity.typeID)) {
+                  //  BattleManager.getInstance().getBattleLayer().dropSpell(dataEntity.typeID, cc.p(0,0), dataEntity.mode);
                 }
             }
             existEntityInGame = entityManager.getEntity(entityID);
