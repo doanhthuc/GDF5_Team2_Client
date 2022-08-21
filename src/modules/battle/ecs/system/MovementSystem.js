@@ -45,8 +45,6 @@ let MovementSystem = System.extend({
                     } else {
                         positionComponent.__x = tmpPos.x;
                         positionComponent.__y = tmpPos.y;
-                        let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
-                        positionComponent.moveDistance += moveDistance;
                     }
                 } else {
                     positionComponent.__x = tmpPos.x;
