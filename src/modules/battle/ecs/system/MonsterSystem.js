@@ -29,9 +29,9 @@ let MonsterSystem = System.extend({
                 BattleAnimation.animationHouse(monster.mode);
                 BattleAnimation.animationPlusEnergy(monsterPos, monsterInfo.damageEnergy, monster.mode);
 
-                if (monster.mode === GameConfig.PLAYER) {
+                if (monster.mode === GameConfig.USER1()) {
                     let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
-                    deckEnergyProgress.plusEnergy(monsterInfo.damageEnergy);
+                    deckEnergyProgress.plusEnergy(monsterInfo.damageEnergy * 10);
                     soundManager.playMainTowerHit();
                 }
 

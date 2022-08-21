@@ -104,3 +104,53 @@ const BattleMapObject = cc.Class.extend({
         return this.battleMap[tilePos.x][tilePos.y].getObjectInTile();
     }
 });
+
+BattleMapObject.unpackData = function (inPacket) {
+    let mapHeight = inPacket.getInt();
+    let mapWidth = inPacket.getInt();
+    let battleMapObject = new BattleMapObject(mapHeight, mapWidth);
+    let battleMap = battleMapObject.getBattleMap();
+    for (let i = 0; i < mapHeight; i++) {
+        for (let j = 0; j < mapWidth; j++) {
+            battleMap[i][j] = BattleMapObject._unpackTileObject(inPacket);
+        }
+    }
+    return battleMapObject;
+},
+
+BattleMapObject._unpackTileObject = function (inPacket) {
+    let tilePos = {
+        x: inPacket.getInt(),
+        y: inPacket.getInt()
+    };
+    let tileType = inPacket.getInt();
+    let objectInTileType = inPacket.getInt();
+    let tileObject = new TileObject(tilePos, tileType, objectInTileType);
+    BattleMapObject._unpackObjectInTile(tileObject, inPacket);
+    return tileObject;
+},
+
+BattleMapObject._unpackObjectInTile = function (tileObject, inPacket) {
+    switch (tileObject.getObjectInTileType()) {
+        case ObjectInCellType.TREE:
+            let hp = inPacket.getDouble();
+            let tree = new Tree(hp);
+            tileObject.setObjectInTile(tree);
+            break;
+        case ObjectInCellType.TOWER:
+            let towerType = inPacket.getInt();
+            let towerLevel = inPacket.getInt();
+            let entityId = inPacket.getLong();
+            let tower = new Tower(towerType, towerLevel, tileObject.getTilePos());
+            tower.setEntityId(entityId);
+            tileObject.setObjectInTile(tower);
+            break;
+        case ObjectInCellType.PIT:
+            let pit = inPacket.getInt();
+            let pitObject = new Pit();
+            tileObject.setObjectInTile(pitObject);
+            break;
+        default:
+            break;
+    }
+}

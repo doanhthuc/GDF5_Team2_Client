@@ -15,6 +15,21 @@ let FrozenEffect = EffectComponent.extend({
     clone: function () {
         return ComponentFactory.create(FrozenEffect, this._duration);
     },
+
+    readData: function (data) {
+        this._super(data);
+        this.duration = data.duration;
+        this.countdown = data.countdown;
+    }
 });
 FrozenEffect.typeID = GameConfig.COMPONENT_ID.FROZEN_EFFECT;
 ComponentManager.getInstance().registerClass(FrozenEffect);
+
+FrozenEffect.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+
+    data.duration = inPacket.getDouble();
+    data.countdown = inPacket.getDouble();
+
+    return data;
+}

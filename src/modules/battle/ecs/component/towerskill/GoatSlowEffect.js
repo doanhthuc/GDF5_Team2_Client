@@ -17,3 +17,8 @@ let GoatSlowEffectComponent = Component.extend({
 });
 GoatSlowEffectComponent.typeID = GameConfig.COMPONENT_ID.GOAT_SLOW_EFFECT;
 ComponentManager.getInstance().registerClass(GoatSlowEffectComponent);
+
+GoatSlowEffectComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
+}

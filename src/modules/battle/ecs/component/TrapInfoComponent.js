@@ -22,3 +22,8 @@ let TrapInfoComponent = InfoComponent.extend({
 });
 TrapInfoComponent.typeID = GameConfig.COMPONENT_ID.TRAP_INFO;
 ComponentManager.getInstance().registerClass(TrapInfoComponent);
+
+TrapInfoComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
+}

@@ -93,7 +93,7 @@ let CardDeckNode = cc.Node.extend({
     },
 
     handleChangeCardEvent: function (data) {
-        if (data.mode === GameConfig.PLAYER) {
+        if (data.mode === GameConfig.USER1()) {
             this.isCardPuttedIntoMap = true;
             this.nextCard(this.selectedCard.id);
         }
@@ -142,12 +142,12 @@ let CardDeckNode = cc.Node.extend({
         //cc.log("cardDeckNode line 142")
         let selectedCard = event.getCurrentTarget();
         let touchPos = touch.getLocation();
-        touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.PLAYER);
+        touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.USER1());
 
         // FIXME: hardcode
         if (ValidatorECS.isSpell(selectedCard.type)) {
-            if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
-                this._createOrGetSprite(selectedCard, touch, GameConfig.PLAYER);
+            if (Utils.isPixelPositionInMap(touchPos, GameConfig.USER1())) {
+                this._createOrGetSprite(selectedCard, touch, GameConfig.USER1());
                 this.spriteDragManager[touch.getID()].setVisible(true);
                 this.spriteDragManager[touch.getID()].setPosition(touchPos);
             } else {
@@ -156,9 +156,9 @@ let CardDeckNode = cc.Node.extend({
                 }
             }
         } else if (ValidatorECS.isTower(selectedCard.type) || ValidatorECS.isTrap(selectedCard.type)) {
-            if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
-                this._createOrGetSprite(selectedCard, touch, GameConfig.PLAYER);
-                let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER);
+            if (Utils.isPixelPositionInMap(touchPos, GameConfig.USER1())) {
+                this._createOrGetSprite(selectedCard, touch, GameConfig.USER1());
+                let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.USER1());
                 this.spriteDragManager[touch.getID()].setVisible(true);
                 this.spriteDragManager[touch.getID()].setPosition(pixelPos);
             } else {
@@ -216,7 +216,7 @@ let CardDeckNode = cc.Node.extend({
         Utils.validateMode(mode);
         if (!this.spriteDragManager[touch.getID()]) {
             // FIXME: hardcode sprite, use map to cache
-            let mapNode = mode === GameConfig.PLAYER ? battleLayer.getPlayerMapNode()
+            let mapNode = mode === GameConfig.USER1() ? battleLayer.getPlayerMapNode()
                 : battleLayer.getOpponentMapNode();
             if (ValidatorECS.isSpell(selectedCard.type)) {
                 let sp = new cc.Sprite(BattleResource.POTION_RANGE_IMG);

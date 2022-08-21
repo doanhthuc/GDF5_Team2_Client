@@ -9,17 +9,17 @@ Utils.getVariableName = function (variable) {
  *  Convert tile map coordination to pixel map node coordination (center of a cell)
  * @param x {Number}
  * @param y {Number}
- * @param mode {GameConfig.PLAYER | GameConfig.OPPONENT}
+ * @param mode {GameConfig.USER1() | GameConfig.USER2()}
  * @returns {{x: number, y: number}|{x: *, y: *}|{x: *, y: *}}
  */
 Utils.tile2Pixel = function (x, y, mode) {
     Utils.validateMode(mode);
 
     let xx, yy;
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         xx = x * GameConfig.TILE_WIDTH - GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2 + GameConfig.TILE_WIDTH / 2;
         yy = y * GameConfig.TILE_HEIGH - GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2 + GameConfig.TILE_HEIGH / 2;
-    } else if (mode === GameConfig.OPPONENT) {
+    } else if (mode === GameConfig.USER2()) {
         // x <---------o
         //             |
         //             |
@@ -39,16 +39,16 @@ Utils.playerPixel2OpponentPixel = function (x, y) {
  * Convert pixel map node coordination to tile coordination
  * @param xx {Number}
  * @param yy {Number}
- * @param mode {GameConfig.PLAYER | GameConfig.OPPONENT}
+ * @param mode {GameConfig.USER1() | GameConfig.USER2()}
  * @returns {{x: number, y: number}|{x: *, y: *}|{x: *, y: *}}
  */
 Utils.pixel2Tile = function (xx, yy, mode) {
     Utils.validateMode(mode);
 
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         xx = xx + GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2;
         yy = yy + GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2;
-    } else if (mode === GameConfig.OPPONENT) {
+    } else if (mode === GameConfig.USER2()) {
         xx = GameConfig.MAP_WIDTH * GameConfig.TILE_WIDTH / 2 - xx;
         yy = GameConfig.MAP_HEIGH * GameConfig.TILE_HEIGH / 2 - yy;
     }
@@ -59,7 +59,11 @@ Utils.pixel2Tile = function (xx, yy, mode) {
 }
 
 Utils.validateMode = function (mode) {
-    if (mode !== GameConfig.PLAYER && mode !== GameConfig.OPPONENT) {
+    if (mode !== GameConfig.USER1() && mode !== GameConfig.USER2()) {
+        cc.log("============")
+        cc.log(mode)
+        cc.log(GameConfig.USER1())
+        cc.log(GameConfig.USER2());
         throw new Error("mode is invalid");
     }
 }
@@ -67,13 +71,13 @@ Utils.validateMode = function (mode) {
 /**
  *
  * @param worldPos {pixel}
- * @param mode {GameConfig.PLAYER | GameConfig.OPPONENT}
+ * @param mode {GameConfig.USER1() | GameConfig.USER2()}
  * @returns {vec2_object|cc.Point|*}
  */
 Utils.convertWorldSpace2MapNodeSpace = function (worldPos, mode) {
     Utils.validateMode(mode);
 
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         return BattleManager.getInstance().getBattleLayer().getPlayerMapNode().convertToNodeSpace(worldPos);
     } else {
         return BattleManager.getInstance().getBattleLayer().getOpponentMapNode().convertToNodeSpace(worldPos);
@@ -83,7 +87,7 @@ Utils.convertWorldSpace2MapNodeSpace = function (worldPos, mode) {
 Utils.convertMapNodeSpace2WorldSpace = function (pixelPos, mode) {
     Utils.validateMode(mode);
 
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         return BattleManager.getInstance().getBattleLayer().getPlayerMapNode().convertToWorldSpace(pixelPos);
     } else {
         return BattleManager.getInstance().getBattleLayer().getOpponentMapNode().convertToWorldSpace(pixelPos);
@@ -95,7 +99,7 @@ Utils.validateTilePos = function (tilePos) {
 }
 
 Utils.tileArray2PixelArray = function (positionArr, mode) {
-    if (mode !== GameConfig.PLAYER && mode !== GameConfig.OPPONENT) {
+    if (mode !== GameConfig.USER1() && mode !== GameConfig.USER2()) {
         throw new Error("Mode is invalid")
     }
     let result = [];
@@ -116,7 +120,7 @@ Utils.isPixelPositionInMap = function (pixelPos, mode) {
 
     let tile00 = Utils.tile2Pixel(0, 0, mode);
     let tile64 = Utils.tile2Pixel(6, 4, mode);
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         tile00.x = tile00.x - GameConfig.TILE_WIDTH / 2;
         tile00.y = tile00.y - GameConfig.TILE_HEIGH / 2;
         tile64.x = tile64.x + GameConfig.TILE_WIDTH / 2;
@@ -127,9 +131,9 @@ Utils.isPixelPositionInMap = function (pixelPos, mode) {
         tile64.x = tile64.x - GameConfig.TILE_WIDTH / 2;
         tile64.y = tile64.y - GameConfig.TILE_HEIGH / 2;
     }
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         return pixelPos.x >= tile00.x && pixelPos.x <= tile64.x && pixelPos.y >= tile00.y && pixelPos.y <= tile64.y;
-    } else if (mode === GameConfig.OPPONENT) {
+    } else if (mode === GameConfig.USER2()) {
         return pixelPos.x <= tile00.x && pixelPos.x >= tile64.x && pixelPos.y <= tile00.y && pixelPos.y >= tile64.y;
     }
 }
@@ -216,10 +220,10 @@ Utils.cell2Pixel = function (cellX, cellY, mode) {
         throw new Error("Cell position is invalid (cellX = " + cellX + ", cellY = " + cellY + ")");
     }
     let x, y;
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         x = (cellX + 1) * cellWidth - mapWidthPixel / 2 - cellWidth / 2;
         y = (cellY + 1) * cellHeight - mapHeightPixel / 2 - cellHeight / 2;
-    } else if (mode === GameConfig.OPPONENT) {
+    } else if (mode === GameConfig.USER2()) {
         x = mapWidthPixel / 2 - (cellX + 1) * cellWidth + cellWidth / 2;
         y = mapHeightPixel / 2 - (cellY + 1) * cellHeight + cellHeight / 2;
     }
@@ -250,7 +254,7 @@ Utils.cell2Tile = function (cellX, cellY) {
  */
 Utils.pixel2Cell = function (x, y, mode) {
     Utils.validateMode(mode);
-    const tilePos = Utils.pixel2Tile(x, y, GameConfig.PLAYER);
+    const tilePos = Utils.pixel2Tile(x, y, GameConfig.USER1());
     if (Utils.validateTilePos(tilePos) === false) {
         throw new Error("Pixel (x = " + x + ", y = " + y + ") is invalid");
     }
@@ -258,10 +262,10 @@ Utils.pixel2Cell = function (x, y, mode) {
     const paddingLeftX = Utils.cell2Pixel(0, 0).x - cellWidth / 2;
     const paddingBottomY = Utils.cell2Pixel(0, 0).y - cellHeight / 2;
 
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         cellX = Math.floor((x - paddingLeftX) / cellWidth);
         cellY = Math.floor((y - paddingBottomY) / cellHeight);
-    } else if (mode === GameConfig.OPPONENT) {
+    } else if (mode === GameConfig.USER2()) {
         cellX = cellsX - 1 - Math.floor((x - paddingLeftX) / cellWidth);
         cellY = cellsY - 1 - Math.floor((y - paddingBottomY) / cellHeight);
     }
@@ -400,4 +404,19 @@ Utils.divideCellPath = function (pointA, pointB, divideAmount) {
 
 Utils.currentTimeMillis = function () {
     return Date.now();
+}
+
+Utils.convertShortToMode = function (shortVar) {
+    let result = shortVar === 1 ? "player" : "opponent";
+    // if (GameConfig.USER1() === "opponent") {
+    //     if (result === "player")
+    //         result = "opponent"
+    //     else
+    //         result = "player";
+    // }
+    return result;
+}
+
+Utils.convertShortToBoolean = function (booleanVal) {
+    return booleanVal === 1;
 }

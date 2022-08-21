@@ -92,7 +92,7 @@ let EffectSystem = System.extend({
                 if (!slowComponent.addedAnimation) {
                     BattleAnimation.addAnimationHitSlowEffect(entity);
                     slowComponent.addedAnimation = true;
-                    if (entity.mode === GameConfig.PLAYER) needAddSound = true;
+                    if (entity.mode === GameConfig.USER1()) needAddSound = true;
                 }
             }
         }

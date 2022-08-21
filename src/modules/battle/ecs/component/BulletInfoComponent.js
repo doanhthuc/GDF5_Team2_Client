@@ -22,3 +22,8 @@ let BulletInfoComponent = InfoComponent.extend({
 });
 BulletInfoComponent.typeID = GameConfig.COMPONENT_ID.BULLET_INFO;
 ComponentManager.getInstance().registerClass(BulletInfoComponent);
+
+BulletInfoComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
+}

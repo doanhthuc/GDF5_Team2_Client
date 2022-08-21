@@ -45,8 +45,6 @@ let MovementSystem = System.extend({
                     } else {
                         positionComponent.__x = tmpPos.x;
                         positionComponent.__y = tmpPos.y;
-                        let moveDistance = Math.sqrt(Math.pow(moveDistanceX, 2) + Math.pow(moveDistanceY, 2))
-                        positionComponent.moveDistance += moveDistance;
                     }
                 } else {
                     positionComponent.__x = tmpPos.x;
@@ -80,7 +78,7 @@ let MovementSystem = System.extend({
             if (fireballEffect && velocityComponent) {
                 if (fireballEffect.accTime < fireballEffect.maxDuration) {
                     fireballEffect.accTime += tick;
-                    let newSpeed = (-1) * fireballEffect.a * fireballEffect.accTime + fireballEffect.V0;
+                    let newSpeed = (-1) * fireballEffect.acceleration * fireballEffect.accTime + fireballEffect.velocityStart;
                     let newVelocity = Utils.calculateVelocityVector(fireballEffect.startPos, fireballEffect.endPos, newSpeed);
                     velocityComponent.speedX = newVelocity.speedX;
                     velocityComponent.speedY = newVelocity.speedY;

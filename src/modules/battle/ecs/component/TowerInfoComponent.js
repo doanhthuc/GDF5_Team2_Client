@@ -8,16 +8,17 @@ let TowerInfoComponent = InfoComponent.extend({
     },
 
     reset: function (energy, bulletTargetType, archType, targetType, bulletType) {
-        this.energy = energy;
-        this.bulletTargetType = bulletTargetType;
-        this.archType = archType;
-        this.targetType = targetType;
-        this.bulletType = bulletType;
+
     },
 
     clone: function () {
-        return ComponentFactory.create(TowerInfoComponent, this.energy, this.bulletTargetType, this.archType, this.targetType, this.bulletType);
+        return ComponentFactory.create(TowerInfoComponent);
     }
 });
 TowerInfoComponent.typeID = GameConfig.COMPONENT_ID.TOWER_INFO;
 ComponentManager.getInstance().registerClass(TowerInfoComponent);
+
+TowerInfoComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
+}

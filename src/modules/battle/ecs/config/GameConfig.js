@@ -4,8 +4,22 @@ let GameConfig = GameConfig || {};
 GameConfig.DEBUG = 0;
 GameConfig.NETWORK = 1;
 GameConfig.SOUND = 0;
-GameConfig.PLAYER = "player";
-GameConfig.OPPONENT = "opponent";
+
+let _playerInfo = {
+    user1: "player",
+    user2: "opponent",
+}
+GameConfig.swapPlayerInfo = function () {
+    let tmp = _playerInfo.user1;
+    _playerInfo.user1 = _playerInfo.user2;
+    _playerInfo.user2 = tmp;
+}
+GameConfig.USER1 = function () {
+    return _playerInfo.user1;
+}
+GameConfig.USER2 = function () {
+    return  _playerInfo.user2;
+}
 
 GameConfig.COMPONENT_ID = {
     MONSTER_INFO: 1,
@@ -97,9 +111,11 @@ GameConfig.GROUP_ID = {
     MONSTER_ENTITY: [GameConfig.ENTITY_ID.SWORD_MAN, GameConfig.ENTITY_ID.ASSASSIN, GameConfig.ENTITY_ID.BAT, GameConfig.ENTITY_ID.GIANT, GameConfig.ENTITY_ID.NINJA,
         GameConfig.ENTITY_ID.DEMON_TREE, GameConfig.ENTITY_ID.DEMON_TREE_MINION, GameConfig.ENTITY_ID.DARK_GIANT, GameConfig.ENTITY_ID.SATYR],
     BULLET_ENTITY: [GameConfig.ENTITY_ID.BULLET, GameConfig.ENTITY_ID.SLOW_BULLET, GameConfig.ENTITY_ID.WIZARD_BULLET],
+    OBSTACLE_ENTITY: [GameConfig.ENTITY_ID.TREE,GameConfig.ENTITY_ID.HOLE],
+
     EFFECT_COMPONENT: [GameConfig.COMPONENT_ID.DAMAGE_EFFECT, GameConfig.COMPONENT_ID.SLOW_EFFECT, GameConfig.COMPONENT_ID.FROZEN_EFFECT],
     INFO_COMPONENT: [GameConfig.COMPONENT_ID.TOWER_INFO, GameConfig.COMPONENT_ID.MONSTER_INFO, GameConfig.COMPONENT_ID.BULLET_INFO],
-    SPELL_ENTITY: [GameConfig.ENTITY_ID.FIRE_SPELL, GameConfig.ENTITY_ID.FROZEN_SPELL]
+    SPELL_ENTITY: [GameConfig.ENTITY_ID.FIRE_SPELL, GameConfig.ENTITY_ID.FROZEN_SPELL, GameConfig.ENTITY_ID.TRAP_SPELL]
 }
 
 GameConfig.TOWER_TARGET_STRATEGY = {
