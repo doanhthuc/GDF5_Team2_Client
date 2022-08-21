@@ -74,23 +74,10 @@ var ScreenNetwork = cc.Layer.extend({
     onFinishLogin: function () {
         //this.setVisible(false);
         fr.view(MainScreen);
-        testnetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
-        testnetwork.connector.sendGetUserLobbyChest();
-        testnetwork.connector.sendGetUserInventory();
-        //testnetwork.connector.sendGetRoomInfo(1);
-        //testnetwork.connector.sendGetUserGoldShop();
-        //testnetwork.connector.sendUpgradeCard(2);
-        //.connector.sendGetUserDailyShop();
-        // testnetwork.connector.sendAddUserGem(100);
-        // testnetwork.connector.sendAddUserGold(100);
-        // testnetwork.connector.sendBuyGoldShop(0);
-        // testnetwork.connector.sendBuyDailyShop(0);
-        //testnetwork.connector.sendUnlockLobbyChest(0);
-        // testnetwork.connector.sendSpeedUpLobbyChest(1);
-        // testnetwork.connector.sendClaimLobbyChest(2);
-        // let userContext = new UserContext();
-        // contextManager.registerContext(ContextManagerConst.USER_CONTEXT, userContext);
-        // userContext.updateUserInfoUI();
+        AuthNetwork.connector.sendGetUserInfo(); // Nhanaj UserInfo
+        LobbyNetwork.connector.sendGetUserLobbyChest();
+        InventoryNetwork.connector.sendGetUserInventory();
+
         ShopNetwork.connector.sendGetUserDailyShop();
         ShopNetwork.connector.sendGetGoldShop();
         this.reset();

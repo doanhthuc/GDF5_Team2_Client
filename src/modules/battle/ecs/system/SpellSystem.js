@@ -31,7 +31,7 @@ let SpellSystem = System.extend({
                 continue;
             }
 
-            if (spellComponent.delay <= 0 && !spellComponent.isTriggered    ) {
+            if (spellComponent.delay <= 0 && !spellComponent.isTriggered) {
                 for (let monsterId in this.getEntityStore()) {
                     let monster = this.getEntityStore()[monsterId];
 

@@ -108,11 +108,11 @@ const CardDetailPopup = cc.Node.extend({
         this.constraintTxt.setVisible(this.shouldConstraintVisible());
         this.towerImg.setTexture(CARD_CONST[this.cardModel.id].image[this.rankArr[this.DEFAULT_RANK_INDEX]]);
         this.setNextAndPrevTowerImgBtnOpacity();
-        // TODO: check condition card from where click
+
         cardModel.isBattleDeck
             ? this.setBtnPosPopupFromBattleDeck()
             : this.setBtnPosPopupFromCardCollection();
-        // this.setBtnPosPopupFromBattleDeck()
+
     },
 
     setCardNodeModel: function (cardModel) {
@@ -152,7 +152,6 @@ const CardDetailPopup = cc.Node.extend({
                     PopupUIManager.getInstance().showUI(CLIENT_UI_CONST.POPUPS_NAME.GUI_NOT_ENOUGH_UPGRADE_RES);
                     break;
                 case InventoryResources.UPGRADE_BTN_STATE.NORMAL:
-                    //TODO: upgrade card
                     contextManager.getContext(ContextManagerConst.CONTEXT_NAME.INVENTORY_CONTEXT).upgradeCard(this.cardModel.id);
                     break;
                 default:

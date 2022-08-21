@@ -1,31 +1,56 @@
-EntityFactory.createCannonOwlTower = function (tilePos, mode) {
-    Utils.validateMode(mode);
-    let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
-    let entity = this._createEntity(typeID, mode);
-    let towerConfig = TowerConfig.getTowerConfigFromJson(typeID, 1);
+EntityFactory.createAttackTowerBasicComponent = function (typeID, level, tilePos, mode, effectList, spriteAnimationConfig, canTargetAirMonster = true) {
+    let basicTowerInfo = this.getBasicAttackTowerInfo(typeID, level);
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
-    // let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
-    let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
-    let attackDamage = towerConfig.stat.damage;
-    let attackSpeed = towerConfig.stat.attackSpeed / 1000;
-    let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
-    let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
-    let towerEnergy = CARD_CONST[typeID].energy;
+    let defaultTowerTargetStrategy = GameConfig.TOWER_TARGET_STRATEGY.MAX_HP;
 
-    let node = NodeFactory.createOwlNodeAnimation(attackRange, mode);
+    let infoComponent = ComponentFactory.create(TowerInfoComponent, basicTowerInfo.towerEnergy, basicTowerInfo.bulletTargetBuffType,
+        basicTowerInfo.archetype, basicTowerInfo.targetType, basicTowerInfo.bulletType);
 
-
-    let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
+
+    let node = NodeFactory.createTowerNode(typeID, basicTowerInfo.attackRange, mode);
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, attackDamage, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, attackSpeed, 0, [], bulletSpeed, bulletRadius);
-    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.cannon.level.A);
+
+    let attackComponent = ComponentFactory.create(AttackComponent, basicTowerInfo.attackDamage, defaultTowerTargetStrategy,
+        basicTowerInfo.attackRange, basicTowerInfo.attackSpeed, 0, effectList, basicTowerInfo.bulletSpeed, basicTowerInfo.bulletRadius, canTargetAirMonster);
+
+    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, spriteAnimationConfig);
+
+    return {
+        infoComponent: infoComponent,
+        positionComponent: positionComponent,
+        appearanceComponent: appearanceComponent,
+        attackComponent: attackComponent,
+        spriteComponent: spriteComponent
+    }
+};
+
+EntityFactory.addBasicTowerComponentToEntity = function (entity, basicTowerComponents) {
+    let infoComponent = basicTowerComponents.infoComponent;
+    let positionComponent = basicTowerComponents.positionComponent;
+    let appearanceComponent = basicTowerComponents.appearanceComponent;
+    let attackComponent = basicTowerComponents.attackComponent;
+    let spriteComponent = basicTowerComponents.spriteComponent;
 
     entity.addComponent(infoComponent)
         .addComponent(positionComponent)
         .addComponent(appearanceComponent)
         .addComponent(attackComponent)
         .addComponent(spriteComponent);
+}
+
+EntityFactory.createCannonOwlTower = function (tilePos, mode) {
+    Utils.validateMode(mode);
+    let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
+    let entity = this._createEntity(typeID, mode);
+
+    let spriteAnimationConfig = TowerAnimationConfig.cannon.level.A;
+    let effectList = [];
+    let initialLevel = 1;
+
+    let basicTowerComponent = this.createAttackTowerBasicComponent(typeID, initialLevel, tilePos, mode, effectList, spriteAnimationConfig);
+
+    this.addBasicTowerComponentToEntity(entity, basicTowerComponent);
 
     return entity;
 };
@@ -34,34 +59,21 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.BEAR_TOWER;
     let entity = this._createEntity(typeID, mode);
+    let initialLevel = 1;
 
-    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
-    let towerConfig = TowerConfig.getBearIceGunTowerConfigFromJson(1);
-    let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
-    let attackDamage = towerConfig.stat.damage;
-    let attackSpeed = towerConfig.stat.attackSpeed / 1000;
-    let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
-    let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
-    let canTargetAirMonster = false;
+    let towerConfig = TowerConfig.getBearIceGunTowerConfigFromJson(initialLevel);
 
     let frozenDuration = towerConfig.frozenDuration / 1000;
-
-    let towerEnergy = CARD_CONST[typeID].energy;
-
-    let node = NodeFactory.createBearNodeAnimation(attackRange, false, mode);
     let frozenEffect = ComponentFactory.create(FrozenEffect, frozenDuration);
 
-    let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "support", "monster", "bulletType");
-    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, attackDamage, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, attackSpeed, 0, [frozenEffect], bulletSpeed, bulletRadius, canTargetAirMonster);
-    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bear.level.A);
+    let canTargetAirMonster = false;
 
-    entity.addComponent(infoComponent)
-        .addComponent(positionComponent)
-        .addComponent(appearanceComponent)
-        .addComponent(attackComponent)
-        .addComponent(spriteComponent);
+    let spriteAnimationConfig = TowerAnimationConfig.bear.level.A;
+    let effectList = [frozenEffect];
+
+    let basicTowerComponent = this.createAttackTowerBasicComponent(typeID, initialLevel, tilePos, mode, effectList, spriteAnimationConfig, canTargetAirMonster);
+
+    this.addBasicTowerComponentToEntity(entity, basicTowerComponent);
 
     return entity;
 }
@@ -71,28 +83,13 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.FROG_TOWER;
     let entity = this._createEntity(typeID, mode);
 
-    let towerConfig = TowerConfig.getTowerConfigFromJson(typeID, 1);
-    let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
-    let attackDamage = towerConfig.stat.damage;
-    let attackSpeed = towerConfig.stat.attackSpeed / 1000;
-    let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
-    let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
-    let towerEnergy = CARD_CONST[typeID].energy;
+    let spriteAnimationConfig = TowerAnimationConfig.boomerang.level.A;
+    let effectList = [];
+    let initialLevel = 1;
 
-    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
-    let node = NodeFactory.createFrogNodeAnimation(attackRange, mode);
+    let basicTowerComponent = this.createAttackTowerBasicComponent(typeID, initialLevel, tilePos, mode, effectList, spriteAnimationConfig);
 
-    let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
-    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, attackDamage, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, attackSpeed, 0, [], bulletSpeed, bulletRadius);
-    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.boomerang.level.A);
-
-    entity.addComponent(infoComponent)
-        .addComponent(positionComponent)
-        .addComponent(appearanceComponent)
-        .addComponent(attackComponent)
-        .addComponent(spriteComponent);
+    this.addBasicTowerComponentToEntity(entity, basicTowerComponent);
 
     return entity;
 }
@@ -102,30 +99,19 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.BUNNY_TOWER;
     let entity = this._createEntity(typeID, mode);
 
-    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let towerConfig = TowerConfig.getBunnyOilGunTowerConfigFromJson(1);
-    let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
-    let attackDamage = towerConfig.stat.damage;
-    let attackSpeed = towerConfig.stat.attackSpeed / 1000;
-    let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
-    let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
     let slowDuration = towerConfig.slowDuration / 1000;
     let slowValue = towerConfig.slowValue * -1;
-    let towerEnergy = CARD_CONST[typeID].energy;
-    let node = NodeFactory.createBunnyNodeAnimation(attackRange, mode);
 
     let slowEffect = ComponentFactory.create(SlowEffect, slowDuration, slowValue);
-    let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
-    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, attackDamage, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, attackSpeed, 0, [slowEffect], bulletSpeed, bulletRadius);
-    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.bunnyOil.level.A);
 
-    entity.addComponent(infoComponent)
-        .addComponent(positionComponent)
-        .addComponent(appearanceComponent)
-        .addComponent(attackComponent)
-        .addComponent(spriteComponent);
+    let spriteAnimationConfig = TowerAnimationConfig.cannon.level.A;
+    let effectList = [slowEffect];
+    let initialLevel = 1;
+
+    let basicTowerComponent = this.createAttackTowerBasicComponent(typeID, initialLevel, tilePos, mode, effectList, spriteAnimationConfig);
+
+    this.addBasicTowerComponentToEntity(entity, basicTowerComponent);
 
     return entity;
 }
@@ -135,29 +121,14 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     let typeID = GameConfig.ENTITY_ID.WIZARD_TOWER;
     let entity = this._createEntity(typeID, mode);
 
-    let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
-    let towerConfig = TowerConfig.getTowerConfigFromJson(typeID, 1);
-    let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
-    let attackDamage = towerConfig.stat.damage;
-    let attackSpeed = towerConfig.stat.attackSpeed / 1000;
-    let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
-    let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
     let canTargetAirMonster = false;
-    let towerEnergy = CARD_CONST[typeID].energy;
-    let node = NodeFactory.createWizardNodeAnimation(attackRange, mode);
+    let spriteAnimationConfig = TowerAnimationConfig.wizard.level.A;
+    let effectList = [];
+    let initialLevel = 1;
 
+    let basicTowerComponent = this.createAttackTowerBasicComponent(typeID, initialLevel, tilePos, mode, effectList, spriteAnimationConfig, canTargetAirMonster);
 
-    let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "bulletTargetType", "attack", "monster", "bulletType");
-    let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
-    let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
-    let attackComponent = ComponentFactory.create(AttackComponent, attackDamage, GameConfig.TOWER_TARGET_STRATEGY.MAX_HP, attackRange, attackSpeed, 0, [], bulletSpeed, bulletRadius, canTargetAirMonster);
-    let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, TowerAnimationConfig.wizard.level.A);
-
-    entity.addComponent(infoComponent)
-        .addComponent(positionComponent)
-        .addComponent(appearanceComponent)
-        .addComponent(attackComponent)
-        .addComponent(spriteComponent);
+    this.addBasicTowerComponentToEntity(entity, basicTowerComponent);
 
     return entity;
 }
@@ -217,6 +188,33 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode) {
         .addComponent(spriteComponent);
 
     return entity;
+}
+
+EntityFactory.getBasicAttackTowerInfo = function (towerType, towerLevel) {
+    let towerConfig = TowerConfig.getTowerConfigFromJson(towerType, towerLevel);
+    let attackRange = towerConfig.stat.range * GameConfig.TILE_WIDTH;
+    let attackDamage = towerConfig.stat.damage;
+    let attackSpeed = towerConfig.stat.attackSpeed / 1000;
+    let bulletSpeed = towerConfig.stat.bulletSpeed * GameConfig.TILE_WIDTH / 10;
+    let bulletRadius = towerConfig.stat.bulletRadius * GameConfig.TILE_WIDTH;
+    let towerEnergy = towerConfig.energy;
+    let archetype = towerConfig.archetype;
+    let targetType = towerConfig.targetType;
+    let bulletType = towerConfig.bulletType;
+    let bulletTargetBuffType = towerConfig.bulletTargetBuffType;
+
+    return {
+        attackRange: attackRange,
+        attackDamage: attackDamage,
+        attackSpeed: attackSpeed,
+        bulletSpeed: bulletSpeed,
+        bulletRadius: bulletRadius,
+        towerEnergy: towerEnergy,
+        archetype: archetype,
+        targetType: targetType,
+        bulletType: bulletType,
+        bulletTargetBuffType: bulletTargetBuffType
+    }
 }
 
 EntityFactory.onUpdateTowerLevel = function (entityId, towerLevel, tilePos, mode) {
