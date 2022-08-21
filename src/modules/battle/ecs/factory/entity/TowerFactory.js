@@ -39,10 +39,10 @@ EntityFactory.addBasicTowerComponentToEntity = function (entity, basicTowerCompo
         .addComponent(spriteComponent);
 }
 
-EntityFactory.createCannonOwlTower = function (tilePos, mode) {
+EntityFactory.createCannonOwlTower = function (tilePos, mode, entityID) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, entityID);
 
     let spriteAnimationConfig = TowerAnimationConfig.cannon.level.A;
     let effectList = [];
@@ -55,10 +55,10 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode) {
     return entity;
 };
 
-EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
+EntityFactory.createIceGunPolarBearTower = function (tilePos, mode, entityID) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.BEAR_TOWER;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, entityID);
     let initialLevel = 1;
 
     let towerConfig = TowerConfig.getBearIceGunTowerConfigFromJson(initialLevel);
@@ -78,10 +78,10 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode) {
     return entity;
 }
 
-EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
+EntityFactory.createBoomerangFrogTower = function (tilePos, mode, entityID) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.FROG_TOWER;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, entityID);
 
     let spriteAnimationConfig = TowerAnimationConfig.boomerang.level.A;
     let effectList = [];
@@ -94,10 +94,10 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode) {
     return entity;
 }
 
-EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
+EntityFactory.createBunnyOilGunTower = function (tilePos, mode, entityID) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.BUNNY_TOWER;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, entityID);
 
     let towerConfig = TowerConfig.getBunnyOilGunTowerConfigFromJson(1);
     let slowDuration = towerConfig.slowDuration / 1000;
@@ -116,10 +116,10 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode) {
     return entity;
 }
 
-EntityFactory.createWizardTower = function (tilePos, mode) {
+EntityFactory.createWizardTower = function (tilePos, mode, entityID) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.WIZARD_TOWER;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, entityID);
 
     let canTargetAirMonster = false;
     let spriteAnimationConfig = TowerAnimationConfig.wizard.level.A;
@@ -133,10 +133,10 @@ EntityFactory.createWizardTower = function (tilePos, mode) {
     return entity;
 }
 
-EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode) {
+EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode, entityID) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.SNAKE_TOWER;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, entityID);
 
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let towerConfig = TowerConfig.getAttackSpeedSnakeTowerConfigFromJson(1);
@@ -162,10 +162,10 @@ EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode) {
     return entity;
 }
 
-EntityFactory.createGoatDamageTower = function (tilePos, mode) {
+EntityFactory.createGoatDamageTower = function (tilePos, mode, entityID) {
     Utils.validateMode(mode);
     let typeID = GameConfig.ENTITY_ID.GOAT_TOWER;
-    let entity = this._createEntity(typeID, mode);
+    let entity = this._createEntity(typeID, mode, entityID);
 
     let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, mode);
     let towerConfig = TowerConfig.getDamageGoatTowerConfigFromJson(1);
