@@ -13,6 +13,7 @@ let SpellInfoComponent = Component.extend({
         this.effects = effects;
         this.range = range;
         this.delay = delay;
+        this.countdown = this.delay;
 
         this.delayDestroy = this.delay + this.DELAY_DESTROY_TIME;
         if (delayDestroy) {
