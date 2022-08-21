@@ -24,8 +24,14 @@ let SpellSystem = System.extend({
             let spellComponent = spellEntity.getComponent(SpellInfoComponent);
 
             spellComponent.delay = spellComponent.delay - tick;
+            spellComponent.delayDestroy = spellComponent.delayDestroy - tick;
 
-            if (spellComponent.delay <= 0) {
+            if (spellComponent.delayDestroy <= 0) {
+                EntityManager.destroy(spellEntity);
+                continue;
+            }
+
+            if (spellComponent.delay <= 0 && !spellComponent.isTriggered    ) {
                 for (let monsterId in this.getEntityStore()) {
                     let monster = this.getEntityStore()[monsterId];
 
@@ -89,9 +95,11 @@ let SpellSystem = System.extend({
                         }
                     }
                 }
+
+                spellComponent.isTriggered = true;
                 spellEntity.removeComponent(VelocityComponent);
                 spellEntity.removeComponent(PositionComponent);
-                spellEntity.removeComponent(SpellInfoComponent);
+                // spellEntity.removeComponent(SpellInfoComponent);
 
                 if (spellEntity.mode === GameConfig.USER1() && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
                     soundManager.playFireballExplosion();
