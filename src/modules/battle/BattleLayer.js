@@ -178,36 +178,36 @@ let BattleLayer = cc.Layer.extend({
         NodeFactory.createBuildingTowerTimer(tilePos, mode);
     },
 
-    buildTower: function (towerTypeID, tilePos, mode, entityID) {
-        this._createTower(towerTypeID, tilePos, mode, entityID);
+    buildTower: function (towerTypeID, tilePos, mode, entityID, animationLevel) {
+        this._createTower(towerTypeID, tilePos, mode, entityID, animationLevel);
         EventDispatcher.getInstance()
             .dispatchEvent(EventType.PUT_NEW_TOWER, {cardId: towerTypeID, pos: tilePos, mode: mode});
         if (mode === GameConfig.USER1()) soundManager.playPutNewTower();
     },
 
-    _createTower: function (towerId, tilePos, mode, entityID) {
+    _createTower: function (towerId, tilePos, mode, entityID, animationLevel) {
         let tower = null;
         switch (towerId) {
             case GameConfig.ENTITY_ID.CANNON_TOWER:
-                tower = EntityFactory.createCannonOwlTower(tilePos, mode, entityID);
+                tower = EntityFactory.createCannonOwlTower(tilePos, mode, entityID,animationLevel);
                 break;
             case GameConfig.ENTITY_ID.FROG_TOWER:
-                tower = EntityFactory.createBoomerangFrogTower(tilePos, mode, entityID);
+                tower = EntityFactory.createBoomerangFrogTower(tilePos, mode, entityID,animationLevel);
                 break;
             case GameConfig.ENTITY_ID.BEAR_TOWER:
-                tower = EntityFactory.createIceGunPolarBearTower(tilePos, mode, entityID);
+                tower = EntityFactory.createIceGunPolarBearTower(tilePos, mode, entityID, animationLevel);
                 break;
             case GameConfig.ENTITY_ID.BUNNY_TOWER:
-                tower = EntityFactory.createBunnyOilGunTower(tilePos, mode, entityID);
+                tower = EntityFactory.createBunnyOilGunTower(tilePos, mode, entityID, animationLevel);
                 break;
             case GameConfig.ENTITY_ID.WIZARD_TOWER:
-                tower = EntityFactory.createWizardTower(tilePos, mode, entityID);
+                tower = EntityFactory.createWizardTower(tilePos, mode, entityID, animationLevel);
                 break;
             case GameConfig.ENTITY_ID.SNAKE_TOWER:
-                tower = EntityFactory.createSnakeAttackSpeedTower(tilePos, mode, entityID);
+                tower = EntityFactory.createSnakeAttackSpeedTower(tilePos, mode, entityID, animationLevel);
                 break;
             case GameConfig.ENTITY_ID.GOAT_TOWER:
-                tower = EntityFactory.createGoatDamageTower(tilePos, mode, entityID);
+                tower = EntityFactory.createGoatDamageTower(tilePos, mode, entityID, animationLevel);
                 break;
             default:
                 return;
