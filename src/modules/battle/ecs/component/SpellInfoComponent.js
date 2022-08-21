@@ -27,3 +27,4 @@ SpellInfoComponent.unpackData = function (inPacket) {
     let data = Component.unpackData(inPacket);
     return data;
 }
+
