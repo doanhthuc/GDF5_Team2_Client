@@ -36,8 +36,6 @@ const AttackTowerCard = TowerCard.extend({
         let damage = this.getDamageFromJson(level);
         let attackSpeed = this.getAttackSpeedFromJson(level);
         let range = this.getRangeFromJson(level);
-        cc.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbb " + JSON.stringify(range) + "   damage " + JSON.stringify(damage)
-            + "   attackSpeed " + JSON.stringify(attackSpeed) + "   typeof damage " + typeof damage + "   typeof attackSpeed " + typeof attackSpeed)
         return {
             damage: this.calculateCardStatByLevel(damage, level),
             attackSpeed: (this.calculateCardStatByLevel(attackSpeed, level) / 1000).toFixed(2),
