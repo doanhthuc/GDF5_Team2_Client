@@ -12,7 +12,7 @@ const PolarBearCard = MagicTowerCard.extend({
     },
 
     getCardStatByLevel: function (level) {
-        let stat = this._super();
+        let stat = this._super(level);
         let frozenTime = this.getFrozenTimeFromJson(level);
         stat.frozenTime = this.calculateCardStatByLevel(frozenTime, level);
         return stat;
