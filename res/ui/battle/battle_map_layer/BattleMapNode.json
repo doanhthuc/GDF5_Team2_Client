@@ -639,8 +639,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 335.8388,
-              "Y": 256.0807
+              "X": 346.688,
+              "Y": 258.2506
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -656,10 +656,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 263.3388,
-            "RightMargin": -408.3388,
-            "TopMargin": -341.0807,
-            "BottomMargin": 171.0807,
+            "LeftMargin": 274.188,
+            "RightMargin": -419.188,
+            "TopMargin": -343.2506,
+            "BottomMargin": 173.2506,
             "Tag": 1413,
             "ActionTag": 1581774475,
             "Size": {
@@ -729,8 +729,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": -42.048,
-              "Y": -481.4996
+              "X": -23.1813,
+              "Y": -509.7982
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -746,10 +746,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -114.548,
-            "RightMargin": -30.452,
-            "TopMargin": 396.4996,
-            "BottomMargin": -566.4996,
+            "LeftMargin": -95.6813,
+            "RightMargin": -49.3187,
+            "TopMargin": 424.7982,
+            "BottomMargin": -594.7982,
             "Tag": 1415,
             "ActionTag": 1518811973,
             "Size": {
@@ -909,8 +909,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 347.6151,
-              "Y": 155.2483
+              "X": 356.2945,
+              "Y": 153.0783
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -926,10 +926,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 275.1151,
-            "RightMargin": -420.1151,
-            "TopMargin": -240.2483,
-            "BottomMargin": 70.2483,
+            "LeftMargin": 283.7945,
+            "RightMargin": -428.7945,
+            "TopMargin": -238.0783,
+            "BottomMargin": 68.0783,
             "Tag": 1419,
             "ActionTag": -1994844701,
             "Size": {
@@ -954,8 +954,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 138.4341,
-              "Y": 516.6014
+              "X": 140.6036,
+              "Y": 540.4705
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -971,10 +971,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 65.9341,
-            "RightMargin": -210.9341,
-            "TopMargin": -601.6014,
-            "BottomMargin": 431.6014,
+            "LeftMargin": 68.1036,
+            "RightMargin": -213.1036,
+            "TopMargin": -625.4705,
+            "BottomMargin": 455.4705,
             "Tag": 1420,
             "ActionTag": -2037651391,
             "Size": {
@@ -1179,8 +1179,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": -14.6841,
-              "Y": 486.8821
+              "X": 319.4841,
+              "Y": 455.4159
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -1196,10 +1196,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -61.1841,
-            "RightMargin": -31.8159,
-            "TopMargin": -538.3821,
-            "BottomMargin": 435.3821,
+            "LeftMargin": 272.9841,
+            "RightMargin": -365.9841,
+            "TopMargin": -506.9159,
+            "BottomMargin": 403.9159,
             "Tag": 1425,
             "ActionTag": 1332458009,
             "Size": {
