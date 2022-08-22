@@ -36,17 +36,17 @@ EntityFactory.createCannonOwlTower = function (tilePos, mode, entityID, animatio
     let typeID = GameConfig.ENTITY_ID.CANNON_TOWER;
     let entity = this._createEntity(typeID, mode, entityID);
     let spriteAnimationConfig = TowerAnimationConfig.cannon.level.A;
-    switch (animationLevel) {
-        case 1:
-            spriteAnimationConfig = TowerAnimationConfig.cannon.level.A;
-            break;
-        case 2:
-            spriteAnimationConfig = TowerAnimationConfig.cannon.level.B;
-            break;
-        case 3:
-            spriteAnimationConfig = TowerAnimationConfig.cannon.level.C;
-            break;
-    }
+    // switch (animationLevel) {
+    //     case 1:
+    //         spriteAnimationConfig = TowerAnimationConfig.cannon.level.A;
+    //         break;
+    //     case 2:
+    //         spriteAnimationConfig = TowerAnimationConfig.cannon.level.B;
+    //         break;
+    //     case 3:
+    //         spriteAnimationConfig = TowerAnimationConfig.cannon.level.C;
+    //         break;
+    // }
     let effectList = [];
     let initialLevel = 1;
 
@@ -71,17 +71,17 @@ EntityFactory.createIceGunPolarBearTower = function (tilePos, mode, entityID, an
     let canTargetAirMonster = false;
 
     let spriteAnimationConfig = TowerAnimationConfig.bear.level.A;
-    switch (animationLevel) {
-        case 1:
-            spriteAnimationConfig = TowerAnimationConfig.bear.level.A;
-            break;
-        case 2:
-            spriteAnimationConfig = TowerAnimationConfig.bear.level.B;
-            break;
-        case 3:
-            spriteAnimationConfig = TowerAnimationConfig.bear.level.C;
-            break;
-    }
+    // switch (animationLevel) {
+    //     case 1:
+    //         spriteAnimationConfig = TowerAnimationConfig.bear.level.A;
+    //         break;
+    //     case 2:
+    //         spriteAnimationConfig = TowerAnimationConfig.bear.level.B;
+    //         break;
+    //     case 3:
+    //         spriteAnimationConfig = TowerAnimationConfig.bear.level.C;
+    //         break;
+    // }
     let effectList = [frozenEffect];
 
     let basicTowerComponent = this.createAttackTowerBasicComponent(typeID, initialLevel, tilePos, mode, effectList, spriteAnimationConfig, canTargetAirMonster);
@@ -97,17 +97,17 @@ EntityFactory.createBoomerangFrogTower = function (tilePos, mode, entityID, anim
     let entity = this._createEntity(typeID, mode, entityID);
 
     let spriteAnimationConfig = TowerAnimationConfig.boomerang.level.A;
-    switch (animationLevel) {
-        case 1:
-            spriteAnimationConfig = TowerAnimationConfig.boomerang.level.A;
-            break;
-        case 2:
-            spriteAnimationConfig = TowerAnimationConfig.boomerang.level.B;
-            break;
-        case 3:
-            spriteAnimationConfig = TowerAnimationConfig.boomerang.level.C;
-            break;
-    }
+    // switch (animationLevel) {
+    //     case 1:
+    //         spriteAnimationConfig = TowerAnimationConfig.boomerang.level.A;
+    //         break;
+    //     case 2:
+    //         spriteAnimationConfig = TowerAnimationConfig.boomerang.level.B;
+    //         break;
+    //     case 3:
+    //         spriteAnimationConfig = TowerAnimationConfig.boomerang.level.C;
+    //         break;
+    // }
     let effectList = [];
     let initialLevel = 1;
 
@@ -130,17 +130,17 @@ EntityFactory.createBunnyOilGunTower = function (tilePos, mode, entityID, animat
     let slowEffect = ComponentFactory.create(SlowEffect, slowDuration, slowValue);
 
     let spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.A;
-    switch (animationLevel) {
-        case 1:
-            spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.A;
-            break;
-        case 2:
-            spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.B;
-            break;
-        case 3:
-            spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.C;
-            break;
-    }
+    // switch (animationLevel) {
+    //     case 1:
+    //         spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.A;
+    //         break;
+    //     case 2:
+    //         spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.B;
+    //         break;
+    //     case 3:
+    //         spriteAnimationConfig = TowerAnimationConfig.bunnyOil.level.C;
+    //         break;
+    // }
     let effectList = [slowEffect];
     let initialLevel = 1;
 
@@ -158,17 +158,17 @@ EntityFactory.createWizardTower = function (tilePos, mode, entityID, animationLe
 
     let canTargetAirMonster = false;
     let spriteAnimationConfig = TowerAnimationConfig.wizard.level.A;
-    switch (animationLevel) {
-        case 1:
-            spriteAnimationConfig = TowerAnimationConfig.wizard.level.A;
-            break;
-        case 2:
-            spriteAnimationConfig = TowerAnimationConfig.wizard.level.B;
-            break;
-        case 3:
-            spriteAnimationConfig = TowerAnimationConfig.wizard.level.C;
-            break;
-    }
+    // switch (animationLevel) {
+    //     case 1:
+    //         spriteAnimationConfig = TowerAnimationConfig.wizard.level.A;
+    //         break;
+    //     case 2:
+    //         spriteAnimationConfig = TowerAnimationConfig.wizard.level.B;
+    //         break;
+    //     case 3:
+    //         spriteAnimationConfig = TowerAnimationConfig.wizard.level.C;
+    //         break;
+    // }
     let effectList = [];
     let initialLevel = 1;
 
@@ -192,17 +192,17 @@ EntityFactory.createSnakeAttackSpeedTower = function (tilePos, mode, entityID, a
     let node = NodeFactory.createSnakeAttackSpeedNodeAnimation(buffRange, mode);
 
     let spriteAnimationConfig = TowerAnimationConfig.snake.level.A;
-    switch (animationLevel) {
-        case 1:
-            spriteAnimationConfig = TowerAnimationConfig.snake.level.A;
-            break;
-        case 2:
-            spriteAnimationConfig = TowerAnimationConfig.snake.level.B;
-            break;
-        case 3:
-            spriteAnimationConfig = TowerAnimationConfig.snake.level.C;
-            break;
-    }
+    // switch (animationLevel) {
+    //     case 1:
+    //         spriteAnimationConfig = TowerAnimationConfig.snake.level.A;
+    //         break;
+    //     case 2:
+    //         spriteAnimationConfig = TowerAnimationConfig.snake.level.B;
+    //         break;
+    //     case 3:
+    //         spriteAnimationConfig = TowerAnimationConfig.snake.level.C;
+    //         break;
+    // }
 
     let infoComponent = ComponentFactory.create(TowerInfoComponent, towerEnergy, "", "support", "aura", "");
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y);
@@ -239,17 +239,17 @@ EntityFactory.createGoatDamageTower = function (tilePos, mode, entityID, animati
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode);
 
     let spriteAnimationConfig = TowerAnimationConfig.goat.level.A;
-    switch (animationLevel) {
-        case 1:
-            spriteAnimationConfig = TowerAnimationConfig.goat.level.A;
-            break;
-        case 2:
-            spriteAnimationConfig = TowerAnimationConfig.goat.level.B;
-            break;
-        case 3:
-            spriteAnimationConfig = TowerAnimationConfig.goat.level.C;
-            break;
-    }
+    // switch (animationLevel) {
+    //     case 1:
+    //         spriteAnimationConfig = TowerAnimationConfig.goat.level.A;
+    //         break;
+    //     case 2:
+    //         spriteAnimationConfig = TowerAnimationConfig.goat.level.B;
+    //         break;
+    //     case 3:
+    //         spriteAnimationConfig = TowerAnimationConfig.goat.level.C;
+    //         break;
+    // }
 
     let spriteComponent = ComponentFactory.create(SpriteSheetAnimationComponent, spriteAnimationConfig);
 

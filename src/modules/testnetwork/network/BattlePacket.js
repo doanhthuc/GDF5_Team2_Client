@@ -649,9 +649,14 @@ BattleNetwork.packetMap[gv.CMD.SNAPSHOT] = fr.InPacket.extend({
             let temp = this.playerEnergyHouse;
             this.playerEnergyHouse = this.opponentEnergyHouse;
             this.opponentEnergyHouse = temp;
+
             temp = this.playerMonsterEntityID;
             this.playerMonsterEntityID = this.opponentMonsterEntityID;
             this.opponentMonsterEntityID = temp;
+
+            temp = this.playerTowerEntityID;
+            this.playerTowerEntityID = this.opponentTowerEntityID;
+            this.opponentTowerEntityID = temp;
         }
 
         // map object

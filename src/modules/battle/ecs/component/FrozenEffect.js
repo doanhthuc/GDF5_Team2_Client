@@ -18,7 +18,7 @@ let FrozenEffect = EffectComponent.extend({
 
     readData: function (data) {
         this._super(data);
-        this.duration = data.duration;
+        this._duration = data.duration;
         this.countdown = data.countdown;
     }
 });
