@@ -61,6 +61,16 @@ EntityManager.destroy = function (entity) {
         ComponentManager.getInstance().remove(appearanceComponent);
     }
 
+    let skeletonAnimComponent = entity.getComponent(SkeletonAnimationComponent);
+    if (skeletonAnimComponent) {
+        let spine = skeletonAnimComponent.spine;
+        if (spine) {
+            spine.setVisible(false);
+            spine.removeFromParent();
+            cc.error("Remove skeleton animation ....")
+        }
+    }
+
     for (let key of Object.keys(entity.components)) {
         ComponentManager.getInstance().remove(entity.components[key]);
         entity.removeComponent(entity.components[key]);
