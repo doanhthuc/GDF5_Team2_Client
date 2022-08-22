@@ -11,18 +11,18 @@ let BattleMapLayer = cc.Layer.extend({
 
         // river
         // FIXME: hardcode
-        let riverSpine = new sp.SkeletonAnimation("res/textures/map/fx/ho_nuoc.json", "res/textures/map/fx/ho_nuoc.atlas");
+        let riverSpine = new sp.SkeletonAnimation(BattleResource.BATTLE_LAKE_JSON, BattleResource.BATTLE_LAKE_ATLAS);
         riverSpine.setAnimation(0, "animation", true);
         riverSpine.setAnchorPoint(cc.p(0.5, 0.5));
         riverSpine.setPosition(0, -64);
         rootNode.addChild(riverSpine, 0);
 
         // light
-        let lightSpinePlayer = new sp.SkeletonAnimation("res/textures/map/fx/as_duoi.json", "res/textures/map/fx/as_duoi.atlas");
+        let lightSpinePlayer = new sp.SkeletonAnimation(BattleResource.BATTLE_LIGHT_BELOW_JSON, BattleResource.BATTLE_LIGHT_BELOW_ATLAS);
         lightSpinePlayer.setAnimation(0, "animation", true);
         rootNode.addChild(lightSpinePlayer, 1);
 
-        let lightSpineOpponent = new sp.SkeletonAnimation("res/textures/map/fx/as_tren.json", "res/textures/map/fx/as_tren.atlas")
+        let lightSpineOpponent = new sp.SkeletonAnimation(BattleResource.BATTLE_LIGHT_ABOVE_JSON, BattleResource.BATTLE_LIGHT_ABOVE_ATLAS)
         lightSpineOpponent.setAnimation(0, "animation", true);
         rootNode.addChild(lightSpineOpponent, 1);
 
@@ -120,7 +120,7 @@ let BattleMapLayer = cc.Layer.extend({
 
             let sp = this._spriteContainerInActive.pop();
             if (!sp) {
-                sp = new cc.Sprite("res/textures/battle/UI/ui_icon_arrow.png");
+                sp = new cc.Sprite(BattleResource.ARROW_PATH_ICON_IMG);
                 sp.retain();
                 this.mapNode[GameConfig.USER1()].addChild(sp, 0);
             } else {
@@ -169,7 +169,7 @@ let BattleMapLayer = cc.Layer.extend({
 
             let sp = this._spriteContainerInActive.pop();
             if (!sp) {
-                sp = new cc.Sprite("res/textures/battle/UI/ui_icon_arrow.png");
+                sp = new cc.Sprite(BattleResource.ARROW_PATH_ICON_IMG);
                 sp.retain();
                 this.mapNode[GameConfig.USER1()].addChild(sp, 0);
             } else {
