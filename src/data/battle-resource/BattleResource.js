@@ -59,4 +59,15 @@ const BattleResource = {
     TRAP_IMG: "textures/potion/fx_trap/image0000.png",
 
     PLUS_ENERGY_ICON: "ui/battle/battle_ui_layer/energy/PlusEnergyIcon.json",
+
+    // Battle Screen Skeleton resources
+    BATTLE_LAKE_ATLAS: "res/textures/map/fx/ho_nuoc.atlas",
+    BATTLE_LAKE_JSON: "res/textures/map/fx/ho_nuoc.json",
+    BATTLE_LIGHT_BELOW_ATLAS: "res/textures/map/fx/as_duoi.atlas",
+    BATTLE_LIGHT_BELOW_JSON: "res/textures/map/fx/as_duoi.json",
+    BATTLE_LIGHT_ABOVE_ATLAS: "res/textures/map/fx/as_tren.atlas",
+    BATTLE_LIGHT_ABOVE_JSON: "res/textures/map/fx/as_tren.json",
+
+    // Arrow Path images
+    ARROW_PATH_ICON_IMG: "res/textures/battle/UI/ui_icon_arrow.png",
 }
