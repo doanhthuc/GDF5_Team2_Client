@@ -28,6 +28,7 @@ let LifeSystem = System.extend({
                 if (pos && monsterInfo) {
                     BattleAnimation.animationPlusEnergy(pos, monsterInfo.gainEnergy, entity.mode);
                     let deckEnergyProgress = BattleManager.getInstance().getCardDeckNode().deckEnergyProgress;
+                    if (entity.mode === GameConfig.USER1())
                     deckEnergyProgress.plusEnergy(monsterInfo.gainEnergy);
                 }
 

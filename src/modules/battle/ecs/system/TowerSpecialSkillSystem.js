@@ -77,15 +77,15 @@ let TowerSpecialSkillSystem = System.extend({
 
             for (let i = 0; i < this.direction.length - 1; i++) {
                 let tile = battleMapObject.getTileObject(tilePos.x + this.direction[i], tilePos.y + this.direction[i + 1]);
-                if (tile === null) continue;
+                if (!tile) continue;
 
                 let towerInTileObject = tile.getTower();
-                if (towerInTileObject === null) continue;
+                if (!towerInTileObject) continue;
 
                 let towerEntity = EntityManager.getInstance().getEntity(towerInTileObject.getEntityId());
                 let attackComponent = towerEntity.getComponent(AttackComponent);
 
-                if (attackComponent === null) continue;
+                if (!attackComponent) continue;
 
                 let effectTypeId = towerAbilityComponent.effect.typeID;
                 if (effectTypeId === BuffAttackDamageEffect.typeID) {
