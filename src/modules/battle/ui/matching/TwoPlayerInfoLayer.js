@@ -13,20 +13,20 @@ let TwoPlayerInfoLayer = cc.Layer.extend({
         });
         this.addChild(this.rootNode);
 
-        this.setAvatar(playerAvatar, GameConfig.PLAYER);
-        this.setAvatar(opponentAvatar, GameConfig.OPPONENT);
-        this.setUsername(playerName, GameConfig.PLAYER);
-        this.setUsername(opponentName, GameConfig.OPPONENT);
+        this.setAvatar(playerAvatar, GameConfig.USER1());
+        this.setAvatar(opponentAvatar, GameConfig.USER2());
+        this.setUsername(playerName, GameConfig.USER1());
+        this.setUsername(opponentName, GameConfig.USER2());
         soundManager.stopThemeLobby();
     },
 
     setAvatar: function (avatarPath, type) {
         let avatarNode = null;
         switch (type) {
-            case GameConfig.PLAYER:
+            case GameConfig.USER1():
                 avatarNode = this.rootNode.getChildByName("player_avatar");
                 break;
-            case GameConfig.OPPONENT:
+            case GameConfig.USER2():
                 avatarNode = this.rootNode.getChildByName("opponent_avatar");
                 break;
             default:
@@ -38,10 +38,10 @@ let TwoPlayerInfoLayer = cc.Layer.extend({
     setUsername: function (username, type) {
         let usernameNode = null;
         switch (type) {
-            case GameConfig.PLAYER:
+            case GameConfig.USER1():
                 usernameNode = this.rootNode.getChildByName("player_name");
                 break;
-            case GameConfig.OPPONENT:
+            case GameConfig.USER2():
                 usernameNode = this.rootNode.getChildByName("opponent_name");
                 break;
             default:

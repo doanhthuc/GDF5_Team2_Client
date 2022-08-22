@@ -15,9 +15,12 @@ let ComponentManager = ManagerECS.extend({
     },
 
     getClass: function (typeID) {
-        if (this._storeCls.has(typeID)) {
+        if (!this._storeCls.has(typeID)) {
+            cc.error("all class")
+            cc.log(JSON.stringify(this._storeCls));
             throw new Error("Component Class with typeID = " + typeID + " doesn't exist");
         }
+        return this._storeCls.get(typeID);
     },
 
     add: function (component, override=false) {
@@ -41,17 +44,21 @@ let ComponentManager = ManagerECS.extend({
 });
 
 let _instanceBuilder = (function () {
+    let _storeClassCache = null;
     let _instance = null;
     return {
         getInstance: function () {
             if (_instance === null) {
                 _instance = new ComponentManager();
+                if (_storeClassCache) {
+                    _instance._storeCls = _storeClassCache;
+                }
             }
             return _instance;
         },
         resetInstance: function () {
             _instance._storeInstance = null;
-            _instance._storeCls = null;
+            _storeClassCache = _instance._storeCls;
             _instance = null;
         }
     }

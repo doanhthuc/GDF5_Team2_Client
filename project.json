@@ -194,6 +194,7 @@
         "src/modules/battle/ecs/config/MonsterConfig.js",
         "src/modules/battle/ecs/config/ReadConfigUtils.js",
         "src/modules/battle/ecs/config/TowerConfig.js",
+        "src/modules/battle/ecs/config/SpellConfig.js",
         "src/modules/battle/ecs/entity/Entity.js",
         "src/modules/battle/ecs/factory/entity/BossFactory.js",
         "src/modules/battle/ecs/factory/entity/BulletFactory.js",

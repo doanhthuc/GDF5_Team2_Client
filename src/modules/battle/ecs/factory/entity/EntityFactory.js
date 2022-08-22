@@ -2,20 +2,20 @@ let EntityFactory = cc.Class.extend({});
 
 EntityFactory.pool = new EntityPool()
 
-EntityFactory._createEntity = function (typeID, mode) {
+EntityFactory._createEntity = function (typeID, mode, entityId) {
     Utils.validateMode(mode);
     // TODO: create pool object for each type bullet
     // let entity = this.pool.getInActiveEntity(typeID);
     let entity = null;
     if (entity === null) {
-        entity = new EntityECS(typeID, mode);
+        entity = new EntityECS(typeID, mode, entityId);
         // this.pool.push(entity);
         EntityManager.getInstance().addEntity(entity);
     }
     return entity;
 }
 
-EntityFactory.createBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster) {
+EntityFactory.createBullet = function (towerType, startPosition, targetEntity, staticPosition, effects, mode, bulletSpeed, bulletRadius, canTargetAirMonster , entityId) {
     Utils.validateMode(mode);
     switch (towerType) {
         case GameConfig.ENTITY_ID.CANNON_TOWER:
@@ -57,7 +57,7 @@ EntityFactory.createTree = function (tilePos, mode) {
     hpBarNode.setPosition(cc.p(0, 50));
 
     let zOrder = 1;
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         zOrder = GameConfig.MAP_HEIGH - tilePos.y;
     } else {
         zOrder = tilePos.y;
@@ -67,7 +67,7 @@ EntityFactory.createTree = function (tilePos, mode) {
     node.addChild(sp, zOrder, "tree");
     node.addChild(hpBarNode, zOrder, "hp");
 
-    if (mode === GameConfig.PLAYER)
+    if (mode === GameConfig.USER1())
         node.setName("PlayerTree");
     else node.setName("OpponentTree");
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos, zOrder);
@@ -90,7 +90,7 @@ EntityFactory.createHole = function (tilePos, mode) {
     let node = new cc.Node();
     let sp = new cc.Sprite(BattleResource.HOLE_IMG);
     node.addChild(sp, 1, "hole");
-    if (mode === GameConfig.PLAYER)
+    if (mode === GameConfig.USER1())
         node.setName("PlayerHole");
     else node.setName("OpponentHole");
     let appearanceComponent = ComponentFactory.create(AppearanceComponent, node, mode, pixelPos);

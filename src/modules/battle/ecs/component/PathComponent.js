@@ -8,7 +8,7 @@ let PathComponent = Component.extend({
     },
 
     reset: function (pathTile, mode, isConvert = true) {
-        if (isConvert === true) {
+        if (pathTile && isConvert === true) {
             let pathTile2 = Utils.tileArray2PixelCellArray(pathTile, mode);
             this.path = pathTile2;
         } else {
@@ -21,6 +21,34 @@ let PathComponent = Component.extend({
     clone: function () {
         return ComponentFactory.create(PathComponent, this.path, this.mode, false);
     },
+
+    readData: function (data) {
+        this._super(data);
+        this.mode = data.mode;
+        this.path = data.path;
+        this.currentPathIdx = data.currentPathIdx;
+    },
 });
 PathComponent.typeID = GameConfig.COMPONENT_ID.PATH;
 ComponentManager.getInstance().registerClass(PathComponent);
+
+PathComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+
+    data.mode = Utils.convertShortToMode(inPacket.getShort());
+    data.currentPathIdx = inPacket.getInt();
+
+    let pathSize = inPacket.getInt();
+    let path = [];
+    for (let i = 1; i <= pathSize; i++) {
+        if (GameConfig.USER1() === "opponent") {
+            path.push(cc.p((-1) * inPacket.getDouble(), (-1) * inPacket.getDouble()));
+
+        } else {
+            path.push(cc.p(inPacket.getDouble(), inPacket.getDouble()));
+        }
+    }
+    data.path = path;
+
+    return data;
+}

@@ -75,6 +75,22 @@ ValidatorECS.isTrap = function (entityOrTypeID) {
     return GameConfig.ENTITY_ID.TRAP_SPELL === type;
 }
 
+ValidatorECS.isObstacle = function (entityOrTypeID) {
+    let type;
+    if (typeof entityOrTypeID === "number") {
+        type = entityOrTypeID;
+    } else {
+        type = entityOrTypeID.typeID;
+    }
+
+    for (let typeID of GameConfig.GROUP_ID.OBSTACLE_ENTITY) {
+        if (typeID === type) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /**
  *
  * @param type

@@ -63,7 +63,7 @@ const CardDeckNode2 = cc.Node.extend({
     },
 
     handleInvalidPutCardPosition: function (data) {
-        if (data.mode !== GameConfig.PLAYER) {
+        if (data.mode !== GameConfig.USER1()) {
             return;
         }
         let cardId = data.cardId;
@@ -88,7 +88,7 @@ const CardDeckNode2 = cc.Node.extend({
     },
 
     handlePutCardIntoMap: function (data) {
-        if (data.mode === GameConfig.PLAYER) {
+        if (data.mode === GameConfig.USER1()) {
             this.isCardPuttedIntoMap = true;
             // cc.log("[CardDeckNode2] handlePutCardIntoMap event ==============:  " + data.cardId);
             this.onCardPutIntoMap(data.cardId);
@@ -168,12 +168,12 @@ const CardDeckNode2 = cc.Node.extend({
         this.isDragging = true;
         let selectedCard = event.getCurrentTarget();
         let touchPos = touch.getLocation();
-        touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.PLAYER);
+        touchPos = Utils.convertWorldSpace2MapNodeSpace(touchPos, GameConfig.USER1());
         let cardType = selectedCard.type;
 
         if (ValidatorECS.isSpell(cardType)) {
-            if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
-                this._createOrGetSprite(selectedCard, cardType, GameConfig.PLAYER);
+            if (Utils.isPixelPositionInMap(touchPos, GameConfig.USER1())) {
+                this._createOrGetSprite(selectedCard, cardType, GameConfig.USER1());
                 this.spriteDragManager[cardType].setVisible(true);
                 this.spriteDragManager[cardType].setPosition(touchPos);
             } else {
@@ -183,13 +183,13 @@ const CardDeckNode2 = cc.Node.extend({
             }
         } else if (ValidatorECS.isTower(selectedCard.type) || ValidatorECS.isTrap(selectedCard.type)) {
             if (ValidatorECS.isTower(selectedCard.type)) {
-                let tilePos = Utils.pixel2Tile(touchPos.x, touchPos.y, GameConfig.PLAYER);
+                let tilePos = Utils.pixel2Tile(touchPos.x, touchPos.y, GameConfig.USER1());
                 BattleManager.getInstance().getBattleLayer().mapLayer.showMonsterPathWhenDragCard(tilePos);
             }
-            if (Utils.isPixelPositionInMap(touchPos, GameConfig.PLAYER)) {
-                this._createOrGetSprite(selectedCard, cardType, GameConfig.PLAYER);
-                let tilePos = Utils.pixel2Tile(touchPos.x, touchPos.y, GameConfig.PLAYER);
-                let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.PLAYER);
+            if (Utils.isPixelPositionInMap(touchPos, GameConfig.USER1())) {
+                this._createOrGetSprite(selectedCard, cardType, GameConfig.USER1());
+                let tilePos = Utils.pixel2Tile(touchPos.x, touchPos.y, GameConfig.USER1());
+                let pixelPos = Utils.tile2Pixel(tilePos.x, tilePos.y, GameConfig.USER1());
                 this.spriteDragManager[cardType].setVisible(true);
                 this.spriteDragManager[cardType].setPosition(pixelPos);
             } else {
@@ -219,8 +219,8 @@ const CardDeckNode2 = cc.Node.extend({
         const battleLayer = BattleManager.getInstance().getBattleLayer();
         Utils.validateMode(mode);
         if (!this.spriteDragManager[cardType]) {
-
-            let mapNode = mode === GameConfig.PLAYER ? battleLayer.getPlayerMapNode()
+            // FIXME: hardcode sprite, use map to cache
+            let mapNode = mode === GameConfig.USER1() ? battleLayer.getPlayerMapNode()
                 : battleLayer.getOpponentMapNode();
             if (ValidatorECS.isSpell(selectedCard.type)) {
                 let sp = new cc.Sprite(BattleResource.POTION_RANGE_IMG);
@@ -288,7 +288,7 @@ const CardDeckNode2 = cc.Node.extend({
 
     validateEnoughEnergySelectCard: function (cardType) {
         let cardEnergy = CARD_CONST[cardType].energy;
-        let playerEnergy = BattleManager.getInstance().getBattleData().getCurrentEnergy(GameConfig.PLAYER);
+        let playerEnergy = BattleManager.getInstance().getBattleData().getCurrentEnergy(GameConfig.USER1());
         return playerEnergy >= cardEnergy;
     },
 
@@ -297,7 +297,7 @@ const CardDeckNode2 = cc.Node.extend({
             this.removeDragSprite(this.selectedCardType);
             let cardSlotNode = this.cardSlotNodeList.find(card => card.type === this.selectedCardType);
             if (cardSlotNode) {
-                if (BattleManager.getInstance().getBattleData().getCurrentEnergy(GameConfig.PLAYER) < 5) {
+                if (BattleManager.getInstance().getBattleData().getCurrentEnergy(GameConfig.USER1()) < 5) {
                     BattleManager.getInstance().getBattleLayer().uiLayer.notify("Không đủ năng lượng");
                     this._moveCardDown(cardSlotNode);
                     this.setSelectedCardType(null, null);

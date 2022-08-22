@@ -17,3 +17,8 @@ let WizardBulletSkillComponent = Component.extend({
 });
 WizardBulletSkillComponent.typeID = GameConfig.COMPONENT_ID.WIZARD_BULLET_SKILL;
 ComponentManager.getInstance().registerClass(WizardBulletSkillComponent);
+
+WizardBulletSkillComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
+}

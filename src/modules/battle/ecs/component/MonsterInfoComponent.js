@@ -29,3 +29,8 @@ let MonsterInfoComponent = InfoComponent.extend({
 });
 MonsterInfoComponent.typeID = GameConfig.COMPONENT_ID.MONSTER_INFO;
 ComponentManager.getInstance().registerClass(MonsterInfoComponent);
+
+MonsterInfoComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
+}

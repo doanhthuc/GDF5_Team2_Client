@@ -2,10 +2,14 @@ let EntityECS = cc.Class.extend({
     typeID: 0,
     name: "EntityECS",
 
-    ctor: function (typeID, mode) {
+    ctor: function (typeID, mode, id) {
         this.typeID = typeID;
         this.components = {};
-        this.id = UUIDGeneratorECS.genEntityID();
+        if (id) {
+            this.id = id;
+        } else {
+            this.id = UUIDGeneratorECS.genEntityID(mode, typeID);
+        }
         this._active = true;
 
         this.mode = mode;
@@ -18,7 +22,7 @@ let EntityECS = cc.Class.extend({
         }
         component.setActive(true);
         this.components[component.typeID] = component;
-        ComponentManager.getInstance().add(component);
+        // ComponentManager.getInstance().add(component);
         this.bitmask[component.typeID] = 1;
         SystemManager.getInstance().addEntityIntoSystem(this, component);
         return this;
@@ -28,21 +32,35 @@ let EntityECS = cc.Class.extend({
         let component = this.components[componentOrCls.typeID];
         if (component) {
             SystemManager.getInstance().removeEntityFromSystem(this, componentOrCls);
-            ComponentManager.getInstance().remove(component);
+            // ComponentManager.getInstance().remove(component);
             delete this.components[componentOrCls.typeID];
             this.bitmask[component.typeID] = 0;
         }
     },
 
-    getComponent: function (ComponentCls) {
-        if (ComponentCls.typeID == null) {
+    getComponent: function (ComponentClsOrTypeID) {
+        let typeID;
+        if (typeof ComponentClsOrTypeID === "number") {
+            typeID = ComponentClsOrTypeID;
+        } else {
+            typeID = ComponentClsOrTypeID.typeID;
+        }
+
+        if (typeID == null) {
             throw new Error("Class doesn't have typeID property");
         }
-        return this.components[ComponentCls.typeID];
+        return this.components[typeID];
     },
 
-    _hasComponent: function (ComponentCls) {
-        return this.bitmask[ComponentCls.typeID] === 1;
+    _hasComponent: function (ComponentClsOrTypeID) {
+        let typeID;
+        if (typeof ComponentClsOrTypeID === "number") {
+            typeID = ComponentClsOrTypeID;
+        } else {
+            typeID = ComponentClsOrTypeID.typeID;
+        }
+
+        return this.bitmask[typeID] === 1;
     },
 
     hasAllComponent: function (...ComponentClss) {
@@ -74,9 +92,36 @@ let EntityECS = cc.Class.extend({
         return this._active;
     },
 
-    _isComponent: function (component) {
-        if (!(component instanceof Component)) {
-            throw new Error("component must be an instance of Component");
-        }
+    setComponentStore: function (componentStore) {
+        this.components = componentStore;
+    },
+
+    getComponentStore: function () {
+        return this.components;
     }
 });
+
+EntityECS.unpackData = function (inPacket) {
+    let data = {};
+    data.typeID = inPacket.getInt();
+    data.id = inPacket.getLong();
+    data._active = Utils.convertShortToBoolean(inPacket.getShort());
+    data.mode = Utils.convertShortToMode(inPacket.getShort());
+    Utils.validateMode(data.mode);
+
+    data.components = {};
+
+    let componentSize = inPacket.getInt();
+
+    for (let j = 1; j <= componentSize; j++) {
+        let componentTypeID = inPacket.getInt();
+
+        let ComponentCls = ComponentManager.getInstance().getClass(componentTypeID);
+        let component = ComponentCls.unpackData(inPacket);
+        component.typeID = componentTypeID;
+
+        data.components[component.typeID] = component;
+    }
+
+    return data;
+}

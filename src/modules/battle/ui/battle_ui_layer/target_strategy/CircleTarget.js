@@ -93,7 +93,7 @@ let CircleTarget = cc.Node.extend({
         this.destroy();
     },
 
-    _findTowerEntityIdByTilePos: function (tilePos, mode = GameConfig.PLAYER) {
+    _findTowerEntityIdByTilePos: function (tilePos, mode = GameConfig.USER1()) {
         let battleData = BattleManager.getInstance().getBattleData();
         let mapObject = battleData.getMapObject(mode);
         let tower = mapObject.getTowerInTile(tilePos);

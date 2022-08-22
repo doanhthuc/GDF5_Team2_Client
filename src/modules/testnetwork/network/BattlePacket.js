@@ -23,6 +23,7 @@ gv.CMD.SEND_CHECK_SUM = 5020;
 gv.CMD.BORN_MONSTER = 5021;
 gv.CMD.NEXT_WAVE = 5022;
 gv.CMD.SPEEDUP_NEXT_WAVE = 5023;
+gv.CMD.SNAPSHOT = 5025;
 
 BattleNetwork = BattleNetwork || {};
 
@@ -138,24 +139,6 @@ CMDDestroyTower = fr.OutPacket.extend({
     }
 })
 
-CMDSendCheckSum = fr.OutPacket.extend({
-    ctor: function () {
-        this._super();
-        this.initData(100);
-        this.setCmdId(gv.CMD.SEND_CHECK_SUM);
-    },
-
-    pack: function (checksum, serverEndBattleTick) {
-        this.packHeader();
-        this.putInt(BattleManager.getInstance().getBattleData().getRoomId());
-        this.putInt(checksum.length)
-        for (let i = 0; i < Math.min(serverEndBattleTick, checksum.length); i++) {
-            this.putDouble(checksum[i])
-        }
-        this.updateSize();
-    }
-})
-
 CMDSendSpeedUpNextWave = fr.OutPacket.extend({
     ctor: function () {
         this._super();
@@ -195,6 +178,7 @@ BattleNetwork.packetMap[gv.CMD.SEND_MATCHING] = fr.InPacket.extend({
     readData: function () {
         this.error = this.getShort();
         this.roomId = this.getInt();
+        this.entityMode = Utils.convertShortToMode(this.getShort());
         let result = this._unpackMap();
         this.playerMap = result.map;
         this.playerLongestPath = result.path;
@@ -355,58 +339,9 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_MAP_OBJECT] = fr.InPacket.extend({
     },
 
     readData: function () {
-        this.playerBattleMapObject = this._unpackMapObject();
-        this.opponentBattleMapObject = this._unpackMapObject();
+        this.playerBattleMapObject = BattleMapObject.unpackData(this);
+        this.opponentBattleMapObject = BattleMapObject.unpackData(this);
     },
-
-    _unpackMapObject: function () {
-        let mapHeight = this.getInt();
-        let mapWidth = this.getInt();
-        let battleMapObject = new BattleMapObject(mapHeight, mapWidth);
-        let battleMap = battleMapObject.getBattleMap();
-        for (let i = 0; i < mapHeight; i++) {
-            for (let j = 0; j < mapWidth; j++) {
-                battleMap[i][j] = this._unpackTileObject();
-            }
-        }
-        cc.log("battleMapObject: " + JSON.stringify(battleMapObject));
-        return battleMapObject;
-    },
-
-    _unpackTileObject: function () {
-        let tilePos = {
-            x: this.getInt(),
-            y: this.getInt()
-        };
-        let tileType = this.getInt();
-        let objectInTileType = this.getInt();
-        let tileObject = new TileObject(tilePos, tileType, objectInTileType);
-        this._unpackObjectInTile(tileObject);
-        return tileObject;
-    },
-
-    _unpackObjectInTile: function (tileObject) {
-        switch (tileObject.getObjectInTileType()) {
-            case ObjectInCellType.TREE:
-                let hp = this.getDouble();
-                let tree = new Tree(hp);
-                tileObject.setObjectInTile(tree);
-                break;
-            case ObjectInCellType.TOWER:
-                let towerType = this.getInt();
-                let towerLevel = this.getInt();
-                let tower = new Tower(towerType, towerLevel, tileObject.getTilePos());
-                tileObject.setObjectInTile(tower);
-                break;
-            case ObjectInCellType.PIT:
-                let pit = this.getInt();
-                let pitObject = new Pit();
-                tileObject.setObjectInTile(pitObject);
-                break;
-            default:
-                break;
-        }
-    }
 })
 
 BattleNetwork.packetMap[gv.CMD.DROP_SPELL] = fr.InPacket.extend({
@@ -617,6 +552,9 @@ BattleNetwork.packetMap[gv.CMD.GET_BATTLE_INFO] = fr.InPacket.extend({
             }
             this.monsterWave.push(wave);
         }
+        this.playerStartEntityID = this.getLong();
+        this.opponentStartEntityID = this.getLong();
+        this.currentWave = this.getInt();
     }
 });
 
@@ -681,4 +619,45 @@ BattleNetwork.packetMap[gv.CMD.BATTLE_ERROR] = fr.InPacket.extend({
     readData: function () {
         this.errorMessage = this.getString();
     }
+})
+
+BattleNetwork.packetMap[gv.CMD.SNAPSHOT] = fr.InPacket.extend({
+    ctor: function () {
+        this._super();
+    },
+
+    readData: function () {
+        this.dataEntity = {};
+        let entitySize = this.getInt();
+        cc.log("EntitySize = " + entitySize);
+        for (let i = 1; i <= entitySize; i++) {
+            let entity = EntityECS.unpackData(this);
+            this.dataEntity[entity.id] = entity;
+        }
+
+        this.playerEnergyHouse = this.getInt();
+        this.opponentEnergyHouse = this.getInt();
+        this.serverTick = this.getInt();
+        this.playerMonsterEntityID = this.getLong();
+        this.opponentMonsterEntityID = this.getLong();
+        this.playerTowerEntityID = this.getLong();
+        this.opponentTowerEntityID = this.getLong();
+        this.playerSpellEnttiyID = this.getLong();
+        this.opponentSpellEntityID = this.getLong();
+        this.playerStartEntityID = this.getLong();
+        if (UUIDGeneratorECS.getPlayerStartEntityID() !== Number(this.playerStartEntityID)) {
+            let temp = this.playerEnergyHouse;
+            this.playerEnergyHouse = this.opponentEnergyHouse;
+            this.opponentEnergyHouse = temp;
+            temp = this.playerMonsterEntityID;
+            this.playerMonsterEntityID = this.opponentMonsterEntityID;
+            this.opponentMonsterEntityID = temp;
+        }
+
+        // map object
+        this.battleMapObject = {};
+        this.battleMapObject.player = BattleMapObject.unpackData(this);
+        this.battleMapObject.opponent = BattleMapObject.unpackData(this);
+    },
+
 })

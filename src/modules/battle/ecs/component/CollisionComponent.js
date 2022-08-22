@@ -20,3 +20,8 @@ let CollisionComponent = Component.extend({
 });
 CollisionComponent.typeID = GameConfig.COMPONENT_ID.COLLISION;
 ComponentManager.getInstance().registerClass(CollisionComponent);
+
+CollisionComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+    return data;
+}

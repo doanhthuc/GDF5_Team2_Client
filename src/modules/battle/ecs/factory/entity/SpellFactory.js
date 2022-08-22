@@ -1,27 +1,30 @@
-EntityFactory.createFrozenSpell = function (pixelPos, mode) {
+EntityFactory.createFrozenSpell = function (pixelPos, mode, entityID) {
     let typeID = GameConfig.ENTITY_ID.FROZEN_SPELL;
-    let entity = EntityFactory._createEntity(typeID, mode);
+    let entity = EntityFactory._createEntity(typeID, mode, entityID);
 
-    let S = 300, V = 1000;
+    let S = GameConfig.DELAY_SPELL * 1000, V = 1000;
     let T = S / V;
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y + S);
 
     let speed = Utils.calculateVelocityVector(cc.p(pixelPos.x, pixelPos.y + S), pixelPos, V);
     let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
 
-    let damageEffect = ComponentFactory.create(DamageEffect, 10);
-    let frozenEffect = ComponentFactory.create(FrozenEffect, 5);
+    let spellConfig = EntityFactory.getSpellConfigBySpellTypeID(typeID);
+    let value = spellConfig.value;
+    let radius = spellConfig.radius * GameConfig.TILE_WIDTH;
+
+    let frozenEffect = ComponentFactory.create(FrozenEffect, value);
 
     let parent;
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         parent = BattleManager.getInstance().getBattleLayer().getPlayerMapNode();
-    } else if (mode === GameConfig.OPPONENT) {
+    } else if (mode === GameConfig.USER2()) {
         parent = BattleManager.getInstance().getBattleLayer().getOpponentMapNode();
     }
     let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent,
         BattleResource.FROZEN_SKELETON_JSON, BattleResource.FROZEN_SKELETON_ATLAS, [0, T],
         ["animation_ice_ball", "animation_full"], [true, false], parent);
-    let spellInfoComponent = ComponentFactory.create(SpellInfoComponent, pixelPos, [damageEffect, frozenEffect], 1.2 * GameConfig.TILE_WIDTH, T);
+    let spellInfoComponent = ComponentFactory.create(SpellInfoComponent, pixelPos, [frozenEffect], radius, T);
 
     entity.addComponent(positionComponent)
         .addComponent(velocityComponent)
@@ -31,27 +34,30 @@ EntityFactory.createFrozenSpell = function (pixelPos, mode) {
     return entity;
 }
 
-EntityFactory.createFireSpell = function (pixelPos, mode) {
+EntityFactory.createFireSpell = function (pixelPos, mode, entityID) {
     let typeID = GameConfig.ENTITY_ID.FIRE_SPELL;
-    let entity = EntityFactory._createEntity(typeID, mode);
+    let entity = EntityFactory._createEntity(typeID, mode, entityID);
 
-    let S = 300, V = 1000;
+    let S = GameConfig.DELAY_SPELL * 1000, V = 1000;
     let T = S / V;
     let positionComponent = ComponentFactory.create(PositionComponent, pixelPos.x, pixelPos.y + S);
 
     let speed = Utils.calculateVelocityVector(cc.p(pixelPos.x, pixelPos.y + S), pixelPos, V);
     let velocityComponent = ComponentFactory.create(VelocityComponent, speed.speedX, speed.speedY);
 
-    let damageEffect = ComponentFactory.create(DamageEffect, 50);
+    let spellConfig = EntityFactory.getSpellConfigBySpellTypeID(typeID);
+    let damage = spellConfig.value;
+    let radius = spellConfig.radius * GameConfig.TILE_WIDTH;
+    let damageEffect = ComponentFactory.create(DamageEffect, damage);
 
     let parent;
-    if (mode === GameConfig.PLAYER) {
+    if (mode === GameConfig.USER1()) {
         parent = BattleManager.getInstance().getBattleLayer().getPlayerMapNode();
-    } else if (mode === GameConfig.OPPONENT) {
+    } else if (mode === GameConfig.USER2()) {
         parent = BattleManager.getInstance().getBattleLayer().getOpponentMapNode();
     }
     let skeletonComponent = ComponentFactory.create(SkeletonAnimationComponent, BattleResource.FIRE_SKELETON_JSON, BattleResource.FIRE_SKELETON_ATLAS, [0, T], ["animation_fireball", "animation_full"], [true, false], parent);
-    let spellInfoComponent = ComponentFactory.create(SpellInfoComponent, pixelPos, [damageEffect], 1.2 * GameConfig.TILE_WIDTH, T);
+    let spellInfoComponent = ComponentFactory.create(SpellInfoComponent, pixelPos, [damageEffect], radius, T);
 
     entity.addComponent(positionComponent)
         .addComponent(velocityComponent)
@@ -80,4 +86,19 @@ EntityFactory.createTrap = function (tilePos, mode) {
         .addComponent(collisionComponent);
 
     return entity;
+}
+
+EntityFactory.getSpellConfigBySpellTypeID = function (entityTypeID) {
+    let spellIDInConfig = SpellEntityTypeIdToIdInJSONConfig[entityTypeID];
+    let monsterConfigData = JsonReader.getPotionConfig()[spellIDInConfig]
+    let name = monsterConfigData.name;
+    let energy = monsterConfigData.energy;
+    let value = monsterConfigData.adjust.player.value;
+    let radius = monsterConfigData.radius;
+    return {
+        name : name,
+        energy : energy,
+        value : value,
+        radius : radius,
+    };
 }

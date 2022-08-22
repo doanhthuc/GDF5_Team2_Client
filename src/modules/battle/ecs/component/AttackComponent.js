@@ -84,9 +84,65 @@ let AttackComponent = Component.extend({
         this.bulletRadius = bulletRadius;
         this.effects.push(new DamageEffect(this._damage));
     },
+
     addEffect: function (effect){
         this.effects.push(effect);
+    },
+
+    readData: function (data) {
+        this.originDamage = data.originDamage;
+        this.damage = data.damage;
+        this.targetStrategy = data.targetStrategy;
+        this.originRange = data.originRange;
+        this.range = data.range;
+        this.originSpeed = data.originSpeed;
+        this.speed = data.speed;
+        this.countdown = data.countdown;
+        this.bulletSpeed = data.bulletSpeed;
+        this.bulletRadius = data.bulletRadius;
+        this.canTargetAirMonster = data.canTargetAirMonster;
+        this._latestTick = data._latestTick;
+        this.effects = [];
+
+        for (let effectData of data.effects) {
+            let effectType = effectData.typeID;
+            ComponentCls = ComponentManager.getInstance().getClass(effectType);
+            let component = new ComponentCls();
+            component.typeID = effectType;
+            component.readData(effectData);
+            this.effects.push(component);
+        }
     }
 });
 AttackComponent.typeID = GameConfig.COMPONENT_ID.ATTACK;
 ComponentManager.getInstance().registerClass(AttackComponent);
+
+AttackComponent.unpackData = function (inPacket) {
+    let data = Component.unpackData(inPacket);
+
+    data.originDamage = inPacket.getDouble();
+    data.damage = inPacket.getDouble();
+    data.targetStrategy = inPacket.getInt();
+    data.originRange = inPacket.getDouble();
+    data.range = inPacket.getDouble();
+    data.originSpeed = inPacket.getDouble();
+    data.speed = inPacket.getDouble();
+    data.countdown = inPacket.getDouble();
+    data.bulletSpeed = inPacket.getDouble();
+    data.bulletRadius = inPacket.getDouble();
+    data.canTargetAirMonster = Utils.convertShortToBoolean(inPacket.getShort());
+    data._latestTick = inPacket.getInt();
+
+    data.effects = [];
+    let effectSize = inPacket.getShort();
+
+    for (let i = 1; i <= effectSize; i++) {
+        let effectType = inPacket.getInt();
+        ComponentCls = ComponentManager.getInstance().getClass(effectType);
+        let componentData = ComponentCls.unpackData(inPacket);
+        componentData.typeID = effectType;
+        data.effects.push(componentData);
+    }
+
+    return data;
+}

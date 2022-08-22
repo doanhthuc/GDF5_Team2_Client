@@ -23,9 +23,16 @@ let SpellSystem = System.extend({
 
             let spellComponent = spellEntity.getComponent(SpellInfoComponent);
 
+            spellComponent.delayDestroy = spellComponent.delayDestroy - tick;
+
+            if (spellComponent.delayDestroy <= 0) {
+                EntityManager.destroy(spellEntity);
+                continue;
+            }
+
             spellComponent.delay = spellComponent.delay - tick;
 
-            if (spellComponent.delay <= 0) {
+            if (spellComponent.delay <= 0 && !spellComponent.isTriggered) {
                 for (let monsterId in this.getEntityStore()) {
                     let monster = this.getEntityStore()[monsterId];
 
@@ -67,20 +74,20 @@ let SpellSystem = System.extend({
                                     const mass = monsterInfo.weight;
                                     let A =  40 + force / mass;
                                     let T = 1;
-                                    const V0 = Math.abs(A * T);
+                                    const velocityStart = Math.abs(A * T);
 
 
                                     let newVectorVelocity = Utils.calculateVelocityVector(
                                         spellPos,
                                         monsterPos,
-                                        V0
+                                        velocityStart
                                     );
                                     oldVelocity.speedX = newVectorVelocity.speedX;
                                     oldVelocity.speedY = newVectorVelocity.speedY;
 
 
                                     let fireballEffect = ComponentFactory.create(FireBallEffect,
-                                        A, T, cc.p(spellPos.x, spellPos.y), cc.p(monsterPos.x, monsterPos.y), V0);
+                                        A, T, cc.p(spellPos.x, spellPos.y), cc.p(monsterPos.x, monsterPos.y), velocityStart);
 
                                     monster.addComponent(fireballEffect);
                                     monster.removeComponent(PathComponent);
@@ -89,14 +96,16 @@ let SpellSystem = System.extend({
                         }
                     }
                 }
+
+                spellComponent.isTriggered = true;
                 spellEntity.removeComponent(VelocityComponent);
                 spellEntity.removeComponent(PositionComponent);
-                spellEntity.removeComponent(SpellInfoComponent);
+                // spellEntity.removeComponent(SpellInfoComponent);
 
-                if (spellEntity.mode === GameConfig.PLAYER && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
+                if (spellEntity.mode === GameConfig.USER1() && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
                     soundManager.playFireballExplosion();
                 }
-                if (spellEntity.mode === GameConfig.PLAYER && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
+                if (spellEntity.mode === GameConfig.USER1() && spellEntity.typeID === GameConfig.ENTITY_ID.FIRE_SPELL) {
                     soundManager.playFrozenExplosion();
                 }
             }

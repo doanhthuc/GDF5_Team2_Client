@@ -74,8 +74,8 @@ let BattleTimerNode = cc.Node.extend({
             // if (monsterWave[currentWave] && currentIndexMonsterWave < monsterWave[currentWave].length) {
             //     let monsterTypeID = monsterWave[currentWave][currentIndexMonsterWave];
             //     battleData.setCurrentIndexMonsterWave(currentIndexMonsterWave + 1);
-            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.PLAYER, monsterTypeID);
-            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.OPPONENT, monsterTypeID);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.USER1(), monsterTypeID);
+            //     BattleManager.getInstance().getBattleLayer().createMonsterByEntityID(GameConfig.USER2(), monsterTypeID);
             //}
         } else {
             this._monsterSpawmTime -= tickManager.getTickRate() / 1000;
