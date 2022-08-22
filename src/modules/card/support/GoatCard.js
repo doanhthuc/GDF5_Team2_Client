@@ -11,7 +11,7 @@ const GoatCard = SupportTowerCard.extend({
     },
 
     getCardStatByLevel: function (level) {
-        let stat = this._super();
+        let stat = this._super(level);
         stat.damageUp = this.getDamageUpFromJson(level);
         return stat;
     },

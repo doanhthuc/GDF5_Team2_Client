@@ -11,7 +11,7 @@ const SnakeCard = SupportTowerCard.extend({
     },
 
     getCardStatByLevel: function (level) {
-        let stat = this._super();
+        let stat = this._super(level);
         stat.attackSpeedUp = this.getAttackSpeedUpFromJson(level);
         return stat;
     },
