@@ -245,7 +245,7 @@ let TickManager = cc.Class.extend({
         // snapshot entity id
         UUIDGeneratorECS.setMonsterEntityID(packet.playerMonsterEntityID, packet.opponentMonsterEntityID);
         UUIDGeneratorECS.setTowerEntityID(packet.playerTowerEntityID, packet.opponentTowerEntityID);
-        UUIDGeneratorECS.setSpellEntityID(packet.playerSpellEnttiyID, packet.opponentSpellEntityID);
+        // UUIDGeneratorECS.setSpellEntityID(packet.playerSpellEnttiyID, packet.opponentSpellEntityID);
 
         let battleData = BattleManager.getInstance().getBattleData()
         battleData.setEnergyHouse(packet.playerEnergyHouse, GameConfig.USER1());
